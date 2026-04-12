@@ -7,3 +7,8 @@ dist
 build
 .agents
 .gemini
+.claude
+.kiro
+.trae
+.windsurf
+*.tsbuildinfo
