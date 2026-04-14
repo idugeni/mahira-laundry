@@ -4,27 +4,27 @@ import { AdminTestimonialsClient } from "@/components/shared/admin-testimonials-
 import { createClient, getAllTestimonials } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
-  title: "Moderasi Testimoni",
-  description: "Kelola ulasan dan testimoni pelanggan.",
+	title: "Moderasi Testimoni",
+	description: "Kelola ulasan dan testimoni pelanggan.",
 };
 
 export default async function AdminTestimonialsPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
 
-  // Check admin role
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("role")
-    .eq("id", user?.id)
-    .single();
-  if (profile?.role !== "superadmin") {
-    redirect("/dashboard");
-  }
+	// Check admin role
+	const { data: profile } = await supabase
+		.from("profiles")
+		.select("role")
+		.eq("id", user?.id)
+		.single();
+	if (profile?.role !== "superadmin") {
+		redirect("/dashboard");
+	}
 
-  const testimonials = await getAllTestimonials();
+	const testimonials = await getAllTestimonials();
 
-  return <AdminTestimonialsClient testimonials={testimonials} />;
+	return <AdminTestimonialsClient testimonials={testimonials} />;
 }

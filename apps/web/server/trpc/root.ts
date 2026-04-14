@@ -9,14 +9,14 @@ import { paymentsRouter } from "./routers/payments";
 import { servicesRouter } from "./routers/services";
 
 export const appRouter = router({
-  orders: ordersRouter,
-  services: servicesRouter,
-  payments: paymentsRouter,
-  delivery: deliveryRouter,
-  loyalty: loyaltyRouter,
-  analytics: analyticsRouter,
-  inventory: inventoryRouter,
-  notifications: notificationsRouter,
+	orders: ordersRouter,
+	services: servicesRouter,
+	payments: paymentsRouter,
+	delivery: deliveryRouter,
+	loyalty: loyaltyRouter,
+	analytics: analyticsRouter,
+	inventory: inventoryRouter,
+	notifications: notificationsRouter,
 });
 
 export type AppRouter = typeof appRouter;

@@ -3,29 +3,29 @@ import { createClient } from "@/lib/supabase/server";
 import { getDashboardUrl } from "@/lib/utils";
 
 export async function GET(request: Request) {
-  const requestUrl = new URL(request.url);
-  const code = requestUrl.searchParams.get("code");
-  const type = requestUrl.searchParams.get("type");
+	const requestUrl = new URL(request.url);
+	const code = requestUrl.searchParams.get("code");
+	const type = requestUrl.searchParams.get("type");
 
-  let targetUrl = "/customer";
-  const supabase = await createClient();
+	let targetUrl = "/customer";
+	const supabase = await createClient();
 
-  if (code) {
-    const { data } = await supabase.auth.exchangeCodeForSession(code);
-    if (data?.user) {
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("role")
-        .eq("id", data.user.id)
-        .single();
-        
-      targetUrl = getDashboardUrl(profile?.role);
-    }
-  }
+	if (code) {
+		const { data } = await supabase.auth.exchangeCodeForSession(code);
+		if (data?.user) {
+			const { data: profile } = await supabase
+				.from("profiles")
+				.select("role")
+				.eq("id", data.user.id)
+				.single();
 
-  if (type === "recovery") {
-    return NextResponse.redirect(new URL("/profil", requestUrl.origin));
-  }
+			targetUrl = getDashboardUrl(profile?.role);
+		}
+	}
 
-  return NextResponse.redirect(new URL(targetUrl, requestUrl.origin));
+	if (type === "recovery") {
+		return NextResponse.redirect(new URL("/reset-password", requestUrl.origin));
+	}
+
+	return NextResponse.redirect(new URL(targetUrl, requestUrl.origin));
 }

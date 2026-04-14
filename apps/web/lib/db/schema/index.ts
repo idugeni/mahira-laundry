@@ -4,8 +4,12 @@
 
 export * from "./audit-logs";
 export * from "./delivery";
+export * from "./deposit-transactions";
+export * from "./expenses";
 export * from "./inventory";
+export * from "./inventory-logs";
 export * from "./loyalty";
+export * from "./machines";
 export * from "./notifications";
 export * from "./order-items";
 export * from "./orders";

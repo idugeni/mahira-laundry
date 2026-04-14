@@ -62,15 +62,18 @@ logs
 npm-debug.log*
 yarn-debug.log*
 
-# Database & Supabase
+# Database & Migrations (STRICT)
 supabase/.temp/
 supabase/functions/.env
-.supabase/
-
-# Trash & Temporaries
-trash/
-apps/web/scratch/
-
-# Strict Database & Migrations
 supabase/migrations/
 supabase/seed.sql
+.supabase/
+apps/web/drizzle/
+apps/web/migrate-db.ts
+apps/web/test-db.ts
+drizzle/
+
+# Scratch & Temporaries
+trash/
+scratch/
+apps/web/scratch/
