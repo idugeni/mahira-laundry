@@ -267,7 +267,7 @@ export async function getRecentExpenses(limit = 10) {
 		.from("expenses")
 		.select(`
       *,
-      outlets(name),
+      outlets!outlet_id(name),
       profiles!actor_id(full_name)
     `)
 		.order("created_at", { ascending: false })
@@ -582,7 +582,7 @@ export async function getStaffManagementList() {
       is_active,
       created_at,
       outlet_id,
-      outlets (
+      outlets!outlet_id (
         name
       )
     `)
