@@ -222,25 +222,15 @@ export default async function OutletPage() {
 									</p>
 								</div>
 
-								<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-									<div className="flex items-center gap-6">
-										<div className="flex items-center gap-2 text-xs font-bold text-slate-400">
-											<Phone size={14} className="text-indigo-400" />
-											{outlet.phone || "—"}
-										</div>
-										<div className="flex items-center gap-2 text-xs font-bold text-slate-400">
-											<Clock size={14} className="text-indigo-400" />
-											{outlet.operating_hours?.weekday || "07:00-21:00"}
-										</div>
+								<div className="flex items-center gap-6">
+									<div className="flex items-center gap-2 text-xs font-bold text-slate-400">
+										<Phone size={14} className="text-indigo-400" />
+										{outlet.phone || "—"}
 									</div>
-
-									<Button className="rounded-2xl h-12 px-6 bg-slate-50 hover:bg-slate-900 text-slate-600 hover:text-white font-black text-[10px] uppercase tracking-widest border-none shadow-none group/btn transition-all">
-										Buka Dashboard{" "}
-										<ArrowUpRight
-											size={14}
-											className="ml-2 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform"
-										/>
-									</Button>
+									<div className="flex items-center gap-2 text-xs font-bold text-slate-400">
+										<Clock size={14} className="text-indigo-400" />
+										{outlet.operating_hours?.weekday || "07:00-21:00"}
+									</div>
 								</div>
 							</div>
 						</div>
