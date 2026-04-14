@@ -5,7 +5,8 @@ import { resetPassword } from "@/lib/actions/auth";
 
 export const metadata: Metadata = {
   title: "Lupa Password",
-  description: "Reset password akun Mahira Laundry Anda. Masukkan email untuk menerima link reset password.",
+  description:
+    "Reset password akun Mahira Laundry Anda. Masukkan email untuk menerima link reset password.",
 };
 
 export default function LupaPasswordPage() {

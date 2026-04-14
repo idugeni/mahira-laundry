@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { motion } from "motion/react";
-import { HiOutlineHome, HiOutlineArrowLeft } from "react-icons/hi2";
+import Link from "next/link";
+import { HiOutlineArrowLeft, HiOutlineHome } from "react-icons/hi2";
 
 export default function NotFound() {
   return (
@@ -41,8 +41,8 @@ export default function NotFound() {
           transition={{ delay: 0.3 }}
           className="mt-3 text-muted-foreground"
         >
-          Maaf, halaman yang Anda cari mungkin telah dipindahkan atau tidak tersedia.
-          Seperti cucian yang terselip — pasti ketemu!
+          Maaf, halaman yang Anda cari mungkin telah dipindahkan atau tidak
+          tersedia. Seperti cucian yang terselip — pasti ketemu!
         </motion.p>
 
         <motion.div
@@ -55,7 +55,9 @@ export default function NotFound() {
             href="/"
             className="inline-flex items-center gap-2 px-6 py-3 bg-brand-primary text-white rounded-full font-semibold text-sm hover:bg-brand-primary/90 transition-all hover:shadow-lg hover:shadow-brand-primary/25"
           >
-            <span className="w-4 h-4 flex items-center justify-center"><HiOutlineHome /></span>
+            <span className="w-4 h-4 flex items-center justify-center">
+              <HiOutlineHome />
+            </span>
             Ke Beranda
           </Link>
           <button
@@ -63,7 +65,9 @@ export default function NotFound() {
             onClick={() => window.history.back()}
             className="inline-flex items-center gap-2 px-6 py-3 border border-border rounded-full font-semibold text-sm hover:bg-muted transition-colors"
           >
-            <span className="w-4 h-4 flex items-center justify-center"><HiOutlineArrowLeft /></span>
+            <span className="w-4 h-4 flex items-center justify-center">
+              <HiOutlineArrowLeft />
+            </span>
             Kembali
           </button>
         </motion.div>

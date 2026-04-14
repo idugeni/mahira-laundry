@@ -1,7 +1,13 @@
 "use client";
 
 import { motion } from "motion/react";
-import { HiOutlineSparkles, HiOutlineRocketLaunch, HiOutlineCheckBadge, HiOutlineMapPin, HiOutlineTruck, HiOutlineClock, HiOutlineDevicePhoneMobile } from "react-icons/hi2";
+import {
+  HiOutlineClock,
+  HiOutlineDevicePhoneMobile,
+  HiOutlineRocketLaunch,
+  HiOutlineSparkles,
+  HiOutlineTruck,
+} from "react-icons/hi2";
 import { MdOutlineScience } from "react-icons/md";
 
 export function TentangClient() {
@@ -14,35 +20,43 @@ export function TentangClient() {
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full text-brand-primary text-sm font-bold mb-6"
           >
-            <span className="w-4 h-4"><HiOutlineSparkles /></span>
+            <span className="w-4 h-4">
+              <HiOutlineSparkles />
+            </span>
             <span>Mahira Story</span>
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl lg:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900"
           >
-            Tentang <span className="inline-block text-brand-gradient">Mahira Laundry</span>
+            Tentang{" "}
+            <span className="inline-block text-brand-gradient">
+              Mahira Laundry
+            </span>
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
             className="mt-6 text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed"
           >
-            Didirikan oleh <strong className="text-slate-900">Indira Maharani</strong>, Mahira Laundry lahir dari visi sederhana: memberikan standar kebersihan laundry premium tanpa kompromi.
+            Didirikan oleh{" "}
+            <strong className="text-slate-900">Indira Maharani</strong>, Mahira
+            Laundry lahir dari visi sederhana: memberikan standar kebersihan
+            laundry premium tanpa kompromi.
           </motion.p>
         </div>
 
         <div className="grid gap-16">
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             className="relative p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 overflow-hidden"
           >
             <div className="absolute top-0 right-0 p-8 text-6xl text-slate-200 opacity-20 pointer-events-none">
-                <HiOutlineRocketLaunch />
+              <HiOutlineRocketLaunch />
             </div>
             <h2 className="text-2xl font-black font-[family-name:var(--font-heading)] mb-6 text-slate-900 flex items-center gap-3">
               <span className="w-2 h-8 bg-brand-primary rounded-full" />
@@ -56,7 +70,7 @@ export function TentangClient() {
             </p>
           </motion.section>
 
-          <motion.section 
+          <motion.section
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -71,11 +85,14 @@ export function TentangClient() {
                 "Memberikan layanan laundry dengan kualitas premium dan harga terjangkau",
                 "Menggunakan deterjen ramah lingkungan dan teknologi modern",
                 "Menyediakan layanan antar-jemput yang cepat dan terpercaya",
-                "Membangun hubungan jangka panjang dengan setiap pelanggan"
+                "Membangun hubungan jangka panjang dengan setiap pelanggan",
               ].map((misi, i) => (
-                <div key={i} className="flex items-start gap-4 p-4 hover:bg-slate-50 rounded-2xl transition-colors">
+                <div
+                  key={i}
+                  className="flex items-start gap-4 p-4 hover:bg-slate-50 rounded-2xl transition-colors"
+                >
                   <div className="w-10 h-10 rounded-xl bg-brand-accent/10 text-brand-accent flex items-center justify-center font-black shrink-0">
-                    0{i+1}
+                    0{i + 1}
                   </div>
                   <p className="text-slate-600 font-medium pt-1">{misi}</p>
                 </div>
@@ -94,31 +111,31 @@ export function TentangClient() {
                   title: "Deterjen Premium",
                   desc: "Formula khusus yang aman untuk serat kain dan ramah lingkungan.",
                   color: "text-blue-500",
-                  bg: "bg-blue-50"
+                  bg: "bg-blue-50",
                 },
                 {
                   icon: HiOutlineTruck,
                   title: "Antar Jemput Gratis",
-                  desc: "Layanan pickup & delivery di area Salemba tanpa biaya tambahan.",
+                  desc: "Layanan pickup & delivery di area layanan kami tanpa biaya tambahan.",
                   color: "text-emerald-500",
-                  bg: "bg-emerald-50"
+                  bg: "bg-emerald-50",
                 },
                 {
                   icon: HiOutlineClock,
                   title: "Express 6 Jam",
                   desc: "Pakaian bersih seketika untuk jadwal Anda yang padat.",
                   color: "text-orange-500",
-                  bg: "bg-orange-50"
+                  bg: "bg-orange-50",
                 },
                 {
                   icon: HiOutlineDevicePhoneMobile,
                   title: "Tracking Online",
                   desc: "Pantau status cucian Anda dari dashboard pelanggan secara real-time.",
                   color: "text-brand-primary",
-                  bg: "bg-brand-primary/10"
+                  bg: "bg-brand-primary/10",
                 },
               ].map((item, i) => (
-                <motion.div 
+                <motion.div
                   key={item.title}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -126,12 +143,18 @@ export function TentangClient() {
                   transition={{ delay: i * 0.1 }}
                   className="p-8 bg-slate-50/50 rounded-3xl border border-slate-100 flex items-start gap-6 hover:bg-white hover:shadow-xl hover:shadow-slate-200/50 transition-all group"
                 >
-                  <div className={`w-14 h-14 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center text-3xl shrink-0 transition-transform group-hover:scale-110`}>
+                  <div
+                    className={`w-14 h-14 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center text-3xl shrink-0 transition-transform group-hover:scale-110`}
+                  >
                     <item.icon />
                   </div>
                   <div>
-                    <h3 className="font-bold text-slate-900 mb-2">{item.title}</h3>
-                    <p className="text-sm text-slate-500 leading-relaxed font-medium">{item.desc}</p>
+                    <h3 className="font-bold text-slate-900 mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                      {item.desc}
+                    </p>
                   </div>
                 </motion.div>
               ))}

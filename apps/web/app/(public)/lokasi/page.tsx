@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
-import { OUTLET_SALEMBA } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Lokasi Outlet",
   description:
-    "Temukan outlet Mahira Laundry terdekat di Jakarta Pusat: Salemba, Menteng, dan Cikini. Buka setiap hari dengan layanan antar-jemput.",
+    "Temukan outlet kami terdekat dan nikmati layanan laundry premium dengan standar kualitas tinggi di titik-titik strategis.",
   openGraph: {
-    title: "Lokasi Outlet — Mahira Laundry Jakarta",
+    title: "Lokasi Outlet",
     description:
-      "3 outlet Mahira Laundry di Jakarta Pusat. Buka setiap hari 07:00–21:00.",
+      "Jaringan outlet kami yang siap melayani kebutuhan laundry Anda setiap hari.",
   },
 };
 
-const outlets = [
+const _outlets = [
   {
     name: "Mahira Laundry Salemba",
     address: "Jl. Salemba Raya No. 28, Paseban, Senen, Jakarta Pusat 10440",

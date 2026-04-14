@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
+import { getDashboardUrl } from "@/lib/utils";
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({
@@ -35,23 +36,11 @@ export async function updateSession(request: NextRequest) {
 
   // Protect authenticated routes
   const protectedPaths = [
-    "/dashboard",
-    "/order",
-    "/loyalty",
-    "/profil",
-    "/pembayaran",
-    "/pos",
-    "/antrian",
-    "/shift",
-    "/tugas",
-    "/inventori",
-    "/tim",
-    "/voucher",
-    "/layanan",
-    "/outlet",
-    "/franchise",
-    "/keuangan",
-    "/laporan",
+    "/customer",
+    "/admin",
+    "/manager",
+    "/kasir",
+    "/kurir",
   ];
   const isProtectedPath = protectedPaths.some((path) =>
     request.nextUrl.pathname.startsWith(path),
@@ -71,8 +60,18 @@ export async function updateSession(request: NextRequest) {
   );
 
   if (user && isAuthPath) {
+    let targetUrl = "/customer";
+    
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+      
+    targetUrl = getDashboardUrl(profile?.role);
+
     const url = request.nextUrl.clone();
-    url.pathname = "/dashboard";
+    url.pathname = targetUrl;
     return NextResponse.redirect(url);
   }
 

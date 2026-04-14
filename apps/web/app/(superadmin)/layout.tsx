@@ -1,11 +1,17 @@
-import Link from "next/link";
-import { MahiraLogo } from "@/components/brand/mahira-logo";
+import { AdminSidebar } from "@/components/shared/admin-sidebar";
 
-const adminNav = [
-  { href: "/outlet", label: "Outlet", icon: "🏪" },
-  { href: "/franchise", label: "Franchise", icon: "🤝" },
-  { href: "/keuangan", label: "Keuangan", icon: "💰" },
-  { href: "/laporan", label: "Laporan", icon: "📊" },
+const superadminNav = [
+  { href: "/admin", label: "Dashboard", icon: "🏠" },
+  { href: "/admin/pos", label: "POS Kasir", icon: "💰" },
+  { href: "/admin/antrian", label: "Antrian", icon: "📋" },
+  { href: "/admin/outlet", label: "Outlet", icon: "🏪" },
+  { href: "/admin/franchise", label: "Franchise", icon: "🤝" },
+  { href: "/admin/pegawai", label: "Manajemen Pegawai", icon: "👥" },
+  { href: "/admin/testimonials", label: "Testimoni", icon: "💬" },
+  { href: "/admin/layanan", label: "Kelola Layanan", icon: "🧺" },
+  { href: "/admin/galeri", label: "Galeri", icon: "🖼️" },
+  { href: "/admin/keuangan", label: "Keuangan", icon: "💰" },
+  { href: "/admin/laporan", label: "Laporan & Audit", icon: "📊" },
 ];
 
 export default function SuperadminLayout({
@@ -14,41 +20,31 @@ export default function SuperadminLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="min-h-screen flex bg-muted/30">
-      <aside className="hidden lg:flex lg:w-64 flex-col border-r border-border bg-white">
-        <div className="p-6 border-b border-border">
-          <Link href="/">
-            <MahiraLogo size={32} />
-          </Link>
-        </div>
-        <div className="px-4 py-2">
-          <span className="text-xs font-semibold text-red-500 uppercase tracking-wider">
-            Superadmin
-          </span>
-        </div>
-        <nav className="flex-1 p-4 space-y-1">
-          {adminNav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-            >
-              <span>{item.icon}</span>
-              <span>{item.label}</span>
-            </Link>
-          ))}
-        </nav>
-      </aside>
+    <div className="min-h-screen flex bg-slate-50/50">
+      <AdminSidebar
+        navItems={superadminNav}
+        panelLabel="Superadmin"
+        panelBadgeColor="bg-gradient-to-r from-red-500 to-pink-500 text-white"
+        headerInfo="Mahira Laundry Group"
+      />
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-16 border-b border-border bg-white flex items-center justify-between px-6">
-          <h2 className="font-semibold font-[family-name:var(--font-heading)]">
-            Superadmin Panel
-          </h2>
-          <span className="px-2 py-0.5 bg-red-100 text-red-600 rounded-full text-xs font-semibold">
-            Owner
-          </span>
+        {/* Top Header */}
+        <header className="h-14 lg:h-16 border-b border-slate-200/80 bg-white/90 backdrop-blur-sm flex items-center justify-between px-4 lg:px-8 mt-14 lg:mt-0 shadow-sm/30">
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-2 text-sm text-slate-400">
+              <span className="font-medium text-slate-600">Mahira Laundry</span>
+              <span>/</span>
+              <span>Panel Superadmin</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-semibold text-red-600 bg-red-50 border border-red-200 px-3 py-1 rounded-full">
+              🔑 Owner
+            </span>
+          </div>
         </header>
-        <main className="flex-1 p-6 overflow-auto">{children}</main>
+        {/* Main Content */}
+        <main className="flex-1 p-4 lg:p-8 overflow-auto">{children}</main>
       </div>
     </div>
   );

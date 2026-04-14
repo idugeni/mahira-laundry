@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getDashboardUrl } from "@/lib/utils";
 
 export async function signUp(formData: FormData): Promise<void> {
   const supabase = await createClient();
@@ -14,6 +15,7 @@ export async function signUp(formData: FormData): Promise<void> {
       data: {
         full_name: formData.get("full_name") as string,
         phone: formData.get("phone") as string,
+        referred_by_code: formData.get("referred_by_code") as string,
         role: "customer",
       },
     },
@@ -25,8 +27,7 @@ export async function signUp(formData: FormData): Promise<void> {
     redirect(`/register?error=${encodeURIComponent(error.message)}`);
   }
 
-  revalidatePath("/", "layout");
-  redirect("/dashboard");
+  redirect("/register?success=verify-email");
 }
 
 export async function signIn(formData: FormData): Promise<void> {
@@ -37,14 +38,25 @@ export async function signIn(formData: FormData): Promise<void> {
     password: formData.get("password") as string,
   };
 
-  const { error } = await supabase.auth.signInWithPassword(data);
+  const { error, data: authData } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
     redirect(`/login?error=${encodeURIComponent(error.message)}`);
   }
 
+  let targetUrl = "/customer";
+  if (authData?.user) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", authData.user.id)
+      .single();
+    
+    targetUrl = getDashboardUrl(profile?.role);
+  }
+
   revalidatePath("/", "layout");
-  redirect("/dashboard");
+  redirect(targetUrl);
 }
 
 export async function signOut(): Promise<void> {

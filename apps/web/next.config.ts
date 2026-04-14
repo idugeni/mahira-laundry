@@ -14,6 +14,14 @@ const nextConfig: NextConfig = {
   env: {
     NEXT_PUBLIC_APP_NAME: process.env.NEXT_PUBLIC_APP_NAME,
   },
+  experimental: {
+    serverActions: {
+      allowedOrigins: [
+        "*.ngrok-free.app",
+        "8af7-2001-448a-b010-1857-48b4-4f4-6cd4-fc70.ngrok-free.app",
+      ],
+    },
+  },
 };
 
 export default nextConfig;

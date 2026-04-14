@@ -1,16 +1,18 @@
 export const APP_NAME = "Mahira Laundry";
 export const APP_TAGLINE = "Cucian Bersih, Hidup Nyaman.";
 
-export const OUTLET_SALEMBA = {
+export const PRIMARY_OUTLET = {
   id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-  name: "Mahira Laundry Salemba",
-  slug: "salemba",
-  address: "Jl. Salemba Raya No. 28, Paseban, Senen, Jakarta Pusat 10440",
-  phone: "021-3456789",
-  whatsapp: "6281234567890",
-  email: "salemba@mahiralaundry.id",
-  lat: -6.2115,
-  lng: 106.8559,
+  name: "Mahira Laundry Jatiwaringin",
+  slug: "jatiwaringin",
+  address:
+    "Jl. Raya Jatiwaringin No. 12, Pondok Gede, Kota Bekasi, Jawa Barat 17411",
+  phone: "0838-0651-8859",
+  whatsapp: "6283806518859",
+  whatsapp_clean: "6283806518859",
+  email: "hello@mahiralaundry.id",
+  lat: -6.273114,
+  lng: 106.924298,
   operatingHours: {
     weekday: "07:00-21:00",
     weekend: "08:00-20:00",
@@ -69,7 +71,7 @@ export const LOYALTY_TIERS = {
 };
 
 export const DELIVERY_ZONES = {
-  free: ["Salemba", "Paseban", "Kenari", "Kramat"],
-  paid_5000: ["Menteng", "Cikini", "Gondangdia"],
-  paid_10000: ["Senen", "Kemayoran", "Gunung Sahari"],
+  free: ["Jatiwaringin", "Jaticempaka", "Pondok Gede"],
+  paid_5000: ["Gamprit", "Curug", "Pangkalan Jati"],
+  paid_10000: ["Kalimalang", "Lubang Buaya", "Jatimakmur"],
 };

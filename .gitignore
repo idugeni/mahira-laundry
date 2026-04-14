@@ -1,14 +1,75 @@
-node_modules
-.next
-.env*
-!.env.example
-.turbo
-dist
-build
-.agents
-.gemini
-.claude
-.kiro
-.trae
-.windsurf
+# ─────────────────────────────────────────────
+# Mahira Laundry — Ultimate Gitignore
+# ─────────────────────────────────────────────
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Production & Builds
+dist/
+build/
 *.tsbuildinfo
+
+# Environment Variables (CRITICAL)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+!.env.example
+
+# Tools & Frameworks
+.turbo/
+.vercel
+.agents/
+.gemini/
+.claude/
+.kiro/
+.trae/
+.windsurf/
+.sentry-debug-log
+
+# Testing
+coverage/
+
+# IDEs & System
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+Thumbs.db
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Database & Supabase
+supabase/.temp/
+supabase/functions/.env
+.supabase/
+
+# Trash & Temporaries
+trash/
+apps/web/scratch/
+
+# Strict Database & Migrations
+supabase/migrations/
+supabase/seed.sql

@@ -2,149 +2,117 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { formatIDR } from "@/lib/utils";
-import { HiOutlineSparkles, HiOutlineClock } from "react-icons/hi2";
-import { MdOutlineLocalLaundryService, MdOutlineIron, MdOutlineFlashOn, MdOutlineDryCleaning } from "react-icons/md";
-import { GiChelseaBoot, GiRolledCloth, GiWashingMachine } from "react-icons/gi";
-import { RiGraduationCapLine } from "react-icons/ri";
+import type { IconType } from "react-icons";
 import { BiHomeAlt } from "react-icons/bi";
-import { IconType } from "react-icons";
+import { GiChelseaBoot, GiRolledCloth, GiWashingMachine } from "react-icons/gi";
+import { HiOutlineClock, HiOutlineSparkles } from "react-icons/hi2";
+import {
+  MdOutlineDryCleaning,
+  MdOutlineFlashOn,
+  MdOutlineIron,
+  MdOutlineLocalLaundryService,
+} from "react-icons/md";
+import { RiGraduationCapLine } from "react-icons/ri";
+import { formatIDR } from "@/lib/utils";
 
-interface Service {
-  icon: IconType;
-  name: string;
-  price: number;
-  unit: string;
-  duration: string;
-  desc: string;
-  popular: boolean;
-  color: string;
-  bg: string;
-}
+import { getDashboardUrl } from "@/lib/utils";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { ServiceDetailModal } from "./service-detail-modal";
+import { HiOutlineArrowRight } from "react-icons/hi2";
+import { useAuth } from "@/hooks/use-auth";
 
-const allServices: Service[] = [
-  {
-    icon: MdOutlineLocalLaundryService,
-    name: "Cuci Lipat Reguler",
-    price: 7000,
-    unit: "kg",
-    duration: "24 jam",
-    desc: "Cuci bersih dan dilipat rapi. Cocok untuk pakaian sehari-hari.",
-    popular: false,
-    color: "text-blue-500",
-    bg: "bg-blue-50"
-  },
-  {
-    icon: MdOutlineIron,
-    name: "Cuci Setrika Reguler",
-    price: 10000,
-    unit: "kg",
-    duration: "24 jam",
-    desc: "Cuci bersih, disetrika rapi, dan dilipat. Pakaian siap pakai.",
-    popular: true,
-    color: "text-orange-500",
-    bg: "bg-orange-50"
-  },
-  {
-    icon: MdOutlineFlashOn,
-    name: "Express Cuci Setrika",
-    price: 15000,
-    unit: "kg",
-    duration: "6 jam",
-    desc: "Layanan kilat, selesai dalam 6 jam. Cocok untuk kebutuhan mendesak.",
-    popular: true,
-    color: "text-yellow-500",
-    bg: "bg-yellow-50"
-  },
-  {
-    icon: MdOutlineDryCleaning,
-    name: "Dry Cleaning",
-    price: 25000,
-    unit: "item",
-    duration: "48 jam",
-    desc: "Untuk pakaian formal, jas, gaun, dan bahan sensitif.",
-    popular: false,
-    color: "text-purple-500",
-    bg: "bg-purple-50"
-  },
-  {
-    icon: GiChelseaBoot,
-    name: "Cuci Sepatu",
-    price: 35000,
-    unit: "pasang",
-    duration: "48 jam",
-    desc: "Deep cleaning sepatu sneakers, kulit, atau kanvas.",
-    popular: false,
-    color: "text-teal-500",
-    bg: "bg-teal-50"
-  },
-  {
-    icon: BiHomeAlt,
-    name: "Cuci Karpet",
-    price: 20000,
-    unit: "meter",
-    duration: "72 jam",
-    desc: "Cuci karpet segala ukuran dengan mesin khusus.",
-    popular: false,
-    color: "text-emerald-500",
-    bg: "bg-emerald-50"
-  },
-  {
-    icon: GiRolledCloth,
-    name: "Cuci Bed Cover",
-    price: 30000,
-    unit: "item",
-    duration: "48 jam",
-    desc: "Cuci bed cover, sprei, dan selimut tebal.",
-    popular: false,
-    color: "text-indigo-500",
-    bg: "bg-indigo-50"
-  },
-  {
-    icon: RiGraduationCapLine,
-    name: "Paket Kost",
-    price: 8000,
-    unit: "kg",
-    duration: "48 jam",
-    desc: "Paket hemat mahasiswa. Maks 5kg per minggu, cuci setrika.",
-    popular: true,
-    color: "text-pink-500",
-    bg: "bg-pink-50"
-  },
-  {
-    icon: GiWashingMachine,
-    name: "Cuci Gordyn",
-    price: 15000,
-    unit: "meter",
-    duration: "72 jam",
-    desc: "Cuci gordyn/vitrase segala bahan dan ukuran.",
-    popular: false,
-    color: "text-slate-500",
-    bg: "bg-slate-50"
-  },
-];
+export function LayananClient({ initialServices }: { initialServices: any[] }) {
+  const { user, profile, loading } = useAuth();
 
-export function LayananClient() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [selectedService, setSelectedService] = useState<any>(null);
+  const [isDetailOpen, setIsDetailOpen] = useState(false);
+
+  useEffect(() => {
+    const serviceSlug = searchParams.get("s");
+    if (serviceSlug) {
+      const service = initialServices.find(s => s.id === serviceSlug || s.slug === serviceSlug);
+      if (service) {
+        setSelectedService(service);
+        setIsDetailOpen(true);
+      }
+    } else {
+      setIsDetailOpen(false);
+    }
+  }, [searchParams, initialServices]);
+
+  const handleServiceClick = (slug: string) => {
+    router.push(`/layanan?s=${slug}`, { scroll: false });
+  };
+
+  const handleCloseDetail = () => {
+    router.push("/layanan", { scroll: false });
+  };
+
+  let orderHref = "/register";
+  if (user) {
+    if (profile?.role === "customer") {
+      orderHref = "/customer/order/baru";
+    } else {
+      orderHref = getDashboardUrl(profile?.role as string);
+    }
+  }
+
+  const getServiceIcon = (name: string) => {
+    const n = name.toLowerCase();
+    if (n.includes("sepatu")) return GiChelseaBoot;
+    if (n.includes("setrika")) return MdOutlineIron;
+    if (n.includes("express")) return MdOutlineFlashOn;
+    if (n.includes("dry")) return MdOutlineDryCleaning;
+    if (n.includes("kost")) return RiGraduationCapLine;
+    return MdOutlineLocalLaundryService;
+  };
+
+  const getServiceStyles = (name: string) => {
+    const n = name.toLowerCase();
+    if (n.includes("sepatu")) return { color: "text-teal-500", bg: "bg-teal-50" };
+    if (n.includes("setrika")) return { color: "text-orange-500", bg: "bg-orange-50" };
+    if (n.includes("express")) return { color: "text-yellow-500", bg: "bg-yellow-50" };
+    if (n.includes("dry")) return { color: "text-purple-500", bg: "bg-purple-50" };
+    if (n.includes("kost")) return { color: "text-pink-500", bg: "bg-pink-50" };
+    return { color: "text-blue-500", bg: "bg-blue-50" };
+  };
+
+  if (loading) {
+    return (
+      <div className="py-24 text-center">
+        <div className="w-10 h-10 border-4 border-brand-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <p className="text-slate-400 font-bold">Memuat layanan...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header content unchanged... skipping for brevity in thought but I will include it in replacement */}
         <div className="text-center mb-20">
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full text-brand-primary text-sm font-bold mb-6"
           >
-            <span className="w-4 h-4 flex items-center justify-center"><HiOutlineSparkles /></span>
+            <span className="w-4 h-4 flex items-center justify-center">
+              <HiOutlineSparkles />
+            </span>
             <span>Kualitas Premium</span>
           </motion.div>
-          <motion.h1 
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900"
           >
-            Daftar <span className="inline-block text-brand-gradient">Layanan</span>
+            Daftar{" "}
+            <span className="inline-block text-brand-gradient">Layanan</span>
           </motion.h1>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
@@ -155,60 +123,73 @@ export function LayananClient() {
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {allServices.map((service, i) => (
-            <motion.div
-              key={service.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.05 }}
-              className="group relative bg-white rounded-[2rem] p-8 border border-slate-100 hover:border-brand-primary/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] transition-all duration-300"
-            >
-              {service.popular && (
-                <div className="absolute -top-3 right-8 px-4 py-1 bg-brand-accent text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-lg shadow-brand-accent/30 z-10">
-                  Populer
+          {initialServices.map((service, i) => {
+            const Icon = getServiceIcon(service.name);
+            const styles = getServiceStyles(service.name);
+            return (
+              <motion.div
+                key={service.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ y: -10 }}
+                onClick={() => handleServiceClick(service.slug || service.id)}
+                className="group p-8 bg-white rounded-3xl border border-slate-100 hover:border-brand-primary/20 hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] transition-all duration-300 cursor-pointer"
+              >
+                <div
+                  className={`w-16 h-16 rounded-2xl ${styles.bg} flex items-center justify-center text-3xl ${styles.color} mb-8 shadow-inner`}
+                >
+                  {service.icon ? (
+                    <span className="shrink-0">{service.icon}</span>
+                  ) : (
+                    <Icon />
+                  )}
                 </div>
-              )}
-              <div className={`w-16 h-16 rounded-2xl ${service.bg} ${service.color} flex items-center justify-center text-3xl mb-8 group-hover:scale-110 transition-transform duration-500`}>
-                <service.icon />
-              </div>
-              <h3 className="font-bold font-[family-name:var(--font-heading)] text-xl text-slate-900 group-hover:text-brand-primary transition-colors">
-                {service.name}
-              </h3>
-              <p className="mt-3 text-sm text-slate-500 leading-relaxed min-h-[40px]">
-                {service.desc}
-              </p>
-              <div className="mt-8 flex items-center justify-between border-t border-slate-50 pt-6">
-                <div>
-                  <span className="text-brand-primary font-black text-2xl">
+                <h3 className="text-xl font-bold font-[family-name:var(--font-heading)] text-slate-900 mb-3 grayscale group-hover:grayscale-0 transition-all">
+                  {service.name}
+                </h3>
+                <p className="text-slate-500 leading-relaxed text-sm mb-6 line-clamp-2">
+                  {service.description}
+                </p>
+                <div className="flex items-center justify-between pt-6 border-t border-slate-50">
+                  <span className="text-xl font-black text-brand-primary">
                     {formatIDR(service.price)}
+                    <span className="text-xs text-slate-400 font-medium">
+                      /{service.unit}
+                    </span>
                   </span>
-                  <span className="text-xs font-bold text-slate-400">
-                    /{service.unit}
-                  </span>
+                  <div className="w-10 h-10 rounded-full border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary transition-all duration-300">
+                    <span className="w-5 h-5 flex items-center justify-center">
+                      <HiOutlineArrowRight />
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-50 text-slate-500 rounded-lg text-xs font-bold border border-slate-100">
-                  <span className="w-3.5 h-3.5 flex items-center justify-center"><HiOutlineClock /></span>
-                  <span>{service.duration}</span>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
 
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-20 text-center"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-20 text-center"
         >
           <Link
-            href="/register"
+            href={orderHref}
             className="inline-flex px-10 py-4 bg-brand-primary text-white rounded-full font-black hover:bg-brand-primary/90 transition-all shadow-xl shadow-brand-primary/20 hover:shadow-2xl hover:-translate-y-1"
           >
-            Pesan Sekarang
+            {user ? "Pesan Laundry Sekarang" : "Daftar & Pesan"}
           </Link>
         </motion.div>
       </div>
+
+      <ServiceDetailModal 
+        service={selectedService} 
+        isOpen={isDetailOpen} 
+        onClose={handleCloseDetail} 
+      />
     </div>
   );
 }

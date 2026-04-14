@@ -1,92 +1,85 @@
 "use client";
 
-import Link from "next/link";
-import { OUTLET_SALEMBA } from "@/lib/constants";
-import { MahiraLogo } from "./mahira-logo";
-import { FaWhatsapp, FaInstagram, FaFacebookF } from "react-icons/fa6";
-import { HiOutlineEnvelope, HiOutlinePhone, HiOutlineMapPin, HiOutlineClock } from "react-icons/hi2";
 import { motion } from "motion/react";
+import Link from "next/link";
+import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa6";
+import { HiOutlineMapPin, HiOutlinePhone } from "react-icons/hi2";
+import { PRIMARY_OUTLET } from "@/lib/constants";
+import { MahiraLogo } from "./mahira-logo";
 
-export function MahiraFooter() {
+export function MahiraFooter({ services = [] }: { services?: any[] }) {
+  const displayServices = services.map(s => ({ 
+    name: s.name, 
+    path: `/layanan?s=${s.slug || s.id}` 
+  }));
+
   return (
     <footer className="bg-brand-primary-dark text-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-16">
-          <motion.div 
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="md:col-span-2"
           >
-            <MahiraLogo size={40} showText={true} />
-            <p className="mt-4 text-sm text-white/60 max-w-md">
-              Layanan laundry premium terpercaya di Jakarta. Berpengalaman
-              menangani berbagai jenis pakaian dan kain dengan teknologi modern.
+            <MahiraLogo size={36} showText={true} />
+            <p className="mt-4 text-sm text-white/50 leading-relaxed">
+              Layanan laundry premium terpercaya di Bekasi Jatiwaringin.
+              Berpengalaman menangani berbagai jenis pakaian dengan teknologi
+              ramah lingkungan.
             </p>
-            <div className="mt-8 flex gap-4">
-              <motion.a
-                whileHover={{ y: -3 }}
-                href={`https://wa.me/${OUTLET_SALEMBA.whatsapp}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#25D366] transition-colors"
-                title="WhatsApp"
-              >
-                <span className="w-5 h-5 flex items-center justify-center"><FaWhatsapp /></span>
-              </motion.a>
-              <motion.a
-                whileHover={{ y: -3 }}
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#E4405F] transition-colors"
-                title="Instagram"
-              >
-                <span className="w-5 h-5 flex items-center justify-center"><FaInstagram /></span>
-              </motion.a>
-              <motion.a
-                whileHover={{ y: -3 }}
-                href="#"
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#1877F2] transition-colors"
-                title="Facebook"
-              >
-                <span className="w-4 h-4 flex items-center justify-center"><FaFacebookF /></span>
-              </motion.a>
+            <div className="mt-8 flex gap-3">
+              {[
+                {
+                  icon: <FaWhatsapp />,
+                  href: `https://api.whatsapp.com/send?phone=${PRIMARY_OUTLET.whatsapp}`,
+                  color: "hover:bg-[#25D366]",
+                },
+                {
+                  icon: <FaInstagram />,
+                  href: "#",
+                  color: "hover:bg-[#E4405F]",
+                },
+                {
+                  icon: <FaFacebookF />,
+                  href: "#",
+                  color: "hover:bg-[#1877F2]",
+                },
+              ].map((social, i) => (
+                <motion.a
+                  key={i}
+                  whileHover={{ y: -3 }}
+                  href={social.href}
+                  className={`w-9 h-9 rounded-xl bg-white/5 flex items-center justify-center transition-colors ${social.color}`}
+                >
+                  <span className="w-4 h-4 flex items-center justify-center">
+                    {social.icon}
+                  </span>
+                </motion.a>
+              ))}
             </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
           >
-            <h4 className="font-semibold font-[family-name:var(--font-heading)] mb-6 text-brand-accent">
-              Layanan
+            <h4 className="font-bold font-[family-name:var(--font-heading)] mb-6 text-brand-accent uppercase tracking-widest text-[10px]">
+              Layanan Kami
             </h4>
-            <ul className="space-y-4 text-sm text-white/60">
-              <li>
-                <Link href="/layanan" className="hover:text-white transition-colors flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-brand-accent" />
-                  <span>Cuci Setrika</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/layanan" className="hover:text-white transition-colors flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-brand-accent" />
-                  <span>Dry Cleaning</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/layanan" className="hover:text-white transition-colors flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-brand-accent" />
-                  <span>Express</span>
-                </Link>
-              </li>
-              <li>
-                <Link href="/layanan" className="hover:text-white transition-colors flex items-center gap-2">
-                  <div className="w-1 h-1 rounded-full bg-brand-accent" />
-                  <span>Paket Kost</span>
-                </Link>
-              </li>
+            <ul className="space-y-3 text-sm text-white/60">
+              {displayServices.map((service, idx) => (
+                <li key={idx}>
+                  <Link
+                    href={service.path}
+                    className="hover:text-brand-accent transition-colors"
+                  >
+                    {service.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </motion.div>
 
@@ -96,35 +89,99 @@ export function MahiraFooter() {
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
           >
-            <h4 className="font-semibold font-[family-name:var(--font-heading)] mb-6 text-brand-accent">
-              Hubungi Kami
+            <h4 className="font-bold font-[family-name:var(--font-heading)] mb-6 text-brand-accent uppercase tracking-widest text-[10px]">
+              Legal & Perusahaan
             </h4>
-            <ul className="space-y-5 text-sm text-white/60">
+            <ul className="space-y-3 text-sm text-white/60">
+              <li>
+                <Link
+                  href="/tentang"
+                  className="hover:text-brand-accent transition-colors"
+                >
+                  Tentang Mahira
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/privacy"
+                  className="hover:text-brand-accent transition-colors"
+                >
+                  Kebijakan Privasi
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/terms"
+                  className="hover:text-brand-accent transition-colors"
+                >
+                  Syarat & Ketentuan
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/lokasi"
+                  className="hover:text-brand-accent transition-colors"
+                >
+                  Lokasi Outlet
+                </Link>
+              </li>
+            </ul>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <h4 className="font-bold font-[family-name:var(--font-heading)] mb-6 text-brand-accent uppercase tracking-widest text-[10px]">
+              Kontak
+            </h4>
+            <ul className="space-y-4 text-sm text-white/60">
               <li className="flex items-start gap-3">
-                <span className="w-5 h-5 flex items-center justify-center text-brand-accent shrink-0"><HiOutlineMapPin /></span>
-                <span>{OUTLET_SALEMBA.address}</span>
+                <span className="w-4 h-4 flex items-center justify-center text-brand-accent shrink-0 mt-0.5">
+                  <HiOutlineMapPin />
+                </span>
+                <span className="leading-relaxed">
+                  {PRIMARY_OUTLET.address}
+                </span>
               </li>
               <li className="flex items-center gap-3">
-                <span className="w-5 h-5 flex items-center justify-center text-brand-accent shrink-0"><HiOutlinePhone /></span>
-                <span>{OUTLET_SALEMBA.phone}</span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-5 h-5 flex items-center justify-center text-brand-accent shrink-0"><HiOutlineClock /></span>
-                <div>
-                  <p>Senin–Jumat: {OUTLET_SALEMBA.operatingHours.weekday}</p>
-                  <p>Sabtu–Minggu: {OUTLET_SALEMBA.operatingHours.weekend}</p>
-                </div>
+                <span className="w-4 h-4 flex items-center justify-center text-brand-accent shrink-0">
+                  <HiOutlinePhone />
+                </span>
+                <span>{PRIMARY_OUTLET.phone}</span>
               </li>
             </ul>
           </motion.div>
         </div>
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-20 pt-8 border-t border-white/10 text-center text-sm text-white/40"
+          className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/30"
         >
-          © {new Date().getFullYear()} Mahira Laundry. Hak cipta dilindungi.
+          <p>
+            © {new Date().getFullYear()} Mahira Laundry Group. Seluruh Hak Cipta
+            Dilindungi.
+          </p>
+          <div className="flex gap-6">
+            <Link
+              href="/privacy"
+              className="hover:text-white transition-colors"
+            >
+              Privacy
+            </Link>
+            <Link href="/terms" className="hover:text-white transition-colors">
+              Terms
+            </Link>
+            <Link
+              href="/cookies"
+              className="hover:text-white transition-colors"
+            >
+              Cookies
+            </Link>
+          </div>
         </motion.div>
       </div>
     </footer>

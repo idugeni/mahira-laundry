@@ -40,7 +40,7 @@ export function useRealtimeDelivery(orderId?: string) {
           table: "delivery",
           filter: `order_id=eq.${orderId}`,
         },
-        (payload) => {
+        (payload: { new: unknown; eventType: string }) => {
           setDelivery(payload.new as unknown as DeliveryLocation);
         },
       )

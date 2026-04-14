@@ -32,8 +32,29 @@ export function useNotifications() {
         .limit(20);
 
       if (data) {
-        setNotifications(data as unknown as Notification[]);
-        setUnreadCount(data.filter((n) => !n.is_read).length);
+        setNotifications(
+          data.map(
+            (
+              n: Record<string, unknown> & {
+                id: string;
+                type: string;
+                is_read: boolean;
+              },
+            ) => ({
+              id: n.id,
+              type: n.type,
+              title: n.title,
+              body: n.body,
+              isRead: n.is_read,
+              createdAt: n.created_at,
+            }),
+          ),
+        );
+        setUnreadCount(
+          data.filter(
+            (n: Record<string, unknown> & { is_read: boolean }) => !n.is_read,
+          ).length,
+        );
       }
     };
 
@@ -49,11 +70,26 @@ export function useNotifications() {
           schema: "public",
           table: "notifications",
         },
-        (payload) => {
-          setNotifications((prev) => [
-            payload.new as unknown as Notification,
-            ...prev,
-          ]);
+        (payload: {
+          new: {
+            id: string;
+            type: string;
+            title: string;
+            body: string;
+            created_at: string;
+            is_read: boolean;
+          };
+        }) => {
+          const n = payload.new;
+          const mapped: Notification = {
+            id: n.id,
+            type: n.type,
+            title: n.title,
+            body: n.body,
+            isRead: n.is_read,
+            createdAt: n.created_at,
+          };
+          setNotifications((prev) => [mapped, ...prev]);
           setUnreadCount((prev) => prev + 1);
         },
       )
@@ -76,7 +112,7 @@ export function useNotifications() {
       .eq("id", id);
 
     setNotifications((prev) =>
-      prev.map((n) => (n.id === id ? { ...n, isRead: true } : n)),
+      prev.map((n: Notification) => (n.id === id ? { ...n, isRead: true } : n)),
     );
     setUnreadCount((prev) => Math.max(0, prev - 1));
   };

@@ -5,11 +5,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-brand-primary: #1a6b4a;
-  --color-brand-primary-light: #e6f5ee;
-  --color-brand-primary-dark: #0f2e1e;
-  --color-brand-accent: #d4a017;
-  --color-brand-accent-light: #fdf8e8;
+  --color-brand-primary: #db2777;
+  --color-brand-primary-light: #fff1f2;
+  --color-brand-primary-dark: #4c0519;
+  --color-brand-accent: #fb7185;
+  --color-brand-accent-light: #fff5f7;
 
   --color-background: #ffffff;
   --color-foreground: #0f172a;
@@ -36,11 +36,11 @@ body {
 
 /* Brand gradient */
 .bg-brand-gradient {
-  background: linear-gradient(135deg, #1a6b4a 0%, #2d9a6e 50%, #d4a017 100%);
+  background: linear-gradient(135deg, #db2777 0%, #f472b6 50%, #fb7185 100%);
 }
 
 .text-brand-gradient {
-  background: linear-gradient(135deg, #1a6b4a 0%, #d4a017 100%);
+  background: linear-gradient(135deg, #db2777 0%, #fb7185 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -54,7 +54,7 @@ body {
   border-radius: 1rem;
 }
 
-/* Smooth scrollbar */
+/* Smooth scrollbar global */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -68,7 +68,42 @@ body {
   border-radius: 999px;
 }
 
-/* Animation utilities */
+/* Custom scrollbar class for internal areas */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
+
+/* Premium Form Elements */
+input, select, textarea {
+  transition: all 0.2s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--color-brand-primary);
+  box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.1);
+  background-color: #ffffff !important;
+}
+
+select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: calc(100% - 1rem) center;
+  background-size: 1rem;
+  padding-right: 2.5rem !important;
+}
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -92,12 +127,31 @@ body {
 }
 
 @keyframes float {
-  0%,
-  100% {
+  0%, 100% {
     translate: 0 0;
   }
   50% {
     translate: 0 -10px;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
@@ -111,6 +165,14 @@ body {
 
 .animate-float {
   animation: float 6s ease-in-out infinite;
+}
+
+.animate-zoom-in {
+  animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
 }
 
 /* Stagger delays */
@@ -248,5 +310,19 @@ body {
   }
   html {
     @apply font-sans;
+  }
+  button {
+    cursor: pointer;
+  }
+  
+  /* Force hide spin buttons on all number inputs globally */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none !important;
+    margin: 0 !important;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield !important;
+    appearance: textfield !important;
   }
 }

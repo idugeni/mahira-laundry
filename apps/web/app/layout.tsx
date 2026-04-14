@@ -20,26 +20,33 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mahira Laundry — Jakarta Salemba",
+    default: "Mahira Laundry — Premium Laundry & Dry Cleaning",
     template: "%s | Mahira Laundry",
   },
   description:
-    "Layanan laundry premium terpercaya di Jakarta Salemba. Cuci, setrika, dry cleaning berkualitas tinggi dengan pickup & delivery.",
+    "Layanan laundry premium terbaik di Bekasi Jatiwaringin. Cuci, setrika, dan dry cleaning berkualitas tinggi dengan layanan antar-jemput profesional untuk warga Bekasi.",
   keywords: [
-    "laundry",
-    "jakarta",
-    "salemba",
-    "cuci",
-    "setrika",
-    "dry cleaning",
-    "mahira",
+    "laundry premium bekasi",
+    "laundry jatiwaringin",
+    "dry cleaning bekasi",
+    "cuci setrika jatiwaringin",
+    "laundry profesional bekasi",
+    "mahira laundry jatiwaringin",
   ],
   openGraph: {
-    title: "Mahira Laundry — Jakarta Salemba",
-    description: "Layanan laundry premium terpercaya di Jakarta Salemba.",
+    title: "Mahira Laundry — Premium Laundry & Dry Cleaning",
+    description:
+      "Layanan laundry premium terbaik di Bekasi Jatiwaringin dengan standar kualitas tinggi.",
     type: "website",
   },
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
+
+import { AuthProvider } from "@/providers/auth-provider";
 
 export default function RootLayout({
   children,
@@ -59,7 +66,7 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-[family-name:var(--font-body)]">
-        {children}
+        <AuthProvider>{children}</AuthProvider>
         <Toaster richColors position="top-right" />
       </body>
     </html>

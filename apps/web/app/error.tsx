@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
 import { motion } from "motion/react";
-import { HiOutlineArrowPath, HiOutlineHome } from "react-icons/hi2";
 import Link from "next/link";
+import { useEffect } from "react";
+import { HiOutlineArrowPath, HiOutlineHome } from "react-icons/hi2";
 
-export default function Error({
+export default function ErrorPage({
   error,
   reset,
 }: {
@@ -17,8 +17,8 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="min-h-[60vh] flex items-center justify-center p-6">
-      <div className="text-center max-w-lg">
+    <div className="min-h-[100dvh] flex items-center justify-center p-6 bg-white/50">
+      <div className="text-center max-w-lg mb-20">
         <motion.div
           initial={{ rotate: -10, opacity: 0 }}
           animate={{ rotate: 0, opacity: 1 }}
@@ -45,8 +45,8 @@ export default function Error({
           transition={{ delay: 0.25 }}
           className="mt-2 text-muted-foreground text-sm"
         >
-          Maaf, terjadi gangguan saat memuat halaman ini.
-          Tim kami sudah diberitahu dan sedang bekerja untuk memperbaikinya.
+          Maaf, terjadi gangguan saat memuat halaman ini. Tim kami sudah
+          diberitahu dan sedang bekerja untuk memperbaikinya.
         </motion.p>
 
         {error.digest && (
@@ -71,14 +71,18 @@ export default function Error({
             onClick={reset}
             className="inline-flex items-center gap-2 px-6 py-2.5 bg-brand-primary text-white rounded-full font-semibold text-sm hover:bg-brand-primary/90 transition-all hover:shadow-lg hover:shadow-brand-primary/25"
           >
-            <span className="w-4 h-4 flex items-center justify-center"><HiOutlineArrowPath /></span>
+            <span className="w-4 h-4 flex items-center justify-center">
+              <HiOutlineArrowPath />
+            </span>
             Coba Lagi
           </button>
           <Link
             href="/"
             className="inline-flex items-center gap-2 px-6 py-2.5 border border-border rounded-full font-semibold text-sm hover:bg-muted transition-colors"
           >
-            <span className="w-4 h-4 flex items-center justify-center"><HiOutlineHome /></span>
+            <span className="w-4 h-4 flex items-center justify-center">
+              <HiOutlineHome />
+            </span>
             Ke Beranda
           </Link>
         </motion.div>

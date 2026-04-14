@@ -39,8 +39,8 @@ export default function GlobalError({
             transition={{ delay: 0.3 }}
             className="mt-3 text-gray-500"
           >
-            Kami mengalami masalah teknis yang tidak terduga.
-            Silakan coba muat ulang halaman.
+            Kami mengalami masalah teknis yang tidak terduga. Silakan coba muat
+            ulang halaman.
           </motion.p>
 
           {error.digest && (
@@ -65,7 +65,9 @@ export default function GlobalError({
               onClick={reset}
               className="inline-flex items-center gap-2 px-8 py-3 bg-red-600 text-white rounded-full font-semibold text-sm hover:bg-red-700 transition-colors shadow-lg shadow-red-200"
             >
-              <span className="w-4 h-4 flex items-center justify-center"><HiOutlineArrowPath /></span>
+              <span className="w-4 h-4 flex items-center justify-center">
+                <HiOutlineArrowPath />
+              </span>
               Muat Ulang
             </button>
           </motion.div>

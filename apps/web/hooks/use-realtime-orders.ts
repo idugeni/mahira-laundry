@@ -33,7 +33,11 @@ export function useRealtimeOrders(outletId?: string) {
           table: "orders",
           ...(outletId ? { filter: `outlet_id=eq.${outletId}` } : {}),
         },
-        (payload) => {
+        (payload: {
+          new?: unknown;
+          old?: { id: string };
+          eventType: string;
+        }) => {
           if (payload.eventType === "INSERT") {
             setOrders((prev) => [payload.new as unknown as Order, ...prev]);
           } else if (payload.eventType === "UPDATE") {
