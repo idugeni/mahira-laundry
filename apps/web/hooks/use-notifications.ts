@@ -2,18 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-
-interface Notification {
-  id: string;
-  type: string;
-  title: string;
-  body: string;
-  isRead: boolean;
-  createdAt: string;
-}
+import { AppNotification } from "@/lib/types";
 
 export function useNotifications() {
-  const [notifications, setNotifications] = useState<Notification[]>([]);
+  const [notifications, setNotifications] = useState<AppNotification[]>([]);
   const [unreadCount, setUnreadCount] = useState(0);
   const supabase = createClient();
 
@@ -32,28 +24,10 @@ export function useNotifications() {
         .limit(20);
 
       if (data) {
-        setNotifications(
-          data.map(
-            (
-              n: Record<string, unknown> & {
-                id: string;
-                type: string;
-                is_read: boolean;
-              },
-            ) => ({
-              id: n.id,
-              type: n.type,
-              title: n.title,
-              body: n.body,
-              isRead: n.is_read,
-              createdAt: n.created_at,
-            }),
-          ),
-        );
+        const mappedData = data as unknown as AppNotification[];
+        setNotifications(mappedData);
         setUnreadCount(
-          data.filter(
-            (n: Record<string, unknown> & { is_read: boolean }) => !n.is_read,
-          ).length,
+          mappedData.filter((n) => !n.is_read).length,
         );
       }
     };
@@ -71,25 +45,10 @@ export function useNotifications() {
           table: "notifications",
         },
         (payload: {
-          new: {
-            id: string;
-            type: string;
-            title: string;
-            body: string;
-            created_at: string;
-            is_read: boolean;
-          };
+          new: AppNotification;
         }) => {
           const n = payload.new;
-          const mapped: Notification = {
-            id: n.id,
-            type: n.type,
-            title: n.title,
-            body: n.body,
-            isRead: n.is_read,
-            createdAt: n.created_at,
-          };
-          setNotifications((prev) => [mapped, ...prev]);
+          setNotifications((prev) => [n, ...prev]);
           setUnreadCount((prev) => prev + 1);
         },
       )
@@ -112,7 +71,7 @@ export function useNotifications() {
       .eq("id", id);
 
     setNotifications((prev) =>
-      prev.map((n: Notification) => (n.id === id ? { ...n, isRead: true } : n)),
+      prev.map((n) => (n.id === id ? { ...n, is_read: true } : n)),
     );
     setUnreadCount((prev) => Math.max(0, prev - 1));
   };

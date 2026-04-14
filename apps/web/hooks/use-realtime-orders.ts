@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { Order } from "@/lib/db/schema";
 import { createClient } from "@/lib/supabase/client";
+import { Order } from "@/lib/types";
 
 export function useRealtimeOrders(outletId?: string) {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -34,24 +34,18 @@ export function useRealtimeOrders(outletId?: string) {
           ...(outletId ? { filter: `outlet_id=eq.${outletId}` } : {}),
         },
         (payload: {
-          new?: unknown;
-          old?: { id: string };
-          eventType: string;
+          new: Order;
+          old: { id: string };
+          eventType: 'INSERT' | 'UPDATE' | 'DELETE' | '*';
         }) => {
           if (payload.eventType === "INSERT") {
-            setOrders((prev) => [payload.new as unknown as Order, ...prev]);
+            setOrders((prev) => [payload.new, ...prev]);
           } else if (payload.eventType === "UPDATE") {
             setOrders((prev) =>
-              prev.map((o) =>
-                o.id === (payload.new as { id: string }).id
-                  ? (payload.new as unknown as Order)
-                  : o,
-              ),
+              prev.map((o) => (o.id === payload.new.id ? payload.new : o)),
             );
           } else if (payload.eventType === "DELETE") {
-            setOrders((prev) =>
-              prev.filter((o) => o.id !== (payload.old as { id: string }).id),
-            );
+            setOrders((prev) => prev.filter((o) => o.id !== payload.old.id));
           }
         },
       )

@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { ActionResponse } from "@/lib/types";
 
 export type ServiceInput = {
   id?: string;
@@ -20,7 +21,7 @@ export type ServiceInput = {
   is_featured?: boolean;
 };
 
-export async function upsertService(data: ServiceInput) {
+export async function upsertService(data: ServiceInput): Promise<ActionResponse> {
   try {
     const supabase = await createClient();
 
@@ -60,13 +61,14 @@ export async function upsertService(data: ServiceInput) {
     revalidatePath("/manager");
     revalidatePath("/");
     return { success: true };
-  } catch (error: any) {
-    console.error("Service action failed:", error);
-    return { success: false, error: error.message };
+  } catch (error) {
+    const err = error as Error;
+    console.error("Service action failed:", err);
+    return { success: false, error: err.message };
   }
 }
 
-export async function deleteService(id: string) {
+export async function deleteService(id: string): Promise<ActionResponse> {
   try {
     const supabase = await createClient();
     const { error } = await supabase.from("services").delete().eq("id", id);
@@ -76,8 +78,9 @@ export async function deleteService(id: string) {
     revalidatePath("/kelola-layanan");
     revalidatePath("/");
     return { success: true };
-  } catch (error: any) {
-    console.error("Delete service failed:", error);
-    return { success: false, error: error.message };
+  } catch (error) {
+    const err = error as Error;
+    console.error("Delete service failed:", err);
+    return { success: false, error: err.message };
   }
 }

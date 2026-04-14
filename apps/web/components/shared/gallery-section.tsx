@@ -7,12 +7,7 @@ import { HiOutlinePhoto, HiOutlineViewColumns } from "react-icons/hi2";
 
 const categories = ["Semua", "Hasil Cucian", "Fasilitas", "Proses", "Lainnya"];
 
-interface GalleryItem {
-  id: string;
-  title: string;
-  image_url: string;
-  category: string;
-}
+import { GalleryItem } from "@/lib/types";
 
 export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
   const [filter, setFilter] = useState("Semua");
@@ -98,7 +93,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8">
                   <span className="text-[10px] font-black uppercase tracking-widest text-brand-accent mb-2">
-                    {item.category}
+                    {item.category || "Umum"}
                   </span>
                   <h3 className="text-white font-bold font-[family-name:var(--font-heading)] text-xl">
                     {item.title}

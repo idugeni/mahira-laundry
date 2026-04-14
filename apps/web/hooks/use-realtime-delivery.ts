@@ -2,18 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-
-interface DeliveryLocation {
-  id: string;
-  orderId: string;
-  courierId: string;
-  currentLat: number;
-  currentLng: number;
-  status: string;
-}
+import { Delivery } from "@/lib/types";
 
 export function useRealtimeDelivery(orderId?: string) {
-  const [delivery, setDelivery] = useState<DeliveryLocation | null>(null);
+  const [delivery, setDelivery] = useState<Delivery | null>(null);
   const supabase = createClient();
 
   useEffect(() => {
@@ -25,7 +17,7 @@ export function useRealtimeDelivery(orderId?: string) {
         .select("*")
         .eq("order_id", orderId)
         .single();
-      if (data) setDelivery(data as unknown as DeliveryLocation);
+      if (data) setDelivery(data as unknown as Delivery);
     };
 
     fetchDelivery();
@@ -40,8 +32,8 @@ export function useRealtimeDelivery(orderId?: string) {
           table: "delivery",
           filter: `order_id=eq.${orderId}`,
         },
-        (payload: { new: unknown; eventType: string }) => {
-          setDelivery(payload.new as unknown as DeliveryLocation);
+        (payload: { new: Delivery }) => {
+          setDelivery(payload.new);
         },
       )
       .subscribe();

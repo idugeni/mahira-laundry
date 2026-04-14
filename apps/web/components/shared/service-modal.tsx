@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { upsertService, deleteService } from "@/lib/actions/services";
 import { toast } from "sonner";
+import { Service } from "@/lib/types";
 import { HiOutlineTag, HiOutlineClock, HiOutlineCube, HiOutlineBolt, HiOutlineXMark, HiOutlineListBullet, HiOutlineStar, HiOutlineTrash, HiOutlineSparkles } from "react-icons/hi2";
 
 interface ServiceModalProps {
-  service?: any;
+  service?: Service;
   outletId: string;
   trigger?: React.ReactNode;
   isOpen?: boolean;
@@ -138,7 +139,7 @@ export function ServiceModal({ service, outletId, trigger, isOpen: controlledOpe
                         <HiOutlineTag />
                       </span>
                       <input 
-                        required name="name" defaultValue={service?.name}
+                        required name="name" defaultValue={service?.name || ""}
                         placeholder="Contoh: Cuci Lipat"
                         className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none placeholder:font-medium placeholder:text-slate-300"
                       />
@@ -147,7 +148,7 @@ export function ServiceModal({ service, outletId, trigger, isOpen: controlledOpe
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Kategori</label>
                     <select 
-                      name="category" defaultValue={service?.category || "Kiloan"}
+                      name="category" defaultValue={service?.category || "kiloan"}
                       className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none appearance-none cursor-pointer hover:bg-slate-100/50"
                     >
                       <option value="kiloan">Kiloan</option>
@@ -163,7 +164,7 @@ export function ServiceModal({ service, outletId, trigger, isOpen: controlledOpe
                 <div className="space-y-2">
                   <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Deskripsi Singkat</label>
                   <textarea 
-                    name="description" defaultValue={service?.description}
+                    name="description" defaultValue={service?.description || ""}
                     placeholder="Jelaskan detail cakupan layanan ini..."
                     className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[80px] resize-none placeholder:font-medium placeholder:text-slate-300"
                   />
@@ -241,7 +242,7 @@ export function ServiceModal({ service, outletId, trigger, isOpen: controlledOpe
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">URL Slug</label>
                     <input 
-                      required name="slug" defaultValue={service?.slug}
+                      required name="slug" defaultValue={service?.slug || ""}
                       placeholder="cuci-lipat"
                       className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none placeholder:font-medium placeholder:text-slate-300"
                     />

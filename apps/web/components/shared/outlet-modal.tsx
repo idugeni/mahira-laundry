@@ -4,10 +4,11 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { upsertOutlet, uploadOutletImage } from "@/lib/actions/outlets";
 import { toast } from "sonner";
+import { Outlet } from "@/lib/types";
 import { HiOutlineCamera, HiOutlineBuildingOffice, HiOutlineMapPin, HiOutlinePhone, HiOutlineCurrencyDollar, HiOutlineXMark } from "react-icons/hi2";
 
 interface OutletModalProps {
-  outlet?: any;
+  outlet?: Outlet;
   trigger?: React.ReactNode;
 }
 
@@ -30,11 +31,11 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
     formData.append("image", file);
 
     const result = await uploadOutletImage(outlet?.id || "temp", formData);
-    if (result.success) {
-      setImageUrl(result.url);
+    if (result.success && result.data) {
+      setImageUrl(result.data.url);
       toast.success("Foto outlet terunggah!");
     } else {
-      toast.error(result.error);
+      toast.error(result.error || "Gagal mengunggah foto");
     }
     setIsLoading(false);
   }
@@ -136,7 +137,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Nama Gerai</label>
                     <input 
-                      required name="name" defaultValue={outlet?.name}
+                      required name="name" defaultValue={outlet?.name || ""}
                       placeholder="Contoh: Salemba Prime"
                       className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 placeholder:font-medium outline-none"
                     />
@@ -144,7 +145,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
                   <div className="space-y-2">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Slug URL</label>
                     <input 
-                      required name="slug" defaultValue={outlet?.slug}
+                      required name="slug" defaultValue={outlet?.slug || ""}
                       placeholder="salemba-prime"
                       className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 placeholder:font-medium outline-none"
                     />
@@ -158,7 +159,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
                       <HiOutlineMapPin />
                     </span>
                     <textarea 
-                      required name="address" defaultValue={outlet?.address}
+                      required name="address" defaultValue={outlet?.address || ""}
                       placeholder="Jl. Raya Salemba No. 123, Jakarta Pusat..."
                       className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 placeholder:font-medium outline-none min-h-[80px] resize-none"
                     />
@@ -173,7 +174,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
                         <HiOutlinePhone />
                       </span>
                       <input 
-                        name="phone" defaultValue={outlet?.phone}
+                        name="phone" defaultValue={outlet?.phone || ""}
                         placeholder="021-..."
                         className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 placeholder:font-medium outline-none"
                       />

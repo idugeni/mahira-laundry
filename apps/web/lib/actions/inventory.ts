@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { ActionResponse } from "@/lib/types";
 
 export type InventoryInput = {
   id?: string;
@@ -15,7 +16,7 @@ export type InventoryInput = {
   notes?: string;
 };
 
-export async function upsertInventory(data: InventoryInput) {
+export async function upsertInventory(data: InventoryInput): Promise<ActionResponse> {
   try {
     const supabase = await createClient();
 
@@ -48,13 +49,14 @@ export async function upsertInventory(data: InventoryInput) {
     revalidatePath("/inventori");
     revalidatePath("/manager");
     return { success: true };
-  } catch (error: any) {
-    console.error("Inventory action failed:", error);
-    return { success: false, error: error.message };
+  } catch (error) {
+    const err = error as Error;
+    console.error("Inventory action failed:", err);
+    return { success: false, error: err.message };
   }
 }
 
-export async function deleteInventory(id: string) {
+export async function deleteInventory(id: string): Promise<ActionResponse> {
   try {
     const supabase = await createClient();
     const { error } = await supabase.from("inventory").delete().eq("id", id);
@@ -62,13 +64,14 @@ export async function deleteInventory(id: string) {
 
     revalidatePath("/inventori");
     return { success: true };
-  } catch (error: any) {
-    console.error("Delete inventory failed:", error);
-    return { success: false, error: error.message };
+  } catch (error) {
+    const err = error as Error;
+    console.error("Delete inventory failed:", err);
+    return { success: false, error: err.message };
   }
 }
 
-export async function restockInventory(id: string, amount: number) {
+export async function restockInventory(id: string, amount: number): Promise<ActionResponse> {
   try {
     const supabase = await createClient();
     
@@ -81,7 +84,7 @@ export async function restockInventory(id: string, amount: number) {
     
     if (fetchError) throw fetchError;
 
-    const newQty = (Number(item.quantity) || 0) + amount;
+    const newQty = (Number(item?.quantity) || 0) + amount;
 
     const { error: updateError } = await supabase
       .from("inventory")
@@ -96,8 +99,9 @@ export async function restockInventory(id: string, amount: number) {
 
     revalidatePath("/inventori");
     return { success: true };
-  } catch (error: any) {
-    console.error("Restock inventory failed:", error);
-    return { success: false, error: error.message };
+  } catch (error) {
+    const err = error as Error;
+    console.error("Restock inventory failed:", err);
+    return { success: false, error: err.message };
   }
 }

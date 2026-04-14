@@ -119,11 +119,11 @@ export function OrderClient({
       formData.append("items", JSON.stringify(orderItems));
 
       const result = await createOrder(formData);
-      if (result.error) {
-        toast.error(result.error);
-      } else {
+      if (result.success && result.data) {
         toast.success("Order berhasil dibuat!");
         router.push(`/order/${result.data.id}`);
+      } else {
+        toast.error(result.error || "Gagal membuat order");
       }
     } catch (_error) {
       toast.error("Terjadi kesalahan sistem");

@@ -5,9 +5,10 @@ import { HiOutlineXMark, HiOutlineClock, HiOutlineSparkles, HiOutlineTag, HiOutl
 import { formatIDR } from "@/lib/utils";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 import Link from "next/link";
+import { Service } from "@/lib/types";
 
 interface ServiceDetailModalProps {
-  service: any;
+  service: Service | null;
   isOpen: boolean;
   onClose: () => void;
 }
@@ -139,7 +140,7 @@ export function ServiceDetailModal({ service, isOpen, onClose }: ServiceDetailMo
                                     "Setrika Uap",
                                     "Parfum Signature",
                                     "Kemasan Eksklusif",
-                                ]).map((feat: string, i: number) => (
+                                ]).map((feat, i) => (
                                     <li key={i} className="flex items-center gap-2.5 text-[11px] font-bold text-slate-600">
                                         <span className="text-brand-primary shrink-0">
                                             <span className="text-brand-primary"><HiCheckBadge /></span>

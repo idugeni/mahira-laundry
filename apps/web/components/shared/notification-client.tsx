@@ -13,17 +13,11 @@ import {
   HiOutlineXMark,
 } from "react-icons/hi2";
 import { useNotifications } from "@/hooks/use-notifications";
+import { AppNotification } from "@/lib/types";
 
 export function NotificationClient() {
   const { notifications, unreadCount, markAsRead } = useNotifications();
-  const [selectedNotification, setSelectedNotification] = useState<{
-    id: string;
-    title: string;
-    body: string;
-    type: string;
-    isRead: boolean;
-    createdAt: string;
-  } | null>(null);
+  const [selectedNotification, setSelectedNotification] = useState<AppNotification | null>(null);
 
   const getIcon = (type: string) => {
     switch (type) {
@@ -38,8 +32,8 @@ export function NotificationClient() {
     }
   };
 
-  const getIconStyles = (type: string, isRead: boolean) => {
-    if (isRead) return "bg-slate-50 text-slate-400";
+  const getIconStyles = (type: string, is_read: boolean) => {
+    if (is_read) return "bg-slate-50 text-slate-400";
     switch (type) {
       case "order_status":
         return "bg-blue-50 text-blue-500";
@@ -52,16 +46,9 @@ export function NotificationClient() {
     }
   };
 
-  const handleNotificationClick = (n: {
-    id: string;
-    title: string;
-    body: string;
-    type: string;
-    isRead: boolean;
-    createdAt: string;
-  }) => {
+  const handleNotificationClick = (n: AppNotification) => {
     setSelectedNotification(n);
-    if (!n.isRead) {
+    if (!n.is_read) {
       markAsRead(n.id);
     }
   };
@@ -95,36 +82,36 @@ export function NotificationClient() {
               transition={{ delay: i * 0.05 }}
               onClick={() => handleNotificationClick(n)}
               className={`p-6 rounded-[2rem] border transition-all cursor-pointer group relative overflow-hidden ${
-                n.isRead
+                n.is_read
                   ? "bg-white border-slate-100"
                   : "bg-brand-primary/5 border-brand-primary/20 shadow-lg shadow-brand-primary/5"
               }`}
             >
-              {!n.isRead && (
+              {!n.is_read && (
                 <div className="absolute top-0 left-0 w-1.5 h-full bg-brand-primary" />
               )}
 
               <div className="flex gap-6">
                 <div
-                  className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shadow-inner ${getIconStyles(n.type, n.isRead)}`}
+                  className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl shadow-inner ${getIconStyles(n.type, n.is_read)}`}
                 >
                   {getIcon(n.type)}
                 </div>
                 <div className="flex-1">
                   <div className="flex justify-between items-start">
                     <h3
-                      className={`font-black text-lg ${n.isRead ? "text-slate-600" : "text-slate-900"}`}
+                      className={`font-black text-lg ${n.is_read ? "text-slate-600" : "text-slate-900"}`}
                     >
                       {n.title}
                     </h3>
                     <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-                      {format(new Date(n.createdAt), "d MMM, HH:mm", {
+                      {format(new Date(n.created_at), "d MMM, HH:mm", {
                         locale: idLocale,
                       })}
                     </span>
                   </div>
                   <p
-                    className={`mt-2 text-sm leading-relaxed ${n.isRead ? "text-slate-400" : "text-slate-600 font-medium"}`}
+                    className={`mt-2 text-sm leading-relaxed ${n.is_read ? "text-slate-400" : "text-slate-600 font-medium"}`}
                   >
                     {n.body}
                   </p>
@@ -183,7 +170,7 @@ export function NotificationClient() {
               <div className="p-10 text-center">
                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 px-4 py-1.5 rounded-full inline-block mb-6">
                   {format(
-                    new Date(selectedNotification.createdAt),
+                    new Date(selectedNotification.created_at),
                     "eeee, d MMMM yyyy • HH:mm",
                     { locale: idLocale },
                   )}

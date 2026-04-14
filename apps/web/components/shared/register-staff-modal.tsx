@@ -4,9 +4,10 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { registerStaffMember } from "@/lib/actions/staff";
 import { HiOutlineUserPlus, HiOutlineEnvelope, HiOutlinePhone, HiOutlineLockClosed, HiOutlineXMark } from "react-icons/hi2";
+import { Outlet, UserRole } from "@/lib/types";
 
 interface RegisterStaffModalProps {
-  outlets: any[];
+  outlets: Outlet[];
 }
 
 export function RegisterStaffModal({ outlets }: RegisterStaffModalProps) {
@@ -29,7 +30,7 @@ export function RegisterStaffModal({ outlets }: RegisterStaffModalProps) {
       fullName: formData.get("fullName") as string,
       email: formData.get("email") as string,
       phone: formData.get("phone") as string,
-      role: formData.get("role") as any,
+      role: formData.get("role") as "manager" | "kasir" | "kurir",
       outletId: formData.get("outletId") as string,
       password: (formData.get("password") as string) || "Mahira123!",
     };

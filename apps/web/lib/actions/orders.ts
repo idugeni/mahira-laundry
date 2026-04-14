@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
+import { ActionResponse, Order, OrderStatus } from "@/lib/types";
 
 const OrderSchema = z.object({
   customer_id: z.string().uuid().optional(),
@@ -25,12 +26,12 @@ const OrderSchema = z.object({
     .min(1),
 });
 
-export async function createOrder(formData: FormData) {
+export async function createOrder(formData: FormData): Promise<ActionResponse<Order>> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
+  if (!user) return { success: false, error: "Unauthorized" };
 
   try {
     const rawItems = JSON.parse(formData.get("items") as string);
@@ -59,7 +60,7 @@ export async function createOrder(formData: FormData) {
       .select()
       .single();
 
-    if (error) return { error: error.message };
+    if (error) return { success: false, error: error.message };
 
     // Insert order items
     const orderItems = validatedData.items.map((item) => ({
@@ -76,7 +77,7 @@ export async function createOrder(formData: FormData) {
     const { error: itemsError } = await supabase
       .from("order_items")
       .insert(orderItems);
-    if (itemsError) return { error: itemsError.message };
+    if (itemsError) return { success: false, error: itemsError.message };
 
     // 4. Initial Timeline Log
     await supabase.from("order_status_logs").insert({
@@ -87,23 +88,23 @@ export async function createOrder(formData: FormData) {
     });
 
     revalidatePath("/order");
-    return { data: order };
+    return { success: true, data: order as unknown as Order };
   } catch (error: unknown) {
     if (error instanceof z.ZodError) {
-      return { error: `Data tidak valid: ${error.issues[0].message}` };
+      return { success: false, error: `Data tidak valid: ${error.issues[0].message}` };
     }
-    return { error: (error as Error).message || "Terjadi kesalahan sistem" };
+    return { success: false, error: (error as Error).message || "Terjadi kesalahan sistem" };
   }
 }
 
-export async function updateOrderStatus(orderId: string, status: string) {
+export async function updateOrderStatus(orderId: string, status: OrderStatus): Promise<ActionResponse> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
+  if (!user) return { success: false, error: "Unauthorized" };
 
-  const updateData: Record<string, any> = { status };
+  const updateData: Partial<Order> = { status };
   const now = new Date().toISOString();
 
   // Handle milestone timestamps
@@ -122,7 +123,7 @@ export async function updateOrderStatus(orderId: string, status: string) {
 
   const timeField = statusToTimeMap[status];
   if (timeField) {
-    updateData[timeField] = now;
+    (updateData as any)[timeField] = now;
   }
 
   const { error } = await supabase
@@ -130,7 +131,7 @@ export async function updateOrderStatus(orderId: string, status: string) {
     .update(updateData)
     .eq("id", orderId);
 
-  if (error) return { error: error.message };
+  if (error) return { success: false, error: error.message };
 
   // 1. Log the status change
   await supabase.from("order_status_logs").insert({
@@ -144,12 +145,12 @@ export async function updateOrderStatus(orderId: string, status: string) {
   return { success: true };
 }
 
-export async function cancelOrder(orderId: string, reason: string) {
+export async function cancelOrder(orderId: string, reason: string): Promise<ActionResponse> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
+  if (!user) return { success: false, error: "Unauthorized" };
 
   const { error } = await supabase
     .from("orders")
@@ -162,18 +163,18 @@ export async function cancelOrder(orderId: string, reason: string) {
     .eq("customer_id", user.id)
     .eq("status", "pending");
 
-  if (error) return { error: error.message };
+  if (error) return { success: false, error: error.message };
 
   revalidatePath("/order");
   return { success: true };
 }
 
-export async function deleteOrder(orderId: string) {
+export async function deleteOrder(orderId: string): Promise<ActionResponse> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return { error: "Unauthorized" };
+  if (!user) return { success: false, error: "Unauthorized" };
 
   const { error } = await supabase
     .from("orders")
@@ -182,7 +183,7 @@ export async function deleteOrder(orderId: string) {
     .eq("customer_id", user.id)
     .eq("status", "pending");
 
-  if (error) return { error: error.message };
+  if (error) return { success: false, error: error.message };
 
   revalidatePath("/order");
   return { success: true };

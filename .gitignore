@@ -38,6 +38,7 @@ build/
 .trae/
 .windsurf/
 .sentry-debug-log
+skills-lock.json
 
 # Testing
 coverage/

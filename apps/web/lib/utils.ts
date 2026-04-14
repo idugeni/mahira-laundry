@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { UserRole } from "@/lib/types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -68,7 +69,7 @@ export function formatRelativeTime(date: string | Date): string {
   return rtf.format(Math.round(diff / 86400), "days");
 }
 
-export function getDashboardUrl(role?: string | null): string {
+export function getDashboardUrl(role?: UserRole | string | null): string {
   switch (role) {
     case "superadmin":
     case "admin":

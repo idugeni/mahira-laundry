@@ -14,17 +14,11 @@ import {
   HiOutlineXMark,
 } from "react-icons/hi2";
 import { useNotifications } from "@/hooks/use-notifications";
+import { AppNotification } from "@/lib/types";
 
 export function NotificationPopover() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedNotification, setSelectedNotification] = useState<{
-    id: string;
-    title: string;
-    body: string;
-    type: string;
-    isRead: boolean;
-    createdAt: string;
-  } | null>(null);
+  const [selectedNotification, setSelectedNotification] = useState<AppNotification | null>(null);
   const { notifications, unreadCount, markAsRead } = useNotifications();
   const popoverRef = useRef<HTMLDivElement>(null);
 
@@ -54,8 +48,8 @@ export function NotificationPopover() {
     }
   };
 
-  const getIconStyles = (type: string, isRead: boolean) => {
-    if (isRead) return "bg-slate-50 text-slate-400";
+  const getIconStyles = (type: string, is_read: boolean) => {
+    if (is_read) return "bg-slate-50 text-slate-400";
     switch (type) {
       case "order_status":
         return "bg-blue-50 text-blue-500";
@@ -68,16 +62,9 @@ export function NotificationPopover() {
     }
   };
 
-  const handleNotificationClick = (n: {
-    id: string;
-    title: string;
-    body: string;
-    type: string;
-    isRead: boolean;
-    createdAt: string;
-  }) => {
+  const handleNotificationClick = (n: AppNotification) => {
     setSelectedNotification(n);
-    if (!n.isRead) {
+    if (!n.is_read) {
       markAsRead(n.id);
     }
   };
@@ -129,32 +116,32 @@ export function NotificationPopover() {
                       key={n.id}
                       onClick={() => handleNotificationClick(n)}
                       className={`w-full text-left p-6 hover:bg-slate-50 transition-colors flex gap-4 group relative ${
-                        !n.isRead ? "bg-brand-primary/[0.02]" : ""
+                        !n.is_read ? "bg-brand-primary/[0.02]" : ""
                       }`}
                     >
-                      {!n.isRead && (
+                      {!n.is_read && (
                         <div className="absolute left-0 top-0 bottom-0 w-1 bg-brand-primary" />
                       )}
                       <div
-                        className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0 ${getIconStyles(n.type, n.isRead)}`}
+                        className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl shrink-0 ${getIconStyles(n.type, n.is_read)}`}
                       >
                         {getIcon(n.type)}
                       </div>
                       <div className="flex-1 min-w-0">
                         <div className="flex justify-between items-start gap-2 mb-1">
                           <p
-                            className={`font-bold truncate ${n.isRead ? "text-slate-600" : "text-slate-900"}`}
+                            className={`font-bold truncate ${n.is_read ? "text-slate-600" : "text-slate-900"}`}
                           >
                             {n.title}
                           </p>
                           <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest shrink-0 mt-1">
-                            {format(new Date(n.createdAt), "HH:mm", {
+                            {format(new Date(n.created_at), "HH:mm", {
                               locale: idLocale,
                             })}
                           </span>
                         </div>
                         <p
-                          className={`text-xs line-clamp-2 leading-relaxed ${n.isRead ? "text-slate-400" : "text-slate-500"}`}
+                          className={`text-xs line-clamp-2 leading-relaxed ${n.is_read ? "text-slate-400" : "text-slate-500"}`}
                         >
                           {n.body}
                         </p>
@@ -222,7 +209,7 @@ export function NotificationPopover() {
               <div className="p-10 text-center">
                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 px-4 py-1.5 rounded-full inline-block mb-6">
                   {format(
-                    new Date(selectedNotification.createdAt),
+                    new Date(selectedNotification.created_at),
                     "eeee, d MMMM yyyy • HH:mm",
                     { locale: idLocale },
                   )}

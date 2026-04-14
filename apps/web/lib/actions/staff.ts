@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { ActionResponse } from "@/lib/types";
 
 export type RegisterStaffInput = {
   fullName: string;
@@ -12,7 +13,7 @@ export type RegisterStaffInput = {
   password?: string;
 };
 
-export async function registerStaffMember(data: RegisterStaffInput) {
+export async function registerStaffMember(data: RegisterStaffInput): Promise<ActionResponse> {
   try {
     const admin = createAdminClient();
 
@@ -50,8 +51,9 @@ export async function registerStaffMember(data: RegisterStaffInput) {
 
     revalidatePath("/pegawai");
     return { success: true };
-  } catch (error: any) {
-    console.error("Staff registration failed:", error);
-    return { success: false, error: error.message };
+  } catch (error) {
+    const err = error as Error;
+    console.error("Staff registration failed:", err);
+    return { success: false, error: err.message };
   }
 }

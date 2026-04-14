@@ -21,13 +21,14 @@ import { useState, useEffect } from "react";
 import { ServiceDetailModal } from "./service-detail-modal";
 import { HiOutlineArrowRight } from "react-icons/hi2";
 import { useAuth } from "@/hooks/use-auth";
+import { Service } from "@/lib/types";
 
-export function LayananClient({ initialServices }: { initialServices: any[] }) {
+export function LayananClient({ initialServices }: { initialServices: Service[] }) {
   const { user, profile, loading } = useAuth();
 
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedService, setSelectedService] = useState<any>(null);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   useEffect(() => {

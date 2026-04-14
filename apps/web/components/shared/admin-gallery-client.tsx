@@ -12,10 +12,11 @@ import {
 } from "react-icons/hi2";
 import { addGalleryItem, deleteGalleryItem } from "@/lib/actions/gallery";
 import { Button } from "@/components/ui/button";
+import { GalleryItem } from "@/lib/types";
 
 const categories = ["Hasil Cucian", "Fasilitas", "Proses", "Lainnya"];
 
-export function AdminGalleryClient({ initialItems }: { initialItems: any[] }) {
+export function AdminGalleryClient({ initialItems }: { initialItems: GalleryItem[] }) {
   const [items, setItems] = useState(initialItems);
   const [isUploading, setIsUploading] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
@@ -36,9 +37,10 @@ export function AdminGalleryClient({ initialItems }: { initialItems: any[] }) {
         window.location.reload(); 
         return "Foto berhasil ditambahkan!";
       },
-      error: (err: any) => {
+      error: (err: unknown) => {
+        const error = err as Error;
         setIsUploading(false);
-        return err.message || "Gagal mengunggah foto.";
+        return error.message || "Gagal mengunggah foto.";
       }
     });
   }

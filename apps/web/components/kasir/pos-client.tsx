@@ -5,32 +5,24 @@ import { toast } from "sonner";
 import { createOrder } from "@/lib/actions/orders";
 import { searchCustomers } from "@/lib/actions/customers";
 import { formatIDR } from "@/lib/utils";
+import { Service, Profile } from "@/lib/types";
 
 interface POSClientProps {
-  initialServices: (Record<string, unknown> & {
-    id: string;
-    name: string;
-    price: number;
-    unit: string;
-    description: string;
-    icon?: string;
-  })[];
+  initialServices: Service[];
   outletId: string;
 }
 
 export function POSClient({ initialServices, outletId }: POSClientProps) {
-  const [cart, setCart] = useState<
-    (Record<string, unknown> & {
-      id: string;
-      name: string;
-      qty: number;
-      price: number;
-      unit: string;
-    })[]
-  >([]);
+  const [cart, setCart] = useState<{
+    id: string;
+    name: string;
+    qty: number;
+    price: number;
+    unit: string;
+  }[]>([]);
   const [customerSearch, setCustomerSearch] = useState("");
-  const [searchResults, setSearchResults] = useState<any[]>([]);
-  const [selectedCustomer, setSelectedCustomer] = useState<any>(null);
+  const [searchResults, setSearchResults] = useState<Profile[]>([]);
+  const [selectedCustomer, setSelectedCustomer] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
 
@@ -52,15 +44,7 @@ export function POSClient({ initialServices, outletId }: POSClientProps) {
     return () => clearTimeout(timer);
   }, [customerSearch]);
 
-  const addToCart = (
-    service: Record<string, unknown> & {
-      id: string;
-      name: string;
-      price: number;
-      unit: string;
-      description: string;
-    },
-  ) => {
+  const addToCart = (service: Service) => {
     setCart((prev) => {
       const existing = prev.find((i) => i.id === service.id);
       if (existing)
@@ -118,13 +102,13 @@ export function POSClient({ initialServices, outletId }: POSClientProps) {
 
       const result = await createOrder(formData);
 
-      if (result.error) {
-        toast.error(result.error);
-      } else {
+      if (result.success && result.data) {
         toast.success(`Berhasil! Order ID: ${result.data.id.split("-")[0]}`);
         setCart([]);
         setSelectedCustomer(null);
         setCustomerSearch("");
+      } else {
+        toast.error(result.error || "Gagal membuat order");
       }
     } catch (_error) {
       toast.error("Terjadi kesalahan sistem");

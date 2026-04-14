@@ -3,16 +3,11 @@
 import { useOptimistic } from "react";
 import { toast } from "sonner";
 import { updateOrderStatus } from "@/lib/actions/orders";
+import { formatIDR } from "@/lib/utils";
+import { Order, OrderStatus } from "@/lib/types";
 
 interface AntrianClientProps {
-  initialOrders: (Record<string, unknown> & {
-    id: string;
-    status: string;
-    order_items: { service_name: string }[];
-    profiles?: { full_name?: string };
-    total_amount: number;
-    created_at: string;
-  })[];
+  initialOrders: Order[];
 }
 
 const columns = [
@@ -28,13 +23,14 @@ const columns = [
 export function AntrianClient({ initialOrders }: AntrianClientProps) {
   const [optimisticOrders, addOptimisticOrder] = useOptimistic(
     initialOrders,
-    (state, { id, status }) =>
+    (state, { id, status }: { id: string; status: OrderStatus }) =>
       state.map((o) => (o.id === id ? { ...o, status } : o)),
   );
 
   const handleStatusChange = async (id: string, status: string) => {
-    addOptimisticOrder({ id, status });
-    const result = await updateOrderStatus(id, status);
+    const newStatus = status as OrderStatus;
+    addOptimisticOrder({ id, status: newStatus });
+    const result = await updateOrderStatus(id, newStatus);
     if (result.error) {
       toast.error(result.error);
     } else {
@@ -85,8 +81,8 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
                   </div>
                   <div className="text-sm font-bold text-slate-800 line-clamp-2">
                     {order.order_items?.[0]?.service_name || "Layanan Unknown"}
-                    {order.order_items?.length > 1 &&
-                      ` (+${order.order_items.length - 1})`}
+                    {(order.order_items?.length ?? 0) > 1 &&
+                      ` (+${(order.order_items?.length ?? 0) - 1})`}
                   </div>
                   <div className="text-xs text-slate-400 font-medium mt-1">
                     Pelanggan: {order.profiles?.full_name || "Guest"}

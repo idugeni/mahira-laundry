@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { ActionResponse } from "@/lib/types";
 
 export type OutletInput = {
   id?: string;
@@ -15,7 +16,7 @@ export type OutletInput = {
   franchise_fee?: number;
 };
 
-export async function upsertOutlet(data: OutletInput) {
+export async function upsertOutlet(data: OutletInput): Promise<ActionResponse> {
   try {
     const supabase = await createClient();
 
@@ -55,13 +56,14 @@ export async function upsertOutlet(data: OutletInput) {
 
     revalidatePath("/outlet");
     return { success: true };
-  } catch (error: any) {
-    console.error("Outlet action failed:", error);
-    return { success: false, error: error.message };
+  } catch (error) {
+    const err = error as Error;
+    console.error("Outlet action failed:", err);
+    return { success: false, error: err.message };
   }
 }
 
-export async function deleteOutlet(id: string) {
+export async function deleteOutlet(id: string): Promise<ActionResponse> {
   try {
     const supabase = await createClient();
     const { error } = await supabase.from("outlets").delete().eq("id", id);
@@ -69,13 +71,14 @@ export async function deleteOutlet(id: string) {
 
     revalidatePath("/outlet");
     return { success: true };
-  } catch (error: any) {
-    console.error("Delete outlet failed:", error);
-    return { success: false, error: error.message };
+  } catch (error) {
+    const err = error as Error;
+    console.error("Delete outlet failed:", err);
+    return { success: false, error: err.message };
   }
 }
 
-export async function uploadOutletImage(outletId: string, formData: FormData) {
+export async function uploadOutletImage(outletId: string, formData: FormData): Promise<ActionResponse<{ url: string }>> {
   try {
     const supabase = await createClient();
     const file = formData.get("image") as File;
@@ -103,9 +106,10 @@ export async function uploadOutletImage(outletId: string, formData: FormData) {
       if (updateError) throw updateError;
     }
 
-    return { success: true, url: publicUrl };
-  } catch (error: any) {
-    console.error("Upload image failed:", error);
-    return { success: false, error: error.message };
+    return { success: true, data: { url: publicUrl } };
+  } catch (error) {
+    const err = error as Error;
+    console.error("Upload image failed:", err);
+    return { success: false, error: err.message };
   }
 }

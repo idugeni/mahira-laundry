@@ -24,29 +24,13 @@ interface Stat {
   label: string;
 }
 
+import { Service, Testimonial, GalleryItem } from "@/lib/types";
+
 interface HomeClientProps {
-  initialServices: {
-    id: string;
-    name: string;
-    price: number;
-    unit: string;
-    slug?: string;
-    description?: string;
-    category?: string;
-    icon?: string;
-    features?: string[];
-    is_express?: boolean;
-    estimated_duration_hours?: number;
-  }[];
+  initialServices: Service[];
   stats: Stat[];
-  testimonials: {
-    id: string;
-    content: string;
-    profiles?: { full_name: string };
-    rating: number;
-    created_at: string;
-  }[];
-  galleryItems: any[];
+  testimonials: Testimonial[];
+  galleryItems: GalleryItem[];
 }
 
 import { useAuth } from "@/hooks/use-auth";
@@ -66,14 +50,14 @@ export function HomeClient({
   const { user, profile, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [selectedService, setSelectedService] = useState<any>(null);
+  const [selectedService, setSelectedService] = useState<Service | null>(null);
   const [isDetailOpen, setIsDetailOpen] = useState(false);
 
   // Sync state with URL
   useEffect(() => {
     const serviceSlug = searchParams.get("s");
     if (serviceSlug) {
-      const service = initialServices.find(s => s.id === serviceSlug || (s as any).slug === serviceSlug);
+      const service = initialServices.find(s => s.id === serviceSlug || s.slug === serviceSlug);
       if (service) {
         setSelectedService(service);
         setIsDetailOpen(true);
