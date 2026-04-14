@@ -26,9 +26,13 @@ export function OrderTimeline({ logs }: { logs: Log[] }) {
         <div key={log.id} className="relative flex items-center group">
           <div className="absolute left-0 w-8 h-8 rounded-full bg-white border-2 border-indigo-500 flex items-center justify-center z-10 group-first:scale-110 shadow-sm group-first:shadow-indigo-200 transition-transform">
             {index === 0 ? (
-              <HiOutlineCheckCircle className="text-indigo-600 w-5 h-5" />
+              <span className="text-indigo-600 w-5 h-5 flex items-center justify-center">
+                <HiOutlineCheckCircle />
+              </span>
             ) : (
-              <HiOutlineClock className="text-slate-400 w-4 h-4" />
+              <span className="text-slate-400 w-4 h-4 flex items-center justify-center">
+                <HiOutlineClock />
+              </span>
             )}
           </div>
           
@@ -50,7 +54,9 @@ export function OrderTimeline({ logs }: { logs: Log[] }) {
 
             {log.profiles?.full_name && (
               <div className="flex items-center gap-1.5 pt-2 border-t border-slate-200/50">
-                <HiOutlineUser className="text-slate-400 w-3 h-3" />
+                <span className="text-slate-400 w-3 h-3 flex items-center justify-center">
+                  <HiOutlineUser />
+                </span>
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
                   Oleh: {log.profiles.full_name}
                 </span>

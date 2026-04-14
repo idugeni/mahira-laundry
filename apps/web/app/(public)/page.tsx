@@ -56,6 +56,7 @@ const jsonLd = {
 
 import { HomeClient } from "@/components/shared/home-client";
 import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
+import { Suspense } from "react";
 
 export default async function HomePage() {
   const supabase = await createClient();
@@ -101,12 +102,14 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div id="home-page-container">
-        <HomeClient
-          initialServices={services || []}
-          stats={stats}
-          testimonials={testimonials}
-          galleryItems={galleryItems || []}
-        />
+        <Suspense fallback={<div className="py-24 text-center">Memuat...</div>}>
+          <HomeClient
+            initialServices={services || []}
+            stats={stats}
+            testimonials={testimonials}
+            galleryItems={galleryItems || []}
+          />
+        </Suspense>
       </div>
     </>
   );

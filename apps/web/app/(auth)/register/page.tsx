@@ -8,7 +8,12 @@ export const metadata: Metadata = {
 };
 
 import { AuthClient } from "@/components/shared/auth-client";
+import { Suspense } from "react";
 
 export default function RegisterPage() {
-  return <AuthClient type="register" action={signUp} />;
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Memuat...</div>}>
+      <AuthClient type="register" action={signUp} />
+    </Suspense>
+  );
 }

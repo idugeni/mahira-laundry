@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 
 import { LayananClient } from "@/components/shared/layanan-client";
 import { createClient } from "@/lib/supabase/server";
+import { Suspense } from "react";
 
 export default async function LayananPage() {
   const supabase = await createClient();
@@ -23,5 +24,9 @@ export default async function LayananPage() {
     .eq("is_active", true)
     .order("sort_order", { ascending: true });
 
-  return <LayananClient initialServices={services || []} />;
+  return (
+    <Suspense fallback={<div className="py-24 text-center">Memuat Layanan...</div>}>
+      <LayananClient initialServices={services || []} />
+    </Suspense>
+  );
 }
