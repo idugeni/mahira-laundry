@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { AdminTestimonialsClient } from "@/components/shared/admin-testimonials-client";
+import { AdminTestimonialsClient } from "@/components/shared/admin/testimonials/admin-testimonials-client";
 import { createClient, getAllTestimonials } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {

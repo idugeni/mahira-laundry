@@ -58,7 +58,7 @@ export function ReportModal({
 
 	return (
 		<>
-			<div onClick={() => setIsOpen(true)} className="cursor-pointer">
+			<div onClick={() => setIsOpen(true)} className="cursor-pointer h-full">
 				{trigger}
 			</div>
 

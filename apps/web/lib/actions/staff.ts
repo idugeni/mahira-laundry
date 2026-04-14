@@ -5,6 +5,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import type { ActionResponse } from "@/lib/types";
 
 export type RegisterStaffInput = {
+	id?: string;
 	fullName: string;
 	email: string;
 	phone: string;
@@ -19,47 +20,96 @@ export async function registerStaffMember(
 	try {
 		const admin = createAdminClient();
 
-		// 1. Create user in Supabase Auth via Admin API
-		const { data: authUser, error: authError } =
-			await admin.auth.admin.createUser({
-				email: data.email,
-				password: data.password || "Mahira123!", // Default password if empty
-				email_confirm: true, // Mark email as confirmed immediately
-				user_metadata: {
-					full_name: data.fullName,
-					role: data.role,
-					phone: data.phone,
+		if (data.id) {
+			// Update Existing
+			const { error: authError } = await admin.auth.admin.updateUserById(
+				data.id,
+				{
+					email: data.email,
+					user_metadata: {
+						full_name: data.fullName,
+						role: data.role,
+						phone: data.phone,
+					},
+					...(data.password ? { password: data.password } : {}),
 				},
-			});
+			);
 
-		if (authError) throw authError;
+			if (authError) throw authError;
 
-		// 2. The database trigger 'on_auth_user_created' in Supabase
-		// will automatically create the profile.
-		// We just need to ensure the outlet_id is updated since the trigger
-		// doesn't know about it.
-
-		if (authUser.user) {
 			const { error: profileError } = await admin
 				.from("profiles")
 				.update({
+					full_name: data.fullName,
+					role: data.role,
+					phone: data.phone,
 					outlet_id: data.outletId,
 				})
-				.eq("id", authUser.user.id);
+				.eq("id", data.id);
 
-			if (profileError) {
-				console.error(
-					"Error updating staff profile with outlet:",
-					profileError,
-				);
+			if (profileError) throw profileError;
+		} else {
+			// Create New
+			const { data: authUser, error: authError } =
+				await admin.auth.admin.createUser({
+					email: data.email,
+					password: data.password || "Mahira123!",
+					email_confirm: true,
+					user_metadata: {
+						full_name: data.fullName,
+						role: data.role,
+						phone: data.phone,
+					},
+				});
+
+			if (authError) throw authError;
+
+			if (authUser.user) {
+				const { error: profileError } = await admin
+					.from("profiles")
+					.update({
+						outlet_id: data.outletId,
+					})
+					.eq("id", authUser.user.id);
+
+				if (profileError) throw profileError;
 			}
 		}
 
 		revalidatePath("/pegawai");
+		revalidatePath("/admin/pegawai");
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Staff registration failed:", err);
+		console.error("Staff action failed:", err);
+		return { success: false, error: err.message };
+	}
+}
+
+export async function deleteStaffMember(id: string): Promise<ActionResponse> {
+	try {
+		const admin = createAdminClient();
+
+		// 1. Delete from Auth
+		const { error: authError } = await admin.auth.admin.deleteUser(id);
+		if (authError) throw authError;
+
+		// 2. Profile should be deleted via Cascade or manual if needed
+		// In some setups, profiles is linked via FK cascade.
+		const { error: profileError } = await admin
+			.from("profiles")
+			.delete()
+			.eq("id", id);
+		if (profileError) {
+			console.log("Profile already deleted or FK cascade handled it.");
+		}
+
+		revalidatePath("/pegawai");
+		revalidatePath("/admin/pegawai");
+		return { success: true };
+	} catch (error) {
+		const err = error as Error;
+		console.error("Delete staff failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -74,7 +124,6 @@ export async function getStaffPerformance(
 		const start = new Date(year, month - 1, 1).toISOString();
 		const end = new Date(year, month, 0, 23, 59, 59).toISOString();
 
-		// Query orders where this staff was involve in any production stage
 		const { data: orders, error } = await admin
 			.from("orders")
 			.select(`
@@ -168,7 +217,6 @@ export async function getStaffLeaderboard(month: number, year: number) {
 			}
 		});
 
-		// Fetch profile names for IDs
 		const userIds = Object.keys(leaderboard);
 		const { data: profiles } = await admin
 			.from("profiles")

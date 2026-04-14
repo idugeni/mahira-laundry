@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { LoyaltyClient } from "@/components/shared/loyalty-client";
+import { LoyaltyClient } from "@/components/shared/customer/loyalty/loyalty-client";
 import {
 	getLoyaltyHistory,
 	getRewards,

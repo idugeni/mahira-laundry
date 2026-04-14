@@ -1,7 +1,7 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Suspense } from "react";
-import { RevenueBarChart } from "@/components/shared/admin-charts";
-import { StatCard } from "@/components/shared/stat-card";
+import { RevenueBarChart } from "@/components/shared/superadmin/admin-charts";
+import { StatCard } from "@/components/shared/common/stat-card";
 import { ORDER_STATUS_COLORS, ORDER_STATUS_LABELS } from "@/lib/constants";
 import {
 	getAuditLogs,
@@ -103,7 +103,7 @@ export default async function SuperadminDashboardPage() {
 			{/* Charts Row */}
 			<div className="grid lg:grid-cols-3 gap-6">
 				{/* Revenue Chart */}
-				<div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm">
+				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-sm">
 					<div className="flex items-center justify-between mb-6">
 						<div>
 							<h2 className="text-base font-bold text-slate-900">
@@ -129,7 +129,7 @@ export default async function SuperadminDashboardPage() {
 				</div>
 
 				{/* Quick Stats */}
-				<div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm">
+				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-sm">
 					<h2 className="text-base font-bold text-slate-900 mb-4">
 						Ringkasan Cepat
 					</h2>
@@ -197,7 +197,7 @@ export default async function SuperadminDashboardPage() {
 
 			<div className="grid lg:grid-cols-3 gap-6">
 				{/* Recent Orders Table */}
-				<div className="lg:col-span-2 bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-sm overflow-hidden">
 					<div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
 						<div>
 							<h2 className="text-base font-bold text-slate-900">
@@ -281,7 +281,7 @@ export default async function SuperadminDashboardPage() {
 				</div>
 
 				{/* Audit Logs */}
-				<div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm flex flex-col">
+				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-sm flex flex-col">
 					<div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
 						<h2 className="text-base font-bold text-slate-900">Aktivitas</h2>
 						<span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />

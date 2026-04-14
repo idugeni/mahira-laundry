@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { AdminGalleryClient } from "@/components/shared/admin-gallery-client";
+import { AdminGalleryClient } from "@/components/shared/admin/gallery/admin-gallery-client";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -35,5 +35,9 @@ export default async function AdminGalleryPage() {
 		.select("*")
 		.order("created_at", { ascending: false });
 
-	return <AdminGalleryClient initialItems={galleryItems || []} />;
+	return (
+		<div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
+			<AdminGalleryClient initialItems={galleryItems || []} />
+		</div>
+	);
 }

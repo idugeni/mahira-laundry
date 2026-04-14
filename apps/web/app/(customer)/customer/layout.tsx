@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { motion } from "motion/react";
 import Link from "next/link";
@@ -31,7 +31,7 @@ const customerNav = [
 	{ href: "/customer/profil", label: "Profil", icon: HiOutlineUserCircle },
 ];
 
-import { NotificationPopover } from "@/components/shared/notification-popover";
+import { NotificationPopover } from "@/components/shared/common/notification-popover";
 import { useAuth } from "@/hooks/use-auth";
 
 export default function CustomerLayout({

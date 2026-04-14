@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { AuthClient } from "@/components/shared/auth/auth-client";
 import { signUp } from "@/lib/actions/auth";
 
 export const metadata: Metadata = {
@@ -6,9 +8,6 @@ export const metadata: Metadata = {
 	description:
 		"Buat akun Mahira Laundry gratis dan dapatkan diskon 10% untuk order pertama Anda. Layanan laundry premium di Jakarta.",
 };
-
-import { Suspense } from "react";
-import { AuthClient } from "@/components/shared/auth-client";
 
 export default function RegisterPage() {
 	return (

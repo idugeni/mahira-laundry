@@ -17,7 +17,7 @@ import {
 import { toast } from "sonner";
 import { registerMitra } from "@/lib/actions/mitra";
 
-export function MitraModal() {
+export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [mounted, setMounted] = useState(false);
@@ -58,13 +58,17 @@ export function MitraModal() {
 
 	return (
 		<>
-			<button
-				onClick={() => setIsOpen(true)}
-				className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow-md hover:scale-[1.02] transition-all"
-			>
-				<HiOutlineUserGroup size={18} />
-				<span>Tambah Mitra Baru</span>
-			</button>
+			<div onClick={() => setIsOpen(true)}>
+				{trigger || (
+					<button
+						type="button"
+						className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow-md hover:scale-[1.02] transition-all"
+					>
+						<HiOutlineUserGroup size={18} />
+						<span>Tambah Mitra Baru</span>
+					</button>
+				)}
+			</div>
 
 			{isOpen &&
 				mounted &&

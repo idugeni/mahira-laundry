@@ -53,6 +53,7 @@ export async function upsertOutlet(data: OutletInput): Promise<ActionResponse> {
 		if (result.error) throw result.error;
 
 		revalidatePath("/outlet");
+		revalidatePath("/admin/outlet");
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
@@ -68,6 +69,7 @@ export async function deleteOutlet(id: string): Promise<ActionResponse> {
 		if (error) throw error;
 
 		revalidatePath("/outlet");
+		revalidatePath("/admin/outlet");
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;

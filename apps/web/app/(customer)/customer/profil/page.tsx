@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { ProfilClient } from "@/components/shared/profil-client";
+import { ProfilClient } from "@/components/shared/customer/profil/profil-client";
 import { getUserProfile } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {

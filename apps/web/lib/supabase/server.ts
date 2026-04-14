@@ -392,7 +392,7 @@ export async function getAuditLogs(limit = 50, tableName?: string) {
 	const supabase = await createClient();
 	let query = supabase
 		.from("audit_logs")
-		.select("*, profiles!user_id(full_name, role)")
+		.select("*, profiles(full_name, role)")
 		.order("created_at", { ascending: false })
 		.limit(limit);
 
@@ -400,7 +400,11 @@ export async function getAuditLogs(limit = 50, tableName?: string) {
 		query = query.eq("table_name", tableName);
 	}
 
-	const { data } = await query;
+	const { data, error } = await query;
+	if (error) {
+		console.error("Error fetching audit logs:", error);
+		return [];
+	}
 	return data || [];
 }
 

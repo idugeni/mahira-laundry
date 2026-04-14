@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { ServiceModal } from "@/components/shared/service-modal";
+﻿import type { Metadata } from "next";
+import { ServiceModal } from "@/components/shared/admin/services/service-modal";
 import { getAllServices, getUserProfile } from "@/lib/supabase/server";
 import { formatIDR } from "@/lib/utils";
 

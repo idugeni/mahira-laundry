@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { NotificationClient } from "@/components/shared/notification-client";
+﻿import type { Metadata } from "next";
+import { NotificationClient } from "@/components/shared/customer/notification/notification-client";
 
 export const metadata: Metadata = {
 	title: "Notifikasi",

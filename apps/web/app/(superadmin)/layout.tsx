@@ -1,4 +1,4 @@
-import { AdminSidebar } from "@/components/shared/admin-sidebar";
+﻿import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
 
 const superadminNav = [
 	{ href: "/admin", label: "Dashboard", icon: "🏠" },
@@ -12,6 +12,7 @@ const superadminNav = [
 	{ href: "/admin/galeri", label: "Galeri", icon: "🖼️" },
 	{ href: "/admin/keuangan", label: "Keuangan", icon: "💰" },
 	{ href: "/admin/laporan", label: "Laporan & Audit", icon: "📊" },
+	{ href: "/admin/profil", label: "Profil Akun", icon: "👤" },
 ];
 
 export default function SuperadminLayout({
@@ -44,7 +45,9 @@ export default function SuperadminLayout({
 					</div>
 				</header>
 				{/* Main Content */}
-				<main className="flex-1 p-4 lg:p-8 overflow-auto">{children}</main>
+				<main className="flex-1 px-0 py-4 sm:px-4 lg:p-8 overflow-auto">
+					{children}
+				</main>
 				{/* Dashboard Footer */}
 				<footer className="p-4 lg:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
 					<p>

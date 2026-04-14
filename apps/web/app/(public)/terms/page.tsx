@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { LegalLayout } from "@/components/shared/legal-layout";
+﻿import type { Metadata } from "next";
+import { LegalLayout } from "@/components/shared/public/legal-layout";
 
 export const metadata: Metadata = {
 	title: "Syarat & Ketentuan",

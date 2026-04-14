@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { OrderListClient } from "@/components/shared/order-list-client";
+﻿import type { Metadata } from "next";
+import { OrderListClient } from "@/components/shared/customer/order/order-list-client";
 import { getOrders } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {

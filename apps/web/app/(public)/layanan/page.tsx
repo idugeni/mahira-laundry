@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Layanan Laundry Premium",
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 import { Suspense } from "react";
-import { LayananClient } from "@/components/shared/layanan-client";
+import { LayananClient } from "@/components/shared/public/layanan-client";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function LayananPage() {

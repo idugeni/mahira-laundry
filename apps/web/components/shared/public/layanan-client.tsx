@@ -13,10 +13,10 @@ import {
 	MdOutlineLocalLaundryService,
 } from "react-icons/md";
 import { RiGraduationCapLine } from "react-icons/ri";
+import { ServiceDetailModal } from "@/components/shared/customer/order/service-detail-modal";
 import { useAuth } from "@/hooks/use-auth";
 import type { Service } from "@/lib/types";
 import { formatIDR, getDashboardUrl } from "@/lib/utils";
-import { ServiceDetailModal } from "./service-detail-modal";
 
 export function LayananClient({
 	initialServices,

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Tentang Kami",
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 	},
 };
 
-import { TentangClient } from "@/components/shared/tentang-client";
+import { TentangClient } from "@/components/shared/public/tentang-client";
 
 export default function TentangPage() {
 	return <TentangClient />;

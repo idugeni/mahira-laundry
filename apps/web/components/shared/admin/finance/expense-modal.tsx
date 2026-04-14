@@ -27,7 +27,13 @@ const CATEGORIES = [
 	{ id: "other", label: "Lain-lain" },
 ];
 
-export function ExpenseModal({ outletId }: { outletId: string }) {
+export function ExpenseModal({
+	outletId,
+	trigger,
+}: {
+	outletId: string;
+	trigger?: React.ReactNode;
+}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [mounted, setMounted] = useState(false);
@@ -62,13 +68,17 @@ export function ExpenseModal({ outletId }: { outletId: string }) {
 
 	return (
 		<>
-			<button
-				onClick={() => setIsOpen(true)}
-				className="inline-flex items-center gap-2 px-4 py-2.5 bg-rose-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-rose-100 hover:shadow-rose-200 hover:scale-[1.02] active:scale-[0.98] transition-all"
-			>
-				<HiOutlineBanknotes size={18} />
-				<span>Input Pengeluaran</span>
-			</button>
+			<div onClick={() => setIsOpen(true)}>
+				{trigger || (
+					<button
+						type="button"
+						className="inline-flex items-center gap-2 px-4 py-2.5 bg-rose-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-rose-100 hover:shadow-rose-200 hover:scale-[1.02] active:scale-[0.98] transition-all"
+					>
+						<HiOutlineBanknotes size={18} />
+						<span>Input Pengeluaran</span>
+					</button>
+				)}
+			</div>
 
 			{isOpen &&
 				mounted &&

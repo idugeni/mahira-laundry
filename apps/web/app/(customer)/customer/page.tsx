@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { DashboardClient } from "@/components/shared/dashboard-client";
+import { DashboardClient } from "@/components/shared/admin/dashboard-client";
 import { getDashboardStats } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {

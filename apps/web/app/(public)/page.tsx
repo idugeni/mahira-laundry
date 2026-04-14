@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { HomeClient } from "@/components/shared/public/home/home-client";
 import { PRIMARY_OUTLET } from "@/lib/constants";
+import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
+
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
@@ -54,10 +58,6 @@ const jsonLd = {
 	],
 	priceRange: "$$",
 };
-
-import { Suspense } from "react";
-import { HomeClient } from "@/components/shared/home-client";
-import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
 
 export default async function HomePage() {
 	const supabase = await createClient();

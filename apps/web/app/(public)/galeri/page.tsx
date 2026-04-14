@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import { GallerySection } from "@/components/shared/gallery-section";
+﻿import type { Metadata } from "next";
+import { GallerySection } from "@/components/shared/public/gallery/gallery-section";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {

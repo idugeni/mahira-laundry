@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { Suspense } from "react";
-import { OrderTrendChart } from "@/components/shared/admin-charts";
+import { OrderTrendChart } from "@/components/shared/superadmin/admin-charts";
 import {
 	getManagerDashboardStats,
 	getOrdersByDay,

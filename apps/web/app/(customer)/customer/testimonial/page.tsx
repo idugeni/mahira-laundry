@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { HiOutlineStar } from "react-icons/hi2";
-import { TestimonialForm } from "@/components/shared/testimonial-form";
+import { TestimonialForm } from "@/components/shared/public/testimonial-form";
 
 export const metadata: Metadata = {
 	title: "Kirim Testimoni",

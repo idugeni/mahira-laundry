@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Lokasi Outlet",
@@ -41,7 +41,7 @@ const _outlets = [
 	},
 ];
 
-import { LokasiClient } from "@/components/shared/lokasi-client";
+import { LokasiClient } from "@/components/shared/public/lokasi-client";
 
 export default function LokasiPage() {
 	return <LokasiClient />;

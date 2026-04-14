@@ -1,4 +1,4 @@
-import { AdminSidebar } from "@/components/shared/admin-sidebar";
+﻿import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 
 const managerNav = [

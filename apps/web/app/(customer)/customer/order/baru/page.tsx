@@ -1,4 +1,4 @@
-import { OrderClient } from "@/components/shared/order-client";
+﻿import { OrderClient } from "@/components/shared/customer/order/order-client";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function NewOrderPage() {

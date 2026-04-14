@@ -1,6 +1,6 @@
-import { MahiraFooter } from "@/components/brand/mahira-footer";
+﻿import { MahiraFooter } from "@/components/brand/mahira-footer";
 import { MahiraHeader } from "@/components/brand/mahira-header";
-import { BackToTop } from "@/components/shared/back-to-top";
+import { BackToTop } from "@/components/shared/common/back-to-top";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function PublicLayout({

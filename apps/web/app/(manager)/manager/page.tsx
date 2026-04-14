@@ -1,4 +1,4 @@
-import {
+﻿import {
 	AlertTriangle,
 	ArrowRight,
 	Bell,
@@ -12,8 +12,8 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { OrderTrendChart } from "@/components/shared/admin-charts";
-import { StatCard } from "@/components/shared/stat-card";
+import { OrderTrendChart } from "@/components/shared/superadmin/admin-charts";
+import { StatCard } from "@/components/shared/common/stat-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {

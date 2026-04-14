@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
-import { OutletModal } from "@/components/shared/outlet-modal";
+﻿import type { Metadata } from "next";
+import { OutletModal } from "@/components/shared/admin/outlet/outlet-modal";
 import { getOutletsWithStats } from "@/lib/supabase/server";
 import { formatCompact, formatIDR, cn } from "@/lib/utils";
-import { StatCard } from "@/components/shared/stat-card";
+import { StatCard } from "@/components/shared/common/stat-card";
 import {
 	Building2,
 	CheckCircle2,

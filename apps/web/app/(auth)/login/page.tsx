@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import { signIn } from "@/lib/actions/auth";
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 import { Suspense } from "react";
-import { AuthClient } from "@/components/shared/auth-client";
+import { AuthClient } from "@/components/shared/auth/auth-client";
 
 export default function LoginPage() {
 	return (

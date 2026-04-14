@@ -1,4 +1,4 @@
-import {
+﻿import {
 	AlertTriangle,
 	ArrowUpRight,
 	CheckCircle2,
@@ -9,7 +9,7 @@ import {
 	Search,
 } from "lucide-react";
 import type { Metadata } from "next";
-import { InventoryModal } from "@/components/shared/inventory-modal";
+import { InventoryModal } from "@/components/shared/admin/inventory/inventory-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
