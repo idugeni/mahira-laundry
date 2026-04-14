@@ -273,8 +273,11 @@ export async function getRecentExpenses(limit = 10) {
 		.order("created_at", { ascending: false })
 		.limit(limit);
 
-	if (error) throw error;
-	return data;
+	if (error) {
+		console.error("Error fetching expenses:", error.message);
+		return [];
+	}
+	return data || [];
 }
 
 // Revenue aggregated by month for the past N months

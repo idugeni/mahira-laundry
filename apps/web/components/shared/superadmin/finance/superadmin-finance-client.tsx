@@ -1,9 +1,7 @@
-﻿"use client";
+"use client";
 
 import {
 	Activity,
-	ArrowDownRight,
-	ArrowUpRight,
 	Banknote,
 	BarChart3,
 	Building2,
@@ -12,7 +10,6 @@ import {
 	Download,
 	Filter,
 	History,
-	PieChart as PieChartIcon,
 	Receipt,
 	TrendingUp,
 	Wallet,
@@ -55,23 +52,22 @@ export function SuperadminFinanceClient({
 }: SuperadminFinanceClientProps) {
 	const [activeTab, setActiveTab] = useState("overview");
 	const [expensePage, setExpensePage] = useState(1);
+	const [expensePageSize, setExpensePageSize] = useState(10);
 	const [historyPage, setHistoryPage] = useState(1);
+	const [historyPageSize, setHistoryPageSize] = useState(10);
 
-	const EXPENSE_PER_PAGE = 8;
-	const HISTORY_PER_PAGE = 8;
-
-	const expenseTotalPages = Math.ceil(expenses.length / EXPENSE_PER_PAGE);
+	const expenseTotalPages = Math.ceil(expenses.length / expensePageSize);
 	const paginatedExpenses = expenses.slice(
-		(expensePage - 1) * EXPENSE_PER_PAGE,
-		expensePage * EXPENSE_PER_PAGE,
+		(expensePage - 1) * expensePageSize,
+		expensePage * expensePageSize,
 	);
 
 	const historyTotalPages = Math.ceil(
-		recentPaidOrders.length / HISTORY_PER_PAGE,
+		recentPaidOrders.length / historyPageSize,
 	);
 	const paginatedHistory = recentPaidOrders.slice(
-		(historyPage - 1) * HISTORY_PER_PAGE,
-		historyPage * HISTORY_PER_PAGE,
+		(historyPage - 1) * historyPageSize,
+		historyPage * historyPageSize,
 	);
 
 	return (
@@ -105,7 +101,7 @@ export function SuperadminFinanceClient({
 						<ExpenseModal
 							outletId="all"
 							trigger={
-								<Button className="bg-white text-slate-900 hover:bg-emerald-400 hover:text-white rounded-2xl px-12 h-20 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-white/5 flex items-center gap-4">
+								<Button className="bg-white text-slate-900 hover:bg-emerald-400 hover:text-white rounded-2xl px-8 sm:px-12 h-16 sm:h-20 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-white/5 flex items-center gap-4">
 									<div className="w-10 h-10 rounded-2xl bg-slate-900/5 flex items-center justify-center">
 										<Receipt size={24} />
 									</div>
@@ -122,47 +118,46 @@ export function SuperadminFinanceClient({
 				className="w-full space-y-10"
 				onValueChange={setActiveTab}
 			>
-				<div className="flex flex-wrap items-center justify-between gap-6 px-4 lg:px-0">
+				<div className="flex flex-wrap items-center justify-between gap-4 px-4 lg:px-0">
 					<TabsList className="bg-slate-100 p-1.5 rounded-2xl lg:rounded-[2rem] h-auto flex flex-wrap gap-1.5">
 						<TabsTrigger
 							value="overview"
-							className="rounded-2xl px-8 py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
+							className="rounded-2xl px-4 sm:px-8 py-3 sm:py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
 						>
-							<BarChart3 size={16} className="mr-2" /> Overview
-						</TabsTrigger>
-						<TabsTrigger
-							value="cashflow"
-							className="rounded-2xl px-8 py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
-						>
-							<TrendingUp size={16} className="mr-2" /> Cashflow
+							<BarChart3 size={14} className="mr-1.5" /> Overview
 						</TabsTrigger>
 						<TabsTrigger
 							value="expenses"
-							className="rounded-2xl px-8 py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
+							className="rounded-2xl px-4 sm:px-8 py-3 sm:py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
 						>
-							<Wallet size={16} className="mr-2" /> Expenses
+							<Wallet size={14} className="mr-1.5" /> Expenses
 						</TabsTrigger>
 						<TabsTrigger
 							value="history"
-							className="rounded-2xl px-8 py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
+							className="rounded-2xl px-4 sm:px-8 py-3 sm:py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
 						>
-							<History size={16} className="mr-2" /> History
+							<History size={14} className="mr-1.5" /> History
 						</TabsTrigger>
 					</TabsList>
 
-					<div className="flex items-center gap-3">
+					<div className="flex items-center gap-2">
 						<Button
 							variant="outline"
-							className="rounded-2xl h-14 px-8 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50 shadow-sm transition-all flex items-center gap-2"
+							className="rounded-2xl h-12 px-4 sm:px-8 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50 shadow-sm transition-all flex items-center gap-2"
 						>
-							<Calendar size={18} /> April 2026
+							<Calendar size={16} />{" "}
+							{new Date().toLocaleDateString("id-ID", {
+								month: "long",
+								year: "numeric",
+							})}
 						</Button>
-						<Button className="rounded-2xl h-14 px-8 font-black text-[10px] uppercase tracking-widest bg-slate-900 text-white hover:bg-indigo-600 shadow-xl shadow-slate-900/10 transition-all">
-							<Download size={18} className="mr-2" /> Export Report
+						<Button className="rounded-2xl h-12 px-4 sm:px-8 font-black text-[10px] uppercase tracking-widest bg-slate-900 text-white hover:bg-indigo-600 shadow-xl shadow-slate-900/10 transition-all">
+							<Download size={16} className="mr-1.5" /> Export
 						</Button>
 					</div>
 				</div>
 
+				{/* === OVERVIEW TAB === */}
 				<TabsContent
 					value="overview"
 					className="space-y-10 focus-visible:outline-none"
@@ -223,7 +218,7 @@ export function SuperadminFinanceClient({
 									<TrendingUp size={32} />
 								</div>
 								<Badge className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border-none">
-									{stats.margin}% Profit Margin
+									{stats.margin}% Margin
 								</Badge>
 							</div>
 							<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">
@@ -238,51 +233,45 @@ export function SuperadminFinanceClient({
 						</div>
 					</div>
 
-					<div className="grid lg:grid-cols-5 gap-10">
+					<div className="grid lg:grid-cols-5 gap-6 sm:gap-10">
 						{/* Revenue Trend Chart */}
 						<div className="lg:col-span-3 bg-white rounded-none sm:rounded-[3rem] p-6 sm:p-10 border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40">
 							<div className="flex items-center justify-between mb-10">
 								<div>
-									<h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">
+									<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
 										Tren Pendapatan
 									</h2>
 									<p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
-										Snapshot Performa 6 Bulan Terakhir
+										6 Bulan Terakhir
 									</p>
 								</div>
-								<div className="flex items-center gap-2">
-									<div className="w-3 h-3 rounded-full bg-indigo-500" />
-									<span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-										Paid Trans.
-									</span>
-								</div>
 							</div>
-							<div className="h-72">
+							<div className="h-64">
 								<RevenueBarChart data={revenueData} />
 							</div>
 						</div>
 
 						{/* Payment Distribution Pie */}
 						<div className="lg:col-span-2 bg-white rounded-none sm:rounded-[3rem] p-6 sm:p-10 border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40">
-							<div className="mb-10">
-								<h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">
+							<div className="mb-8">
+								<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
 									Distribusi Bayar
 								</h2>
 								<p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
-									Metode Paling Populer Seluruh Cabang
+									Metode Paling Populer
 								</p>
 							</div>
 							{paymentStats.length > 0 ? (
-								<div className="h-72">
+								<div className="h-64">
 									<PaymentPieChart data={paymentStats} />
 								</div>
 							) : (
-								<div className="h-72 flex flex-col items-center justify-center text-slate-300 gap-4">
+								<div className="h-64 flex flex-col items-center justify-center text-slate-300 gap-4">
 									<div className="w-20 h-20 rounded-full bg-slate-50 flex items-center justify-center">
 										<CreditCard size={40} />
 									</div>
 									<p className="text-[10px] font-black uppercase tracking-widest">
-										Waiting for data...
+										Belum ada data pembayaran
 									</p>
 								</div>
 							)}
@@ -290,204 +279,313 @@ export function SuperadminFinanceClient({
 					</div>
 				</TabsContent>
 
+				{/* === EXPENSES TAB === */}
 				<TabsContent
 					value="expenses"
 					className="space-y-10 focus-visible:outline-none"
 				>
 					<div className="bg-white rounded-none sm:rounded-[3rem] border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden">
-						<div className="p-10 border-b border-slate-50 flex items-center justify-between">
+						<div className="p-6 sm:p-10 border-b border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 							<div>
-								<h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">
+								<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
 									Detail Pengeluaran
 								</h2>
 								<p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
-									Audit biaya operasional • {expenses.length} record • Hal{" "}
-									{expensePage}/{expenseTotalPages || 1}
+									{expenses.length} record total
 								</p>
 							</div>
 							<Button
 								variant="outline"
-								className="rounded-2xl h-12 px-6 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white shadow-sm flex items-center gap-2"
+								className="rounded-2xl h-12 px-6 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white shadow-sm flex items-center gap-2 self-start sm:self-auto"
 							>
 								<Filter size={16} /> Filter Category
 							</Button>
 						</div>
-						<div className="overflow-x-auto">
-							<table className="w-full text-left border-collapse">
-								<thead>
-									<tr className="bg-slate-50/50">
-										<th className="px-5 sm:px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
-											Deskripsi & Kategori
-										</th>
-										<th className="px-5 sm:px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
-											Unit Cabang
-										</th>
-										<th className="px-5 sm:px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
-											Validator
-										</th>
-										<th className="px-5 sm:px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
-											Waktu Inflow
-										</th>
-										<th className="px-5 sm:px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">
-											Nominal
-										</th>
-									</tr>
-								</thead>
-								<tbody className="divide-y divide-slate-100">
+
+						{expenses.length === 0 ? (
+							<div className="py-20 text-center text-slate-300">
+								<Receipt size={48} className="mx-auto mb-4 opacity-30" />
+								<p className="font-bold text-sm">Belum ada data pengeluaran</p>
+							</div>
+						) : (
+							<>
+								{/* DESKTOP TABLE */}
+								<div className="hidden md:block">
+									<table className="w-full text-left border-collapse">
+										<thead>
+											<tr className="bg-slate-50/50">
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
+													Deskripsi & Kategori
+												</th>
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
+													Unit Cabang
+												</th>
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
+													Validator
+												</th>
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
+													Waktu
+												</th>
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">
+													Nominal
+												</th>
+											</tr>
+										</thead>
+										<tbody className="divide-y divide-slate-100">
+											{paginatedExpenses.map((expense) => (
+												<tr
+													key={expense.id}
+													className="group hover:bg-slate-50/30 transition-colors"
+												>
+													<td className="px-6 py-6">
+														<div>
+															<p className="font-black text-slate-900 uppercase tracking-tight text-sm">
+																{expense.reason}
+															</p>
+															<Badge className="mt-1 bg-rose-50 text-rose-600 border-none text-[8px] font-black uppercase tracking-widest px-1.5 shadow-none">
+																{expense.category || "General"}
+															</Badge>
+														</div>
+													</td>
+													<td className="px-6 py-6">
+														<div className="flex items-center gap-2">
+															<Building2
+																size={14}
+																className="text-slate-300 shrink-0"
+															/>
+															<p className="text-sm font-bold text-slate-700">
+																{expense.outlets?.name || "Global"}
+															</p>
+														</div>
+													</td>
+													<td className="px-6 py-6">
+														<div className="flex items-center gap-2">
+															<div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-[10px] shrink-0">
+																{expense.profiles?.full_name?.charAt(0) || "?"}
+															</div>
+															<p className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
+																{expense.profiles?.full_name || "—"}
+															</p>
+														</div>
+													</td>
+													<td className="px-6 py-6 text-xs font-bold text-slate-400 whitespace-nowrap">
+														{formatDateTime(expense.created_at)}
+													</td>
+													<td className="px-6 py-6 text-right">
+														<p className="text-base font-black text-rose-600 whitespace-nowrap">
+															-{formatIDR(expense.amount)}
+														</p>
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
+
+								{/* MOBILE CARDS */}
+								<div className="md:hidden divide-y divide-slate-100">
 									{paginatedExpenses.map((expense) => (
-										<tr
+										<div
 											key={expense.id}
-											className="group hover:bg-slate-50/30 transition-colors"
+											className="p-4 hover:bg-slate-50/50 transition-colors"
 										>
-											<td className="px-5 sm:px-10 py-8">
-												<div>
-													<p className="font-black text-slate-900 uppercase tracking-tight">
+											<div className="flex items-start justify-between gap-3">
+												<div className="flex-1 min-w-0">
+													<p className="font-black text-slate-900 text-sm uppercase tracking-tight truncate">
 														{expense.reason}
 													</p>
-													<Badge className="mt-2 bg-rose-50 text-rose-600 border-none text-[8px] font-black uppercase tracking-widest px-2 shadow-none">
-														{expense.category || "General"}
-													</Badge>
-												</div>
-											</td>
-											<td className="px-10 py-8">
-												<div className="flex items-center gap-2">
-													<Building2 size={16} className="text-slate-300" />
-													<p className="text-sm font-bold text-slate-700">
-														{expense.outlets?.name || "Global"}
-													</p>
-												</div>
-											</td>
-											<td className="px-10 py-8">
-												<div className="flex items-center gap-2">
-													<div className="w-8 h-8 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-[10px]">
-														{expense.profiles?.full_name?.charAt(0)}
+													<div className="flex items-center gap-2 mt-1 flex-wrap">
+														<Badge className="bg-rose-50 text-rose-600 border-none text-[8px] font-black uppercase tracking-widest px-1.5 shadow-none">
+															{expense.category || "General"}
+														</Badge>
+														<span className="text-[10px] text-slate-400 font-bold">
+															{expense.outlets?.name || "Global"}
+														</span>
 													</div>
-													<p className="text-xs font-bold text-slate-600">
-														{expense.profiles?.full_name}
-													</p>
 												</div>
-											</td>
-											<td className="px-10 py-8 text-xs font-bold text-slate-400">
-												{formatDateTime(expense.created_at)}
-											</td>
-											<td className="px-10 py-8 text-right">
-												<p className="text-lg font-black text-rose-600">
+												<p className="font-black text-rose-600 text-sm whitespace-nowrap">
 													-{formatIDR(expense.amount)}
 												</p>
-											</td>
-										</tr>
+											</div>
+											<div className="flex items-center justify-between mt-2">
+												<span className="text-[10px] text-slate-400 font-bold">
+													{expense.profiles?.full_name || "—"}
+												</span>
+												<span className="text-[10px] text-slate-400 font-bold">
+													{formatDateTime(expense.created_at)}
+												</span>
+											</div>
+										</div>
 									))}
-								</tbody>
-							</table>
-						</div>
-						<div className="px-10 pb-8">
-							<PaginationControls
-								currentPage={expensePage}
-								totalPages={expenseTotalPages}
-								onPageChange={setExpensePage}
-								totalItems={expenses.length}
-								itemsPerPage={EXPENSE_PER_PAGE}
-							/>
-						</div>
+								</div>
+
+								<div className="px-6 pb-6">
+									<PaginationControls
+										currentPage={expensePage}
+										totalPages={expenseTotalPages}
+										onPageChange={setExpensePage}
+										totalItems={expenses.length}
+										itemsPerPage={expensePageSize}
+										onPageSizeChange={setExpensePageSize}
+									/>
+								</div>
+							</>
+						)}
 					</div>
 				</TabsContent>
 
+				{/* === HISTORY TAB === */}
 				<TabsContent
 					value="history"
 					className="space-y-10 focus-visible:outline-none"
 				>
 					<div className="bg-white rounded-none sm:rounded-[4rem] border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden">
-						<div className="p-10 border-b border-slate-50">
-							<h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight">
-								Ledger Transaksi Utama
+						<div className="p-6 sm:p-10 border-b border-slate-50">
+							<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
+								Ledger Transaksi
 							</h2>
 							<p className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-1">
-								{recentPaidOrders.length} transaksi • Hal {historyPage}/
-								{historyTotalPages || 1}
+								{recentPaidOrders.length} transaksi total
 							</p>
 						</div>
-						<div className="overflow-x-auto">
-							<table className="w-full text-left border-collapse">
-								<thead>
-									<tr className="bg-slate-50/50">
-										<th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
-											Order ID
-										</th>
-										<th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
-											Pelanggan
-										</th>
-										<th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400">
-											Verification Status
-										</th>
-										<th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">
-											Settlement Date
-										</th>
-										<th className="px-10 py-6 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">
-											Bruto Amount
-										</th>
-									</tr>
-								</thead>
-								<tbody className="divide-y divide-slate-100">
+
+						{recentPaidOrders.length === 0 ? (
+							<div className="py-20 text-center text-slate-300">
+								<CreditCard size={48} className="mx-auto mb-4 opacity-30" />
+								<p className="font-bold text-sm">Belum ada transaksi</p>
+							</div>
+						) : (
+							<>
+								{/* DESKTOP TABLE */}
+								<div className="hidden md:block">
+									<table className="w-full text-left border-collapse">
+										<thead>
+											<tr className="bg-slate-50/50">
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
+													Order ID
+												</th>
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
+													Pelanggan
+												</th>
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
+													Status Bayar
+												</th>
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">
+													Tanggal
+												</th>
+												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">
+													Amount
+												</th>
+											</tr>
+										</thead>
+										<tbody className="divide-y divide-slate-100">
+											{paginatedHistory.map((order) => (
+												<tr
+													key={order.id}
+													className="group hover:bg-slate-50/30 transition-colors"
+												>
+													<td className="px-6 py-6 font-mono text-xs font-black text-indigo-600">
+														#{order.order_number}
+													</td>
+													<td className="px-6 py-6">
+														<p className="text-sm font-black text-slate-900 uppercase tracking-tight">
+															{Array.isArray(order.profiles)
+																? order.profiles[0]?.full_name || "—"
+																: order.profiles?.full_name || "—"}
+														</p>
+													</td>
+													<td className="px-6 py-6">
+														<Badge
+															className={cn(
+																"px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border-none shadow-none",
+																order.payment_status === "paid"
+																	? "bg-emerald-50 text-emerald-600"
+																	: "bg-amber-50 text-amber-600",
+															)}
+														>
+															{order.payment_status === "paid"
+																? "✓ Settled"
+																: "⏳ Pending"}
+														</Badge>
+													</td>
+													<td className="px-6 py-6 text-right text-xs font-bold text-slate-400 whitespace-nowrap">
+														{formatDateTime(order.created_at)}
+													</td>
+													<td className="px-6 py-6 text-right font-black text-slate-900 text-base whitespace-nowrap">
+														{formatIDR(order.total)}
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
+
+								{/* MOBILE CARDS */}
+								<div className="md:hidden divide-y divide-slate-100">
 									{paginatedHistory.map((order) => (
-										<tr
+										<div
 											key={order.id}
-											className="group hover:bg-slate-50/30 transition-colors"
+											className="p-4 hover:bg-slate-50/50 transition-colors"
 										>
-											<td className="px-10 py-8 font-mono text-xs font-black text-indigo-600 group-hover:scale-105 transition-transform">
-												#{order.order_number}
-											</td>
-											<td className="px-10 py-8">
-												<p className="text-sm font-black text-slate-900 uppercase tracking-tight">
-													{Array.isArray(order.profiles)
-														? order.profiles[0]?.full_name || "—"
-														: order.profiles?.full_name || "—"}
+											<div className="flex items-start justify-between gap-3">
+												<div>
+													<p className="font-mono text-xs font-black text-indigo-600">
+														#{order.order_number}
+													</p>
+													<p className="font-black text-slate-900 text-sm mt-0.5">
+														{Array.isArray(order.profiles)
+															? order.profiles[0]?.full_name || "—"
+															: order.profiles?.full_name || "—"}
+													</p>
+												</div>
+												<p className="font-black text-slate-900 text-sm whitespace-nowrap">
+													{formatIDR(order.total)}
 												</p>
-											</td>
-											<td className="px-10 py-8">
+											</div>
+											<div className="flex items-center justify-between mt-2">
 												<Badge
 													className={cn(
-														"px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border-none shadow-none",
+														"px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest border-none shadow-none",
 														order.payment_status === "paid"
 															? "bg-emerald-50 text-emerald-600"
 															: "bg-amber-50 text-amber-600",
 													)}
 												>
 													{order.payment_status === "paid"
-														? "✓ Validated & Settled"
-														: "⏳ Pending Proc."}
+														? "✓ Settled"
+														: "⏳ Pending"}
 												</Badge>
-											</td>
-											<td className="px-10 py-8 text-right text-xs font-bold text-slate-400">
-												{formatDateTime(order.created_at)}
-											</td>
-											<td className="px-10 py-8 text-right font-black text-slate-900 text-lg">
-												{formatIDR(order.total)}
-											</td>
-										</tr>
+												<span className="text-[10px] text-slate-400 font-bold">
+													{formatDateTime(order.created_at)}
+												</span>
+											</div>
+										</div>
 									))}
-								</tbody>
-							</table>
-						</div>
-						<div className="px-10 pb-8">
-							<PaginationControls
-								currentPage={historyPage}
-								totalPages={historyTotalPages}
-								onPageChange={setHistoryPage}
-								totalItems={recentPaidOrders.length}
-								itemsPerPage={HISTORY_PER_PAGE}
-							/>
-						</div>
+								</div>
+
+								<div className="px-6 pb-6">
+									<PaginationControls
+										currentPage={historyPage}
+										totalPages={historyTotalPages}
+										onPageChange={setHistoryPage}
+										totalItems={recentPaidOrders.length}
+										itemsPerPage={historyPageSize}
+										onPageSizeChange={setHistoryPageSize}
+									/>
+								</div>
+							</>
+						)}
 					</div>
 				</TabsContent>
 			</Tabs>
 
 			{/* Reconciliation Notice */}
-			<div className="bg-slate-50 rounded-[3rem] p-10 lg:p-14 border border-slate-100 flex flex-col lg:flex-row items-center gap-10 group hover:bg-white hover:border-indigo-100 transition-all duration-500">
-				<div className="w-24 h-24 bg-white rounded-3xl flex items-center justify-center text-4xl shadow-xl border border-slate-50 group-hover:rotate-12 transition-transform duration-500">
+			<div className="bg-slate-50 rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-10 lg:p-14 border border-slate-100 flex flex-col lg:flex-row items-center gap-8 group hover:bg-white hover:border-indigo-100 transition-all duration-500">
+				<div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-4xl shadow-xl border border-slate-50 group-hover:rotate-12 transition-transform duration-500 shrink-0">
 					🏦
 				</div>
 				<div className="flex-1 text-center lg:text-left">
-					<h3 className="text-2xl font-black text-slate-900 uppercase tracking-tight mb-4">
+					<h3 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight mb-3">
 						Rekonsiliasi Midtrans Audit
 					</h3>
 					<p className="text-slate-400 font-bold text-sm leading-relaxed max-w-3xl">
@@ -499,7 +597,7 @@ export function SuperadminFinanceClient({
 				</div>
 				<Button
 					variant="outline"
-					className="rounded-2xl h-14 px-10 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-900 hover:text-white transition-all"
+					className="rounded-2xl h-14 px-8 sm:px-10 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-900 hover:text-white transition-all shrink-0"
 				>
 					Manual Sync Detail
 				</Button>
