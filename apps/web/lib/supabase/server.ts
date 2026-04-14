@@ -267,8 +267,8 @@ export async function getRecentExpenses(limit = 10) {
 		.from("expenses")
 		.select(`
       *,
-      outlets!outlet_id(name),
-      profiles!actor_id(full_name)
+      outlets!expenses_outlet_id_fkey(name),
+      profiles!expenses_actor_id_fkey(full_name)
     `)
 		.order("created_at", { ascending: false })
 		.limit(limit);
