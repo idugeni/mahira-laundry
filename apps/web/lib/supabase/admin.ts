@@ -11,13 +11,13 @@ export function createAdminClient() {
 	// biome-ignore lint/style/noNonNullAssertion: env vars are required and validated at startup
 	const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 	// biome-ignore lint/style/noNonNullAssertion: env vars are required and validated at startup
-	const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+	const supabaseSecretKey = process.env.SUPABASE_SECRET_KEY!;
 
-	if (!supabaseServiceKey) {
-		throw new Error("SUPABASE_SERVICE_ROLE_KEY is missing in env!");
+	if (!supabaseSecretKey) {
+		throw new Error("SUPABASE_SECRET_KEY is missing in env!");
 	}
 
-	return createClient(supabaseUrl, supabaseServiceKey, {
+	return createClient(supabaseUrl, supabaseSecretKey, {
 		auth: {
 			autoRefreshToken: false,
 			persistSession: false,
