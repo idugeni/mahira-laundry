@@ -7,12 +7,14 @@ interface MahiraLogoProps {
 	size?: number;
 	className?: string;
 	showText?: boolean;
+	priority?: boolean;
 }
 
 export function MahiraLogo({
 	size = 40,
 	className = "",
 	showText = true,
+	priority = false,
 }: MahiraLogoProps) {
 	return (
 		<motion.div
@@ -26,6 +28,8 @@ export function MahiraLogo({
 				width={size}
 				height={size}
 				className="object-contain"
+				priority={priority}
+				loading={priority ? "eager" : "lazy"}
 			/>
 			{showText && (
 				<div className="flex flex-col">
