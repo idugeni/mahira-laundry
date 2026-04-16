@@ -6,8 +6,14 @@ import { ServiceDetailModal } from "@/components/shared/customer/order/service-d
 import { GallerySection } from "@/components/shared/public/gallery/gallery-section";
 import { TestimonialSection } from "@/components/shared/public/testimonial-section";
 import { useAuth } from "@/hooks/use-auth";
-import type { GalleryItem, Service, Testimonial } from "@/lib/types";
+import type {
+	BusinessPackage,
+	GalleryItem,
+	Service,
+	Testimonial,
+} from "@/lib/types";
 import { getDashboardUrl } from "@/lib/utils";
+import { HomeBusinessPackagesSection } from "./home-business-packages-section";
 import { HomeCtaSection } from "./home-cta-section";
 import { HomeHeroSection } from "./home-hero-section";
 import { HomeServicesSection } from "./home-services-section";
@@ -23,6 +29,7 @@ interface HomeClientProps {
 	stats: Stat[];
 	testimonials: Testimonial[];
 	galleryItems: GalleryItem[];
+	businessPackages: BusinessPackage[];
 }
 
 export function HomeClient({
@@ -30,6 +37,7 @@ export function HomeClient({
 	stats,
 	testimonials,
 	galleryItems,
+	businessPackages,
 }: HomeClientProps) {
 	const { user, profile, loading } = useAuth();
 	const router = useRouter();
@@ -78,6 +86,7 @@ export function HomeClient({
 			/>
 			<GallerySection items={galleryItems} />
 			<TestimonialSection testimonials={testimonials} />
+			<HomeBusinessPackagesSection packages={businessPackages} />
 			<HomeCtaSection />
 
 			{/* Service Detail Modal (PWA Model) */}

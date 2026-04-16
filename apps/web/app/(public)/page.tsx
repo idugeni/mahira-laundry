@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { HomeClient } from "@/components/shared/public/home/home-client";
+import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
 
@@ -96,6 +97,9 @@ export default async function HomePage() {
 		.order("sort_order", { ascending: true })
 		.limit(12);
 
+	// Fetch active business packages for homepage preview
+	const businessPackages = await getActiveBusinessPackages();
+
 	return (
 		<>
 			<script
@@ -110,6 +114,7 @@ export default async function HomePage() {
 						stats={stats}
 						testimonials={testimonials}
 						galleryItems={galleryItems || []}
+						businessPackages={businessPackages}
 					/>
 				</Suspense>
 			</div>
