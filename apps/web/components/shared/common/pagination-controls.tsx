@@ -59,127 +59,146 @@ export function PaginationControls({
 
 	if (!showPagination && !onPageSizeChange) return null;
 
-	return (
-		<div
-			className={cn(
-				"flex flex-col sm:flex-row items-center justify-between gap-4 pt-6",
-				className,
-			)}
-		>
-			{/* Left: info + page size selector */}
-			<div className="flex items-center gap-4 flex-wrap justify-center sm:justify-start">
-				{totalItems !== undefined && (
-					<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
-						Menampilkan{" "}
-						<span className="text-slate-700">
-							{totalItems === 0 ? 0 : startItem}–{endItem}
-						</span>{" "}
-						dari <span className="text-slate-700">{totalItems}</span> data
-					</p>
-				)}
+	// Page navigation buttons (shared between mobile and desktop)
+	const pageNavButtons = showPagination ? (
+		<div className="flex items-center gap-1.5">
+			{/* First page */}
+			<Button
+				variant="ghost"
+				disabled={currentPage === 1}
+				onClick={() => onPageChange(1)}
+				className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
+			>
+				<ChevronsLeft size={14} />
+			</Button>
 
-				{/* Page size dropdown */}
-				{onPageSizeChange && (
-					<div className="flex items-center gap-2">
-						<span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-							Tampilkan:
+			{/* Previous page */}
+			<Button
+				variant="ghost"
+				disabled={currentPage === 1}
+				onClick={() => onPageChange(currentPage - 1)}
+				className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
+			>
+				<ChevronLeft size={14} />
+			</Button>
+
+			{/* Page numbers */}
+			<div className="flex items-center gap-1">
+				{getVisiblePages().map((page, idx) =>
+					page === "..." ? (
+						<span
+							key={`dots-${idx}`}
+							className="w-7 text-center text-slate-300 text-xs font-black"
+						>
+							···
 						</span>
-						<div className="flex items-center gap-1">
-							{pageSizeOptions.map((size) => (
-								<button
-									key={size}
-									type="button"
-									onClick={() => {
-										onPageSizeChange(size);
-										onPageChange(1);
-									}}
-									className={cn(
-										"h-8 px-2.5 rounded-lg text-[10px] font-black transition-all",
-										itemsPerPage === size
-											? "bg-slate-900 text-white shadow-lg"
-											: "text-slate-400 hover:bg-slate-100 hover:text-slate-700",
-									)}
-								>
-									{size}
-								</button>
-							))}
-						</div>
-					</div>
+					) : (
+						<Button
+							key={page}
+							variant="ghost"
+							onClick={() => onPageChange(page)}
+							className={cn(
+								"w-9 h-9 p-0 rounded-xl text-xs font-black transition-all",
+								currentPage === page
+									? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:text-white"
+									: "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600",
+							)}
+						>
+							{page}
+						</Button>
+					),
 				)}
 			</div>
 
-			{/* Right: page navigation */}
-			{showPagination && (
-				<div className="flex items-center gap-1.5">
-					{/* First page */}
-					<Button
-						variant="ghost"
-						disabled={currentPage === 1}
-						onClick={() => onPageChange(1)}
-						className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
-					>
-						<ChevronsLeft size={14} />
-					</Button>
+			{/* Next page */}
+			<Button
+				variant="ghost"
+				disabled={currentPage === totalPages}
+				onClick={() => onPageChange(currentPage + 1)}
+				className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
+			>
+				<ChevronRight size={14} />
+			</Button>
 
-					{/* Previous page */}
-					<Button
-						variant="ghost"
-						disabled={currentPage === 1}
-						onClick={() => onPageChange(currentPage - 1)}
-						className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
-					>
-						<ChevronLeft size={14} />
-					</Button>
+			{/* Last page */}
+			<Button
+				variant="ghost"
+				disabled={currentPage === totalPages}
+				onClick={() => onPageChange(totalPages)}
+				className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
+			>
+				<ChevronsRight size={14} />
+			</Button>
+		</div>
+	) : null;
 
-					{/* Page numbers */}
-					<div className="flex items-center gap-1">
-						{getVisiblePages().map((page, idx) =>
-							page === "..." ? (
-								<span
-									key={`dots-${idx}`}
-									className="w-7 text-center text-slate-300 text-xs font-black"
-								>
-									···
-								</span>
-							) : (
-								<Button
-									key={page}
-									variant="ghost"
-									onClick={() => onPageChange(page)}
-									className={cn(
-										"w-9 h-9 p-0 rounded-xl text-xs font-black transition-all",
-										currentPage === page
-											? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:text-white"
-											: "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600",
-									)}
-								>
-									{page}
-								</Button>
-							),
+	// Data info text
+	const dataInfo =
+		totalItems !== undefined ? (
+			<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+				Menampilkan{" "}
+				<span className="text-slate-700">
+					{totalItems === 0 ? 0 : startItem}–{endItem}
+				</span>{" "}
+				dari <span className="text-slate-700">{totalItems}</span> data
+			</p>
+		) : null;
+
+	// Rows-per-page selector
+	const rowsSelector = onPageSizeChange ? (
+		<div className="flex items-center gap-2">
+			<span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+				Tampilkan:
+			</span>
+			<div className="flex items-center gap-1">
+				{pageSizeOptions.map((size) => (
+					<button
+						key={size}
+						type="button"
+						onClick={() => {
+							onPageSizeChange(size);
+							onPageChange(1);
+						}}
+						className={cn(
+							"h-8 px-2.5 rounded-lg text-[10px] font-black transition-all",
+							itemsPerPage === size
+								? "bg-slate-900 text-white shadow-lg"
+								: "text-slate-400 hover:bg-slate-100 hover:text-slate-700",
 						)}
+					>
+						{size}
+					</button>
+				))}
+			</div>
+		</div>
+	) : null;
+
+	return (
+		<div className={cn("pt-6", className)}>
+			{/* Mobile layout: two rows */}
+			<div className="sm:hidden flex flex-col gap-3">
+				{/* Row 1: data info (left) + rows selector (right) */}
+				{(dataInfo || rowsSelector) && (
+					<div className="flex items-center justify-between gap-2">
+						<div>{dataInfo}</div>
+						<div>{rowsSelector}</div>
 					</div>
+				)}
+				{/* Row 2: centered page navigation */}
+				{pageNavButtons && (
+					<div className="flex justify-center">{pageNavButtons}</div>
+				)}
+			</div>
 
-					{/* Next page */}
-					<Button
-						variant="ghost"
-						disabled={currentPage === totalPages}
-						onClick={() => onPageChange(currentPage + 1)}
-						className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
-					>
-						<ChevronRight size={14} />
-					</Button>
-
-					{/* Last page */}
-					<Button
-						variant="ghost"
-						disabled={currentPage === totalPages}
-						onClick={() => onPageChange(totalPages)}
-						className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
-					>
-						<ChevronsRight size={14} />
-					</Button>
-				</div>
-			)}
+			{/* Desktop layout: three-column grid */}
+			<div className="hidden sm:grid sm:grid-cols-3 sm:items-center sm:gap-4">
+				{/* Left: data info */}
+				<div className="flex items-center">{dataInfo}</div>
+				{/* Center: page navigation */}
+				<div className="flex justify-center">{pageNavButtons}</div>
+				{/* Right: rows-per-page selector */}
+				<div className="flex justify-end">{rowsSelector}</div>
+			</div>
 		</div>
 	);
 }

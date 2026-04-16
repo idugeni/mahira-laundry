@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { LogOut } from "lucide-react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { cn } from "@/lib/utils";
 
@@ -21,38 +22,45 @@ interface AdminSidebarProps {
 	headerInfo?: string;
 }
 
-export function AdminSidebar({
+interface SidebarContentProps {
+	navItems: NavItem[];
+	panelLabel: string;
+	panelBadgeColor: string;
+	headerInfo?: string;
+	onNavClick: () => void;
+}
+
+function SidebarContent({
 	navItems,
 	panelLabel,
-	panelBadge,
-	panelBadgeColor = "bg-red-100 text-red-600",
+	panelBadgeColor,
 	headerInfo,
-}: AdminSidebarProps) {
+	onNavClick,
+}: SidebarContentProps) {
 	const pathname = usePathname();
-	const [mobileOpen, setMobileOpen] = useState(false);
 
 	const isActive = (href: string) => {
 		if (href === "/admin" || href === "/manager") return pathname === href;
 		return pathname.startsWith(href);
 	};
 
-	const SidebarContent = () => (
+	return (
 		<div className="flex flex-col h-screen max-h-screen overflow-hidden">
 			{/* Header Area (Fixed) */}
 			<div className="shrink-0">
 				{/* Logo */}
-				<div className="p-5 border-b border-slate-100">
-					<Link href="/" onClick={() => setMobileOpen(false)}>
+				<div className="p-5 border-b border-slate-100 flex justify-center">
+					<Link href="/" onClick={onNavClick}>
 						<MahiraLogo size={30} />
 					</Link>
 				</div>
 
 				{/* Panel Badge */}
-				<div className="px-4 pt-4 pb-1">
-					<div className="flex items-center gap-2">
+				<div className="px-4 pt-4 pb-1 text-center">
+					<div className="flex justify-center mb-1.5">
 						<span
 							className={cn(
-								"text-[10px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full",
+								"inline-block text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full",
 								panelBadgeColor,
 							)}
 						>
@@ -60,7 +68,7 @@ export function AdminSidebar({
 						</span>
 					</div>
 					{headerInfo && (
-						<p className="text-xs text-slate-400 mt-1 px-1 truncate">
+						<p className="text-xs font-bold text-slate-400 px-1 truncate text-center">
 							{headerInfo}
 						</p>
 					)}
@@ -75,7 +83,7 @@ export function AdminSidebar({
 						<Link
 							key={item.href}
 							href={item.href}
-							onClick={() => setMobileOpen(false)}
+							onClick={onNavClick}
 							className={cn(
 								"group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150",
 								active
@@ -114,21 +122,36 @@ export function AdminSidebar({
 				<form action="/api/auth/signout" method="POST">
 					<button
 						type="submit"
-						className="group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-semibold text-slate-400 hover:text-red-600 hover:bg-red-50 transition-all duration-150"
+						className="group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white transition-all duration-150"
 					>
-						<span className="text-base w-7 text-center">🚪</span>
-						<span>Keluar Sesi</span>
+						<LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
+						<span>Logout</span>
 					</button>
 				</form>
 			</div>
 		</div>
 	);
+}
+
+export function AdminSidebar({
+	navItems,
+	panelLabel,
+	panelBadgeColor = "bg-red-100 text-red-600",
+	headerInfo,
+}: AdminSidebarProps) {
+	const [mobileOpen, setMobileOpen] = useState(false);
 
 	return (
 		<>
 			{/* Desktop Sidebar */}
 			<aside className="hidden lg:flex lg:w-64 shrink-0 flex-col border-r border-slate-100 bg-white/95 backdrop-blur-sm sticky top-0 h-screen">
-				<SidebarContent />
+				<SidebarContent
+					navItems={navItems}
+					panelLabel={panelLabel}
+					panelBadgeColor={panelBadgeColor}
+					headerInfo={headerInfo}
+					onNavClick={() => {}}
+				/>
 			</aside>
 
 			{/* Mobile Top Bar */}
@@ -173,7 +196,13 @@ export function AdminSidebar({
 						onClick={() => setMobileOpen(false)}
 					/>
 					<aside className="lg:hidden fixed top-0 left-0 bottom-0 z-50 w-72 bg-white shadow-2xl flex flex-col">
-						<SidebarContent />
+						<SidebarContent
+							navItems={navItems}
+							panelLabel={panelLabel}
+							panelBadgeColor={panelBadgeColor}
+							headerInfo={headerInfo}
+							onNavClick={() => setMobileOpen(false)}
+						/>
 					</aside>
 				</>
 			)}

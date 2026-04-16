@@ -274,3 +274,113 @@ export interface ActionResponse<T = void> {
 	error?: string;
 	message?: string;
 }
+
+// ─────────────────────────────────────────────
+// PAKET USAHA LAUNDRY
+// ─────────────────────────────────────────────
+
+export type InquiryStatus =
+	| "new"
+	| "contacted"
+	| "negotiating"
+	| "converted"
+	| "rejected";
+
+export type PackageTier = "Starter" | "Standard" | "Premium" | "Custom";
+
+export interface PackageItem {
+	name: string;
+	quantity?: number;
+	spec?: string;
+}
+
+export interface BusinessPackage {
+	id: string;
+	name: string;
+	tier: PackageTier;
+	description?: string | null;
+	price: number;
+	promo_price?: number | null;
+	promo_expires_at?: string | null;
+	items: PackageItem[];
+	training_duration_days?: number | null;
+	support_coverage?: string | null;
+	estimated_roi?: string | null;
+	image_url?: string | null;
+	is_featured: boolean;
+	is_active: boolean;
+	sort_order: number;
+	created_at: string;
+	updated_at: string;
+}
+
+export interface BusinessPackageInquiry {
+	id: string;
+	package_id?: string | null;
+	package_name: string;
+	full_name: string;
+	phone: string;
+	email: string;
+	city: string;
+	budget_range?: string | null;
+	message?: string | null;
+	status: InquiryStatus;
+	converted_outlet_id?: string | null;
+	created_at: string;
+	updated_at: string;
+}
+
+export interface InquiryLog {
+	id: string;
+	inquiry_id: string;
+	changed_by: string;
+	old_status?: string | null;
+	new_status: string;
+	note?: string | null;
+	created_at: string;
+}
+
+export interface InquiryStats {
+	total: number;
+	new: number;
+	negotiating: number;
+	converted: number;
+}
+
+export interface CreatePackageInput {
+	name: string;
+	tier: PackageTier;
+	description?: string;
+	price: number;
+	promo_price?: number | null;
+	promo_expires_at?: string | null;
+	items: PackageItem[];
+	training_duration_days?: number | null;
+	support_coverage?: string | null;
+	estimated_roi?: string | null;
+	image_url?: string | null;
+	is_featured?: boolean;
+	is_active?: boolean;
+	sort_order?: number;
+}
+
+export type UpdatePackageInput = Partial<CreatePackageInput>;
+
+export interface SubmitInquiryInput {
+	package_id?: string;
+	package_name: string;
+	full_name: string;
+	phone: string;
+	email: string;
+	city: string;
+	budget_range?: string;
+	message?: string;
+}
+
+export interface InquiryFilters {
+	status?: InquiryStatus;
+	package_id?: string;
+	package_name?: string;
+	date_from?: string;
+	date_to?: string;
+}
