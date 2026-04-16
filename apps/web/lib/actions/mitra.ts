@@ -24,7 +24,7 @@ const MitraSchema = z.object({
 	franchiseFee: z.number().min(0).max(100),
 });
 
-export async function registerMitra(formData: any) {
+export async function registerMitra(formData: Record<string, unknown>) {
 	try {
 		const validated = MitraSchema.parse(formData);
 		const admin = createAdminClient();
@@ -101,14 +101,14 @@ export async function registerMitra(formData: any) {
 		revalidatePath("/admin/outlet");
 
 		return { success: true, outletId: outlet.id };
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Mitra registration failed:", error);
 		if (error instanceof z.ZodError) {
 			return { success: false, error: error.issues[0].message };
 		}
 		return {
 			success: false,
-			error: error.message || "Gagal mendaftarkan mitra baru.",
+			error: (error as Error).message || "Gagal mendaftarkan mitra baru.",
 		};
 	}
 }

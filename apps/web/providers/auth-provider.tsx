@@ -67,6 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 		);
 
 		return () => subscription.unsubscribe();
+		// biome-ignore lint/correctness/useExhaustiveDependencies: supabase.auth methods are stable references
 	}, [fetchProfile, supabase.auth.getSession, supabase.auth.onAuthStateChange]);
 
 	return (

@@ -36,6 +36,7 @@ export function ProfilForm({
 					Informasi Pribadi
 				</h3>
 				<button
+					type="button"
 					onClick={onToggleEdit}
 					className="text-xs font-black uppercase tracking-widest text-brand-primary hover:bg-brand-primary/5 px-4 py-2 rounded-full transition-all"
 				>

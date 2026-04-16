@@ -36,9 +36,9 @@ export async function addExpense(data: ExpenseInput): Promise<ActionResponse> {
 		revalidatePath("/laporan");
 		revalidatePath("/admin/keuangan");
 		return { success: true };
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Add expense failed:", error);
-		return { success: false, error: error.message };
+		return { success: false, error: (error as Error).message };
 	}
 }
 
@@ -51,9 +51,9 @@ export async function deleteExpense(id: string): Promise<ActionResponse> {
 		revalidatePath("/laporan");
 		revalidatePath("/admin/keuangan");
 		return { success: true };
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Delete expense failed:", error);
-		return { success: false, error: error.message };
+		return { success: false, error: (error as Error).message };
 	}
 }
 
@@ -80,7 +80,7 @@ export async function uploadExpenseReceipt(
 		} = supabase.storage.from("receipts").getPublicUrl(filePath);
 
 		return { success: true, data: { url: publicUrl } };
-	} catch (error: any) {
-		return { success: false, error: error.message };
+	} catch (error) {
+		return { success: false, error: (error as Error).message };
 	}
 }

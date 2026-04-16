@@ -7,21 +7,13 @@ import {
 	Percent,
 	Phone,
 	Save,
-	Store,
-	ToggleRight,
 	Trash2,
 	X,
 } from "lucide-react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import {
-	HiOutlineBuildingOffice,
-	HiOutlineCamera,
-	HiOutlineCurrencyDollar,
-	HiOutlineMapPin,
-	HiOutlinePhone,
-	HiOutlineXMark,
-} from "react-icons/hi2";
+import { HiOutlineCamera } from "react-icons/hi2";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -74,7 +66,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 			return;
 
 		setIsLoading(true);
-		const result = await deleteOutlet(outlet!.id);
+		const result = await deleteOutlet(outlet?.id ?? "");
 
 		if (result.success) {
 			toast.success("Outlet telah dihapus dari ekosistem bisnis.");
@@ -119,21 +111,27 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 
 	return (
 		<>
-			<div onClick={() => setIsOpen(true)}>
+			<button
+				type="button"
+				onClick={() => setIsOpen(true)}
+				className="contents"
+			>
 				{trigger || (
 					<Button className="bg-slate-900 text-white rounded-2xl h-14 px-8 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-slate-900/10 hover:bg-slate-800 transition-all">
 						+ Tambah Outlet
 					</Button>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
 				createPortal(
 					<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-						<div
-							className="fixed inset-0 bg-slate-900/40 backdrop-blur-xl animate-in fade-in duration-300"
+						<button
+							type="button"
+							className="fixed inset-0 bg-slate-900/40 backdrop-blur-xl animate-in fade-in duration-300 cursor-default"
 							onClick={() => !isLoading && setIsOpen(false)}
+							aria-label="Close modal"
 						/>
 
 						<div className="relative bg-white rounded-[3.5rem] shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-500 border border-white/20">
@@ -155,6 +153,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 										</p>
 									</div>
 									<button
+										type="button"
 										onClick={() => setIsOpen(false)}
 										className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-500"
 									>
@@ -168,10 +167,11 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 									{/* Luxury Image Upload */}
 									<div className="relative group/outlet-img w-full h-48 rounded-[2.5rem] bg-slate-50 border-4 border-dashed border-slate-100 overflow-hidden flex items-center justify-center transition-all hover:border-indigo-200">
 										{imageUrl ? (
-											<img
+											<Image
 												src={imageUrl}
 												alt="Preview"
-												className="w-full h-full object-cover transition-transform group-hover/outlet-img:scale-110 duration-1000"
+												fill
+												className="object-cover transition-transform group-hover/outlet-img:scale-110 duration-1000"
 											/>
 										) : (
 											<div className="flex flex-col items-center gap-4 text-slate-300">
@@ -201,11 +201,15 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 
 									<div className="grid grid-cols-2 gap-6">
 										<div className="space-y-2">
-											<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label
+												htmlFor="outlet-name"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
 												Nama Bisnis
 											</label>
 											<input
 												required
+												id="outlet-name"
 												name="name"
 												defaultValue={outlet?.name || ""}
 												placeholder="Contoh: Salemba Prime"
@@ -213,11 +217,15 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 											/>
 										</div>
 										<div className="space-y-2">
-											<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label
+												htmlFor="outlet-slug"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
 												Unik Slug
 											</label>
 											<input
 												required
+												id="outlet-slug"
 												name="slug"
 												defaultValue={outlet?.slug || ""}
 												placeholder="salemba-prime"
@@ -227,13 +235,17 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 									</div>
 
 									<div className="space-y-2">
-										<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+										<label
+											htmlFor="outlet-address"
+											className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+										>
 											Lokasi Geo-Tag
 										</label>
 										<div className="relative group/input">
 											<MapPin className="absolute left-5 top-5 text-indigo-400 w-5 h-5" />
 											<textarea
 												required
+												id="outlet-address"
 												name="address"
 												defaultValue={outlet?.address || ""}
 												placeholder="Alamat lengkap operasional..."
@@ -244,12 +256,16 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 
 									<div className="grid grid-cols-2 gap-6">
 										<div className="space-y-2">
-											<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label
+												htmlFor="outlet-phone"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
 												Center Contact
 											</label>
 											<div className="relative group/input">
 												<Phone className="absolute left-5 top-1/2 -translate-y-1/2 text-indigo-400 w-5 h-5" />
 												<input
+													id="outlet-phone"
 													name="phone"
 													defaultValue={outlet?.phone || ""}
 													placeholder="+62..."
@@ -258,12 +274,16 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 											</div>
 										</div>
 										<div className="space-y-2">
-											<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label
+												htmlFor="outlet-franchise-fee"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
 												Royalty Fee (%)
 											</label>
 											<div className="relative group/input">
 												<Percent className="absolute left-5 top-1/2 -translate-y-1/2 text-indigo-400 w-5 h-5" />
 												<input
+													id="outlet-franchise-fee"
 													type="number"
 													name="franchise_fee"
 													defaultValue={outlet?.franchise_fee || 0}

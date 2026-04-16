@@ -88,7 +88,7 @@ export function TentangClient() {
 								"Membangun hubungan jangka panjang dengan setiap pelanggan",
 							].map((misi, i) => (
 								<div
-									key={i}
+									key={misi}
 									className="flex items-start gap-4 p-4 hover:bg-slate-50 rounded-2xl transition-colors"
 								>
 									<div className="w-10 h-10 rounded-xl bg-brand-accent/10 text-brand-accent flex items-center justify-center font-black shrink-0">

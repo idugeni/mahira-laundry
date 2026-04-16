@@ -60,6 +60,7 @@ export function DepositModal({
 	return (
 		<>
 			<button
+				type="button"
 				onClick={() => setIsOpen(true)}
 				className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-50 text-emerald-600 text-[10px] font-bold rounded-lg hover:bg-emerald-100 transition-all border border-emerald-100"
 			>
@@ -71,8 +72,10 @@ export function DepositModal({
 				mounted &&
 				createPortal(
 					<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-						<div
-							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in"
+						<button
+							type="button"
+							aria-label="Tutup modal"
+							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in cursor-default"
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
@@ -95,6 +98,7 @@ export function DepositModal({
 										</div>
 									</div>
 									<button
+										type="button"
 										onClick={() => setIsOpen(false)}
 										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
@@ -125,7 +129,10 @@ export function DepositModal({
 								</div>
 
 								<div className="space-y-3">
-									<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+									<label
+										htmlFor="deposit-amount"
+										className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+									>
 										Nominal Top Up
 									</label>
 									<div className="relative group/input">
@@ -133,6 +140,7 @@ export function DepositModal({
 											Rp
 										</span>
 										<input
+											id="deposit-amount"
 											type="number"
 											value={amount || ""}
 											onChange={(e) => setAmount(Number(e.target.value))}

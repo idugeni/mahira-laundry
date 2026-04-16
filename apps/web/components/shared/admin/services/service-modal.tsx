@@ -117,20 +117,26 @@ export function ServiceModal({
 
 	return (
 		<>
-			<div onClick={() => setIsOpen(true)}>
+			<button
+				type="button"
+				onClick={() => setIsOpen(true)}
+				className="contents"
+			>
 				{trigger || (
-					<button className="px-6 py-3 bg-brand-primary text-white text-sm font-black rounded-2xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
+					<span className="px-6 py-3 bg-brand-primary text-white text-sm font-black rounded-2xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 inline-block cursor-pointer">
 						+ Tambah Layanan
-					</button>
+					</span>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
 				createPortal(
 					<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-						<div
-							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in"
+						<button
+							type="button"
+							aria-label="Tutup modal"
+							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in cursor-default"
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
@@ -149,6 +155,7 @@ export function ServiceModal({
 										</p>
 									</div>
 									<button
+										type="button"
 										onClick={() => setIsOpen(false)}
 										className="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-300"
 									>
@@ -164,7 +171,10 @@ export function ServiceModal({
 								<form onSubmit={handleSubmit} className="p-8 space-y-5">
 									<div className="grid grid-cols-2 gap-5">
 										<div className="space-y-2">
-											<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+											<label
+												htmlFor="service-name"
+												className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+											>
 												Nama Layanan
 											</label>
 											<div className="relative group/input">
@@ -173,6 +183,7 @@ export function ServiceModal({
 												</span>
 												<input
 													required
+													id="service-name"
 													name="name"
 													defaultValue={service?.name || ""}
 													placeholder="Contoh: Cuci Lipat"
@@ -181,12 +192,15 @@ export function ServiceModal({
 											</div>
 										</div>
 										<div className="space-y-2">
-											<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
 												Kategori
-											</label>
+											</p>
 											<input type="hidden" name="category" value={category} />
 											<Select value={category} onValueChange={setCategory}>
-												<SelectTrigger className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-brand-primary/20 transition-all">
+												<SelectTrigger
+													aria-label="Kategori"
+													className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-brand-primary/20 transition-all"
+												>
 													<SelectValue placeholder="Pilih Kategori" />
 												</SelectTrigger>
 												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
@@ -223,10 +237,14 @@ export function ServiceModal({
 									</div>
 
 									<div className="space-y-2">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<label
+											htmlFor="service-description"
+											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+										>
 											Deskripsi Singkat
 										</label>
 										<textarea
+											id="service-description"
 											name="description"
 											defaultValue={service?.description || ""}
 											placeholder="Jelaskan detail cakupan layanan ini..."
@@ -235,7 +253,10 @@ export function ServiceModal({
 									</div>
 
 									<div className="space-y-2">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<label
+											htmlFor="service-features"
+											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+										>
 											Fitur & Benefit (Pisahkan dengan koma)
 										</label>
 										<div className="relative group/input">
@@ -243,6 +264,7 @@ export function ServiceModal({
 												<HiOutlineListBullet />
 											</span>
 											<textarea
+												id="service-features"
 												name="features_raw"
 												defaultValue={
 													service?.features?.join(", ") ||
@@ -256,12 +278,15 @@ export function ServiceModal({
 
 									<div className="grid grid-cols-3 gap-4">
 										<div className="space-y-2">
-											<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
 												Satuan
-											</label>
+											</p>
 											<input type="hidden" name="unit" value={unit} />
 											<Select value={unit} onValueChange={setUnit}>
-												<SelectTrigger className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-brand-primary/20 transition-all">
+												<SelectTrigger
+													aria-label="Satuan"
+													className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-brand-primary/20 transition-all"
+												>
 													<SelectValue placeholder="Satuan" />
 												</SelectTrigger>
 												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
@@ -281,7 +306,10 @@ export function ServiceModal({
 											</Select>
 										</div>
 										<div className="space-y-2">
-											<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+											<label
+												htmlFor="service-price"
+												className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+											>
 												Harga
 											</label>
 											<div className="relative group/input">
@@ -290,6 +318,7 @@ export function ServiceModal({
 												</span>
 												<input
 													required
+													id="service-price"
 													type="number"
 													name="price"
 													defaultValue={service?.price}
@@ -298,7 +327,10 @@ export function ServiceModal({
 											</div>
 										</div>
 										<div className="space-y-2">
-											<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+											<label
+												htmlFor="service-duration"
+												className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+											>
 												Waktu
 											</label>
 											<div className="relative group/input">
@@ -307,6 +339,7 @@ export function ServiceModal({
 												</span>
 												<input
 													required
+													id="service-duration"
 													type="number"
 													name="estimated_duration_hours"
 													defaultValue={service?.estimated_duration_hours || 24}
@@ -318,7 +351,10 @@ export function ServiceModal({
 
 									<div className="grid grid-cols-2 gap-4">
 										<div className="space-y-2">
-											<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+											<label
+												htmlFor="service-icon"
+												className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+											>
 												Icon / Visual
 											</label>
 											<div className="relative group/input">
@@ -327,6 +363,7 @@ export function ServiceModal({
 												</span>
 												<input
 													required
+													id="service-icon"
 													name="icon"
 													defaultValue={service?.icon || "🧺"}
 													placeholder="Contoh: 🧺"
@@ -357,11 +394,15 @@ export function ServiceModal({
 										</div>
 
 										<div className="space-y-2">
-											<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+											<label
+												htmlFor="service-slug"
+												className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+											>
 												URL Slug
 											</label>
 											<input
 												required
+												id="service-slug"
 												name="slug"
 												defaultValue={service?.slug || ""}
 												placeholder="cuci-lipat"
@@ -371,9 +412,9 @@ export function ServiceModal({
 									</div>
 
 									<div className="space-y-3">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
 											Pengaturan Tambahan
-										</label>
+										</p>
 										<div className="flex flex-wrap items-center gap-6 p-4 bg-slate-50 border border-slate-100 rounded-2xl">
 											<label className="flex items-center gap-3 cursor-pointer group/check shrink-0">
 												<input

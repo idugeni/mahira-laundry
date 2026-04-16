@@ -2,8 +2,6 @@
 	AlertTriangle,
 	ArrowUpRight,
 	CheckCircle2,
-	Filter,
-	History,
 	MoreVertical,
 	Package,
 	Search,

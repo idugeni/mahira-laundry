@@ -1,14 +1,13 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
-import { FaWhatsapp } from "react-icons/fa6";
 import { HiOutlineArrowRight, HiOutlineMapPin } from "react-icons/hi2";
 import {
 	MdOutlineCheckCircle,
 	MdOutlineLocalLaundryService,
 } from "react-icons/md";
-import { PRIMARY_OUTLET } from "@/lib/constants";
 
 interface HomeHeroSectionProps {
 	user: unknown;
@@ -101,9 +100,11 @@ export function HomeHeroSection({
 										key={i}
 										className="w-12 h-12 rounded-full bg-slate-200 border-4 border-white overflow-hidden shadow-sm"
 									>
-										<img
+										<Image
 											src={`https://i.pravatar.cc/150?u=${i + 10}`}
 											alt="Pelanggan"
+											width={48}
+											height={48}
 											className="w-full h-full object-cover"
 										/>
 									</div>
@@ -111,8 +112,8 @@ export function HomeHeroSection({
 							</div>
 							<div>
 								<div className="flex text-amber-500 text-sm">
-									{"★★★★★".split("").map((s, i) => (
-										<span key={i}>{s}</span>
+									{"★★★★★".split("").map((s) => (
+										<span key={s}>{s}</span>
 									))}
 								</div>
 								<p className="text-sm font-medium text-slate-600">
@@ -151,7 +152,7 @@ export function HomeHeroSection({
 									"Express Setrika 1kg",
 								].map((item, i) => (
 									<motion.div
-										key={i}
+										key={item}
 										initial={{ opacity: 0, x: 10 }}
 										animate={{ opacity: 1, x: 0 }}
 										transition={{ delay: 0.5 + i * 0.1 }}

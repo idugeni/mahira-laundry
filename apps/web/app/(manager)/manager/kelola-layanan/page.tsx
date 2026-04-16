@@ -141,7 +141,10 @@ export default async function ManagerLayananPage() {
 													service={service}
 													outletId={outletId}
 													trigger={
-														<button className="text-xs font-bold text-brand-primary hover:text-brand-primary/80 transition-colors p-2 hover:bg-brand-primary/5 rounded-lg">
+														<button
+															type="button"
+															className="text-xs font-bold text-brand-primary hover:text-brand-primary/80 transition-colors p-2 hover:bg-brand-primary/5 rounded-lg"
+														>
 															Edit Detail →
 														</button>
 													}

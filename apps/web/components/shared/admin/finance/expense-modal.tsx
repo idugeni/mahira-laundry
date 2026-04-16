@@ -68,24 +68,27 @@ export function ExpenseModal({
 
 	return (
 		<>
-			<div onClick={() => setIsOpen(true)}>
+			<button
+				type="button"
+				onClick={() => setIsOpen(true)}
+				className="contents"
+			>
 				{trigger || (
-					<button
-						type="button"
-						className="inline-flex items-center gap-2 px-4 py-2.5 bg-rose-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-rose-100 hover:shadow-rose-200 hover:scale-[1.02] active:scale-[0.98] transition-all"
-					>
+					<span className="inline-flex items-center gap-2 px-4 py-2.5 bg-rose-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-rose-100 hover:shadow-rose-200 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
 						<HiOutlineBanknotes size={18} />
 						<span>Input Pengeluaran</span>
-					</button>
+					</span>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
 				createPortal(
 					<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-						<div
-							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in"
+						<button
+							type="button"
+							aria-label="Tutup modal"
+							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in cursor-default"
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
@@ -108,6 +111,7 @@ export function ExpenseModal({
 										</div>
 									</div>
 									<button
+										type="button"
 										onClick={() => setIsOpen(false)}
 										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
@@ -120,7 +124,10 @@ export function ExpenseModal({
 							<form onSubmit={handleSubmit} className="p-8 space-y-6">
 								<div className="space-y-4">
 									<div className="space-y-2">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<label
+											htmlFor="expense-category"
+											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+										>
 											Kategori Biaya
 										</label>
 										<div className="relative group/input">
@@ -129,7 +136,10 @@ export function ExpenseModal({
 											</span>
 											<input type="hidden" name="category" value={category} />
 											<Select value={category} onValueChange={setCategory}>
-												<SelectTrigger className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-rose-500/20 transition-all">
+												<SelectTrigger
+													id="expense-category"
+													className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-rose-500/20 transition-all"
+												>
 													<SelectValue placeholder="Pilih Kategori" />
 												</SelectTrigger>
 												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
@@ -148,7 +158,10 @@ export function ExpenseModal({
 									</div>
 
 									<div className="space-y-2">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<label
+											htmlFor="expense-amount"
+											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+										>
 											Nominal (Rp)
 										</label>
 										<div className="relative group/input">
@@ -158,6 +171,7 @@ export function ExpenseModal({
 											<input
 												required
 												type="number"
+												id="expense-amount"
 												name="amount"
 												placeholder="0"
 												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-xl font-black outline-none ring-0 focus:border-rose-500 focus:bg-white transition-all"
@@ -166,7 +180,10 @@ export function ExpenseModal({
 									</div>
 
 									<div className="space-y-2">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<label
+											htmlFor="expense-notes"
+											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+										>
 											Keterangan / Deskripsi
 										</label>
 										<div className="relative group/input">
@@ -175,6 +192,7 @@ export function ExpenseModal({
 											</span>
 											<textarea
 												required
+												id="expense-notes"
 												name="notes"
 												placeholder="Contoh: Pembelian deterjen 10 liter"
 												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[100px] ring-0 focus:border-rose-500 focus:bg-white transition-all resize-none"

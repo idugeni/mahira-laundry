@@ -122,7 +122,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 	const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
 	// Drag to Scroll State
-	const scrollRef = useRef<HTMLDivElement>(null);
+	const scrollRef = useRef<HTMLButtonElement>(null);
 	const [isDragging, setIsDragging] = useState(false);
 	const [startX, setStartX] = useState(0);
 	const [scrollLeft, setScrollLeftState] = useState(0);
@@ -205,6 +205,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 
 	return (
 		<div className="max-w-[1400px] mx-auto space-y-12 pb-32 px-4 lg:px-8">
+			{/* biome-ignore-start lint/security/noDangerouslySetInnerHtml: receipt HTML content */}
 			<style
 				dangerouslySetInnerHTML={{
 					__html: `
@@ -224,6 +225,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
       `,
 				}}
 			/>
+			{/* biome-ignore-end lint/security/noDangerouslySetInnerHtml: receipt HTML content */}
 
 			{/* Premium Dashboard Header */}
 			<div className="flex flex-col gap-10 pt-6">
@@ -281,13 +283,14 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 
 					{/* Tab Navigation - Horizontal Drag Scroll */}
 					<div className="relative group/tabs">
-						<div
+						<button
+							type="button"
 							ref={scrollRef}
 							onMouseDown={handleMouseDown}
 							onMouseLeave={handleMouseLeave}
 							onMouseUp={handleMouseUp}
 							onMouseMove={handleMouseMove}
-							className={`flex items-center gap-2 bg-slate-100/50 p-2 rounded-3xl overflow-x-auto scroll-smooth flex-nowrap border border-white shadow-inner-sm custom-scrollbar touch-pan-x cursor-grab active:cursor-grabbing select-none`}
+							className={`flex items-center gap-2 bg-slate-100/50 p-2 rounded-3xl overflow-x-auto scroll-smooth flex-nowrap border border-white shadow-inner-sm custom-scrollbar touch-pan-x cursor-grab active:cursor-grabbing select-none w-full text-left`}
 						>
 							{allStatuses.map((status) => {
 								const count = optimisticOrders.filter((o) =>
@@ -295,6 +298,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 								).length;
 								return (
 									<button
+										type="button"
 										key={status.id}
 										onPointerDown={(e) => e.stopPropagation()} // Allow clicking tabs while keeping drag on container
 										onClick={() => {
@@ -323,7 +327,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 									</button>
 								);
 							})}
-						</div>
+						</button>
 						{/* Visual Fade Edges */}
 						<div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-50/80 to-transparent pointer-events-none rounded-r-3xl" />
 					</div>
@@ -374,6 +378,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 
 											<div className="flex items-center gap-2">
 												<button
+													type="button"
 													onClick={() => setSelectedOrder(order)}
 													className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:text-brand-primary hover:bg-brand-primary/5 transition-all shadow-sm"
 													title="Lihat Detail"
@@ -422,7 +427,8 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 													<div className="flex items-center gap-2 py-1 px-3 bg-brand-primary/5 rounded-full w-fit">
 														<Package className="w-3 h-3 text-brand-primary" />
 														<span className="text-[10px] font-black text-brand-primary uppercase tracking-widest">
-															+{order.order_items?.length! - 1} Item Tambahan
+															+{(order.order_items?.length ?? 0) - 1} Item
+															Tambahan
 														</span>
 													</div>
 												)}
@@ -432,9 +438,9 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 												<div className="space-y-3">
 													{order.order_items
 														.filter((item) => item.notes)
-														.map((item, idx) => (
+														.map((item) => (
 															<div
-																key={idx}
+																key={item.id}
 																className="bg-slate-50/50 p-5 rounded-[1.5rem] border border-slate-100 flex gap-4"
 															>
 																<div
@@ -452,7 +458,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 										<div className="mt-12 pt-8 border-t border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
 											<div className="flex items-center gap-4">
 												<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-lg font-black text-slate-500 border border-white shadow-lg">
-													{(order as any).customer?.full_name?.charAt(0) || (
+													{order.customer?.full_name?.charAt(0) || (
 														<User className="w-6 h-6" />
 													)}
 												</div>
@@ -461,7 +467,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 														Customer
 													</span>
 													<span className="text-sm font-black text-slate-800 uppercase tracking-wider">
-														{(order as any).customer?.full_name || "Guest User"}
+														{order.customer?.full_name || "Guest User"}
 													</span>
 												</div>
 											</div>
@@ -518,19 +524,19 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 					</Button>
 
 					<div className="flex items-center gap-2">
-						{Array.from({ length: totalPages }).map((_, i) => (
+						{Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
 							<Button
-								key={`page-${i + 1}`}
+								key={`page-${page}`}
 								type="button"
-								variant={currentPage === i + 1 ? "default" : "outline"}
-								onClick={() => setCurrentPage(i + 1)}
+								variant={currentPage === page ? "default" : "outline"}
+								onClick={() => setCurrentPage(page)}
 								className={`w-12 h-12 rounded-2xl text-xs font-black transition-all border-slate-100 ${
-									currentPage === i + 1
+									currentPage === page
 										? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20 scale-110"
 										: "bg-white text-slate-400 hover:text-slate-600"
 								}`}
 							>
-								{i + 1}
+								{page}
 							</Button>
 						))}
 					</div>

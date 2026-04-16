@@ -5,6 +5,23 @@ import { formatIDR } from "@/lib/utils";
 
 export type ReportType = "harian" | "mingguan" | "bulanan" | "keuangan";
 
+type OrderRow = {
+	order_number: string;
+	created_at: string;
+	status: string;
+	payment_status: string;
+	total: number;
+	outlets?: { name?: string } | null;
+	profiles?: { full_name?: string; phone?: string } | null;
+	order_items?:
+		| { service_name?: string; quantity?: number; unit?: string }[]
+		| null;
+};
+
+type ExpenseRow = {
+	amount?: number | string | null;
+};
+
 export async function generateReportData(
 	type: ReportType,
 	dateRange?: { from: string; to: string },
@@ -54,7 +71,7 @@ export async function generateReportData(
 		console.error("Could not fetch expenses for report:", expensesError);
 
 	// Process data for export
-	const reportRows = orders.map((order: any) => ({
+	const reportRows = (orders as OrderRow[]).map((order) => ({
 		"Order Number": order.order_number,
 		Tanggal: new Date(order.created_at).toLocaleDateString("id-ID"),
 		Outlet: order.outlets?.name || "N/A",
@@ -64,29 +81,29 @@ export async function generateReportData(
 		Payment: order.payment_status,
 		Total: order.total,
 		Items: order.order_items
-			?.map((i: any) => `${i.service_name} (${i.quantity} ${i.unit})`)
+			?.map((i) => `${i.service_name} (${i.quantity} ${i.unit})`)
 			.join(", "),
 	}));
 
 	// Summary Metrics based on type
-	const totalRevenue = orders
-		.filter((o: any) => o.payment_status === "paid")
-		.reduce((sum: number, o: any) => sum + (o.total || 0), 0);
+	const totalRevenue = (orders as OrderRow[])
+		.filter((o) => o.payment_status === "paid")
+		.reduce((sum: number, o) => sum + (o.total || 0), 0);
 
-	const totalExpenses = (expenses || []).reduce(
-		(sum: number, e: any) => sum + Number(e.amount || 0),
+	const totalExpenses = ((expenses || []) as ExpenseRow[]).reduce(
+		(sum: number, e) => sum + Number(e.amount || 0),
 		0,
 	);
 	const netProfit = totalRevenue - totalExpenses;
 
 	const totalOrders = orders.length;
-	const completedOrders = orders.filter(
-		(o: any) => o.status === "completed",
+	const completedOrders = (orders as OrderRow[]).filter(
+		(o) => o.status === "completed",
 	).length;
 
 	// Aggregate by outlet (Kompleks!)
 	const outletStats: Record<string, { count: number; revenue: number }> = {};
-	orders.forEach((o: any) => {
+	(orders as OrderRow[]).forEach((o) => {
 		const name = o.outlets?.name || "N/A";
 		if (!outletStats[name]) outletStats[name] = { count: 0, revenue: 0 };
 		outletStats[name].count++;

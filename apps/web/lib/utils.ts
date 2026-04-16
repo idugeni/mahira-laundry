@@ -58,7 +58,7 @@ export function formatDateTime(date: string | Date): string {
 		hour12: false,
 	}).format(new Date(date));
 
-	return result.replace(/\./g, ":") + " WIB";
+	return `${result.replace(/\./g, ":")} WIB`;
 }
 
 export function formatRelativeTime(date: string | Date): string {

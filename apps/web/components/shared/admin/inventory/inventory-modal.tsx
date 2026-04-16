@@ -11,10 +11,12 @@ import {
 	HiOutlineXMark,
 } from "react-icons/hi2";
 import { toast } from "sonner";
+import type { InventoryInput } from "@/lib/actions/inventory";
 import { restockInventory, upsertInventory } from "@/lib/actions/inventory";
+import type { ActionResponse } from "@/lib/types";
 
 interface InventoryModalProps {
-	item?: any;
+	item?: InventoryInput & { id: string };
 	outletId: string;
 	mode?: "edit" | "restock" | "create";
 	trigger?: React.ReactNode;
@@ -40,10 +42,10 @@ export function InventoryModal({
 
 		const formData = new FormData(e.currentTarget);
 
-		let result;
+		let result: ActionResponse;
 		if (mode === "restock") {
 			const amount = Number(formData.get("restock_amount"));
-			result = await restockInventory(item.id, amount);
+			result = await restockInventory(item?.id ?? "", amount);
 		} else {
 			const data = {
 				id: item?.id,
@@ -76,21 +78,27 @@ export function InventoryModal({
 
 	return (
 		<>
-			<div onClick={() => setIsOpen(true)}>
+			<button
+				type="button"
+				onClick={() => setIsOpen(true)}
+				className="contents"
+			>
 				{trigger || (
-					<button className="px-6 py-3 bg-brand-primary text-white text-sm font-black rounded-2xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200">
+					<span className="px-6 py-3 bg-brand-primary text-white text-sm font-black rounded-2xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer">
 						+ Tambah Item
-					</button>
+					</span>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
 				createPortal(
 					<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-						<div
-							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in"
+						<button
+							type="button"
+							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in cursor-default"
 							onClick={() => !isLoading && setIsOpen(false)}
+							aria-label="Close modal"
 						/>
 
 						<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden animate-zoom-in border border-white/20">
@@ -112,6 +120,7 @@ export function InventoryModal({
 										</p>
 									</div>
 									<button
+										type="button"
 										onClick={() => setIsOpen(false)}
 										className="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-300"
 									>
@@ -150,7 +159,10 @@ export function InventoryModal({
 												</div>
 											</div>
 											<div className="space-y-2">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+												<label
+													htmlFor="restock_amount"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+												>
 													Jumlah Restock ({item?.unit})
 												</label>
 												<div className="relative group/input">
@@ -159,6 +171,7 @@ export function InventoryModal({
 													</span>
 													<input
 														required
+														id="restock_amount"
 														type="number"
 														name="restock_amount"
 														placeholder="Masukkan jumlah tambahan..."
@@ -171,7 +184,10 @@ export function InventoryModal({
 										<>
 											<div className="grid grid-cols-2 gap-5">
 												<div className="space-y-2">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+													<label
+														htmlFor="name"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+													>
 														Nama Item
 													</label>
 													<div className="relative group/input">
@@ -180,6 +196,7 @@ export function InventoryModal({
 														</span>
 														<input
 															required
+															id="name"
 															name="name"
 															defaultValue={item?.name}
 															placeholder="Contoh: Deterjen Liquid"
@@ -188,7 +205,10 @@ export function InventoryModal({
 													</div>
 												</div>
 												<div className="space-y-2">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+													<label
+														htmlFor="sku"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+													>
 														SKU / Kode Stok
 													</label>
 													<div className="relative group/input">
@@ -196,6 +216,7 @@ export function InventoryModal({
 															<HiOutlineQrCode />
 														</span>
 														<input
+															id="sku"
 															name="sku"
 															defaultValue={item?.sku}
 															placeholder="DET-001"
@@ -207,7 +228,10 @@ export function InventoryModal({
 
 											<div className="grid grid-cols-3 gap-4">
 												<div className="space-y-2">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+													<label
+														htmlFor="category"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+													>
 														Kategori
 													</label>
 													<div className="relative group/input">
@@ -215,6 +239,7 @@ export function InventoryModal({
 															<HiOutlineSquares2X2 />
 														</span>
 														<input
+															id="category"
 															name="category"
 															defaultValue={item?.category}
 															placeholder="Kategori"
@@ -223,11 +248,15 @@ export function InventoryModal({
 													</div>
 												</div>
 												<div className="space-y-2">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+													<label
+														htmlFor="quantity"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+													>
 														Stok Awal
 													</label>
 													<input
 														required
+														id="quantity"
 														type="number"
 														name="quantity"
 														defaultValue={item?.quantity || 0}
@@ -235,11 +264,15 @@ export function InventoryModal({
 													/>
 												</div>
 												<div className="space-y-2">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+													<label
+														htmlFor="unit"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+													>
 														Satuan
 													</label>
 													<input
 														required
+														id="unit"
 														name="unit"
 														defaultValue={item?.unit || "pcs"}
 														placeholder="kg/ltr/pcs"
@@ -250,10 +283,14 @@ export function InventoryModal({
 
 											<div className="grid grid-cols-2 gap-5">
 												<div className="space-y-2">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+													<label
+														htmlFor="min_stock"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+													>
 														Batas Minimal Stok
 													</label>
 													<input
+														id="min_stock"
 														type="number"
 														name="min_stock"
 														defaultValue={item?.min_stock || 0}
@@ -261,7 +298,10 @@ export function InventoryModal({
 													/>
 												</div>
 												<div className="space-y-2">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+													<label
+														htmlFor="notes"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+													>
 														Catatan Tambahan
 													</label>
 													<div className="relative group/input">
@@ -269,6 +309,7 @@ export function InventoryModal({
 															<HiOutlinePencilSquare />
 														</span>
 														<input
+															id="notes"
 															name="notes"
 															defaultValue={item?.notes}
 															placeholder="..."

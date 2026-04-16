@@ -43,8 +43,9 @@ export async function broadcastNotification(data: {
 
 		revalidatePath("/");
 		return { success: true };
-	} catch (error: any) {
-		return { success: false, error: error.message };
+	} catch (error) {
+		const err = error as Error;
+		return { success: false, error: err.message };
 	}
 }
 
@@ -65,7 +66,8 @@ export async function sendDirectNotification(data: {
 
 		if (error) throw error;
 		return { success: true };
-	} catch (error: any) {
-		return { success: false, error: error.message };
+	} catch (error) {
+		const err = error as Error;
+		return { success: false, error: err.message };
 	}
 }

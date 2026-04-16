@@ -59,9 +59,9 @@ export async function topUpBalance(
 		revalidatePath("/customer");
 		revalidatePath("/admin/keuangan");
 		return { success: true };
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Top up failed:", error);
-		return { success: false, error: error.message };
+		return { success: false, error: (error as Error).message };
 	}
 }
 
@@ -94,9 +94,9 @@ export async function settleRoyalty(data: {
 		revalidatePath("/franchise");
 		revalidatePath("/admin/keuangan");
 		return { success: true };
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Royalty settlement failed:", error);
-		return { success: false, error: error.message };
+		return { success: false, error: (error as Error).message };
 	}
 }
 
@@ -125,7 +125,9 @@ export async function recordIncome(data: {
 			.eq("id", user.id)
 			.single();
 		if (profile?.role !== "superadmin") {
-			throw new Error("Akses ditolak. Hanya superadmin yang dapat mencatat pemasukan.");
+			throw new Error(
+				"Akses ditolak. Hanya superadmin yang dapat mencatat pemasukan.",
+			);
 		}
 
 		const { error } = await supabase.from("income").insert({
@@ -140,8 +142,8 @@ export async function recordIncome(data: {
 
 		revalidatePath("/admin/keuangan");
 		return { success: true };
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Record income failed:", error);
-		return { success: false, error: error.message };
+		return { success: false, error: (error as Error).message };
 	}
 }

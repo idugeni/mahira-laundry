@@ -42,6 +42,7 @@ export function OrderWhatsappPanel({ onBack }: OrderWhatsappPanelProps) {
 						Buka WhatsApp <HiOutlineChevronRight />
 					</a>
 					<button
+						type="button"
 						onClick={onBack}
 						className="w-full py-4 text-slate-400 font-bold text-xs uppercase tracking-widest hover:text-slate-900 transition-colors"
 					>

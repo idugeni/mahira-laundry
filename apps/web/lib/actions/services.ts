@@ -44,7 +44,7 @@ export async function upsertService(
 			updated_at: new Date().toISOString(),
 		};
 
-		let result;
+		let result: { error: { message: string } | null };
 		if (data.id) {
 			result = await supabase
 				.from("services")

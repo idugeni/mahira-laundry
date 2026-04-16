@@ -1,21 +1,21 @@
-﻿import type { Metadata } from "next";
-import { ReportModal } from "@/components/shared/admin/finance/report-modal";
-import { AuditTrailTable } from "@/components/shared/admin/audit-trail-table";
-import { getAuditLogs } from "@/lib/supabase/server";
-import { cn } from "@/lib/utils";
-import {
-	BarChart3,
-	FileText,
-	ShieldAlert,
+﻿import {
 	Activity,
+	ArrowRight,
+	BarChart3,
+	Calendar,
+	FileText,
 	Layers,
 	PieChart,
+	ShieldAlert,
 	TrendingUp,
 	Users,
-	ArrowRight,
-	Calendar,
 } from "lucide-react";
+import type { Metadata } from "next";
+import { AuditTrailTable } from "@/components/shared/admin/audit-trail-table";
+import { ReportModal } from "@/components/shared/admin/finance/report-modal";
 import { Badge } from "@/components/ui/badge";
+import { getAuditLogs } from "@/lib/supabase/server";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Laporan & Audit",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-const ACTION_COLORS: Record<string, string> = {
+const _ACTION_COLORS: Record<string, string> = {
 	create: "bg-emerald-50 text-emerald-600 border-emerald-100",
 	update: "bg-indigo-50 text-indigo-600 border-indigo-100",
 	delete: "bg-rose-50 text-rose-600 border-rose-100",
@@ -34,7 +34,7 @@ const ACTION_COLORS: Record<string, string> = {
 	status_change: "bg-amber-50 text-amber-600 border-amber-100",
 };
 
-const TABLE_LABELS: Record<string, string> = {
+const _TABLE_LABELS: Record<string, string> = {
 	orders: "Pesanan",
 	profiles: "Profil",
 	payments: "Pembayaran",

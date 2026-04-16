@@ -85,6 +85,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 						className="flex gap-6 whitespace-nowrap"
 					>
 						{duplicatedTestimonials.map((t, i) => (
+							// biome-ignore lint/suspicious/noArrayIndexKey: intentional duplicate items for infinite marquee
 							<TestimonialCard key={`${t.id}-${i}`} testimonial={t} />
 						))}
 					</motion.div>
@@ -106,6 +107,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 						className="flex gap-6 whitespace-nowrap"
 					>
 						{[...duplicatedTestimonials].reverse().map((t, i) => (
+							// biome-ignore lint/suspicious/noArrayIndexKey: intentional duplicate items for infinite marquee
 							<TestimonialCard key={`rev-${t.id}-${i}`} testimonial={t} />
 						))}
 					</motion.div>
@@ -128,14 +130,16 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 	return (
 		<div className="w-[350px] sm:w-[450px] shrink-0 p-8 bg-white/70 backdrop-blur-md rounded-[2.5rem] border border-white shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-brand-primary/5 transition-all duration-500 group">
 			<div className="flex gap-1 mb-6">
-				{[...Array(testimonial.rating || 5)].map((_, i) => (
-					<span
-						key={i}
-						className="text-amber-400 group-hover:scale-110 transition-transform"
-					>
-						<HiStar />
-					</span>
-				))}
+				{Array.from({ length: testimonial.rating || 5 }, (_, i) => i).map(
+					(i) => (
+						<span
+							key={i}
+							className="text-amber-400 group-hover:scale-110 transition-transform"
+						>
+							<HiStar />
+						</span>
+					),
+				)}
 			</div>
 
 			<div className="relative">

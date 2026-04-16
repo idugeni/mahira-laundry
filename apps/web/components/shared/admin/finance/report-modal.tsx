@@ -50,24 +50,26 @@ export function ReportModal({
 				toast.success(`Berhasil mengekspor ${data.rows.length} baris data.`);
 				setIsOpen(false);
 			}
-		} catch (error: any) {
-			toast.error(error.message || "Gagal mengolah data laporan.");
+		} catch (error) {
+			toast.error((error as Error).message || "Gagal mengolah data laporan.");
 		}
 		setIsLoading(false);
 	}
 
 	return (
 		<>
-			<div onClick={() => setIsOpen(true)} className="cursor-pointer h-full">
+			<button type="button" onClick={() => setIsOpen(true)} className="contents h-full cursor-pointer">
 				{trigger}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
 				createPortal(
 					<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-						<div
-							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in"
+						<button
+							type="button"
+							aria-label="Tutup modal"
+							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in cursor-default"
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
@@ -91,6 +93,7 @@ export function ReportModal({
 										</div>
 									</div>
 									<button
+										type="button"
 										onClick={() => setIsOpen(false)}
 										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
@@ -103,9 +106,9 @@ export function ReportModal({
 							<div className="p-8 space-y-6">
 								{/* Report Type Selector */}
 								<div className="space-y-3">
-									<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+									<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
 										Jenis Laporan
-									</label>
+									</p>
 									<div className="grid grid-cols-2 gap-3">
 										{[
 											{
@@ -131,6 +134,7 @@ export function ReportModal({
 										].map((type) => (
 											<button
 												key={type.id}
+												type="button"
 												onClick={() => setReportType(type.id as ReportType)}
 												className={`flex items-center gap-3 p-4 rounded-2xl border transition-all ${
 													reportType === type.id
@@ -147,9 +151,9 @@ export function ReportModal({
 
 								{/* Date Range */}
 								<div className="space-y-3 pt-2">
-									<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+									<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
 										Rentang Waktu
-									</label>
+									</p>
 									<div className="grid grid-cols-2 gap-4">
 										<div className="space-y-2">
 											<p className="text-[9px] font-bold text-slate-400 uppercase tracking-tight ml-1 text-center">
@@ -183,6 +187,7 @@ export function ReportModal({
 								{/* Action */}
 								<div className="pt-4">
 									<button
+										type="button"
 										onClick={handleExport}
 										disabled={isLoading}
 										className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-sm shadow-xl shadow-slate-200 hover:bg-black hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-3"

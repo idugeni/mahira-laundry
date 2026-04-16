@@ -84,30 +84,33 @@ export function PaginationControls({
 
 			{/* Page numbers */}
 			<div className="flex items-center gap-1">
-				{getVisiblePages().map((page, idx) =>
-					page === "..." ? (
-						<span
-							key={`dots-${idx}`}
-							className="w-7 text-center text-slate-300 text-xs font-black"
-						>
-							···
-						</span>
-					) : (
-						<Button
-							key={page}
-							variant="ghost"
-							onClick={() => onPageChange(page)}
-							className={cn(
-								"w-9 h-9 p-0 rounded-xl text-xs font-black transition-all",
-								currentPage === page
-									? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:text-white"
-									: "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600",
-							)}
-						>
-							{page}
-						</Button>
-					),
-				)}
+				{(() => {
+					let ellipsisCount = 0;
+					return getVisiblePages().map((page) =>
+						page === "..." ? (
+							<span
+								key={`ellipsis-${++ellipsisCount}`}
+								className="w-7 text-center text-slate-300 text-xs font-black"
+							>
+								···
+							</span>
+						) : (
+							<Button
+								key={page}
+								variant="ghost"
+								onClick={() => onPageChange(page)}
+								className={cn(
+									"w-9 h-9 p-0 rounded-xl text-xs font-black transition-all",
+									currentPage === page
+										? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:text-white"
+										: "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600",
+								)}
+							>
+								{page}
+							</Button>
+						),
+					);
+				})()}
 			</div>
 
 			{/* Next page */}

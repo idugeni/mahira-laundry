@@ -5,8 +5,8 @@ import { createPortal } from "react-dom";
 import {
 	HiOutlineBanknotes,
 	HiOutlineBuildingOffice2,
-	HiOutlineChatBubbleBottomCenterText,
 	HiOutlineCalendar,
+	HiOutlineChatBubbleBottomCenterText,
 	HiOutlineXMark,
 } from "react-icons/hi2";
 import { toast } from "sonner";
@@ -65,7 +65,11 @@ export function IncomeModal({
 
 	return (
 		<>
-			<div onClick={() => setIsOpen(true)}>
+			<button
+				type="button"
+				className="contents"
+				onClick={() => setIsOpen(true)}
+			>
 				{trigger || (
 					<button
 						type="button"
@@ -75,14 +79,16 @@ export function IncomeModal({
 						<span>Tambah Pemasukan</span>
 					</button>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
 				createPortal(
 					<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-						<div
-							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in"
+						<button
+							type="button"
+							aria-label="Tutup modal"
+							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in cursor-default"
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
@@ -97,7 +103,8 @@ export function IncomeModal({
 										</div>
 										<div>
 											<h2 className="text-xl font-black text-slate-900 tracking-tight">
-												Tambah <span className="text-emerald-600">Pemasukan</span>
+												Tambah{" "}
+												<span className="text-emerald-600">Pemasukan</span>
 											</h2>
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
 												Catat Pendapatan & Pemasukan
@@ -105,6 +112,7 @@ export function IncomeModal({
 										</div>
 									</div>
 									<button
+										type="button"
 										onClick={() => setIsOpen(false)}
 										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
@@ -118,7 +126,10 @@ export function IncomeModal({
 								<div className="space-y-4">
 									{/* Amount */}
 									<div className="space-y-2">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<label
+											htmlFor="income-amount"
+											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+										>
 											Nominal (Rp)
 										</label>
 										<div className="relative group/input">
@@ -127,6 +138,7 @@ export function IncomeModal({
 											</span>
 											<input
 												required
+												id="income-amount"
 												type="number"
 												name="amount"
 												min="1"
@@ -138,7 +150,10 @@ export function IncomeModal({
 
 									{/* Description */}
 									<div className="space-y-2">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<label
+											htmlFor="income-description"
+											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+										>
 											Deskripsi
 										</label>
 										<div className="relative group/input">
@@ -147,6 +162,7 @@ export function IncomeModal({
 											</span>
 											<textarea
 												required
+												id="income-description"
 												name="description"
 												placeholder="Contoh: Pembayaran royalti cabang Sudirman"
 												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[90px] ring-0 focus:border-emerald-500 focus:bg-white transition-all resize-none"
@@ -156,7 +172,10 @@ export function IncomeModal({
 
 									{/* Outlet */}
 									<div className="space-y-2">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<label
+											htmlFor="income-outlet"
+											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+										>
 											Outlet / Cabang
 										</label>
 										<div className="relative group/input">
@@ -164,7 +183,10 @@ export function IncomeModal({
 												<HiOutlineBuildingOffice2 />
 											</span>
 											<Select value={outletId} onValueChange={setOutletId}>
-												<SelectTrigger className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-emerald-500/20 transition-all">
+												<SelectTrigger
+													id="income-outlet"
+													className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-emerald-500/20 transition-all"
+												>
 													<SelectValue placeholder="Pilih Outlet" />
 												</SelectTrigger>
 												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
@@ -184,7 +206,10 @@ export function IncomeModal({
 
 									{/* Date */}
 									<div className="space-y-2">
-										<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+										<label
+											htmlFor="income-date"
+											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+										>
 											Tanggal
 										</label>
 										<div className="relative group/input">
@@ -193,6 +218,7 @@ export function IncomeModal({
 											</span>
 											<input
 												required
+												id="income-date"
 												type="date"
 												name="date"
 												defaultValue={new Date().toISOString().split("T")[0]}

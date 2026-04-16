@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 
 interface MahiraLogoProps {
 	size?: number;
@@ -19,7 +20,7 @@ export function MahiraLogo({
 			animate={{ opacity: 1, x: 0 }}
 			className={`flex items-center gap-3 ${className}`}
 		>
-			<img
+			<Image
 				src="/logo.png"
 				alt="Mahira Laundry Logo"
 				width={size}

@@ -12,7 +12,7 @@ export async function upsertMachine(data: {
 	status: "available" | "in_use" | "maintenance" | "broken";
 	capacityKg?: number;
 	brand?: string;
-}): Promise<ActionResponse<any>> {
+}): Promise<ActionResponse<Record<string, unknown>>> {
 	try {
 		const supabase = await createClient();
 
@@ -26,7 +26,10 @@ export async function upsertMachine(data: {
 			updated_at: new Date().toISOString(),
 		};
 
-		let result;
+		let result: {
+			data: Record<string, unknown> | null;
+			error: { message: string } | null;
+		};
 		if (data.id) {
 			result = await supabase
 				.from("machines")
@@ -45,9 +48,10 @@ export async function upsertMachine(data: {
 		if (result.error) throw result.error;
 
 		revalidatePath("/admin/outlet");
-		return { success: true, data: result.data };
-	} catch (error: any) {
-		return { success: false, error: error.message };
+		return { success: true, data: result.data ?? undefined };
+	} catch (error) {
+		const err = error as Error;
+		return { success: false, error: err.message };
 	}
 }
 
@@ -58,7 +62,8 @@ export async function deleteMachine(id: string): Promise<ActionResponse<void>> {
 		if (error) throw error;
 		revalidatePath("/admin/outlet");
 		return { success: true };
-	} catch (error: any) {
-		return { success: false, error: error.message };
+	} catch (error) {
+		const err = error as Error;
+		return { success: false, error: err.message };
 	}
 }

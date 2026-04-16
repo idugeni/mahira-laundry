@@ -91,6 +91,7 @@ export function OrderServiceStep({
 								<div className="flex flex-col items-center lg:items-end gap-3">
 									<div className="flex items-center gap-4 bg-slate-50/50 p-1.5 rounded-2xl border border-slate-100 shadow-sm">
 										<button
+											type="button"
 											onClick={() => onUpdateQuantity(service.id, -1)}
 											className="w-10 h-10 bg-white rounded-xl shadow-sm text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all active:scale-90"
 										>
@@ -110,6 +111,7 @@ export function OrderServiceStep({
 											className="w-12 text-center font-black text-lg bg-transparent text-slate-900 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 										/>
 										<button
+											type="button"
 											onClick={() => onUpdateQuantity(service.id, 1)}
 											className="w-10 h-10 bg-white rounded-xl shadow-sm text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all active:scale-90"
 										>
@@ -122,6 +124,7 @@ export function OrderServiceStep({
 										{[3, 5, 8].map((k) => (
 											<button
 												key={k}
+												type="button"
 												onClick={() => onSetQuantity(service.id, k)}
 												className="px-3 py-1 bg-white border border-slate-100 rounded-lg text-[10px] font-black text-slate-400 hover:text-brand-primary hover:border-brand-primary shadow-sm transition-all"
 											>
@@ -136,6 +139,7 @@ export function OrderServiceStep({
 				})}
 				<div className="flex justify-end pt-8">
 					<button
+						type="button"
 						onClick={onNext}
 						disabled={calculateTotal() === 0}
 						className="px-12 py-5 bg-brand-primary text-white rounded-[24px] font-black shadow-2xl shadow-brand-primary/20 flex items-center gap-3 transition-all hover:scale-105 disabled:opacity-50"

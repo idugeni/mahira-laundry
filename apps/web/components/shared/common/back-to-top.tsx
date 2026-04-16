@@ -39,7 +39,7 @@ export function BackToTop() {
 						className="relative group"
 					>
 						{/* Circular Progress Stroke */}
-						<svg className="w-16 h-16 transform -rotate-90">
+						<svg className="w-16 h-16 transform -rotate-90" aria-hidden="true">
 							<circle
 								cx="32"
 								cy="32"

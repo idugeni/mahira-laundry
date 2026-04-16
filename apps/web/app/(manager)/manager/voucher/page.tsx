@@ -23,7 +23,10 @@ export default async function VoucherPage() {
 						Ada {vouchers.length} voucher terdaftar untuk cabang ini.
 					</p>
 				</div>
-				<button className="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl text-sm font-bold shadow-sm shadow-pink-500/20 hover:scale-[1.02] hover:shadow-md transition-all">
+				<button
+					type="button"
+					className="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl text-sm font-bold shadow-sm shadow-pink-500/20 hover:scale-[1.02] hover:shadow-md transition-all"
+				>
 					+ Buat Voucher
 				</button>
 			</div>
@@ -135,7 +138,10 @@ export default async function VoucherPage() {
 									<span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
 										S.d. {formatDate(v.valid_until)}
 									</span>
-									<button className="text-xs font-bold text-brand-primary hover:text-pink-700 transition-colors">
+									<button
+										type="button"
+										className="text-xs font-bold text-brand-primary hover:text-pink-700 transition-colors"
+									>
 										Edit Kupon
 									</button>
 								</div>

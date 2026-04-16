@@ -58,24 +58,27 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 
 	return (
 		<>
-			<div onClick={() => setIsOpen(true)}>
+			<button
+				type="button"
+				onClick={() => setIsOpen(true)}
+				className="contents"
+			>
 				{trigger || (
-					<button
-						type="button"
-						className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow-md hover:scale-[1.02] transition-all"
-					>
+					<span className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow-md hover:scale-[1.02] transition-all cursor-pointer">
 						<HiOutlineUserGroup size={18} />
 						<span>Tambah Mitra Baru</span>
-					</button>
+					</span>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
 				createPortal(
 					<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-						<div
-							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in"
+						<button
+							type="button"
+							aria-label="Tutup modal"
+							className="fixed inset-0 bg-slate-900/60 backdrop-blur-md animate-fade-in cursor-default"
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
@@ -94,6 +97,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 										</p>
 									</div>
 									<button
+										type="button"
 										onClick={() => setIsOpen(false)}
 										className="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-300"
 									>
@@ -125,7 +129,10 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 
 										<div className="grid grid-cols-2 gap-5">
 											<div className="space-y-2 col-span-2 sm:col-span-1">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+												<label
+													htmlFor="fullName"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+												>
 													Nama Lengkap
 												</label>
 												<div className="relative group/input">
@@ -134,6 +141,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 													</span>
 													<input
 														required
+														id="fullName"
 														name="fullName"
 														placeholder="Contoh: Budi Santoso"
 														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
@@ -141,7 +149,10 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 												</div>
 											</div>
 											<div className="space-y-2 col-span-2 sm:col-span-1">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+												<label
+													htmlFor="email"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+												>
 													Email Mitra
 												</label>
 												<div className="relative group/input">
@@ -151,6 +162,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 													<input
 														required
 														type="email"
+														id="email"
 														name="email"
 														placeholder="owner@email.com"
 														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
@@ -158,7 +170,10 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 												</div>
 											</div>
 											<div className="space-y-2 col-span-2 sm:col-span-1">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+												<label
+													htmlFor="phone"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+												>
 													No. WhatsApp
 												</label>
 												<div className="relative group/input">
@@ -167,6 +182,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 													</span>
 													<input
 														required
+														id="phone"
 														name="phone"
 														placeholder="0812..."
 														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
@@ -174,7 +190,10 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 												</div>
 											</div>
 											<div className="space-y-2 col-span-2 sm:col-span-1">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+												<label
+													htmlFor="password"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+												>
 													Password Akses
 												</label>
 												<div className="relative group/input">
@@ -183,6 +202,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 													</span>
 													<input
 														type="password"
+														id="password"
 														name="password"
 														placeholder="Default: MitraMahira12!@"
 														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
@@ -205,7 +225,10 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 
 										<div className="grid grid-cols-2 gap-5">
 											<div className="space-y-2 col-span-2 sm:col-span-1">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+												<label
+													htmlFor="outletName"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+												>
 													Nama Outlet
 												</label>
 												<div className="relative group/input">
@@ -214,6 +237,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 													</span>
 													<input
 														required
+														id="outletName"
 														name="outletName"
 														placeholder="Mahira - Gading Serpong"
 														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
@@ -221,7 +245,10 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 												</div>
 											</div>
 											<div className="space-y-2 col-span-2 sm:col-span-1">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+												<label
+													htmlFor="outletSlug"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+												>
 													Slug URL (Tanpa Spasi)
 												</label>
 												<div className="relative group/input">
@@ -230,6 +257,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 													</span>
 													<input
 														required
+														id="outletSlug"
 														name="outletSlug"
 														placeholder="gading-serpong"
 														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
@@ -237,7 +265,10 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 												</div>
 											</div>
 											<div className="space-y-2 col-span-2">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+												<label
+													htmlFor="outletAddress"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+												>
 													Alamat Lengkap
 												</label>
 												<div className="relative group/input">
@@ -246,6 +277,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 													</span>
 													<textarea
 														required
+														id="outletAddress"
 														name="outletAddress"
 														placeholder="Jl. Boulevard Raya Blok M3 No. 45..."
 														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[80px] ring-0 focus:border-indigo-500 focus:bg-white transition-all resize-none"
@@ -253,7 +285,10 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 												</div>
 											</div>
 											<div className="space-y-2 col-span-2">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+												<label
+													htmlFor="franchiseFee"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+												>
 													Franchise Fee / Royalti (%)
 												</label>
 												<div className="relative group/input">
@@ -263,6 +298,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 													<input
 														required
 														type="number"
+														id="franchiseFee"
 														name="franchiseFee"
 														defaultValue="5"
 														min="0"

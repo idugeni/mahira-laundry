@@ -73,6 +73,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 					>
 						{categories.map((cat) => (
 							<button
+								type="button"
 								key={cat}
 								onClick={() => setFilter(cat)}
 								className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${
@@ -116,7 +117,8 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 									sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 									className="object-cover transition-transform duration-700 group-hover:scale-110"
 								/>
-								<div
+								<button
+									type="button"
 									onClick={() => setSelectedItem(item)}
 									className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-8"
 								>
@@ -126,7 +128,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 									<h3 className="text-white font-bold font-[family-name:var(--font-heading)] text-xl">
 										{item.title}
 									</h3>
-								</div>
+								</button>
 							</motion.div>
 						))}
 					</div>
@@ -135,6 +137,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 				{hasMore ? (
 					<div className="mt-16 text-center">
 						<button
+							type="button"
 							onClick={() => setDisplayLimit((prev) => prev + 6)}
 							className="inline-flex items-center gap-2 px-8 py-4 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 transition-all hover:shadow-xl hover:shadow-slate-200"
 						>
@@ -183,6 +186,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							>
 								{/* Close Button */}
 								<button
+									type="button"
 									onClick={() => setSelectedItem(null)}
 									className="absolute top-4 right-4 z-50 w-10 h-10 lg:w-12 lg:h-12 bg-slate-900/10 hover:bg-slate-900/20 text-slate-900 rounded-full flex items-center justify-center transition-all backdrop-blur-sm"
 								>

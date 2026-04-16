@@ -32,7 +32,7 @@ export async function upsertOutlet(data: OutletInput): Promise<ActionResponse> {
 			updated_at: new Date().toISOString(),
 		};
 
-		let result;
+		let result: { error: { message: string } | null };
 		if (data.id) {
 			// Update
 			result = await supabase

@@ -38,7 +38,7 @@ interface OrderClientProps {
 export function OrderClient({
 	initialOutlets,
 	initialServices,
-	user,
+	user: _user,
 }: OrderClientProps) {
 	const router = useRouter();
 	const [orderMode, setOrderMode] = useState<"form" | "whatsapp" | null>(null);
@@ -231,6 +231,7 @@ export function OrderClient({
 						{/* Back Button */}
 						<div className="flex justify-start px-4 max-w-2xl mx-auto">
 							<button
+								type="button"
 								onClick={handleBack}
 								disabled={loading}
 								className="flex items-center gap-2 text-slate-400 font-black hover:text-slate-900 transition-colors uppercase tracking-[2px] text-xs disabled:opacity-50"

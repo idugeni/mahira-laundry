@@ -1,9 +1,9 @@
 "use client";
 
+import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { LogOut } from "lucide-react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { cn } from "@/lib/utils";
 
@@ -124,7 +124,10 @@ function SidebarContent({
 						type="submit"
 						className="group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white transition-all duration-150"
 					>
-						<LogOut size={16} className="group-hover:-translate-x-1 transition-transform" />
+						<LogOut
+							size={16}
+							className="group-hover:-translate-x-1 transition-transform"
+						/>
 						<span>Logout</span>
 					</button>
 				</form>
@@ -168,6 +171,7 @@ export function AdminSidebar({
 						fill="none"
 						stroke="currentColor"
 						viewBox="0 0 24 24"
+						aria-hidden="true"
 					>
 						{mobileOpen ? (
 							<path
@@ -191,8 +195,10 @@ export function AdminSidebar({
 			{/* Mobile Drawer */}
 			{mobileOpen && (
 				<>
-					<div
-						className="lg:hidden fixed inset-0 z-40 bg-black/30 backdrop-blur-sm"
+					<button
+						type="button"
+						aria-label="Tutup menu"
+						className="lg:hidden fixed inset-0 z-40 bg-black/30 backdrop-blur-sm cursor-default"
 						onClick={() => setMobileOpen(false)}
 					/>
 					<aside className="lg:hidden fixed top-0 left-0 bottom-0 z-50 w-72 bg-white shadow-2xl flex flex-col">

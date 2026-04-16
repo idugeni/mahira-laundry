@@ -74,6 +74,7 @@ export function NotificationPopover() {
 		<div className="relative" ref={popoverRef}>
 			{/* Bell Trigger */}
 			<button
+				type="button"
 				onClick={() => setIsOpen(!isOpen)}
 				className={`relative p-2 rounded-xl transition-all ${
 					isOpen
@@ -115,6 +116,7 @@ export function NotificationPopover() {
 									{notifications.map((n) => (
 										<button
 											key={n.id}
+											type="button"
 											onClick={() => handleNotificationClick(n)}
 											className={`w-full text-left p-6 hover:bg-slate-50 transition-colors flex gap-4 group relative ${
 												!n.is_read ? "bg-brand-primary/[0.02]" : ""
@@ -192,6 +194,7 @@ export function NotificationPopover() {
 						>
 							<div className="absolute top-6 right-6">
 								<button
+									type="button"
 									onClick={() => setSelectedNotification(null)}
 									className="w-10 h-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-all"
 								>
@@ -225,6 +228,7 @@ export function NotificationPopover() {
 
 								<div className="mt-12">
 									<button
+										type="button"
 										onClick={() => setSelectedNotification(null)}
 										className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-black hover:bg-brand-primary transition-all shadow-xl shadow-slate-200"
 									>

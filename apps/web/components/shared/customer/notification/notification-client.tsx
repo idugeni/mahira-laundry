@@ -153,6 +153,7 @@ export function NotificationClient() {
 						>
 							<div className="absolute top-6 right-6">
 								<button
+									type="button"
 									onClick={() => setSelectedNotification(null)}
 									className="w-10 h-10 rounded-full bg-slate-100 text-slate-500 flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-all"
 								>
@@ -186,6 +187,7 @@ export function NotificationClient() {
 
 								<div className="mt-12 text-center">
 									<button
+										type="button"
 										onClick={() => setSelectedNotification(null)}
 										className="px-8 py-4 bg-slate-900 text-white rounded-2xl font-black hover:bg-brand-primary transition-all shadow-xl shadow-slate-200"
 									>

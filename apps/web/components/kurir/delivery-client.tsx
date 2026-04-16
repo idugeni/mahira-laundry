@@ -73,6 +73,7 @@ export function DeliveryClient({ initialDeliveries }: DeliveryClientProps) {
 							Peta
 						</a>
 						<button
+							type="button"
 							onClick={() => handleUpdateStatus(delivery.id, "picked_up")}
 							className="px-6 py-3 rounded-xl bg-slate-900 text-white text-xs font-black uppercase tracking-widest hover:bg-brand-primary transition-all shadow-lg shadow-slate-200"
 						>

@@ -127,7 +127,7 @@ export function StatCard({
 							{value}
 						</p>
 					</div>
-					{(subtitle || (trend && trend.label)) && (
+					{(subtitle || trend?.label) && (
 						<p className="text-[10px] font-bold text-slate-400 mt-3 flex items-center gap-2 uppercase tracking-widest truncate">
 							{subtitle || trend?.label}
 						</p>
@@ -137,7 +137,7 @@ export function StatCard({
 
 			{/* Bottom Decorative Pattern */}
 			<div className="absolute bottom-0 right-0 p-3 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity duration-500">
-				<svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor">
+				<svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor" aria-hidden="true">
 					<rect width="40" height="40" rx="8" />
 				</svg>
 			</div>

@@ -254,6 +254,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 						{["Semua", "Aktif", "Selesai", "Batal"].map((f) => (
 							<button
 								key={f}
+								type="button"
 								onClick={() => setFilter(f)}
 								className={`px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${
 									filter === f
@@ -270,6 +271,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 
 					<div className="flex gap-1 p-1 bg-slate-100 rounded-2xl">
 						<button
+							type="button"
 							onClick={() => setViewMode("list")}
 							className={`p-3 rounded-xl transition-all ${viewMode === "list" ? "bg-white text-brand-primary shadow-sm" : "text-slate-400"}`}
 						>
@@ -278,6 +280,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 							</span>
 						</button>
 						<button
+							type="button"
 							onClick={() => setViewMode("grid")}
 							className={`p-3 rounded-xl transition-all ${viewMode === "grid" ? "bg-white text-brand-primary shadow-sm" : "text-slate-400"}`}
 						>
@@ -352,6 +355,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 									>
 										{order.status === "pending" && (
 											<button
+												type="button"
 												onClick={() => setOrderIdToDelete(order.id)}
 												className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shadow-sm active:scale-90"
 												title="Hapus Pesanan"
@@ -395,6 +399,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 							Coba sesuaikan kata kunci pencarian atau filter status Anda.
 						</p>
 						<button
+							type="button"
 							onClick={() => {
 								setSearch("");
 								setFilter("Semua");

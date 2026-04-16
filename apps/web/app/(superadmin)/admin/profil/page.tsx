@@ -1,26 +1,22 @@
-import type { Metadata } from "next";
-import { getUserProfile, createClient } from "@/lib/supabase/server";
-import { cn } from "@/lib/utils";
 import {
-	User,
-	ShieldCheck,
+	AlertCircle,
+	Bell,
+	Camera,
+	Globe,
+	Lock,
+	LogOut,
 	Mail,
 	Phone,
-	MapPin,
-	Calendar,
-	Lock,
-	Bell,
-	Globe,
-	Camera,
 	Settings2,
-	CheckCircle2,
-	AlertCircle,
-	ArrowRight,
-	LogOut,
+	ShieldCheck,
+	User,
 } from "lucide-react";
+import type { Metadata } from "next";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { createClient, getUserProfile } from "@/lib/supabase/server";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Profil Pengguna",
@@ -104,12 +100,16 @@ export default async function SuperadminProfilPage() {
 
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
 							<div className="space-y-3">
-								<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+								<label
+									htmlFor="profil-nama"
+									className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
+								>
 									Nama Lengkap
 								</label>
 								<div className="relative group">
 									<User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-600 transition-colors" />
 									<Input
+										id="profil-nama"
 										defaultValue={profile?.full_name}
 										className="pl-11 pr-4 py-7 bg-slate-50/50 border-slate-50 rounded-2xl font-bold text-sm focus:bg-white transition-all shadow-none"
 									/>
@@ -117,12 +117,16 @@ export default async function SuperadminProfilPage() {
 							</div>
 
 							<div className="space-y-3">
-								<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+								<label
+									htmlFor="profil-email"
+									className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
+								>
 									Email Utama (Read-only)
 								</label>
 								<div className="relative">
 									<Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
 									<Input
+										id="profil-email"
 										disabled
 										defaultValue={authUser?.email || "—"}
 										className="pl-11 pr-4 py-7 bg-slate-100 border-slate-100 rounded-2xl font-bold text-sm grayscale opacity-60 shadow-none cursor-not-allowed"
@@ -131,12 +135,16 @@ export default async function SuperadminProfilPage() {
 							</div>
 
 							<div className="space-y-3">
-								<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+								<label
+									htmlFor="profil-phone"
+									className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
+								>
 									Kontak Person
 								</label>
 								<div className="relative group">
 									<Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
 									<Input
+										id="profil-phone"
 										defaultValue={profile?.phone || "+62 8..."}
 										className="pl-11 pr-4 py-7 bg-slate-50/50 border-slate-50 rounded-2xl font-bold text-sm focus:bg-white transition-all shadow-none"
 									/>
@@ -144,10 +152,16 @@ export default async function SuperadminProfilPage() {
 							</div>
 
 							<div className="space-y-3">
-								<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+								<label
+									htmlFor="profil-timezone"
+									className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
+								>
 									Zona Waktu Sistem
 								</label>
-								<Badge className="w-full justify-center h-14 rounded-2xl bg-indigo-50/50 border-indigo-100/50 text-indigo-600 text-sm font-black tracking-tight shadow-none border">
+								<Badge
+									id="profil-timezone"
+									className="w-full justify-center h-14 rounded-2xl bg-indigo-50/50 border-indigo-100/50 text-indigo-600 text-sm font-black tracking-tight shadow-none border"
+								>
 									Asia/Jakarta (GMT+07:00)
 								</Badge>
 							</div>

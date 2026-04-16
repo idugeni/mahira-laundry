@@ -1,27 +1,24 @@
-﻿import type { Metadata } from "next";
+﻿import {
+	Building2,
+	Clock,
+	Edit,
+	Eye,
+	Phone,
+	Search,
+	Trash2,
+	UserPlus,
+	Users,
+} from "lucide-react";
+import type { Metadata } from "next";
 import { RegisterStaffModal } from "@/components/shared/admin/staff/register-staff-modal";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
 	getOutletsWithStats,
 	getStaffManagementList,
 } from "@/lib/supabase/server";
-import { formatDate, cn } from "@/lib/utils";
-import {
-	Users,
-	UserPlus,
-	Search,
-	MoreVertical,
-	Phone,
-	ShieldCheck,
-	Building2,
-	Clock,
-	Mail,
-	Edit,
-	Trash2,
-	Eye,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { cn, formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Manajemen Pegawai",
@@ -133,7 +130,7 @@ export default async function PegawaiPage() {
 				</div>
 			) : (
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{staff.map((s: any) => (
+					{staff.map((s) => (
 						<div
 							key={s.id}
 							className="group relative bg-white rounded-none sm:rounded-[3rem] border-b sm:border border-slate-100 p-6 sm:p-8 flex flex-col gap-8 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 overflow-hidden h-full"
@@ -207,7 +204,8 @@ export default async function PegawaiPage() {
 										</span>
 									</div>
 									<span className="text-xs font-bold text-slate-700 truncate max-w-[150px]">
-										{s.outlets?.name || "Unassigned"}
+										{(Array.isArray(s.outlets) ? s.outlets[0]?.name : null) ||
+											"Unassigned"}
 									</span>
 								</div>
 

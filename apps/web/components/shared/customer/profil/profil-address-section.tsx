@@ -45,6 +45,7 @@ export function ProfilAddressSection({
 				</h3>
 				{!showAddAddress && (
 					<button
+						type="button"
 						onClick={onShowAddAddress}
 						className="text-[10px] font-black uppercase tracking-widest text-brand-primary hover:bg-brand-primary/5 px-4 py-2 rounded-full transition-all"
 					>
@@ -61,10 +62,11 @@ export function ProfilAddressSection({
 						className="p-8 rounded-[2rem] border-2 border-dashed border-brand-primary/20 bg-brand-primary/5 space-y-4"
 					>
 						<div className="space-y-2">
-							<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+							<label htmlFor="addr-label" className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
 								Label Alamat (Contoh: Rumah, Kantor)
 							</label>
 							<input
+								id="addr-label"
 								type="text"
 								placeholder="Label"
 								value={newAddr.label}
@@ -75,10 +77,11 @@ export function ProfilAddressSection({
 							/>
 						</div>
 						<div className="space-y-2">
-							<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+							<label htmlFor="addr-detail" className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
 								Alamat Lengkap
 							</label>
 							<textarea
+								id="addr-detail"
 								placeholder="Jl. Raya No. 123..."
 								value={newAddr.detail}
 								onChange={(e) =>
@@ -90,6 +93,7 @@ export function ProfilAddressSection({
 						</div>
 						<div className="flex gap-3">
 							<button
+								type="button"
 								onClick={onAddAddress}
 								disabled={loading}
 								className="flex-1 py-3 bg-brand-primary text-white rounded-xl font-bold hover:shadow-lg hover:shadow-brand-primary/20 transition-all disabled:opacity-50"
@@ -97,6 +101,7 @@ export function ProfilAddressSection({
 								{loading ? "Menambah..." : "Simpan Alamat"}
 							</button>
 							<button
+								type="button"
 								onClick={onHideAddAddress}
 								className="px-6 py-3 border border-slate-200 text-slate-400 rounded-xl font-bold hover:bg-white transition-all"
 							>
@@ -110,7 +115,7 @@ export function ProfilAddressSection({
 					<div className="space-y-4">
 						{addresses.map((addr, i) => (
 							<div
-								key={i}
+								key={addr.id ?? `addr-${i}`}
 								className="p-6 rounded-3xl bg-slate-50/30 flex items-center justify-between group hover:bg-white hover:shadow-xl hover:shadow-brand-primary/5 transition-all"
 							>
 								<div className="flex items-center gap-4">
@@ -127,6 +132,7 @@ export function ProfilAddressSection({
 									</div>
 								</div>
 								<button
+									type="button"
 									onClick={() => onDeleteAddress(i)}
 									disabled={loading}
 									className="text-[10px] font-black uppercase tracking-widest text-slate-300 hover:text-red-500 transition-colors disabled:opacity-50"
@@ -143,6 +149,7 @@ export function ProfilAddressSection({
 								Belum ada alamat tersimpan.
 							</p>
 							<button
+								type="button"
 								onClick={onShowAddAddress}
 								className="mt-4 text-xs font-black uppercase tracking-widest text-brand-primary hover:underline"
 							>

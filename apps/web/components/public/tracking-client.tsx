@@ -2,11 +2,16 @@
 
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { trackOrder } from "@/lib/actions/orders";
 import { ORDER_STATUS_COLORS, ORDER_STATUS_LABELS } from "@/lib/constants";
+import type { Order } from "@/lib/types";
 import { formatDateTime, formatIDR } from "@/lib/utils";
+
+type TrackedOrder = Order & {
+	order_status_logs?: Array<{ status: string; notes?: string; created_at: string }>;
+};
 
 export function TrackingClient() {
 	const searchParams = useSearchParams();
@@ -14,18 +19,11 @@ export function TrackingClient() {
 
 	const [query, setQuery] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [order, setOrder] = useState<any>(null);
+	const [order, setOrder] = useState<TrackedOrder | null>(null);
 	const [error, setError] = useState<string | null>(null);
 	const [isScanning, setIsScanning] = useState(false);
 
 	const idParam = searchParams.get("id");
-
-	useEffect(() => {
-		if (idParam) {
-			setQuery(idParam);
-			handleSearch(idParam);
-		}
-	}, [idParam]);
 
 	const handleSearch = async (searchQuery: string) => {
 		if (!searchQuery.trim()) return;
@@ -37,16 +35,24 @@ export function TrackingClient() {
 		try {
 			const res = await trackOrder(searchQuery);
 			if (res.success && res.data) {
-				setOrder(res.data);
+				setOrder(res.data as TrackedOrder);
 			} else {
 				setError(res.error || "Pesanan tidak ditemukan");
 			}
-		} catch (err) {
+		} catch (_err) {
 			setError("Terjadi kesalahan sistem");
 		} finally {
 			setLoading(false);
 		}
 	};
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: handleSearch is stable within component lifecycle
+	useEffect(() => {
+		if (idParam) {
+			setQuery(idParam);
+			handleSearch(idParam);
+		}
+	}, [idParam]);
 
 	const onSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -74,7 +80,7 @@ export function TrackingClient() {
 						if (idFromUrl) {
 							idToSearch = idFromUrl;
 						}
-					} catch (e) {
+					} catch (_e) {
 						// Not a URL, use text directly
 					}
 
@@ -84,7 +90,7 @@ export function TrackingClient() {
 					router.replace(`/lacak?id=${idToSearch}`);
 					toast.success("QR Code berhasil dipindai!");
 				},
-				(error) => {
+				(_error) => {
 					// Ignore scanner frame errors
 				},
 			);
@@ -131,6 +137,7 @@ export function TrackingClient() {
 					<div className="mt-4 p-4 border border-slate-200 rounded-2xl overflow-hidden">
 						<div id="qr-reader" className="w-full"></div>
 						<button
+							type="button"
 							onClick={() => setIsScanning(false)}
 							className="mt-4 w-full py-2 bg-red-50 text-red-600 font-bold rounded-xl"
 						>
@@ -189,15 +196,25 @@ export function TrackingClient() {
 								<span>⏱️</span> Timeline Pesanan
 							</h3>
 							<div className="space-y-6">
-								{order.order_status_logs
+								{(
+									order.order_status_logs as Array<{
+										created_at: string;
+										status: string;
+										notes?: string;
+									}>
+								)
 									?.sort(
-										(a: any, b: any) =>
+										(a, b) =>
 											new Date(b.created_at).getTime() -
 											new Date(a.created_at).getTime(),
 									)
-									.map((log: any, idx: number) => (
-										<div key={idx} className="relative pl-6">
-											{idx !== order.order_status_logs.length - 1 && (
+									.map((log, idx) => (
+										<div
+											key={log.created_at + log.status}
+											className="relative pl-6"
+										>
+											{idx !==
+												(order.order_status_logs as unknown[]).length - 1 && (
 												<div className="absolute left-[9px] top-6 bottom-[-24px] w-px bg-slate-200" />
 											)}
 											<div className="absolute left-0 top-1.5 w-5 h-5 rounded-full bg-emerald-100 border-4 border-white shadow-sm flex items-center justify-center">
@@ -227,8 +244,16 @@ export function TrackingClient() {
 								<span>🧺</span> Rincian Layanan
 							</h3>
 							<div className="space-y-4">
-								{order.order_items?.map((item: any, idx: number) => (
-									<div key={idx} className="flex justify-between items-start">
+								{(
+									order.order_items as Array<{
+										service_name: string;
+										quantity: number;
+										unit?: string;
+										is_express?: boolean;
+										subtotal: number;
+									}>
+								)?.map((item) => (
+									<div key={item.service_name} className="flex justify-between items-start">
 										<div className="pr-4">
 											<p className="font-bold text-sm text-slate-900">
 												{item.service_name}

@@ -5,7 +5,7 @@
 /**
  * Converts JSON data to CSV and triggers browser download
  */
-export function exportToCSV(data: any[], filename: string) {
+export function exportToCSV(data: Record<string, unknown>[], filename: string) {
 	if (data.length === 0) return;
 
 	// 1. Get headers

@@ -1,36 +1,34 @@
 ﻿"use client";
 
+import {
+	Clock,
+	Edit3,
+	Layers,
+	LayoutGrid,
+	Package,
+	Plus,
+	Search,
+	Sparkles,
+	Trash2,
+	Zap,
+} from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ServiceModal } from "@/components/shared/admin/services/service-modal";
-import { formatIDR, cn } from "@/lib/utils";
-import {
-	Plus,
-	Edit3,
-	Zap,
-	Clock,
-	Settings2,
-	Search,
-	LayoutGrid,
-	Layers,
-	Sparkles,
-	Package,
-	Trash2,
-	Eye,
-} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import type { Service } from "@/lib/types";
+import { cn, formatIDR } from "@/lib/utils";
 
 interface ServiceManagerProps {
-	services: any[];
+	services: Service[];
 	outletId: string;
 }
 
 export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const [selectedService, setSelectedService] = useState<any>(null);
+	const [selectedService, setSelectedService] = useState<Service | null>(null);
 	const [isDetailOpen, setIsDetailOpen] = useState(false);
 
 	// Sync state with URL
@@ -162,7 +160,7 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 									<Button
 										variant="ghost"
 										className="w-10 h-10 p-0 rounded-xl hover:bg-indigo-50 text-slate-300 hover:text-indigo-600 transition-all"
-										onClick={() => handleServiceClick(service.slug)}
+										onClick={() => handleServiceClick(service.slug ?? service.id)}
 									>
 										<Edit3 size={18} />
 									</Button>

@@ -251,7 +251,8 @@ export default async function SuperadminDashboardPage() {
 												<p className="text-xs font-bold text-slate-800">
 													{Array.isArray(order.profiles)
 														? order.profiles[0]?.full_name || "Guest"
-														: (order.profiles as any)?.full_name || "Guest"}
+														: (order.profiles as { full_name?: string } | null)
+																?.full_name || "Guest"}
 												</p>
 											</td>
 											<td className="px-6 py-3.5">
@@ -295,7 +296,8 @@ export default async function SuperadminDashboardPage() {
 										<span className="font-bold text-slate-900">
 											{Array.isArray(log.profiles)
 												? log.profiles[0]?.full_name
-												: (log.profiles as any)?.full_name || "System"}
+												: (log.profiles as { full_name?: string } | null)
+														?.full_name || "System"}
 										</span>{" "}
 										{log.action.toLowerCase().replace("_", " ")}
 										{" pada "}

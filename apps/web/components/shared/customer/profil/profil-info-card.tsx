@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { HiOutlineCamera, HiOutlineCheckBadge } from "react-icons/hi2";
 
@@ -34,12 +35,14 @@ export function ProfilInfoCard({
 
 				<div className="relative mt-4 mb-6 group/avatar">
 					<div className="w-24 h-24 rounded-3xl bg-white shadow-xl flex items-center justify-center mx-auto text-4xl border-4 border-white overflow-hidden relative">
-						<img
+						<Image
 							src={
 								profile.avatar_url ||
 								`https://ui-avatars.com/api/?name=${encodeURIComponent(profile.full_name)}&background=0f2a1e&color=fff&size=128`
 							}
 							alt={profile.full_name}
+							width={96}
+							height={96}
 							className="w-full h-full object-cover"
 						/>
 						<label className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/avatar:opacity-100 flex items-center justify-center transition-opacity cursor-pointer">

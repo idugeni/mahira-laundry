@@ -22,20 +22,26 @@ export default function ShiftPage() {
 							{day}
 						</div>
 					))}
-					{Array.from({ length: 28 }).map((_, i) => (
+					{Array.from({ length: 28 }, (_, i) => i + 1).map((day) => (
 						<div
-							key={i}
+							key={day}
 							className="aspect-square rounded-lg border border-border flex items-center justify-center text-sm hover:bg-muted cursor-pointer transition-colors"
 						>
-							{i + 1}
+							{day}
 						</div>
 					))}
 				</div>
 				<div className="flex gap-4 mt-4 pt-4 border-t border-border">
-					<button className="flex-1 py-2.5 rounded-lg bg-green-500 text-white text-sm font-semibold">
+					<button
+						type="button"
+						className="flex-1 py-2.5 rounded-lg bg-green-500 text-white text-sm font-semibold"
+					>
 						🟢 Clock In
 					</button>
-					<button className="flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold text-muted-foreground">
+					<button
+						type="button"
+						className="flex-1 py-2.5 rounded-lg border border-border text-sm font-semibold text-muted-foreground"
+					>
 						🔴 Clock Out
 					</button>
 				</div>

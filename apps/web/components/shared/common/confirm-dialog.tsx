@@ -25,7 +25,12 @@ export function ConfirmDialog({
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center">
-			<div className="fixed inset-0 bg-black/50" onClick={onClose} />
+			<button
+				type="button"
+				aria-label="Tutup dialog"
+				className="fixed inset-0 bg-black/50 cursor-default"
+				onClick={onClose}
+			/>
 			<div className="relative bg-white rounded-2xl shadow-xl max-w-md w-full mx-4 p-6">
 				<h3 className="text-lg font-semibold font-[family-name:var(--font-heading)]">
 					{title}
@@ -33,12 +38,14 @@ export function ConfirmDialog({
 				<p className="mt-2 text-sm text-muted-foreground">{description}</p>
 				<div className="mt-6 flex gap-3 justify-end">
 					<button
+						type="button"
 						onClick={onClose}
 						className="px-4 py-2 text-sm rounded-lg border border-border hover:bg-muted transition-colors"
 					>
 						{cancelText}
 					</button>
 					<button
+						type="button"
 						onClick={() => {
 							onConfirm();
 							onClose();

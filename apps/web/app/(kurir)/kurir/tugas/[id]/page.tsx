@@ -17,7 +17,7 @@ export default async function TugasDetailPage({
 }: {
 	params: Promise<{ id: string }>;
 }) {
-	const { id } = await params;
+	const { id: _id } = await params;
 	return (
 		<div className="max-w-2xl space-y-6">
 			<h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">
@@ -46,10 +46,16 @@ export default async function TugasDetailPage({
 					</p>
 				</div>
 				<div className="flex gap-3 pt-4 border-t border-border">
-					<button className="flex-1 py-2.5 rounded-lg border border-border text-sm font-medium">
+					<button
+						type="button"
+						className="flex-1 py-2.5 rounded-lg border border-border text-sm font-medium"
+					>
 						📷 Upload Foto
 					</button>
-					<button className="flex-1 py-2.5 rounded-lg bg-brand-primary text-white text-sm font-medium">
+					<button
+						type="button"
+						className="flex-1 py-2.5 rounded-lg bg-brand-primary text-white text-sm font-medium"
+					>
 						✅ Selesaikan
 					</button>
 				</div>

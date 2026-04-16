@@ -110,6 +110,7 @@ export function MahiraHeader() {
 
 					{/* Mobile Toggle */}
 					<button
+						type="button"
 						onClick={() => setIsOpen(!isOpen)}
 						className="lg:hidden w-10 h-10 flex items-center justify-center text-slate-900 rounded-full hover:bg-slate-50 transition-colors ring-1 ring-slate-100"
 					>

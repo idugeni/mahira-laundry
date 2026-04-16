@@ -37,6 +37,7 @@ export async function upsertInventory(
 			updated_at: new Date().toISOString(),
 		};
 
+		// biome-ignore lint/suspicious/noImplicitAnyLet: result is assigned in both branches
 		let result;
 		if (data.id) {
 			// Get prev qty for log
@@ -90,9 +91,9 @@ export async function upsertInventory(
 		revalidatePath("/admin/inventori");
 		revalidatePath("/manager");
 		return { success: true };
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Inventory action failed:", error);
-		return { success: false, error: error.message };
+		return { success: false, error: (error as Error).message };
 	}
 }
 
@@ -105,9 +106,9 @@ export async function deleteInventory(id: string): Promise<ActionResponse> {
 		revalidatePath("/inventori");
 		revalidatePath("/admin/inventori");
 		return { success: true };
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Delete inventory failed:", error);
-		return { success: false, error: error.message };
+		return { success: false, error: (error as Error).message };
 	}
 }
 
@@ -159,9 +160,9 @@ export async function restockInventory(
 		revalidatePath("/inventori");
 		revalidatePath("/admin/inventori");
 		return { success: true };
-	} catch (error: any) {
+	} catch (error) {
 		console.error("Restock inventory failed:", error);
-		return { success: false, error: error.message };
+		return { success: false, error: (error as Error).message };
 	}
 }
 
@@ -211,8 +212,8 @@ export async function adjustStock(
 		revalidatePath("/inventori");
 		revalidatePath("/admin/inventori");
 		return { success: true };
-	} catch (error: any) {
-		return { success: false, error: error.message };
+	} catch (error) {
+		return { success: false, error: (error as Error).message };
 	}
 }
 
@@ -255,6 +256,7 @@ export async function transferInventory(data: {
 			.eq("sku", source.sku)
 			.limit(1);
 
+		// biome-ignore lint/suspicious/noImplicitAnyLet: targetId is assigned in both branches
 		let targetId;
 		if (targetItems && targetItems.length > 0) {
 			targetId = targetItems[0].id;
@@ -309,7 +311,7 @@ export async function transferInventory(data: {
 		revalidatePath("/inventori");
 		revalidatePath("/admin/inventori");
 		return { success: true };
-	} catch (error: any) {
-		return { success: false, error: error.message };
+	} catch (error) {
+		return { success: false, error: (error as Error).message };
 	}
 }

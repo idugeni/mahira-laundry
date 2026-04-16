@@ -1,25 +1,24 @@
-﻿import type { Metadata } from "next";
-import { OutletModal } from "@/components/shared/admin/outlet/outlet-modal";
-import { getOutletsWithStats } from "@/lib/supabase/server";
-import { formatCompact, formatIDR, cn } from "@/lib/utils";
-import { StatCard } from "@/components/shared/common/stat-card";
-import {
+﻿import {
 	Building2,
-	CheckCircle2,
-	Users2,
-	Package,
-	MapPin,
-	Phone,
 	Clock,
-	Edit3,
-	Plus,
-	ArrowUpRight,
-	TrendingUp,
-	Globe,
 	CreditCard,
+	Edit3,
+	Globe,
+	MapPin,
+	Package,
+	Phone,
+	Plus,
+	TrendingUp,
+	Users2,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import type { Metadata } from "next";
+import Image from "next/image";
+import { OutletModal } from "@/components/shared/admin/outlet/outlet-modal";
+import { StatCard } from "@/components/shared/common/stat-card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { getOutletsWithStats } from "@/lib/supabase/server";
+import { cn, formatCompact, formatIDR } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Kelola Outlet",
@@ -136,9 +135,11 @@ export default async function OutletPage() {
 									<div className="relative">
 										<div className="w-20 h-20 rounded-[1.5rem] bg-gradient-to-br from-indigo-50 to-indigo-100/50 overflow-hidden flex items-center justify-center text-indigo-600 font-black text-2xl border-2 border-white shadow-xl transition-transform duration-700 group-hover:scale-105">
 											{outlet.image_url ? (
-												<img
+												<Image
 													src={outlet.image_url}
 													alt={outlet.name}
+													width={80}
+													height={80}
 													className="w-full h-full object-cover"
 												/>
 											) : (

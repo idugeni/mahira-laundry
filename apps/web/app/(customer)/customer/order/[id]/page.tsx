@@ -124,8 +124,11 @@ export default async function OrderDetailPage({
 						Tracking Status
 					</h3>
 					<div className="space-y-6 relative before:absolute before:left-[5px] before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-50">
-						{getTimeline().map((item, i) => (
-							<div key={i} className="flex items-start gap-6 relative">
+						{getTimeline().map((item) => (
+							<div
+								key={item.status}
+								className="flex items-start gap-6 relative"
+							>
 								<div
 									className={`w-3 h-3 rounded-full mt-1.5 z-10 ${item.done ? "bg-brand-primary shadow-[0_0_0_4px_rgba(26,107,74,0.1)]" : "bg-slate-200"}`}
 								/>

@@ -209,6 +209,7 @@ export function LoyaltyClient({
 									{profile.referral_code || "MHR-UNSET"}
 								</div>
 								<button
+									type="button"
 									onClick={() => {
 										const url = `${window.location.origin}/register?ref=${profile.referral_code}`;
 										navigator.clipboard.writeText(url);
@@ -280,6 +281,7 @@ export function LoyaltyClient({
 								</div>
 
 								<button
+									type="button"
 									onClick={() => handleRedeem(r.id)}
 									disabled={profile.loyalty_points < r.points_cost || !!loading}
 									className="w-full mt-10 py-4 rounded-2xl bg-slate-900 text-white text-xs font-black uppercase tracking-[3px] transition-all hover:bg-emerald-500 shadow-xl shadow-slate-100 disabled:bg-slate-100 disabled:text-slate-300 disabled:shadow-none active:scale-95"

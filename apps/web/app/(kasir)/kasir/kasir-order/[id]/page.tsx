@@ -17,7 +17,7 @@ export default async function KasirOrderDetailPage({
 }: {
 	params: Promise<{ id: string }>;
 }) {
-	const { id } = await params;
+	const { id: _id } = await params;
 	return (
 		<div className="max-w-3xl space-y-6">
 			<h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">

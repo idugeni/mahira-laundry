@@ -101,6 +101,7 @@ export function ServiceDetailModal({
 
 							{/* Close Button Inside Header (Mobile Only) */}
 							<button
+								type="button"
 								onClick={onClose}
 								className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex md:hidden items-center justify-center text-white active:scale-90 transition-all"
 							>
@@ -112,6 +113,7 @@ export function ServiceDetailModal({
 						<div className="relative w-full md:w-[72%] bg-white flex flex-col h-full overflow-hidden">
 							{/* Close Button (Desktop Only) - Subtle */}
 							<button
+								type="button"
 								onClick={onClose}
 								className="absolute top-6 right-6 z-20 w-9 h-9 rounded-full bg-slate-50 hidden md:flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all active:scale-90"
 							>
@@ -173,9 +175,9 @@ export function ServiceDetailModal({
 														"Parfum Signature",
 														"Kemasan Eksklusif",
 													]
-											).map((feat, i) => (
+											).map((feat) => (
 												<li
-													key={i}
+													key={feat}
 													className="flex items-center gap-2.5 text-[11px] font-bold text-slate-600"
 												>
 													<span className="text-brand-primary shrink-0">

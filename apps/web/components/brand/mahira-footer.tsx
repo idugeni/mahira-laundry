@@ -7,7 +7,17 @@ import { HiOutlineMapPin, HiOutlinePhone } from "react-icons/hi2";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 import { MahiraLogo } from "./mahira-logo";
 
-export function MahiraFooter({ services = [] }: { services?: any[] }) {
+interface FooterService {
+	name: string;
+	slug?: string;
+	id?: string;
+}
+
+export function MahiraFooter({
+	services = [],
+}: {
+	services?: FooterService[];
+}) {
 	const displayServices = services.map((s) => ({
 		name: s.name,
 		path: `/layanan?s=${s.slug || s.id}`,
@@ -34,22 +44,26 @@ export function MahiraFooter({ services = [] }: { services?: any[] }) {
 									icon: <FaWhatsapp />,
 									href: `https://api.whatsapp.com/send?phone=${PRIMARY_OUTLET.whatsapp}`,
 									color: "hover:bg-[#25D366]",
+									label: "WhatsApp",
 								},
 								{
 									icon: <FaInstagram />,
 									href: "#",
 									color: "hover:bg-[#E4405F]",
+									label: "Instagram",
 								},
 								{
 									icon: <FaFacebookF />,
 									href: "#",
 									color: "hover:bg-[#1877F2]",
+									label: "Facebook",
 								},
-							].map((social, i) => (
+							].map((social) => (
 								<motion.a
-									key={i}
+									key={social.label}
 									whileHover={{ y: -3 }}
 									href={social.href}
+									aria-label={social.label}
 									className={`w-9 h-9 rounded-full bg-white/5 flex items-center justify-center transition-colors ${social.color}`}
 								>
 									<span className="w-4 h-4 flex items-center justify-center">
@@ -70,8 +84,8 @@ export function MahiraFooter({ services = [] }: { services?: any[] }) {
 							Layanan Kami
 						</h4>
 						<ul className="space-y-3 text-sm text-white/60">
-							{displayServices.map((service, idx) => (
-								<li key={idx}>
+							{displayServices.map((service) => (
+								<li key={service.path}>
 									<Link
 										href={service.path}
 										className="hover:text-brand-accent transition-colors"

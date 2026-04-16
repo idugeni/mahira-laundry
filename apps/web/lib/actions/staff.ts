@@ -161,8 +161,9 @@ export async function getStaffPerformance(
 		});
 
 		return { success: true, data: stats };
-	} catch (error: any) {
-		return { success: false, error: error.message };
+	} catch (error) {
+		const err = error as Error;
+		return { success: false, error: err.message };
 	}
 }
 
@@ -234,7 +235,8 @@ export async function getStaffLeaderboard(month: number, year: number) {
 			.sort((a, b) => b.washed + b.ironed - (a.washed + a.ironed));
 
 		return { success: true, data: result };
-	} catch (error: any) {
-		return { success: false, error: error.message };
+	} catch (error) {
+		const err = error as Error;
+		return { success: false, error: err.message };
 	}
 }

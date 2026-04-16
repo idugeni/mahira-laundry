@@ -9,7 +9,6 @@ import {
 	Phone,
 	Save,
 	ShieldCheck,
-	Sparkles,
 	Trash2,
 	User,
 	UserPlus,
@@ -27,11 +26,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
+import type { RegisterStaffInput } from "@/lib/actions/staff";
 import { deleteStaffMember, registerStaffMember } from "@/lib/actions/staff";
-import type { Outlet } from "@/lib/types";
+import type { Outlet, Profile } from "@/lib/types";
 
 interface RegisterStaffModalProps {
-	staff?: any;
+	staff?: Profile;
 	outlets: Outlet[];
 	trigger?: React.ReactNode;
 }
@@ -54,7 +54,11 @@ export function RegisterStaffModal({
 
 	async function handleDelete() {
 		if (!staff) return;
-		if (!confirm(`Hapus akses ${staff.full_name || "staf ini"} dari sistem secara permanen?`))
+		if (
+			!confirm(
+				`Hapus akses ${staff.full_name || "staf ini"} dari sistem secara permanen?`,
+			)
+		)
 			return;
 		setIsLoading(true);
 		const result = await deleteStaffMember(staff.id);
@@ -78,7 +82,7 @@ export function RegisterStaffModal({
 			fullName: formData.get("fullName") as string,
 			email: formData.get("email") as string,
 			phone: formData.get("phone") as string,
-			role: role as any,
+			role: role as RegisterStaffInput["role"],
 			outletId: outletId,
 			password: (formData.get("password") as string) || undefined,
 		};
@@ -103,19 +107,24 @@ export function RegisterStaffModal({
 
 	return (
 		<>
-			<div onClick={() => setIsOpen(true)}>
+			<button
+				type="button"
+				onClick={() => setIsOpen(true)}
+				className="contents"
+			>
 				{trigger || (
 					<Button className="bg-white text-slate-900 hover:bg-emerald-400 hover:text-white rounded-2xl px-8 h-14 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-white/5 flex items-center gap-3">
 						<UserPlus size={18} /> Registrasi Staf
 					</Button>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
 				createPortal(
 					<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
-						<div
+						<button
+							type="button"
 							className="fixed inset-0 bg-slate-900/40 backdrop-blur-xl animate-in fade-in duration-300"
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
@@ -139,6 +148,7 @@ export function RegisterStaffModal({
 										</p>
 									</div>
 									<button
+										type="button"
 										onClick={() => setIsOpen(false)}
 										className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-500"
 									>
@@ -157,13 +167,14 @@ export function RegisterStaffModal({
 									)}
 
 									<div className="space-y-2">
-										<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+										<label htmlFor="staff-fullname" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
 											Nama Lengkap Tim
 										</label>
 										<div className="relative group/input">
 											<User className="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-400 w-5 h-5" />
 											<input
 												required
+												id="staff-fullname"
 												name="fullName"
 												defaultValue={staff?.full_name}
 												placeholder="Contoh: Muhammad Rafli"
@@ -174,7 +185,7 @@ export function RegisterStaffModal({
 
 									<div className="grid grid-cols-2 gap-6">
 										<div className="space-y-2">
-											<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label htmlFor="staff-email" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
 												Email Corporate
 											</label>
 											<div className="relative group/input">
@@ -182,23 +193,25 @@ export function RegisterStaffModal({
 												<input
 													required
 													type="email"
+													id="staff-email"
 													name="email"
-													defaultValue={staff?.email} // Note: This might need careful handling if email changes
+													defaultValue={staff?.email ?? ""} // Note: This might need careful handling if email changes
 													placeholder="staf@mahira.id"
 													className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
 												/>
 											</div>
 										</div>
 										<div className="space-y-2">
-											<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label htmlFor="staff-phone" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
 												Koneksi WhatsApp
 											</label>
 											<div className="relative group/input">
 												<Phone className="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-400 w-5 h-5" />
 												<input
 													required
+													id="staff-phone"
 													name="phone"
-													defaultValue={staff?.phone}
+													defaultValue={staff?.phone ?? ""}
 													placeholder="0812..."
 													className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
 												/>
@@ -208,9 +221,9 @@ export function RegisterStaffModal({
 
 									<div className="grid grid-cols-2 gap-6">
 										<div className="space-y-2">
-											<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
 												Otoritas Peran
-											</label>
+											</p>
 											<Select value={role} onValueChange={setRole}>
 												<SelectTrigger className="px-5 h-16 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white font-bold text-sm transition-all shadow-none">
 													<div className="flex items-center gap-3">
@@ -241,9 +254,9 @@ export function RegisterStaffModal({
 											</Select>
 										</div>
 										<div className="space-y-2">
-											<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
 												Penempatan Unit
-											</label>
+											</p>
 											<Select value={outletId} onValueChange={setOutletId}>
 												<SelectTrigger className="px-5 h-16 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white font-bold text-sm transition-all shadow-none">
 													<div className="flex items-center gap-3">
@@ -268,7 +281,7 @@ export function RegisterStaffModal({
 
 									<div className="space-y-2">
 										<div className="flex items-center justify-between mx-1">
-											<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+											<label htmlFor="staff-password" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
 												Security Password
 											</label>
 											{!staff && (
@@ -280,6 +293,7 @@ export function RegisterStaffModal({
 										<div className="relative group/input">
 											<Lock className="absolute left-5 top-1/2 -translate-y-1/2 text-emerald-400 w-5 h-5" />
 											<input
+												id="staff-password"
 												type="password"
 												name="password"
 												placeholder={

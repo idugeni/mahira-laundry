@@ -63,8 +63,11 @@ export default function AdminNotificationPage() {
 				<div className="lg:col-span-2 bg-card border rounded-3xl p-8 shadow-sm">
 					<form onSubmit={handleSubmit} className="space-y-6">
 						<div className="space-y-2">
-							<label className="text-sm font-medium">Judul Notifikasi</label>
+							<label htmlFor="notif-title" className="text-sm font-medium">
+								Judul Notifikasi
+							</label>
 							<input
+								id="notif-title"
 								type="text"
 								placeholder="Contoh: Promo Ramadhan Berkah ✨"
 								className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
@@ -76,8 +79,11 @@ export default function AdminNotificationPage() {
 						</div>
 
 						<div className="space-y-2">
-							<label className="text-sm font-medium">Isi Pesan</label>
+							<label htmlFor="notif-body" className="text-sm font-medium">
+								Isi Pesan
+							</label>
 							<textarea
+								id="notif-body"
 								rows={5}
 								placeholder="Tulis pesan lengkap Anda di sini..."
 								className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all resize-none"
@@ -90,12 +96,18 @@ export default function AdminNotificationPage() {
 
 						<div className="grid grid-cols-2 gap-4">
 							<div className="space-y-2">
-								<label className="text-sm font-medium">Tipe</label>
+								<label htmlFor="notif-type" className="text-sm font-medium">
+									Tipe
+								</label>
 								<select
+									id="notif-type"
 									className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
 									value={formData.type}
 									onChange={(e) =>
-										setFormData({ ...formData, type: e.target.value as any })
+										setFormData({
+											...formData,
+											type: e.target.value as "promotion" | "system",
+										})
 									}
 								>
 									<option value="promotion">Promosi / Diskon</option>
@@ -103,8 +115,11 @@ export default function AdminNotificationPage() {
 								</select>
 							</div>
 							<div className="space-y-2">
-								<label className="text-sm font-medium">Target Pengguna</label>
+								<label htmlFor="notif-target" className="text-sm font-medium">
+									Target Pengguna
+								</label>
 								<select
+									id="notif-target"
 									className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
 									value={formData.targetRole}
 									onChange={(e) =>
@@ -120,6 +135,7 @@ export default function AdminNotificationPage() {
 						</div>
 
 						<button
+							type="submit"
 							disabled={loading}
 							className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-emerald-500/20 disabled:opacity-50"
 						>

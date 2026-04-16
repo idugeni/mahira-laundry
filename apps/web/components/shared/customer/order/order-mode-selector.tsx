@@ -26,6 +26,7 @@ export function OrderModeSelector({
 		>
 			{/* Mode Form Mandiri */}
 			<button
+				type="button"
 				onClick={onSelectForm}
 				className="group relative flex flex-col items-center text-center p-8 bg-white rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 transition-all hover:border-brand-primary active:scale-95 overflow-hidden"
 			>
@@ -51,6 +52,7 @@ export function OrderModeSelector({
 
 			{/* Mode WhatsApp */}
 			<button
+				type="button"
 				onClick={onSelectWhatsapp}
 				className="group relative flex flex-col items-center text-center p-8 bg-white rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 transition-all hover:border-emerald-500 active:scale-95 overflow-hidden"
 			>

@@ -39,10 +39,14 @@ export function OrderDetailStep({
 			>
 				<div className="space-y-6">
 					<div className="space-y-3">
-						<label className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] flex items-center gap-2 italic">
+						<label
+							htmlFor="order-pickup-address"
+							className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] flex items-center gap-2 italic"
+						>
 							Alamat Penjemputan
 						</label>
 						<textarea
+							id="order-pickup-address"
 							value={pickupAddress}
 							onChange={(e) => onAddressChange(e.target.value)}
 							rows={3}
@@ -52,10 +56,14 @@ export function OrderDetailStep({
 					</div>
 					<div className="grid grid-cols-2 gap-4">
 						<div className="space-y-3">
-							<label className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] italic">
+							<label
+								htmlFor="order-pickup-date"
+								className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] italic"
+							>
 								Tanggal
 							</label>
 							<input
+								id="order-pickup-date"
 								type="date"
 								value={pickupDate}
 								onChange={(e) => onDateChange(e.target.value)}
@@ -63,9 +71,9 @@ export function OrderDetailStep({
 							/>
 						</div>
 						<div className="space-y-3">
-							<label className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] italic">
+							<p className="text-[10px] font-black text-slate-400 uppercase tracking-[2px] italic">
 								Waktu
-							</label>
+							</p>
 							<Select value={pickupTime} onValueChange={onTimeChange}>
 								<SelectTrigger className="w-full h-[68px] px-6 bg-white border border-slate-100 rounded-[30px] font-bold outline-none focus:ring-brand-primary/20 transition-all shadow-sm">
 									<SelectValue placeholder="Pilih Waktu" />
@@ -95,6 +103,7 @@ export function OrderDetailStep({
 					</div>
 				</div>
 				<button
+					type="button"
 					onClick={onNext}
 					disabled={!pickupAddress || !pickupDate}
 					className="w-full py-6 bg-brand-primary text-white rounded-[32px] font-black text-xl shadow-2xl shadow-brand-primary/30 transition-all hover:scale-[1.02] disabled:opacity-50"

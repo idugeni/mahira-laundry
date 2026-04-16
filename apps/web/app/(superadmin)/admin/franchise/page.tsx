@@ -1,25 +1,22 @@
-﻿import type { Metadata } from "next";
-import { MitraModal } from "@/components/shared/admin/mitra/mitra-modal";
-import { getOutletsWithStats } from "@/lib/supabase/server";
-import { formatCompact, formatIDR, cn } from "@/lib/utils";
-import {
-	Handshake,
+﻿import {
+	ArrowUpRight,
+	Briefcase,
 	Building2,
 	Coins,
 	FileText,
-	Search,
-	Plus,
 	Globe,
-	TrendingUp,
-	CheckCircle2,
-	Clock,
-	ArrowUpRight,
-	Briefcase,
+	Handshake,
+	Plus,
 	ShieldCheck,
 } from "lucide-react";
+import type { Metadata } from "next";
+import Image from "next/image";
+import { MitraModal } from "@/components/shared/admin/mitra/mitra-modal";
+import { StatCard } from "@/components/shared/common/stat-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { StatCard } from "@/components/shared/common/stat-card";
+import { getOutletsWithStats } from "@/lib/supabase/server";
+import { cn, formatCompact, formatIDR } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Franchise Portal",
@@ -170,9 +167,11 @@ export default async function FranchisePage() {
 										<div className="flex items-center gap-4">
 											<div className="w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-2xl border-2 border-white shadow-lg transition-transform duration-700 group-hover:scale-105 group-hover:rotate-3 overflow-hidden">
 												{outlet.image_url ? (
-													<img
+													<Image
 														src={outlet.image_url}
 														alt={outlet.name}
+														width={64}
+														height={64}
 														className="w-full h-full object-cover"
 													/>
 												) : (

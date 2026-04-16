@@ -1,9 +1,9 @@
+import { Globe, Layers } from "lucide-react";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ServiceManager } from "@/components/admin/service-manager";
-import { getAllServices, getUserProfile } from "@/lib/supabase/server";
-import { Sparkles, LayoutGrid, Layers, Globe } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { getAllServices, getUserProfile } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
 	title: "Pusat Layanan",

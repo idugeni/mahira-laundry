@@ -7,8 +7,6 @@ import {
 	Edit3,
 	Image as ImageIcon,
 	Plus,
-	Save,
-	Search,
 	Trash2,
 	X,
 } from "lucide-react";
@@ -166,8 +164,8 @@ export function AdminGalleryClient({
 							Arsip <span className="text-indigo-400 italic">Visual</span>
 						</h1>
 						<p className="text-slate-400 font-bold text-xs sm:text-sm lg:text-base max-w-2xl leading-relaxed">
-							Etalase digital kualitas Mahira Laundry. Kelola standar visual
-							dan dokumentasi fasilitas.
+							Etalase digital kualitas Mahira Laundry. Kelola standar visual dan
+							dokumentasi fasilitas.
 						</p>
 					</div>
 
@@ -204,10 +202,11 @@ export function AdminGalleryClient({
 
 							<div className="space-y-4 sm:space-y-6">
 								<div className="space-y-2">
-									<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+									<label htmlFor="gallery-title" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
 										Deskripsi Aset
 									</label>
 									<Input
+										id="gallery-title"
 										name="title"
 										required
 										placeholder="Judul visual (e.g. Lobby Sultan)"
@@ -216,12 +215,12 @@ export function AdminGalleryClient({
 								</div>
 
 								<div className="space-y-2">
-									<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+									<label htmlFor="gallery-category" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
 										Klasifikasi
 									</label>
 									<input type="hidden" name="category" value={category} />
 									<Select value={category} onValueChange={setCategory}>
-										<SelectTrigger className="px-5 h-12 sm:h-14 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white font-bold text-sm transition-all">
+										<SelectTrigger id="gallery-category" className="px-5 h-12 sm:h-14 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white font-bold text-sm transition-all">
 											<SelectValue placeholder="Pilih Kategori" />
 										</SelectTrigger>
 										<SelectContent className="rounded-3xl border-slate-100 shadow-2xl p-2">
@@ -239,9 +238,9 @@ export function AdminGalleryClient({
 								</div>
 
 								<div className="space-y-2">
-									<label className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+									<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
 										Source Media
-									</label>
+									</p>
 									<div className="relative aspect-video rounded-2xl sm:rounded-3xl border-4 border-dashed border-slate-50 overflow-hidden group/upload hover:border-indigo-100 transition-all cursor-pointer bg-slate-50/50 flex flex-col items-center justify-center gap-4">
 										{preview ? (
 											<Image

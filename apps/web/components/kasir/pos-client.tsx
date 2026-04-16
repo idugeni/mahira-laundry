@@ -473,24 +473,28 @@ export function POSClient({
 
 				<div className="flex flex-wrap items-center justify-center gap-3 print:hidden">
 					<button
+						type="button"
 						onClick={() => setReceiptData(null)}
 						className="px-6 py-3 rounded-2xl bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition-colors"
 					>
 						+ Order Baru
 					</button>
 					<button
+						type="button"
 						onClick={handlePrintReceipt}
 						className="px-6 py-3 rounded-2xl bg-brand-primary text-white font-bold hover:bg-brand-primary/90 transition-colors shadow-lg shadow-brand-primary/20 flex items-center gap-2"
 					>
 						<Receipt className="w-5 h-5" /> Cetak Langsung
 					</button>
 					<button
+						type="button"
 						onClick={handleDownloadPNG}
 						className="px-6 py-3 rounded-2xl border border-slate-200 bg-white text-slate-700 font-bold hover:bg-slate-50 transition-colors flex items-center gap-2"
 					>
 						🖼️ PNG
 					</button>
 					<button
+						type="button"
 						onClick={handleDownloadPDF}
 						className="px-6 py-3 rounded-2xl border border-slate-200 bg-white text-slate-700 font-bold hover:bg-slate-50 transition-colors flex items-center gap-2"
 					>
@@ -531,6 +535,7 @@ export function POSClient({
 								{searchResults.map((c) => (
 									<button
 										key={c.id}
+										type="button"
 										onClick={() => {
 											setSelectedCustomer(c);
 											setCustomerSearch(c.full_name);
@@ -649,10 +654,14 @@ export function POSClient({
 											{/* Baris 1: Nama / Search */}
 											{isPureManual ? (
 												<div className="space-y-3">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
+													<label
+														htmlFor="pos-custom-service-name"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+													>
 														Nama Layanan Custom
 													</label>
 													<Input
+														id="pos-custom-service-name"
 														required
 														type="text"
 														placeholder="Cth: Cuci Boneka Besar..."
@@ -663,11 +672,15 @@ export function POSClient({
 												</div>
 											) : (
 												<div className="relative space-y-3">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
+													<label
+														htmlFor="pos-service-select"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+													>
 														Pilih Layanan / Jenis Barang
 													</label>
 													<div className="relative">
 														<Input
+															id="pos-service-select"
 															type="text"
 															placeholder="Ketik nama layanan..."
 															value={quickSearch}
@@ -713,11 +726,15 @@ export function POSClient({
 												className={`grid gap-4 ${isPureManual ? "md:grid-cols-3" : "grid-cols-2"}`}
 											>
 												<div className="space-y-3">
-													<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
+													<label
+														htmlFor="pos-quantity"
+														className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+													>
 														Berat / Qty
 													</label>
 													<div className="relative">
 														<Input
+															id="pos-quantity"
 															ref={qtyInputRef}
 															required
 															type="text"
@@ -746,14 +763,20 @@ export function POSClient({
 												{isPureManual ? (
 													<>
 														<div className="space-y-3">
-															<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
+															<label
+																htmlFor="pos-unit-select"
+																className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+															>
 																Satuan
 															</label>
 															<Select
 																value={manualUnit}
 																onValueChange={setManualUnit}
 															>
-																<SelectTrigger className="w-full h-[58px] px-5 bg-white border border-slate-200 rounded-2xl font-bold">
+																<SelectTrigger
+																	id="pos-unit-select"
+																	className="w-full h-[58px] px-5 bg-white border border-slate-200 rounded-2xl font-bold"
+																>
 																	<SelectValue placeholder="Pilih Satuan" />
 																</SelectTrigger>
 																<SelectContent className="rounded-2xl shadow-2xl">
@@ -791,10 +814,14 @@ export function POSClient({
 															</Select>
 														</div>
 														<div className="space-y-3">
-															<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
+															<label
+																htmlFor="pos-manual-price"
+																className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+															>
 																Harga / Unit
 															</label>
 															<Input
+																id="pos-manual-price"
 																required
 																type="text"
 																placeholder="Rp 0"
@@ -811,9 +838,9 @@ export function POSClient({
 													</>
 												) : (
 													<div className="space-y-3">
-														<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
+														<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
 															Total Harga Preview
-														</label>
+														</p>
 														<div className="w-full h-[58px] px-5 rounded-2xl bg-white border border-slate-200 flex items-center justify-end font-black text-xl text-slate-900 shadow-sm transition-all animate-in fade-in zoom-in-95 duration-200">
 															{selectedService
 																? formatIDR(
@@ -827,11 +854,15 @@ export function POSClient({
 											</div>
 
 											<div className="space-y-3">
-												<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 flex items-center gap-2">
+												<label
+													htmlFor="pos-item-notes"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 flex items-center gap-2"
+												>
 													<Info className="w-3 h-3 text-brand-primary" />{" "}
 													Rincian Item (Cth: 5 Kemeja, 3 Celana Kain)
 												</label>
 												<Textarea
+													id="pos-item-notes"
 													rows={3}
 													placeholder="Berikan detail isi laundry untuk mempermudah pengecekan..."
 													value={quickNote}
