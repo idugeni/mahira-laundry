@@ -80,3 +80,6 @@ drizzle/
 trash/
 scratch/
 apps/web/scratch/
+apps/web/lint_errors.txt
+apps/web/pos_errors.txt
+apps/web/test-query.mjs
