@@ -1,6 +1,6 @@
 ﻿import type { Metadata } from "next";
 import { Suspense } from "react";
-import { RevenueBarChart } from "@/components/shared/superadmin/admin-charts";
+import { RevenueBarChart } from "@/components/shared/admin/admin-charts";
 import { StatCard } from "@/components/shared/common/stat-card";
 import { ORDER_STATUS_COLORS, ORDER_STATUS_LABELS } from "@/lib/constants";
 import {
@@ -35,7 +35,7 @@ export default async function SuperadminDashboardPage() {
 	const ordersGrowthPositive = parseFloat(stats.ordersGrowth) >= 0;
 
 	return (
-		<div className="space-y-8 animate-fade-in-up">
+		<div className="space-y-8 pb-20 animate-fade-in-up">
 			{/* Page Header */}
 			<div>
 				<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">

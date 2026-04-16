@@ -39,19 +39,17 @@ export default async function IntegratedAntrianPage() {
 		.order("created_at", { ascending: false });
 
 	return (
-		<div className="max-w-full overflow-hidden">
-			<div className="space-y-8">
-				<div>
-					<h1 className="text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900">
-						Superadmin{" "}
-						<span className="inline-block text-brand-gradient">Antrian</span>
-					</h1>
-					<p className="text-slate-500 font-medium mt-1 uppercase tracking-widest text-xs">
-						Mengelola Antrian — Outlet: {finalOutletId.split("-")[0]}
-					</p>
-				</div>
-				<AntrianClient initialOrders={orders || []} />
+		<div className="space-y-8 pb-20 overflow-x-hidden">
+			<div>
+				<h1 className="text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900">
+					Superadmin{" "}
+					<span className="inline-block text-brand-gradient">Antrian</span>
+				</h1>
+				<p className="text-slate-500 font-medium mt-1 uppercase tracking-widest text-xs">
+					Mengelola Antrian — Outlet: {finalOutletId.split("-")[0]}
+				</p>
 			</div>
+			<AntrianClient initialOrders={orders || []} />
 		</div>
 	);
 }

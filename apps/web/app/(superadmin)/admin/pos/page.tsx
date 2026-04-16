@@ -39,8 +39,8 @@ export default async function IntegratedPOSPage() {
 	const finalOutletId = outletId || PRIMARY_OUTLET.id;
 
 	return (
-		<div className="space-y-6">
-			<div className="px-4">
+		<div className="space-y-8 pb-20">
+			<div>
 				<h1 className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900">
 					Superadmin <span className="text-brand-gradient">POS</span>
 				</h1>

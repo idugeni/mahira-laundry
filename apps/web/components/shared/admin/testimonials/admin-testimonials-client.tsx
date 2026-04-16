@@ -6,26 +6,27 @@ import {
 	Calendar,
 	CheckCircle2,
 	MessageSquare,
-	MoreVertical,
+	Pencil,
+	Plus,
 	Quote,
 	Star,
 	Trash2,
 	XCircle,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
-	HiCheck,
-	HiOutlineChatBubbleLeftRight,
-	HiOutlineTrash,
-	HiStar,
-	HiXMark,
+	HiOutlineChatBubbleBottomCenterText,
+	HiOutlineXMark,
 } from "react-icons/hi2";
 import { toast } from "sonner";
 import { PaginationControls } from "@/components/shared/common/pagination-controls";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
+	createTestimonialAsAdmin,
 	deleteTestimonial,
+	updateTestimonialContent,
 	updateTestimonialStatus,
 } from "@/lib/actions/testimonial";
 import { cn } from "@/lib/utils";
@@ -50,6 +51,20 @@ export function AdminTestimonialsClient({
 }: AdminTestimonialsClientProps) {
 	const [loading, setLoading] = useState<string | null>(null);
 	const [currentPage, setCurrentPage] = useState(1);
+
+	// Create modal state
+	const [createOpen, setCreateOpen] = useState(false);
+	const [createLoading, setCreateLoading] = useState(false);
+	const [createRating, setCreateRating] = useState(5);
+
+	// Edit modal state
+	const [editOpen, setEditOpen] = useState(false);
+	const [editLoading, setEditLoading] = useState(false);
+	const [editTarget, setEditTarget] = useState<Testimonial | null>(null);
+	const [editRating, setEditRating] = useState(5);
+
+	const [mounted, setMounted] = useState(false);
+	useEffect(() => { setMounted(true); }, []);
 
 	const ITEMS_PER_PAGE = 9;
 	const totalPages = Math.ceil(testimonials.length / ITEMS_PER_PAGE);
@@ -91,6 +106,50 @@ export function AdminTestimonialsClient({
 		} finally {
 			setLoading(null);
 		}
+	}
+
+	async function handleCreate(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+		setCreateLoading(true);
+		const formData = new FormData(e.currentTarget);
+		const res = await createTestimonialAsAdmin({
+			userId: formData.get("userId") as string,
+			content: formData.get("content") as string,
+			rating: createRating,
+		});
+		if (res.error) {
+			toast.error(res.error);
+		} else {
+			toast.success("Testimoni berhasil dibuat!");
+			setCreateOpen(false);
+			setCreateRating(5);
+		}
+		setCreateLoading(false);
+	}
+
+	function openEdit(t: Testimonial) {
+		setEditTarget(t);
+		setEditRating(t.rating);
+		setEditOpen(true);
+	}
+
+	async function handleEdit(e: React.FormEvent<HTMLFormElement>) {
+		e.preventDefault();
+		if (!editTarget) return;
+		setEditLoading(true);
+		const formData = new FormData(e.currentTarget);
+		const res = await updateTestimonialContent(editTarget.id, {
+			content: formData.get("content") as string,
+			rating: editRating,
+		});
+		if (res.error) {
+			toast.error(res.error);
+		} else {
+			toast.success("Testimoni berhasil diperbarui!");
+			setEditOpen(false);
+			setEditTarget(null);
+		}
+		setEditLoading(false);
 	}
 
 	return (
@@ -137,6 +196,14 @@ export function AdminTestimonialsClient({
 								Pending
 							</p>
 						</div>
+						<div className="w-px h-10 bg-slate-100 mx-2" />
+						<Button
+							onClick={() => setCreateOpen(true)}
+							className="bg-indigo-600 text-white hover:bg-indigo-500 rounded-2xl px-6 h-14 font-black text-[10px] uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl shadow-indigo-500/20 flex items-center gap-3"
+						>
+							<Plus size={18} />
+							Tambah Testimoni
+						</Button>
 					</div>
 				</div>
 			</div>
@@ -191,6 +258,15 @@ export function AdminTestimonialsClient({
 									</div>
 
 									<div className="flex items-center gap-2">
+										<Button
+											variant="ghost"
+											className="w-12 h-12 p-0 rounded-2xl bg-indigo-50 text-indigo-500 hover:bg-indigo-100 transition-all active:scale-90 shadow-sm"
+											onClick={() => openEdit(t)}
+											disabled={loading === t.id}
+											title="Edit testimoni"
+										>
+											<Pencil size={18} />
+										</Button>
 										<Button
 											variant="ghost"
 											className={cn(
@@ -300,6 +376,223 @@ export function AdminTestimonialsClient({
 					</div>
 				</div>
 			</div>
+
+			{/* ── Create Modal ── */}
+			{createOpen && mounted && createPortal(
+				<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
+					<div
+						className="fixed inset-0 bg-slate-900/60 backdrop-blur-md"
+						onClick={() => !createLoading && setCreateOpen(false)}
+					/>
+					<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-lg overflow-hidden border border-white/20 text-left">
+						{/* Header */}
+						<div className="px-8 pt-8 pb-6 bg-slate-50 border-b border-slate-100 relative overflow-hidden">
+							<div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
+							<div className="relative flex items-center justify-between">
+								<div className="flex items-center gap-3">
+									<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-indigo-600">
+										<MessageSquare size={22} />
+									</div>
+									<div>
+										<h2 className="text-xl font-black text-slate-900 tracking-tight">
+											Tambah <span className="text-indigo-600">Testimoni</span>
+										</h2>
+										<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
+											Buat testimoni atas nama pengguna
+										</p>
+									</div>
+								</div>
+								<button
+									onClick={() => setCreateOpen(false)}
+									className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+								>
+									<HiOutlineXMark size={16} />
+								</button>
+							</div>
+						</div>
+
+						{/* Form */}
+						<form onSubmit={handleCreate} className="p-8 space-y-5">
+							{/* User ID */}
+							<div className="space-y-2">
+								<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+									User ID
+								</label>
+								<input
+									required
+									type="text"
+									name="userId"
+									placeholder="UUID pengguna"
+									className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:border-indigo-500 focus:bg-white transition-all"
+								/>
+							</div>
+
+							{/* Rating */}
+							<div className="space-y-2">
+								<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+									Rating
+								</label>
+								<div className="flex gap-2">
+									{[1, 2, 3, 4, 5].map((star) => (
+										<button
+											key={star}
+											type="button"
+											onClick={() => setCreateRating(star)}
+											className="transition-transform hover:scale-110 active:scale-95"
+										>
+											<Star
+												size={28}
+												className={cn(
+													"transition-colors",
+													star <= createRating
+														? "text-amber-400 fill-amber-400"
+														: "text-slate-200 fill-slate-200",
+												)}
+											/>
+										</button>
+									))}
+								</div>
+							</div>
+
+							{/* Content */}
+							<div className="space-y-2">
+								<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+									Konten
+								</label>
+								<div className="relative group/input">
+									<span className="absolute left-4 top-4 text-slate-400 group-focus-within/input:text-indigo-600 transition-colors">
+										<HiOutlineChatBubbleBottomCenterText size={18} />
+									</span>
+									<textarea
+										required
+										name="content"
+										placeholder="Tulis ulasan pelanggan..."
+										className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[100px] focus:border-indigo-500 focus:bg-white transition-all resize-none"
+									/>
+								</div>
+							</div>
+
+							<button
+								type="submit"
+								disabled={createLoading}
+								className="w-full py-4 bg-indigo-600 text-white rounded-2xl font-black text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+							>
+								{createLoading ? (
+									<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+								) : (
+									<>
+										<Plus size={18} />
+										Simpan Testimoni
+									</>
+								)}
+							</button>
+						</form>
+					</div>
+				</div>,
+				document.body,
+			)}
+
+			{/* ── Edit Modal ── */}
+			{editOpen && editTarget && mounted && createPortal(
+				<div className="fixed inset-0 z-[999] flex items-center justify-center p-4">
+					<div
+						className="fixed inset-0 bg-slate-900/60 backdrop-blur-md"
+						onClick={() => !editLoading && setEditOpen(false)}
+					/>
+					<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-lg overflow-hidden border border-white/20 text-left">
+						{/* Header */}
+						<div className="px-8 pt-8 pb-6 bg-slate-50 border-b border-slate-100 relative overflow-hidden">
+							<div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
+							<div className="relative flex items-center justify-between">
+								<div className="flex items-center gap-3">
+									<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-amber-500">
+										<Pencil size={20} />
+									</div>
+									<div>
+										<h2 className="text-xl font-black text-slate-900 tracking-tight">
+											Edit <span className="text-amber-500">Testimoni</span>
+										</h2>
+										<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
+											{editTarget.profiles?.full_name}
+										</p>
+									</div>
+								</div>
+								<button
+									onClick={() => setEditOpen(false)}
+									className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+								>
+									<HiOutlineXMark size={16} />
+								</button>
+							</div>
+						</div>
+
+						{/* Form */}
+						<form onSubmit={handleEdit} className="p-8 space-y-5">
+							{/* Rating */}
+							<div className="space-y-2">
+								<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+									Rating
+								</label>
+								<div className="flex gap-2">
+									{[1, 2, 3, 4, 5].map((star) => (
+										<button
+											key={star}
+											type="button"
+											onClick={() => setEditRating(star)}
+											className="transition-transform hover:scale-110 active:scale-95"
+										>
+											<Star
+												size={28}
+												className={cn(
+													"transition-colors",
+													star <= editRating
+														? "text-amber-400 fill-amber-400"
+														: "text-slate-200 fill-slate-200",
+												)}
+											/>
+										</button>
+									))}
+								</div>
+							</div>
+
+							{/* Content */}
+							<div className="space-y-2">
+								<label className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+									Konten
+								</label>
+								<div className="relative group/input">
+									<span className="absolute left-4 top-4 text-slate-400 group-focus-within/input:text-amber-500 transition-colors">
+										<HiOutlineChatBubbleBottomCenterText size={18} />
+									</span>
+									<textarea
+										required
+										name="content"
+										defaultValue={editTarget.content}
+										placeholder="Tulis ulasan pelanggan..."
+										className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[100px] focus:border-amber-500 focus:bg-white transition-all resize-none"
+									/>
+								</div>
+							</div>
+
+							<button
+								type="submit"
+								disabled={editLoading}
+								className="w-full py-4 bg-amber-500 text-white rounded-2xl font-black text-sm shadow-xl shadow-amber-100 hover:bg-amber-600 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+							>
+								{editLoading ? (
+									<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+								) : (
+									<>
+										<Pencil size={18} />
+										Simpan Perubahan
+									</>
+								)}
+							</button>
+						</form>
+					</div>
+				</div>,
+				document.body,
+			)}
 		</div>
 	);
 }

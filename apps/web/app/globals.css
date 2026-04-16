@@ -320,6 +320,17 @@ select {
 		cursor: pointer;
 	}
 
+	/* Remove outline from SVG icons — they are decorative and should never show a ring */
+	svg {
+		outline: none;
+	}
+
+	/* Remove outline on mouse/touch focus; preserve focus-visible for keyboard navigation */
+	button:focus:not(:focus-visible),
+	a:focus:not(:focus-visible) {
+		outline: none;
+	}
+
 	/* Force hide spin buttons on all number inputs globally */
 	input[type="number"]::-webkit-inner-spin-button,
 	input[type="number"]::-webkit-outer-spin-button {

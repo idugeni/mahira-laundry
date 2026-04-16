@@ -98,6 +98,7 @@ export async function registerMitra(formData: any) {
 
 		revalidatePath("/franchise");
 		revalidatePath("/outlet");
+		revalidatePath("/admin/outlet");
 
 		return { success: true, outletId: outlet.id };
 	} catch (error: any) {

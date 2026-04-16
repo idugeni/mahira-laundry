@@ -87,6 +87,7 @@ export async function upsertInventory(
 		if (result.error) throw result.error;
 
 		revalidatePath("/inventori");
+		revalidatePath("/admin/inventori");
 		revalidatePath("/manager");
 		return { success: true };
 	} catch (error: any) {
@@ -102,6 +103,7 @@ export async function deleteInventory(id: string): Promise<ActionResponse> {
 		if (error) throw error;
 
 		revalidatePath("/inventori");
+		revalidatePath("/admin/inventori");
 		return { success: true };
 	} catch (error: any) {
 		console.error("Delete inventory failed:", error);
@@ -155,6 +157,7 @@ export async function restockInventory(
 		});
 
 		revalidatePath("/inventori");
+		revalidatePath("/admin/inventori");
 		return { success: true };
 	} catch (error: any) {
 		console.error("Restock inventory failed:", error);
@@ -206,6 +209,7 @@ export async function adjustStock(
 		});
 
 		revalidatePath("/inventori");
+		revalidatePath("/admin/inventori");
 		return { success: true };
 	} catch (error: any) {
 		return { success: false, error: error.message };
@@ -303,6 +307,7 @@ export async function transferInventory(data: {
 		}
 
 		revalidatePath("/inventori");
+		revalidatePath("/admin/inventori");
 		return { success: true };
 	} catch (error: any) {
 		return { success: false, error: error.message };

@@ -79,7 +79,7 @@ export default async function PegawaiPage() {
 				<div className="relative group">
 					<Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
 					<Input
-						className="pl-11 pr-4 py-6 w-[350px] bg-white rounded-2xl border-slate-100 shadow-sm focus:ring-4 focus:ring-emerald-500/5 transition-all font-bold text-sm"
+						className="pl-11 pr-4 py-6 w-full max-w-sm bg-white rounded-2xl border-slate-100 shadow-sm focus:ring-4 focus:ring-emerald-500/5 transition-all font-bold text-sm"
 						placeholder="Cari nama, email, atau telepon..."
 					/>
 				</div>

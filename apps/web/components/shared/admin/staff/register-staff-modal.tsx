@@ -53,7 +53,8 @@ export function RegisterStaffModal({
 	}, []);
 
 	async function handleDelete() {
-		if (!confirm(`Hapus akses ${staff.full_name} dari sistem secara permanen?`))
+		if (!staff) return;
+		if (!confirm(`Hapus akses ${staff.full_name || "staf ini"} dari sistem secara permanen?`))
 			return;
 		setIsLoading(true);
 		const result = await deleteStaffMember(staff.id);

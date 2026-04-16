@@ -15,13 +15,13 @@ import {
 	Wallet,
 } from "lucide-react";
 import { useState } from "react";
-import { ExpenseModal } from "@/components/shared/admin/finance/expense-modal";
-import { PaginationControls } from "@/components/shared/common/pagination-controls";
-import { StatCard } from "@/components/shared/common/stat-card";
 import {
 	PaymentPieChart,
 	RevenueBarChart,
-} from "@/components/shared/superadmin/admin-charts";
+} from "@/components/shared/admin/admin-charts";
+import { ExpenseModal } from "@/components/shared/admin/finance/expense-modal";
+import { IncomeModal } from "@/components/shared/admin/finance/income-modal";
+import { PaginationControls } from "@/components/shared/common/pagination-controls";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -35,12 +35,47 @@ interface FinanceStats {
 	margin: string;
 }
 
+interface RevenueDataPoint {
+	month: string;
+	revenue: number;
+	[key: string]: unknown;
+}
+
+interface PaymentStatPoint {
+	method: string;
+	total: number;
+	[key: string]: unknown;
+}
+
+interface RecentOrder {
+	id: string;
+	order_number: string;
+	profiles:
+		| { full_name: string | null }
+		| { full_name: string | null }[]
+		| null;
+	payment_status: string;
+	created_at: string;
+	total: number;
+}
+
+interface ExpenseRecord {
+	id: string;
+	reason: string;
+	category: string | null;
+	amount: number;
+	created_at: string;
+	outlets: { name: string } | null;
+	profiles: { full_name: string | null } | null;
+}
+
 interface SuperadminFinanceClientProps {
 	stats: FinanceStats;
-	revenueData: any[];
-	paymentStats: any[];
-	recentPaidOrders: any[];
-	expenses: any[];
+	revenueData: RevenueDataPoint[];
+	paymentStats: PaymentStatPoint[];
+	recentPaidOrders: RecentOrder[];
+	expenses: ExpenseRecord[];
+	outlets: { id: string; name: string }[];
 }
 
 export function SuperadminFinanceClient({
@@ -49,8 +84,9 @@ export function SuperadminFinanceClient({
 	paymentStats,
 	recentPaidOrders,
 	expenses,
+	outlets,
 }: SuperadminFinanceClientProps) {
-	const [activeTab, setActiveTab] = useState("overview");
+	const [_activeTab, setActiveTab] = useState("overview");
 	const [expensePage, setExpensePage] = useState(1);
 	const [expensePageSize, setExpensePageSize] = useState(10);
 	const [historyPage, setHistoryPage] = useState(1);
@@ -98,6 +134,17 @@ export function SuperadminFinanceClient({
 					</div>
 
 					<div className="flex items-center gap-4">
+						<IncomeModal
+							outlets={outlets}
+							trigger={
+								<Button className="bg-emerald-500 text-white hover:bg-emerald-400 rounded-2xl px-8 sm:px-12 h-16 sm:h-20 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-emerald-500/20 flex items-center gap-4">
+									<div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center">
+										<TrendingUp size={24} />
+									</div>
+									Tambah Pemasukan
+								</Button>
+							}
+						/>
 						<ExpenseModal
 							outletId="all"
 							trigger={
@@ -310,7 +357,7 @@ export function SuperadminFinanceClient({
 						) : (
 							<>
 								{/* DESKTOP TABLE */}
-								<div className="hidden md:block">
+								<div className="hidden md:block overflow-x-auto">
 									<table className="w-full text-left border-collapse">
 										<thead>
 											<tr className="bg-slate-50/50">
@@ -457,7 +504,7 @@ export function SuperadminFinanceClient({
 						) : (
 							<>
 								{/* DESKTOP TABLE */}
-								<div className="hidden md:block">
+								<div className="hidden md:block overflow-x-auto">
 									<table className="w-full text-left border-collapse">
 										<thead>
 											<tr className="bg-slate-50/50">

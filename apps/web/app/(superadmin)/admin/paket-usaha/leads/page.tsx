@@ -1,6 +1,6 @@
 import { Users } from "lucide-react";
 import type { Metadata } from "next";
-import { AdminLeadsClient } from "@/components/shared/superadmin/paket-usaha/leads/admin-leads-client";
+import { AdminLeadsClient } from "@/components/shared/admin/paket-usaha/leads/admin-leads-client";
 import { Badge } from "@/components/ui/badge";
 import { getBusinessInquiries } from "@/lib/actions/business-inquiries";
 import { getInquiryStats } from "@/lib/supabase/server";

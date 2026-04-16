@@ -47,6 +47,7 @@ export async function addGalleryItem(
 
 		revalidatePath("/", "layout");
 		revalidatePath("/galeri");
+		revalidatePath("/admin/galeri");
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
@@ -84,10 +85,36 @@ export async function deleteGalleryItem(
 
 		revalidatePath("/", "layout");
 		revalidatePath("/galeri");
+		revalidatePath("/admin/galeri");
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
 		console.error("Delete gallery item failed:", err);
+		return { success: false, error: err.message };
+	}
+}
+
+export async function updateGalleryItem(
+	id: string,
+	data: { title: string; category: string },
+): Promise<ActionResponse> {
+	try {
+		const supabase = await createClient();
+
+		const { error } = await supabase
+			.from("gallery")
+			.update({ title: data.title, category: data.category })
+			.eq("id", id);
+
+		if (error) throw error;
+
+		revalidatePath("/", "layout");
+		revalidatePath("/galeri");
+		revalidatePath("/admin/galeri");
+		return { success: true };
+	} catch (error) {
+		const err = error as Error;
+		console.error("Update gallery item failed:", err);
 		return { success: false, error: err.message };
 	}
 }

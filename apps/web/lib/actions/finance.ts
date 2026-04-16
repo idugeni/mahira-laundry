@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import type { ActionResponse } from "@/lib/types";
 
 /**
  * Top up customer balance
@@ -56,6 +57,7 @@ export async function topUpBalance(
 		if (updateError) throw updateError;
 
 		revalidatePath("/customer");
+		revalidatePath("/admin/keuangan");
 		return { success: true };
 	} catch (error: any) {
 		console.error("Top up failed:", error);
@@ -90,9 +92,56 @@ export async function settleRoyalty(data: {
 		if (error) throw error;
 
 		revalidatePath("/franchise");
+		revalidatePath("/admin/keuangan");
 		return { success: true };
 	} catch (error: any) {
 		console.error("Royalty settlement failed:", error);
+		return { success: false, error: error.message };
+	}
+}
+
+/**
+ * Record Income / Pemasukan
+ * Superadmin only
+ */
+export async function recordIncome(data: {
+	amount: number;
+	description: string;
+	outletId: string;
+	date: string;
+}): Promise<ActionResponse> {
+	try {
+		const supabase = await createClient();
+
+		const {
+			data: { user },
+		} = await supabase.auth.getUser();
+		if (!user) throw new Error("Unauthorized");
+
+		// Superadmin role check
+		const { data: profile } = await supabase
+			.from("profiles")
+			.select("role")
+			.eq("id", user.id)
+			.single();
+		if (profile?.role !== "superadmin") {
+			throw new Error("Akses ditolak. Hanya superadmin yang dapat mencatat pemasukan.");
+		}
+
+		const { error } = await supabase.from("income").insert({
+			outlet_id: data.outletId,
+			description: data.description,
+			amount: data.amount,
+			date: data.date,
+			actor_id: user.id,
+		});
+
+		if (error) throw error;
+
+		revalidatePath("/admin/keuangan");
+		return { success: true };
+	} catch (error: any) {
+		console.error("Record income failed:", error);
 		return { success: false, error: error.message };
 	}
 }

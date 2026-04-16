@@ -31,6 +31,10 @@ export const dynamic = "force-dynamic";
 
 export default async function SuperadminProfilPage() {
 	const profile = await getUserProfile();
+	const supabase = await createClient();
+	const {
+		data: { user: authUser },
+	} = await supabase.auth.getUser();
 
 	return (
 		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
@@ -120,7 +124,7 @@ export default async function SuperadminProfilPage() {
 									<Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300" />
 									<Input
 										disabled
-										defaultValue="superadmin@mahiralaundry.com"
+										defaultValue={authUser?.email || "—"}
 										className="pl-11 pr-4 py-7 bg-slate-100 border-slate-100 rounded-2xl font-bold text-sm grayscale opacity-60 shadow-none cursor-not-allowed"
 									/>
 								</div>

@@ -1,12 +1,13 @@
 ﻿import type { Metadata } from "next";
+import { SuperadminFinanceClient } from "@/components/shared/admin/finance/finance-client";
 import {
+	getOutletsWithStats,
 	getPaymentMethodStats,
+	getRecentExpenses,
 	getRecentOrders,
 	getSuperadminDashboardStats,
 	getSuperadminRevenueByMonth,
-	getRecentExpenses,
 } from "@/lib/supabase/server";
-import { SuperadminFinanceClient } from "@/components/shared/superadmin/finance/superadmin-finance-client";
 
 export const metadata: Metadata = {
 	title: "Laporan Keuangan",
@@ -17,14 +18,21 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function KeuanganPage() {
-	const [stats, revenueData, paymentStats, recentPaidOrders, expenses] =
-		await Promise.all([
-			getSuperadminDashboardStats(),
-			getSuperadminRevenueByMonth(6),
-			getPaymentMethodStats(),
-			getRecentOrders(10),
-			getRecentExpenses(50),
-		]);
+	const [
+		stats,
+		revenueData,
+		paymentStats,
+		recentPaidOrders,
+		expenses,
+		outletsWithStats,
+	] = await Promise.all([
+		getSuperadminDashboardStats(),
+		getSuperadminRevenueByMonth(6),
+		getPaymentMethodStats(),
+		getRecentOrders(10),
+		getRecentExpenses(50),
+		getOutletsWithStats(),
+	]);
 
 	const actualExpenses = stats.totalExpenses || 0;
 	const netProfit = stats.totalRevenue - actualExpenses;
@@ -32,6 +40,11 @@ export default async function KeuanganPage() {
 		stats.totalRevenue > 0
 			? ((netProfit / stats.totalRevenue) * 100).toFixed(1)
 			: "0";
+
+	const outlets = outletsWithStats.map((o: { id: string; name: string }) => ({
+		id: o.id,
+		name: o.name,
+	}));
 
 	return (
 		<SuperadminFinanceClient
@@ -46,6 +59,7 @@ export default async function KeuanganPage() {
 			paymentStats={paymentStats}
 			recentPaidOrders={recentPaidOrders}
 			expenses={expenses || []}
+			outlets={outlets}
 		/>
 	);
 }

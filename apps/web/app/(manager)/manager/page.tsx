@@ -12,7 +12,7 @@
 } from "lucide-react";
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { OrderTrendChart } from "@/components/shared/superadmin/admin-charts";
+import { OrderTrendChart } from "@/components/shared/admin/admin-charts";
 import { StatCard } from "@/components/shared/common/stat-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,8 +27,7 @@ import {
 	getOrdersByDay,
 	getRecentOrders,
 } from "@/lib/supabase/server";
-import { formatCompact, formatDate, formatIDR, cn } from "@/lib/utils";
-import type { Order, InventoryItem } from "@/lib/types";
+import { cn, formatCompact, formatDate, formatIDR } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Dashboard Manager",
@@ -291,54 +290,69 @@ export default async function ManagerDashboardPage() {
 							</div>
 						) : (
 							<div className="p-4 space-y-2">
-								{recentOrders.map((order: any) => (
-									<div
-										key={order.id}
-										className="p-4 rounded-2xl flex items-center justify-between hover:bg-slate-50 group/row transition-all duration-300 border border-transparent hover:border-slate-100"
-									>
-										<div className="flex items-center gap-4 min-w-0">
-											<div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-sm font-black text-slate-500 border border-white shadow-sm transition-transform group-hover/row:scale-105">
-												{(Array.isArray(order.profiles)
-													? order.profiles[0]?.full_name?.charAt(0)
-													: order.profiles?.full_name?.charAt(0)) || "?"}
-											</div>
-											<div className="min-w-0">
-												<p className="text-sm font-black text-slate-800 uppercase tracking-wide truncate">
+								{recentOrders.map(
+									(order: {
+										id: string;
+										order_number: string;
+										profiles:
+											| { full_name: string | null }
+											| { full_name: string | null }[]
+											| null;
+										status: string;
+										created_at: string;
+										total: number;
+										final_total?: number | null;
+									}) => (
+										<div
+											key={order.id}
+											className="p-4 rounded-2xl flex items-center justify-between hover:bg-slate-50 group/row transition-all duration-300 border border-transparent hover:border-slate-100"
+										>
+											<div className="flex items-center gap-4 min-w-0">
+												<div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-sm font-black text-slate-500 border border-white shadow-sm transition-transform group-hover/row:scale-105">
 													{(Array.isArray(order.profiles)
-														? order.profiles[0]?.full_name
-														: order.profiles?.full_name) || "Guest User"}
-												</p>
-												<p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-													<span className="text-indigo-400">
-														#{order.order_number}
-													</span>
-													<span>•</span>
-													<span>
-														{new Intl.DateTimeFormat("id-ID", {
-															hour: "2-digit",
-															minute: "2-digit",
-														}).format(new Date(order.created_at))}{" "}
-														WIB
-													</span>
-												</p>
+														? order.profiles[0]?.full_name?.charAt(0)
+														: order.profiles?.full_name?.charAt(0)) || "?"}
+												</div>
+												<div className="min-w-0">
+													<p className="text-sm font-black text-slate-800 uppercase tracking-wide truncate">
+														{(Array.isArray(order.profiles)
+															? order.profiles[0]?.full_name
+															: order.profiles?.full_name) || "Guest User"}
+													</p>
+													<p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+														<span className="text-indigo-400">
+															#{order.order_number}
+														</span>
+														<span>•</span>
+														<span>
+															{new Intl.DateTimeFormat("id-ID", {
+																hour: "2-digit",
+																minute: "2-digit",
+															}).format(new Date(order.created_at))}{" "}
+															WIB
+														</span>
+													</p>
+												</div>
+											</div>
+											<div className="flex items-center gap-4 shrink-0">
+												<Badge
+													className={cn(
+														"text-[9px] font-black px-2.5 py-1 rounded-lg border-none shadow-none uppercase tracking-widest",
+														ORDER_STATUS_COLORS[order.status] ||
+															"bg-slate-100 text-slate-500",
+													)}
+												>
+													{ORDER_STATUS_LABELS[order.status] || order.status}
+												</Badge>
+												<span className="text-sm font-black text-slate-900">
+													{order.final_total
+														? formatIDR(order.final_total)
+														: "—"}
+												</span>
 											</div>
 										</div>
-										<div className="flex items-center gap-4 shrink-0">
-											<Badge
-												className={cn(
-													"text-[9px] font-black px-2.5 py-1 rounded-lg border-none shadow-none uppercase tracking-widest",
-													ORDER_STATUS_COLORS[order.status] ||
-														"bg-slate-100 text-slate-500",
-												)}
-											>
-												{ORDER_STATUS_LABELS[order.status] || order.status}
-											</Badge>
-											<span className="text-sm font-black text-slate-900">
-												{order.final_total ? formatIDR(order.final_total) : "—"}
-											</span>
-										</div>
-									</div>
-								))}
+									),
+								)}
 							</div>
 						)}
 					</div>

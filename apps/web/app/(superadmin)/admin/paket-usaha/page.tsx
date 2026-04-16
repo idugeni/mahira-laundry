@@ -1,6 +1,6 @@
 import { Package } from "lucide-react";
 import type { Metadata } from "next";
-import { AdminPaketUsahaClient } from "@/components/shared/superadmin/paket-usaha/admin-paket-usaha-client";
+import { AdminPaketUsahaClient } from "@/components/shared/admin/paket-usaha/admin-paket-usaha-client";
 import { Badge } from "@/components/ui/badge";
 import { getAllBusinessPackages } from "@/lib/actions/business-packages";
 

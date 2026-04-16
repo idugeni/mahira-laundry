@@ -34,6 +34,7 @@ export async function addExpense(data: ExpenseInput): Promise<ActionResponse> {
 		if (error) throw error;
 
 		revalidatePath("/laporan");
+		revalidatePath("/admin/keuangan");
 		return { success: true };
 	} catch (error: any) {
 		console.error("Add expense failed:", error);
@@ -48,6 +49,7 @@ export async function deleteExpense(id: string): Promise<ActionResponse> {
 		if (error) throw error;
 
 		revalidatePath("/laporan");
+		revalidatePath("/admin/keuangan");
 		return { success: true };
 	} catch (error: any) {
 		console.error("Delete expense failed:", error);

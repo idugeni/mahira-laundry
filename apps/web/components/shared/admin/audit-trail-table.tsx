@@ -149,7 +149,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 			) : (
 				<>
 					{/* DESKTOP TABLE */}
-					<div className="hidden md:block">
+					<div className="hidden md:block overflow-x-auto">
 						<table className="w-full text-left border-collapse">
 							<thead>
 								<tr className="bg-slate-50/50">
