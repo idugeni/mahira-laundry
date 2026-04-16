@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 interface MahiraLogoProps {
 	size?: number;
@@ -30,6 +30,7 @@ export function MahiraLogo({
 				className="object-contain"
 				priority={priority}
 				loading={priority ? "eager" : "lazy"}
+				fetchPriority={priority ? "high" : "auto"}
 			/>
 			{showText && (
 				<div className="flex flex-col">

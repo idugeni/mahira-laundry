@@ -56,7 +56,7 @@ export function RevenueBarChart({ data }: RevenueChartProps) {
 	};
 
 	return (
-		<div className="min-h-[200px] w-full h-full" style={{ minWidth: 0 }}>
+		<div className="w-full h-full" style={{ minHeight: 200, minWidth: 0 }}>
 			{mounted && (
 				<ResponsiveContainer
 					width="100%"
@@ -136,7 +136,7 @@ export function OrderTrendChart({ data }: OrderTrendChartProps) {
 	};
 
 	return (
-		<div className="min-h-[200px] w-full h-full" style={{ minWidth: 0 }}>
+		<div className="w-full h-full" style={{ minHeight: 200, minWidth: 0 }}>
 			{mounted && (
 				<ResponsiveContainer
 					width="100%"
@@ -243,7 +243,7 @@ export function PaymentPieChart({ data }: PaymentPieChartProps) {
 	};
 
 	return (
-		<div className="min-h-[200px] w-full h-full" style={{ minWidth: 0 }}>
+		<div className="w-full h-full" style={{ minHeight: 200, minWidth: 0 }}>
 			{mounted && (
 				<ResponsiveContainer
 					width="100%"

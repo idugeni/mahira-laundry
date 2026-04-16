@@ -122,7 +122,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 	const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
 
 	// Drag to Scroll State
-	const scrollRef = useRef<HTMLButtonElement>(null);
+	const scrollRef = useRef<HTMLDivElement>(null);
 	const [isDragging, setIsDragging] = useState(false);
 	const [startX, setStartX] = useState(0);
 	const [scrollLeft, setScrollLeftState] = useState(0);
@@ -134,7 +134,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 	);
 
 	// Drag Handlers
-	const handleMouseDown = (e: React.MouseEvent) => {
+	const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
 		if (!scrollRef.current) return;
 		setIsDragging(true);
 		setStartX(e.pageX - scrollRef.current.offsetLeft);
@@ -144,7 +144,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 	const handleMouseLeave = () => setIsDragging(false);
 	const handleMouseUp = () => setIsDragging(false);
 
-	const handleMouseMove = (e: React.MouseEvent) => {
+	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
 		if (!isDragging || !scrollRef.current) return;
 		e.preventDefault();
 		const x = e.pageX - scrollRef.current.offsetLeft;
@@ -283,14 +283,15 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 
 					{/* Tab Navigation - Horizontal Drag Scroll */}
 					<div className="relative group/tabs">
-						<button
-							type="button"
+						<div
 							ref={scrollRef}
+							role="toolbar"
+							aria-label="Filter status antrian"
 							onMouseDown={handleMouseDown}
 							onMouseLeave={handleMouseLeave}
 							onMouseUp={handleMouseUp}
 							onMouseMove={handleMouseMove}
-							className={`flex items-center gap-2 bg-slate-100/50 p-2 rounded-3xl overflow-x-auto scroll-smooth flex-nowrap border border-white shadow-inner-sm custom-scrollbar touch-pan-x cursor-grab active:cursor-grabbing select-none w-full text-left`}
+							className="flex items-center gap-2 bg-slate-100/50 p-2 rounded-3xl overflow-x-auto scroll-smooth flex-nowrap border border-white shadow-inner-sm custom-scrollbar touch-pan-x cursor-grab active:cursor-grabbing select-none w-full"
 						>
 							{allStatuses.map((status) => {
 								const count = optimisticOrders.filter((o) =>
@@ -327,7 +328,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 									</button>
 								);
 							})}
-						</button>
+						</div>
 						{/* Visual Fade Edges */}
 						<div className="absolute right-0 top-0 bottom-0 w-12 bg-gradient-to-l from-slate-50/80 to-transparent pointer-events-none rounded-r-3xl" />
 					</div>
