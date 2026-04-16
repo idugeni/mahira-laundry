@@ -68,8 +68,8 @@ export function ExpenseModal({
 
 	return (
 		<>
-			<button
-				type="button"
+			<div
+				role="presentation"
 				onClick={() => setIsOpen(true)}
 				className="contents"
 			>
@@ -79,7 +79,7 @@ export function ExpenseModal({
 						<span>Input Pengeluaran</span>
 					</span>
 				)}
-			</button>
+			</div>
 
 			{isOpen &&
 				mounted &&

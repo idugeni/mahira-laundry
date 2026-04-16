@@ -78,8 +78,8 @@ export function InventoryModal({
 
 	return (
 		<>
-			<button
-				type="button"
+			<div
+				role="presentation"
 				onClick={() => setIsOpen(true)}
 				className="contents"
 			>
@@ -88,7 +88,7 @@ export function InventoryModal({
 						+ Tambah Item
 					</span>
 				)}
-			</button>
+			</div>
 
 			{isOpen &&
 				mounted &&

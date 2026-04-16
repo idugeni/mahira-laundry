@@ -65,8 +65,8 @@ export function IncomeModal({
 
 	return (
 		<>
-			<button
-				type="button"
+			<div
+				role="presentation"
 				className="contents"
 				onClick={() => setIsOpen(true)}
 			>
@@ -79,7 +79,7 @@ export function IncomeModal({
 						<span>Tambah Pemasukan</span>
 					</button>
 				)}
-			</button>
+			</div>
 
 			{isOpen &&
 				mounted &&

@@ -107,8 +107,8 @@ export function RegisterStaffModal({
 
 	return (
 		<>
-			<button
-				type="button"
+			<div
+				role="presentation"
 				onClick={() => setIsOpen(true)}
 				className="contents"
 			>
@@ -117,7 +117,7 @@ export function RegisterStaffModal({
 						<UserPlus size={18} /> Registrasi Staf
 					</Button>
 				)}
-			</button>
+			</div>
 
 			{isOpen &&
 				mounted &&

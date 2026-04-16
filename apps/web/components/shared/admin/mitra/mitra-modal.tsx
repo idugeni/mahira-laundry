@@ -58,8 +58,8 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 
 	return (
 		<>
-			<button
-				type="button"
+			<div
+				role="presentation"
 				onClick={() => setIsOpen(true)}
 				className="contents"
 			>
@@ -69,7 +69,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 						<span>Tambah Mitra Baru</span>
 					</span>
 				)}
-			</button>
+			</div>
 
 			{isOpen &&
 				mounted &&
