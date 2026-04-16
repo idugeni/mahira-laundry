@@ -112,8 +112,8 @@ export function HomeHeroSection({
 							</div>
 							<div>
 								<div className="flex text-amber-500 text-sm">
-									{"★★★★★".split("").map((s) => (
-										<span key={s}>{s}</span>
+									{Array.from({ length: 5 }, (_, i) => (
+										<span key={i}>★</span>
 									))}
 								</div>
 								<p className="text-sm font-medium text-slate-600">
