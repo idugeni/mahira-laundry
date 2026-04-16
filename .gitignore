@@ -76,7 +76,19 @@ apps/web/migrate-db.ts
 apps/web/test-db.ts
 drizzle/
 
-# Scratch & Temporaries
+# Certificates & Keys (CRITICAL — never commit)
+*.pem
+*.crt
+*.key
+*.cert
+*.p12
+*.pfx
+*.cer
+*.der
+*.csr
+localhost.pem
+localhost-key.pem
+apps/web/.next/certificates/
 trash/
 scratch/
 apps/web/scratch/
