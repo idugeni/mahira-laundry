@@ -89,6 +89,7 @@ drizzle/
 localhost.pem
 localhost-key.pem
 apps/web/.next/certificates/
+apps/web/certificates/
 trash/
 scratch/
 apps/web/scratch/
