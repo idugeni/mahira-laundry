@@ -41,7 +41,7 @@ export default async function SuperadminLayout({
 				{/* Top Header */}
 				<header className="h-14 lg:h-16 border-b border-slate-200/80 bg-white/90 backdrop-blur-sm flex items-center justify-between px-4 lg:px-8 mt-14 lg:mt-0 shadow-sm/30 sticky top-14 lg:top-0 z-30">
 					<div className="flex items-center gap-3">
-							<div className="hidden lg:flex items-center">
+						<div className="hidden lg:flex items-center">
 							<DynamicBreadcrumb />
 						</div>
 					</div>

@@ -153,7 +153,7 @@ export function AdminSidebar({
 					panelLabel={panelLabel}
 					panelBadgeColor={panelBadgeColor}
 					headerInfo={headerInfo}
-					onNavClick={() => {}}
+					onNavClick={() => { }}
 				/>
 			</aside>
 

@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { RevenueBarChart } from "@/components/shared/admin/admin-charts";
 import { StatCard } from "@/components/shared/common/stat-card";
@@ -252,7 +252,7 @@ export default async function SuperadminDashboardPage() {
 													{Array.isArray(order.profiles)
 														? order.profiles[0]?.full_name || "Guest"
 														: (order.profiles as { full_name?: string } | null)
-																?.full_name || "Guest"}
+															?.full_name || "Guest"}
 												</p>
 											</td>
 											<td className="px-6 py-3.5">
@@ -297,7 +297,7 @@ export default async function SuperadminDashboardPage() {
 											{Array.isArray(log.profiles)
 												? log.profiles[0]?.full_name
 												: (log.profiles as { full_name?: string } | null)
-														?.full_name || "System"}
+													?.full_name || "System"}
 										</span>{" "}
 										{log.action.toLowerCase().replace("_", " ")}
 										{" pada "}
