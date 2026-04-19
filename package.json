@@ -1,31 +1,33 @@
 {
-  "name": "mahira-laundry",
-  "version": "1.0.0",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
-  "scripts": {
-    "dev": "npm run dev --workspace=apps/web",
-    "build": "npm run build --workspace=apps/web",
-    "lint": "npx @biomejs/biome check --write .",
-    "db:generate": "npm run db:generate --workspace=apps/web",
-    "db:migrate": "npm run db:migrate --workspace=apps/web",
-    "db:push": "npm run db:push --workspace=apps/web",
-    "db:studio": "npm run db:studio --workspace=apps/web"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^2.4.12",
-    "typescript": "^6.0.3"
-  },
-  "dependencies": {
-    "html2canvas": "^1.4.1",
-    "html5-qrcode": "^2.3.8",
-    "jspdf": "^4.2.1",
-    "next": "^16.2.4",
-    "qrcode.react": "^4.2.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5"
-  }
+	"name": "mahira-laundry",
+	"version": "1.0.0",
+	"private": true,
+	"packageManager": "npm@11.11.1",
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"scripts": {
+		"dev": "npm run dev --workspace=apps/web",
+		"build": "npm run build --workspace=apps/web",
+		"lint": "npx @biomejs/biome check --write .",
+		"db:generate": "npm run db:generate --workspace=apps/web",
+		"db:migrate": "npm run db:migrate --workspace=apps/web",
+		"db:push": "npm run db:push --workspace=apps/web",
+		"db:studio": "npm run db:studio --workspace=apps/web"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.12",
+		"turbo": "^2.9.6",
+		"typescript": "^6.0.3"
+	},
+	"dependencies": {
+		"html2canvas": "^1.4.1",
+		"html5-qrcode": "^2.3.8",
+		"jspdf": "^4.2.1",
+		"next": "^16.2.4",
+		"qrcode.react": "^4.2.0",
+		"react": "^19.2.5",
+		"react-dom": "^19.2.5"
+	}
 }

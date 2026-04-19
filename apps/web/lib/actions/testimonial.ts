@@ -136,7 +136,9 @@ export async function updateTestimonialContent(
 		revalidatePath("/admin/testimonials");
 		return { success: true };
 	} catch (error: unknown) {
-		return { error: (error as Error).message || "Gagal memperbarui testimoni." };
+		return {
+			error: (error as Error).message || "Gagal memperbarui testimoni.",
+		};
 	}
 }
 

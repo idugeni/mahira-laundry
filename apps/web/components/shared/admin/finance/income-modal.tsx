@@ -65,21 +65,18 @@ export function IncomeModal({
 
 	return (
 		<>
-			<div
-				role="presentation"
-				className="contents"
+			<button
+				type="button"
 				onClick={() => setIsOpen(true)}
+				className="contents"
 			>
 				{trigger || (
-					<button
-						type="button"
-						className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-emerald-100 hover:shadow-emerald-200 hover:scale-[1.02] active:scale-[0.98] transition-all"
-					>
+					<span className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-emerald-100 hover:shadow-emerald-200 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
 						<HiOutlineBanknotes size={18} />
-						<span>Tambah Pemasukan</span>
-					</button>
+						<span>Input Pemasukan</span>
+					</span>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&

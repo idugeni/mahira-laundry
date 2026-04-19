@@ -112,8 +112,8 @@ export function HomeHeroSection({
 							</div>
 							<div>
 								<div className="flex text-amber-500 text-sm">
-									{Array.from({ length: 5 }, (_, i) => (
-										<span key={i}>★</span>
+									{[1, 2, 3, 4, 5].map((star) => (
+										<span key={star}>★</span>
 									))}
 								</div>
 								<p className="text-sm font-medium text-slate-600">

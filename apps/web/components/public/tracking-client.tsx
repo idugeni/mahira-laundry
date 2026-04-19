@@ -10,7 +10,11 @@ import type { Order } from "@/lib/types";
 import { formatDateTime, formatIDR } from "@/lib/utils";
 
 type TrackedOrder = Order & {
-	order_status_logs?: Array<{ status: string; notes?: string; created_at: string }>;
+	order_status_logs?: Array<{
+		status: string;
+		notes?: string;
+		created_at: string;
+	}>;
 };
 
 export function TrackingClient() {
@@ -253,7 +257,10 @@ export function TrackingClient() {
 										subtotal: number;
 									}>
 								)?.map((item) => (
-									<div key={item.service_name} className="flex justify-between items-start">
+									<div
+										key={item.service_name}
+										className="flex justify-between items-start"
+									>
 										<div className="pr-4">
 											<p className="font-bold text-sm text-slate-900">
 												{item.service_name}

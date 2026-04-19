@@ -111,8 +111,8 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 
 	return (
 		<>
-			<div
-				role="presentation"
+			<button
+				type="button"
 				onClick={() => setIsOpen(true)}
 				className="contents"
 			>
@@ -121,7 +121,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 						+ Tambah Outlet
 					</Button>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&

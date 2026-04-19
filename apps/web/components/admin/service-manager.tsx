@@ -160,7 +160,9 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 									<Button
 										variant="ghost"
 										className="w-10 h-10 p-0 rounded-xl hover:bg-indigo-50 text-slate-300 hover:text-indigo-600 transition-all"
-										onClick={() => handleServiceClick(service.slug ?? service.id)}
+										onClick={() =>
+											handleServiceClick(service.slug ?? service.id)
+										}
 									>
 										<Edit3 size={18} />
 									</Button>

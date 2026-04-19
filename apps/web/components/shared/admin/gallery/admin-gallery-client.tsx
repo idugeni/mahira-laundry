@@ -202,7 +202,10 @@ export function AdminGalleryClient({
 
 							<div className="space-y-4 sm:space-y-6">
 								<div className="space-y-2">
-									<label htmlFor="gallery-title" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+									<label
+										htmlFor="gallery-title"
+										className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
+									>
 										Deskripsi Aset
 									</label>
 									<Input
@@ -215,12 +218,18 @@ export function AdminGalleryClient({
 								</div>
 
 								<div className="space-y-2">
-									<label htmlFor="gallery-category" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+									<label
+										htmlFor="gallery-category"
+										className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
+									>
 										Klasifikasi
 									</label>
 									<input type="hidden" name="category" value={category} />
 									<Select value={category} onValueChange={setCategory}>
-										<SelectTrigger id="gallery-category" className="px-5 h-12 sm:h-14 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white font-bold text-sm transition-all">
+										<SelectTrigger
+											id="gallery-category"
+											className="px-5 h-12 sm:h-14 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white font-bold text-sm transition-all"
+										>
 											<SelectValue placeholder="Pilih Kategori" />
 										</SelectTrigger>
 										<SelectContent className="rounded-3xl border-slate-100 shadow-2xl p-2">

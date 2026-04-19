@@ -58,7 +58,11 @@ export function ReportModal({
 
 	return (
 		<>
-			<button type="button" onClick={() => setIsOpen(true)} className="contents h-full cursor-pointer">
+			<button
+				type="button"
+				onClick={() => setIsOpen(true)}
+				className="contents h-full cursor-pointer"
+			>
 				{trigger}
 			</button>
 

@@ -1,20 +1,31 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "globalDependencies": [".env"],
-  "tasks": {
-    "build": {
-      "dependsOn": ["^build"],
-      "outputs": [".next/**", "!.next/cache/**"]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    },
-    "lint": {
-      "dependsOn": ["^lint"]
-    },
-    "db:generate": {},
-    "db:migrate": {},
-    "db:push": {}
-  }
+	"$schema": "https://turbo.build/schema.json",
+	"globalDependencies": [".env"],
+	"globalPassThroughEnv": [
+		"NEXT_PUBLIC_SUPABASE_URL",
+		"NEXT_PUBLIC_SUPABASE_ANON_KEY",
+		"SUPABASE_DB_URL",
+		"MIDTRANS_SERVER_KEY",
+		"MIDTRANS_IS_PRODUCTION",
+		"FONNTE_API_KEY",
+		"RESEND_API_KEY",
+		"RESEND_FROM_EMAIL",
+		"RESEND_FROM_NAME"
+	],
+	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": [".next/**", "!.next/cache/**"]
+		},
+		"dev": {
+			"cache": false,
+			"persistent": true
+		},
+		"lint": {
+			"dependsOn": ["^lint"]
+		},
+		"db:generate": {},
+		"db:migrate": {},
+		"db:push": {}
+	}
 }

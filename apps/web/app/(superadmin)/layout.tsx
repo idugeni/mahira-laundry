@@ -19,7 +19,12 @@ export default async function SuperadminLayout({
 		{ href: "/admin/antrian", label: "Antrian", icon: "📋" },
 		{ href: "/admin/outlet", label: "Outlet", icon: "🏪" },
 		{ href: "/admin/franchise", label: "Franchise", icon: "🤝" },
-		{ href: "/admin/paket-usaha", label: "Paket Usaha", icon: "📦", badge: inquiryStats.new > 0 ? inquiryStats.new : undefined },
+		{
+			href: "/admin/paket-usaha",
+			label: "Paket Usaha",
+			icon: "📦",
+			badge: inquiryStats.new > 0 ? inquiryStats.new : undefined,
+		},
 		{ href: "/admin/pegawai", label: "Manajemen Pegawai", icon: "👥" },
 		{ href: "/admin/testimonials", label: "Testimoni", icon: "💬" },
 		{ href: "/admin/layanan", label: "Kelola Layanan", icon: "🧺" },

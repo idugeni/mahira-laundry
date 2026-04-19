@@ -62,7 +62,10 @@ export function ProfilAddressSection({
 						className="p-8 rounded-[2rem] border-2 border-dashed border-brand-primary/20 bg-brand-primary/5 space-y-4"
 					>
 						<div className="space-y-2">
-							<label htmlFor="addr-label" className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+							<label
+								htmlFor="addr-label"
+								className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+							>
 								Label Alamat (Contoh: Rumah, Kantor)
 							</label>
 							<input
@@ -77,7 +80,10 @@ export function ProfilAddressSection({
 							/>
 						</div>
 						<div className="space-y-2">
-							<label htmlFor="addr-detail" className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+							<label
+								htmlFor="addr-detail"
+								className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+							>
 								Alamat Lengkap
 							</label>
 							<textarea

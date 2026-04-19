@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { HiOutlineCamera, HiOutlineCheckBadge } from "react-icons/hi2";
 
 interface Profile {

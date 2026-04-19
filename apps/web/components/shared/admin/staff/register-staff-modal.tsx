@@ -107,8 +107,8 @@ export function RegisterStaffModal({
 
 	return (
 		<>
-			<div
-				role="presentation"
+			<button
+				type="button"
 				onClick={() => setIsOpen(true)}
 				className="contents"
 			>
@@ -117,7 +117,7 @@ export function RegisterStaffModal({
 						<UserPlus size={18} /> Registrasi Staf
 					</Button>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
@@ -167,7 +167,10 @@ export function RegisterStaffModal({
 									)}
 
 									<div className="space-y-2">
-										<label htmlFor="staff-fullname" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+										<label
+											htmlFor="staff-fullname"
+											className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+										>
 											Nama Lengkap Tim
 										</label>
 										<div className="relative group/input">
@@ -185,7 +188,10 @@ export function RegisterStaffModal({
 
 									<div className="grid grid-cols-2 gap-6">
 										<div className="space-y-2">
-											<label htmlFor="staff-email" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label
+												htmlFor="staff-email"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
 												Email Corporate
 											</label>
 											<div className="relative group/input">
@@ -202,7 +208,10 @@ export function RegisterStaffModal({
 											</div>
 										</div>
 										<div className="space-y-2">
-											<label htmlFor="staff-phone" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label
+												htmlFor="staff-phone"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
 												Koneksi WhatsApp
 											</label>
 											<div className="relative group/input">
@@ -281,7 +290,10 @@ export function RegisterStaffModal({
 
 									<div className="space-y-2">
 										<div className="flex items-center justify-between mx-1">
-											<label htmlFor="staff-password" className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+											<label
+												htmlFor="staff-password"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400"
+											>
 												Security Password
 											</label>
 											{!staff && (

@@ -579,7 +579,10 @@ export function AdminTestimonialsClient({
 
 								{/* Content */}
 								<div className="space-y-2">
-									<label htmlFor="edit-testimonial-content" className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">
+									<label
+										htmlFor="edit-testimonial-content"
+										className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+									>
 										Konten
 									</label>
 									<div className="relative group/input">

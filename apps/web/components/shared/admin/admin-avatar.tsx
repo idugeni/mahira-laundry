@@ -15,7 +15,11 @@ function getInitials(fullName?: string | null): string {
 	return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
 }
 
-export function AdminAvatar({ fullName, avatarUrl, className }: AdminAvatarProps) {
+export function AdminAvatar({
+	fullName,
+	avatarUrl,
+	className,
+}: AdminAvatarProps) {
 	return (
 		<Avatar className={className}>
 			{avatarUrl && <AvatarImage src={avatarUrl} alt={fullName ?? "Avatar"} />}
