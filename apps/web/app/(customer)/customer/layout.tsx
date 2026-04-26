@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { motion } from "motion/react";
 import Link from "next/link";
@@ -130,10 +130,18 @@ export default function CustomerLayout({
 					<div className="flex items-center gap-2 sm:gap-3">
 						<NotificationPopover />
 						<Link
-							href="/profil"
-							className="w-8 h-8 rounded-full bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-xs font-bold text-brand-primary"
+							href="/customer/profil"
+							className="w-8 h-8 rounded-full bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-xs font-bold text-brand-primary overflow-hidden relative"
 						>
-							{getInitials(profile?.full_name as string)}
+							{profile?.avatar_url ? (
+								<img
+									src={profile.avatar_url}
+									alt={profile.full_name || "Avatar"}
+									className="w-full h-full object-cover object-top"
+								/>
+							) : (
+								getInitials(profile?.full_name as string)
+							)}
 						</Link>
 					</div>
 				</header>

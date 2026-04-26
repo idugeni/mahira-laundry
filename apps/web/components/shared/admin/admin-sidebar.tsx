@@ -118,17 +118,17 @@ function SidebarContent({
 			</nav>
 
 			{/* Logout Area (Fixed/Bottom) */}
-			<div className="shrink-0 p-3 border-t border-slate-100 bg-white">
+			<div className="shrink-0 p-6 border-t border-slate-50 bg-white">
 				<form action="/api/auth/signout" method="POST">
 					<button
 						type="submit"
-						className="group flex items-center gap-3 w-full px-3 py-2.5 rounded-xl text-sm font-medium text-slate-500 hover:bg-gradient-to-r hover:from-pink-500 hover:to-rose-500 hover:text-white transition-all duration-150"
+						className="group flex items-center justify-center gap-2.5 w-full px-6 py-3.5 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-400 border-2 border-slate-50 hover:border-red-100 hover:bg-red-50 hover:text-red-500 transition-all duration-300 active:scale-95"
 					>
 						<LogOut
-							size={16}
+							size={14}
 							className="group-hover:-translate-x-1 transition-transform"
 						/>
-						<span>Logout</span>
+						<span>Logout Sesi</span>
 					</button>
 				</form>
 			</div>
@@ -158,7 +158,7 @@ export function AdminSidebar({
 			</aside>
 
 			{/* Mobile Top Bar */}
-			<div className="lg:hidden fixed top-0 left-0 right-0 z-30 bg-white border-b border-slate-100 px-4 h-14 flex items-center justify-between">
+			<div className="lg:hidden fixed top-0 left-0 right-0 z-30 bg-white px-4 h-14 flex items-center justify-between">
 				<MahiraLogo size={24} priority />
 				<button
 					type="button"

@@ -31,10 +31,7 @@ const nextConfig: NextConfig = {
 	},
 	experimental: {
 		serverActions: {
-			allowedOrigins: [
-				"*.ngrok-free.app",
-				"8af7-2001-448a-b010-1857-48b4-4f4-6cd4-fc70.ngrok-free.app",
-			],
+			bodySizeLimit: "10mb",
 		},
 	},
 };

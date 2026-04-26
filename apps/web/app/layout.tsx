@@ -19,6 +19,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(
+		process.env.NEXT_PUBLIC_APP_URL || "https://mahira-laundry.vercel.app",
+	),
 	title: {
 		default: "Mahira Laundry — Premium Laundry & Dry Cleaning",
 		template: "%s | Mahira Laundry",
@@ -32,18 +35,54 @@ export const metadata: Metadata = {
 		"cuci setrika jatiwaringin",
 		"laundry profesional bekasi",
 		"mahira laundry jatiwaringin",
+		"amanda laundry",
+		"mahira laundry vercel",
 	],
 	openGraph: {
 		title: "Mahira Laundry — Premium Laundry & Dry Cleaning",
 		description:
 			"Layanan laundry premium terbaik di Bekasi Jatiwaringin dengan standar kualitas tinggi.",
 		type: "website",
+		locale: "id_ID",
+		siteName: "Mahira Laundry",
+		url: "https://mahira-laundry.vercel.app",
+	},
+	alternates: {
+		canonical: "/",
 	},
 	icons: {
 		icon: "/logo.png",
 		shortcut: "/logo.png",
 		apple: "/logo.png",
 	},
+};
+
+const organizationSchema = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: "Mahira Laundry",
+	url: "https://mahira-laundry.vercel.app",
+	logo: "https://mahira-laundry.vercel.app/logo.png",
+	description: "Layanan laundry premium terbaik di Bekasi Jatiwaringin.",
+	address: {
+		"@type": "PostalAddress",
+		streetAddress: "Jl. Jatiwaringin No. 28",
+		addressLocality: "Bekasi",
+		addressRegion: "Jawa Barat",
+		postalCode: "17411",
+		addressCountry: "ID",
+	},
+	contactPoint: {
+		"@type": "ContactPoint",
+		telephone: "+6281234567890",
+		contactType: "customer service",
+		areaServed: "ID",
+		availableLanguage: "Indonesian",
+	},
+	sameAs: [
+		"https://www.instagram.com/mahiralaundry",
+		"https://www.facebook.com/mahiralaundry",
+	],
 };
 
 import { AuthProvider } from "@/providers/auth-provider";
@@ -56,6 +95,7 @@ export default function RootLayout({
 	return (
 		<html
 			lang="id"
+			suppressHydrationWarning
 			className={cn(
 				"h-full",
 				"antialiased",
@@ -65,7 +105,17 @@ export default function RootLayout({
 				geist.variable,
 			)}
 		>
-			<body className="min-h-full flex flex-col bg-background text-foreground font-[family-name:var(--font-body)]">
+			<body
+				suppressHydrationWarning
+				className="min-h-full flex flex-col bg-background text-foreground font-[family-name:var(--font-body)]"
+			>
+				<script
+					type="application/ld+json"
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: Organization Schema
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(organizationSchema),
+					}}
+				/>
 				<AuthProvider>{children}</AuthProvider>
 				<Toaster richColors position="top-right" />
 			</body>

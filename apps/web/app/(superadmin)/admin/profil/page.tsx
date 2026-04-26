@@ -12,6 +12,7 @@ import {
 	User,
 } from "lucide-react";
 import type { Metadata } from "next";
+import { AdminAvatarSection } from "@/components/shared/admin/profil/admin-avatar-section";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -32,22 +33,17 @@ export default async function SuperadminProfilPage() {
 		data: { user: authUser },
 	} = await supabase.auth.getUser();
 
+	if (!profile) return null;
+
 	return (
-		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+		<div className="space-y-12 pb-20 animate-in fade-in zoom-in-95 slide-in-from-top-12 duration-1000 ease-out">
 			{/* High-End Header */}
 			<div className="relative overflow-hidden bg-white rounded-[3rem] p-10 lg:p-14 border border-slate-100 shadow-2xl shadow-slate-200/40 group">
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-all duration-1000 group-hover:bg-indigo-100" />
 
 				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-10">
 					<div className="flex flex-col lg:flex-row items-center gap-10">
-						<div className="relative">
-							<div className="w-32 h-32 rounded-[2.5rem] bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-black text-4xl shadow-2xl shadow-indigo-500/20 border-4 border-white transition-transform duration-700 group-hover:scale-105 group-hover:rotate-3">
-								{profile?.full_name?.charAt(0) || <User size={48} />}
-							</div>
-							<div className="absolute -bottom-2 -right-2 w-12 h-12 rounded-2xl bg-white shadow-xl border border-slate-50 flex items-center justify-center text-indigo-600 cursor-pointer hover:bg-slate-50 transition-colors">
-								<Camera size={20} />
-							</div>
-						</div>
+						<AdminAvatarSection profile={profile} />
 
 						<div className="text-center lg:text-left space-y-4">
 							<div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
@@ -216,31 +212,55 @@ export default async function SuperadminProfilPage() {
 
 				{/* Sidebar Stats / Settings */}
 				<div className="space-y-10">
-					<div className="bg-indigo-600 rounded-[3rem] p-10 lg:p-12 text-white relative overflow-hidden group">
-						<div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-2xl" />
-						<div className="relative space-y-8 h-full flex flex-col">
-							<div className="w-14 h-14 rounded-2xl bg-white/20 border border-white/20 flex items-center justify-center text-3xl shadow-2xl">
-								⚡
+					<div className="bg-slate-950 rounded-[3.5rem] p-10 lg:p-12 text-white relative overflow-hidden group border border-slate-800 shadow-2xl">
+						{/* Animated Cyber Gradients */}
+						<div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/30 rounded-full -mr-32 -mt-32 blur-[100px] animate-pulse" />
+						<div className="absolute bottom-0 left-0 w-64 h-64 bg-violet-600/20 rounded-full -ml-32 -mb-32 blur-[100px] animate-pulse transition-all duration-1000 group-hover:bg-indigo-500/30" />
+
+						<div className="relative space-y-10 h-full flex flex-col z-10">
+							<div className="w-16 h-16 rounded-[1.5rem] bg-indigo-500/10 flex items-center justify-center text-4xl shadow-[0_0_30px_rgba(99,102,241,0.2)] backdrop-blur-xl group-hover:scale-110 transition-transform duration-500">
+								<span className="drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
+									⚡
+								</span>
 							</div>
-							<div>
-								<h3 className="text-2xl font-black uppercase tracking-tight mb-2">
-									Power User
-								</h3>
-								<p className="text-indigo-100/70 font-bold text-xs leading-relaxed">
-									Anda mengelola{" "}
-									{profile?.role === "superadmin" ? "SELUERUH" : "—"}{" "}
-									infrastruktur backend Mahira Laundry Group.
-								</p>
-							</div>
-							<div className="space-y-4 pt-4 border-t border-white/10 mt-auto">
-								<div className="flex justify-between items-center">
-									<span className="text-[10px] font-black uppercase tracking-widest text-indigo-200">
-										System Uptime
+
+							<div className="space-y-4">
+								<div className="inline-flex items-center gap-2 px-3 py-1.5 bg-indigo-500/5 backdrop-blur-md rounded-full shadow-inner">
+									<div className="w-1.5 h-1.5 bg-indigo-500 rounded-full shadow-[0_0_8px_rgba(99,102,241,1)] animate-pulse" />
+									<span className="text-[8px] font-black uppercase tracking-[0.3em] text-indigo-400/80">
+										System High Priority
 									</span>
-									<span className="text-xs font-black">99.99%</span>
 								</div>
-								<div className="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
-									<div className="h-full w-[99%] bg-white animate-pulse" />
+								<div>
+									<h3 className="text-3xl font-black uppercase tracking-tighter mb-3 leading-none italic">
+										Power <span className="text-indigo-500">User</span>
+									</h3>
+									<p className="text-slate-400 font-bold text-[11px] leading-relaxed max-w-[200px]">
+										Otoritas penuh atas infrastruktur{" "}
+										<span className="text-white">Mahira Laundry Group</span>.
+									</p>
+								</div>
+							</div>
+
+							<div className="space-y-5 pt-8 mt-auto relative">
+								{/* Subtle Gradient Divider */}
+								<div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+
+								<div className="flex justify-between items-end">
+									<div className="space-y-1">
+										<span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500">
+											System Uptime
+										</span>
+										<p className="text-sm font-black text-indigo-400">
+											Operational
+										</p>
+									</div>
+									<span className="text-2xl font-black tracking-tighter">
+										99.99<span className="text-xs text-slate-500">%</span>
+									</span>
+								</div>
+								<div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+									<div className="h-full w-[99.9%] bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.3)]" />
 								</div>
 							</div>
 						</div>

@@ -22,7 +22,13 @@ export function AdminAvatar({
 }: AdminAvatarProps) {
 	return (
 		<Avatar className={className}>
-			{avatarUrl && <AvatarImage src={avatarUrl} alt={fullName ?? "Avatar"} />}
+			{avatarUrl && (
+				<AvatarImage
+					src={avatarUrl}
+					alt={fullName ?? "Avatar"}
+					className="object-cover object-top"
+				/>
+			)}
 			<AvatarFallback className="bg-slate-900 text-white font-black text-xs">
 				{getInitials(fullName)}
 			</AvatarFallback>

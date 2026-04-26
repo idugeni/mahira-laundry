@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Image from "next/image";
+import { useRef } from "react";
 import { HiOutlineCamera, HiOutlineCheckBadge } from "react-icons/hi2";
 
 interface Profile {
@@ -23,6 +24,8 @@ export function ProfilInfoCard({
 	loading,
 	onAvatarChange,
 }: ProfilInfoCardProps) {
+	const fileInputRef = useRef<HTMLInputElement>(null);
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
@@ -43,26 +46,26 @@ export function ProfilInfoCard({
 							alt={profile.full_name}
 							width={96}
 							height={96}
-							className="w-full h-full object-cover"
+							className="w-full h-full object-cover object-top"
 						/>
-						<label className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover/avatar:opacity-100 flex items-center justify-center transition-opacity cursor-pointer">
-							<span className="text-white text-xl">
-								<HiOutlineCamera />
-							</span>
-							<input
-								type="file"
-								className="hidden"
-								accept="image/*"
-								onChange={onAvatarChange}
-								disabled={loading}
-							/>
-						</label>
 					</div>
-					<div className="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-primary text-white rounded-full flex items-center justify-center border-4 border-white shadow-lg z-10">
-						<span className="flex items-center justify-center text-sm">
-							<HiOutlineCheckBadge />
+
+					<button
+						type="button"
+						onClick={() => fileInputRef.current?.click()}
+						className="absolute -bottom-2 -right-2 w-10 h-10 bg-white text-brand-primary rounded-2xl flex items-center justify-center border-4 border-white shadow-xl z-30 cursor-pointer hover:scale-110 hover:text-brand-accent transition-all group/cam"
+					>
+						<span className="flex items-center justify-center text-lg group-hover/cam:rotate-12 transition-transform">
+							<HiOutlineCamera />
 						</span>
-					</div>
+					</button>
+					<input
+						ref={fileInputRef}
+						type="file"
+						className="sr-only"
+						accept="image/*"
+						onChange={onAvatarChange}
+					/>
 				</div>
 
 				<h2 className="text-xl font-black text-slate-900 leading-tight">

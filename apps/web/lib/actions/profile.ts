@@ -31,33 +31,45 @@ export async function updateProfile(formData: FormData) {
 }
 
 export async function updateAvatar(formData: FormData) {
-	const supabase = await createClient();
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-	if (!user) return { error: "Unauthorized" };
+	try {
+		const supabase = await createClient();
+		const {
+			data: { user },
+		} = await supabase.auth.getUser();
+		if (!user) return { error: "Unauthorized" };
 
-	const file = formData.get("avatar") as File;
-	if (!file) return { error: "File tidak ditemukan" };
+		const file = formData.get("avatar");
+		if (!file || !(file instanceof File)) return { error: "File tidak valid" };
 
-	const fileExt = file.name.split(".").pop();
-	const filePath = `${user.id}/avatar.${fileExt}`;
+		const fileExt = file.name.split(".").pop();
+		const filePath = `${user.id}/avatar.${fileExt}`;
 
-	const { error: uploadError } = await supabase.storage
-		.from("avatars")
-		.upload(filePath, file, { upsert: true });
+		const { error: uploadError } = await supabase.storage
+			.from("avatars")
+			.upload(filePath, file, { upsert: true });
 
-	if (uploadError) return { error: uploadError.message };
+		if (uploadError) return { error: uploadError.message };
 
-	const {
-		data: { publicUrl },
-	} = supabase.storage.from("avatars").getPublicUrl(filePath);
+		const {
+			data: { publicUrl },
+		} = supabase.storage.from("avatars").getPublicUrl(filePath);
 
-	await supabase
-		.from("profiles")
-		.update({ avatar_url: publicUrl })
-		.eq("id", user.id);
+		const { error: dbError } = await supabase
+			.from("profiles")
+			.update({ avatar_url: publicUrl })
+			.eq("id", user.id);
 
-	revalidatePath("/profil");
-	return { success: true, url: publicUrl };
+		if (dbError) return { error: dbError.message };
+
+		revalidatePath("/profil");
+		revalidatePath("/admin/profil");
+		revalidatePath("/customer/profil");
+
+		return { success: true, url: publicUrl };
+	} catch (error: unknown) {
+		console.error("Update Avatar Error:", error);
+		const errorMessage =
+			error instanceof Error ? error.message : "Gagal memperbarui foto profil";
+		return { error: errorMessage };
+	}
 }

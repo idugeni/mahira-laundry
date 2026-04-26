@@ -3,16 +3,16 @@ import { PaketUsahaClient } from "@/components/shared/public/paket-usaha/paket-u
 import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
 import type { BusinessPackage } from "@/lib/types";
 
-export const revalidate = 3600;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
-	title: "Paket Usaha Laundry Mahira — Mulai Bisnis Laundry Anda",
+	title: "Paket Usaha Laundry Lengkap",
 	description:
-		"Mulai bisnis laundry Anda bersama Mahira Laundry. Pilih paket kemitraan yang sesuai dengan modal dan kebutuhan Anda.",
+		"Mulai bisnis laundry Anda bersama Mahira dengan dukungan mesin, pelatihan, dan sistem manajemen terbaik.",
 	openGraph: {
-		title: "Paket Usaha Laundry Mahira — Mulai Bisnis Laundry Anda",
+		title: "Jual Paket Usaha Laundry Lengkap — Mahira Laundry",
 		description:
-			"Mulai bisnis laundry Anda bersama Mahira Laundry. Pilih paket kemitraan yang sesuai dengan modal dan kebutuhan Anda.",
+			"Jual paket usaha laundry lengkap dan terpercaya. Mulai bisnis laundry Anda bersama Mahira dengan dukungan mesin, pelatihan, dan sistem manajemen terbaik.",
 		type: "website",
 		url: "/paket-usaha",
 		siteName: "Mahira Laundry",

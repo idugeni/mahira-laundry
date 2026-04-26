@@ -3,8 +3,10 @@
 import { AnimatePresence, motion } from "motion/react";
 import {
 	HiCheckBadge,
+	HiOutlineArrowRight,
 	HiOutlineBolt,
 	HiOutlineClock,
+	HiOutlineSparkles,
 	HiOutlineTag,
 	HiOutlineXMark,
 } from "react-icons/hi2";
@@ -26,186 +28,200 @@ export function ServiceDetailModal({
 	if (!service) return null;
 
 	const containerVariants = {
-		hidden: { opacity: 0, scale: 0.98, y: 10 },
+		hidden: { opacity: 0, scale: 0.95, y: 20 },
 		visible: {
 			opacity: 1,
 			scale: 1,
 			y: 0,
 			transition: {
 				type: "spring",
-				damping: 30,
-				stiffness: 400,
-				staggerChildren: 0.05,
+				damping: 25,
+				stiffness: 300,
+				staggerChildren: 0.1,
 			},
 		},
-		exit: { opacity: 0, scale: 0.98, y: 10, transition: { duration: 0.2 } },
+		exit: { opacity: 0, scale: 0.95, y: 20, transition: { duration: 0.3 } },
 	};
 
 	const itemVariants = {
-		hidden: { opacity: 0, y: 10 },
-		visible: { opacity: 1, y: 0 },
+		hidden: { opacity: 0, y: 15 },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] },
+		},
 	};
 
 	return (
 		<AnimatePresence>
 			{isOpen && (
-				<div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-4 overflow-hidden">
-					{/* Backdrop with elegant blur */}
+				<div className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-6 overflow-hidden">
+					{/* Backdrop with Deep Cinematic Blur */}
 					<motion.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						onClick={onClose}
-						className="absolute inset-0 bg-slate-900/60 backdrop-blur-lg"
+						className="absolute inset-0 bg-slate-950/80 backdrop-blur-xl"
 					/>
 
-					{/* Modal Container: Sleek Executive Style */}
+					{/* Modal Container: High-End Card Design */}
 					<motion.div
 						variants={containerVariants}
 						initial="hidden"
 						animate="visible"
 						exit="exit"
-						className="relative w-full max-w-lg md:max-w-3xl bg-white rounded-t-3xl sm:rounded-[2rem] shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh] md:h-auto z-10"
+						className="relative w-full max-w-4xl bg-white rounded-t-[3rem] sm:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row z-10 max-h-[95vh]"
 					>
-						{/* Left Side (Desktop) / Top Side (Mobile): Compact Header Strip */}
-						<div className="relative w-full md:w-[28%] bg-gradient-to-br from-slate-900 via-brand-primary to-slate-900 p-6 md:p-8 flex flex-col items-center justify-center text-center shrink-0">
-							<div className="relative z-10 w-full flex flex-col items-center gap-5">
-								{/* 1. Icon - Compact Circle */}
+						{/* Left Side: Brand Visual Strip */}
+						<div className="relative w-full md:w-[35%] bg-slate-900 p-10 lg:p-14 flex flex-col items-center justify-center text-center shrink-0">
+							{/* Background Decorative */}
+							<div className="absolute inset-0 bg-brand-gradient opacity-20 mix-blend-overlay" />
+							<div className="absolute top-0 left-0 w-full h-full bg-brand-primary/10 blur-[80px] rounded-full" />
+
+							<div className="relative z-10 w-full flex flex-col items-center gap-8">
 								<motion.div
 									variants={itemVariants}
-									className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white/10 backdrop-blur-xl flex items-center justify-center text-4xl sm:text-5xl shadow-lg relative"
+									className="w-24 h-24 lg:w-32 lg:h-32 rounded-[2.5rem] bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-6xl shadow-2xl relative rotate-3 group"
 								>
 									{service.icon || "🧺"}
-									<div className="absolute -bottom-0.5 -right-0.5 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md">
-										<span className="text-brand-primary text-sm">
+									<div className="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center shadow-xl border-4 border-slate-900">
+										<span className="text-white text-sm">
 											<HiCheckBadge />
 										</span>
 									</div>
 								</motion.div>
 
-								{/* 2. Price Display - Elegant & Small */}
-								<motion.div variants={itemVariants} className="text-white">
-									<span className="block text-[9px] font-bold text-white/40 uppercase tracking-[0.3em] mb-1">
-										Investment
+								<motion.div
+									variants={itemVariants}
+									className="text-white space-y-2"
+								>
+									<span className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-[9px] font-black uppercase tracking-[0.3em] text-brand-primary border border-white/5">
+										<HiOutlineSparkles size={12} />
+										Investasi Bersih
 									</span>
-									<div className="flex flex-col items-center">
-										<h3 className="text-2xl sm:text-3xl font-black font-[family-name:var(--font-heading)] leading-none">
+									<div className="flex flex-col items-center pt-4">
+										<h3 className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] tracking-tighter leading-none text-brand-accent">
 											{formatIDR(Number(service.price))}
 										</h3>
-										<p className="text-[9px] font-bold text-brand-accent uppercase tracking-[0.2em] mt-2 opacity-80">
+										<p className="text-[10px] font-black text-white/40 uppercase tracking-[0.4em] mt-4">
 											Per {service.unit}
 										</p>
 									</div>
 								</motion.div>
 							</div>
 
-							{/* Close Button Inside Header (Mobile Only) */}
+							{/* Close Mobile Button */}
 							<button
 								type="button"
 								onClick={onClose}
-								className="absolute top-4 right-4 z-20 w-8 h-8 rounded-full bg-white/10 backdrop-blur-md flex md:hidden items-center justify-center text-white active:scale-90 transition-all"
+								className="absolute top-8 right-8 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex md:hidden items-center justify-center text-white border border-white/10 active:scale-90 transition-all"
 							>
-								<HiOutlineXMark size={18} />
+								<HiOutlineXMark size={24} />
 							</button>
 						</div>
 
-						{/* Right Side (Desktop) / Bottom Side (Mobile): Efficient Content Area */}
-						<div className="relative w-full md:w-[72%] bg-white flex flex-col h-full overflow-hidden">
-							{/* Close Button (Desktop Only) - Subtle */}
+						{/* Right Side: Content Area */}
+						<div className="relative w-full md:w-[65%] bg-white flex flex-col h-full overflow-hidden">
+							{/* Desktop Close Button */}
 							<button
 								type="button"
 								onClick={onClose}
-								className="absolute top-6 right-6 z-20 w-9 h-9 rounded-full bg-slate-50 hidden md:flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all active:scale-90"
+								className="absolute top-10 right-10 z-20 w-12 h-12 bg-slate-50 hidden md:flex items-center justify-center text-slate-300 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-all active:scale-90"
 							>
-								<HiOutlineXMark size={20} />
+								<HiOutlineXMark size={24} />
 							</button>
 
-							<div className="flex-1 overflow-y-auto px-6 py-8 sm:px-10 sm:py-10 custom-scrollbar">
-								<div className="space-y-8">
-									<motion.div
-										variants={itemVariants}
-										className="text-center md:text-left"
-									>
-										<h2 className="text-2xl sm:text-3xl font-black text-slate-900 font-[family-name:var(--font-heading)] leading-tight">
+							<div className="flex-1 overflow-y-auto px-10 py-12 lg:px-16 lg:py-16 custom-scrollbar">
+								<div className="space-y-12">
+									<motion.div variants={itemVariants} className="text-left">
+										<h2 className="text-4xl lg:text-5xl font-black text-slate-900 font-[family-name:var(--font-heading)] tracking-tighter leading-[0.9] mb-6">
 											{service.name}
 										</h2>
-										<div className="mt-3 flex flex-wrap items-center justify-center md:justify-start gap-4">
-											<div className="flex items-center gap-1.5 text-slate-400 text-[10px] font-bold uppercase tracking-wider">
+										<div className="flex flex-wrap items-center gap-6">
+											<div className="flex items-center gap-3 text-slate-400 text-[10px] font-black uppercase tracking-widest">
 												<span className="text-brand-primary">
-													<HiOutlineClock />
+													<HiOutlineClock size={16} />
 												</span>
 												<span>
-													{service.estimated_duration_hours} JAM ESTIMASI
+													{service.estimated_duration_hours} Jam Pengerjaan
 												</span>
 											</div>
 											{service.is_express && (
-												<div className="flex items-center gap-1.5 text-amber-600 text-[10px] font-bold uppercase tracking-wider bg-amber-50 px-3 py-1.5 rounded-full ring-1 ring-amber-100">
-													<span className="text-amber-500">
-														<HiOutlineBolt />
-													</span>
-													<span>Express OK</span>
+												<div className="flex items-center gap-3 text-amber-600 text-[10px] font-black uppercase tracking-widest bg-amber-50 px-4 py-2 rounded-full border border-amber-100">
+													<HiOutlineBolt size={16} />
+													<span>Express Available</span>
 												</div>
 											)}
 										</div>
 									</motion.div>
 
-									<motion.div variants={itemVariants} className="space-y-3">
-										<div className="flex items-center gap-2 text-[9px] font-bold text-slate-300 uppercase tracking-widest">
-											<HiOutlineTag />
-											<span>Overview</span>
+									<motion.div variants={itemVariants} className="space-y-4">
+										<div className="flex items-center gap-3 text-[10px] font-black text-slate-300 uppercase tracking-[0.3em]">
+											<HiOutlineTag size={14} />
+											<span>Layanan Overview</span>
 										</div>
-										<p className="text-slate-600 text-center md:text-left leading-relaxed text-sm font-medium">
+										<p className="text-slate-500 text-lg lg:text-xl leading-relaxed font-medium italic">
 											"
 											{service.description ||
-												"Layanan profesional Mahira Laundry memastikan pakaian Anda bersih, wangi, dan awet dengan standar kualitas tinggi."}
+												"Komitmen kami adalah memberikan hasil pengerjaan terbaik untuk setiap serat pakaian Anda."}
 											"
 										</p>
 									</motion.div>
 
 									<motion.div
 										variants={itemVariants}
-										className="bg-slate-50/50 rounded-2xl p-6 border border-slate-100/50"
+										className="bg-slate-50/50 rounded-[2.5rem] p-10 border border-slate-100"
 									>
-										<ul className="grid grid-cols-2 gap-4">
+										<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-8">
+											Fitur & Keunggulan
+										</p>
+										<ul className="grid sm:grid-cols-2 gap-6">
 											{(service.features && service.features.length > 0
 												? service.features
 												: [
-														"Detergen Premium",
-														"Setrika Uap",
-														"Parfum Signature",
-														"Kemasan Eksklusif",
+														"Detergen Premium RAM",
+														"Setrika Uap Industri",
+														"Parfum Signature Mahira",
+														"Packing Anti Bakteri",
 													]
-											).map((feat) => (
-												<li
+											).map((feat, i) => (
+												<motion.li
 													key={feat}
-													className="flex items-center gap-2.5 text-[11px] font-bold text-slate-600"
+													initial={{ opacity: 0, x: -10 }}
+													whileInView={{ opacity: 1, x: 0 }}
+													transition={{ delay: 0.5 + i * 0.1 }}
+													className="flex items-center gap-4 text-sm font-black text-slate-700"
 												>
-													<span className="text-brand-primary shrink-0">
-														<span className="text-brand-primary">
-															<HiCheckBadge />
-														</span>
+													<span className="text-brand-primary w-6 h-6 rounded-full bg-brand-primary/10 flex items-center justify-center shrink-0">
+														<HiCheckBadge size={14} />
 													</span>
 													{feat}
-												</li>
+												</motion.li>
 											))}
 										</ul>
 									</motion.div>
 								</div>
 							</div>
 
-							{/* Footer Buttons: WhatsApp Domination */}
+							{/* Footer Actions */}
 							<motion.div
 								variants={itemVariants}
-								className="px-6 py-6 sm:px-10 bg-white border-t border-slate-50 flex items-center"
+								className="px-10 py-10 lg:px-16 border-t border-slate-50 bg-white"
 							>
-								<a
+								<motion.a
+									whileHover={{ scale: 1.02, y: -2 }}
+									whileTap={{ scale: 0.98 }}
 									href={`https://wa.me/${PRIMARY_OUTLET.whatsapp}?text=Halo Mahira Laundry, saya ingin pesan layanan ${service.name}`}
 									target="_blank"
 									rel="noopener noreferrer"
-									className="w-full py-4 bg-brand-primary text-white text-center text-xs font-black rounded-full shadow-xl shadow-brand-primary/25 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 uppercase tracking-[0.15em]"
+									className="w-full py-6 bg-slate-900 text-white text-center text-xs font-black rounded-full shadow-2xl shadow-slate-200 transition-all flex items-center justify-center gap-4 uppercase tracking-[0.2em] group"
 								>
-									<span>Pesan via WhatsApp</span>
-								</a>
+									<span>Booking Layanan Sekarang</span>
+									<span className="group-hover:translate-x-2 transition-transform">
+										<HiOutlineArrowRight size={20} />
+									</span>
+								</motion.a>
 							</motion.div>
 						</div>
 					</motion.div>

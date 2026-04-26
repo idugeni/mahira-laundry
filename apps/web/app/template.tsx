@@ -42,7 +42,7 @@ export default function RootTemplate({
 							className="flex flex-col items-center gap-6"
 						>
 							<div className="p-4 bg-slate-50 rounded-3xl shadow-sm border border-slate-100">
-								<MahiraLogo size={64} showText={false} />
+								<MahiraLogo size={64} showText={false} priority />
 							</div>
 
 							<div className="flex flex-col items-center gap-2">

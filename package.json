@@ -2,7 +2,7 @@
 	"name": "mahira-laundry",
 	"version": "1.0.0",
 	"private": true,
-	"packageManager": "npm@11.11.1",
+	"packageManager": "npm@11.13.0",
 	"workspaces": [
 		"apps/*",
 		"packages/*"
@@ -17,7 +17,7 @@
 		"db:studio": "npm run db:studio --workspace=apps/web"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.12",
+		"@biomejs/biome": "^2.4.13",
 		"turbo": "^2.9.6",
 		"typescript": "^6.0.3"
 	},

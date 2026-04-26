@@ -1,209 +1,293 @@
 "use client";
 
-import { motion } from "motion/react";
+import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { HiOutlineArrowRight, HiOutlineMapPin } from "react-icons/hi2";
+import { useRef } from "react";
+import { HiOutlineArrowRight, HiOutlineSparkles } from "react-icons/hi2";
 import {
-	MdOutlineCheckCircle,
 	MdOutlineLocalLaundryService,
+	MdOutlineRocketLaunch,
+	MdOutlineSupportAgent,
 } from "react-icons/md";
+
+import type { BusinessPackage } from "@/lib/types";
 
 interface HomeHeroSectionProps {
 	user: unknown;
 	loading: boolean;
 	dashboardHref: string;
+	packages?: BusinessPackage[];
 }
 
-export function HomeHeroSection({
-	user,
-	loading,
-	dashboardHref,
-}: HomeHeroSectionProps) {
+export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
+	const containerRef = useRef(null);
+	const { scrollY } = useScroll();
+
+	// Use Spring for smoother scroll animations (fixes jitter/choppiness)
+	const smoothScrollY = useSpring(scrollY, {
+		stiffness: 100,
+		damping: 30,
+		restDelta: 0.001,
+	});
+
+	const y1 = useTransform(smoothScrollY, [0, 500], [0, 100]);
+	const y2 = useTransform(smoothScrollY, [0, 500], [0, -80]);
+	const rotate = useTransform(smoothScrollY, [0, 500], [0, 8]);
+
+	const containerVariants = {
+		hidden: { opacity: 0 },
+		visible: {
+			opacity: 1,
+			transition: {
+				staggerChildren: 0.1,
+				delayChildren: 0.2,
+			},
+		},
+	};
+
+	const itemVariants = {
+		hidden: { opacity: 0, y: 20 },
+		visible: {
+			opacity: 1,
+			y: 0,
+			transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+		},
+	};
+
 	return (
-		<section className="relative py-16 lg:pt-24 lg:pb-32">
-			<div className="absolute inset-0 bg-brand-gradient opacity-[0.03]" />
+		<section
+			ref={containerRef}
+			className="relative py-16 lg:pt-24 lg:pb-32 overflow-hidden"
+		>
+			{/* Animated Background Elements */}
+			<div className="absolute inset-0 bg-brand-gradient opacity-[0.02]" />
 			<motion.div
-				animate={{ scale: [1, 1.1, 1], opacity: [0.1, 0.15, 0.1] }}
-				transition={{ duration: 10, repeat: Infinity }}
-				className="absolute top-20 right-0 w-[500px] h-[500px] bg-brand-primary rounded-full blur-[120px]"
+				style={{ y: y1 }}
+				className="absolute -top-20 -right-20 w-[600px] h-[600px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none"
 			/>
 			<motion.div
-				animate={{ scale: [1, 1.2, 1], opacity: [0.05, 0.1, 0.05] }}
-				transition={{ duration: 15, repeat: Infinity, delay: 2 }}
-				className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-brand-accent rounded-full blur-[100px]"
+				style={{ y: y2 }}
+				className="absolute -bottom-40 -left-20 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none"
 			/>
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
 				<div className="grid lg:grid-cols-2 gap-20 items-center">
+					{/* Left Content */}
 					<motion.div
-						initial={{ opacity: 0, x: -30 }}
-						animate={{ opacity: 1, x: 0 }}
-						transition={{ duration: 0.8, ease: "easeOut" }}
+						variants={containerVariants}
+						initial="hidden"
+						animate="visible"
 						className="text-center lg:text-left flex flex-col items-center lg:items-start"
 					>
 						<motion.div
-							initial={{ opacity: 0, y: 10 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.2 }}
-							className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full text-brand-primary text-sm font-semibold mb-8 border border-brand-primary/10"
+							variants={itemVariants}
+							className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black mb-8 border border-brand-primary/20 shadow-sm uppercase tracking-[0.2em]"
 						>
-							<span className="w-4 h-4 flex items-center justify-center animate-pulse">
-								<MdOutlineLocalLaundryService />
-							</span>
-							<span>Standar Baru Laundry Indonesia</span>
+							<motion.span
+								animate={{ rotate: 360 }}
+								transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+								className="w-4 h-4 flex items-center justify-center"
+							>
+								<HiOutlineSparkles />
+							</motion.span>
+							<span>Peluang Bisnis 2026</span>
 						</motion.div>
 
-						<h1 className="text-4xl sm:text-5xl lg:text-7xl font-bold font-[family-name:var(--font-heading)] leading-[1.1] tracking-tight text-slate-900">
-							Cucian Bersih,
+						<motion.h1
+							variants={itemVariants}
+							className="text-5xl sm:text-6xl lg:text-8xl font-black font-[family-name:var(--font-heading)] leading-[1] tracking-tighter text-slate-900"
+						>
+							Jual Paket
 							<br />
-							<span className="inline-block text-brand-gradient">
-								Hidup Nyaman.
+							<span className="inline-block text-brand-gradient py-2">
+								Usaha Laundry.
 							</span>
-						</h1>
+						</motion.h1>
 
-						<p className="mt-8 text-xl text-slate-600 leading-relaxed max-w-lg">
-							Mahira Laundry hadir sebagai solusi modern untuk kebutuhan gaya
-							hidup Anda. Pakaian Anda ditangani secara profesional dengan
-							antar-jemput gratis.
-						</p>
+						<motion.p
+							variants={itemVariants}
+							className="mt-8 text-xl text-slate-500 leading-relaxed max-w-lg font-medium"
+						>
+							Wujudkan impian bisnis Anda dengan sistem franchise-like yang
+							sudah teruji. Mulai dari peralatan premium hingga sistem autopilot
+							siap pakai.
+						</motion.p>
 
-						<div className="mt-10 flex flex-wrap justify-center lg:justify-start gap-5">
-							{!loading ? (
-								<Link
-									href={user ? dashboardHref : "/register"}
-									className="group relative px-8 py-4 bg-brand-primary text-white rounded-full font-bold overflow-hidden transition-all hover:shadow-2xl hover:shadow-brand-primary/30"
-								>
-									<motion.div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform" />
-									<span className="relative flex items-center gap-2">
-										{user ? "Buka Dashboard" : "Mulai Sekarang"}
-										<span className="w-5 h-5 flex items-center justify-center group-hover:translate-x-1 transition-transform">
-											<HiOutlineArrowRight />
-										</span>
-									</span>
-								</Link>
-							) : (
-								<div className="w-48 h-14 bg-slate-100 animate-pulse rounded-full" />
-							)}
+						<motion.div
+							variants={itemVariants}
+							className="mt-10 flex flex-wrap justify-center lg:justify-start gap-5"
+						>
 							<Link
-								href="/layanan"
-								className="px-8 py-4 border-2 border-slate-200 rounded-full font-bold text-slate-700 hover:border-brand-primary hover:text-brand-primary transition-all flex items-center gap-2"
+								href="/paket-usaha"
+								className="group relative px-10 py-5 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all hover:shadow-[0_20px_40px_rgba(var(--brand-primary-rgb),0.4)]"
 							>
-								Lihat Layanan
+								<motion.div
+									initial={{ x: "-100%" }}
+									whileHover={{ x: "100%" }}
+									transition={{ duration: 0.5 }}
+									className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+								/>
+								<span className="relative flex items-center gap-2">
+									PILIH PAKET USAHA
+									<span className="group-hover:translate-x-2 transition-transform duration-300">
+										<HiOutlineArrowRight />
+									</span>
+								</span>
 							</Link>
-						</div>
+							<a
+								href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent("Halo Mahira, saya ingin konsultasi mengenai paket usaha laundry.")}`}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="px-10 py-5 border-2 border-slate-200 rounded-full font-black text-slate-700 hover:border-brand-primary hover:text-brand-primary transition-all flex items-center gap-2"
+							>
+								KONSULTASI GRATIS
+							</a>
+						</motion.div>
 
-						<div className="mt-12 flex items-center gap-6 p-4 bg-white/50 backdrop-blur-sm rounded-2xl border border-slate-100 max-w-sm mx-auto lg:mx-0">
-							<div className="flex -space-x-3">
+						{/* Social Proof */}
+						<motion.div
+							variants={itemVariants}
+							className="mt-16 flex items-center gap-6"
+						>
+							<div className="flex -space-x-4">
 								{[1, 2, 3, 4].map((i) => (
-									<div
+									<motion.div
 										key={i}
-										className="w-12 h-12 rounded-full bg-slate-200 border-4 border-white overflow-hidden shadow-sm"
+										whileHover={{ y: -5, zIndex: 10 }}
+										className="w-14 h-14 rounded-full border-4 border-white overflow-hidden shadow-lg cursor-pointer"
 									>
 										<Image
-											src={`https://i.pravatar.cc/150?u=${i + 10}`}
-											alt="Pelanggan"
-											width={48}
-											height={48}
+											src={`https://i.pravatar.cc/150?u=${i + 20}`}
+											alt="Partner"
+											width={56}
+											height={56}
 											className="w-full h-full object-cover"
 										/>
-									</div>
-								))}
-							</div>
-							<div>
-								<div className="flex text-amber-500 text-sm">
-									{[1, 2, 3, 4, 5].map((star) => (
-										<span key={star}>★</span>
-									))}
-								</div>
-								<p className="text-sm font-medium text-slate-600">
-									<strong className="text-slate-900">2,500+</strong> pelanggan
-									puas
-								</p>
-							</div>
-						</div>
-					</motion.div>
-
-					<motion.div
-						initial={{ opacity: 0, scale: 0.9 }}
-						animate={{ opacity: 1, scale: 1 }}
-						transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-						className="relative"
-					>
-						<div className="relative z-10 glass-card p-6 sm:p-10 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.1)] border-white/40 ring-1 ring-black/5">
-							<div className="flex items-center gap-4 mb-8">
-								<div className="w-14 h-14 rounded-full bg-brand-primary/10 flex items-center justify-center text-3xl text-brand-primary shadow-inner">
-									<MdOutlineLocalLaundryService />
-								</div>
-								<div>
-									<h3 className="text-lg font-bold text-slate-900 leading-tight">
-										Order Aktif
-									</h3>
-									<p className="text-sm text-slate-500 font-medium">
-										Pickup dalam 30 menit
-									</p>
-								</div>
-							</div>
-
-							<div className="space-y-4">
-								{[
-									"Cuci Setrika 3kg",
-									"Dry Cleaning 2 item",
-									"Express Setrika 1kg",
-								].map((item, i) => (
-									<motion.div
-										key={item}
-										initial={{ opacity: 0, x: 10 }}
-										animate={{ opacity: 1, x: 0 }}
-										transition={{ delay: 0.5 + i * 0.1 }}
-										className="flex items-center justify-between p-3 rounded-xl hover:bg-slate-50 transition-colors border border-transparent hover:border-slate-100"
-									>
-										<span className="text-sm font-semibold text-slate-700">
-											{item}
-										</span>
-										<span className="text-emerald-500 w-5 h-5 flex items-center justify-center">
-											<MdOutlineCheckCircle />
-										</span>
 									</motion.div>
 								))}
 							</div>
-
-							<div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between">
-								<div>
-									<p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
-										Total Pembayaran
-									</p>
-									<p className="text-2xl font-black text-brand-primary mt-1">
-										Rp 85.000
-									</p>
-								</div>
-								<div className="px-4 py-2 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-bold ring-1 ring-emerald-100 uppercase">
-									Paid
-								</div>
-							</div>
-						</div>
-
-						{/* Float Element */}
-						<motion.div
-							animate={{ y: [0, -15, 0] }}
-							transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-							className="absolute -bottom-8 -right-8 z-20 glass-card p-5 shadow-2xl ring-1 ring-black/5 flex items-center gap-4 max-w-[220px]"
-						>
-							<div className="w-12 h-12 rounded-full bg-brand-accent/20 flex items-center justify-center text-2xl">
-								<span className="text-brand-accent flex items-center justify-center">
-									<HiOutlineMapPin />
-								</span>
-							</div>
+							<div className="h-12 w-px bg-slate-200" />
 							<div>
-								<p className="text-[10px] uppercase font-bold text-slate-400">
-									Kurir Mahira
+								<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+									Dipercaya oleh
 								</p>
-								<p className="text-sm font-bold text-slate-800 leading-tight mt-0.5">
-									Sedang Menuju Lokasi
+								<p className="text-lg font-black text-slate-900">
+									150+ <span className="text-brand-primary">Mitra Aktif</span>
 								</p>
 							</div>
 						</motion.div>
 					</motion.div>
+
+					{/* Right Visual Content */}
+					<div className="relative lg:h-[600px] flex items-center justify-center">
+						<motion.div
+							initial={{ opacity: 0, x: 50 }}
+							animate={{ opacity: 1, x: 0 }}
+							style={{
+								rotate,
+								y: y2,
+								willChange: "transform",
+							}}
+							className="relative z-10 w-full max-w-md p-10 rounded-[3rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
+						>
+							{/* Floating Decoration Icons */}
+							<motion.div
+								animate={{ y: [0, -10, 0] }}
+								transition={{
+									duration: 4,
+									repeat: Infinity,
+									ease: "easeInOut",
+								}}
+								className="absolute top-10 right-10 text-brand-primary/10 text-6xl"
+							>
+								<MdOutlineLocalLaundryService />
+							</motion.div>
+
+							<div className="flex items-center gap-5 mb-10 relative z-10">
+								<div className="w-16 h-16 rounded-2xl bg-brand-primary flex items-center justify-center text-3xl text-white shadow-xl shadow-brand-primary/20">
+									<MdOutlineRocketLaunch />
+								</div>
+								<div>
+									<h3 className="text-xl font-black text-slate-900 leading-tight">
+										Estimasi Profit
+									</h3>
+									<p className="text-[10px] text-brand-primary font-black uppercase tracking-[0.2em]">
+										ROI CEPAT & TERUJI
+									</p>
+								</div>
+							</div>
+
+							<div className="space-y-4 relative z-10">
+								{packages.length > 0 ? (
+									packages.slice(0, 3).map((pkg, i) => (
+										<motion.div
+											key={pkg.id}
+											initial={{ opacity: 0, x: 20 }}
+											animate={{ opacity: 1, x: 0 }}
+											transition={{ delay: 0.5 + i * 0.1 }}
+											className="flex items-center justify-between p-5 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm"
+										>
+											<div className="flex items-center gap-3">
+												<div className="w-2 h-2 rounded-full bg-brand-primary" />
+												<span className="text-xs font-black text-slate-700 uppercase tracking-widest">
+													{pkg.name}
+												</span>
+											</div>
+											<span className="text-brand-primary font-black text-sm">
+												Rp {(pkg.price / 1000000).toFixed(0)}jt
+											</span>
+										</motion.div>
+									))
+								) : (
+									<div className="space-y-4">
+										{[1, 2, 3].map((i) => (
+											<div
+												key={i}
+												className="h-14 bg-slate-50 animate-pulse rounded-2xl border border-slate-100"
+											/>
+										))}
+									</div>
+								)}
+							</div>
+
+							<div className="mt-10 pt-8 border-t border-slate-100 flex items-center justify-between relative z-10">
+								<div>
+									<p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1">
+										Status Franchise
+									</p>
+									<div className="flex items-center gap-2">
+										<div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+										<p className="text-2xl font-black text-slate-900 tracking-tighter">
+											OPEN <span className="text-emerald-500">NOW</span>
+										</p>
+									</div>
+								</div>
+								<div className="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl">
+									Verified 2026
+								</div>
+							</div>
+						</motion.div>
+
+						{/* Floating Stats Badge (Simplified for performance) */}
+						<motion.div
+							style={{ y: y1 }}
+							className="absolute -bottom-6 -right-6 lg:-right-12 z-20 p-6 bg-slate-900 rounded-[2rem] shadow-2xl flex items-center gap-4 min-w-[240px] border border-slate-800"
+						>
+							<div className="w-12 h-12 rounded-full bg-brand-accent/20 flex items-center justify-center text-2xl text-brand-accent">
+								<MdOutlineSupportAgent />
+							</div>
+							<div>
+								<p className="text-[10px] uppercase font-black text-brand-accent tracking-widest">
+									Full Support
+								</p>
+								<p className="text-sm font-black text-white leading-tight mt-0.5">
+									Bimbingan Bisnis <br />
+									Sampai Berhasil
+								</p>
+							</div>
+						</motion.div>
+					</div>
 				</div>
 			</div>
 		</section>

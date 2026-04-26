@@ -36,7 +36,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
 				exit={{ scale: 1.1, opacity: 0 }}
 				className="flex flex-col items-center gap-4"
 			>
-				<MahiraLogo size={60} showText={false} />
+				<MahiraLogo size={60} showText={false} priority />
 				<div className="h-0.5 w-12 bg-slate-100 rounded-full overflow-hidden">
 					<motion.div
 						initial={{ x: "-100%" }}

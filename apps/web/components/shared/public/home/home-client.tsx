@@ -77,6 +77,7 @@ export function HomeClient({
 				user={user}
 				loading={loading}
 				dashboardHref={dashboardHref}
+				packages={businessPackages}
 			/>
 			<HomeStatsSection stats={stats} />
 			<HomeServicesSection
