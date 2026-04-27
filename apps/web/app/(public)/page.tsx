@@ -9,18 +9,18 @@ export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
 	title: {
-		absolute: "Mahira Laundry — Premium Laundry & Dry Cleaning",
+		absolute: "Mahira Laundry — Paket Usaha Laundry Premium & Kemitraan",
 	},
 	description:
-		"Layanan laundry premium terpercaya di Jatiwaringin, Bekasi. Cuci lipat, setrika, dry cleaning, express 6 jam dengan antar-jemput gratis. Mulai Rp 7.000/kg.",
+		"Mulai bisnis laundry sukses Anda dengan Paket Usaha Laundry Mahira. Investasi aman, sistem teruji, dan dukungan operasional penuh untuk profit maksimal.",
 	openGraph: {
-		title: "Mahira Laundry — Layanan Laundry Premium Jatiwaringin Bekasi",
+		title: "Jual Paket Usaha Laundry Premium — Peluang Investasi Kemitraan",
 		description:
-			"Cucian Bersih, Hidup Nyaman. Layanan cuci setrika, dry cleaning, dan express 6 jam. Antar-jemput gratis.",
+			"Wujudkan impian memiliki bisnis laundry profesional. Pilih paket usaha laundry yang sesuai dengan budget dan target pasar Anda.",
 		type: "website",
 		images: [
 			{
-				url: "/og/home.png",
+				url: "/og/paket-usaha.png",
 				width: 1200,
 				height: 630,
 				alt: "Mahira Laundry Premium Experience",
@@ -34,15 +34,15 @@ const jsonLd = {
 	"@type": "LaundryBusiness",
 	name: "Mahira Laundry",
 	image: "https://mahira-laundry.vercel.app/logo.png",
-	description: "Layanan laundry premium terpercaya di Jatiwaringin, Bekasi.",
+	description: "Penyedia paket usaha laundry premium dan solusi bisnis laundry terlengkap.",
 	"@id": "https://mahira-laundry.vercel.app",
 	url: "https://mahira-laundry.vercel.app",
 	telephone: PRIMARY_OUTLET.phone,
 	address: {
 		"@type": "PostalAddress",
 		streetAddress: PRIMARY_OUTLET.address,
-		addressLocality: "Bekasi",
-		addressRegion: "Jawa Barat",
+		addressLocality: "Indonesia",
+		addressRegion: "Asia",
 		postalCode: "17411",
 		addressCountry: "ID",
 	},
@@ -74,10 +74,10 @@ const faqJsonLd = {
 	mainEntity: [
 		{
 			"@type": "Question",
-			name: "Berapa harga laundry per kg di Mahira Laundry Bekasi?",
+			name: "Berapa harga laundry per kg di Mahira Laundry?",
 			acceptedAnswer: {
 				"@type": "Answer",
-				text: "Harga laundry kiloan di Mahira Laundry Bekasi mulai dari Rp 7.000 per kg untuk layanan cuci lipat. Kami juga menawarkan berbagai paket laundry premium lainnya.",
+				text: "Harga laundry kiloan di Mahira Laundry mulai dari Rp 7.000 per kg untuk layanan cuci lipat. Kami juga menawarkan berbagai paket laundry premium lainnya.",
 			},
 		},
 		{
@@ -85,7 +85,7 @@ const faqJsonLd = {
 			name: "Apakah Mahira Laundry menyediakan layanan antar-jemput?",
 			acceptedAnswer: {
 				"@type": "Answer",
-				text: "Ya, Mahira Laundry menyediakan layanan antar-jemput gratis untuk area Jatiwaringin dan sekitarnya. Anda dapat memesan layanan ini melalui WhatsApp kami.",
+				text: "Ya, Mahira Laundry menyediakan layanan antar-jemput gratis untuk area jangkauan kami. Anda dapat memesan layanan ini melalui WhatsApp kami.",
 			},
 		},
 		{

@@ -3,7 +3,7 @@ export const APP_TAGLINE = "Cucian Bersih, Hidup Nyaman.";
 
 export const PRIMARY_OUTLET = {
 	id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
-	name: "Mahira Laundry Jatiwaringin",
+	name: "Mahira Laundry Premium",
 	slug: "jatiwaringin",
 	address:
 		"Jl. Raya Jatiwaringin No. 12, Pondok Gede, Kota Bekasi, Jawa Barat 17411",

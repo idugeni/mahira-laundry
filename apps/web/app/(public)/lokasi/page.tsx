@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 const _outlets = [
 	{
-		name: "Mahira Laundry Jatiwaringin",
+		name: "Mahira Laundry Premium",
 		address: "Jl. Jatiwaringin No. 28, Jaticempaka, Pondokgede, Bekasi 17411",
 		phone: "021-3456789",
 		hours: { weekday: "07:00-21:00", weekend: "08:00-20:00" },

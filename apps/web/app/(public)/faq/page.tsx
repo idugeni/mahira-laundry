@@ -44,7 +44,7 @@ const faqJsonLd = {
 			name: "Apakah layanan antar-jemput gratis?",
 			acceptedAnswer: {
 				"@type": "Answer",
-				text: "Kami menyediakan layanan antar-jemput GRATIS untuk area Jatiwaringin dengan minimum order tertentu.",
+				text: "Kami menyediakan layanan antar-jemput GRATIS untuk area operasional kami dengan minimum order tertentu.",
 			},
 		},
 	],

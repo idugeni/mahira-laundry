@@ -23,32 +23,32 @@ const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mahira-laundry.verce
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
 	title: {
-		default: "Mahira Laundry — Premium Laundry & Dry Cleaning",
+		default: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
 		template: "%s | Mahira Laundry",
 	},
 	description:
-		"Layanan laundry premium terbaik di Bekasi Jatiwaringin. Cuci, setrika, dan dry cleaning berkualitas tinggi dengan layanan antar-jemput profesional untuk warga Bekasi.",
+		"Dapatkan peluang investasi terbaik dengan paket usaha laundry lengkap dari Mahira. Dukungan mesin, sistem manajemen, dan pelatihan profesional untuk bisnis yang menguntungkan.",
 	keywords: [
-		"laundry premium bekasi",
-		"laundry jatiwaringin",
-		"dry cleaning bekasi",
-		"cuci setrika jatiwaringin",
-		"laundry profesional bekasi",
-		"mahira laundry jatiwaringin",
-		"amanda laundry",
-		"mahira laundry vercel",
+		"paket usaha laundry",
+		"kemitraan laundry",
+		"investasi laundry",
+		"franchise laundry",
+		"bisnis laundry premium",
+		"mahira laundry",
+		"peluang usaha laundry",
+		"laundry business setup",
 	],
 	openGraph: {
-		title: "Mahira Laundry — Premium Laundry & Dry Cleaning",
+		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
 		description:
-			"Layanan laundry premium terbaik di Bekasi Jatiwaringin dengan standar kualitas tinggi. Higienis, cepat, dan terpercaya.",
+			"Peluang investasi bisnis laundry dengan sistem teruji dan dukungan penuh. Mulai usaha laundry premium Anda hari ini.",
 		type: "website",
 		locale: "id_ID",
 		siteName: "Mahira Laundry",
 		url: "https://mahira-laundry.vercel.app",
 		images: [
 			{
-				url: "/og/home.png",
+				url: "/og/paket-usaha.png",
 				width: 1200,
 				height: 630,
 				alt: "Mahira Laundry Premium Experience",
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: "summary_large_image",
-		title: "Mahira Laundry — Premium Laundry & Dry Cleaning",
-		description: "Layanan laundry premium terbaik di Bekasi dengan standar kualitas tinggi.",
-		images: ["/og/home.png"],
+		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
+		description: "Investasi bisnis laundry premium dengan sistem manajemen profesional dan mesin terbaik.",
+		images: ["/og/paket-usaha.png"],
 		creator: "@mahiralaundry",
 	},
 	alternates: {
@@ -81,8 +81,17 @@ export const metadata: Metadata = {
 		shortcut: "/logo.png",
 		apple: "/logo.png",
 	},
+	manifest: "/manifest.json",
+	appleWebApp: {
+		capable: true,
+		statusBarStyle: "default",
+		title: "Mahira Laundry",
+	},
+	formatDetection: {
+		telephone: true,
+	},
 	verification: {
-		google: "google-site-verification-placeholder",
+		google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
 		yandex: "yandex-verification-placeholder",
 	},
 	category: "Business",
@@ -94,7 +103,7 @@ const organizationSchema = {
 	name: "Mahira Laundry",
 	url: baseUrl,
 	logo: `${baseUrl}/logo.png`,
-	description: "Layanan laundry premium terbaik di Bekasi Jatiwaringin.",
+	description: "Penyedia paket usaha laundry premium dan kemitraan bisnis terpercaya.",
 	address: {
 		"@type": "PostalAddress",
 		streetAddress: "Jl. Jatiwaringin No. 28",

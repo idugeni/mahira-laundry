@@ -18,8 +18,33 @@ export default function robots(): MetadataRoute.Robots {
 				],
 			},
 			{
-				// Specifically encourage AI crawlers for better visibility in AI Search (SearchGPT, Perplexity, Google AI Mode, etc.)
-				userAgent: ["GPTBot", "CCBot", "PerplexityBot", "Google-Extended"],
+				// Ensure social media scrapers can access the site for link previews
+				userAgent: [
+					"facebookexternalhit",
+					"Facebot",
+					"Twitterbot",
+					"Pinterest",
+					"Slackbot",
+					"LinkedInBot",
+					"WhatsApp",
+					"TelegramBot",
+				],
+				allow: "/",
+			},
+			{
+				// High-priority for 2026 AI Search Engines (SearchGPT, Claude, Perplexity, etc.)
+				userAgent: [
+					"GPTBot",
+					"CCBot",
+					"PerplexityBot",
+					"Google-Extended",
+					"OAI-SearchBot",
+					"ClaudeBot",
+					"Anthropic-AI",
+					"Claude-Web",
+					"SearchGPT",
+					"YouBot",
+				],
 				allow: ["/", "/layanan", "/paket-usaha", "/galeri", "/llms.txt"],
 				disallow: ["/admin", "/dashboard", "/api"],
 			},

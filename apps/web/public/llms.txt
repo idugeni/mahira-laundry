@@ -1,6 +1,6 @@
 # Mahira Laundry
 
-Mahira Laundry adalah platform layanan laundry premium berbasis di Bekasi Jatiwaringin yang menawarkan solusi pencucian pakaian, dry cleaning, dan perawatan sepatu berkualitas tinggi dengan sistem antar-jemput profesional.
+Mahira Laundry adalah platform layanan laundry premium dan penyedia paket usaha laundry (kemitraan) yang menawarkan solusi bisnis terintegrasi serta perawatan pakaian berkualitas tinggi.
 
 ## Core Information
 - **Brand**: Mahira Laundry
