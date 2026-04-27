@@ -31,9 +31,9 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 		restDelta: 0.001,
 	});
 
-	const y1 = useTransform(smoothScrollY, [0, 500], [0, 100]);
-	const y2 = useTransform(smoothScrollY, [0, 500], [0, -80]);
-	const rotate = useTransform(smoothScrollY, [0, 500], [0, 8]);
+	const y1 = useTransform(smoothScrollY, [0, 500], [0, 50]);
+	const y2 = useTransform(smoothScrollY, [0, 500], [0, -40]);
+	const rotateValue = useTransform(smoothScrollY, [0, 500], [0, 0]); // Disable scroll rotation as it feels broken on mobile
 
 	const containerVariants = {
 		hidden: { opacity: 0 },
@@ -180,12 +180,12 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 					</motion.div>
 
 					{/* Right Visual Content */}
-					<div className="relative lg:h-[600px] flex items-center justify-center">
+					<div className="relative py-12 lg:py-0 lg:h-[600px] flex items-center justify-center">
 							<motion.div
 								initial={{ opacity: 0, x: 50 }}
 								animate={{ opacity: 1, x: 0 }}
 								style={{
-									rotate,
+									rotate: rotateValue,
 									y: y2,
 									willChange: "transform",
 								}}
@@ -272,7 +272,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 						{/* Floating Stats Badge (Simplified for performance) */}
 						<motion.div
 							style={{ y: y1 }}
-							className="absolute -bottom-6 -right-6 lg:-right-12 z-20 p-6 bg-slate-900 rounded-[2rem] shadow-2xl flex items-center gap-4 min-w-[240px] border border-slate-800"
+							className="absolute -bottom-10 -right-4 lg:-bottom-6 lg:-right-12 z-20 p-5 lg:p-6 bg-slate-900 rounded-[2rem] shadow-2xl flex items-center gap-4 min-w-[220px] lg:min-w-[240px] border border-slate-800"
 						>
 							<div className="w-12 h-12 rounded-full bg-brand-accent/20 flex items-center justify-center text-2xl text-brand-accent">
 								<MdOutlineSupportAgent />
