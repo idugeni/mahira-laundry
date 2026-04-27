@@ -103,7 +103,7 @@ export default async function HomePage() {
 	const supabase = await createClient();
 	const testimonials = await getPublishedTestimonials();
 
-	// Fetch active services from the main outlet (Salemba)
+	// Fetch active services from the main outlet (Jatiwaringin)
 	const { data: services } = await supabase
 		.from("services")
 		.select("*")

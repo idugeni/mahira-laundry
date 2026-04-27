@@ -21,8 +21,8 @@ export const metadata: Metadata = {
 
 const _outlets = [
 	{
-		name: "Mahira Laundry Salemba",
-		address: "Jl. Salemba Raya No. 28, Paseban, Senen, Jakarta Pusat 10440",
+		name: "Mahira Laundry Jatiwaringin",
+		address: "Jl. Jatiwaringin No. 28, Jaticempaka, Pondokgede, Bekasi 17411",
 		phone: "021-3456789",
 		hours: { weekday: "07:00-21:00", weekend: "08:00-20:00" },
 		lat: -6.2115,

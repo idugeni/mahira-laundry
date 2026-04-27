@@ -44,7 +44,7 @@ export default function KasirLayout({
 						Kasir Panel
 					</h2>
 					<span className="text-sm text-muted-foreground">
-						Mahira Laundry Salemba
+						Mahira Laundry Jatiwaringin
 					</span>
 				</header>
 				<main className="flex-1 p-6 overflow-auto">{children}</main>

@@ -36,7 +36,7 @@ export default async function TugasDetailPage({
 				<div>
 					<span className="text-sm font-medium">Alamat Jemput</span>
 					<p className="text-sm text-muted-foreground">
-						Jl. Salemba Raya No. 10, Jakarta Pusat
+						Jl. Jatiwaringin Raya No. 10, Bekasi
 					</p>
 				</div>
 				<div>

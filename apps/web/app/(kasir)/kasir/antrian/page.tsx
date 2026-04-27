@@ -27,8 +27,8 @@ export default async function AntrianPage() {
 		outletId = outlet?.id;
 	}
 
-	// Fallback to salemba if still null (old behavior)
-	const finalOutletId = outletId || "salemba";
+	// Fallback to jatiwaringin if still null (old behavior)
+	const finalOutletId = outletId || "jatiwaringin";
 
 	const { data: orders } = await supabase
 		.from("orders")

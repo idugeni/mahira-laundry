@@ -64,7 +64,7 @@ Our ecosystem is built using industry-leading technologies:
    Create a `.env` file in `apps/web/` and add your Supabase credentials:
    ```env
    NEXT_PUBLIC_SUPABASE_URL=your_url
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
+   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_key
    ```
 
 4. **Run development server:**

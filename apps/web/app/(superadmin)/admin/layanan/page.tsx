@@ -18,7 +18,7 @@ export default async function SuperadminLayananPage() {
 		getAllServices(),
 	]);
 
-	const outletId = profile?.outlet_id || "salemba";
+	const outletId = profile?.outlet_id || "jatiwaringin";
 
 	return (
 		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
