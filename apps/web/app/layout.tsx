@@ -41,20 +41,51 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: "Mahira Laundry — Premium Laundry & Dry Cleaning",
 		description:
-			"Layanan laundry premium terbaik di Bekasi Jatiwaringin dengan standar kualitas tinggi.",
+			"Layanan laundry premium terbaik di Bekasi Jatiwaringin dengan standar kualitas tinggi. Higienis, cepat, dan terpercaya.",
 		type: "website",
 		locale: "id_ID",
 		siteName: "Mahira Laundry",
 		url: "https://mahira-laundry.vercel.app",
+		images: [
+			{
+				url: "/og/home.png",
+				width: 1200,
+				height: 630,
+				alt: "Mahira Laundry Premium Experience",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Mahira Laundry — Premium Laundry & Dry Cleaning",
+		description: "Layanan laundry premium terbaik di Bekasi dengan standar kualitas tinggi.",
+		images: ["/og/home.png"],
+		creator: "@mahiralaundry",
 	},
 	alternates: {
 		canonical: "/",
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-video-preview": -1,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+		},
 	},
 	icons: {
 		icon: "/logo.png",
 		shortcut: "/logo.png",
 		apple: "/logo.png",
 	},
+	verification: {
+		google: "google-site-verification-placeholder",
+		yandex: "yandex-verification-placeholder",
+	},
+	category: "Business",
 };
 
 const organizationSchema = {
