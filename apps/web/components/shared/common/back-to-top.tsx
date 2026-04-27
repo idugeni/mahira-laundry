@@ -31,7 +31,10 @@ export function BackToTop() {
 	return (
 		<AnimatePresence>
 			{isVisible && (
-				<div className="fixed bottom-8 right-8 z-[60] flex items-center justify-center">
+				<div
+					key="back-to-top"
+					className="fixed bottom-8 right-8 z-[60] flex items-center justify-center"
+				>
 					<motion.div
 						initial={{ opacity: 0, y: 20, scale: 0.8 }}
 						animate={{ opacity: 1, y: 0, scale: 1 }}

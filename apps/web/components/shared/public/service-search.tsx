@@ -78,7 +78,7 @@ export function ServiceSearch({
 	}
 
 	return (
-		<div className={`w-full max-w-3xl mx-auto px-4 ${className}`}>
+		<div className={`w-full max-w-3xl mx-auto max-w-full ${className}`}>
 			<form onSubmit={handleSearch} className="relative group">
 				<motion.div
 					animate={isFocused ? { scale: 1.02, y: -4 } : { scale: 1, y: 0 }}
@@ -89,7 +89,7 @@ export function ServiceSearch({
 					}`}
 				>
 					<div
-						className={`pl-8 text-2xl transition-colors duration-300 ${isFocused ? "text-brand-primary" : "text-slate-300"}`}
+						className={`pl-4 md:pl-8 text-xl md:text-2xl transition-colors duration-300 ${isFocused ? "text-brand-primary" : "text-slate-300"}`}
 					>
 						<HiOutlineMagnifyingGlass />
 					</div>
@@ -102,10 +102,10 @@ export function ServiceSearch({
 						onFocus={() => setIsFocused(true)}
 						onBlur={() => setIsFocused(false)}
 						placeholder={placeholder}
-						className="flex-1 bg-transparent border-none focus:ring-0 py-6 px-6 text-lg font-bold text-slate-900 placeholder:text-slate-300"
+						className="flex-1 bg-transparent border-none focus:ring-0 py-4 md:py-6 px-3 md:px-6 text-base md:text-lg font-bold text-slate-900 placeholder:text-slate-300 min-w-0"
 					/>
 
-					<div className="pr-4 flex items-center gap-3">
+					<div className="pr-2 md:pr-4 flex items-center gap-1 md:gap-3">
 						<AnimatePresence>
 							{query && (
 								<motion.button
@@ -114,9 +114,9 @@ export function ServiceSearch({
 									exit={{ opacity: 0, x: 10 }}
 									type="button"
 									onClick={clearSearch}
-									className="p-2 text-slate-400 hover:text-slate-600 transition-colors"
+									className="p-1 md:p-2 text-slate-400 hover:text-slate-600 transition-colors"
 								>
-									<HiOutlineXMark size={24} />
+									<HiOutlineXMark size={20} />
 								</motion.button>
 							)}
 						</AnimatePresence>
@@ -125,9 +125,10 @@ export function ServiceSearch({
 							whileHover={{ scale: 1.05 }}
 							whileTap={{ scale: 0.95 }}
 							type="submit"
-							className="px-8 py-3 bg-brand-primary text-white rounded-2xl font-black text-sm shadow-xl shadow-brand-primary/30 hover:bg-brand-primary/90 transition-all uppercase tracking-widest"
+							className="px-4 md:px-8 py-2 md:py-3 bg-brand-primary text-white rounded-2xl font-black text-xs md:text-sm shadow-xl shadow-brand-primary/30 hover:bg-brand-primary/90 transition-all uppercase tracking-widest"
 						>
-							Cari
+							<span className="hidden min-[380px]:inline">Cari</span>
+							<span className="min-[380px]:hidden">Go</span>
 						</motion.button>
 					</div>
 				</motion.div>
@@ -139,7 +140,7 @@ export function ServiceSearch({
 							initial={{ opacity: 0, y: 10 }}
 							animate={{ opacity: 1, y: 0 }}
 							exit={{ opacity: 0, y: 10 }}
-							className="absolute top-full left-0 right-0 mt-4 p-6 bg-white rounded-[2rem] shadow-3xl border border-slate-50 z-50 overflow-hidden"
+							className="absolute top-full left-0 right-0 mt-4 p-4 md:p-6 bg-white rounded-[2rem] shadow-3xl border border-slate-50 z-50 overflow-hidden"
 						>
 							<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
 								<span className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse" />

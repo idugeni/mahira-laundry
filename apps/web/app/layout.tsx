@@ -212,6 +212,7 @@ export default function RootLayout({
 				className="min-h-full flex flex-col bg-background text-foreground font-[family-name:var(--font-body)]"
 			>
 				<script
+					key="ld-org"
 					type="application/ld+json"
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: Organization Schema
 					dangerouslySetInnerHTML={{
@@ -219,6 +220,7 @@ export default function RootLayout({
 					}}
 				/>
 				<script
+					key="ld-web"
 					type="application/ld+json"
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: WebSite Schema
 					dangerouslySetInnerHTML={{
@@ -226,6 +228,7 @@ export default function RootLayout({
 					}}
 				/>
 				<script
+					key="ld-nav"
 					type="application/ld+json"
 					// biome-ignore lint/security/noDangerouslySetInnerHtml: Navigation Schema
 					dangerouslySetInnerHTML={{

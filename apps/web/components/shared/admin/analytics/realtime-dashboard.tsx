@@ -173,9 +173,9 @@ export function RealtimeDashboard() {
 								/>
 							))
 						) : data?.deviceBreakdown && data.deviceBreakdown.length > 0 ? (
-							data.deviceBreakdown.slice(0, 7).map((item) => (
+							data.deviceBreakdown.slice(0, 7).map((item, idx) => (
 								<div
-									key={`${item.device}-${item.city}-${item.users}`}
+									key={`${item.device}-${item.city}-${idx}`}
 									className="flex items-center justify-between p-3.5 bg-slate-50/50 rounded-2xl border border-slate-100/50 group hover:bg-slate-50 hover:border-slate-200 transition-all"
 								>
 									<div className="flex items-center gap-3">

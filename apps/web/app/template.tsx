@@ -26,7 +26,7 @@ export default function RootTemplate({
 
 	return (
 		<>
-			<AnimatePresence mode="wait">
+			<AnimatePresence key="template-presence" mode="wait">
 				{loading && (
 					<motion.div
 						key="loading-overlay"
@@ -68,7 +68,7 @@ export default function RootTemplate({
 			</AnimatePresence>
 
 			<motion.div
-				key={pathname}
+				key={`page-content-${pathname}`}
 				initial={{ opacity: 0 }}
 				animate={{ opacity: loading ? 0 : 1 }}
 				transition={{ duration: 0.4 }}
