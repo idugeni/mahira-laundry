@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Lokasi Outlet",
@@ -8,6 +8,14 @@ export const metadata: Metadata = {
 		title: "Lokasi Outlet",
 		description:
 			"Jaringan outlet kami yang siap melayani kebutuhan laundry Anda setiap hari.",
+		images: [
+			{
+				url: "/og/lokasi.png",
+				width: 1200,
+				height: 630,
+				alt: "Lokasi Outlet Mahira Laundry",
+			},
+		],
 	},
 };
 

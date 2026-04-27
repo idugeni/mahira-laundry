@@ -16,6 +16,14 @@ export const metadata: Metadata = {
 		type: "website",
 		url: "/paket-usaha",
 		siteName: "Mahira Laundry",
+		images: [
+			{
+				url: "/og/paket-usaha.png",
+				width: 1200,
+				height: 630,
+				alt: "Peluang Investasi Paket Usaha Laundry Mahira",
+			},
+		],
 	},
 };
 

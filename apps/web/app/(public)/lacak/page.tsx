@@ -4,6 +4,18 @@ import { TrackingClient } from "@/components/public/tracking-client";
 export const metadata: Metadata = {
 	title: "Lacak Pesanan | Mahira Laundry",
 	description: "Lacak status pesanan laundry Anda secara real-time.",
+	openGraph: {
+		title: "Lacak Pesanan | Mahira Laundry",
+		description: "Pantau status cucian Anda secara real-time dari jemput hingga antar.",
+		images: [
+			{
+				url: "/og/lacak.png",
+				width: 1200,
+				height: 630,
+				alt: "Lacak Status Pesanan Mahira Laundry",
+			},
+		],
+	},
 };
 
 export default function LacakPage() {

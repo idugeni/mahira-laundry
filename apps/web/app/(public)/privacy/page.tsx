@@ -1,10 +1,22 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { LegalLayout } from "@/components/shared/public/legal-layout";
 
 export const metadata: Metadata = {
 	title: "Kebijakan Privasi",
 	description:
 		"Kebijakan Privasi Mahira Laundry - Pelajari bagaimana kami melindungi data dan informasi privasi pelanggan kami.",
+	openGraph: {
+		title: "Kebijakan Privasi | Mahira Laundry",
+		description: "Informasi mengenai cara kami menjaga dan melindungi data pribadi Anda.",
+		images: [
+			{
+				url: "/og/legal.png",
+				width: 1200,
+				height: 630,
+				alt: "Kebijakan Privasi Mahira Laundry",
+			},
+		],
+	},
 };
 
 export default function PrivacyPage() {

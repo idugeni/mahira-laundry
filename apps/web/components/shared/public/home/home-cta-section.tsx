@@ -7,13 +7,13 @@ import { PRIMARY_OUTLET } from "@/lib/constants";
 
 export function HomeCtaSection() {
 	return (
-		<section className="py-24 relative overflow-hidden bg-white">
+		<section className="py-20 relative overflow-hidden bg-white">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 				<motion.div
 					initial={{ opacity: 0, y: 40 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="group relative p-12 lg:p-24 rounded-[4rem] bg-slate-900 text-white shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden"
+					className="group relative p-10 lg:p-16 rounded-[3rem] bg-slate-900 text-white shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden"
 				>
 					{/* Elite Background Effects */}
 					<div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-brand-primary/20 via-transparent to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-1000" />
@@ -33,14 +33,14 @@ export function HomeCtaSection() {
 								Premium Services
 							</motion.div>
 
-							<h2 className="text-4xl sm:text-5xl lg:text-6xl font-black font-[family-name:var(--font-heading)] leading-[1.1] mb-8">
+							<h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] leading-[1.1] mb-6">
 								Nikmati Kualitas <br />
 								<span className="text-brand-gradient">Perawatan Pakaian</span>{" "}
 								<br />
 								Terbaik Hari Ini
 							</h2>
 
-							<p className="text-xl text-white/60 leading-relaxed max-w-xl mb-12">
+							<p className="text-lg text-white/60 leading-relaxed max-w-xl mb-10">
 								Berikan yang terbaik untuk pakaian favorit Anda. Tim profesional
 								kami siap memberikan hasil yang higienis, wangi, dan rapi
 								sempurna.
@@ -68,7 +68,7 @@ export function HomeCtaSection() {
 								href={`https://wa.me/${PRIMARY_OUTLET.whatsapp}?text=Halo Mahira Laundry, saya ingin order laundry`}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="w-full sm:w-auto inline-flex items-center justify-center gap-4 px-12 py-7 bg-white text-slate-900 rounded-[2.5rem] font-black text-xl hover:bg-brand-accent hover:text-slate-900 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.1)] group/btn"
+								className="w-full sm:w-auto inline-flex items-center justify-center gap-4 px-10 py-5 bg-white text-slate-900 rounded-[2rem] font-black text-lg hover:bg-brand-accent hover:text-slate-900 transition-all shadow-[0_20px_40px_rgba(255,255,255,0.1)] group/btn"
 							>
 								<span className="w-8 h-8 flex items-center justify-center text-emerald-500 bg-emerald-50 rounded-full group-hover/btn:bg-slate-900 transition-colors">
 									<FaWhatsapp />

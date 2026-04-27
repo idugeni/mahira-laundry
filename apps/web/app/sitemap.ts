@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-	const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mahiralaundry.id";
+	const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mahira-laundry.vercel.app";
 
 	const routes = [
 		"",
@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		"/tentang",
 		"/lokasi",
 		"/lacak",
+		"/sitemap",
 	].map((route) => ({
 		url: `${baseUrl}${route}`,
 		lastModified: new Date(),

@@ -160,6 +160,14 @@ export function MahiraFooter({
 									Syarat & Ketentuan
 								</Link>
 							</li>
+							<li>
+								<Link
+									href="/sitemap"
+									className="hover:text-brand-primary transition-colors font-bold"
+								>
+									Sitemap
+								</Link>
+							</li>
 						</ul>
 					</motion.div>
 

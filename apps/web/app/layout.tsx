@@ -18,10 +18,10 @@ const inter = Inter({
 	weight: ["300", "400", "500", "600", "700"],
 });
 
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mahira-laundry.vercel.app";
+
 export const metadata: Metadata = {
-	metadataBase: new URL(
-		process.env.NEXT_PUBLIC_APP_URL || "https://mahira-laundry.vercel.app",
-	),
+	metadataBase: new URL(baseUrl),
 	title: {
 		default: "Mahira Laundry — Premium Laundry & Dry Cleaning",
 		template: "%s | Mahira Laundry",
@@ -61,8 +61,8 @@ const organizationSchema = {
 	"@context": "https://schema.org",
 	"@type": "Organization",
 	name: "Mahira Laundry",
-	url: "https://mahira-laundry.vercel.app",
-	logo: "https://mahira-laundry.vercel.app/logo.png",
+	url: baseUrl,
+	logo: `${baseUrl}/logo.png`,
 	description: "Layanan laundry premium terbaik di Bekasi Jatiwaringin.",
 	address: {
 		"@type": "PostalAddress",

@@ -71,7 +71,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 				ease: [0.16, 1, 0.3, 1],
 			}}
 			whileHover={{ y: -10 }}
-			className={`relative flex flex-col h-full rounded-[2.5rem] border bg-white p-8 sm:p-10 transition-all duration-500 overflow-hidden ${style.accent}`}
+			className={`relative flex flex-col h-full rounded-[2rem] border bg-white p-6 sm:p-8 transition-all duration-500 overflow-hidden ${style.accent}`}
 		>
 			<div
 				className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none`}
@@ -237,7 +237,7 @@ export function HomeBusinessPackagesSection({
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
-							className="text-5xl lg:text-7xl font-black text-slate-900 tracking-tighter leading-[0.9]"
+							className="text-4xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9]"
 						>
 							Pilih Paket <br />
 							<span className="text-brand-gradient">Usaha Anda.</span>
@@ -274,7 +274,7 @@ export function HomeBusinessPackagesSection({
 					<motion.div whileHover={{ scale: 1.05 }} className="inline-block">
 						<Link
 							href="/paket-usaha"
-							className="group inline-flex items-center gap-4 px-10 py-5 bg-slate-50 text-slate-900 rounded-full font-black text-xs uppercase tracking-widest hover:bg-slate-100 transition-all border border-slate-100"
+							className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-50 text-slate-900 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 transition-all border border-slate-100"
 						>
 							Lihat Detail & Bandingkan Semua
 							<motion.div

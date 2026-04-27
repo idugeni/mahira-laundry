@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Layanan Laundry Premium",
@@ -8,6 +8,14 @@ export const metadata: Metadata = {
 		title: "Layanan",
 		description:
 			"Solusi laundry profesional dengan layanan lengkap. Mulai dari Rp 7.000/kg.",
+		images: [
+			{
+				url: "/og/layanan.png",
+				width: 1200,
+				height: 630,
+				alt: "Layanan Laundry Premium Mahira",
+			},
+		],
 	},
 };
 

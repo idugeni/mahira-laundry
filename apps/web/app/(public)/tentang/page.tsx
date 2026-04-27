@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
 	title: "Tentang Kami",
@@ -8,6 +8,14 @@ export const metadata: Metadata = {
 		title: "Tentang",
 		description:
 			"Layanan laundry terpercaya dengan komitmen terhadap kebersihan dan kualitas kain Anda.",
+		images: [
+			{
+				url: "/og/tentang.png",
+				width: 1200,
+				height: 630,
+				alt: "Visi dan Misi Mahira Laundry",
+			},
+		],
 	},
 };
 

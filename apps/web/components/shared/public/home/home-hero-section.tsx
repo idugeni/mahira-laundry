@@ -96,7 +96,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 						<motion.h1
 							variants={itemVariants}
-							className="text-5xl sm:text-6xl lg:text-8xl font-black font-[family-name:var(--font-heading)] leading-[1] tracking-tighter text-slate-900"
+							className="text-4xl sm:text-5xl lg:text-7xl font-black font-[family-name:var(--font-heading)] leading-[1] tracking-tighter text-slate-900"
 						>
 							Jual Paket
 							<br />
@@ -107,7 +107,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 						<motion.p
 							variants={itemVariants}
-							className="mt-8 text-xl text-slate-500 leading-relaxed max-w-lg font-medium"
+							className="mt-6 text-lg text-slate-500 leading-relaxed max-w-lg font-medium"
 						>
 							Wujudkan impian bisnis Anda dengan sistem franchise-like yang
 							sudah teruji. Mulai dari peralatan premium hingga sistem autopilot
@@ -116,11 +116,11 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 						<motion.div
 							variants={itemVariants}
-							className="mt-10 flex flex-wrap justify-center lg:justify-start gap-5"
+							className="mt-8 flex flex-wrap justify-center lg:justify-start gap-4"
 						>
 							<Link
 								href="/paket-usaha"
-								className="group relative px-10 py-5 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all hover:shadow-[0_20px_40px_rgba(var(--brand-primary-rgb),0.4)]"
+								className="group relative px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all hover:shadow-[0_20px_40px_rgba(var(--brand-primary-rgb),0.4)] text-sm"
 							>
 								<motion.div
 									initial={{ x: "-100%" }}
@@ -139,7 +139,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 								href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent("Halo Mahira, saya ingin konsultasi mengenai paket usaha laundry.")}`}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="px-10 py-5 border-2 border-slate-200 rounded-full font-black text-slate-700 hover:border-brand-primary hover:text-brand-primary transition-all flex items-center gap-2"
+								className="px-8 py-4 border-2 border-slate-200 rounded-full font-black text-slate-700 hover:border-brand-primary hover:text-brand-primary transition-all flex items-center gap-2 text-sm"
 							>
 								KONSULTASI GRATIS
 							</a>
@@ -181,16 +181,16 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 					{/* Right Visual Content */}
 					<div className="relative lg:h-[600px] flex items-center justify-center">
-						<motion.div
-							initial={{ opacity: 0, x: 50 }}
-							animate={{ opacity: 1, x: 0 }}
-							style={{
-								rotate,
-								y: y2,
-								willChange: "transform",
-							}}
-							className="relative z-10 w-full max-w-md p-10 rounded-[3rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
-						>
+							<motion.div
+								initial={{ opacity: 0, x: 50 }}
+								animate={{ opacity: 1, x: 0 }}
+								style={{
+									rotate,
+									y: y2,
+									willChange: "transform",
+								}}
+								className="relative z-10 w-full max-w-md p-8 rounded-[2.5rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
+							>
 							{/* Floating Decoration Icons */}
 							<motion.div
 								animate={{ y: [0, -10, 0] }}

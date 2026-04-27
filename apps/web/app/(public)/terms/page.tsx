@@ -1,10 +1,22 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { LegalLayout } from "@/components/shared/public/legal-layout";
 
 export const metadata: Metadata = {
 	title: "Syarat & Ketentuan",
 	description:
 		"Syarat dan Ketentuan penggunaan layanan Mahira Laundry - Ketentuan layanan, tanggung jawab, dan aturan penggunaan.",
+	openGraph: {
+		title: "Syarat & Ketentuan | Mahira Laundry",
+		description: "Aturan dan panduan penggunaan layanan laundry Mahira secara transparan.",
+		images: [
+			{
+				url: "/og/legal.png",
+				width: 1200,
+				height: 630,
+				alt: "Syarat & Ketentuan Mahira Laundry",
+			},
+		],
+	},
 };
 
 export default function TermsPage() {

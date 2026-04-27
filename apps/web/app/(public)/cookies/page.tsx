@@ -1,10 +1,22 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { LegalLayout } from "@/components/shared/public/legal-layout";
 
 export const metadata: Metadata = {
 	title: "Kebijakan Cookie",
 	description:
 		"Informasi mengenai penggunaan cookie dan teknologi pelacakan di platform Mahira Laundry.",
+	openGraph: {
+		title: "Kebijakan Cookie | Mahira Laundry",
+		description: "Penjelasan mengenai penggunaan teknologi pelacakan untuk meningkatkan layanan kami.",
+		images: [
+			{
+				url: "/og/legal.png",
+				width: 1200,
+				height: 630,
+				alt: "Kebijakan Cookie Mahira Laundry",
+			},
+		],
+	},
 };
 
 export default function CookiesPage() {

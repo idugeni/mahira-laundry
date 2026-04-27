@@ -106,7 +106,7 @@ export function HomeServicesSection({
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
-							className="text-5xl lg:text-7xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.9]"
+							className="text-4xl lg:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.9]"
 						>
 							Layanan <br />
 							<span className="text-brand-gradient">Unggulan.</span>
@@ -217,7 +217,7 @@ export function HomeServicesSection({
 					<motion.div whileHover={{ scale: 1.05 }} className="inline-block">
 						<Link
 							href="/layanan"
-							className="group inline-flex items-center gap-4 px-10 py-5 bg-slate-900 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-brand-primary transition-all shadow-2xl shadow-slate-200 hover:shadow-brand-primary/40"
+							className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-brand-primary transition-all shadow-2xl shadow-slate-200 hover:shadow-brand-primary/40"
 						>
 							Eksplor Semua Layanan
 							<motion.div

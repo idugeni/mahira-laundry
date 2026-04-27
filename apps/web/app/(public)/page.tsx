@@ -18,6 +18,14 @@ export const metadata: Metadata = {
 		description:
 			"Cucian Bersih, Hidup Nyaman. Layanan cuci setrika, dry cleaning, dan express 6 jam. Antar-jemput gratis.",
 		type: "website",
+		images: [
+			{
+				url: "/og/home.png",
+				width: 1200,
+				height: 630,
+				alt: "Mahira Laundry Premium Experience",
+			},
+		],
 	},
 };
 
@@ -25,10 +33,10 @@ const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "LaundryBusiness",
 	name: "Mahira Laundry",
-	image: "https://mahiralaundry.id/logo.png",
+	image: "https://mahira-laundry.vercel.app/logo.png",
 	description: "Layanan laundry premium terpercaya di Jatiwaringin, Bekasi.",
-	"@id": "https://mahiralaundry.id",
-	url: "https://mahiralaundry.id",
+	"@id": "https://mahira-laundry.vercel.app",
+	url: "https://mahira-laundry.vercel.app",
 	telephone: PRIMARY_OUTLET.phone,
 	address: {
 		"@type": "PostalAddress",
