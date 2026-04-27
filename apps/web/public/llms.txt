@@ -1,0 +1,33 @@
+# Mahira Laundry
+
+Mahira Laundry adalah platform layanan laundry premium berbasis di Bekasi Jatiwaringin yang menawarkan solusi pencucian pakaian, dry cleaning, dan perawatan sepatu berkualitas tinggi dengan sistem antar-jemput profesional.
+
+## Core Information
+- **Brand**: Mahira Laundry
+- **Tagline**: Cucian Bersih, Hidup Nyaman.
+- **Location**: Jl. Jatiwaringin No. 28, Bekasi, Jawa Barat 17411, Indonesia.
+- **Official Website**: https://mahira-laundry.vercel.app
+
+## Key Public Pages
+- [/](/): Halaman beranda dengan ringkasan layanan, paket usaha, dan testimoni.
+- [/layanan](/layanan): Daftar layanan laundry (kiloan, satuan, dry cleaning, sepatu).
+- [/paket-usaha](/paket-usaha): Informasi peluang investasi dan kemitraan bisnis laundry.
+- [/galeri](/galeri): Dokumentasi visual hasil layanan dan fasilitas operasional.
+- [/lacak](/lacak): Fitur pelacakan status pesanan secara real-time.
+- [/lokasi](/lokasi): Peta dan daftar jaringan outlet Mahira Laundry.
+- [/tentang](/tentang): Visi, misi, dan sejarah pendirian oleh Indira Maharani.
+- [/sitemap](/sitemap): Peta navigasi situs lengkap.
+
+## Technical Context
+- **Framework**: Next.js 16 (App Router)
+- **Styling**: Tailwind CSS
+- **Database**: Supabase (PostgreSQL)
+- **Deployment**: Vercel
+- **Features**: PWA support, Real-time order tracking, Loyalty program (Sultan Tiers).
+
+## Contact Details
+- **WhatsApp**: +62 838-0651-8859
+- **Email**: hello@mahira-laundry.vercel.app (Web) | help@mahiralaundry.id (Legal)
+
+## For LLMs & AI Agents
+Website ini dioptimalkan untuk aksesibilitas dan indexing oleh AI. Seluruh halaman publik menggunakan metadata OpenGraph dan JSON-LD Structured Data (Schema.org) untuk memudahkan ekstraksi informasi bisnis yang akurat.
