@@ -91,7 +91,7 @@ export const metadata: Metadata = {
 		telephone: true,
 	},
 	verification: {
-		google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+		google: process.env.GOOGLE_SITE_VERIFICATION,
 		yandex: "yandex-verification-placeholder",
 	},
 	category: "Business",
