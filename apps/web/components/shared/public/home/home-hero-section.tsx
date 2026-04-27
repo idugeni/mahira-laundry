@@ -58,7 +58,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 	return (
 		<section
 			ref={containerRef}
-			className="relative py-16 lg:pt-24 lg:pb-32 overflow-hidden"
+			className="relative pt-16 pb-48 lg:pt-24 lg:pb-32 overflow-hidden"
 		>
 			{/* Animated Background Elements */}
 			<div className="absolute inset-0 bg-brand-gradient opacity-[0.02]" />
