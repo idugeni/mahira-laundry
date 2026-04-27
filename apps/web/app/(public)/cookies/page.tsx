@@ -7,7 +7,8 @@ export const metadata: Metadata = {
 		"Informasi mengenai penggunaan cookie dan teknologi pelacakan di platform Mahira Laundry.",
 	openGraph: {
 		title: "Kebijakan Cookie | Mahira Laundry",
-		description: "Penjelasan mengenai penggunaan teknologi pelacakan untuk meningkatkan layanan kami.",
+		description:
+			"Penjelasan mengenai penggunaan teknologi pelacakan untuk meningkatkan layanan kami.",
 		images: [
 			{
 				url: "/og/legal.png",

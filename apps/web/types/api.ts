@@ -1,4 +1,4 @@
-export type { Database, Json } from "./database";
+export type { Database, Json } from "@/types/database";
 
 export interface ApiResponse<T> {
 	data?: T;

@@ -6,8 +6,8 @@ import {
 	timestamp,
 	uuid,
 } from "drizzle-orm/pg-core";
-import { orders } from "./orders";
-import { services, serviceUnitEnum } from "./services";
+import { orders } from "@/lib/db/schema/orders";
+import { services, serviceUnitEnum } from "@/lib/db/schema/services";
 
 export const orderItems = pgTable("order_items", {
 	id: uuid("id").primaryKey().defaultRandom(),

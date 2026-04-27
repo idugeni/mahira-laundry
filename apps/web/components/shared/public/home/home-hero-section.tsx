@@ -181,16 +181,16 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 					{/* Right Visual Content */}
 					<div className="relative py-12 lg:py-0 lg:h-[600px] flex items-center justify-center">
-							<motion.div
-								initial={{ opacity: 0, x: 50 }}
-								animate={{ opacity: 1, x: 0 }}
-								style={{
-									rotate: rotateValue,
-									y: y2,
-									willChange: "transform",
-								}}
-								className="relative z-10 w-full max-w-md p-8 rounded-[2.5rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
-							>
+						<motion.div
+							initial={{ opacity: 0, x: 50 }}
+							animate={{ opacity: 1, x: 0 }}
+							style={{
+								rotate: rotateValue,
+								y: y2,
+								willChange: "transform",
+							}}
+							className="relative z-10 w-full max-w-md p-8 rounded-[2.5rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
+						>
 							{/* Floating Decoration Icons */}
 							<motion.div
 								animate={{ y: [0, -10, 0] }}

@@ -8,7 +8,8 @@ export const metadata: Metadata = {
 		"Lihat hasil cucian, fasilitas, dan proses operasional Mahira Laundry melalui dokumentasi foto kualitas premium kami.",
 	openGraph: {
 		title: "Galeri Hasil Layanan | Mahira Laundry",
-		description: "Koleksi foto hasil layanan laundry premium dan fasilitas modern Mahira.",
+		description:
+			"Koleksi foto hasil layanan laundry premium dan fasilitas modern Mahira.",
 		images: [
 			{
 				url: "/og/galeri.png",

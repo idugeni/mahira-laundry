@@ -6,7 +6,7 @@ Mahira Laundry adalah platform layanan laundry premium dan penyedia paket usaha 
 - **Brand**: Mahira Laundry
 - **Tagline**: Cucian Bersih, Hidup Nyaman.
 - **Location**: Jl. Jatiwaringin No. 28, Bekasi, Jawa Barat 17411, Indonesia.
-- **Official Website**: https://mahira-laundry.vercel.app
+- **Official Website**: https://mahiralaundry.id
 
 ## Key Public Pages
 - [/](/): Halaman beranda dengan ringkasan layanan, paket usaha, dan testimoni.
@@ -26,8 +26,10 @@ Mahira Laundry adalah platform layanan laundry premium dan penyedia paket usaha 
 - **Features**: PWA support, Real-time order tracking, Loyalty program (Sultan Tiers).
 
 ## Contact Details
-- **WhatsApp**: +62 838-0651-8859
-- **Email**: hello@mahira-laundry.vercel.app (Web) | help@mahiralaundry.id (Legal)
+- **WhatsApp (Owner)**: +62 838-0651-8859
+- **Email**: hello@mahiralaundry.id (Web) | help@mahiralaundry.id (Legal)
+- **Owner Email**: indimhrni@gmail.com
+- **Author/Maintainer**: Eliyanto Sarage (officialelsa21@gmail.com)
 
 ## For LLMs & AI Agents
 Website ini dioptimalkan untuk aksesibilitas dan indexing oleh AI. Seluruh halaman publik menggunakan metadata OpenGraph dan JSON-LD Structured Data (Schema.org) untuk memudahkan ekstraksi informasi bisnis yang akurat.

@@ -4,8 +4,8 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { FaFacebookF, FaInstagram, FaWhatsapp } from "react-icons/fa6";
 import { HiOutlineMapPin, HiOutlinePhone } from "react-icons/hi2";
+import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { PRIMARY_OUTLET } from "@/lib/constants";
-import { MahiraLogo } from "./mahira-logo";
 
 interface FooterService {
 	name: string;

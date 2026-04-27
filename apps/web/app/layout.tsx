@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Geist, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "sonner";
@@ -18,7 +19,8 @@ const inter = Inter({
 	weight: ["300", "400", "500", "600", "700"],
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mahira-laundry.vercel.app";
+const baseUrl =
+	process.env.NEXT_PUBLIC_APP_URL || "https://mahiralaundry.id";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
@@ -45,7 +47,7 @@ export const metadata: Metadata = {
 		type: "website",
 		locale: "id_ID",
 		siteName: "Mahira Laundry",
-		url: "https://mahira-laundry.vercel.app",
+		url: "https://mahiralaundry.id",
 		images: [
 			{
 				url: "/og/paket-usaha.png",
@@ -58,7 +60,8 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary_large_image",
 		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
-		description: "Investasi bisnis laundry premium dengan sistem manajemen profesional dan mesin terbaik.",
+		description:
+			"Investasi bisnis laundry premium dengan sistem manajemen profesional dan mesin terbaik.",
 		images: ["/og/paket-usaha.png"],
 		creator: "@mahiralaundry",
 	},
@@ -91,7 +94,7 @@ export const metadata: Metadata = {
 		telephone: true,
 	},
 	verification: {
-		google: process.env.GOOGLE_SITE_VERIFICATION,
+		google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
 		yandex: "yandex-verification-placeholder",
 	},
 	category: "Business",
@@ -103,7 +106,8 @@ const organizationSchema = {
 	name: "Mahira Laundry",
 	url: baseUrl,
 	logo: `${baseUrl}/logo.png`,
-	description: "Penyedia paket usaha laundry premium dan kemitraan bisnis terpercaya.",
+	description:
+		"Penyedia paket usaha laundry premium dan kemitraan bisnis terpercaya.",
 	address: {
 		"@type": "PostalAddress",
 		streetAddress: "Jl. Jatiwaringin No. 28",
@@ -122,6 +126,64 @@ const organizationSchema = {
 	sameAs: [
 		"https://www.instagram.com/mahiralaundry",
 		"https://www.facebook.com/mahiralaundry",
+	],
+};
+
+const websiteSchema = {
+	"@context": "https://schema.org",
+	"@type": "WebSite",
+	name: "Mahira Laundry",
+	url: baseUrl,
+	potentialAction: {
+		"@type": "SearchAction",
+		target: {
+			"@type": "EntryPoint",
+			urlTemplate: `${baseUrl}/layanan?q={search_term_string}`,
+		},
+		"query-input": "required name=search_term_string",
+	},
+};
+
+const navigationSchema = {
+	"@context": "https://schema.org",
+	"@type": "ItemList",
+	itemListElement: [
+		{
+			"@type": "SiteNavigationElement",
+			position: 1,
+			name: "Paket Usaha",
+			url: `${baseUrl}/paket-usaha`,
+		},
+		{
+			"@type": "SiteNavigationElement",
+			position: 2,
+			name: "Layanan",
+			url: `${baseUrl}/layanan`,
+		},
+		{
+			"@type": "SiteNavigationElement",
+			position: 3,
+			name: "Galeri",
+			url: `${baseUrl}/galeri`,
+		},
+		{
+			"@type": "SiteNavigationElement",
+			position: 4,
+			name: "Lokasi",
+			url: `${baseUrl}/lokasi`,
+		},
+		{
+			"@type": "SiteNavigationElement",
+			position: 5,
+			name: "Tentang Kami",
+			url: `${baseUrl}/tentang`,
+		},
+		{
+			"@type": "SiteNavigationElement",
+			position: 6,
+			name: "Bantuan & FAQ",
+			url: `${baseUrl}/faq`,
+		},
 	],
 };
 
@@ -156,8 +218,25 @@ export default function RootLayout({
 						__html: JSON.stringify(organizationSchema),
 					}}
 				/>
+				<script
+					type="application/ld+json"
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: WebSite Schema
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(websiteSchema),
+					}}
+				/>
+				<script
+					type="application/ld+json"
+					// biome-ignore lint/security/noDangerouslySetInnerHtml: Navigation Schema
+					dangerouslySetInnerHTML={{
+						__html: JSON.stringify(navigationSchema),
+					}}
+				/>
 				<AuthProvider>{children}</AuthProvider>
 				<Toaster richColors position="top-right" />
+				{process.env.NEXT_PUBLIC_GA_ID && (
+					<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+				)}
 			</body>
 		</html>
 	);

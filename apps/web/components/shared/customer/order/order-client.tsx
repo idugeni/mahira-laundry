@@ -10,12 +10,12 @@ import {
 	HiOutlineSparkles,
 } from "react-icons/hi2";
 import { toast } from "sonner";
+import { OrderConfirmStep } from "@/components/shared/customer/order/order-confirm-step";
+import { OrderDetailStep } from "@/components/shared/customer/order/order-detail-step";
+import { OrderModeSelector } from "@/components/shared/customer/order/order-mode-selector";
+import { OrderServiceStep } from "@/components/shared/customer/order/order-service-step";
+import { OrderWhatsappPanel } from "@/components/shared/customer/order/order-whatsapp-panel";
 import { createOrder } from "@/lib/actions/orders";
-import { OrderConfirmStep } from "./order-confirm-step";
-import { OrderDetailStep } from "./order-detail-step";
-import { OrderModeSelector } from "./order-mode-selector";
-import { OrderServiceStep } from "./order-service-step";
-import { OrderWhatsappPanel } from "./order-whatsapp-panel";
 
 const steps = [
 	{ name: "Layanan", icon: HiOutlineSparkles },

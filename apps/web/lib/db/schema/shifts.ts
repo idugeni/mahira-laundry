@@ -7,8 +7,8 @@ import {
 	unique,
 	uuid,
 } from "drizzle-orm/pg-core";
-import { outlets } from "./outlets";
-import { profiles } from "./profiles";
+import { outlets } from "@/lib/db/schema/outlets";
+import { profiles } from "@/lib/db/schema/profiles";
 
 export const shiftTypeEnum = pgEnum("shift_type", ["pagi", "siang", "malam"]);
 

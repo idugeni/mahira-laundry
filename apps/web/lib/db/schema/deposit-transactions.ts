@@ -6,7 +6,7 @@ import {
 	timestamp,
 	uuid,
 } from "drizzle-orm/pg-core";
-import { profiles } from "./profiles";
+import { profiles } from "@/lib/db/schema/profiles";
 
 export const depositTypeEnum = pgEnum("deposit_type", [
 	"topup",

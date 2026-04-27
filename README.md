@@ -1,7 +1,7 @@
 # Mahira Laundry — Official Platform
 
 <div align="center">
-  <img src="https://mahira-laundry.vercel.app/logo.png" alt="Mahira Laundry Logo" width="120" />
+  <img src="https://mahiralaundry.id/logo.png" alt="Mahira Laundry Logo" width="120" />
   <p><strong>Cucian Bersih, Hidup Nyaman.</strong></p>
   <p><i>The next-generation premium laundry management ecosystem.</i></p>
 </div>
@@ -76,8 +76,9 @@ Our ecosystem is built using industry-leading technologies:
 
 <div align="center">
   <p>© 2026 Mahira Laundry Group. All rights reserved.</p>
+  <p><strong>Owner:</strong> +62 838-0651-8859 (<a href="mailto:indimhrni@gmail.com">indimhrni@gmail.com</a>) | <strong>Maintained by:</strong> Eliyanto Sarage (<a href="mailto:officialelsa21@gmail.com">officialelsa21@gmail.com</a>)</p>
   <p>
-    <a href="https://mahira-laundry.vercel.app">Official Website</a> • 
+    <a href="https://mahiralaundry.id">Official Website</a> • 
     <a href="https://github.com/idugeni/mahira-laundry">GitHub</a>
   </p>
 </div>

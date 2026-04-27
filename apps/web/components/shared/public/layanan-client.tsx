@@ -11,7 +11,11 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { GiChelseaBoot } from "react-icons/gi";
-import { HiOutlineArrowRight, HiOutlineSparkles } from "react-icons/hi2";
+import {
+	HiOutlineArrowRight,
+	HiOutlineMagnifyingGlass,
+	HiOutlineSparkles,
+} from "react-icons/hi2";
 import {
 	MdOutlineDryCleaning,
 	MdOutlineFlashOn,
@@ -20,6 +24,7 @@ import {
 } from "react-icons/md";
 import { RiGraduationCapLine } from "react-icons/ri";
 import { ServiceDetailModal } from "@/components/shared/customer/order/service-detail-modal";
+import { ServiceSearch } from "@/components/shared/public/service-search";
 import { useAuth } from "@/hooks/use-auth";
 import type { Service } from "@/lib/types";
 import { formatIDR, getDashboardUrl } from "@/lib/utils";
@@ -233,7 +238,7 @@ export function LayananClient({
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 				{/* Header */}
-				<div className="text-center mb-24">
+				<div className="text-center mb-12">
 					<motion.div
 						initial={{ opacity: 0, scale: 0.8 }}
 						whileInView={{ opacity: 1, scale: 1 }}
@@ -255,31 +260,68 @@ export function LayananClient({
 						Layanan <br />
 						<span className="text-brand-gradient">Terbaik Kami.</span>
 					</motion.h1>
-					<motion.p
-						initial={{ opacity: 0 }}
-						whileInView={{ opacity: 1 }}
-						viewport={{ once: true }}
-						transition={{ delay: 0.4 }}
-						className="mt-8 text-slate-500 max-w-xl mx-auto text-lg font-medium leading-relaxed"
-					>
-						Teknologi modern berpadu dengan ketelitian tangan para ahli untuk
-						hasil cucian yang bersih maksimal dan wangi sepanjang hari.
-					</motion.p>
+				</div>
+
+				{/* Search Bar Integration */}
+				<div className="mb-24">
+					<ServiceSearch
+						variant="section"
+						placeholder="Cari layanan yang Anda butuhkan..."
+					/>
 				</div>
 
 				{/* Grid */}
-				<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
-					{initialServices.map((service, i) => (
-						<ServiceCard
-							key={service.id}
-							service={service}
-							index={i}
-							Icon={getServiceIcon(service.name)}
-							styles={getServiceStyles(service.name)}
-							onClick={() => handleServiceClick(service.slug || service.id)}
-						/>
-					))}
-				</div>
+				{(() => {
+					const query = searchParams.get("q")?.toLowerCase() || "";
+					const filteredServices = initialServices.filter(
+						(s) =>
+							s.name.toLowerCase().includes(query) ||
+							s.description?.toLowerCase().includes(query) ||
+							s.slug?.toLowerCase().includes(query),
+					);
+
+					if (filteredServices.length === 0) {
+						return (
+							<motion.div
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								className="py-24 text-center bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200"
+							>
+								<div className="w-20 h-20 bg-slate-200/50 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-400">
+									<HiOutlineMagnifyingGlass size={40} />
+								</div>
+								<h3 className="text-2xl font-black text-slate-900 mb-2">
+									Layanan tidak ditemukan
+								</h3>
+								<p className="text-slate-500 font-medium">
+									Maaf, kami tidak dapat menemukan layanan dengan kata kunci "
+									{query}"
+								</p>
+								<button
+									onClick={() => router.push("/layanan")}
+									className="mt-8 text-brand-primary font-black text-xs uppercase tracking-widest hover:underline"
+								>
+									Lihat Semua Layanan
+								</button>
+							</motion.div>
+						);
+					}
+
+					return (
+						<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+							{filteredServices.map((service, i) => (
+								<ServiceCard
+									key={service.id}
+									service={service}
+									index={i}
+									Icon={getServiceIcon(service.name)}
+									styles={getServiceStyles(service.name)}
+									onClick={() => handleServiceClick(service.slug || service.id)}
+								/>
+							))}
+						</div>
+					);
+				})()}
 
 				{/* CTA Section */}
 				<motion.div

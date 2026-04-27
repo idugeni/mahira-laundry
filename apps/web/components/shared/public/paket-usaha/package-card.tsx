@@ -11,8 +11,8 @@ import {
 	HiOutlineInformationCircle,
 	HiOutlineSparkles,
 } from "react-icons/hi2";
+import PromoCountdown from "@/components/shared/public/paket-usaha/promo-countdown";
 import type { BusinessPackage } from "@/lib/types";
-import PromoCountdown from "./promo-countdown";
 
 interface PackageCardProps {
 	package: BusinessPackage;

@@ -13,6 +13,7 @@ import { useState } from "react";
 import { createPortal } from "react-dom";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { toast } from "sonner";
+import { PackageFormModal } from "@/components/shared/admin/paket-usaha/package-form-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,7 +22,6 @@ import {
 } from "@/lib/actions/business-packages";
 import type { BusinessPackage } from "@/lib/types";
 import { cn, formatIDR } from "@/lib/utils";
-import { PackageFormModal } from "./package-form-modal";
 
 interface AdminPaketUsahaClientProps {
 	packages: BusinessPackage[];

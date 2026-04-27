@@ -3,16 +3,16 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import {
+	HiOutlineClipboardDocumentList,
+	HiOutlineDocumentText,
 	HiOutlineHome,
 	HiOutlineInformationCircle,
-	HiOutlineSquare2Stack,
-	HiOutlinePhoto,
-	HiOutlineMapPin,
 	HiOutlineMagnifyingGlass,
-	HiOutlineShieldCheck,
-	HiOutlineDocumentText,
-	HiOutlineClipboardDocumentList,
+	HiOutlineMapPin,
+	HiOutlinePhoto,
 	HiOutlineRocketLaunch,
+	HiOutlineShieldCheck,
+	HiOutlineSquare2Stack,
 } from "react-icons/hi2";
 
 const sitemapData = [
@@ -28,22 +28,42 @@ const sitemapData = [
 		links: [
 			{ name: "Layanan Kami", href: "/layanan", icon: HiOutlineSquare2Stack },
 			{ name: "Galeri Foto", href: "/galeri", icon: HiOutlinePhoto },
-			{ name: "Paket Usaha", href: "/paket-usaha", icon: HiOutlineRocketLaunch },
+			{
+				name: "Paket Usaha",
+				href: "/paket-usaha",
+				icon: HiOutlineRocketLaunch,
+			},
 		],
 	},
 	{
 		title: "Tentang & Lokasi",
 		links: [
-			{ name: "Tentang Kami", href: "/tentang", icon: HiOutlineInformationCircle },
+			{
+				name: "Tentang Kami",
+				href: "/tentang",
+				icon: HiOutlineInformationCircle,
+			},
 			{ name: "Lokasi Outlet", href: "/lokasi", icon: HiOutlineMapPin },
 		],
 	},
 	{
 		title: "Legal & Privasi",
 		links: [
-			{ name: "Kebijakan Privasi", href: "/privacy", icon: HiOutlineShieldCheck },
-			{ name: "Syarat & Ketentuan", href: "/terms", icon: HiOutlineDocumentText },
-			{ name: "Kebijakan Cookie", href: "/cookies", icon: HiOutlineClipboardDocumentList },
+			{
+				name: "Kebijakan Privasi",
+				href: "/privacy",
+				icon: HiOutlineShieldCheck,
+			},
+			{
+				name: "Syarat & Ketentuan",
+				href: "/terms",
+				icon: HiOutlineDocumentText,
+			},
+			{
+				name: "Kebijakan Cookie",
+				href: "/cookies",
+				icon: HiOutlineClipboardDocumentList,
+			},
 		],
 	},
 ];
@@ -97,7 +117,8 @@ export function SitemapClient() {
 						transition={{ delay: 0.4 }}
 						className="mt-10 text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed font-medium"
 					>
-						Temukan semua informasi dan layanan Mahira Laundry dengan mudah melalui navigasi terstruktur kami.
+						Temukan semua informasi dan layanan Mahira Laundry dengan mudah
+						melalui navigasi terstruktur kami.
 					</motion.p>
 				</div>
 
@@ -140,7 +161,8 @@ export function SitemapClient() {
 					className="mt-24 text-center p-12 bg-slate-50 rounded-[3rem] border border-slate-100"
 				>
 					<p className="text-slate-500 font-medium">
-						Tidak menemukan yang Anda cari? Silakan hubungi layanan pelanggan kami melalui WhatsApp untuk bantuan langsung.
+						Tidak menemukan yang Anda cari? Silakan hubungi layanan pelanggan
+						kami melalui WhatsApp untuk bantuan langsung.
 					</p>
 				</motion.div>
 			</div>

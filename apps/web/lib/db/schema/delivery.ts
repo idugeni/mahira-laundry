@@ -7,8 +7,8 @@ import {
 	timestamp,
 	uuid,
 } from "drizzle-orm/pg-core";
-import { deliveryTypeEnum, orders } from "./orders";
-import { profiles } from "./profiles";
+import { deliveryTypeEnum, orders } from "@/lib/db/schema/orders";
+import { profiles } from "@/lib/db/schema/profiles";
 
 export const deliveryStatusEnum = pgEnum("delivery_status", [
 	"assigned",

@@ -7,7 +7,7 @@ import {
 	timestamp,
 	uuid,
 } from "drizzle-orm/pg-core";
-import { profiles } from "./profiles";
+import { profiles } from "@/lib/db/schema/profiles";
 
 export const notificationTypeEnum = pgEnum("notification_type", [
 	"order_update",

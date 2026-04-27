@@ -1,5 +1,5 @@
 import { decimal, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { outlets } from "./outlets";
+import { outlets } from "@/lib/db/schema/outlets";
 
 export const inventory = pgTable("inventory", {
 	id: uuid("id").primaryKey().defaultRandom(),

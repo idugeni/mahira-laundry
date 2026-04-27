@@ -2,9 +2,9 @@
 
 import { motion } from "motion/react";
 import { HiOutlineArrowDown, HiOutlineSparkles } from "react-icons/hi2";
+import ComparisonTable from "@/components/shared/public/paket-usaha/comparison-table";
+import { PackageCard } from "@/components/shared/public/paket-usaha/package-card";
 import type { BusinessPackage } from "@/lib/types";
-import ComparisonTable from "./comparison-table";
-import { PackageCard } from "./package-card";
 
 interface PaketUsahaClientProps {
 	packages: BusinessPackage[];

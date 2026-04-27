@@ -1,6 +1,10 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { protectedProcedure, router, staffProcedure } from "../proxy";
+import {
+	protectedProcedure,
+	router,
+	staffProcedure,
+} from "@/server/trpc/proxy";
 
 export const paymentsRouter = router({
 	getByOrder: protectedProcedure

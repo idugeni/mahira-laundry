@@ -10,9 +10,10 @@ import {
 	HiOutlineUser,
 	HiOutlineXMark,
 } from "react-icons/hi2";
+import { MahiraLogo } from "@/components/brand/mahira-logo";
+import { ServiceSearch } from "@/components/shared/public/service-search";
 import { useAuth } from "@/hooks/use-auth";
 import { getDashboardUrl } from "@/lib/utils";
-import { MahiraLogo } from "./mahira-logo";
 
 const links = [
 	{ href: "/paket-usaha", label: "Paket Usaha", featured: true },
@@ -52,12 +53,13 @@ export function MahiraHeader() {
 						</Link>
 
 						{/* Desktop Nav */}
-						<nav className="hidden lg:flex items-center gap-8">
+						<nav className="hidden lg:flex items-center gap-6">
+							<ServiceSearch variant="header" className="mr-2" />
 							{links.map((link) => (
 								<Link
 									key={link.href}
 									href={link.href}
-									className={`text-sm font-bold transition-all ${
+									className={`text-sm font-bold transition-all whitespace-nowrap ${
 										link.featured
 											? "text-brand-primary px-4 py-2 bg-brand-primary/5 rounded-full hover:bg-brand-primary/10"
 											: "text-slate-500 hover:text-brand-primary"
@@ -163,36 +165,50 @@ export function MahiraHeader() {
 							</div>
 
 							{/* Links */}
-							<div className="flex-1 overflow-y-auto p-6 space-y-2">
-								<p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 pl-4">
-									Navigasi Utama
-								</p>
-								{links.map((link) => (
-									<Link
-										key={link.href}
-										href={link.href}
-										onClick={() => setIsOpen(false)}
-										className={`flex items-center justify-between w-full px-5 py-4 text-lg font-black rounded-2xl transition-all group ${
-											link.featured
-												? "bg-brand-primary/5 text-brand-primary border border-brand-primary/10"
-												: "text-slate-900 hover:bg-slate-50"
-										}`}
-									>
-										<span className="flex items-center gap-3">
-											{link.label}
-											{link.featured && (
-												<span className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-ping" />
-											)}
-										</span>
-										<span
-											className={
-												link.featured ? "text-brand-primary" : "text-slate-300"
-											}
-										>
-											<HiOutlineChevronRight size={18} />
-										</span>
-									</Link>
-								))}
+							<div className="flex-1 overflow-y-auto p-6 space-y-6">
+								<div className="px-4">
+									<ServiceSearch
+										variant="section"
+										className="!px-0"
+										placeholder="Cari layanan..."
+									/>
+								</div>
+
+								<div>
+									<p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4 pl-4">
+										Navigasi Utama
+									</p>
+									<div className="space-y-2">
+										{links.map((link) => (
+											<Link
+												key={link.href}
+												href={link.href}
+												onClick={() => setIsOpen(false)}
+												className={`flex items-center justify-between w-full px-5 py-4 text-lg font-black rounded-2xl transition-all group ${
+													link.featured
+														? "bg-brand-primary/5 text-brand-primary border border-brand-primary/10"
+														: "text-slate-900 hover:bg-slate-50"
+												}`}
+											>
+												<span className="flex items-center gap-3">
+													{link.label}
+													{link.featured && (
+														<span className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-ping" />
+													)}
+												</span>
+												<span
+													className={
+														link.featured
+															? "text-brand-primary"
+															: "text-slate-300"
+													}
+												>
+													<HiOutlineChevronRight size={18} />
+												</span>
+											</Link>
+										))}
+									</div>
+								</div>
 							</div>
 
 							{/* Footer Actions */}

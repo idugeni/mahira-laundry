@@ -7,7 +7,7 @@ import {
 	timestamp,
 	uuid,
 } from "drizzle-orm/pg-core";
-import { orders } from "./orders";
+import { orders } from "@/lib/db/schema/orders";
 
 export const paymentStatusEnum = pgEnum("payment_status", [
 	"unpaid",

@@ -49,8 +49,33 @@ const _outlets = [
 	},
 ];
 
+import { JsonLd } from "@/components/shared/common/json-ld";
 import { LokasiClient } from "@/components/shared/public/lokasi-client";
 
 export default function LokasiPage() {
-	return <LokasiClient />;
+	const breadcrumbJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Beranda",
+				item: "https://mahiralaundry.id",
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Lokasi Outlet",
+				item: "https://mahiralaundry.id/lokasi",
+			},
+		],
+	};
+
+	return (
+		<>
+			<JsonLd data={breadcrumbJsonLd} />
+			<LokasiClient />
+		</>
+	);
 }

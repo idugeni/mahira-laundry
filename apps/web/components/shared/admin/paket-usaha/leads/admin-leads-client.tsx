@@ -11,6 +11,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
+import { LeadDetailModal } from "@/components/shared/admin/paket-usaha/leads/lead-detail-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { exportInquiriesCSV } from "@/lib/actions/business-inquiries";
@@ -20,7 +21,6 @@ import type {
 	InquiryStatus,
 } from "@/lib/types";
 import { cn } from "@/lib/utils";
-import { LeadDetailModal } from "./lead-detail-modal";
 
 interface AdminLeadsClientProps {
 	leads: BusinessPackageInquiry[];

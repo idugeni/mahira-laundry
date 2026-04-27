@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { signIn } from "@/lib/actions/auth";
 
 export const metadata: Metadata = {
@@ -9,16 +9,11 @@ export const metadata: Metadata = {
 
 import { Suspense } from "react";
 import { AuthClient } from "@/components/shared/auth/auth-client";
+import { AuthSkeleton } from "@/components/shared/auth/auth-skeleton";
 
 export default function LoginPage() {
 	return (
-		<Suspense
-			fallback={
-				<div className="min-h-screen flex items-center justify-center">
-					Memuat...
-				</div>
-			}
-		>
+		<Suspense fallback={<AuthSkeleton />}>
 			<AuthClient type="login" action={signIn} />
 		</Suspense>
 	);

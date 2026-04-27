@@ -1,6 +1,6 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import * as schema from "./schema";
+import * as schema from "@/lib/db/schema";
 
 // biome-ignore lint/style/noNonNullAssertion: env vars are required and validated at startup
 const connectionString = process.env.SUPABASE_DB_URL!;

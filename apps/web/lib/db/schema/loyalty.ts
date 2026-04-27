@@ -1,6 +1,6 @@
 import { integer, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
-import { orders } from "./orders";
-import { profiles } from "./profiles";
+import { orders } from "@/lib/db/schema/orders";
+import { profiles } from "@/lib/db/schema/profiles";
 
 export const loyalty = pgTable("loyalty", {
 	id: uuid("id").primaryKey().defaultRandom(),

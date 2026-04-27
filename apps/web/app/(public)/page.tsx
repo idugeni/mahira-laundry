@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { HomeClient } from "@/components/shared/public/home/home-client";
+import { HomeSkeleton } from "@/components/shared/public/home/home-skeleton";
 import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
@@ -33,10 +34,11 @@ const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "LaundryBusiness",
 	name: "Mahira Laundry",
-	image: "https://mahira-laundry.vercel.app/logo.png",
-	description: "Penyedia paket usaha laundry premium dan solusi bisnis laundry terlengkap.",
-	"@id": "https://mahira-laundry.vercel.app",
-	url: "https://mahira-laundry.vercel.app",
+	image: "https://mahiralaundry.id/logo.png",
+	description:
+		"Penyedia paket usaha laundry premium dan solusi bisnis laundry terlengkap.",
+	"@id": "https://mahiralaundry.id",
+	url: "https://mahiralaundry.id",
 	telephone: PRIMARY_OUTLET.phone,
 	address: {
 		"@type": "PostalAddress",
@@ -152,7 +154,7 @@ export default async function HomePage() {
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
 			/>
 			<div id="home-page-container">
-				<Suspense fallback={<div className="py-24 text-center">Memuat...</div>}>
+				<Suspense fallback={<HomeSkeleton />}>
 					<HomeClient
 						initialServices={services || []}
 						stats={stats}

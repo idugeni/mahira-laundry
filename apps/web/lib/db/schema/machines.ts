@@ -6,7 +6,7 @@ import {
 	timestamp,
 	uuid,
 } from "drizzle-orm/pg-core";
-import { outlets } from "./outlets";
+import { outlets } from "@/lib/db/schema/outlets";
 
 export const machineTypeEnum = pgEnum("machine_type", [
 	"washer",

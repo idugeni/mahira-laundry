@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { managerProcedure, publicProcedure, router } from "../proxy";
+import { managerProcedure, publicProcedure, router } from "@/server/trpc/proxy";
 
 export const servicesRouter = router({
 	list: publicProcedure

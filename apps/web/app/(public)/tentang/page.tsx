@@ -19,8 +19,33 @@ export const metadata: Metadata = {
 	},
 };
 
+import { JsonLd } from "@/components/shared/common/json-ld";
 import { TentangClient } from "@/components/shared/public/tentang-client";
 
 export default function TentangPage() {
-	return <TentangClient />;
+	const breadcrumbJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Beranda",
+				item: "https://mahiralaundry.id",
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Tentang Kami",
+				item: "https://mahiralaundry.id/tentang",
+			},
+		],
+	};
+
+	return (
+		<>
+			<JsonLd data={breadcrumbJsonLd} />
+			<TentangClient />
+		</>
+	);
 }

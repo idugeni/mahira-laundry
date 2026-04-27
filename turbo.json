@@ -1,9 +1,16 @@
 {
 	"$schema": "https://turbo.build/schema.json",
 	"globalDependencies": [".env"],
-	"globalPassThroughEnv": [
+	"globalEnv": [
+		"NEXT_PUBLIC_APP_NAME",
+		"NEXT_PUBLIC_APP_URL",
+		"NEXT_PUBLIC_WHATSAPP_CS",
 		"NEXT_PUBLIC_SUPABASE_URL",
 		"NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY",
+		"NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION",
+		"NODE_ENV"
+	],
+	"globalPassThroughEnv": [
 		"SUPABASE_DB_URL",
 		"MIDTRANS_SERVER_KEY",
 		"MIDTRANS_IS_PRODUCTION",

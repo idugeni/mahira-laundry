@@ -1,12 +1,12 @@
-import { router } from "./proxy";
-import { analyticsRouter } from "./routers/analytics";
-import { deliveryRouter } from "./routers/delivery";
-import { inventoryRouter } from "./routers/inventory";
-import { loyaltyRouter } from "./routers/loyalty";
-import { notificationsRouter } from "./routers/notifications";
-import { ordersRouter } from "./routers/orders";
-import { paymentsRouter } from "./routers/payments";
-import { servicesRouter } from "./routers/services";
+import { router } from "@/server/trpc/proxy";
+import { analyticsRouter } from "@/server/trpc/routers/analytics";
+import { deliveryRouter } from "@/server/trpc/routers/delivery";
+import { inventoryRouter } from "@/server/trpc/routers/inventory";
+import { loyaltyRouter } from "@/server/trpc/routers/loyalty";
+import { notificationsRouter } from "@/server/trpc/routers/notifications";
+import { ordersRouter } from "@/server/trpc/routers/orders";
+import { paymentsRouter } from "@/server/trpc/routers/payments";
+import { servicesRouter } from "@/server/trpc/routers/services";
 
 export const appRouter = router({
 	orders: ordersRouter,

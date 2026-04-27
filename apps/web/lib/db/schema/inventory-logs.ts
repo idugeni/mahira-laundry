@@ -6,8 +6,8 @@ import {
 	timestamp,
 	uuid,
 } from "drizzle-orm/pg-core";
-import { inventory } from "./inventory";
-import { profiles } from "./profiles";
+import { inventory } from "@/lib/db/schema/inventory";
+import { profiles } from "@/lib/db/schema/profiles";
 
 export const inventoryLogTypeEnum = pgEnum("inventory_log_type", [
 	"in",

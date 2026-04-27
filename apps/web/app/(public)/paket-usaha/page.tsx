@@ -27,6 +27,8 @@ export const metadata: Metadata = {
 	},
 };
 
+import { JsonLd } from "@/components/shared/common/json-ld";
+
 function buildJsonLd(packages: BusinessPackage[]) {
 	return {
 		"@context": "https://schema.org",
@@ -53,15 +55,29 @@ export default async function PaketUsahaPage() {
 	const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890";
 	const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent("Halo, saya ingin mengetahui informasi paket usaha laundry Mahira.")}`;
 
+	const breadcrumbJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Beranda",
+				item: "https://mahiralaundry.id",
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Paket Usaha",
+				item: "https://mahiralaundry.id/paket-usaha",
+			},
+		],
+	};
+
 	return (
 		<>
-			<script
-				type="application/ld+json"
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: structured data JSON-LD
-				dangerouslySetInnerHTML={{
-					__html: JSON.stringify(buildJsonLd(packages)),
-				}}
-			/>
+			<JsonLd data={buildJsonLd(packages)} />
+			<JsonLd data={breadcrumbJsonLd} />
 
 			{packages.length === 0 ? (
 				<section className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4 py-24 text-center">

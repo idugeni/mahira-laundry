@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/shared/common/json-ld";
 import { FAQClient } from "@/components/shared/public/faq-client";
 
 export const metadata: Metadata = {
@@ -7,7 +8,8 @@ export const metadata: Metadata = {
 		"Cari jawaban cepat untuk pertanyaan yang sering ditanyakan mengenai layanan laundry premium Mahira, harga, antar-jemput, dan kemitraan.",
 	openGraph: {
 		title: "Pusat Bantuan & FAQ | Mahira Laundry",
-		description: "Solusi lengkap untuk segala pertanyaan Anda mengenai Mahira Laundry.",
+		description:
+			"Solusi lengkap untuk segala pertanyaan Anda mengenai Mahira Laundry.",
 		images: [
 			{
 				url: "/og/legal.png",
@@ -51,13 +53,29 @@ const faqJsonLd = {
 };
 
 export default function FAQPage() {
+	const breadcrumbJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Beranda",
+				item: "https://mahiralaundry.id",
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Pusat Bantuan & FAQ",
+				item: "https://mahiralaundry.id/faq",
+			},
+		],
+	};
+
 	return (
 		<>
-			<script
-				type="application/ld+json"
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: FAQ JSON-LD
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-			/>
+			<JsonLd data={faqJsonLd} />
+			<JsonLd data={breadcrumbJsonLd} />
 			<FAQClient />
 		</>
 	);

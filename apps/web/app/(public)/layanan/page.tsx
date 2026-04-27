@@ -20,6 +20,8 @@ export const metadata: Metadata = {
 };
 
 import { Suspense } from "react";
+import { JsonLd } from "@/components/shared/common/json-ld";
+import { MahiraSpinner } from "@/components/shared/common/mahira-spinner";
 import { LayananClient } from "@/components/shared/public/layanan-client";
 import { createClient } from "@/lib/supabase/server";
 
@@ -32,11 +34,40 @@ export default async function LayananPage() {
 		.eq("is_active", true)
 		.order("sort_order", { ascending: true });
 
+	const breadcrumbJsonLd = {
+		"@context": "https://schema.org",
+		"@type": "BreadcrumbList",
+		itemListElement: [
+			{
+				"@type": "ListItem",
+				position: 1,
+				name: "Beranda",
+				item: "https://mahiralaundry.id",
+			},
+			{
+				"@type": "ListItem",
+				position: 2,
+				name: "Layanan",
+				item: "https://mahiralaundry.id/layanan",
+			},
+		],
+	};
+
 	return (
-		<Suspense
-			fallback={<div className="py-24 text-center">Memuat Layanan...</div>}
-		>
-			<LayananClient initialServices={services || []} />
-		</Suspense>
+		<>
+			<JsonLd data={breadcrumbJsonLd} />
+			<Suspense
+				fallback={
+					<div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
+						<MahiraSpinner size="lg" />
+						<p className="text-slate-400 font-medium animate-pulse text-sm uppercase tracking-widest">
+							Menyiapkan Layanan Premium...
+						</p>
+					</div>
+				}
+			>
+				<LayananClient initialServices={services || []} />
+			</Suspense>
+		</>
 	);
 }

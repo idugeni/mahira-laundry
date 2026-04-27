@@ -1,2 +1,2 @@
-export * from "./api";
-export * from "./database";
+export * from "@/types/api";
+export * from "@/types/database";

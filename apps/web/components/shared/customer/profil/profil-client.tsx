@@ -4,10 +4,10 @@ import { motion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
+import { ProfilAddressSection } from "@/components/shared/customer/profil/profil-address-section";
+import { ProfilForm } from "@/components/shared/customer/profil/profil-form";
+import { ProfilInfoCard } from "@/components/shared/customer/profil/profil-info-card";
 import { updateAvatar, updateProfile } from "@/lib/actions/profile";
-import { ProfilAddressSection } from "./profil-address-section";
-import { ProfilForm } from "./profil-form";
-import { ProfilInfoCard } from "./profil-info-card";
 
 interface Profile {
 	id: string;

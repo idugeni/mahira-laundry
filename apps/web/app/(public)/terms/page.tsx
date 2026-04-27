@@ -7,7 +7,8 @@ export const metadata: Metadata = {
 		"Syarat dan Ketentuan penggunaan layanan Mahira Laundry - Ketentuan layanan, tanggung jawab, dan aturan penggunaan.",
 	openGraph: {
 		title: "Syarat & Ketentuan | Mahira Laundry",
-		description: "Aturan dan panduan penggunaan layanan laundry Mahira secara transparan.",
+		description:
+			"Aturan dan panduan penggunaan layanan laundry Mahira secara transparan.",
 		images: [
 			{
 				url: "/og/legal.png",

@@ -4,6 +4,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ServiceDetailModal } from "@/components/shared/customer/order/service-detail-modal";
 import { GallerySection } from "@/components/shared/public/gallery/gallery-section";
+import { HomeBusinessPackagesSection } from "@/components/shared/public/home/home-business-packages-section";
+import { HomeCtaSection } from "@/components/shared/public/home/home-cta-section";
+import { HomeHeroSection } from "@/components/shared/public/home/home-hero-section";
+import { HomeSearchSection } from "@/components/shared/public/home/home-search-section";
+import { HomeServicesSection } from "@/components/shared/public/home/home-services-section";
+import { HomeStatsSection } from "@/components/shared/public/home/home-stats-section";
 import { TestimonialSection } from "@/components/shared/public/testimonial-section";
 import { useAuth } from "@/hooks/use-auth";
 import type {
@@ -13,11 +19,6 @@ import type {
 	Testimonial,
 } from "@/lib/types";
 import { getDashboardUrl } from "@/lib/utils";
-import { HomeBusinessPackagesSection } from "./home-business-packages-section";
-import { HomeCtaSection } from "./home-cta-section";
-import { HomeHeroSection } from "./home-hero-section";
-import { HomeServicesSection } from "./home-services-section";
-import { HomeStatsSection } from "./home-stats-section";
 
 interface Stat {
 	value: string;
@@ -79,6 +80,7 @@ export function HomeClient({
 				dashboardHref={dashboardHref}
 				packages={businessPackages}
 			/>
+			<HomeSearchSection />
 			<HomeStatsSection stats={stats} />
 			<HomeServicesSection
 				services={initialServices}

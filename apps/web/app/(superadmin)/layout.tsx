@@ -31,6 +31,7 @@ export default async function SuperadminLayout({
 		{ href: "/admin/galeri", label: "Galeri", icon: "🖼️" },
 		{ href: "/admin/keuangan", label: "Keuangan", icon: "💰" },
 		{ href: "/admin/laporan", label: "Laporan & Audit", icon: "📊" },
+		{ href: "/admin/analytics", label: "Traffic Analytics", icon: "📈" },
 		{ href: "/admin/profil", label: "Profil Akun", icon: "👤" },
 	];
 
