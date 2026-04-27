@@ -18,8 +18,8 @@ export default function robots(): MetadataRoute.Robots {
 				],
 			},
 			{
-				// Specifically encourage AI crawlers for better visibility in AI Search (SearchGPT, Perplexity, etc.)
-				userAgent: ["GPTBot", "CCBot", "PerplexityBot"],
+				// Specifically encourage AI crawlers for better visibility in AI Search (SearchGPT, Perplexity, Google AI Mode, etc.)
+				userAgent: ["GPTBot", "CCBot", "PerplexityBot", "Google-Extended"],
 				allow: ["/", "/layanan", "/paket-usaha", "/galeri", "/llms.txt"],
 				disallow: ["/admin", "/dashboard", "/api"],
 			},

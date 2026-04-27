@@ -68,6 +68,37 @@ const jsonLd = {
 	priceRange: "$$",
 };
 
+const faqJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "FAQPage",
+	mainEntity: [
+		{
+			"@type": "Question",
+			name: "Berapa harga laundry per kg di Mahira Laundry Bekasi?",
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: "Harga laundry kiloan di Mahira Laundry Bekasi mulai dari Rp 7.000 per kg untuk layanan cuci lipat. Kami juga menawarkan berbagai paket laundry premium lainnya.",
+			},
+		},
+		{
+			"@type": "Question",
+			name: "Apakah Mahira Laundry menyediakan layanan antar-jemput?",
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: "Ya, Mahira Laundry menyediakan layanan antar-jemput gratis untuk area Jatiwaringin dan sekitarnya. Anda dapat memesan layanan ini melalui WhatsApp kami.",
+			},
+		},
+		{
+			"@type": "Question",
+			name: "Berapa lama waktu pengerjaan laundry express?",
+			acceptedAnswer: {
+				"@type": "Answer",
+				text: "Kami menyediakan layanan Express 6 jam dan Sameday 12 jam untuk kebutuhan mendesak Anda. Layanan reguler biasanya selesai dalam 2-3 hari.",
+			},
+		},
+	],
+};
+
 export default async function HomePage() {
 	const supabase = await createClient();
 	const testimonials = await getPublishedTestimonials();
@@ -114,6 +145,11 @@ export default async function HomePage() {
 				type="application/ld+json"
 				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data
 				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+			/>
+			<script
+				type="application/ld+json"
+				// biome-ignore lint/security/noDangerouslySetInnerHtml: FAQ JSON-LD
+				dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
 			/>
 			<div id="home-page-container">
 				<Suspense fallback={<div className="py-24 text-center">Memuat...</div>}>
