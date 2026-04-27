@@ -235,10 +235,10 @@ export default function RootLayout({
 						__html: JSON.stringify(navigationSchema),
 					}}
 				/>
-				<AuthProvider>{children}</AuthProvider>
-				<Toaster richColors position="top-right" />
+				<AuthProvider key="auth-provider">{children}</AuthProvider>
+				<Toaster key="toaster-notifications" richColors position="top-right" />
 				{process.env.NEXT_PUBLIC_GA_ID && (
-					<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+					<GoogleAnalytics key="google-analytics" gaId={process.env.NEXT_PUBLIC_GA_ID} />
 				)}
 			</body>
 		</html>

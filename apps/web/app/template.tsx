@@ -22,7 +22,7 @@ export default function RootTemplate({
 		}, 450); // Jeda premium yang pas (tidak terlalu lama, tidak terlalu cepat)
 
 		return () => clearTimeout(timer);
-	}, []);
+	}, [pathname]);
 
 	return (
 		<>
