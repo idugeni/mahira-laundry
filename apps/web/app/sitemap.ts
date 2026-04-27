@@ -12,6 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		"/lokasi",
 		"/lacak",
 		"/sitemap",
+		"/faq",
 	].map((route) => ({
 		url: `${baseUrl}${route}`,
 		lastModified: new Date(),

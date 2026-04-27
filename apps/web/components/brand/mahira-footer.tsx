@@ -146,6 +146,14 @@ export function MahiraFooter({
 							</li>
 							<li>
 								<Link
+									href="/faq"
+									className="hover:text-brand-primary transition-colors font-bold text-white"
+								>
+									Bantuan & FAQ
+								</Link>
+							</li>
+							<li>
+								<Link
 									href="/privacy"
 									className="hover:text-brand-primary transition-colors"
 								>
