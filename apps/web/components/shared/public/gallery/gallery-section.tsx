@@ -4,14 +4,13 @@ import {
 	AnimatePresence,
 	LayoutGroup,
 	motion,
-	type PanInfo,
 	useMotionValue,
 	useSpring,
 } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
 	HiOutlineArrowRight,
 	HiOutlineChevronLeft,
@@ -59,7 +58,7 @@ function GalleryCard({
 				ease: [0.16, 1, 0.3, 1],
 			}}
 			whileHover={{ y: -10 }}
-			className="group relative aspect-[4/5] rounded-[3rem] overflow-hidden bg-slate-100 cursor-none"
+			className="group relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-100 cursor-none"
 			onMouseMove={handleMouseMove}
 			onClick={onClick}
 		>
@@ -68,7 +67,7 @@ function GalleryCard({
 				alt={item.title}
 				fill
 				sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-				className="object-cover transition-transform duration-1000 group-hover:scale-110"
+				className="object-cover transition-transform duration-1000"
 				priority={index < 3}
 			/>
 
@@ -140,16 +139,16 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 	const visibleItems = filteredItems.slice(0, displayLimit);
 	const hasMore = filteredItems.length > displayLimit;
 
-	const handleNext = () => {
+	const handleNext = useCallback(() => {
 		if (!selectedItem) return;
 		const currentIndex = filteredItems.findIndex(
 			(item) => item.id === selectedItem.id,
 		);
 		const nextIndex = (currentIndex + 1) % filteredItems.length;
 		setSelectedItem(filteredItems[nextIndex]);
-	};
+	}, [selectedItem, filteredItems]);
 
-	const handlePrev = () => {
+	const handlePrev = useCallback(() => {
 		if (!selectedItem) return;
 		const currentIndex = filteredItems.findIndex(
 			(item) => item.id === selectedItem.id,
@@ -157,7 +156,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 		const prevIndex =
 			(currentIndex - 1 + filteredItems.length) % filteredItems.length;
 		setSelectedItem(filteredItems[prevIndex]);
-	};
+	}, [selectedItem, filteredItems]);
 
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
@@ -168,11 +167,11 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 		};
 		window.addEventListener("keydown", handleKeyDown);
 		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, [selectedItem, filteredItems]); // eslint-disable-line react-hooks/exhaustive-deps
+	}, [selectedItem, handlePrev, handleNext]);
 
 	return (
 		<section
-			className={`${isGalleryPage ? "pt-10 pb-32" : "py-24"} bg-white relative overflow-hidden`}
+			className={`${isGalleryPage ? "pt-10 pb-32" : "py-14 sm:py-16"} bg-white relative overflow-hidden`}
 		>
 			{/* Decorative Background */}
 			<div className="absolute inset-0 pointer-events-none opacity-40">
@@ -256,7 +255,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 								initial={{ opacity: 0, scale: 0.9 }}
 								animate={{ opacity: 1, scale: 1 }}
 								exit={{ opacity: 0, scale: 0.9 }}
-								className="col-span-full py-32 text-center bg-slate-50/50 rounded-[4rem] border-2 border-dashed border-slate-100 flex flex-col items-center justify-center"
+								className="col-span-full py-16 text-center bg-slate-50/50 rounded-[2rem] border-2 border-dashed border-slate-100 flex flex-col items-center justify-center"
 							>
 								<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-200 shadow-sm mb-6">
 									<HiOutlineViewColumns size={40} />
@@ -289,7 +288,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							whileTap={{ scale: 0.95 }}
 							type="button"
 							onClick={() => setDisplayLimit((prev) => prev + 6)}
-							className="inline-flex items-center gap-5 px-12 py-6 bg-slate-900 text-white rounded-full font-black text-sm uppercase tracking-[0.2em] hover:bg-slate-800 transition-all shadow-2xl shadow-slate-200"
+							className="inline-flex items-center gap-5 px-6 sm:px-8 py-6 bg-slate-900 text-white rounded-full font-black text-sm uppercase tracking-[0.2em] hover:bg-slate-800 transition-all shadow-2xl shadow-slate-200"
 						>
 							<span>Muat Koleksi Lain</span>
 							<HiOutlineArrowRight size={20} />
@@ -323,13 +322,14 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-10 lg:p-20"
+						className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-10 lg:p-12"
 					>
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
 							onClick={() => setSelectedItem(null)}
+							role="presentation"
 							className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl"
 						/>
 
@@ -339,7 +339,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							exit={{ opacity: 0, scale: 0.9, y: 100 }}
 							transition={{ type: "spring", damping: 30, stiffness: 300 }}
 							onClick={(e: React.MouseEvent) => e.stopPropagation()}
-							className="relative w-full max-w-7xl h-full flex flex-col lg:flex-row bg-white rounded-[4rem] overflow-hidden shadow-[0_50px_200px_-50px_rgba(0,0,0,0.8)]"
+							className="relative w-full max-w-7xl h-full flex flex-col lg:flex-row bg-white rounded-[2rem] overflow-hidden shadow-[0_50px_200px_-50px_rgba(0,0,0,0.8)]"
 						>
 							{/* Image Container */}
 							<div className="relative w-full lg:w-2/3 h-1/2 lg:h-full bg-slate-950 overflow-hidden group">
@@ -366,12 +366,14 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 								{/* Navigation Buttons */}
 								<div className="absolute inset-0 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity">
 									<button
+										type="button"
 										onClick={handlePrev}
 										className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 hover:bg-white hover:text-slate-900 transition-all"
 									>
 										<HiOutlineChevronLeft size={24} />
 									</button>
 									<button
+										type="button"
 										onClick={handleNext}
 										className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 hover:bg-white hover:text-slate-900 transition-all"
 									>
@@ -381,8 +383,9 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							</div>
 
 							{/* Info Section */}
-							<div className="flex-1 p-8 lg:px-12 lg:py-10 flex flex-col justify-between relative bg-white overflow-hidden">
+							<div className="flex-1 p-8 lg:px-6 sm:px-8 lg:py-10 flex flex-col justify-between relative bg-white overflow-hidden">
 								<button
+									type="button"
 									onClick={() => setSelectedItem(null)}
 									className="absolute top-8 right-8 w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors z-20"
 								>

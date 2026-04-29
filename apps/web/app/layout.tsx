@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
+import { JsonLd } from "@/components/shared/common/json-ld";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
@@ -19,8 +20,7 @@ const inter = Inter({
 	weight: ["300", "400", "500", "600", "700"],
 });
 
-const baseUrl =
-	process.env.NEXT_PUBLIC_APP_URL || "https://mahiralaundry.id";
+const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mahiralaundry.id";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
@@ -207,39 +207,30 @@ export default function RootLayout({
 				geist.variable,
 			)}
 		>
+			<head>
+				<JsonLd
+					key="jsonld-organization"
+					id="jsonld-organization"
+					data={organizationSchema}
+				/>
+				<JsonLd key="jsonld-website" id="jsonld-website" data={websiteSchema} />
+				<JsonLd
+					key="jsonld-navigation"
+					id="jsonld-navigation"
+					data={navigationSchema}
+				/>
+			</head>
 			<body
 				suppressHydrationWarning
 				className="min-h-full flex flex-col bg-background text-foreground font-[family-name:var(--font-body)]"
 			>
-				<script
-					key="ld-org"
-					type="application/ld+json"
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: Organization Schema
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify(organizationSchema),
-					}}
-				/>
-				<script
-					key="ld-web"
-					type="application/ld+json"
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: WebSite Schema
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify(websiteSchema),
-					}}
-				/>
-				<script
-					key="ld-nav"
-					type="application/ld+json"
-					// biome-ignore lint/security/noDangerouslySetInnerHtml: Navigation Schema
-					dangerouslySetInnerHTML={{
-						__html: JSON.stringify(navigationSchema),
-					}}
-				/>
-				<AuthProvider key="auth-provider">{children}</AuthProvider>
-				<Toaster key="toaster-notifications" richColors position="top-right" />
-				{process.env.NEXT_PUBLIC_GA_ID && (
-					<GoogleAnalytics key="google-analytics" gaId={process.env.NEXT_PUBLIC_GA_ID} />
-				)}
+				<div className="contents">
+					<AuthProvider>{children}</AuthProvider>
+					<Toaster richColors position="top-right" />
+					{process.env.NEXT_PUBLIC_GA_ID && (
+						<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+					)}
+				</div>
 			</body>
 		</html>
 	);

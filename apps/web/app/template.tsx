@@ -13,6 +13,7 @@ export default function RootTemplate({
 	const [loading, setLoading] = useState(true);
 	const pathname = usePathname();
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: pathname intentionally restarts the route transition loader.
 	useEffect(() => {
 		// Reset loading state setiap kali pathname berubah
 		setLoading(true);
@@ -25,7 +26,7 @@ export default function RootTemplate({
 	}, [pathname]);
 
 	return (
-		<>
+		<div key="template-root-wrapper">
 			<AnimatePresence key="template-presence" mode="wait">
 				{loading && (
 					<motion.div
@@ -75,6 +76,6 @@ export default function RootTemplate({
 			>
 				{children}
 			</motion.div>
-		</>
+		</div>
 	);
 }

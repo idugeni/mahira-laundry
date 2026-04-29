@@ -534,7 +534,6 @@ export async function getStaffList(outletId?: string) {
 	return data || [];
 }
 
-// All inventory items
 export async function getAllInventory(outletId?: string) {
 	const supabase = await createClient();
 	let query = supabase
@@ -546,7 +545,6 @@ export async function getAllInventory(outletId?: string) {
 	return data || [];
 }
 
-// All services
 export async function getAllServices(outletId?: string) {
 	const supabase = await createClient();
 	let query = supabase
@@ -558,10 +556,8 @@ export async function getAllServices(outletId?: string) {
 	return data || [];
 }
 
-// All vouchers
 export async function getAllVouchers(outletId?: string) {
 	const supabase = await createClient();
-	// Filter for vouchers bound to this outlet or global vouchers (outlet_id is null)
 	let query = supabase
 		.from("vouchers")
 		.select("*")
@@ -571,7 +567,6 @@ export async function getAllVouchers(outletId?: string) {
 	return data || [];
 }
 
-// Global staff list for superadmin (with outlet info)
 export async function getStaffManagementList() {
 	const supabase = await createClient();
 	const { data } = await supabase

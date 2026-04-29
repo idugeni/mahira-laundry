@@ -98,9 +98,9 @@ export function AdminPaketUsahaClient({
 	const packageToDelete = packages.find((p) => p.id === deleteConfirm);
 
 	return (
-		<div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+		<div className="space-y-6 sm:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* Toolbar */}
-			<div className="flex items-center justify-between gap-4">
+			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 				<div className="flex items-center gap-3">
 					<div className="w-10 h-10 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600">
 						<Layers size={20} />
@@ -116,7 +116,7 @@ export function AdminPaketUsahaClient({
 				</div>
 				<Button
 					onClick={() => setModalPackage(null)}
-					className="bg-slate-900 hover:bg-indigo-600 text-white rounded-2xl px-6 h-12 font-black text-[10px] uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl shadow-slate-900/10 flex items-center gap-3"
+					className="bg-slate-900 hover:bg-indigo-600 text-white rounded-xl px-5 h-11 font-black text-[10px] uppercase tracking-widest shadow-lg shadow-slate-900/10 flex items-center gap-2.5"
 				>
 					<Plus size={16} /> Tambah Paket Baru
 				</Button>
@@ -124,9 +124,9 @@ export function AdminPaketUsahaClient({
 
 			{/* Table */}
 			{packages.length === 0 ? (
-				<div className="bg-white rounded-[3rem] border border-slate-100 p-24 text-center shadow-xl shadow-slate-200/40">
-					<div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-dashed border-slate-100">
-						<Package size={40} className="text-slate-200" />
+				<div className="bg-white rounded-2xl border border-slate-100 p-10 sm:p-14 text-center shadow-lg shadow-slate-200/40">
+					<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-5 border-4 border-dashed border-slate-100">
+						<Package size={32} className="text-slate-200" />
 					</div>
 					<h3 className="text-2xl font-black text-slate-800 uppercase tracking-tight">
 						Belum Ada Paket
@@ -137,13 +137,13 @@ export function AdminPaketUsahaClient({
 					</p>
 					<Button
 						onClick={() => setModalPackage(null)}
-						className="mt-8 bg-slate-900 text-white rounded-2xl px-8 h-12 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-slate-900/10"
+						className="mt-8 bg-slate-900 text-white rounded-xl px-5 h-11 font-black text-[10px] uppercase tracking-widest shadow-lg shadow-slate-900/10"
 					>
 						<Plus size={16} className="mr-2" /> Tambah Paket Baru
 					</Button>
 				</div>
 			) : (
-				<div className="bg-white rounded-[3rem] border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden">
+				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 shadow-lg shadow-slate-200/35 overflow-hidden">
 					<div className="overflow-x-auto">
 						<table className="w-full">
 							<thead>
@@ -234,7 +234,7 @@ export function AdminPaketUsahaClient({
 												onClick={() => handleToggle(pkg.id, !pkg.is_active)}
 												disabled={toggleLoading === pkg.id}
 												className={cn(
-													"flex items-center gap-2 transition-all active:scale-95 disabled:opacity-50",
+													"flex items-center gap-2 transition-colors disabled:opacity-50",
 													pkg.is_active ? "text-emerald-600" : "text-slate-400",
 												)}
 												title={
@@ -347,14 +347,14 @@ export function AdminPaketUsahaClient({
 										variant="outline"
 										onClick={() => setDeleteConfirm(null)}
 										disabled={deleteLoading}
-										className="flex-1 rounded-2xl h-12 font-black text-[10px] uppercase tracking-widest border-slate-100 hover:bg-slate-50"
+										className="flex-1 rounded-xl h-11 font-black text-[10px] uppercase tracking-widest border-slate-100 hover:bg-slate-50"
 									>
 										Batal
 									</Button>
 									<Button
 										onClick={handleDelete}
 										disabled={deleteLoading}
-										className="flex-1 rounded-2xl h-12 font-black text-[10px] uppercase tracking-widest bg-rose-500 hover:bg-rose-600 text-white shadow-xl shadow-rose-500/20 transition-all hover:scale-105 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2"
+										className="flex-1 rounded-xl h-11 font-black text-[10px] uppercase tracking-widest bg-rose-500 hover:bg-rose-600 text-white shadow-lg shadow-rose-500/20 disabled:opacity-50 flex items-center justify-center gap-2"
 									>
 										{deleteLoading ? (
 											<span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

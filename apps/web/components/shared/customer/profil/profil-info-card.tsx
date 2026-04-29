@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useRef } from "react";
-import { HiOutlineCamera, HiOutlineCheckBadge } from "react-icons/hi2";
+import { HiOutlineCamera } from "react-icons/hi2";
 
 interface Profile {
 	full_name: string;
@@ -21,7 +21,7 @@ interface ProfilInfoCardProps {
 
 export function ProfilInfoCard({
 	profile,
-	loading,
+	loading: _loading,
 	onAvatarChange,
 }: ProfilInfoCardProps) {
 	const fileInputRef = useRef<HTMLInputElement>(null);
@@ -53,7 +53,7 @@ export function ProfilInfoCard({
 					<button
 						type="button"
 						onClick={() => fileInputRef.current?.click()}
-						className="absolute -bottom-2 -right-2 w-10 h-10 bg-white text-brand-primary rounded-2xl flex items-center justify-center border-4 border-white shadow-xl z-30 cursor-pointer hover:scale-110 hover:text-brand-accent transition-all group/cam"
+						className="absolute -bottom-2 -right-2 w-10 h-10 bg-white text-brand-primary rounded-2xl flex items-center justify-center border-4 border-white shadow-xl z-30 cursor-pointer hover:text-brand-accent transition-all group/cam"
 					>
 						<span className="flex items-center justify-center text-lg group-hover/cam:rotate-12 transition-transform">
 							<HiOutlineCamera />

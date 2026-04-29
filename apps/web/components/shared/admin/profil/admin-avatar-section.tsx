@@ -47,7 +47,7 @@ export function AdminAvatarSection({ profile }: AdminAvatarSectionProps) {
 
 	return (
 		<div className="relative group/avatar">
-			<div className="w-32 h-32 rounded-[2.5rem] bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-black text-4xl shadow-2xl shadow-indigo-500/20 border-4 border-white transition-transform duration-700 group-hover/avatar:scale-105 group-hover/avatar:rotate-3 overflow-hidden relative">
+			<div className="w-28 h-28 sm:w-32 sm:h-32 rounded-[2rem] bg-gradient-to-br from-indigo-500 to-indigo-600 flex items-center justify-center text-white font-black text-4xl shadow-xl shadow-indigo-500/20 border-4 border-white transition-transform duration-300 group-hover/avatar:-translate-y-0.5 overflow-hidden relative">
 				{profile.avatar_url ? (
 					<Image
 						src={profile.avatar_url}
@@ -71,7 +71,7 @@ export function AdminAvatarSection({ profile }: AdminAvatarSectionProps) {
 				type="button"
 				onClick={() => fileInputRef.current?.click()}
 				disabled={loading}
-				className="absolute -bottom-2 -right-2 w-12 h-12 rounded-2xl bg-white shadow-xl border border-slate-50 flex items-center justify-center text-indigo-600 cursor-pointer hover:bg-slate-50 hover:scale-110 transition-all active:scale-95 z-20"
+				className="absolute -bottom-2 -right-2 w-10 h-10 rounded-xl bg-white shadow-lg border border-slate-100 flex items-center justify-center text-indigo-600 cursor-pointer hover:bg-slate-50 transition-colors z-20"
 			>
 				<Camera size={20} className={loading ? "opacity-20" : ""} />
 			</button>

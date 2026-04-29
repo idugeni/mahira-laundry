@@ -38,7 +38,7 @@ export function AuthSkeleton() {
 
 			{/* Right Side Skeleton (Matching the split layout) */}
 			<div className="hidden lg:block lg:flex-1 relative overflow-hidden bg-slate-900 h-full">
-				<div className="absolute inset-0 flex flex-col justify-between p-16 lg:p-20">
+				<div className="absolute inset-0 flex flex-col justify-between p-16 lg:p-12">
 					<Skeleton className="h-20 w-64 bg-white/5" />
 					<div className="space-y-6">
 						<Skeleton className="h-1 w-16 bg-brand-accent/20" />

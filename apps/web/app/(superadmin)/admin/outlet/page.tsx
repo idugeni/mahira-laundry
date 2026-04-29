@@ -40,12 +40,12 @@ export default async function OutletPage() {
 	);
 
 	return (
-		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-white rounded-[3rem] p-10 lg:p-14 border border-slate-100 shadow-2xl shadow-slate-200/40 group">
-				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-all duration-1000 group-hover:bg-indigo-100" />
+			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 group">
+				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-colors duration-500 group-hover:bg-indigo-100" />
 
-				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
 					<div className="space-y-4">
 						<div className="flex items-center gap-3">
 							<Badge className="bg-indigo-50 text-indigo-600 border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
@@ -56,7 +56,7 @@ export default async function OutletPage() {
 								<Globe size={14} /> Total {outlets.length} Cabang
 							</span>
 						</div>
-						<h1 className="text-4xl lg:text-6xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none text-slate-900">
+						<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight text-slate-900">
 							Manajemen <span className="text-indigo-600 italic">Outlet</span>
 						</h1>
 						<p className="text-slate-500 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
@@ -68,9 +68,9 @@ export default async function OutletPage() {
 
 					<OutletModal
 						trigger={
-							<Button className="bg-slate-900 hover:bg-slate-800 text-white rounded-2xl px-10 h-16 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-slate-900/20 flex items-center gap-3">
-								<div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center">
-									<Plus size={20} />
+							<Button className="bg-slate-900 hover:bg-slate-800 text-white rounded-xl px-5 h-11 font-black text-xs uppercase tracking-widest shadow-lg shadow-slate-900/20 flex items-center gap-2.5">
+								<div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
+									<Plus size={17} />
 								</div>
 								Registrasi Outlet
 							</Button>
@@ -113,11 +113,11 @@ export default async function OutletPage() {
 			</div>
 
 			{/* Outlet Cards Grid */}
-			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+			<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
 				{outlets.map((outlet) => (
 					<div
 						key={outlet.id}
-						className="group relative bg-white rounded-[3rem] border border-slate-100 p-8 lg:p-10 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 overflow-hidden"
+						className="group relative bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 p-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-indigo-500/10 transition-[box-shadow,border-color] duration-300 overflow-hidden"
 					>
 						{/* Background Decorative Pattern */}
 						<div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
@@ -128,12 +128,12 @@ export default async function OutletPage() {
 							)}
 						</div>
 
-						<div className="relative space-y-8">
+						<div className="relative space-y-6">
 							{/* Card Header Section */}
 							<div className="flex items-start justify-between">
-								<div className="flex items-center gap-5">
+								<div className="flex items-center gap-4">
 									<div className="relative">
-										<div className="w-20 h-20 rounded-[1.5rem] bg-gradient-to-br from-indigo-50 to-indigo-100/50 overflow-hidden flex items-center justify-center text-indigo-600 font-black text-2xl border-2 border-white shadow-xl transition-transform duration-700 group-hover:scale-105">
+										<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-50 to-indigo-100/50 overflow-hidden flex items-center justify-center text-indigo-600 font-black text-xl border-2 border-white shadow-md transition-transform duration-300 group-hover:-translate-y-0.5">
 											{outlet.image_url ? (
 												<Image
 													src={outlet.image_url}
@@ -176,7 +176,7 @@ export default async function OutletPage() {
 									trigger={
 										<Button
 											variant="outline"
-											className="rounded-2xl h-12 px-5 font-black text-[10px] uppercase tracking-widest border-slate-100 hover:bg-slate-50 active:scale-95 transition-all flex items-center gap-2"
+											className="rounded-xl h-10 px-4 font-black text-[10px] uppercase tracking-widest border-slate-100 hover:bg-slate-50 flex items-center gap-2"
 										>
 											<Edit3 size={16} /> Ubah Info
 										</Button>
@@ -186,7 +186,7 @@ export default async function OutletPage() {
 
 							{/* Card Body Stats */}
 							<div className="grid grid-cols-3 gap-4">
-								<div className="bg-slate-50/50 rounded-3xl p-5 border border-slate-50 group-hover:bg-white group-hover:border-slate-100 transition-all duration-500">
+								<div className="bg-slate-50/50 rounded-2xl p-4 border border-slate-50 group-hover:bg-white group-hover:border-slate-100 transition-colors duration-300">
 									<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
 										Orders
 									</p>
@@ -194,7 +194,7 @@ export default async function OutletPage() {
 										{Number(outlet.ordersThisMonth) || 0}
 									</p>
 								</div>
-								<div className="bg-indigo-50/30 rounded-3xl p-5 border border-indigo-50/50 group-hover:bg-white group-hover:border-indigo-100 transition-all duration-500">
+								<div className="bg-indigo-50/30 rounded-2xl p-4 border border-indigo-50/50 group-hover:bg-white group-hover:border-indigo-100 transition-colors duration-300">
 									<p className="text-[10px] font-black text-indigo-400 uppercase tracking-widest mb-1">
 										Revenue
 									</p>
@@ -202,7 +202,7 @@ export default async function OutletPage() {
 										{formatCompact(Number(outlet.monthlyRevenue) || 0)}
 									</p>
 								</div>
-								<div className="bg-amber-50/30 rounded-3xl p-5 border border-amber-50/50 group-hover:bg-white group-hover:border-amber-100 transition-all duration-500">
+								<div className="bg-amber-50/30 rounded-2xl p-4 border border-amber-50/50 group-hover:bg-white group-hover:border-amber-100 transition-colors duration-300">
 									<p className="text-[10px] font-black text-amber-500 uppercase tracking-widest mb-1">
 										{outlet.is_franchise ? "Fee" : "Stock"}
 									</p>
@@ -213,7 +213,7 @@ export default async function OutletPage() {
 							</div>
 
 							{/* Contact & Address Footer */}
-							<div className="space-y-4 pt-10 border-t border-slate-50">
+							<div className="space-y-4 pt-6 border-t border-slate-50">
 								<div className="flex items-center gap-4 text-slate-500">
 									<div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 shrink-0">
 										<MapPin size={18} />
@@ -240,7 +240,7 @@ export default async function OutletPage() {
 			</div>
 
 			{outlets.length === 0 && (
-				<div className="bg-white rounded-[4rem] border border-slate-100 p-24 text-center shadow-2xl shadow-slate-200/40 relative overflow-hidden group">
+				<div className="bg-white rounded-2xl border border-slate-100 p-10 sm:p-14 text-center shadow-lg shadow-slate-200/40 relative overflow-hidden group">
 					<div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/20 to-slate-50/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 					<div className="relative flex flex-col items-center">
 						<div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mb-8 border-4 border-dashed border-slate-100">

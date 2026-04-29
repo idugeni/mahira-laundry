@@ -5,13 +5,11 @@ import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 const MitraSchema = z.object({
-	// Owner Info
 	fullName: z.string().min(3),
 	email: z.string().email(),
 	phone: z.string().min(10),
 	password: z.string().min(8).optional(),
 
-	// Outlet Info
 	outletName: z.string().min(3),
 	outletSlug: z
 		.string()
@@ -29,7 +27,7 @@ export async function registerMitra(formData: Record<string, unknown>) {
 		const validated = MitraSchema.parse(formData);
 		const admin = createAdminClient();
 
-		// 1. Create Outlet first
+		// 1. Create Outlet
 		const { data: outlet, error: outletError } = await admin
 			.from("outlets")
 			.insert({
@@ -52,7 +50,7 @@ export async function registerMitra(formData: Record<string, unknown>) {
 			throw outletError;
 		}
 
-		// 2. Create Auth User (Manager role)
+		// 2. Create Auth User
 		const { data: authUser, error: authError } =
 			await admin.auth.admin.createUser({
 				email: validated.email,
@@ -66,13 +64,11 @@ export async function registerMitra(formData: Record<string, unknown>) {
 			});
 
 		if (authError) {
-			// Cleanup: Delete the outlet if user creation fails
 			await admin.from("outlets").delete().eq("id", outlet.id);
 			throw authError;
 		}
 
-		// 3. Update profile with outlet_id
-		// Note: Trigger on_auth_user_created already creates the profile entry
+		// 3. Link profile to outlet
 		if (authUser.user) {
 			const { error: profileError } = await admin
 				.from("profiles")
@@ -85,7 +81,7 @@ export async function registerMitra(formData: Record<string, unknown>) {
 			if (profileError) {
 				console.error("Error linking mitra to outlet:", profileError);
 			} else {
-				// 4. Send Welcome Notification
+				// 4. Welcome notification
 				await admin.from("notifications").insert({
 					user_id: authUser.user.id,
 					type: "system",

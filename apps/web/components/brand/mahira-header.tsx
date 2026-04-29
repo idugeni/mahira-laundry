@@ -40,8 +40,9 @@ export function MahiraHeader() {
 	const dashboardHref = getDashboardUrl(profile?.role as string);
 
 	return (
-		<>
+		<div key="header-root-container">
 			<motion.header
+				key="header-main"
 				initial={{ y: -64, opacity: 0 }}
 				animate={{ y: 0, opacity: 1 }}
 				className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-border"
@@ -72,7 +73,10 @@ export function MahiraHeader() {
 							<div className="h-6 w-px bg-slate-200 mx-2" />
 
 							{loading ? (
-								<div key="header-loading" className="flex items-center gap-3 pl-2 pr-6 py-1.5 bg-slate-100/50 rounded-full animate-pulse">
+								<div
+									key="header-loading"
+									className="flex items-center gap-3 pl-2 pr-6 py-1.5 bg-slate-100/50 rounded-full animate-pulse"
+								>
 									<div className="w-8 h-8 rounded-full bg-slate-200" />
 									<div className="h-4 w-12 bg-slate-200 rounded" />
 								</div>
@@ -134,7 +138,7 @@ export function MahiraHeader() {
 			</motion.header>
 
 			{/* Mobile Sidebar */}
-			<AnimatePresence>
+			<AnimatePresence key="mobile-menu-presence">
 				{isOpen && (
 					<motion.div
 						key="mobile-menu-backdrop"
@@ -253,6 +257,6 @@ export function MahiraHeader() {
 					</motion.div>
 				)}
 			</AnimatePresence>
-		</>
+		</div>
 	);
 }

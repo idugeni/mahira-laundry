@@ -35,7 +35,6 @@ export async function generateReportData(
 		start = new Date(dateRange.from);
 		end = new Date(dateRange.to);
 	} else {
-		// Default logic if no range provided
 		if (type === "harian") {
 			start.setHours(0, 0, 0, 0);
 		} else if (type === "mingguan") {
@@ -60,7 +59,6 @@ export async function generateReportData(
 
 	if (ordersError) throw ordersError;
 
-	// Fetch expenses for the same period
 	const { data: expenses, error: expensesError } = await supabase
 		.from("expenses")
 		.select("*")
@@ -70,7 +68,6 @@ export async function generateReportData(
 	if (expensesError)
 		console.error("Could not fetch expenses for report:", expensesError);
 
-	// Process data for export
 	const reportRows = (orders as OrderRow[]).map((order) => ({
 		"Order Number": order.order_number,
 		Tanggal: new Date(order.created_at).toLocaleDateString("id-ID"),
@@ -85,7 +82,6 @@ export async function generateReportData(
 			.join(", "),
 	}));
 
-	// Summary Metrics based on type
 	const totalRevenue = (orders as OrderRow[])
 		.filter((o) => o.payment_status === "paid")
 		.reduce((sum: number, o) => sum + (o.total || 0), 0);
@@ -101,7 +97,6 @@ export async function generateReportData(
 		(o) => o.status === "completed",
 	).length;
 
-	// Aggregate by outlet (Kompleks!)
 	const outletStats: Record<string, { count: number; revenue: number }> = {};
 	(orders as OrderRow[]).forEach((o) => {
 		const name = o.outlets?.name || "N/A";

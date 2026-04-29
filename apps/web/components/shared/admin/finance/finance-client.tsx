@@ -107,13 +107,13 @@ export function SuperadminFinanceClient({
 	);
 
 	return (
-		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-[3rem] p-6 sm:p-10 lg:p-14 text-white shadow-2xl shadow-slate-900/40 group">
+			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white shadow-xl shadow-slate-900/30 group">
 				<div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-500/10 rounded-full -mr-48 -mt-48 blur-3xl opacity-60" />
 
-				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-10">
-					<div className="space-y-6">
+				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
+					<div className="space-y-5">
 						<div className="flex items-center gap-3">
 							<Badge className="bg-emerald-500 text-white border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
 								Financial Governance
@@ -123,7 +123,7 @@ export function SuperadminFinanceClient({
 								<Activity size={14} /> Real-time Cashflow
 							</span>
 						</div>
-						<h1 className="text-4xl lg:text-7xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none">
+						<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight">
 							Executive <span className="text-emerald-400 italic">Finance</span>
 						</h1>
 						<p className="text-slate-400 font-bold text-sm lg:text-lg max-w-2xl leading-relaxed">
@@ -133,13 +133,13 @@ export function SuperadminFinanceClient({
 						</p>
 					</div>
 
-					<div className="flex items-center gap-4">
+					<div className="flex flex-col sm:flex-row sm:items-center gap-3">
 						<IncomeModal
 							outlets={outlets}
 							trigger={
-								<Button className="bg-emerald-500 text-white hover:bg-emerald-400 rounded-2xl px-8 sm:px-12 h-16 sm:h-20 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-emerald-500/20 flex items-center gap-4">
-									<div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center">
-										<TrendingUp size={24} />
+								<Button className="bg-emerald-500 text-white hover:bg-emerald-400 rounded-xl px-5 h-11 font-black text-xs uppercase tracking-widest shadow-lg shadow-emerald-500/20 flex items-center gap-2.5">
+									<div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
+										<TrendingUp size={17} />
 									</div>
 									Tambah Pemasukan
 								</Button>
@@ -148,9 +148,9 @@ export function SuperadminFinanceClient({
 						<ExpenseModal
 							outletId="all"
 							trigger={
-								<Button className="bg-white text-slate-900 hover:bg-emerald-400 hover:text-white rounded-2xl px-8 sm:px-12 h-16 sm:h-20 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-white/5 flex items-center gap-4">
-									<div className="w-10 h-10 rounded-2xl bg-slate-900/5 flex items-center justify-center">
-										<Receipt size={24} />
+								<Button className="bg-white text-slate-900 hover:bg-emerald-400 hover:text-slate-950 rounded-xl px-5 h-11 font-black text-xs uppercase tracking-widest shadow-lg shadow-white/5 flex items-center gap-2.5">
+									<div className="w-7 h-7 rounded-lg bg-slate-900/5 flex items-center justify-center">
+										<Receipt size={17} />
 									</div>
 									Catat Pengeluaran
 								</Button>
@@ -162,26 +162,26 @@ export function SuperadminFinanceClient({
 
 			<Tabs
 				defaultValue="overview"
-				className="w-full space-y-10"
+				className="w-full space-y-8"
 				onValueChange={setActiveTab}
 			>
 				<div className="flex flex-wrap items-center justify-between gap-4 px-4 lg:px-0">
-					<TabsList className="bg-slate-100 p-1.5 rounded-2xl lg:rounded-[2rem] h-auto flex flex-wrap gap-1.5">
+					<TabsList className="bg-slate-100 p-1.5 rounded-2xl h-auto flex flex-wrap gap-1.5">
 						<TabsTrigger
 							value="overview"
-							className="rounded-2xl px-4 sm:px-8 py-3 sm:py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
+							className="rounded-xl px-4 sm:px-6 py-2.5 sm:py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-md shadow-slate-200"
 						>
 							<BarChart3 size={14} className="mr-1.5" /> Overview
 						</TabsTrigger>
 						<TabsTrigger
 							value="expenses"
-							className="rounded-2xl px-4 sm:px-8 py-3 sm:py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
+							className="rounded-xl px-4 sm:px-6 py-2.5 sm:py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-md shadow-slate-200"
 						>
 							<Wallet size={14} className="mr-1.5" /> Expenses
 						</TabsTrigger>
 						<TabsTrigger
 							value="history"
-							className="rounded-2xl px-4 sm:px-8 py-3 sm:py-4 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-xl shadow-slate-200"
+							className="rounded-xl px-4 sm:px-6 py-2.5 sm:py-3 font-black text-[10px] uppercase tracking-widest data-[state=active]:bg-white data-[state=active]:shadow-md shadow-slate-200"
 						>
 							<History size={14} className="mr-1.5" /> History
 						</TabsTrigger>
@@ -190,7 +190,7 @@ export function SuperadminFinanceClient({
 					<div className="flex items-center gap-2">
 						<Button
 							variant="outline"
-							className="rounded-2xl h-12 px-4 sm:px-8 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50 shadow-sm transition-all flex items-center gap-2"
+							className="rounded-xl h-11 px-4 sm:px-5 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50 shadow-sm transition-colors flex items-center gap-2"
 						>
 							<Calendar size={16} />{" "}
 							{new Date().toLocaleDateString("id-ID", {
@@ -198,7 +198,7 @@ export function SuperadminFinanceClient({
 								year: "numeric",
 							})}
 						</Button>
-						<Button className="rounded-2xl h-12 px-4 sm:px-8 font-black text-[10px] uppercase tracking-widest bg-slate-900 text-white hover:bg-indigo-600 shadow-xl shadow-slate-900/10 transition-all">
+						<Button className="rounded-xl h-11 px-4 sm:px-5 font-black text-[10px] uppercase tracking-widest bg-slate-900 text-white hover:bg-indigo-600 shadow-lg shadow-slate-900/10 transition-colors">
 							<Download size={16} className="mr-1.5" /> Export
 						</Button>
 					</div>
@@ -207,14 +207,14 @@ export function SuperadminFinanceClient({
 				{/* === OVERVIEW TAB === */}
 				<TabsContent
 					value="overview"
-					className="space-y-10 focus-visible:outline-none"
+					className="space-y-8 focus-visible:outline-none"
 				>
 					{/* KPI Row */}
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-0 sm:gap-8">
-						<div className="group relative bg-white rounded-none sm:rounded-[3rem] p-6 sm:p-10 border-b sm:border border-slate-100 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500">
-							<div className="flex items-center justify-between mb-8">
-								<div className="w-16 h-16 rounded-3xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-lg shadow-indigo-100 transition-transform group-hover:rotate-6">
-									<CreditCard size={32} />
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-0 sm:gap-6">
+						<div className="group relative bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-indigo-500/10 transition-shadow duration-300">
+							<div className="flex items-center justify-between mb-6">
+								<div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-md shadow-indigo-100">
+									<CreditCard size={26} />
 								</div>
 								<Badge
 									className={cn(
@@ -231,7 +231,7 @@ export function SuperadminFinanceClient({
 							<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">
 								Total Pendapatan
 							</p>
-							<h3 className="text-4xl font-black text-slate-900 tracking-tighter mb-1">
+							<h3 className="text-3xl font-black text-slate-900 tracking-tight mb-1">
 								{formatCompact(stats.totalRevenue)}
 							</h3>
 							<p className="text-xs font-bold text-slate-400">
@@ -239,10 +239,10 @@ export function SuperadminFinanceClient({
 							</p>
 						</div>
 
-						<div className="group relative bg-white rounded-none sm:rounded-[3rem] p-6 sm:p-10 border-b sm:border border-slate-100 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-rose-500/10 transition-all duration-500">
-							<div className="flex items-center justify-between mb-8">
-								<div className="w-16 h-16 rounded-3xl bg-rose-50 flex items-center justify-center text-rose-600 shadow-lg shadow-rose-100 transition-transform group-hover:-rotate-6">
-									<Banknote size={32} />
+						<div className="group relative bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-rose-500/10 transition-shadow duration-300">
+							<div className="flex items-center justify-between mb-6">
+								<div className="w-12 h-12 rounded-2xl bg-rose-50 flex items-center justify-center text-rose-600 shadow-md shadow-rose-100">
+									<Banknote size={26} />
 								</div>
 								<Badge className="bg-slate-50 text-slate-400 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border-none">
 									Monthly Cost
@@ -251,7 +251,7 @@ export function SuperadminFinanceClient({
 							<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">
 								Biaya Operasional
 							</p>
-							<h3 className="text-4xl font-black text-slate-900 tracking-tighter mb-1">
+							<h3 className="text-3xl font-black text-slate-900 tracking-tight mb-1">
 								{formatCompact(stats.totalExpenses)}
 							</h3>
 							<p className="text-xs font-bold text-slate-400">
@@ -259,10 +259,10 @@ export function SuperadminFinanceClient({
 							</p>
 						</div>
 
-						<div className="group relative bg-white rounded-none sm:rounded-[3rem] p-6 sm:p-10 border-b sm:border border-slate-100 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500">
-							<div className="flex items-center justify-between mb-8">
-								<div className="w-16 h-16 rounded-3xl bg-emerald-50 flex items-center justify-center text-emerald-600 shadow-lg shadow-emerald-100 transition-transform group-hover:rotate-6">
-									<TrendingUp size={32} />
+						<div className="group relative bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-emerald-500/10 transition-shadow duration-300">
+							<div className="flex items-center justify-between mb-6">
+								<div className="w-12 h-12 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-600 shadow-md shadow-emerald-100">
+									<TrendingUp size={26} />
 								</div>
 								<Badge className="bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border-none">
 									{stats.margin}% Margin
@@ -271,7 +271,7 @@ export function SuperadminFinanceClient({
 							<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">
 								Laba Bersih (Net)
 							</p>
-							<h3 className="text-4xl font-black text-slate-900 tracking-tighter mb-1">
+							<h3 className="text-3xl font-black text-slate-900 tracking-tight mb-1">
 								{formatCompact(stats.netProfit)}
 							</h3>
 							<p className="text-xs font-bold text-slate-400">
@@ -280,9 +280,9 @@ export function SuperadminFinanceClient({
 						</div>
 					</div>
 
-					<div className="grid lg:grid-cols-5 gap-6 sm:gap-10">
+					<div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
 						{/* Revenue Trend Chart */}
-						<div className="lg:col-span-3 bg-white rounded-none sm:rounded-[3rem] p-6 sm:p-10 border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40">
+						<div className="lg:col-span-3 bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40">
 							<div className="flex items-center justify-between mb-10">
 								<div>
 									<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
@@ -299,7 +299,7 @@ export function SuperadminFinanceClient({
 						</div>
 
 						{/* Payment Distribution Pie */}
-						<div className="lg:col-span-2 bg-white rounded-none sm:rounded-[3rem] p-6 sm:p-10 border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40">
+						<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40">
 							<div className="mb-8">
 								<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
 									Distribusi Bayar
@@ -314,8 +314,8 @@ export function SuperadminFinanceClient({
 								</div>
 							) : (
 								<div className="h-64 flex flex-col items-center justify-center text-slate-300 gap-4">
-									<div className="w-20 h-20 rounded-full bg-slate-50 flex items-center justify-center">
-										<CreditCard size={40} />
+									<div className="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center">
+										<CreditCard size={32} />
 									</div>
 									<p className="text-[10px] font-black uppercase tracking-widest">
 										Belum ada data pembayaran
@@ -329,10 +329,10 @@ export function SuperadminFinanceClient({
 				{/* === EXPENSES TAB === */}
 				<TabsContent
 					value="expenses"
-					className="space-y-10 focus-visible:outline-none"
+					className="space-y-8 focus-visible:outline-none"
 				>
-					<div className="bg-white rounded-none sm:rounded-[3rem] border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden">
-						<div className="p-6 sm:p-10 border-b border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+					<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 overflow-hidden">
+						<div className="p-6 sm:p-8 border-b border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 							<div>
 								<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
 									Detail Pengeluaran
@@ -343,7 +343,7 @@ export function SuperadminFinanceClient({
 							</div>
 							<Button
 								variant="outline"
-								className="rounded-2xl h-12 px-6 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white shadow-sm flex items-center gap-2 self-start sm:self-auto"
+								className="rounded-xl h-11 px-5 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white shadow-sm flex items-center gap-2 self-start sm:self-auto"
 							>
 								<Filter size={16} /> Filter Category
 							</Button>
@@ -384,7 +384,7 @@ export function SuperadminFinanceClient({
 													key={expense.id}
 													className="group hover:bg-slate-50/30 transition-colors"
 												>
-													<td className="px-6 py-6">
+													<td className="px-6 py-4">
 														<div>
 															<p className="font-black text-slate-900 uppercase tracking-tight text-sm">
 																{expense.reason}
@@ -394,7 +394,7 @@ export function SuperadminFinanceClient({
 															</Badge>
 														</div>
 													</td>
-													<td className="px-6 py-6">
+													<td className="px-6 py-4">
 														<div className="flex items-center gap-2">
 															<Building2
 																size={14}
@@ -405,7 +405,7 @@ export function SuperadminFinanceClient({
 															</p>
 														</div>
 													</td>
-													<td className="px-6 py-6">
+													<td className="px-6 py-4">
 														<div className="flex items-center gap-2">
 															<div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-[10px] shrink-0">
 																{expense.profiles?.full_name?.charAt(0) || "?"}
@@ -415,10 +415,10 @@ export function SuperadminFinanceClient({
 															</p>
 														</div>
 													</td>
-													<td className="px-6 py-6 text-xs font-bold text-slate-400 whitespace-nowrap">
+													<td className="px-6 py-4 text-xs font-bold text-slate-400 whitespace-nowrap">
 														{formatDateTime(expense.created_at)}
 													</td>
-													<td className="px-6 py-6 text-right">
+													<td className="px-6 py-4 text-right">
 														<p className="text-base font-black text-rose-600 whitespace-nowrap">
 															-{formatIDR(expense.amount)}
 														</p>
@@ -484,10 +484,10 @@ export function SuperadminFinanceClient({
 				{/* === HISTORY TAB === */}
 				<TabsContent
 					value="history"
-					className="space-y-10 focus-visible:outline-none"
+					className="space-y-8 focus-visible:outline-none"
 				>
-					<div className="bg-white rounded-none sm:rounded-[4rem] border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden">
-						<div className="p-6 sm:p-10 border-b border-slate-50">
+					<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 overflow-hidden">
+						<div className="p-6 sm:p-8 border-b border-slate-50">
 							<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
 								Ledger Transaksi
 							</h2>
@@ -531,17 +531,17 @@ export function SuperadminFinanceClient({
 													key={order.id}
 													className="group hover:bg-slate-50/30 transition-colors"
 												>
-													<td className="px-6 py-6 font-mono text-xs font-black text-indigo-600">
+													<td className="px-6 py-4 font-mono text-xs font-black text-indigo-600">
 														#{order.order_number}
 													</td>
-													<td className="px-6 py-6">
+													<td className="px-6 py-4">
 														<p className="text-sm font-black text-slate-900 uppercase tracking-tight">
 															{Array.isArray(order.profiles)
 																? order.profiles[0]?.full_name || "—"
 																: order.profiles?.full_name || "—"}
 														</p>
 													</td>
-													<td className="px-6 py-6">
+													<td className="px-6 py-4">
 														<Badge
 															className={cn(
 																"px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border-none shadow-none",
@@ -555,10 +555,10 @@ export function SuperadminFinanceClient({
 																: "⏳ Pending"}
 														</Badge>
 													</td>
-													<td className="px-6 py-6 text-right text-xs font-bold text-slate-400 whitespace-nowrap">
+													<td className="px-6 py-4 text-right text-xs font-bold text-slate-400 whitespace-nowrap">
 														{formatDateTime(order.created_at)}
 													</td>
-													<td className="px-6 py-6 text-right font-black text-slate-900 text-base whitespace-nowrap">
+													<td className="px-6 py-4 text-right font-black text-slate-900 text-base whitespace-nowrap">
 														{formatIDR(order.total)}
 													</td>
 												</tr>
@@ -627,8 +627,8 @@ export function SuperadminFinanceClient({
 			</Tabs>
 
 			{/* Reconciliation Notice */}
-			<div className="bg-slate-50 rounded-[2rem] sm:rounded-[3rem] p-8 sm:p-10 lg:p-14 border border-slate-100 flex flex-col lg:flex-row items-center gap-8 group hover:bg-white hover:border-indigo-100 transition-all duration-500">
-				<div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-4xl shadow-xl border border-slate-50 group-hover:rotate-12 transition-transform duration-500 shrink-0">
+			<div className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100 flex flex-col lg:flex-row items-center gap-6 group hover:bg-white hover:border-indigo-100 transition-colors duration-300">
+				<div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-xl shadow-md border border-slate-50 shrink-0">
 					🏦
 				</div>
 				<div className="flex-1 text-center lg:text-left">
@@ -644,7 +644,7 @@ export function SuperadminFinanceClient({
 				</div>
 				<Button
 					variant="outline"
-					className="rounded-2xl h-14 px-8 sm:px-10 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-900 hover:text-white transition-all shrink-0"
+					className="rounded-xl h-11 px-5 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-900 hover:text-white shrink-0"
 				>
 					Manual Sync Detail
 				</Button>

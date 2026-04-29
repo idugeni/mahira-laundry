@@ -76,7 +76,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 	return (
 		<motion.div
 			whileHover={{ y: -12 }}
-			className="group relative flex flex-col h-full rounded-[3rem] border border-slate-100 bg-white shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] transition-all hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] hover:border-brand-primary/20 overflow-hidden"
+			className="group relative flex flex-col h-full rounded-[2rem] border border-slate-100 bg-white shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] transition-all hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] hover:border-brand-primary/20 overflow-hidden"
 		>
 			{/* Featured ribbon - Ultra Premium Style */}
 			{pkg.is_featured && (
@@ -97,7 +97,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 						src={pkg.image_url}
 						alt={pkg.name}
 						fill
-						className="object-cover transition-transform duration-[1.5s] group-hover:scale-110"
+						className="object-cover transition-transform duration-[1.5s]"
 						sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 					/>
 					<div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
@@ -188,7 +188,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 							<AnimatePresence mode="popLayout">
 								{visibleItems.map((item, idx) => (
 									<motion.li
-										key={`${item.name}-${idx}`}
+										key={item.name}
 										initial={{ opacity: 0, x: -10 }}
 										animate={{ opacity: 1, x: 0 }}
 										transition={{ delay: idx * 0.05 }}

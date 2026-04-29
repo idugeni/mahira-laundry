@@ -307,7 +307,7 @@ export function InquiryForm({
 					<button
 						type="submit"
 						disabled={form.formState.isSubmitting}
-						className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition-all hover:bg-blue-700 active:scale-95 disabled:opacity-50"
+						className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition-all hover:bg-blue-700 disabled:opacity-50"
 					>
 						{form.formState.isSubmitting ? "Mengirim..." : "Kirim Inquiry"}
 					</button>

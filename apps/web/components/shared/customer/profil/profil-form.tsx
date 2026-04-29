@@ -117,7 +117,7 @@ export function ProfilForm({
 						animate={{ opacity: 1, y: 0 }}
 						type="submit"
 						disabled={loading}
-						className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-lg shadow-xl shadow-slate-200 hover:bg-brand-primary hover:shadow-brand-primary/20 transition-all active:scale-95 disabled:opacity-50 flex items-center justify-center gap-3"
+						className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-lg shadow-xl shadow-slate-200 hover:bg-brand-primary hover:shadow-brand-primary/20 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
 					>
 						{loading ? "Menyimpan..." : "Simpan Perubahan"}
 					</motion.button>

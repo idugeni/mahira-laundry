@@ -28,7 +28,7 @@ export function OrderModeSelector({
 			<button
 				type="button"
 				onClick={onSelectForm}
-				className="group relative flex flex-col items-center text-center p-8 bg-white rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 transition-all hover:border-brand-primary active:scale-95 overflow-hidden"
+				className="group relative flex flex-col items-center text-center p-8 bg-white rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 transition-all hover:border-brand-primary overflow-hidden"
 			>
 				<div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
 					<span className="text-9xl text-brand-primary transition-transform group-hover:rotate-12 block">
@@ -54,7 +54,7 @@ export function OrderModeSelector({
 			<button
 				type="button"
 				onClick={onSelectWhatsapp}
-				className="group relative flex flex-col items-center text-center p-8 bg-white rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 transition-all hover:border-emerald-500 active:scale-95 overflow-hidden"
+				className="group relative flex flex-col items-center text-center p-8 bg-white rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 transition-all hover:border-emerald-500 overflow-hidden"
 			>
 				<div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
 					<span className="text-9xl text-emerald-500 transition-transform group-hover:rotate-12 block">

@@ -2,7 +2,6 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import type { ActionResponse, Order, OrderStatus } from "@/lib/types";
 
@@ -55,7 +54,6 @@ export async function createOrder(
 			.substring(2, 8)
 			.toUpperCase();
 
-		// Calculate total on server for consistency
 		const serverTotal = validatedData.items.reduce((acc, item) => {
 			const sub = item.quantity * item.unit_price * (item.is_express ? 1.5 : 1);
 			return acc + sub;
@@ -80,7 +78,6 @@ export async function createOrder(
 
 		if (error) return { success: false, error: error.message };
 
-		// Insert order items
 		const orderItems = validatedData.items.map((item) => ({
 			order_id: order.id,
 			service_id: item.service_id,
@@ -98,7 +95,6 @@ export async function createOrder(
 			.insert(orderItems);
 		if (itemsError) return { success: false, error: itemsError.message };
 
-		// 4. Initial Timeline Log
 		await supabase.from("order_status_logs").insert({
 			order_id: order.id,
 			status: "pending",
@@ -138,7 +134,6 @@ export async function updateOrderStatus(
 	const updateData: Partial<Order> = { status };
 	const now = new Date().toISOString();
 
-	// Handle milestone timestamps
 	const statusToTimeMap: Record<string, string> = {
 		confirmed: "confirmed_at",
 		picked_up: "pickup_at",
@@ -164,7 +159,6 @@ export async function updateOrderStatus(
 
 	if (error) return { success: false, error: error.message };
 
-	// 1. Log the status change
 	await supabase.from("order_status_logs").insert({
 		order_id: orderId,
 		status: status,
@@ -254,33 +248,17 @@ export async function trackOrder(
 	orderIdentifier: string,
 ): Promise<ActionResponse<Order>> {
 	try {
-		const admin = createAdminClient();
+		const supabase = await createClient();
 
-		// Attempt to search by order_number or id
-		let query = admin.from("orders").select(`
-      *,
-      order_items(service_name, quantity, unit, subtotal, is_express),
-      order_status_logs(status, notes, created_at)
-    `);
+		const { data: order, error } = await supabase.rpc("get_order_details_v1", {
+			p_identifier: orderIdentifier,
+		});
 
-		// Basic heuristic: if it looks like a UUID, search by ID, else order_number
-		const isUuid =
-			/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(
-				orderIdentifier,
-			);
-		if (isUuid) {
-			query = query.eq("id", orderIdentifier);
-		} else {
-			query = query.eq("order_number", orderIdentifier.toUpperCase());
-		}
-
-		const { data: order, error } = await query.single();
-
-		if (error || !order) {
+		if (error || !order || order.length === 0) {
 			return { success: false, error: "Pesanan tidak ditemukan" };
 		}
 
-		return { success: true, data: order };
+		return { success: true, data: order[0] };
 	} catch (err: unknown) {
 		return {
 			success: false,

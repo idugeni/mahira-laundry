@@ -77,7 +77,7 @@ export function ReportModal({
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
-						<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-lg overflow-hidden animate-zoom-in border border-white/20">
+						<div className="relative bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in border border-white/20">
 							{/* Header */}
 							<div className="px-8 pt-8 pb-6 bg-slate-50 relative overflow-hidden shrink-0 border-b border-slate-100">
 								<div className="absolute top-0 right-0 w-32 h-32 bg-pink-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
@@ -194,7 +194,7 @@ export function ReportModal({
 										type="button"
 										onClick={handleExport}
 										disabled={isLoading}
-										className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-sm shadow-xl shadow-slate-200 hover:bg-black hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+										className="flex h-11 w-full items-center justify-center gap-3 rounded-xl bg-slate-900 text-sm font-black text-white shadow-lg shadow-slate-200 transition-colors hover:bg-black disabled:opacity-50"
 									>
 										{isLoading ? (
 											<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

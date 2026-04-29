@@ -1,11 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import {
-	HiOutlineEnvelope,
-	HiOutlineScale,
-	HiOutlineSparkles,
-} from "react-icons/hi2";
+import { HiOutlineEnvelope, HiOutlineScale } from "react-icons/hi2";
 
 interface LegalLayoutProps {
 	title: string;
@@ -21,7 +17,7 @@ export function LegalLayout({
 	children,
 }: LegalLayoutProps) {
 	return (
-		<div className="bg-white min-h-screen py-32 relative overflow-hidden">
+		<div className="bg-white min-h-screen py-16 relative overflow-hidden">
 			{/* Decorative Cinematic Background */}
 			<div className="absolute top-0 left-0 w-full h-full pointer-events-none">
 				<motion.div
@@ -42,7 +38,7 @@ export function LegalLayout({
 				/>
 			</div>
 
-			<div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+			<div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-6 sm:px-8 relative z-10">
 				{/* Header Section */}
 				<div className="text-center mb-24">
 					<motion.div
@@ -98,7 +94,7 @@ export function LegalLayout({
 					initial={{ opacity: 0, y: 40 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.8, duration: 1 }}
-					className="relative p-10 lg:p-20 bg-white rounded-[4rem] border border-slate-100 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.04)]"
+					className="relative p-10 lg:p-12 bg-white rounded-[2rem] border border-slate-100 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.04)]"
 				>
 					<div className="prose prose-slate max-w-none prose-headings:font-black prose-headings:text-slate-900 prose-headings:font-[family-name:var(--font-heading)] prose-headings:tracking-tighter prose-p:text-lg prose-p:text-slate-600 prose-p:leading-relaxed prose-li:text-slate-600 prose-li:text-lg prose-h2:text-4xl prose-h2:mt-20 prose-h2:mb-10 prose-h2:border-b-2 prose-h2:border-slate-50 prose-h2:pb-4 font-medium">
 						{children}
@@ -110,7 +106,7 @@ export function LegalLayout({
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="mt-32 p-12 lg:p-16 bg-slate-900 rounded-[4rem] flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left relative overflow-hidden"
+					className="mt-32 p-12 lg:p-10 bg-slate-900 rounded-[2rem] flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left relative overflow-hidden"
 				>
 					{/* Accent for CTA */}
 					<div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/20 rounded-full blur-[80px] -mr-20 -mt-20" />

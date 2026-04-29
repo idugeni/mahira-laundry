@@ -13,7 +13,6 @@ export async function broadcastNotification(data: {
 	try {
 		const supabase = await createClient();
 
-		// Get target users
 		let query = supabase.from("profiles").select("id");
 		if (data.targetRole) {
 			query = query.eq("role", data.targetRole);
@@ -26,7 +25,6 @@ export async function broadcastNotification(data: {
 			return { success: true };
 		}
 
-		// Insert notifications map
 		const notifications = users.map((u) => ({
 			user_id: u.id,
 			title: data.title,

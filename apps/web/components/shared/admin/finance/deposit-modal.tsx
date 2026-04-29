@@ -79,7 +79,7 @@ export function DepositModal({
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
-						<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-md overflow-hidden animate-zoom-in border border-white/20">
+						<div className="relative bg-white rounded-[2rem] shadow-2xl w-full max-w-md overflow-hidden animate-fade-in border border-white/20">
 							{/* Header */}
 							<div className="px-8 pt-8 pb-6 bg-slate-50 relative overflow-hidden shrink-0 border-b border-slate-100">
 								<div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
@@ -166,7 +166,7 @@ export function DepositModal({
 								<button
 									type="submit"
 									disabled={isLoading || amount <= 0}
-									className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-black text-sm shadow-xl shadow-emerald-100 hover:bg-emerald-700 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-3 mt-4"
+									className="mt-4 flex h-11 w-full items-center justify-center gap-3 rounded-xl bg-emerald-600 text-sm font-black text-white shadow-lg shadow-emerald-100 transition-colors hover:bg-emerald-700 disabled:opacity-50"
 								>
 									{isLoading ? (
 										<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

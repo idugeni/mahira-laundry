@@ -16,7 +16,6 @@ export async function addGalleryItem(
 
 		if (!file) throw new Error("File gambar wajib diunggah.");
 
-		// 1. Upload to Storage
 		const fileExt = file.name.split(".").pop();
 		const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;
 		const filePath = `items/${fileName}`;
@@ -27,12 +26,10 @@ export async function addGalleryItem(
 
 		if (uploadError) throw uploadError;
 
-		// 2. Get Public URL
 		const {
 			data: { publicUrl },
 		} = supabase.storage.from("gallery").getPublicUrl(filePath);
 
-		// 3. Save to Database
 		const { error: dbError } = await supabase.from("gallery").insert({
 			title,
 			category,
@@ -40,7 +37,6 @@ export async function addGalleryItem(
 		});
 
 		if (dbError) {
-			// Cleanup storage if database failing
 			await supabase.storage.from("gallery").remove([filePath]);
 			throw dbError;
 		}
@@ -63,19 +59,16 @@ export async function deleteGalleryItem(
 	try {
 		const supabase = await createClient();
 
-		// 1. Parse filename from URL
 		const urlParts = imageUrl.split("/");
 		const fileName = urlParts[urlParts.length - 1];
 		const filePath = `items/${fileName}`;
 
-		// 2. Delete from Storage
 		const { error: storageError } = await supabase.storage
 			.from("gallery")
 			.remove([filePath]);
 
 		if (storageError) console.error("Storage delete error:", storageError);
 
-		// 3. Delete from Database
 		const { error: dbError } = await supabase
 			.from("gallery")
 			.delete()

@@ -1,3 +1,4 @@
+// biome-ignore-all lint/suspicious/noArrayIndexKey: skeleton components use static index keys for placeholder lists
 import { Skeleton } from "@/components/shared/common/skeleton";
 
 export function HomeSkeleton() {
@@ -28,8 +29,10 @@ export function HomeSkeleton() {
 			<section className="container px-4">
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-border">
 					{Array.from({ length: 4 }).map((_, i) => (
-						// biome-ignore lint/suspicious/noArrayIndexKey: skeleton
-						<div key={i} className="flex flex-col items-center gap-2">
+						<div
+							key={`stat-skeleton-${i}`}
+							className="flex flex-col items-center gap-2"
+						>
 							<Skeleton className="h-10 w-24" />
 							<Skeleton className="h-4 w-20" />
 						</div>
@@ -46,9 +49,8 @@ export function HomeSkeleton() {
 				</div>
 				<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
 					{Array.from({ length: 6 }).map((_, i) => (
-						// biome-ignore lint/suspicious/noArrayIndexKey: skeleton
 						<div
-							key={i}
+							key={`service-skeleton-${i}`}
 							className="rounded-2xl border border-border p-6 space-y-4"
 						>
 							<Skeleton className="h-48 w-full rounded-xl" />
@@ -73,8 +75,10 @@ export function HomeSkeleton() {
 					</div>
 					<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 						{Array.from({ length: 8 }).map((_, i) => (
-							// biome-ignore lint/suspicious/noArrayIndexKey: skeleton
-							<Skeleton key={i} className="aspect-square rounded-xl" />
+							<Skeleton
+								key={`gallery-skeleton-${i}`}
+								className="aspect-square rounded-xl"
+							/>
 						))}
 					</div>
 				</div>
@@ -87,15 +91,16 @@ export function HomeSkeleton() {
 				</div>
 				<div className="grid md:grid-cols-3 gap-8">
 					{Array.from({ length: 3 }).map((_, i) => (
-						// biome-ignore lint/suspicious/noArrayIndexKey: skeleton
 						<div
-							key={i}
+							key={`testimonial-skeleton-${i}`}
 							className="p-8 rounded-2xl bg-white border border-border space-y-4"
 						>
 							<div className="flex gap-1">
 								{Array.from({ length: 5 }).map((_, j) => (
-									// biome-ignore lint/suspicious/noArrayIndexKey: skeleton
-									<Skeleton key={j} className="h-4 w-4 rounded-full" />
+									<Skeleton
+										key={`star-skeleton-${i}-${j}`}
+										className="h-4 w-4 rounded-full"
+									/>
 								))}
 							</div>
 							<Skeleton className="h-20 w-full" />

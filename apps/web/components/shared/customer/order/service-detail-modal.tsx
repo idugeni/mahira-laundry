@@ -71,7 +71,7 @@ export function ServiceDetailModal({
 						initial="hidden"
 						animate="visible"
 						exit="exit"
-						className="relative w-full max-w-4xl bg-white rounded-t-[3rem] sm:rounded-[4rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row z-10 max-h-[95vh]"
+						className="relative w-full max-w-4xl bg-white rounded-t-[2rem] sm:rounded-[2rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row z-10 max-h-[95vh]"
 					>
 						{/* Left Side: Brand Visual Strip */}
 						<div className="relative w-full md:w-[35%] bg-slate-900 p-10 lg:p-14 flex flex-col items-center justify-center text-center shrink-0">
@@ -115,7 +115,7 @@ export function ServiceDetailModal({
 							<button
 								type="button"
 								onClick={onClose}
-								className="absolute top-8 right-8 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex md:hidden items-center justify-center text-white border border-white/10 active:scale-90 transition-all"
+								className="absolute top-8 right-8 z-20 w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex md:hidden items-center justify-center text-white border border-white/10 transition-all"
 							>
 								<HiOutlineXMark size={24} />
 							</button>
@@ -127,7 +127,7 @@ export function ServiceDetailModal({
 							<button
 								type="button"
 								onClick={onClose}
-								className="absolute top-10 right-10 z-20 w-12 h-12 bg-slate-50 hidden md:flex items-center justify-center text-slate-300 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-all active:scale-90"
+								className="absolute top-10 right-10 z-20 w-12 h-12 bg-slate-50 hidden md:flex items-center justify-center text-slate-300 hover:text-slate-900 hover:bg-slate-100 rounded-full transition-all"
 							>
 								<HiOutlineXMark size={24} />
 							</button>

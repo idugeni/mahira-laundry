@@ -27,13 +27,13 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 
 	// Duplicate testimonials to create a seamless loop
 	const duplicatedTestimonials = [
-		...displayTestimonials,
-		...displayTestimonials,
-		...displayTestimonials,
+		...displayTestimonials.map((t) => ({ ...t, _dupKey: `0-${t.id}` })),
+		...displayTestimonials.map((t) => ({ ...t, _dupKey: `1-${t.id}` })),
+		...displayTestimonials.map((t) => ({ ...t, _dupKey: `2-${t.id}` })),
 	];
 
 	return (
-		<section className="py-24 bg-slate-50 relative overflow-hidden">
+		<section className="py-14 sm:py-16 bg-slate-50 relative overflow-hidden">
 			{/* Background Blurs */}
 			<div className="absolute top-0 left-0 w-full h-full pointer-events-none">
 				<div className="absolute top-1/4 -left-20 w-80 h-80 bg-brand-primary/10 rounded-full blur-[100px]" />
@@ -84,9 +84,8 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 						}}
 						className="flex gap-6 whitespace-nowrap"
 					>
-						{duplicatedTestimonials.map((t, i) => (
-							// biome-ignore lint/suspicious/noArrayIndexKey: intentional duplicate items for infinite marquee
-							<TestimonialCard key={`${t.id}-${i}`} testimonial={t} />
+						{duplicatedTestimonials.map((t) => (
+							<TestimonialCard key={`marquee-L-${t._dupKey}`} testimonial={t} />
 						))}
 					</motion.div>
 				</div>
@@ -106,9 +105,8 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 						}}
 						className="flex gap-6 whitespace-nowrap"
 					>
-						{[...duplicatedTestimonials].reverse().map((t, i) => (
-							// biome-ignore lint/suspicious/noArrayIndexKey: intentional duplicate items for infinite marquee
-							<TestimonialCard key={`rev-${t.id}-${i}`} testimonial={t} />
+						{[...duplicatedTestimonials].reverse().map((t) => (
+							<TestimonialCard key={`marquee-R-${t._dupKey}`} testimonial={t} />
 						))}
 					</motion.div>
 				</div>
@@ -133,8 +131,8 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 				{Array.from({ length: testimonial.rating || 5 }, (_, i) => i).map(
 					(i) => (
 						<span
-							key={i}
-							className="text-amber-400 group-hover:scale-110 transition-transform"
+							key={`star-${testimonial.id}-${i}`}
+							className="text-amber-400 transition-transform"
 						>
 							<HiStar />
 						</span>

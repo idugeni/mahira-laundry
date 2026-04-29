@@ -93,7 +93,7 @@ export function OrderServiceStep({
 										<button
 											type="button"
 											onClick={() => onUpdateQuantity(service.id, -1)}
-											className="w-10 h-10 bg-white rounded-xl shadow-sm text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all active:scale-90"
+											className="w-10 h-10 bg-white rounded-xl shadow-sm text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all"
 										>
 											<HiOutlineChevronLeft />
 										</button>
@@ -113,7 +113,7 @@ export function OrderServiceStep({
 										<button
 											type="button"
 											onClick={() => onUpdateQuantity(service.id, 1)}
-											className="w-10 h-10 bg-white rounded-xl shadow-sm text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all active:scale-90"
+											className="w-10 h-10 bg-white rounded-xl shadow-sm text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all"
 										>
 											<HiOutlineChevronRight />
 										</button>
@@ -142,7 +142,7 @@ export function OrderServiceStep({
 						type="button"
 						onClick={onNext}
 						disabled={calculateTotal() === 0}
-						className="px-12 py-5 bg-brand-primary text-white rounded-[24px] font-black shadow-2xl shadow-brand-primary/20 flex items-center gap-3 transition-all hover:scale-105 disabled:opacity-50"
+						className="px-6 sm:px-8 py-5 bg-brand-primary text-white rounded-[24px] font-black shadow-2xl shadow-brand-primary/20 flex items-center gap-3 transition-all disabled:opacity-50"
 					>
 						Konfirmasi Layanan <HiOutlineChevronRight />
 					</button>

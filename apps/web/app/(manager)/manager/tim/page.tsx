@@ -54,7 +54,7 @@ export default async function TimPage() {
 					</div>
 					<Button
 						type="button"
-						className="bg-slate-900 hover:bg-slate-800 text-white rounded-2xl px-6 h-12 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-slate-900/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2"
+						className="bg-slate-900 hover:bg-slate-800 text-white rounded-2xl px-6 h-12 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-slate-900/10 transition-all flex items-center gap-2"
 					>
 						<UserPlus size={16} /> Tambah Staf
 					</Button>
@@ -62,10 +62,10 @@ export default async function TimPage() {
 			</div>
 
 			{staff.length === 0 ? (
-				<div className="bg-white rounded-[3rem] border border-slate-100 p-24 text-center shadow-xl shadow-slate-200/40 relative overflow-hidden group">
+				<div className="bg-white rounded-[2rem] border border-slate-100 p-8 sm:p-12 text-center shadow-xl shadow-slate-200/40 relative overflow-hidden group">
 					<div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/20 to-slate-50/40 opacity-0 group-hover:opacity-10 transition-opacity duration-700" />
 					<div className="relative">
-						<div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-dashed border-slate-100 transition-transform duration-700 group-hover:rotate-12 group-hover:scale-110">
+						<div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-dashed border-slate-100 transition-transform duration-700 group-hover:rotate-12">
 							<Users size={40} className="text-slate-200" />
 						</div>
 						<h3 className="text-2xl font-black text-slate-800 uppercase tracking-tight">
@@ -99,7 +99,7 @@ export default async function TimPage() {
 							<div className="relative flex items-center justify-between">
 								<div className="flex items-center gap-5">
 									<div className="relative">
-										<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-xl font-black text-slate-500 border-2 border-white shadow-lg group-hover:scale-105 transition-transform duration-500">
+										<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-xl font-black text-slate-500 border-2 border-white shadow-lg transition-transform duration-500">
 											{s.full_name?.charAt(0) || <User />}
 										</div>
 										{s.is_active && (
@@ -179,13 +179,13 @@ export default async function TimPage() {
 								<Button
 									type="button"
 									variant="outline"
-									className="rounded-2xl h-12 font-black text-[9px] uppercase tracking-widest border-slate-100 hover:bg-slate-50 active:scale-95 transition-all"
+									className="rounded-2xl h-12 font-black text-[9px] uppercase tracking-widest border-slate-100 hover:bg-slate-50 transition-all"
 								>
 									Riwayat Tugas
 								</Button>
 								<Button
 									type="button"
-									className="rounded-2xl h-12 font-black text-[9px] uppercase tracking-widest bg-slate-50 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 border-none shadow-none active:scale-95 transition-all"
+									className="rounded-2xl h-12 font-black text-[9px] uppercase tracking-widest bg-slate-50 hover:bg-indigo-50 text-slate-600 hover:text-indigo-600 border-none shadow-none transition-all"
 								>
 									Detail Akun
 								</Button>

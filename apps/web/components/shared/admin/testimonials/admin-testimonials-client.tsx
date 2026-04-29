@@ -52,12 +52,10 @@ export function AdminTestimonialsClient({
 	const [loading, setLoading] = useState<string | null>(null);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	// Create modal state
 	const [createOpen, setCreateOpen] = useState(false);
 	const [createLoading, setCreateLoading] = useState(false);
 	const [createRating, setCreateRating] = useState(5);
 
-	// Edit modal state
 	const [editOpen, setEditOpen] = useState(false);
 	const [editLoading, setEditLoading] = useState(false);
 	const [editTarget, setEditTarget] = useState<Testimonial | null>(null);
@@ -155,9 +153,9 @@ export function AdminTestimonialsClient({
 	}
 
 	return (
-		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-white rounded-[3rem] p-10 lg:p-14 border border-slate-100 shadow-2xl shadow-slate-200/40 group">
+			<div className="relative overflow-hidden bg-white rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border border-slate-100 shadow-xl shadow-slate-200/40 group">
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50" />
 
 				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
@@ -201,7 +199,7 @@ export function AdminTestimonialsClient({
 						<div className="w-px h-10 bg-slate-100 mx-2" />
 						<Button
 							onClick={() => setCreateOpen(true)}
-							className="bg-indigo-600 text-white hover:bg-indigo-500 rounded-2xl px-6 h-14 font-black text-[10px] uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl shadow-indigo-500/20 flex items-center gap-3"
+							className="bg-indigo-600 text-white hover:bg-indigo-500 rounded-xl px-4 h-11 font-black text-[10px] uppercase tracking-widest transition-colors shadow-lg shadow-indigo-500/20 flex items-center gap-2.5"
 						>
 							<Plus size={18} />
 							Tambah Testimoni
@@ -212,13 +210,13 @@ export function AdminTestimonialsClient({
 
 			{/* Testimonials Grid */}
 			{testimonials.length === 0 ? (
-				<div className="bg-white rounded-[4rem] border border-slate-100 p-24 text-center shadow-2xl shadow-slate-200/40 relative overflow-hidden group">
+				<div className="bg-white rounded-2xl border border-slate-100 px-6 py-14 sm:px-10 sm:py-16 text-center shadow-xl shadow-slate-200/40 relative overflow-hidden group">
 					<div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/20 to-slate-50/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
 					<div className="relative flex flex-col items-center">
-						<div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mb-8 border-4 border-dashed border-slate-100">
-							<MessageSquare size={48} className="text-slate-200" />
+						<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-5 border-4 border-dashed border-slate-100">
+							<MessageSquare size={32} className="text-slate-200" />
 						</div>
-						<h3 className="text-3xl font-black text-slate-800 uppercase tracking-tight">
+						<h3 className="text-xl sm:text-2xl font-black text-slate-800 uppercase tracking-tight">
 							Belum Ada Suara
 						</h3>
 						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-4 max-w-lg leading-relaxed text-center mx-auto">
@@ -233,7 +231,7 @@ export function AdminTestimonialsClient({
 						{paginatedTestimonials.map((t) => (
 							<div
 								key={t.id}
-								className="group relative bg-white rounded-[3rem] border border-slate-100 p-8 flex flex-col gap-6 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 overflow-hidden"
+								className="group relative bg-white rounded-2xl border border-slate-100 p-6 flex flex-col gap-5 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-indigo-500/10 transition-shadow duration-300 overflow-hidden"
 							>
 								<div className="absolute top-0 right-0 p-8 text-indigo-50/50 group-hover:text-indigo-100/50 transition-colors pointer-events-none">
 									<Quote size={80} strokeWidth={4} />
@@ -241,7 +239,7 @@ export function AdminTestimonialsClient({
 
 								<div className="relative flex items-center justify-between">
 									<div className="flex items-center gap-4">
-										<div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-xl border-2 border-white shadow-lg transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3">
+										<div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-lg border-2 border-white shadow-md transition-transform duration-300 group-hover:-translate-y-0.5">
 											{t.profiles?.full_name?.charAt(0)}
 										</div>
 										<div className="min-w-0">
@@ -262,7 +260,7 @@ export function AdminTestimonialsClient({
 									<div className="flex items-center gap-2">
 										<Button
 											variant="ghost"
-											className="w-12 h-12 p-0 rounded-2xl bg-indigo-50 text-indigo-500 hover:bg-indigo-100 transition-all active:scale-90 shadow-sm"
+											className="w-10 h-10 p-0 rounded-xl bg-indigo-50 text-indigo-500 hover:bg-indigo-100 transition-colors shadow-sm"
 											onClick={() => openEdit(t)}
 											disabled={loading === t.id}
 											title="Edit testimoni"
@@ -272,7 +270,7 @@ export function AdminTestimonialsClient({
 										<Button
 											variant="ghost"
 											className={cn(
-												"w-12 h-12 p-0 rounded-2xl transition-all active:scale-90 shadow-sm",
+												"w-10 h-10 p-0 rounded-xl transition-colors shadow-sm",
 												t.is_published
 													? "bg-amber-50 text-amber-500 hover:bg-amber-100"
 													: "bg-emerald-50 text-emerald-500 hover:bg-emerald-100",
@@ -288,7 +286,7 @@ export function AdminTestimonialsClient({
 										</Button>
 										<Button
 											variant="ghost"
-											className="w-12 h-12 p-0 rounded-2xl bg-rose-50 text-rose-500 hover:bg-rose-100 transition-all active:scale-90 shadow-sm"
+											className="w-10 h-10 p-0 rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-100 transition-colors shadow-sm"
 											onClick={() => handleDelete(t.id)}
 											disabled={loading === t.id}
 										>
@@ -304,7 +302,7 @@ export function AdminTestimonialsClient({
 												key={star}
 												size={20}
 												className={cn(
-													"transition-all duration-500 group-hover:scale-110",
+													"transition-colors duration-300",
 													star <= t.rating
 														? "text-amber-400 fill-amber-400"
 														: "text-slate-100 fill-slate-100",
@@ -350,7 +348,7 @@ export function AdminTestimonialsClient({
 			)}
 
 			{/* Moderation Guide */}
-			<div className="bg-slate-900 rounded-[3rem] p-10 lg:p-14 text-white relative overflow-hidden group">
+			<div className="bg-slate-900 rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden group">
 				<div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full -mr-32 -mt-32 blur-3xl opacity-50" />
 
 				<div className="relative flex flex-col lg:flex-row items-center gap-10">
@@ -371,7 +369,7 @@ export function AdminTestimonialsClient({
 					<div className="flex gap-4">
 						<Button
 							variant="outline"
-							className="rounded-2xl h-14 px-8 font-black text-[10px] uppercase tracking-widest border-white/20 bg-white/5 hover:bg-white hover:text-slate-900 transition-all"
+							className="rounded-xl h-11 px-5 font-black text-[10px] uppercase tracking-widest border-white/20 bg-white/5 hover:bg-white hover:text-slate-900 transition-colors"
 						>
 							Pelajari SOP
 						</Button>
@@ -450,7 +448,7 @@ export function AdminTestimonialsClient({
 												key={star}
 												type="button"
 												onClick={() => setCreateRating(star)}
-												className="transition-transform hover:scale-110 active:scale-95"
+												className="transition-colors hover:text-amber-500"
 											>
 												<Star
 													size={28}
@@ -491,7 +489,7 @@ export function AdminTestimonialsClient({
 								<button
 									type="submit"
 									disabled={createLoading}
-									className="w-full py-4 bg-indigo-600 text-white rounded-2xl font-black text-sm shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+									className="flex h-11 w-full items-center justify-center gap-3 rounded-xl bg-indigo-600 text-sm font-black text-white shadow-lg shadow-indigo-100 transition-colors hover:bg-indigo-700 disabled:opacity-50"
 								>
 									{createLoading ? (
 										<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -561,7 +559,7 @@ export function AdminTestimonialsClient({
 												key={star}
 												type="button"
 												onClick={() => setEditRating(star)}
-												className="transition-transform hover:scale-110 active:scale-95"
+												className="transition-colors hover:text-amber-500"
 											>
 												<Star
 													size={28}
@@ -603,7 +601,7 @@ export function AdminTestimonialsClient({
 								<button
 									type="submit"
 									disabled={editLoading}
-									className="w-full py-4 bg-amber-500 text-white rounded-2xl font-black text-sm shadow-xl shadow-amber-100 hover:bg-amber-600 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+									className="flex h-11 w-full items-center justify-center gap-3 rounded-xl bg-amber-500 text-sm font-black text-white shadow-lg shadow-amber-100 transition-colors hover:bg-amber-600 disabled:opacity-50"
 								>
 									{editLoading ? (
 										<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

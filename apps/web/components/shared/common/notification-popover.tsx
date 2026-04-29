@@ -190,7 +190,7 @@ export function NotificationPopover() {
 							initial={{ opacity: 0, scale: 0.9, y: 20 }}
 							animate={{ opacity: 1, scale: 1, y: 0 }}
 							exit={{ opacity: 0, scale: 0.9, y: 20 }}
-							className="relative w-full max-w-xl bg-white rounded-[3rem] shadow-2xl overflow-hidden"
+							className="relative w-full max-w-xl bg-white rounded-[2rem] shadow-2xl overflow-hidden"
 						>
 							<div className="absolute top-6 right-6">
 								<button

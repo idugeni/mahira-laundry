@@ -3,7 +3,7 @@
 import { Html5QrcodeScanner } from "html5-qrcode";
 import { AnimatePresence, motion } from "motion/react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
 	HiOutlineCheckCircle,
 	HiOutlineClock,
@@ -12,11 +12,10 @@ import {
 	HiOutlineReceiptPercent,
 	HiOutlineSparkles,
 	HiOutlineTruck,
-	HiOutlineXMark,
 } from "react-icons/hi2";
 import { toast } from "sonner";
 import { trackOrder } from "@/lib/actions/orders";
-import { ORDER_STATUS_COLORS, ORDER_STATUS_LABELS } from "@/lib/constants";
+import { ORDER_STATUS_LABELS } from "@/lib/constants";
 import type { Order } from "@/lib/types";
 import { formatDateTime, formatIDR } from "@/lib/utils";
 
@@ -40,7 +39,7 @@ export function TrackingClient() {
 
 	const idParam = searchParams.get("id");
 
-	const handleSearch = async (searchQuery: string) => {
+	const handleSearch = useCallback(async (searchQuery: string) => {
 		if (!searchQuery.trim()) return;
 
 		setLoading(true);
@@ -59,14 +58,14 @@ export function TrackingClient() {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}, []);
 
 	useEffect(() => {
 		if (idParam) {
 			setQuery(idParam);
 			handleSearch(idParam);
 		}
-	}, [idParam]);
+	}, [idParam, handleSearch]);
 
 	const onSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -159,7 +158,7 @@ export function TrackingClient() {
 								whileTap={{ scale: 0.98 }}
 								type="submit"
 								disabled={loading}
-								className="px-12 py-6 bg-brand-primary text-white font-black rounded-3xl hover:bg-brand-primary/90 transition-all disabled:opacity-50 shadow-xl shadow-brand-primary/30 flex-1 lg:flex-none"
+								className="px-6 sm:px-8 py-6 bg-brand-primary text-white font-black rounded-3xl hover:bg-brand-primary/90 transition-all disabled:opacity-50 shadow-xl shadow-brand-primary/30 flex-1 lg:flex-none"
 							>
 								{loading ? "Mencari..." : "Lacak Sekarang"}
 							</motion.button>
@@ -322,9 +321,9 @@ export function TrackingClient() {
 									</h3>
 
 									<div className="space-y-6">
-										{order.order_items?.map((item, i) => (
+										{order.order_items?.map((item) => (
 											<div
-												key={i}
+												key={item.service_name}
 												className="flex justify-between items-start group"
 											>
 												<div className="space-y-1">
@@ -360,7 +359,7 @@ export function TrackingClient() {
 								{/* Delivery Info If Any */}
 								<motion.div
 									whileHover={{ y: -5 }}
-									className="bg-brand-primary/5 p-10 rounded-[3rem] border border-brand-primary/10 flex items-center gap-6"
+									className="bg-brand-primary/5 p-10 rounded-[2rem] border border-brand-primary/10 flex items-center gap-6"
 								>
 									<div className="w-16 h-16 bg-white rounded-[2rem] flex items-center justify-center text-brand-primary shadow-sm">
 										<HiOutlineTruck size={32} />

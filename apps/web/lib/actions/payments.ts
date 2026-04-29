@@ -10,7 +10,6 @@ export async function createPayment(orderId: string, method: string) {
 	} = await supabase.auth.getUser();
 	if (!user) return { error: "Unauthorized" };
 
-	// Get order total
 	const { data: order } = await supabase
 		.from("orders")
 		.select("total")
@@ -35,7 +34,6 @@ export async function createPayment(orderId: string, method: string) {
 
 	if (error) return { error: error.message };
 
-	// If cash, update order status to confirmed
 	if (method === "cash") {
 		await supabase
 			.from("orders")

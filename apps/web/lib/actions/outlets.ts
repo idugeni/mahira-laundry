@@ -34,13 +34,11 @@ export async function upsertOutlet(data: OutletInput): Promise<ActionResponse> {
 
 		let result: { error: { message: string } | null };
 		if (data.id) {
-			// Update
 			result = await supabase
 				.from("outlets")
 				.update(outletData)
 				.eq("id", data.id);
 		} else {
-			// Create
 			result = await supabase.from("outlets").insert({
 				...outletData,
 				operating_hours: {
@@ -100,7 +98,6 @@ export async function uploadOutletImage(
 			data: { publicUrl },
 		} = supabase.storage.from("outlet-images").getPublicUrl(filePath);
 
-		// If outletId exists, update the db immediately
 		if (outletId !== "temp") {
 			const { error: updateError } = await supabase
 				.from("outlets")

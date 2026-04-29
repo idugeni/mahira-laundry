@@ -39,7 +39,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 	return (
 		<div className="bg-white">
 			{/* Hero / Header - Premium Overhaul */}
-			<section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-slate-900 py-24">
+			<section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-slate-900 py-14 sm:py-16">
 				{/* Cinematic Background */}
 				<div className="absolute inset-0 bg-brand-gradient opacity-20 mix-blend-overlay" />
 				<motion.div
@@ -112,7 +112,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 			{/* Package Cards - Staggered Motion */}
 			<section
 				id="packages"
-				className="py-24 bg-slate-50 relative overflow-hidden"
+				className="py-14 sm:py-16 bg-slate-50 relative overflow-hidden"
 			>
 				<div className="container relative z-10 mx-auto px-6">
 					<div className="mb-16 text-center">
@@ -152,7 +152,10 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 
 			{/* Comparison Table - Reveal Animation */}
 			{packages.length > 0 && (
-				<section id="perbandingan" className="bg-white py-24 scroll-mt-24">
+				<section
+					id="perbandingan"
+					className="bg-white py-14 sm:py-16 scroll-mt-24"
+				>
 					<div className="container mx-auto px-6">
 						<motion.div
 							initial={{ opacity: 0, y: 30 }}
@@ -174,7 +177,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 							whileInView={{ opacity: 1, scale: 1 }}
 							transition={{ duration: 1 }}
 							viewport={{ once: true }}
-							className="rounded-[3rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.05)] border border-slate-200"
+							className="rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.05)] border border-slate-200"
 						>
 							<ComparisonTable packages={packages} />
 						</motion.div>
@@ -193,7 +196,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 						initial={{ opacity: 0, scale: 0.9 }}
 						whileInView={{ opacity: 1, scale: 1 }}
 						viewport={{ once: true }}
-						className="max-w-4xl mx-auto rounded-[3rem] bg-white/5 backdrop-blur-2xl p-10 lg:p-16 border-0 shadow-2xl"
+						className="max-w-4xl mx-auto rounded-[2rem] bg-white/5 backdrop-blur-2xl p-10 lg:p-10 border-0 shadow-2xl"
 					>
 						<h2 className="text-3xl lg:text-4xl font-black text-white mb-4 tracking-tighter leading-tight">
 							Wujudkan Mimpi <br />

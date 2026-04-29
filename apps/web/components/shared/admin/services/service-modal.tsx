@@ -123,7 +123,7 @@ export function ServiceModal({
 				className="contents"
 			>
 				{trigger || (
-					<span className="px-6 py-3 bg-brand-primary text-white text-sm font-black rounded-2xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 inline-block cursor-pointer">
+					<span className="px-5 py-2.5 bg-brand-primary text-white text-sm font-black rounded-xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-shadow duration-200 inline-block cursor-pointer">
 						+ Tambah Layanan
 					</span>
 				)}
@@ -140,7 +140,7 @@ export function ServiceModal({
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
-						<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden animate-zoom-in border border-white/20">
+						<div className="relative bg-white rounded-[2rem] shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden animate-fade-in border border-white/20">
 							{/* Header with Pattern */}
 							<div className="px-8 pt-8 pb-6 bg-slate-50 relative overflow-hidden">
 								<div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-3xl" />
@@ -157,7 +157,7 @@ export function ServiceModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-300"
+										className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
 									>
 										<span className="shrink-0">
 											<HiOutlineXMark size={20} />
@@ -428,7 +428,7 @@ export function ServiceModal({
 													className={`relative flex items-center justify-center w-6 h-6 rounded-lg border-2 transition-all ${isExpress ? "border-amber-500 bg-amber-500" : "border-slate-200 bg-white group-hover/check:border-amber-200"}`}
 												>
 													{isExpress && (
-														<span className="absolute text-white pointer-events-none text-[10px] animate-zoom-in">
+														<span className="absolute text-white pointer-events-none text-[10px] animate-fade-in">
 															⚡
 														</span>
 													)}
@@ -450,7 +450,7 @@ export function ServiceModal({
 													className={`relative flex items-center justify-center w-6 h-6 rounded-lg border-2 transition-all ${isFeatured ? "border-brand-primary bg-brand-primary" : "border-slate-200 bg-white group-hover/check:border-brand-primary/40"}`}
 												>
 													{isFeatured && (
-														<span className="absolute text-white pointer-events-none text-[10px] animate-zoom-in">
+														<span className="absolute text-white pointer-events-none text-[10px] animate-fade-in">
 															⭐
 														</span>
 													)}
@@ -472,7 +472,7 @@ export function ServiceModal({
 													className={`relative flex items-center justify-center w-6 h-6 rounded-lg border-2 transition-all ${isActive ? "border-emerald-500 bg-emerald-500" : "border-slate-200 bg-white group-hover/check:border-emerald-200"}`}
 												>
 													{isActive && (
-														<span className="absolute text-white pointer-events-none text-xs animate-zoom-in">
+														<span className="absolute text-white pointer-events-none text-xs animate-fade-in">
 															✓
 														</span>
 													)}
@@ -490,7 +490,7 @@ export function ServiceModal({
 												type="button"
 												onClick={handleDelete}
 												disabled={isLoading}
-												className="px-4 py-4 text-slate-400 hover:text-red-500 bg-white border border-slate-200 rounded-2xl hover:bg-red-50 hover:border-red-200 transition-all active:scale-[0.98]"
+												className="px-4 py-3 text-slate-500 hover:text-red-600 bg-white border border-slate-200 rounded-xl hover:bg-red-50 hover:border-red-200 transition-colors"
 												title="Hapus Layanan"
 											>
 												<HiOutlineTrash size={20} />
@@ -500,14 +500,14 @@ export function ServiceModal({
 											type="button"
 											onClick={() => setIsOpen(false)}
 											disabled={isLoading}
-											className="flex-1 py-4 text-sm font-black text-slate-500 bg-white border border-slate-200 rounded-2xl hover:bg-slate-50 transition-all active:scale-[0.98]"
+											className="flex-1 py-3 text-sm font-black text-slate-500 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
 										>
 											Batal
 										</button>
 										<button
 											type="submit"
 											disabled={isLoading}
-											className="flex-[2] py-4 text-sm font-black text-white bg-brand-primary rounded-2xl shadow-xl shadow-brand-primary/20 hover:shadow-brand-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+											className="flex-[2] py-3 text-sm font-black text-white bg-brand-primary rounded-xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-shadow disabled:opacity-50 flex items-center justify-center gap-2"
 										>
 											{isLoading && (
 												<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

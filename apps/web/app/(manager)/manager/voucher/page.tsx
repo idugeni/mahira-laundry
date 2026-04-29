@@ -25,7 +25,7 @@ export default async function VoucherPage() {
 				</div>
 				<button
 					type="button"
-					className="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl text-sm font-bold shadow-sm shadow-pink-500/20 hover:scale-[1.02] hover:shadow-md transition-all"
+					className="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl text-sm font-bold shadow-sm shadow-pink-500/20 hover:shadow-md transition-all"
 				>
 					+ Buat Voucher
 				</button>
@@ -53,7 +53,6 @@ export default async function VoucherPage() {
 						const used = v.used_count || 0;
 						const limit = v.usage_limit || "∞";
 
-						// Check if expired
 						const isExpired = new Date(v.valid_until).getTime() < Date.now();
 						const isActive = v.is_active && !isExpired;
 

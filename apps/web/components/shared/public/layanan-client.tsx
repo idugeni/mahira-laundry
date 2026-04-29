@@ -9,7 +9,7 @@ import {
 } from "motion/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { GiChelseaBoot } from "react-icons/gi";
 import {
 	HiOutlineArrowRight,
@@ -90,7 +90,7 @@ function ServiceCard({
 		>
 			<div style={{ transform: "translateZ(50px)" }} className="relative z-10">
 				<div
-					className={`w-20 h-20 rounded-3xl ${styles.bg} flex items-center justify-center text-4xl ${styles.color} mb-8 shadow-inner transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6`}
+					className={`w-20 h-20 rounded-3xl ${styles.bg} flex items-center justify-center text-4xl ${styles.color} mb-8 shadow-inner transition-transform duration-500 group-hover:rotate-6`}
 				>
 					{service.icon ? (
 						<span className="shrink-0">{service.icon}</span>
@@ -118,7 +118,7 @@ function ServiceCard({
 							</span>
 						</span>
 					</div>
-					<div className="w-12 h-12 rounded-full border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary group-hover:scale-110 transition-all duration-500">
+					<div className="w-12 h-12 rounded-full border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary transition-all duration-500">
 						<span className="w-6 h-6 flex items-center justify-center">
 							<HiOutlineArrowRight />
 						</span>
@@ -201,7 +201,7 @@ export function LayananClient({
 
 	if (loading) {
 		return (
-			<div className="py-24 text-center">
+			<div className="py-14 sm:py-16 text-center">
 				<motion.div
 					animate={{ rotate: 360 }}
 					transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
@@ -215,7 +215,7 @@ export function LayananClient({
 	}
 
 	return (
-		<div className="py-24 relative overflow-hidden bg-white">
+		<div className="py-14 sm:py-16 relative overflow-hidden bg-white">
 			{/* Background Decorative */}
 			<div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden">
 				<motion.div
@@ -285,7 +285,7 @@ export function LayananClient({
 							<motion.div
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
-								className="py-24 text-center bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200"
+								className="py-14 sm:py-16 text-center bg-slate-50 rounded-[2rem] border-2 border-dashed border-slate-200"
 							>
 								<div className="w-20 h-20 bg-slate-200/50 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-400">
 									<HiOutlineMagnifyingGlass size={40} />
@@ -298,6 +298,7 @@ export function LayananClient({
 									{query}"
 								</p>
 								<button
+									type="button"
 									onClick={() => router.push("/layanan")}
 									className="mt-8 text-brand-primary font-black text-xs uppercase tracking-widest hover:underline"
 								>
@@ -328,7 +329,7 @@ export function LayananClient({
 					initial={{ opacity: 0, y: 50 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="mt-32 p-10 lg:p-16 rounded-[3rem] bg-slate-900 relative overflow-hidden text-center"
+					className="mt-32 p-10 lg:p-10 rounded-[2rem] bg-slate-900 relative overflow-hidden text-center"
 				>
 					{/* Decorative background for CTA */}
 					<div className="absolute inset-0 opacity-20">

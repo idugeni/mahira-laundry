@@ -123,7 +123,7 @@ export function NotificationClient() {
 				</AnimatePresence>
 
 				{notifications.length === 0 && (
-					<div className="py-24 text-center">
+					<div className="py-14 sm:py-16 text-center">
 						<div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl text-slate-200">
 							<HiOutlineBell />
 						</div>
@@ -149,7 +149,7 @@ export function NotificationClient() {
 							initial={{ opacity: 0, scale: 0.9, y: 20 }}
 							animate={{ opacity: 1, scale: 1, y: 0 }}
 							exit={{ opacity: 0, scale: 0.9, y: 20 }}
-							className="relative w-full max-w-xl bg-white rounded-[3rem] shadow-2xl overflow-hidden"
+							className="relative w-full max-w-xl bg-white rounded-[2rem] shadow-2xl overflow-hidden"
 						>
 							<div className="absolute top-6 right-6">
 								<button

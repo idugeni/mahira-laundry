@@ -61,10 +61,10 @@ export default async function InventoriPage() {
 			</div>
 
 			{items.length === 0 ? (
-				<div className="bg-white rounded-[3rem] border border-slate-100 p-24 text-center shadow-xl shadow-slate-200/40 relative overflow-hidden group">
+				<div className="bg-white rounded-[2rem] border border-slate-100 p-8 sm:p-12 text-center shadow-xl shadow-slate-200/40 relative overflow-hidden group">
 					<div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/20 to-slate-50/40 opacity-0 group-hover:opacity-10 transition-opacity duration-700" />
 					<div className="relative">
-						<div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-dashed border-slate-100 transition-transform duration-700 group-hover:rotate-12 group-hover:scale-110">
+						<div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-dashed border-slate-100 transition-transform duration-700 group-hover:rotate-12">
 							<Package size={40} className="text-slate-200" />
 						</div>
 						<h3 className="text-2xl font-black text-slate-800 uppercase tracking-tight">
@@ -100,7 +100,7 @@ export default async function InventoriPage() {
 									<div className="flex items-center gap-4">
 										<div
 											className={cn(
-												"w-12 h-12 rounded-2xl flex items-center justify-center border-2 border-white shadow-lg transition-transform duration-500 group-hover:scale-110",
+												"w-12 h-12 rounded-2xl flex items-center justify-center border-2 border-white shadow-lg transition-transform duration-500",
 												isLow
 													? "bg-rose-50 text-rose-500"
 													: "bg-emerald-50 text-emerald-500",
@@ -214,7 +214,7 @@ export default async function InventoriPage() {
 											<Button
 												type="button"
 												variant="outline"
-												className="w-full rounded-2xl h-14 bg-white border-slate-100 text-slate-500 font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 hover:text-slate-900 active:scale-95 transition-all"
+												className="w-full rounded-2xl h-14 bg-white border-slate-100 text-slate-500 font-black text-[10px] uppercase tracking-widest hover:bg-slate-50 hover:text-slate-900 transition-all"
 											>
 												Lihat Sejarah
 											</Button>

@@ -74,7 +74,7 @@ export function HomeServicesSection({
 }: HomeServicesSectionProps) {
 	return (
 		<section
-			className="py-24 relative bg-slate-50/40 overflow-hidden"
+			className="py-14 sm:py-16 relative bg-slate-50/40 overflow-hidden"
 			id="layanan"
 		>
 			{/* Animated background accent */}

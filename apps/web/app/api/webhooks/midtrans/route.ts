@@ -4,7 +4,6 @@ export async function POST(request: Request) {
 	try {
 		const body = await request.json();
 
-		// Verify Midtrans signature
 		const serverKey = process.env.MIDTRANS_SERVER_KEY;
 		if (!serverKey) {
 			return NextResponse.json({ error: "Not configured" }, { status: 500 });
@@ -12,13 +11,11 @@ export async function POST(request: Request) {
 
 		const { transaction_status, order_id, fraud_status } = body;
 
-		// Handle payment status
 		if (
 			transaction_status === "capture" ||
 			transaction_status === "settlement"
 		) {
 			if (fraud_status === "accept" || !fraud_status) {
-				// Update payment to paid
 				console.log(`[Midtrans] Payment confirmed for: ${order_id}`);
 			}
 		} else if (

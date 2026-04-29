@@ -147,7 +147,6 @@ export function PaginationControls({
 			</p>
 		) : null;
 
-	// Rows-per-page selector
 	const rowsSelector = onPageSizeChange ? (
 		<div className="flex items-center gap-2">
 			<span className="text-[10px] font-black uppercase tracking-widest text-slate-400">

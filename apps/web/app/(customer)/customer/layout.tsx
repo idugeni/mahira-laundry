@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -134,10 +135,11 @@ export default function CustomerLayout({
 							className="w-8 h-8 rounded-full bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-xs font-bold text-brand-primary overflow-hidden relative"
 						>
 							{profile?.avatar_url ? (
-								<img
+								<Image
 									src={profile.avatar_url}
 									alt={profile.full_name || "Avatar"}
-									className="w-full h-full object-cover object-top"
+									fill
+									className="object-cover object-top"
 								/>
 							) : (
 								getInitials(profile?.full_name as string)

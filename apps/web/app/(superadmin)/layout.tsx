@@ -1,3 +1,19 @@
+import {
+	BarChart3,
+	Building2,
+	ChartNoAxesCombined,
+	ClipboardList,
+	Images,
+	Landmark,
+	LayoutDashboard,
+	MessageSquareText,
+	PackageOpen,
+	ReceiptText,
+	Shirt,
+	Store,
+	UserCircle,
+	UsersRound,
+} from "lucide-react";
 import { AdminAvatar } from "@/components/shared/admin/admin-avatar";
 import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
@@ -14,25 +30,61 @@ export default async function SuperadminLayout({
 	]);
 
 	const superadminNav = [
-		{ href: "/admin", label: "Dashboard", icon: "🏠" },
-		{ href: "/admin/pos", label: "POS Kasir", icon: "💰" },
-		{ href: "/admin/antrian", label: "Antrian", icon: "📋" },
-		{ href: "/admin/outlet", label: "Outlet", icon: "🏪" },
-		{ href: "/admin/franchise", label: "Franchise", icon: "🤝" },
+		{ href: "/admin", label: "Dashboard", icon: <LayoutDashboard size={17} /> },
+		{ href: "/admin/pos", label: "POS Kasir", icon: <ReceiptText size={17} /> },
+		{
+			href: "/admin/antrian",
+			label: "Antrian",
+			icon: <ClipboardList size={17} />,
+		},
+		{ href: "/admin/outlet", label: "Outlet", icon: <Store size={17} /> },
+		{
+			href: "/admin/franchise",
+			label: "Franchise",
+			icon: <Building2 size={17} />,
+		},
 		{
 			href: "/admin/paket-usaha",
 			label: "Paket Usaha",
-			icon: "📦",
+			icon: <PackageOpen size={17} />,
 			badge: inquiryStats.new > 0 ? inquiryStats.new : undefined,
 		},
-		{ href: "/admin/pegawai", label: "Manajemen Pegawai", icon: "👥" },
-		{ href: "/admin/testimonials", label: "Testimoni", icon: "💬" },
-		{ href: "/admin/layanan", label: "Kelola Layanan", icon: "🧺" },
-		{ href: "/admin/galeri", label: "Galeri", icon: "🖼️" },
-		{ href: "/admin/keuangan", label: "Keuangan", icon: "💰" },
-		{ href: "/admin/laporan", label: "Laporan & Audit", icon: "📊" },
-		{ href: "/admin/analytics", label: "Traffic Analytics", icon: "📈" },
-		{ href: "/admin/profil", label: "Profil Akun", icon: "👤" },
+		{
+			href: "/admin/pegawai",
+			label: "Manajemen Pegawai",
+			icon: <UsersRound size={17} />,
+		},
+		{
+			href: "/admin/testimonials",
+			label: "Testimoni",
+			icon: <MessageSquareText size={17} />,
+		},
+		{
+			href: "/admin/layanan",
+			label: "Kelola Layanan",
+			icon: <Shirt size={17} />,
+		},
+		{ href: "/admin/galeri", label: "Galeri", icon: <Images size={17} /> },
+		{
+			href: "/admin/keuangan",
+			label: "Keuangan",
+			icon: <Landmark size={17} />,
+		},
+		{
+			href: "/admin/laporan",
+			label: "Laporan & Audit",
+			icon: <BarChart3 size={17} />,
+		},
+		{
+			href: "/admin/analytics",
+			label: "Traffic Analytics",
+			icon: <ChartNoAxesCombined size={17} />,
+		},
+		{
+			href: "/admin/profil",
+			label: "Profil Akun",
+			icon: <UserCircle size={17} />,
+		},
 	];
 
 	return (

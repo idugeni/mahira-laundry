@@ -1,8 +1,6 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { NextResponse } from "next/server";
 
-// Inisialisasi client Google Analytics Data API
-// Pastikan GOOGLE_CLIENT_EMAIL dan GOOGLE_PRIVATE_KEY ada di .env
 const analyticsClient = new BetaAnalyticsDataClient({
 	credentials: {
 		client_email: process.env.GOOGLE_CLIENT_EMAIL,
@@ -25,15 +23,12 @@ export async function GET() {
 	}
 
 	try {
-		// Memanggil Realtime Report
-		// Mengambil data pengguna aktif dalam 30 menit terakhir
 		const [response] = await analyticsClient.runRealtimeReport({
 			property: `properties/${propertyId}`,
 			dimensions: [{ name: "deviceCategory" }, { name: "city" }],
 			metrics: [{ name: "activeUsers" }, { name: "screenPageViewsPerUser" }],
 		});
 
-		// Mapping hasil report
 		const activeUsers =
 			response.rows?.reduce((acc, row) => {
 				return acc + Number(row.metricValues?.[0].value || 0);

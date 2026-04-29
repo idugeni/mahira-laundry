@@ -75,12 +75,15 @@ export default async function PaketUsahaPage() {
 	};
 
 	return (
-		<>
-			<JsonLd data={buildJsonLd(packages)} />
-			<JsonLd data={breadcrumbJsonLd} />
+		<div key="paket-usaha-root">
+			<JsonLd key="ld-packages" data={buildJsonLd(packages)} />
+			<JsonLd key="ld-breadcrumb" data={breadcrumbJsonLd} />
 
 			{packages.length === 0 ? (
-				<section className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4 py-24 text-center">
+				<section
+					key="empty-packages"
+					className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4 py-14 sm:py-16 text-center"
+				>
 					<div className="max-w-md">
 						<h1 className="mb-3 text-2xl font-bold text-gray-800">
 							Paket Sedang Diperbarui
@@ -110,8 +113,8 @@ export default async function PaketUsahaPage() {
 					</div>
 				</section>
 			) : (
-				<PaketUsahaClient packages={packages} />
+				<PaketUsahaClient key="packages-content" packages={packages} />
 			)}
-		</>
+		</div>
 	);
 }

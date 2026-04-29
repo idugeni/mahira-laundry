@@ -70,7 +70,7 @@ const sitemapData = [
 
 export function SitemapClient() {
 	return (
-		<div className="bg-white min-h-screen py-32 relative overflow-hidden">
+		<div className="bg-white min-h-screen py-16 relative overflow-hidden">
 			{/* Decorative Background */}
 			<div className="absolute top-0 left-0 w-full h-full pointer-events-none">
 				<motion.div
@@ -91,7 +91,7 @@ export function SitemapClient() {
 				/>
 			</div>
 
-			<div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10">
+			<div className="max-w-6xl mx-auto px-6 sm:px-8 lg:px-6 sm:px-8 relative z-10">
 				{/* Header Section */}
 				<div className="text-center mb-24">
 					<motion.div
@@ -130,7 +130,7 @@ export function SitemapClient() {
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.2 + idx * 0.1 }}
-							className="p-10 bg-white rounded-[3rem] border border-slate-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.06)] transition-all duration-500"
+							className="p-10 bg-white rounded-[2rem] border border-slate-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.06)] transition-all duration-500"
 						>
 							<h2 className="text-2xl font-black text-slate-900 mb-8 tracking-tight">
 								{category.title}
@@ -158,7 +158,7 @@ export function SitemapClient() {
 					initial={{ opacity: 0 }}
 					animate={{ opacity: 1 }}
 					transition={{ delay: 1 }}
-					className="mt-24 text-center p-12 bg-slate-50 rounded-[3rem] border border-slate-100"
+					className="mt-24 text-center p-12 bg-slate-50 rounded-[2rem] border border-slate-100"
 				>
 					<p className="text-slate-500 font-medium">
 						Tidak menemukan yang Anda cari? Silakan hubungi layanan pelanggan

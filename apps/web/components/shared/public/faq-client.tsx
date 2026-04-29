@@ -171,6 +171,7 @@ export function FAQClient() {
 							</p>
 							{faqCategories.map((cat) => (
 								<button
+									type="button"
 									key={cat.id}
 									onClick={() => {
 										setActiveCategory(cat.id);
@@ -196,12 +197,12 @@ export function FAQClient() {
 					{/* FAQ Accordion */}
 					<div className="lg:w-2/3">
 						<div className="space-y-4">
-							<AnimatePresence mode="wait">
+							<AnimatePresence initial={false}>
 								{filteredCategories
 									.find((c) => c.id === activeCategory)
 									?.questions.map((faq, idx) => (
 										<motion.div
-											key={faq.q}
+											key={`${activeCategory}-${faq.q}`}
 											initial={{ opacity: 0, x: 20 }}
 											animate={{ opacity: 1, x: 0 }}
 											exit={{ opacity: 0, x: -20 }}
@@ -216,6 +217,7 @@ export function FAQClient() {
 												}`}
 											>
 												<button
+													type="button"
 													onClick={() =>
 														setOpenIndex(openIndex === idx ? null : idx)
 													}
@@ -277,7 +279,7 @@ export function FAQClient() {
 
 			{/* CTA Section */}
 			<section className="max-w-4xl mx-auto px-4 mt-24">
-				<div className="bg-slate-900 rounded-[3rem] p-8 md:p-12 text-center relative overflow-hidden shadow-2xl shadow-slate-900/20">
+				<div className="bg-slate-900 rounded-[2rem] p-8 md:p-12 text-center relative overflow-hidden shadow-2xl shadow-slate-900/20">
 					<div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/20 blur-[100px] rounded-full -translate-y-1/2 translate-x-1/2" />
 					<div className="relative z-10">
 						<h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
@@ -291,7 +293,7 @@ export function FAQClient() {
 							href="https://wa.me/6283806518859"
 							target="_blank"
 							rel="noopener noreferrer"
-							className="inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white rounded-full font-black hover:bg-brand-primary/90 transition-all hover:scale-105"
+							className="inline-flex items-center gap-3 px-8 py-4 bg-brand-primary text-white rounded-full font-black hover:bg-brand-primary/90 transition-all"
 						>
 							Hubungi Kami via WhatsApp
 						</a>

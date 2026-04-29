@@ -227,7 +227,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 			</div>
 
 			{/* Table + Export */}
-			<div className="bg-white rounded-[3rem] border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden">
+			<div className="overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-lg shadow-slate-200/40">
 				{/* Table toolbar */}
 				<div className="flex items-center justify-between px-8 py-5 border-b border-slate-50">
 					<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
@@ -236,7 +236,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 					<Button
 						onClick={handleExportCSV}
 						disabled={exportLoading}
-						className="bg-slate-900 hover:bg-emerald-600 text-white rounded-2xl px-5 h-10 font-black text-[10px] uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl shadow-slate-900/10 flex items-center gap-2 disabled:opacity-50"
+						className="flex h-10 items-center gap-2 rounded-xl bg-slate-900 px-4 text-[10px] font-black uppercase tracking-widest text-white shadow-lg shadow-slate-900/10 transition-colors hover:bg-emerald-600 disabled:opacity-50"
 					>
 						{exportLoading ? (
 							<span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -248,11 +248,11 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 				</div>
 
 				{leads.length === 0 ? (
-					<div className="p-24 text-center">
-						<div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-dashed border-slate-100">
-							<Users size={40} className="text-slate-200" />
+					<div className="px-6 py-14 text-center sm:px-10 sm:py-16">
+						<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-5 border-4 border-dashed border-slate-100">
+							<Users size={32} className="text-slate-200" />
 						</div>
-						<h3 className="text-2xl font-black text-slate-800 uppercase tracking-tight">
+						<h3 className="text-xl font-black text-slate-800 uppercase tracking-tight">
 							Belum Ada Leads
 						</h3>
 						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-3 max-w-sm mx-auto leading-relaxed">

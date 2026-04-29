@@ -5,13 +5,11 @@ import Link from "next/link";
 import React, { useState } from "react";
 import {
 	HiOutlineArrowRight,
-	HiOutlineCheckCircle,
 	HiOutlineEnvelope,
 	HiOutlineExclamationCircle,
 	HiOutlineHome,
 	HiOutlineSparkles,
 } from "react-icons/hi2";
-import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { resetPassword } from "@/lib/actions/auth";
 
 export default function LupaPasswordPage({
@@ -104,7 +102,7 @@ export default function LupaPasswordPage({
 									</p>
 									<Link
 										href="/login"
-										className="inline-flex py-3.5 px-8 bg-slate-900 text-white rounded-full font-black text-[9px] uppercase tracking-widest hover:bg-brand-primary transition-all shadow-xl shadow-slate-200 active:scale-95"
+										className="inline-flex py-3.5 px-8 bg-slate-900 text-white rounded-full font-black text-[9px] uppercase tracking-widest hover:bg-brand-primary transition-all shadow-xl shadow-slate-200"
 									>
 										Kembali ke Login
 									</Link>

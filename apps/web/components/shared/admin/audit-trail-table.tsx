@@ -77,7 +77,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 	};
 
 	return (
-		<div className="bg-white rounded-none sm:rounded-2xl lg:rounded-[3rem] border-y sm:border border-slate-100 shadow-2xl shadow-slate-200/40 overflow-hidden">
+		<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40 overflow-hidden">
 			{/* Header + Filter */}
 			<div className="p-4 sm:p-6 lg:p-10 border-b border-slate-50 space-y-4">
 				<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -93,7 +93,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 					<div className="relative">
 						<Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
 						<Input
-							className="pl-11 pr-4 py-5 rounded-2xl border-slate-100 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all font-bold text-xs w-full sm:w-64"
+							className="pl-11 pr-4 h-11 rounded-xl border-slate-100 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-colors font-bold text-xs w-full sm:w-64"
 							placeholder="Cari user atau entitas..."
 							value={searchQuery}
 							onChange={(e) => handleSearch(e.target.value)}
@@ -109,7 +109,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 							variant="ghost"
 							onClick={() => handleFilterAction(action)}
 							className={cn(
-								"rounded-xl h-8 px-3 font-black text-[9px] uppercase tracking-widest transition-all",
+								"rounded-xl h-8 px-3 font-black text-[9px] uppercase tracking-widest transition-colors",
 								actionFilter === action
 									? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:text-white"
 									: "bg-white text-slate-400 border border-slate-100 hover:bg-slate-50",
@@ -131,9 +131,9 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 			</div>
 
 			{paginatedLogs.length === 0 ? (
-				<div className="py-24 text-center text-slate-300">
-					<div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
-						<History size={40} />
+				<div className="py-14 sm:py-16 text-center text-slate-300">
+					<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-5">
+						<History size={32} />
 					</div>
 					<h3 className="text-xl font-black uppercase tracking-tight text-slate-800">
 						{searchQuery || actionFilter
@@ -181,7 +181,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 										</td>
 										<td className="px-6 lg:px-10 py-5">
 											<div className="flex items-center gap-3">
-												<div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-[10px] group-hover:bg-slate-900 group-hover:text-white transition-all shrink-0">
+												<div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-[10px] group-hover:bg-slate-900 group-hover:text-white transition-colors shrink-0">
 													{log.profiles?.full_name?.charAt(0) || "S"}
 												</div>
 												<div>

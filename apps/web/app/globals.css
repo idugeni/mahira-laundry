@@ -140,14 +140,14 @@ select {
 	}
 }
 
-@keyframes zoomIn {
+@keyframes softEnter {
 	from {
 		opacity: 0;
-		transform: scale(0.95) translateY(10px);
+		translate: 0 10px;
 	}
 	to {
 		opacity: 1;
-		transform: scale(1) translateY(0);
+		translate: 0 0;
 	}
 }
 
@@ -182,7 +182,7 @@ select {
 }
 
 .animate-zoom-in {
-	animation: zoomIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	animation: softEnter 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-fade-in {
@@ -359,5 +359,16 @@ select {
 	.no-scrollbar {
 		-ms-overflow-style: none;
 		scrollbar-width: none;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms;
+		animation-iteration-count: 1;
+		scroll-behavior: auto;
+		transition-duration: 0.01ms;
 	}
 }

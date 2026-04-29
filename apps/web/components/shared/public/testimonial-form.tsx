@@ -92,7 +92,7 @@ export function TestimonialForm() {
 											<button
 												key={star}
 												type="button"
-												className="text-3xl transition-all hover:scale-125 pointer-events-auto"
+												className="text-3xl transition-all pointer-events-auto"
 												onClick={() => field.onChange(star)}
 												onMouseEnter={() => setHover(star)}
 												onMouseLeave={() => setHover(0)}
@@ -138,7 +138,7 @@ export function TestimonialForm() {
 					<button
 						type="submit"
 						disabled={loading}
-						className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-lg shadow-xl shadow-slate-200 hover:bg-brand-primary transition-all active:scale-95 disabled:opacity-50"
+						className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-lg shadow-xl shadow-slate-200 hover:bg-brand-primary transition-all disabled:opacity-50"
 					>
 						{loading ? "Mengirim..." : "Kirim Testimoni"}
 					</button>

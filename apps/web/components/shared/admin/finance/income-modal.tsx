@@ -71,7 +71,7 @@ export function IncomeModal({
 				className="contents"
 			>
 				{trigger || (
-					<span className="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-500 text-white text-sm font-semibold rounded-xl shadow-lg shadow-emerald-100 hover:shadow-emerald-200 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer">
+					<span className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-emerald-500 px-3.5 text-sm font-semibold text-white shadow-md shadow-emerald-100 transition-colors hover:bg-emerald-600">
 						<HiOutlineBanknotes size={18} />
 						<span>Input Pemasukan</span>
 					</span>
@@ -89,7 +89,7 @@ export function IncomeModal({
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
-						<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-lg overflow-hidden animate-zoom-in border border-white/20 text-left">
+						<div className="relative bg-white rounded-[2rem] shadow-2xl w-full max-w-lg overflow-hidden animate-fade-in border border-white/20 text-left">
 							{/* Header */}
 							<div className="px-8 pt-8 pb-6 bg-slate-50 relative overflow-hidden shrink-0 border-b border-slate-100">
 								<div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
@@ -229,7 +229,7 @@ export function IncomeModal({
 								<button
 									type="submit"
 									disabled={isLoading}
-									className="w-full py-4 bg-emerald-600 text-white rounded-2xl font-black text-sm shadow-xl shadow-emerald-100 hover:bg-emerald-700 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-3"
+									className="flex h-11 w-full items-center justify-center gap-3 rounded-xl bg-emerald-600 text-sm font-black text-white shadow-lg shadow-emerald-100 transition-colors hover:bg-emerald-700 disabled:opacity-50"
 								>
 									{isLoading ? (
 										<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

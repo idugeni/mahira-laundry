@@ -13,7 +13,7 @@ import { MdOutlineScience } from "react-icons/md";
 
 export function TentangClient() {
 	return (
-		<div className="py-32 bg-white relative overflow-hidden">
+		<div className="py-16 bg-white relative overflow-hidden">
 			{/* Decorative Background Elements */}
 			<div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
 				<motion.div
@@ -87,7 +87,7 @@ export function TentangClient() {
 						initial={{ opacity: 0, y: 50 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
-						className="relative group p-12 lg:p-20 bg-slate-900 rounded-[4rem] overflow-hidden"
+						className="relative group p-12 lg:p-12 bg-slate-900 rounded-[2rem] overflow-hidden"
 					>
 						<div className="absolute top-0 right-0 p-12 text-[200px] text-white/5 font-black pointer-events-none select-none -mr-20 -mt-20">
 							VISI
@@ -207,7 +207,7 @@ export function TentangClient() {
 									className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] flex flex-col items-start gap-8 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.06)] transition-all duration-500 group"
 								>
 									<div
-										className={`w-16 h-16 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center text-3xl shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6 shadow-inner`}
+										className={`w-16 h-16 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center text-3xl shrink-0 transition-transform duration-500 group-hover:rotate-6 shadow-inner`}
 									>
 										<item.icon />
 									</div>
@@ -230,7 +230,7 @@ export function TentangClient() {
 					initial={{ opacity: 0, scale: 0.95 }}
 					whileInView={{ opacity: 1, scale: 1 }}
 					viewport={{ once: true }}
-					className="mt-40 p-10 lg:p-16 rounded-[3rem] bg-brand-primary text-center text-white relative overflow-hidden"
+					className="mt-40 p-10 lg:p-10 rounded-[2rem] bg-brand-primary text-center text-white relative overflow-hidden"
 				>
 					<div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
 					<div className="relative z-10">

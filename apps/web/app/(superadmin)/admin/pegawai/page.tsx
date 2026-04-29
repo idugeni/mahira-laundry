@@ -10,6 +10,7 @@
 	Users,
 } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { RegisterStaffModal } from "@/components/shared/admin/staff/register-staff-modal";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -27,16 +28,61 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-export default async function PegawaiPage() {
+type PegawaiSearchParams = Promise<{
+	q?: string;
+	role?: string;
+}>;
+
+const roleTabs = [
+	{ label: "Semua", value: "all" },
+	{ label: "Manager", value: "manager" },
+	{ label: "Kasir", value: "kasir" },
+	{ label: "Kurir", value: "kurir" },
+];
+
+function getOutletName(
+	staff: Awaited<ReturnType<typeof getStaffManagementList>>[number],
+) {
+	return (Array.isArray(staff.outlets) ? staff.outlets[0]?.name : null) || "";
+}
+
+export default async function PegawaiPage({
+	searchParams,
+}: {
+	searchParams?: PegawaiSearchParams;
+}) {
+	const params = (await searchParams) ?? {};
+	const query = (params.q ?? "").trim().toLowerCase();
+	const activeRole = roleTabs.some((tab) => tab.value === params.role)
+		? (params.role as string)
+		: "all";
 	const [staff, outlets] = await Promise.all([
 		getStaffManagementList(),
 		getOutletsWithStats(),
 	]);
+	const filteredStaff = staff.filter((s) => {
+		const matchesRole = activeRole === "all" || s.role === activeRole;
+		const outletName = getOutletName(s);
+		const haystack = [s.full_name, s.phone, outletName, s.role]
+			.filter(Boolean)
+			.join(" ")
+			.toLowerCase();
+
+		return matchesRole && (!query || haystack.includes(query));
+	});
+
+	function roleHref(role: string) {
+		const nextParams = new URLSearchParams();
+		if (query) nextParams.set("q", query);
+		if (role !== "all") nextParams.set("role", role);
+		const queryString = nextParams.toString();
+		return queryString ? `/admin/pegawai?${queryString}` : "/admin/pegawai";
+	}
 
 	return (
-		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl lg:rounded-[3rem] p-6 sm:p-10 lg:p-14 text-white shadow-2xl shadow-slate-900/20 group">
+			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white shadow-xl shadow-slate-900/20 group">
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full -mr-40 -mt-40 blur-3xl" />
 				<div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-emerald-500/5 rounded-full -ml-20 -mb-20 blur-3xl" />
 
@@ -63,7 +109,7 @@ export default async function PegawaiPage() {
 					<RegisterStaffModal
 						outlets={outlets}
 						trigger={
-							<Button className="bg-white text-slate-900 hover:bg-emerald-400 hover:text-white rounded-2xl px-10 h-16 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-white/5 flex items-center gap-3">
+							<Button className="bg-white text-slate-900 hover:bg-emerald-400 hover:text-slate-950 rounded-xl px-5 h-11 font-black text-xs uppercase tracking-widest shadow-lg shadow-white/5 flex items-center gap-2.5">
 								<UserPlus size={20} /> Tambah Anggota Tim
 							</Button>
 						}
@@ -72,68 +118,62 @@ export default async function PegawaiPage() {
 			</div>
 
 			{/* Filter Section */}
-			<div className="flex flex-wrap items-center justify-between gap-4">
-				<div className="relative group">
+			<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+				<form
+					action="/admin/pegawai"
+					className="relative group w-full sm:max-w-sm"
+				>
 					<Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
+					{activeRole !== "all" && (
+						<input type="hidden" name="role" value={activeRole} />
+					)}
 					<Input
-						className="pl-11 pr-4 py-6 w-full max-w-sm bg-white rounded-2xl border-slate-100 shadow-sm focus:ring-4 focus:ring-emerald-500/5 transition-all font-bold text-sm"
-						placeholder="Cari nama, email, atau telepon..."
+						name="q"
+						defaultValue={params.q ?? ""}
+						className="pl-11 pr-4 h-11 w-full bg-white rounded-xl border-slate-100 shadow-sm focus:ring-4 focus:ring-emerald-500/5 transition-all font-bold text-sm"
+						placeholder="Cari nama, telepon, outlet, atau role..."
 					/>
-				</div>
-				<div className="flex items-center gap-3">
-					<Button
-						variant="outline"
-						className="rounded-2xl h-12 px-6 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50"
-					>
-						{" "}
-						Semua{" "}
-					</Button>
-					<Button
-						variant="outline"
-						className="rounded-2xl h-12 px-6 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50"
-					>
-						{" "}
-						Manager{" "}
-					</Button>
-					<Button
-						variant="outline"
-						className="rounded-2xl h-12 px-6 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50"
-					>
-						{" "}
-						Kasir{" "}
-					</Button>
-					<Button
-						variant="outline"
-						className="rounded-2xl h-12 px-6 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50"
-					>
-						{" "}
-						Kurir{" "}
-					</Button>
+				</form>
+				<div className="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
+					{roleTabs.map((tab) => (
+						<Button
+							key={tab.value}
+							asChild
+							variant="outline"
+							className={cn(
+								"rounded-xl h-10 px-4 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50 shrink-0",
+								activeRole === tab.value &&
+									"bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-50",
+							)}
+						>
+							<Link href={roleHref(tab.value)}>{tab.label}</Link>
+						</Button>
+					))}
 				</div>
 			</div>
 
-			{staff.length === 0 ? (
-				<div className="bg-white rounded-[4rem] border border-slate-100 p-24 text-center shadow-xl shadow-slate-200/40 relative overflow-hidden group">
+			{filteredStaff.length === 0 ? (
+				<div className="bg-white rounded-2xl border border-slate-100 p-10 sm:p-14 text-center shadow-lg shadow-slate-200/40 relative overflow-hidden group">
 					<div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/20 to-slate-50/40 opacity-0 group-hover:opacity-10 transition-opacity duration-700" />
 					<div className="relative">
-						<div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-dashed border-slate-100 transition-transform duration-700 group-hover:rotate-12 group-hover:scale-110">
-							<Users size={48} className="text-slate-200" />
+						<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-5 border-4 border-dashed border-slate-100 transition-transform duration-300 group-hover:-translate-y-0.5">
+							<Users size={36} className="text-slate-200" />
 						</div>
-						<h3 className="text-3xl font-black text-slate-800 uppercase tracking-tight">
-							Kekosongan Tim
+						<h3 className="text-2xl font-black text-slate-800 uppercase tracking-tight">
+							Data Tidak Ditemukan
 						</h3>
 						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-4 max-w-lg leading-relaxed mx-auto">
-							Mahira Laundry Group belum memiliki staf yang terdaftar. Mulai
-							bangun tim Anda untuk menggerakkan operasional bisnis.
+							Ubah kata kunci atau filter peran untuk melihat daftar pegawai
+							lainnya.
 						</p>
 					</div>
 				</div>
 			) : (
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{staff.map((s) => (
+				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+					{filteredStaff.map((s) => (
 						<div
 							key={s.id}
-							className="group relative bg-white rounded-none sm:rounded-[3rem] border-b sm:border border-slate-100 p-6 sm:p-8 flex flex-col gap-8 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-500 overflow-hidden h-full"
+							className="group relative bg-white rounded-none sm:rounded-2xl border-b sm:border border-slate-100 p-6 flex flex-col gap-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-emerald-500/10 transition-[box-shadow,border-color,background-color] duration-300 overflow-hidden h-full"
 						>
 							{/* Background Decoration */}
 							<div
@@ -150,7 +190,7 @@ export default async function PegawaiPage() {
 							<div className="relative flex items-center justify-between">
 								<div className="flex items-center gap-5">
 									<div className="relative">
-										<div className="w-20 h-20 rounded-[1.5rem] bg-gradient-to-br from-slate-50 to-slate-100 overflow-hidden flex items-center justify-center text-2xl font-black text-slate-400 border-2 border-white shadow-lg transition-transform duration-700 group-hover:scale-105">
+										<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-slate-50 to-slate-100 overflow-hidden flex items-center justify-center text-2xl font-black text-slate-400 border-2 border-white shadow-md transition-transform duration-300 group-hover:-translate-y-0.5">
 											{s.full_name?.charAt(0) || <Users size={32} />}
 										</div>
 										<span
@@ -204,8 +244,7 @@ export default async function PegawaiPage() {
 										</span>
 									</div>
 									<span className="text-xs font-bold text-slate-700 truncate max-w-[150px]">
-										{(Array.isArray(s.outlets) ? s.outlets[0]?.name : null) ||
-											"Unassigned"}
+										{getOutletName(s) || "Unassigned"}
 									</span>
 								</div>
 
@@ -245,8 +284,8 @@ export default async function PegawaiPage() {
 			)}
 
 			{/* Info footer */}
-			<div className="bg-emerald-50 rounded-[2.5rem] p-8 lg:p-10 border border-emerald-100 flex flex-col lg:flex-row items-center gap-8 shadow-xl shadow-emerald-500/5 transition-transform hover:scale-[1.01] duration-500">
-				<div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-3xl shadow-lg border-2 border-emerald-100 rotate-3 group-hover:rotate-0 transition-transform">
+			<div className="bg-emerald-50 rounded-2xl p-6 sm:p-8 border border-emerald-100 flex flex-col lg:flex-row items-center gap-6 shadow-lg shadow-emerald-500/5 transition-colors hover:bg-white duration-300">
+				<div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-md border-2 border-emerald-100">
 					💡
 				</div>
 				<div className="text-center lg:text-left flex-1">

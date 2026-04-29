@@ -1,4 +1,4 @@
-﻿import { MahiraFooter } from "@/components/brand/mahira-footer";
+import { MahiraFooter } from "@/components/brand/mahira-footer";
 import { MahiraHeader } from "@/components/brand/mahira-header";
 import { BackToTop } from "@/components/shared/common/back-to-top";
 import { createClient } from "@/lib/supabase/server";
@@ -17,11 +17,13 @@ export default async function PublicLayout({
 		.limit(6);
 
 	return (
-		<>
-			<MahiraHeader />
-			<main className="flex-1">{children}</main>
-			<MahiraFooter services={services || []} />
-			<BackToTop />
-		</>
+		<div className="flex flex-col min-h-screen">
+			<MahiraHeader key="public-header" />
+			<main key="public-main" className="flex-1">
+				{children}
+			</main>
+			<MahiraFooter key="public-footer" services={services || []} />
+			<BackToTop key="public-back-to-top" />
+		</div>
 	);
 }

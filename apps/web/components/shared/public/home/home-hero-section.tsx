@@ -153,7 +153,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 							<div className="flex -space-x-4">
 								{[1, 2, 3, 4].map((i) => (
 									<motion.div
-										key={i}
+										key={`partner-avatar-${i}`}
 										whileHover={{ y: -5, zIndex: 10 }}
 										className="w-14 h-14 rounded-full border-4 border-white overflow-hidden shadow-lg cursor-pointer"
 									>
@@ -243,7 +243,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 									<div className="space-y-4">
 										{[1, 2, 3].map((i) => (
 											<div
-												key={i}
+												key={`hero-skeleton-${i}`}
 												className="h-14 bg-slate-50 animate-pulse rounded-2xl border border-slate-100"
 											/>
 										))}

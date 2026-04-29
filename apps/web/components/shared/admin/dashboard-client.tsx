@@ -96,7 +96,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 	];
 
 	return (
-		<div className="space-y-10 pb-10">
+		<div className="space-y-8 pb-10">
 			<motion.div
 				initial={{ opacity: 0, x: -20 }}
 				animate={{ opacity: 1, x: 0 }}
@@ -117,10 +117,10 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: i * 0.1 }}
-						className={`bg-white rounded-3xl border ${stat.border} p-5 sm:p-6 hover:shadow-xl hover:shadow-slate-200/50 transition-all group`}
+						className={`bg-white rounded-2xl border ${stat.border} p-4 sm:p-5 hover:shadow-lg hover:shadow-slate-200/50 transition-shadow group`}
 					>
 						<div
-							className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center text-xl sm:text-2xl mb-4 group-hover:scale-110 transition-transform`}
+							className={`w-10 h-10 rounded-xl ${stat.bg} ${stat.color} flex items-center justify-center text-xl mb-4 transition-transform group-hover:-translate-y-0.5`}
 						>
 							<span className="flex items-center justify-center">
 								<stat.icon />
@@ -137,7 +137,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 			</div>
 
 			{/* Quick Actions */}
-			<div className="bg-white rounded-[2.5rem] border border-slate-100 p-6 sm:p-10 shadow-sm overflow-hidden relative">
+			<div className="bg-white rounded-2xl border border-slate-100 p-5 sm:p-8 shadow-sm overflow-hidden relative">
 				<div className="absolute top-0 right-0 p-10 text-[180px] text-slate-50 pointer-events-none -mr-20 -mt-20">
 					<HiOutlinePlus />
 				</div>
@@ -154,10 +154,10 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 						>
 							<Link
 								href={action.href}
-								className="group flex flex-col items-center text-center p-6 sm:p-8 rounded-[2rem] border border-slate-50 bg-slate-50/30 hover:bg-white hover:border-brand-primary/20 hover:shadow-xl hover:shadow-slate-100 transition-all"
+								className="group flex flex-col items-center text-center p-5 sm:p-6 rounded-2xl border border-slate-50 bg-slate-50/30 hover:bg-white hover:border-brand-primary/20 hover:shadow-lg hover:shadow-slate-100 transition-shadow"
 							>
 								<div
-									className={`w-14 h-14 sm:w-16 sm:h-16 rounded-3xl flex items-center justify-center mb-6 transition-all ${action.color} group-hover:shadow-xl shadow-brand-primary/20 group-hover:scale-110`}
+									className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center mb-5 transition-shadow ${action.color} group-hover:shadow-lg shadow-brand-primary/20`}
 								>
 									<span className="text-2xl sm:text-3xl flex items-center justify-center">
 										<action.icon />
@@ -176,7 +176,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 			</div>
 
 			{/* Recent orders */}
-			<div className="bg-white rounded-[2.5rem] border border-slate-100 p-6 sm:p-10 shadow-sm group">
+			<div className="bg-white rounded-2xl border border-slate-100 p-5 sm:p-8 shadow-sm group">
 				<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
 					<h2 className="text-xl font-bold font-[family-name:var(--font-heading)] text-slate-900">
 						Order Terbaru
@@ -191,11 +191,11 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 						</span>
 					</Link>
 				</div>
-				<div className="text-center py-16 sm:py-24 bg-slate-50/50 rounded-[2rem] border-2 border-dashed border-slate-100">
+				<div className="text-center py-14 sm:py-16 bg-slate-50/50 rounded-2xl border-2 border-dashed border-slate-100">
 					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
-						className="w-20 h-20 sm:w-24 sm:h-24 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm mb-8"
+						className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm mb-6"
 					>
 						<span className="text-4xl text-slate-100 flex items-center justify-center">
 							<HiOutlineInbox />
@@ -209,7 +209,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 					</p>
 					<Link
 						href="/customer/order/baru"
-						className="inline-flex px-10 py-5 bg-slate-900 text-white rounded-full font-black shadow-2xl shadow-slate-200 hover:bg-brand-primary hover:shadow-brand-primary/20 transition-all active:scale-95"
+						className="inline-flex h-11 items-center rounded-xl bg-slate-900 px-5 font-black text-white shadow-lg shadow-slate-200 transition-colors hover:bg-brand-primary"
 					>
 						Buat Order Pertama
 					</Link>

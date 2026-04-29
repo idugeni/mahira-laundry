@@ -210,12 +210,12 @@ export function HomeBusinessPackagesSection({
 	if (packages.length === 0) return null;
 
 	return (
-		<section className="py-24 relative overflow-hidden bg-white">
+		<section className="py-14 sm:py-16 relative overflow-hidden bg-white">
 			{/* Decorative Elements */}
 			<motion.div
 				animate={{ rotate: 360 }}
 				transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-				className="absolute -top-24 -right-24 w-96 h-96 border-[40px] border-slate-50 rounded-full opacity-50"
+				className="absolute -top-8 sm:p-12 -right-24 w-96 h-96 border-[40px] border-slate-50 rounded-full opacity-50"
 			/>
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

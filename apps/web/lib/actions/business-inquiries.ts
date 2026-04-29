@@ -18,70 +18,32 @@ export async function submitBusinessInquiry(
 	try {
 		const supabase = await createClient();
 
-		// Check duplicate: same phone + package_id within 24 hours
-		const twentyFourHoursAgo = new Date(
-			Date.now() - 24 * 60 * 60 * 1000,
-		).toISOString();
+		const { data: _inquiryId, error: rpcError } = await supabase.rpc(
+			"submit_business_inquiry_v1",
+			{
+				p_full_name: data.full_name,
+				p_phone: data.phone,
+				p_email: data.email,
+				p_city: data.city,
+				p_package_id: data.package_id,
+				p_package_name: data.package_name,
+				p_budget_range: data.budget_range,
+				p_message: data.message,
+			},
+		);
 
-		let duplicateQuery = supabase
-			.from("business_package_inquiries")
-			.select("id")
-			.eq("phone", data.phone)
-			.gte("created_at", twentyFourHoursAgo);
-
-		if (data.package_id) {
-			duplicateQuery = duplicateQuery.eq("package_id", data.package_id);
-		}
-
-		const { data: existing, error: dupError } = await duplicateQuery.limit(1);
-
-		if (dupError) throw dupError;
-
-		if (existing && existing.length > 0) {
-			return {
-				success: false,
-				error:
-					"Anda sudah mengajukan inquiry untuk paket ini. Tim kami akan segera menghubungi Anda.",
-			};
-		}
-
-		// INSERT inquiry with status='new'
-		const { data: inquiry, error: insertError } = await supabase
-			.from("business_package_inquiries")
-			.insert({ ...data, status: "new" })
-			.select()
-			.single();
-
-		if (insertError) throw insertError;
-
-		// Get all superadmin user IDs
-		const { data: superadmins, error: adminError } = await supabase
-			.from("profiles")
-			.select("id")
-			.eq("role", "superadmin");
-
-		if (adminError) throw adminError;
-
-		// Bulk INSERT notifications for all superadmins
-		if (superadmins && superadmins.length > 0) {
-			const notifications = superadmins.map((admin) => ({
-				user_id: admin.id,
-				type: "system" as const,
-				title: `Lead Baru: ${data.package_name}`,
-				body: `${data.full_name} — ${data.phone}`,
-			}));
-
-			const { error: notifError } = await supabase
-				.from("notifications")
-				.insert(notifications);
-
-			if (notifError) {
-				// Non-fatal: log but don't fail the inquiry submission
-				console.error("Failed to insert notifications:", notifError);
+		if (rpcError) {
+			if (rpcError.message === "Duplicate inquiry") {
+				return {
+					success: false,
+					error:
+						"Anda sudah mengajukan inquiry untuk paket ini. Tim kami akan segera menghubungi Anda.",
+				};
 			}
+			throw rpcError;
 		}
 
-		return { success: true, data: inquiry };
+		return { success: true };
 	} catch (error) {
 		const err = error as Error;
 		console.error("submitBusinessInquiry failed:", err);
@@ -103,7 +65,6 @@ export async function updateInquiryStatus(
 	try {
 		const supabase = await createClient();
 
-		// Get current status
 		const { data: current, error: fetchError } = await supabase
 			.from("business_package_inquiries")
 			.select("status")
@@ -114,7 +75,6 @@ export async function updateInquiryStatus(
 
 		const oldStatus = current?.status;
 
-		// UPDATE status
 		const { error: updateError } = await supabase
 			.from("business_package_inquiries")
 			.update({ status })
@@ -122,14 +82,12 @@ export async function updateInquiryStatus(
 
 		if (updateError) throw updateError;
 
-		// Get current user
 		const {
 			data: { user },
 		} = await supabase.auth.getUser();
 
 		if (!user) throw new Error("Unauthorized");
 
-		// INSERT audit log
 		const { error: logError } = await supabase
 			.from("business_package_inquiry_logs")
 			.insert({
@@ -183,7 +141,6 @@ export async function exportInquiriesCSV(
 
 		const escapeField = (value: string | null | undefined): string => {
 			const str = value ?? "";
-			// Wrap in quotes to handle commas, newlines, and quotes within fields
 			return `"${str.replace(/"/g, '""')}"`;
 		};
 

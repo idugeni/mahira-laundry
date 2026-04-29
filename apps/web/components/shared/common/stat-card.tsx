@@ -67,7 +67,7 @@ export function StatCard({
 	return (
 		<div
 			className={cn(
-				"group relative overflow-hidden rounded-xl sm:rounded-[2rem] border p-4 sm:p-7 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/50",
+				"group relative overflow-hidden rounded-xl sm:rounded-2xl border p-4 sm:p-6 shadow-sm transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-200/40",
 				styles.card,
 				className,
 			)}
@@ -75,7 +75,7 @@ export function StatCard({
 			{/* Decorative Elements */}
 			<div
 				className={cn(
-					"absolute -right-4 -top-4 h-32 w-32 rounded-full blur-[40px] opacity-[0.08] transition-all duration-700 group-hover:scale-150 group-hover:opacity-[0.12]",
+					"absolute -right-4 -top-4 h-32 w-32 rounded-full blur-[40px] opacity-[0.08] transition-opacity duration-500 group-hover:opacity-[0.12]",
 					styles.glow,
 				)}
 			/>
@@ -92,7 +92,7 @@ export function StatCard({
 				<div className="flex items-center justify-between">
 					<div
 						className={cn(
-							"flex h-14 w-14 items-center justify-center rounded-2xl border text-xl shadow-inner-sm transition-transform duration-500 group-hover:rotate-12",
+							"flex h-12 w-12 items-center justify-center rounded-2xl border text-lg shadow-inner-sm transition-transform duration-300 group-hover:-translate-y-0.5",
 							styles.icon,
 						)}
 					>
@@ -120,7 +120,7 @@ export function StatCard({
 					<div className="flex items-baseline gap-2">
 						<p
 							className={cn(
-								"text-4xl font-black tracking-tight font-[family-name:var(--font-heading)]",
+								"text-3xl sm:text-4xl font-black tracking-tight font-[family-name:var(--font-heading)]",
 								styles.value,
 							)}
 						>

@@ -152,7 +152,6 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 		scrollRef.current.scrollLeft = scrollLeft - walk;
 	};
 
-	// Filter & Sort Logic
 	const filteredOrders = useMemo(() => {
 		let result = optimisticOrders;
 
@@ -209,20 +208,20 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 			<style
 				dangerouslySetInnerHTML={{
 					__html: `
-        .custom-scrollbar::-webkit-scrollbar {
-          height: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #e2e8f0;
-          border-radius: 20px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #cbd5e1;
-        }
-      `,
+ .custom-scrollbar::-webkit-scrollbar {
+ height: 4px;
+ }
+ .custom-scrollbar::-webkit-scrollbar-track {
+ background: transparent;
+ }
+ .custom-scrollbar::-webkit-scrollbar-thumb {
+ background: #e2e8f0;
+ border-radius: 20px;
+ }
+ .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+ background: #cbd5e1;
+ }
+ `,
 				}}
 			/>
 			{/* biome-ignore-end lint/security/noDangerouslySetInnerHtml: receipt HTML content */}
@@ -253,9 +252,9 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 							className="px-6 py-7 h-auto border-slate-200 rounded-2xl hover:bg-slate-50 transition-all shadow-sm flex items-center gap-3 text-xs font-black uppercase tracking-widest text-slate-600 group"
 						>
 							{sortBy === "newest" ? (
-								<SortDesc className="w-5 h-5 group-hover:scale-110 transition-transform" />
+								<SortDesc className="w-5 h-5 transition-transform" />
 							) : (
-								<SortAsc className="w-5 h-5 group-hover:scale-110 transition-transform" />
+								<SortAsc className="w-5 h-5 transition-transform" />
 							)}
 							<span>
 								Urutkan: {sortBy === "newest" ? "Terbaru" : "Terlama"}
@@ -355,7 +354,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 									<motion.div
 										key={order.id}
 										layout
-										className="bg-white rounded-[3rem] p-10 shadow-xl shadow-slate-200/40 border border-slate-50 relative group flex flex-col h-full"
+										className="bg-white rounded-[2rem] p-10 shadow-xl shadow-slate-200/40 border border-slate-50 relative group flex flex-col h-full"
 									>
 										<div className="flex justify-between items-start mb-8">
 											<div className="flex flex-col gap-2">
@@ -498,7 +497,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 								);
 							})
 						) : (
-							<div className="col-span-full py-32 flex flex-col items-center justify-center gap-6 opacity-40">
+							<div className="col-span-full py-16 flex flex-col items-center justify-center gap-6 opacity-40">
 								<div className="p-8 bg-slate-50 rounded-full border-4 border-dashed border-slate-100">
 									<Layout className="w-16 h-16 text-slate-200" />
 								</div>
@@ -558,7 +557,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 				open={!!selectedOrder}
 				onOpenChange={(open: boolean) => !open && setSelectedOrder(null)}
 			>
-				<DialogContent className="max-w-2xl p-0 bg-white rounded-[3rem] overflow-hidden border-none shadow-2xl">
+				<DialogContent className="max-w-2xl p-0 bg-white rounded-[2rem] overflow-hidden border-none shadow-2xl">
 					{selectedOrder && (
 						<div className="flex flex-col max-h-[90vh]">
 							<DialogHeader className="sr-only">
@@ -700,7 +699,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 									onClick={() => {
 										toast.info("Fitur Edit Pesanan segera hadir.");
 									}}
-									className="flex-1 flex items-center justify-center gap-3 h-auto py-4 bg-white border border-slate-200 rounded-2xl text-xs font-black text-slate-600 uppercase tracking-widest hover:border-brand-primary hover:text-brand-primary transition-all active:scale-[0.98]"
+									className="flex-1 flex items-center justify-center gap-3 h-auto py-4 bg-white border border-slate-200 rounded-2xl text-xs font-black text-slate-600 uppercase tracking-widest hover:border-brand-primary hover:text-brand-primary transition-all"
 								>
 									<Edit size={18} /> Edit Pesanan
 								</Button>

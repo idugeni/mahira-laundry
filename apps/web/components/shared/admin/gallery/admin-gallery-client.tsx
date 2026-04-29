@@ -146,7 +146,7 @@ export function AdminGalleryClient({
 	return (
 		<div className="space-y-8 sm:space-y-12 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
 			{/* Header */}
-			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-[3rem] p-6 sm:p-10 lg:p-14 text-white shadow-2xl shadow-slate-900/40 group">
+			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white shadow-xl shadow-slate-900/30 group">
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full -mr-40 -mt-40 blur-3xl opacity-50" />
 
 				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 sm:gap-8">
@@ -183,13 +183,13 @@ export function AdminGalleryClient({
 				</div>
 			</div>
 
-			<div className="grid lg:grid-cols-12 gap-6 sm:gap-10 items-start">
+			<div className="grid lg:grid-cols-12 gap-6 lg:gap-8 items-start">
 				{/* Upload Control Center — sticky on desktop, normal on mobile */}
 				<div className="lg:col-span-4 order-first">
 					<div className="sticky top-4">
 						<form
 							onSubmit={handleUpload}
-							className="bg-white p-6 sm:p-8 rounded-none sm:rounded-[3rem] border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40 flex flex-col gap-6 sm:gap-8"
+							className="bg-white p-6 sm:p-7 rounded-none sm:rounded-2xl border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 flex flex-col gap-5"
 						>
 							<div className="flex items-center gap-3 border-b border-slate-50 pb-4 sm:pb-6">
 								<div className="w-10 h-10 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600">
@@ -213,7 +213,7 @@ export function AdminGalleryClient({
 										name="title"
 										required
 										placeholder="Judul visual (e.g. Lobby Sultan)"
-										className="py-5 sm:py-6 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all font-bold text-sm"
+										className="h-11 rounded-xl border-slate-50 bg-slate-50 font-bold text-sm transition-colors focus:bg-white focus:ring-4 focus:ring-indigo-500/5"
 									/>
 								</div>
 
@@ -228,7 +228,7 @@ export function AdminGalleryClient({
 									<Select value={category} onValueChange={setCategory}>
 										<SelectTrigger
 											id="gallery-category"
-											className="px-5 h-12 sm:h-14 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white font-bold text-sm transition-all"
+											className="h-11 rounded-xl border-slate-50 bg-slate-50 px-4 font-bold text-sm transition-colors focus:bg-white"
 										>
 											<SelectValue placeholder="Pilih Kategori" />
 										</SelectTrigger>
@@ -250,17 +250,17 @@ export function AdminGalleryClient({
 									<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
 										Source Media
 									</p>
-									<div className="relative aspect-video rounded-2xl sm:rounded-3xl border-4 border-dashed border-slate-50 overflow-hidden group/upload hover:border-indigo-100 transition-all cursor-pointer bg-slate-50/50 flex flex-col items-center justify-center gap-4">
+									<div className="relative aspect-video rounded-2xl border-4 border-dashed border-slate-50 overflow-hidden group/upload hover:border-indigo-100 transition-colors cursor-pointer bg-slate-50/50 flex flex-col items-center justify-center gap-4">
 										{preview ? (
 											<Image
 												src={preview}
 												alt="Preview"
 												fill
-												className="object-cover transition-transform duration-700 group-hover/upload:scale-110"
+												className="object-cover transition-opacity duration-300 group-hover/upload:opacity-90"
 											/>
 										) : (
 											<div className="flex flex-col items-center gap-4 text-slate-300">
-												<div className="w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-white flex items-center justify-center shadow-lg group-hover/upload:scale-110 transition-transform shadow-slate-100">
+												<div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform group-hover/upload:-translate-y-0.5 shadow-slate-100">
 													<CloudUpload size={28} />
 												</div>
 												<span className="text-[10px] font-black uppercase tracking-widest">
@@ -285,7 +285,7 @@ export function AdminGalleryClient({
 								<Button
 									type="submit"
 									disabled={isUploading}
-									className="w-full h-14 sm:h-16 rounded-[1.5rem] bg-slate-900 hover:bg-indigo-600 text-white font-black text-xs uppercase tracking-[0.2em] shadow-2xl shadow-slate-900/10 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+									className="w-full h-11 rounded-xl bg-slate-900 hover:bg-indigo-600 text-white font-black text-xs uppercase tracking-[0.2em] shadow-lg shadow-slate-900/10 transition-colors disabled:opacity-50"
 								>
 									{isUploading ? "Mengunci Aset..." : "Publish ke Galeri"}
 								</Button>
@@ -318,9 +318,9 @@ export function AdminGalleryClient({
 					</div>
 
 					{filteredItems.length === 0 ? (
-						<div className="h-[300px] sm:h-[500px] flex flex-col items-center justify-center bg-white rounded-none sm:rounded-[4rem] border-y sm:border border-slate-100 text-slate-300 shadow-xl shadow-slate-200/40">
-							<div className="w-20 h-20 sm:w-24 sm:h-24 bg-slate-50 rounded-full flex items-center justify-center mb-6 border-4 border-dashed border-slate-100">
-								<ImageIcon size={40} />
+						<div className="h-[300px] sm:h-[420px] flex flex-col items-center justify-center bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 text-slate-300 shadow-lg shadow-slate-200/40">
+							<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-5 border-4 border-dashed border-slate-100">
+								<ImageIcon size={32} />
 							</div>
 							<h3 className="text-xl sm:text-2xl font-black uppercase text-slate-800 tracking-tight">
 								Perpustakaan Visual Kosong
@@ -336,16 +336,16 @@ export function AdminGalleryClient({
 									<motion.div
 										key={item.id}
 										layout
-										initial={{ opacity: 0, scale: 0.9 }}
-										animate={{ opacity: 1, scale: 1 }}
-										className="group relative bg-white rounded-none sm:rounded-[3rem] overflow-hidden border-b sm:border border-slate-100 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-indigo-500/10 hover:border-indigo-100 transition-all duration-700"
+										initial={{ opacity: 0, y: 8 }}
+										animate={{ opacity: 1, y: 0 }}
+										className="group relative bg-white rounded-none sm:rounded-2xl overflow-hidden border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-100 transition-shadow duration-300"
 									>
 										<div className="relative aspect-[4/3] overflow-hidden">
 											<Image
 												src={item.image_url}
 												alt={item.title}
 												fill
-												className="object-cover transition-transform duration-[2s] group-hover:scale-110"
+												className="object-cover transition-opacity duration-300 group-hover:opacity-90"
 											/>
 
 											{/* Overlay Controls */}
@@ -363,7 +363,7 @@ export function AdminGalleryClient({
 														<Button
 															size="icon"
 															variant="ghost"
-															className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/10 text-white hover:bg-white hover:text-slate-900 transition-all active:scale-95"
+															className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/10 text-white hover:bg-white hover:text-slate-900 transition-colors"
 															onClick={() => startEdit(item)}
 														>
 															<Edit3 size={18} />
@@ -371,7 +371,7 @@ export function AdminGalleryClient({
 														<Button
 															size="icon"
 															variant="ghost"
-															className="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-red-500/20 backdrop-blur-xl border border-red-500/10 text-red-100 hover:bg-red-500 hover:text-white transition-all active:scale-95"
+															className="w-10 h-10 rounded-xl bg-red-500/20 backdrop-blur-xl border border-red-500/10 text-red-100 hover:bg-red-500 hover:text-white transition-colors"
 															onClick={() =>
 																handleDelete(item.id, item.image_url)
 															}

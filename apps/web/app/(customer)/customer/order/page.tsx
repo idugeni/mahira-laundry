@@ -11,8 +11,5 @@ export const metadata: Metadata = {
 export default async function OrderPage() {
 	const orders = await getOrders();
 
-	// getOrders might return empty array, but if session fails it returns null/empty
-	// We check for valid auth in getOrders
-
 	return <OrderListClient orders={orders} />;
 }

@@ -8,7 +8,7 @@ import {
 	useTransform,
 } from "motion/react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { FaGoogle } from "react-icons/fa6";
 import {
@@ -23,7 +23,6 @@ import {
 	HiOutlineStar,
 	HiOutlineUser,
 } from "react-icons/hi2";
-import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { createClient } from "@/lib/supabase/client";
 
 interface AuthClientProps {
@@ -34,7 +33,6 @@ interface AuthClientProps {
 export function AuthClient({ type, action }: AuthClientProps) {
 	const isLogin = type === "login";
 	const searchParams = useSearchParams();
-	const router = useRouter();
 	const supabase = createClient();
 	const error = searchParams.get("error");
 	const success = searchParams.get("success");
@@ -111,7 +109,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 				<motion.div
 					initial={{ opacity: 0, scale: 0.9, y: 20 }}
 					animate={{ opacity: 1, scale: 1, y: 0 }}
-					className="max-w-md w-full bg-white p-10 lg:p-14 rounded-[3rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] text-center border border-slate-100 relative z-10"
+					className="max-w-md w-full bg-white p-10 lg:p-14 rounded-[2rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] text-center border border-slate-100 relative z-10"
 				>
 					<div className="w-20 h-20 bg-brand-primary/10 text-brand-primary rounded-[2rem] flex items-center justify-center mx-auto mb-8 text-4xl shadow-inner">
 						<HiOutlineEnvelope />
@@ -125,7 +123,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 					</p>
 					<Link
 						href="/login"
-						className="inline-flex py-4 px-10 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-brand-primary transition-all shadow-2xl shadow-slate-200 active:scale-95"
+						className="inline-flex py-4 px-10 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-brand-primary transition-all shadow-2xl shadow-slate-200"
 					>
 						Kembali ke Login
 					</Link>
@@ -348,6 +346,8 @@ export function AuthClient({ type, action }: AuthClientProps) {
 			<div
 				onMouseMove={handleMouseMove}
 				onMouseLeave={handleMouseLeave}
+				role="application"
+				aria-label="Interactive visual effect"
 				className="hidden lg:block lg:flex-1 relative overflow-hidden bg-slate-900 group cursor-default h-full"
 			>
 				{/* Background Gradients */}
@@ -361,7 +361,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 					className="absolute top-0 right-0 w-full h-full bg-brand-primary/20 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2"
 				/>
 
-				<div className="absolute inset-0 flex flex-col justify-between p-16 lg:p-20 relative z-10">
+				<div className="absolute inset-0 flex flex-col justify-between p-16 lg:p-12 relative z-10">
 					<motion.div
 						initial={{ opacity: 0, y: -20 }}
 						animate={{ opacity: 1, y: 0 }}

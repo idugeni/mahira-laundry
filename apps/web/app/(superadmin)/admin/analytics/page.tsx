@@ -27,7 +27,7 @@ export default async function AnalyticsPage() {
 					</p>
 				</div>
 				<div
-					className={`flex items-center gap-2 px-4 py-2 rounded-2xl border text-xs font-bold transition-all ${
+					className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-colors ${
 						isConfigured
 							? "bg-emerald-50 border-emerald-100 text-emerald-600 shadow-sm shadow-emerald-100"
 							: "bg-amber-50 border-amber-100 text-amber-600 shadow-sm shadow-amber-100"
@@ -41,10 +41,10 @@ export default async function AnalyticsPage() {
 			</div>
 
 			{!isConfigured ? (
-				<div className="bg-white border-2 border-dashed border-slate-200 rounded-[2rem] p-8 lg:p-16 text-center">
+				<div className="bg-white border-2 border-dashed border-slate-200 rounded-[2rem] p-8 lg:p-10 text-center">
 					{/* ... (keep existing setup instructions) */}
 					<div className="max-w-md mx-auto">
-						<div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-6 text-3xl">
+						<div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl">
 							⚙️
 						</div>
 						<h2 className="text-2xl font-black text-slate-900 mb-3">

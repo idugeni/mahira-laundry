@@ -47,7 +47,7 @@ export default async function ManagerDashboardPage() {
 	return (
 		<div className="space-y-10 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-slate-900 rounded-[3rem] p-10 lg:p-14 text-white shadow-2xl shadow-slate-900/20 group">
+			<div className="relative overflow-hidden bg-slate-900 rounded-[2rem] p-10 lg:p-14 text-white shadow-2xl shadow-slate-900/20 group">
 				{/* Vector Pattern */}
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full -mr-40 -mt-40 blur-3xl" />
 				<div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-emerald-500/5 rounded-full -ml-20 -mb-20 blur-3xl" />
@@ -84,7 +84,7 @@ export default async function ManagerDashboardPage() {
 					</div>
 
 					<div className="flex items-center gap-3">
-						<Button className="bg-white text-slate-900 hover:bg-slate-100 rounded-2xl px-8 h-12 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl shadow-white/5">
+						<Button className="bg-white text-slate-900 hover:bg-slate-100 rounded-2xl px-8 h-12 font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-white/5">
 							Laporan Detail
 						</Button>
 						<Button

@@ -8,7 +8,6 @@ export default async function IntegratedAntrianPage() {
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	// Fetch user's profile to get outlet_id and role
 	const { data: profile } = await supabase
 		.from("profiles")
 		.select("outlet_id, role")
@@ -17,7 +16,6 @@ export default async function IntegratedAntrianPage() {
 
 	let outletId = profile?.outlet_id;
 
-	// For superadmin without assigned outlet, pick the first active one
 	if (!outletId && profile?.role === "superadmin") {
 		const { data: outlet } = await supabase
 			.from("outlets")
@@ -28,7 +26,6 @@ export default async function IntegratedAntrianPage() {
 		outletId = outlet?.id;
 	}
 
-	// Fallback to primary outlet if still null
 	const finalOutletId = outletId || PRIMARY_OUTLET.id;
 
 	const { data: orders } = await supabase

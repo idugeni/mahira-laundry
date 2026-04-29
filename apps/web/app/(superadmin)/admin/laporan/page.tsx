@@ -25,26 +25,6 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-const _ACTION_COLORS: Record<string, string> = {
-	create: "bg-emerald-50 text-emerald-600 border-emerald-100",
-	update: "bg-indigo-50 text-indigo-600 border-indigo-100",
-	delete: "bg-rose-50 text-rose-600 border-rose-100",
-	login: "bg-violet-50 text-violet-600 border-violet-100",
-	logout: "bg-slate-50 text-slate-400 border-slate-100",
-	status_change: "bg-amber-50 text-amber-600 border-amber-100",
-};
-
-const _TABLE_LABELS: Record<string, string> = {
-	orders: "Pesanan",
-	profiles: "Profil",
-	payments: "Pembayaran",
-	services: "Layanan",
-	vouchers: "Voucher",
-	inventory: "Inventori",
-	outlets: "Outlet",
-	delivery: "Pengiriman",
-};
-
 const reportCards = [
 	{
 		title: "Laporan Harian",
@@ -94,9 +74,9 @@ export default async function LaporanPage() {
 	const auditLogs = await getAuditLogs(200);
 
 	return (
-		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl lg:rounded-[3rem] p-6 sm:p-8 lg:p-14 text-white shadow-2xl shadow-slate-900/40 group">
+			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white shadow-xl shadow-slate-900/30 group">
 				<div className="absolute top-0 right-0 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-indigo-500/10 rounded-full -mr-24 lg:-mr-40 -mt-24 lg:-mt-40 blur-3xl opacity-50" />
 
 				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
@@ -162,7 +142,7 @@ export default async function LaporanPage() {
 									<div className="flex items-center justify-between gap-2">
 										<div
 											className={cn(
-												"w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:rotate-6",
+												"w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:-translate-y-0.5",
 												report.variant === "indigo"
 													? "bg-indigo-50 text-indigo-600"
 													: report.variant === "emerald"

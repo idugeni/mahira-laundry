@@ -107,7 +107,7 @@ export function OrderConfirmStep({
 					type="button"
 					onClick={onSubmit}
 					disabled={loading}
-					className="w-full py-6 bg-brand-primary text-white rounded-[32px] font-black text-xl shadow-2xl shadow-brand-primary/30 transition-all hover:scale-[1.02] active:scale-95 disabled:opacity-50"
+					className="w-full py-6 bg-brand-primary text-white rounded-[32px] font-black text-xl shadow-2xl shadow-brand-primary/30 transition-all disabled:opacity-50"
 				>
 					{loading ? "Menyimpan Pesanan..." : "Konfirmasi & Bayar"}
 				</button>

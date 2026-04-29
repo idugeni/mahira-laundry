@@ -134,17 +134,17 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 							aria-label="Close modal"
 						/>
 
-						<div className="relative bg-white rounded-[3.5rem] shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-500 border border-white/20">
+						<div className="relative bg-white rounded-2xl sm:rounded-[2rem] shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-300 border border-white/20">
 							{/* Premium Header */}
-							<div className="px-10 pt-10 pb-8 bg-slate-50 relative overflow-hidden group">
-								<div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 rounded-full -mr-24 -mt-24 blur-3xl transition-transform duration-1000 group-hover:scale-110" />
+							<div className="px-6 sm:px-8 pt-7 sm:pt-8 pb-6 bg-slate-50 relative overflow-hidden group">
+								<div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/10 rounded-full -mr-24 -mt-24 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
 
 								<div className="relative flex items-center justify-between">
 									<div className="space-y-2">
 										<Badge className="bg-indigo-600 text-white border-none py-0.5 text-[8px] font-black uppercase tracking-[0.2em]">
 											Entity Configuration
 										</Badge>
-										<h2 className="text-3xl font-black text-slate-900 tracking-tight font-[family-name:var(--font-heading)]">
+										<h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-[family-name:var(--font-heading)]">
 											{outlet ? "Ubah" : "Daftar"}{" "}
 											<span className="text-indigo-600 italic">Outlet</span>
 										</h2>
@@ -155,7 +155,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-500"
+										className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
 									>
 										<X size={20} />
 									</button>
@@ -163,19 +163,19 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 							</div>
 
 							<div className="flex-1 overflow-y-auto custom-scrollbar">
-								<form onSubmit={handleSubmit} className="p-10 space-y-8">
+								<form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6">
 									{/* Luxury Image Upload */}
-									<div className="relative group/outlet-img w-full h-48 rounded-[2.5rem] bg-slate-50 border-4 border-dashed border-slate-100 overflow-hidden flex items-center justify-center transition-all hover:border-indigo-200">
+									<div className="relative group/outlet-img w-full h-44 rounded-2xl bg-slate-50 border-4 border-dashed border-slate-100 overflow-hidden flex items-center justify-center transition-colors hover:border-indigo-200">
 										{imageUrl ? (
 											<Image
 												src={imageUrl}
 												alt="Preview"
 												fill
-												className="object-cover transition-transform group-hover/outlet-img:scale-110 duration-1000"
+												className="object-cover"
 											/>
 										) : (
 											<div className="flex flex-col items-center gap-4 text-slate-300">
-												<div className="w-16 h-16 rounded-full bg-white flex items-center justify-center shadow-lg transition-transform group-hover/outlet-img:scale-110 shadow-slate-100">
+												<div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg shadow-slate-100">
 													<ImageIcon size={32} />
 												</div>
 												<p className="text-[10px] font-black uppercase tracking-widest">
@@ -346,7 +346,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 												variant="ghost"
 												onClick={handleDelete}
 												disabled={isLoading}
-												className="w-full sm:w-auto px-6 h-16 rounded-2xl bg-rose-50 text-rose-500 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest transition-all shadow-sm active:scale-95 flex items-center gap-2"
+												className="w-full sm:w-auto px-5 h-11 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest shadow-sm flex items-center gap-2"
 											>
 												<Trash2 size={18} /> Hapus Unit
 											</Button>
@@ -357,14 +357,14 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 											variant="outline"
 											onClick={() => setIsOpen(false)}
 											disabled={isLoading}
-											className="w-full sm:w-auto h-16 px-10 rounded-2xl border-slate-100 font-black text-[10px] uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-all"
+											className="w-full sm:w-auto h-11 px-6 rounded-xl border-slate-100 font-black text-[10px] uppercase tracking-widest text-slate-500 hover:bg-slate-50"
 										>
 											Batal
 										</Button>
 										<Button
 											type="submit"
 											disabled={isLoading}
-											className="w-full sm:w-auto h-16 px-12 rounded-2xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.15em] shadow-2xl shadow-slate-900/10 hover:bg-indigo-600 transition-all active:scale-95 flex items-center gap-3"
+											className="w-full sm:w-auto h-11 px-7 rounded-xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.15em] shadow-xl shadow-slate-900/10 hover:bg-indigo-600 flex items-center gap-3"
 										>
 											{isLoading ? (
 												<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

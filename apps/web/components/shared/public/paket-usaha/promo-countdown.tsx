@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { HiOutlineClock } from "react-icons/hi2";
 
@@ -27,35 +26,12 @@ function calculateTimeLeft(expiresAt: string): TimeLeft {
 	};
 }
 
-export default function PromoCountdown({ expiresAt }: PromoCountdownProps) {
-	const [timeLeft, setTimeLeft] = useState<TimeLeft>(() =>
-		calculateTimeLeft(expiresAt),
-	);
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			setTimeLeft(calculateTimeLeft(expiresAt));
-		}, 1000);
-
-		return () => clearInterval(interval);
-	}, [expiresAt]);
-
-	const { days, hours, minutes, seconds } = timeLeft;
-
-	if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
-		return (
-			<div className="flex items-center gap-2 text-slate-400 text-[10px] font-black uppercase tracking-widest">
-				<HiOutlineClock size={12} />
-				<span>Promo Berakhir</span>
-			</div>
-		);
-	}
-
-	const TimeUnit = ({ value, label }: { value: number; label: string }) => (
+function TimeUnit({ value, label }: { value: number | null; label: string }) {
+	return (
 		<div className="flex flex-col items-center">
 			<div className="bg-white/50 backdrop-blur-sm border border-brand-primary/10 rounded-xl px-2 py-1.5 min-w-[36px] flex items-center justify-center shadow-sm">
 				<span className="text-sm font-black text-brand-primary tabular-nums tracking-tighter">
-					{value.toString().padStart(2, "0")}
+					{value == null ? "--" : value.toString().padStart(2, "0")}
 				</span>
 			</div>
 			<span className="text-[7px] font-black text-slate-400 mt-1 uppercase tracking-widest">
@@ -63,6 +39,40 @@ export default function PromoCountdown({ expiresAt }: PromoCountdownProps) {
 			</span>
 		</div>
 	);
+}
+
+export default function PromoCountdown({ expiresAt }: PromoCountdownProps) {
+	const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(null);
+
+	useEffect(() => {
+		setTimeLeft(calculateTimeLeft(expiresAt));
+
+		const interval = setInterval(() => {
+			setTimeLeft(calculateTimeLeft(expiresAt));
+		}, 1000);
+
+		return () => clearInterval(interval);
+	}, [expiresAt]);
+
+	const days = timeLeft?.days ?? null;
+	const hours = timeLeft?.hours ?? null;
+	const minutes = timeLeft?.minutes ?? null;
+	const seconds = timeLeft?.seconds ?? null;
+
+	if (
+		timeLeft &&
+		timeLeft.days === 0 &&
+		timeLeft.hours === 0 &&
+		timeLeft.minutes === 0 &&
+		timeLeft.seconds === 0
+	) {
+		return (
+			<div className="flex items-center gap-2 text-slate-400 text-[10px] font-black uppercase tracking-widest">
+				<HiOutlineClock size={12} />
+				<span>Promo Berakhir</span>
+			</div>
+		);
+	}
 
 	return (
 		<div className="flex flex-col items-center gap-3">

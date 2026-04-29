@@ -21,12 +21,12 @@ export default async function SuperadminLayananPage() {
 	const outletId = profile?.outlet_id || "jatiwaringin";
 
 	return (
-		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-white rounded-[3rem] p-10 lg:p-14 border border-slate-100 shadow-2xl shadow-slate-200/40 group">
-				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-all duration-1000 group-hover:bg-indigo-100" />
+			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 group">
+				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-colors duration-500 group-hover:bg-indigo-100" />
 
-				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
 					<div className="space-y-4">
 						<div className="flex items-center gap-3">
 							<Badge className="bg-indigo-50 text-indigo-600 border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
@@ -37,7 +37,7 @@ export default async function SuperadminLayananPage() {
 								<Globe size={14} /> Global Catalogue
 							</span>
 						</div>
-						<h1 className="text-4xl lg:text-6xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none text-slate-900">
+						<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight text-slate-900">
 							Katalog <span className="text-indigo-600 italic">Layanan</span>
 						</h1>
 						<p className="text-slate-500 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
@@ -47,17 +47,17 @@ export default async function SuperadminLayananPage() {
 						</p>
 					</div>
 
-					<div className="flex items-center gap-6">
-						<div className="text-right">
-							<p className="text-3xl font-black text-slate-900">
+					<div className="flex items-center gap-4">
+						<div className="text-left lg:text-right">
+							<p className="text-2xl font-black text-slate-900">
 								{services?.length || 0}
 							</p>
 							<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
 								Layanan Aktif
 							</p>
 						</div>
-						<div className="w-16 h-16 rounded-3xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-lg shadow-indigo-100">
-							<Layers size={32} />
+						<div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-md shadow-indigo-100">
+							<Layers size={24} />
 						</div>
 					</div>
 				</div>
@@ -65,9 +65,9 @@ export default async function SuperadminLayananPage() {
 
 			<Suspense
 				fallback={
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-8 animate-pulse">
+					<div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 animate-pulse">
 						{[1, 2, 3, 4, 5, 6].map((i) => (
-							<div key={i} className="h-80 bg-slate-50 rounded-[3rem]" />
+							<div key={i} className="h-72 bg-slate-50 rounded-2xl" />
 						))}
 					</div>
 				}

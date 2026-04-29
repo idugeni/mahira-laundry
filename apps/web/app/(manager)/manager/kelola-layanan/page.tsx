@@ -86,7 +86,7 @@ export default async function ManagerLayananPage() {
 											</td>
 											<td className="px-5 py-4">
 												<div className="flex items-center gap-3">
-													<div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 flex items-center justify-center text-xl shadow-sm group-hover:scale-110 transition-transform">
+													<div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 flex items-center justify-center text-xl shadow-sm transition-transform">
 														{service.icon || "🧺"}
 													</div>
 													<div>

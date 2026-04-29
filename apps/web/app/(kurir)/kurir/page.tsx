@@ -26,7 +26,7 @@ export default async function TugasPage() {
 			</div>
 
 			{/* Map placeholder */}
-			<div className="rounded-[3rem] overflow-hidden border border-slate-100 bg-slate-50 aspect-video lg:aspect-[3/1] flex items-center justify-center relative shadow-2xl shadow-slate-200/50">
+			<div className="rounded-[2rem] overflow-hidden border border-slate-100 bg-slate-50 aspect-video lg:aspect-[3/1] flex items-center justify-center relative shadow-2xl shadow-slate-200/50">
 				<div className="text-center">
 					<span className="text-6xl block mb-6 animate-bounce">📍</span>
 					<p className="text-sm font-black text-slate-900 uppercase tracking-widest">

@@ -106,7 +106,7 @@ export function OrderDetailStep({
 					type="button"
 					onClick={onNext}
 					disabled={!pickupAddress || !pickupDate}
-					className="w-full py-6 bg-brand-primary text-white rounded-[32px] font-black text-xl shadow-2xl shadow-brand-primary/30 transition-all hover:scale-[1.02] disabled:opacity-50"
+					className="w-full py-6 bg-brand-primary text-white rounded-[32px] font-black text-xl shadow-2xl shadow-brand-primary/30 transition-all disabled:opacity-50"
 				>
 					Lanjutkan ke Konfirmasi
 				</button>

@@ -14,7 +14,6 @@ export default async function AdminTestimonialsPage() {
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	// Check admin role
 	const { data: profile } = await supabase
 		.from("profiles")
 		.select("role")

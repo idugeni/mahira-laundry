@@ -7,7 +7,6 @@ import {
 	HiOutlineClock,
 	HiOutlineMapPin,
 	HiOutlinePhone,
-	HiOutlineSparkles,
 } from "react-icons/hi2";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 
@@ -42,7 +41,7 @@ export function LokasiClient() {
 	}, []);
 
 	return (
-		<div className="py-24 bg-white relative overflow-hidden">
+		<div className="py-14 sm:py-16 bg-white relative overflow-hidden">
 			{/* Decorative Elements */}
 			<div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-brand-primary/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 			<div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
@@ -92,7 +91,7 @@ export function LokasiClient() {
 									loading="lazy"
 									referrerPolicy="no-referrer-when-downgrade"
 									title="Lokasi Mahira Laundry"
-									className="grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105 group-hover:scale-100"
+									className="grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105"
 								/>
 							) : (
 								<div className="w-full h-full flex flex-col items-center justify-center text-slate-400 gap-6">

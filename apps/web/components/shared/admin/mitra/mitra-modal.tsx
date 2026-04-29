@@ -64,7 +64,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 				className="contents"
 			>
 				{trigger || (
-					<span className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow-md hover:scale-[1.02] transition-all cursor-pointer">
+					<span className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer">
 						<HiOutlineUserGroup size={18} />
 						<span>Tambah Mitra Baru</span>
 					</span>
@@ -82,7 +82,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
-						<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-zoom-in border border-white/20">
+						<div className="relative bg-white rounded-[2rem] shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-fade-in border border-white/20">
 							{/* Header */}
 							<div className="px-8 pt-8 pb-6 bg-slate-50 relative overflow-hidden shrink-0">
 								<div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/5 rounded-full -mr-24 -mt-24 blur-3xl" />
@@ -99,7 +99,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-300"
+										className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
 									>
 										<HiOutlineXMark size={20} />
 									</button>
@@ -320,14 +320,14 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 											type="button"
 											onClick={() => setIsOpen(false)}
 											disabled={isLoading}
-											className="flex-1 py-4 text-sm font-black text-slate-500 bg-white border border-slate-200 rounded-2xl hover:bg-slate-50 transition-all"
+											className="flex-1 py-3 text-sm font-black text-slate-500 bg-white border border-slate-200 rounded-xl hover:bg-slate-50 transition-colors"
 										>
 											Batalkan
 										</button>
 										<button
 											type="submit"
 											disabled={isLoading}
-											className="flex-[2] py-4 text-sm font-black text-white bg-gradient-to-r from-indigo-500 to-violet-600 rounded-2xl shadow-xl shadow-indigo-200 hover:shadow-indigo-300 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+											className="flex-[2] py-3 text-sm font-black text-white bg-gradient-to-r from-indigo-500 to-violet-600 rounded-xl shadow-lg shadow-indigo-200 hover:shadow-indigo-300 transition-shadow disabled:opacity-50 flex items-center justify-center gap-2"
 										>
 											{isLoading ? (
 												<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

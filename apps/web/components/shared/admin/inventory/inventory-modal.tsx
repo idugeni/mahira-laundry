@@ -84,7 +84,7 @@ export function InventoryModal({
 				className="contents"
 			>
 				{trigger || (
-					<span className="px-6 py-3 bg-brand-primary text-white text-sm font-black rounded-2xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-200 cursor-pointer">
+					<span className="inline-flex h-10 cursor-pointer items-center rounded-xl bg-brand-primary px-4 text-sm font-black text-white shadow-md shadow-brand-primary/20 transition-colors hover:bg-brand-primary/90">
 						+ Tambah Item
 					</span>
 				)}
@@ -101,7 +101,7 @@ export function InventoryModal({
 							aria-label="Close modal"
 						/>
 
-						<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-lg max-h-[90vh] flex flex-col overflow-hidden animate-zoom-in border border-white/20">
+						<div className="relative flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-[2rem] border border-white/20 bg-white shadow-2xl animate-fade-in">
 							{/* Header with Pattern */}
 							<div className="px-8 pt-8 pb-6 bg-slate-50 relative overflow-hidden">
 								<div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full -mr-16 -mt-16 blur-3xl" />
@@ -122,7 +122,7 @@ export function InventoryModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-300"
+										className="w-9 h-9 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors"
 									>
 										<HiOutlineXMark size={20} />
 									</button>
@@ -326,14 +326,14 @@ export function InventoryModal({
 											type="button"
 											onClick={() => setIsOpen(false)}
 											disabled={isLoading}
-											className="flex-1 py-4 text-sm font-black text-slate-500 bg-white border border-slate-200 rounded-2xl hover:bg-slate-50 transition-all active:scale-[0.98]"
+											className="h-11 flex-1 rounded-xl border border-slate-200 bg-white text-sm font-black text-slate-500 transition-colors hover:bg-slate-50"
 										>
 											Batal
 										</button>
 										<button
 											type="submit"
 											disabled={isLoading}
-											className="flex-[2] py-4 text-sm font-black text-white bg-brand-primary rounded-2xl shadow-xl shadow-brand-primary/20 hover:shadow-brand-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+											className="flex h-11 flex-[2] items-center justify-center gap-2 rounded-xl bg-brand-primary text-sm font-black text-white shadow-lg shadow-brand-primary/20 transition-colors hover:bg-brand-primary/90 disabled:opacity-50"
 										>
 											{isLoading && (
 												<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />

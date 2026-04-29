@@ -23,7 +23,6 @@ export async function topUpBalance(
 		} = await supabase.auth.getUser();
 		if (!actor) throw new Error("Unauthorized");
 
-		// 1. Get current profile to get current balance
 		const { data: profile, error: profileError } = await admin
 			.from("profiles")
 			.select("balance")
@@ -34,8 +33,7 @@ export async function topUpBalance(
 
 		const newBalance = Number(profile.balance || 0) + amount;
 
-		// 2. Perform Transactional Update
-		// Start with creating the transaction log
+		// 2. Create transaction log
 		const { error: logError } = await admin
 			.from("deposit_transactions")
 			.insert({
@@ -48,7 +46,7 @@ export async function topUpBalance(
 
 		if (logError) throw logError;
 
-		// 3. Update the profile balance
+		// 3. Update balance
 		const { error: updateError } = await admin
 			.from("profiles")
 			.update({ balance: newBalance })
@@ -118,7 +116,6 @@ export async function recordIncome(data: {
 		} = await supabase.auth.getUser();
 		if (!user) throw new Error("Unauthorized");
 
-		// Superadmin role check
 		const { data: profile } = await supabase
 			.from("profiles")
 			.select("role")

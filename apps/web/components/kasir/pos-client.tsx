@@ -106,7 +106,6 @@ export function POSClient({
 		setIsClient(true);
 	}, []);
 
-	// Filtered services for quick search
 	const filteredServices = useMemo(() => {
 		if (!quickSearch) return initialServices;
 		return initialServices.filter((s) =>
@@ -332,7 +331,7 @@ export function POSClient({
 				: "";
 
 		return (
-			<div className="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] py-10 space-y-8 animate-in fade-in zoom-in duration-300">
+			<div className="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] py-10 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300">
 				<div className="flex flex-col items-center space-y-4 text-center">
 					<div className="w-20 h-20 bg-emerald-500 text-white rounded-full flex items-center justify-center text-4xl shadow-xl shadow-emerald-200 animate-bounce">
 						✓
@@ -841,7 +840,7 @@ export function POSClient({
 														<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
 															Total Harga Preview
 														</p>
-														<div className="w-full h-[58px] px-5 rounded-2xl bg-white border border-slate-200 flex items-center justify-end font-black text-xl text-slate-900 shadow-sm transition-all animate-in fade-in zoom-in-95 duration-200">
+														<div className="w-full h-[58px] px-5 rounded-2xl bg-white border border-slate-200 flex items-center justify-end font-black text-xl text-slate-900 shadow-sm transition-all animate-in fade-in slide-in-from-bottom-2 duration-200">
 															{selectedService
 																? formatIDR(
 																		selectedService.price *
@@ -875,7 +874,7 @@ export function POSClient({
 										<Button
 											type="submit"
 											disabled={!isPureManual && !selectedService}
-											className="w-full h-auto py-5 bg-brand-gradient text-white rounded-[2rem] font-black text-lg shadow-2xl shadow-brand-primary/30 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 disabled:scale-100 flex items-center justify-center gap-4 border-none"
+											className="w-full h-auto py-5 bg-brand-gradient text-white rounded-[2rem] font-black text-lg shadow-2xl shadow-brand-primary/30 transition-all disabled:opacity-50 flex items-center justify-center gap-4 border-none"
 										>
 											<PlusCircle className="w-7 h-7" /> TAMBAHKAN KE TRANSAKSI
 										</Button>
@@ -892,7 +891,7 @@ export function POSClient({
 										className={`p-6 rounded-[2rem] border transition-all text-left flex flex-col group ${selectedService?.id === service.id ? "border-brand-primary bg-brand-primary/5 ring-8 ring-brand-primary/5 shadow-lg" : "border-slate-100 bg-white hover:border-brand-primary hover:shadow-2xl hover:-translate-y-2"}`}
 									>
 										<div
-											className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm transition-transform group-hover:scale-110 ${selectedService?.id === service.id ? "bg-brand-primary text-white" : "bg-slate-50 text-slate-400"}`}
+											className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm transition-transform ${selectedService?.id === service.id ? "bg-brand-primary text-white" : "bg-slate-50 text-slate-400"}`}
 										>
 											{service.icon || "🧺"}
 										</div>
@@ -930,7 +929,7 @@ export function POSClient({
 			</div>
 
 			{/* Right: Order Summary (Floating Sticky on Desktop) */}
-			<div className="lg:col-span-4 lg:sticky lg:top-24 h-fit">
+			<div className="lg:col-span-4 lg:sticky lg:top-8 sm:p-12 h-fit">
 				<div className="bg-white rounded-[2.5rem] flex flex-col shadow-2xl border border-slate-200 overflow-hidden outline outline-4 outline-slate-50">
 					<div className="p-8 border-b border-slate-100 bg-slate-50/30">
 						<div className="flex items-center justify-between mb-6">
@@ -960,7 +959,7 @@ export function POSClient({
 
 					<div className="max-h-[40vh] overflow-y-auto px-8 py-6 space-y-4 custom-scrollbar">
 						{cart.length === 0 ? (
-							<div className="flex flex-col items-center justify-center text-center py-24 opacity-30">
+							<div className="flex flex-col items-center justify-center text-center py-14 sm:py-16 opacity-30">
 								<Package className="w-20 h-20 mb-6 text-slate-300" />
 								<p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
 									Keranjang masih kosong
@@ -1048,7 +1047,7 @@ export function POSClient({
 								disabled={loading || cart.length === 0}
 								className="h-auto py-6 rounded-[2rem] bg-emerald-600 text-white font-black text-sm hover:bg-emerald-700 transition-all disabled:opacity-50 shadow-xl shadow-emerald-200 flex flex-col items-center gap-3 group border-b-4 border-emerald-800"
 							>
-								<div className="bg-white/20 p-2.5 rounded-2xl group-hover:scale-110 transition-transform">
+								<div className="bg-white/20 p-2.5 rounded-2xl transition-transform">
 									<Banknote className="w-8 h-8 text-white" />
 								</div>
 								BAYAR TUNAI
@@ -1059,7 +1058,7 @@ export function POSClient({
 								disabled={loading || cart.length === 0}
 								className="h-auto py-6 rounded-[2rem] bg-brand-primary text-white font-black text-sm hover:bg-brand-primary/90 transition-all disabled:opacity-50 shadow-xl shadow-brand-primary/20 flex flex-col items-center gap-3 group border-b-4 border-brand-primary-dark"
 							>
-								<div className="bg-white/20 p-2.5 rounded-2xl group-hover:scale-110 transition-transform">
+								<div className="bg-white/20 p-2.5 rounded-2xl transition-transform">
 									<CreditCard className="w-8 h-8 text-white" />
 								</div>
 								QRIS / TRANSFER

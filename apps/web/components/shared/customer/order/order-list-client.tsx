@@ -165,7 +165,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">
-						<AlertDialogCancel className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs border-slate-100 hover:bg-slate-50 active:scale-95 transition-all">
+						<AlertDialogCancel className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs border-slate-100 hover:bg-slate-50 transition-all">
 							Batal
 						</AlertDialogCancel>
 						<AlertDialogAction
@@ -174,7 +174,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 								handleDelete();
 							}}
 							disabled={isDeleting}
-							className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 active:scale-95 transition-all"
+							className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 transition-all"
 						>
 							{isDeleting ? "Menghapus..." : "Ya, Hapus Sekarang"}
 						</AlertDialogAction>
@@ -224,7 +224,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 
 					<Link
 						href="/customer/order/baru"
-						className="px-8 py-5 bg-slate-900 text-white rounded-3xl font-black text-sm hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-4 active:scale-95 group w-full"
+						className="px-8 py-5 bg-slate-900 text-white rounded-3xl font-black text-sm hover:bg-slate-800 transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-4 group w-full"
 					>
 						<span className="w-5 h-5 flex items-center justify-center group-hover:rotate-90 transition-transform duration-300">
 							<HiOutlinePlus />
@@ -357,7 +357,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 											<button
 												type="button"
 												onClick={() => setOrderIdToDelete(order.id)}
-												className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shadow-sm active:scale-90"
+												className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shadow-sm"
 												title="Hapus Pesanan"
 											>
 												<span className="text-xl flex items-center justify-center">
@@ -385,7 +385,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						className="bg-white rounded-[3rem] border border-slate-100 p-24 shadow-sm text-center"
+						className="bg-white rounded-[2rem] border border-slate-100 p-8 sm:p-12 shadow-sm text-center"
 					>
 						<div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 text-slate-200">
 							<span className="text-4xl flex items-center justify-center">

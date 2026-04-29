@@ -37,7 +37,7 @@ export function OrderWhatsappPanel({ onBack }: OrderWhatsappPanelProps) {
 						href={`https://api.whatsapp.com/send?phone=${PRIMARY_OUTLET.whatsapp}&text=Halo%20Mahira%20Laundry,%20saya%20ingin%20laundry%20cepat...`}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="w-full py-5 bg-emerald-500 text-white font-black rounded-3xl shadow-lg shadow-emerald-200 hover:bg-emerald-600 transition-all flex items-center justify-center gap-3 active:scale-95 text-lg"
+						className="w-full py-5 bg-emerald-500 text-white font-black rounded-3xl shadow-lg shadow-emerald-200 hover:bg-emerald-600 transition-all flex items-center justify-center gap-3 text-lg"
 					>
 						Buka WhatsApp <HiOutlineChevronRight />
 					</a>

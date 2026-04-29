@@ -3,14 +3,14 @@
 import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
 	href: string;
 	label: string;
-	icon: string;
+	icon: ReactNode;
 	badge?: number;
 }
 
@@ -93,8 +93,8 @@ function SidebarContent({
 						>
 							<span
 								className={cn(
-									"text-base w-7 text-center transition-transform duration-150 group-hover:scale-110",
-									active && "scale-110",
+									"flex w-7 items-center justify-center text-base transition-transform duration-150 group-hover:-translate-y-0.5",
+									active && "-translate-y-0.5",
 								)}
 							>
 								{item.icon}
@@ -122,11 +122,11 @@ function SidebarContent({
 				<form action="/api/auth/signout" method="POST">
 					<button
 						type="submit"
-						className="group flex items-center justify-center gap-2.5 w-full px-6 py-3.5 rounded-full text-[10px] font-black uppercase tracking-widest text-slate-400 border-2 border-slate-50 hover:border-red-100 hover:bg-red-50 hover:text-red-500 transition-all duration-300 active:scale-95"
+						className="group flex items-center justify-center gap-2.5 w-full px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-500 border border-slate-100 hover:border-red-100 hover:bg-red-50 hover:text-red-600 transition-[background-color,border-color,color,box-shadow] duration-200"
 					>
 						<LogOut
 							size={14}
-							className="group-hover:-translate-x-1 transition-transform"
+							className="transition-transform group-hover:-translate-x-0.5"
 						/>
 						<span>Logout Sesi</span>
 					</button>

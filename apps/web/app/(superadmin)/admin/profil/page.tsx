@@ -1,7 +1,6 @@
 import {
 	AlertCircle,
 	Bell,
-	Camera,
 	Globe,
 	Lock,
 	LogOut,
@@ -36,13 +35,13 @@ export default async function SuperadminProfilPage() {
 	if (!profile) return null;
 
 	return (
-		<div className="space-y-12 pb-20 animate-in fade-in zoom-in-95 slide-in-from-top-12 duration-1000 ease-out">
+		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-white rounded-[3rem] p-10 lg:p-14 border border-slate-100 shadow-2xl shadow-slate-200/40 group">
-				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-all duration-1000 group-hover:bg-indigo-100" />
+			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 group">
+				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-colors duration-500 group-hover:bg-indigo-100" />
 
-				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-10">
-					<div className="flex flex-col lg:flex-row items-center gap-10">
+				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
+					<div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
 						<AdminAvatarSection profile={profile} />
 
 						<div className="text-center lg:text-left space-y-4">
@@ -56,7 +55,7 @@ export default async function SuperadminProfilPage() {
 									{profile?.id?.slice(0, 8).toUpperCase()}
 								</span>
 							</div>
-							<h1 className="text-4xl lg:text-6xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none text-slate-900">
+							<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight text-slate-900">
 								{profile?.full_name || "Superadmin Account"}
 							</h1>
 							<p className="text-slate-500 font-bold text-sm lg:text-base max-w-xl leading-relaxed">
@@ -67,12 +66,12 @@ export default async function SuperadminProfilPage() {
 					</div>
 
 					<div className="flex flex-col gap-3">
-						<Button className="bg-slate-900 hover:bg-indigo-600 text-white rounded-2xl px-10 h-16 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-slate-900/10 flex items-center gap-4">
+						<Button className="bg-slate-900 hover:bg-indigo-600 text-white rounded-xl px-5 h-11 font-black text-xs uppercase tracking-widest shadow-lg shadow-slate-900/10 flex items-center gap-2.5">
 							<Settings2 size={20} /> Kelola Token API
 						</Button>
 						<Button
 							variant="outline"
-							className="rounded-2xl h-14 px-10 font-black text-xs uppercase tracking-widest border-rose-100 text-rose-500 hover:bg-rose-50 transition-all flex items-center gap-3"
+							className="rounded-xl h-11 px-5 font-black text-xs uppercase tracking-widest border-rose-100 text-rose-600 hover:bg-rose-50 flex items-center gap-2.5"
 						>
 							<LogOut size={18} /> Keluar Sistem
 						</Button>
@@ -80,12 +79,12 @@ export default async function SuperadminProfilPage() {
 				</div>
 			</div>
 
-			<div className="grid lg:grid-cols-3 gap-10">
+			<div className="grid lg:grid-cols-3 gap-5 sm:gap-6">
 				{/* Personal Credentials */}
-				<div className="lg:col-span-2 space-y-10">
-					<div className="bg-white rounded-[3.5rem] p-10 lg:p-14 border border-slate-100 shadow-xl shadow-slate-200/40 space-y-12">
-						<div className="flex items-center justify-between border-b border-slate-50 pb-8">
-							<h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-4">
+				<div className="lg:col-span-2 space-y-6">
+					<div className="bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/35 space-y-8">
+						<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-50 pb-6">
+							<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-3">
 								<ShieldCheck className="text-indigo-600" size={28} /> Identitas
 								& Kredensial
 							</h2>
@@ -94,7 +93,7 @@ export default async function SuperadminProfilPage() {
 							</Badge>
 						</div>
 
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
 							<div className="space-y-3">
 								<label
 									htmlFor="profil-nama"
@@ -107,7 +106,7 @@ export default async function SuperadminProfilPage() {
 									<Input
 										id="profil-nama"
 										defaultValue={profile?.full_name}
-										className="pl-11 pr-4 py-7 bg-slate-50/50 border-slate-50 rounded-2xl font-bold text-sm focus:bg-white transition-all shadow-none"
+										className="pl-11 pr-4 h-11 bg-slate-50/50 border-slate-100 rounded-xl font-bold text-sm focus:bg-white transition-all shadow-none"
 									/>
 								</div>
 							</div>
@@ -125,7 +124,7 @@ export default async function SuperadminProfilPage() {
 										id="profil-email"
 										disabled
 										defaultValue={authUser?.email || "—"}
-										className="pl-11 pr-4 py-7 bg-slate-100 border-slate-100 rounded-2xl font-bold text-sm grayscale opacity-60 shadow-none cursor-not-allowed"
+										className="pl-11 pr-4 h-11 bg-slate-100 border-slate-100 rounded-xl font-bold text-sm grayscale opacity-60 shadow-none cursor-not-allowed"
 									/>
 								</div>
 							</div>
@@ -142,7 +141,7 @@ export default async function SuperadminProfilPage() {
 									<Input
 										id="profil-phone"
 										defaultValue={profile?.phone || "+62 8..."}
-										className="pl-11 pr-4 py-7 bg-slate-50/50 border-slate-50 rounded-2xl font-bold text-sm focus:bg-white transition-all shadow-none"
+										className="pl-11 pr-4 h-11 bg-slate-50/50 border-slate-100 rounded-xl font-bold text-sm focus:bg-white transition-all shadow-none"
 									/>
 								</div>
 							</div>
@@ -156,32 +155,32 @@ export default async function SuperadminProfilPage() {
 								</label>
 								<Badge
 									id="profil-timezone"
-									className="w-full justify-center h-14 rounded-2xl bg-indigo-50/50 border-indigo-100/50 text-indigo-600 text-sm font-black tracking-tight shadow-none border"
+									className="w-full justify-center h-11 rounded-xl bg-indigo-50/50 border-indigo-100/50 text-indigo-600 text-sm font-black tracking-tight shadow-none border"
 								>
 									Asia/Jakarta (GMT+07:00)
 								</Badge>
 							</div>
 						</div>
 
-						<div className="pt-8 border-t border-slate-50 flex items-center justify-end gap-3">
+						<div className="pt-6 border-t border-slate-50 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-3">
 							<Button
 								variant="ghost"
-								className="rounded-2xl h-14 px-10 font-black text-xs uppercase tracking-widest text-slate-400 hover:text-slate-600 transition-all"
+								className="rounded-xl h-11 px-5 font-black text-xs uppercase tracking-widest text-slate-500 hover:text-slate-700"
 							>
 								Reset Form
 							</Button>
-							<Button className="bg-indigo-600 hover:bg-slate-900 text-white rounded-2xl h-14 px-12 font-black text-xs uppercase tracking-widest shadow-2xl shadow-indigo-500/10 transition-all active:scale-95">
+							<Button className="bg-indigo-600 hover:bg-slate-900 text-white rounded-xl h-11 px-6 font-black text-xs uppercase tracking-widest shadow-lg shadow-indigo-500/10">
 								Simpan Perubahan
 							</Button>
 						</div>
 					</div>
 
-					<div className="bg-white rounded-[3.5rem] p-10 lg:p-14 border border-slate-100 shadow-xl shadow-slate-200/40 space-y-10">
+					<div className="bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/35 space-y-6">
 						<h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-4">
 							<Lock className="text-indigo-600" size={28} /> Keamanan & Enkripsi
 						</h2>
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-							<div className="p-8 rounded-[2rem] border border-amber-100 bg-amber-50/30 space-y-4">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-center">
+							<div className="p-5 sm:p-6 rounded-2xl border border-amber-100 bg-amber-50/30 space-y-4">
 								<div className="flex items-center justify-between">
 									<h4 className="font-black text-slate-900 uppercase tracking-tight text-sm">
 										Two-Factor Auth
@@ -196,12 +195,12 @@ export default async function SuperadminProfilPage() {
 								</p>
 							</div>
 							<div className="flex flex-col gap-4">
-								<Button className="w-full rounded-2xl h-14 bg-slate-900 text-white font-black text-[10px] uppercase tracking-widest shadow-xl shadow-slate-900/10">
+								<Button className="w-full rounded-xl h-11 bg-slate-900 text-white font-black text-[10px] uppercase tracking-widest shadow-lg shadow-slate-900/10">
 									Ganti Password
 								</Button>
 								<Button
 									variant="outline"
-									className="w-full rounded-2xl h-14 border-slate-100 font-black text-[10px] uppercase tracking-widest text-slate-400"
+									className="w-full rounded-xl h-11 border-slate-100 font-black text-[10px] uppercase tracking-widest text-slate-500"
 								>
 									Update Recovery Email
 								</Button>
@@ -211,14 +210,14 @@ export default async function SuperadminProfilPage() {
 				</div>
 
 				{/* Sidebar Stats / Settings */}
-				<div className="space-y-10">
-					<div className="bg-slate-950 rounded-[3.5rem] p-10 lg:p-12 text-white relative overflow-hidden group border border-slate-800 shadow-2xl">
+				<div className="space-y-6">
+					<div className="bg-slate-950 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden group border border-slate-800 shadow-xl">
 						{/* Animated Cyber Gradients */}
 						<div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/30 rounded-full -mr-32 -mt-32 blur-[100px] animate-pulse" />
 						<div className="absolute bottom-0 left-0 w-64 h-64 bg-violet-600/20 rounded-full -ml-32 -mb-32 blur-[100px] animate-pulse transition-all duration-1000 group-hover:bg-indigo-500/30" />
 
 						<div className="relative space-y-10 h-full flex flex-col z-10">
-							<div className="w-16 h-16 rounded-[1.5rem] bg-indigo-500/10 flex items-center justify-center text-4xl shadow-[0_0_30px_rgba(99,102,241,0.2)] backdrop-blur-xl group-hover:scale-110 transition-transform duration-500">
+							<div className="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-3xl shadow-[0_0_30px_rgba(99,102,241,0.2)] backdrop-blur-xl transition-transform duration-300 group-hover:-translate-y-0.5">
 								<span className="drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
 									⚡
 								</span>
@@ -266,7 +265,7 @@ export default async function SuperadminProfilPage() {
 						</div>
 					</div>
 
-					<div className="bg-white rounded-[3rem] p-10 border border-slate-100 shadow-xl shadow-slate-200/40 space-y-8">
+					<div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-100 shadow-lg shadow-slate-200/35 space-y-6">
 						<h3 className="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-3">
 							<Bell className="text-indigo-600" /> Notifications
 						</h3>
@@ -318,7 +317,7 @@ export default async function SuperadminProfilPage() {
 						</div>
 					</div>
 
-					<div className="bg-slate-50 rounded-[3rem] p-10 border border-slate-100 flex flex-col gap-6 items-center text-center">
+					<div className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100 flex flex-col gap-5 items-center text-center">
 						<div className="w-16 h-16 rounded-full bg-white flex items-center justify-center text-rose-500 shadow-md">
 							<AlertCircle size={32} />
 						</div>

@@ -40,7 +40,6 @@ export async function upsertInventory(
 		// biome-ignore lint/suspicious/noImplicitAnyLet: result is assigned in both branches
 		let result;
 		if (data.id) {
-			// Get prev qty for log
 			const { data: prev } = await supabase
 				.from("inventory")
 				.select("quantity")
@@ -123,7 +122,6 @@ export async function restockInventory(
 			data: { user },
 		} = await supabase.auth.getUser();
 
-		// First get current quantity
 		const { data: item, error: fetchError } = await supabase
 			.from("inventory")
 			.select("quantity")
@@ -146,7 +144,6 @@ export async function restockInventory(
 
 		if (updateError) throw updateError;
 
-		// Log the restock
 		await supabase.from("inventory_logs").insert({
 			inventory_id: id,
 			type: "in",
@@ -229,7 +226,7 @@ export async function transferInventory(data: {
 			data: { user },
 		} = await supabase.auth.getUser();
 
-		// 1. Get source item details
+		// 1. Get source item
 		const { data: source, error: sourceError } = await supabase
 			.from("inventory")
 			.select("*")
@@ -248,7 +245,7 @@ export async function transferInventory(data: {
 			`Transfer ke outlet target: ${data.notes || ""}`,
 		);
 
-		// 3. Find or Create in target outlet
+		// 3. Find or create in target outlet
 		const { data: targetItems } = await supabase
 			.from("inventory")
 			.select("id, quantity")
@@ -260,14 +257,12 @@ export async function transferInventory(data: {
 		let targetId;
 		if (targetItems && targetItems.length > 0) {
 			targetId = targetItems[0].id;
-			// Add to target
 			const newQty = Number(targetItems[0].quantity) + data.amount;
 			await supabase
 				.from("inventory")
 				.update({ quantity: newQty })
 				.eq("id", targetId);
 
-			// Log for target
 			await supabase.from("inventory_logs").insert({
 				inventory_id: targetId,
 				type: "in",
@@ -278,7 +273,6 @@ export async function transferInventory(data: {
 				notes: `Transfer masuk dari outlet asal. ${data.notes || ""}`,
 			});
 		} else {
-			// Create new in target
 			const { data: newItem, error: createError } = await supabase
 				.from("inventory")
 				.insert({

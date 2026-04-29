@@ -10,7 +10,6 @@ import {
 	HiOutlineLockClosed,
 	HiOutlineSparkles,
 } from "react-icons/hi2";
-import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { updatePassword } from "@/lib/actions/auth";
 
 export default function ResetPasswordPage({

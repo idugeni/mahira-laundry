@@ -50,13 +50,13 @@ export default async function FranchisePage() {
 	);
 
 	return (
-		<div className="space-y-12 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-white rounded-[3rem] p-10 lg:p-14 border border-slate-100 shadow-2xl shadow-slate-200/40 group">
+			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 group">
 				<div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-50 rounded-full -mr-48 -mt-48 blur-3xl opacity-60" />
 
-				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-10">
-					<div className="space-y-6">
+				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
+					<div className="space-y-5">
 						<div className="flex items-center gap-3">
 							<Badge className="bg-indigo-600 text-white border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
 								Strategic Partnership
@@ -66,7 +66,7 @@ export default async function FranchisePage() {
 								<Globe size={14} /> Jaringan Franchise Global
 							</span>
 						</div>
-						<h1 className="text-4xl lg:text-7xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none text-slate-900">
+						<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight text-slate-900">
 							Portal <span className="text-indigo-600 italic">Kemitraan</span>
 						</h1>
 						<p className="text-slate-500 font-bold text-sm lg:text-lg max-w-2xl leading-relaxed">
@@ -78,9 +78,9 @@ export default async function FranchisePage() {
 
 					<MitraModal
 						trigger={
-							<Button className="bg-slate-900 hover:bg-indigo-600 text-white rounded-2xl px-12 h-20 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-slate-900/10 flex items-center gap-4">
-								<div className="w-10 h-10 rounded-2xl bg-white/10 flex items-center justify-center">
-									<Plus size={24} />
+							<Button className="bg-slate-900 hover:bg-indigo-600 text-white rounded-xl px-5 h-11 font-black text-xs uppercase tracking-widest shadow-lg shadow-slate-900/10 flex items-center gap-2.5">
+								<div className="w-7 h-7 rounded-lg bg-white/10 flex items-center justify-center">
+									<Plus size={17} />
 								</div>
 								Onboarding Mitra Baru
 							</Button>
@@ -124,7 +124,7 @@ export default async function FranchisePage() {
 
 			{/* Franchise Grid */}
 			<div className="space-y-8">
-				<div className="flex items-center justify-between">
+				<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
 					<h2 className="text-xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-3">
 						<Handshake className="text-indigo-600" /> Jaringan Kemitraan
 					</h2>
@@ -137,7 +137,7 @@ export default async function FranchisePage() {
 				</div>
 
 				{franchiseOutlets.length === 0 ? (
-					<div className="bg-white rounded-[4rem] border border-slate-100 p-24 text-center shadow-xl shadow-slate-200/40">
+					<div className="bg-white rounded-2xl border border-slate-100 p-10 sm:p-14 text-center shadow-lg shadow-slate-200/40">
 						<div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-8 border-4 border-dashed border-slate-100">
 							<Handshake size={48} className="text-slate-200" />
 						</div>
@@ -150,14 +150,14 @@ export default async function FranchisePage() {
 						</p>
 					</div>
 				) : (
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+					<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
 						{franchiseOutlets.map((outlet) => {
 							const royaltyAmount =
 								outlet.monthlyRevenue * (outlet.franchise_fee / 100);
 							return (
 								<div
 									key={outlet.id}
-									className="group bg-white rounded-[3rem] border border-slate-100 p-8 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-500 overflow-hidden flex flex-col"
+									className="group relative bg-white rounded-2xl border border-slate-100 p-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-indigo-500/10 transition-[box-shadow,border-color] duration-300 overflow-hidden flex flex-col"
 								>
 									<div className="absolute top-0 right-0 p-8 text-indigo-50/50 group-hover:text-indigo-100/50 transition-colors pointer-events-none">
 										<Briefcase size={80} strokeWidth={4} />
@@ -165,7 +165,7 @@ export default async function FranchisePage() {
 
 									<div className="relative flex items-center justify-between mb-8">
 										<div className="flex items-center gap-4">
-											<div className="w-16 h-16 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-2xl border-2 border-white shadow-lg transition-transform duration-700 group-hover:scale-105 group-hover:rotate-3 overflow-hidden">
+											<div className="w-14 h-14 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-xl border-2 border-white shadow-md transition-transform duration-300 group-hover:-translate-y-0.5 overflow-hidden">
 												{outlet.image_url ? (
 													<Image
 														src={outlet.image_url}
@@ -232,7 +232,7 @@ export default async function FranchisePage() {
 												{formatCompact(outlet.monthlyRevenue)}
 											</p>
 										</div>
-										<Button className="rounded-xl h-10 px-4 bg-slate-900 text-white font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 transition-all shadow-xl shadow-slate-900/10">
+										<Button className="rounded-xl h-9 px-4 bg-slate-900 text-white font-black text-[10px] uppercase tracking-widest hover:bg-indigo-600 shadow-md shadow-slate-900/10">
 											Audit Mitra
 										</Button>
 									</div>
@@ -244,16 +244,16 @@ export default async function FranchisePage() {
 			</div>
 
 			{/* Digital Assets Section */}
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-				<div className="lg:col-span-2 bg-slate-900 rounded-[3rem] p-10 lg:p-14 text-white relative overflow-hidden">
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
+				<div className="lg:col-span-2 bg-slate-900 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden">
 					<div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full -mr-20 -mt-20 blur-3xl opacity-50" />
 					<div className="relative flex flex-col h-full">
-						<div className="flex items-center justify-between mb-10">
+						<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
 							<h2 className="text-2xl font-black uppercase tracking-tight flex items-center gap-4">
 								<FileText className="text-indigo-400" /> SOP Digital &
 								Compliance
 							</h2>
-							<Button className="bg-indigo-400 hover:bg-white hover:text-slate-900 text-slate-900 rounded-xl px-6 h-12 font-black text-[10px] uppercase tracking-widest transition-all">
+							<Button className="bg-indigo-400 hover:bg-white hover:text-slate-900 text-slate-900 rounded-xl px-4 h-10 font-black text-[10px] uppercase tracking-widest">
 								+ Upload SOP
 							</Button>
 						</div>
@@ -291,9 +291,9 @@ export default async function FranchisePage() {
 					</div>
 				</div>
 
-				<div className="bg-indigo-600 rounded-[3rem] p-10 lg:p-14 text-white relative overflow-hidden flex flex-col justify-center gap-6">
+				<div className="bg-indigo-600 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden flex flex-col justify-center gap-5">
 					<div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent opacity-50" />
-					<div className="w-20 h-20 bg-white rounded-3xl flex items-center justify-center text-3xl shadow-2xl rotate-3">
+					<div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-xl">
 						🏢
 					</div>
 					<div>
@@ -306,7 +306,7 @@ export default async function FranchisePage() {
 							Mahira.
 						</p>
 					</div>
-					<Button className="bg-white text-indigo-600 hover:bg-slate-900 hover:text-white rounded-2xl h-14 font-black text-[10px] uppercase tracking-widest transition-all shadow-2xl shadow-indigo-900/20">
+					<Button className="bg-white text-indigo-600 hover:bg-slate-900 hover:text-white rounded-xl h-11 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-indigo-900/20">
 						Hubungi Ops Team
 					</Button>
 				</div>

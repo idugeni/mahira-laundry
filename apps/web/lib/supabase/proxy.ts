@@ -2,6 +2,14 @@ import { createServerClient } from "@supabase/ssr";
 import { type NextRequest, NextResponse } from "next/server";
 import { getDashboardUrl } from "@/lib/utils";
 
+const roleProtectedPaths = [
+	{ path: "/admin", roles: ["superadmin"] },
+	{ path: "/manager", roles: ["manager"] },
+	{ path: "/kasir", roles: ["kasir"] },
+	{ path: "/kurir", roles: ["kurir"] },
+	{ path: "/customer", roles: ["customer"] },
+] as const;
+
 export async function updateSession(request: NextRequest) {
 	let supabaseResponse = NextResponse.next({
 		request,
@@ -55,6 +63,39 @@ export async function updateSession(request: NextRequest) {
 		return NextResponse.redirect(url);
 	}
 
+	let profileRole: string | null = null;
+	if (user) {
+		const { data: profile } = await supabase
+			.from("profiles")
+			.select("role")
+			.eq("id", user.id)
+			.single();
+
+		profileRole = profile?.role ?? null;
+	}
+
+	if (user && isProtectedPath) {
+		const protectedRoute = roleProtectedPaths.find(({ path }) =>
+			request.nextUrl.pathname.startsWith(path),
+		);
+
+		if (
+			protectedRoute &&
+			!protectedRoute.roles.some((role) => role === profileRole)
+		) {
+			const dashboardUrl = getDashboardUrl(profileRole);
+			const targetUrl = request.nextUrl.pathname.startsWith(dashboardUrl)
+				? "/customer"
+				: dashboardUrl;
+			if (!request.nextUrl.pathname.startsWith(targetUrl)) {
+				const url = request.nextUrl.clone();
+				url.pathname = targetUrl;
+				url.search = "";
+				return NextResponse.redirect(url);
+			}
+		}
+	}
+
 	// Redirect logged in users from auth pages
 	const authPaths = ["/login", "/register", "/lupa-password"];
 	const isAuthPath = authPaths.some((path) =>
@@ -62,15 +103,7 @@ export async function updateSession(request: NextRequest) {
 	);
 
 	if (user && isAuthPath) {
-		let targetUrl = "/customer";
-
-		const { data: profile } = await supabase
-			.from("profiles")
-			.select("role")
-			.eq("id", user.id)
-			.single();
-
-		targetUrl = getDashboardUrl(profile?.role);
+		const targetUrl = getDashboardUrl(profileRole);
 
 		const url = request.nextUrl.clone();
 		url.pathname = targetUrl;

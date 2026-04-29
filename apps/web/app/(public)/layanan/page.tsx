@@ -54,9 +54,10 @@ export default async function LayananPage() {
 	};
 
 	return (
-		<>
-			<JsonLd data={breadcrumbJsonLd} />
+		<div key="layanan-root">
+			<JsonLd key="ld-breadcrumb" data={breadcrumbJsonLd} />
 			<Suspense
+				key="layanan-suspense"
 				fallback={
 					<div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
 						<MahiraSpinner size="lg" />
@@ -68,6 +69,6 @@ export default async function LayananPage() {
 			>
 				<LayananClient initialServices={services || []} />
 			</Suspense>
-		</>
+		</div>
 	);
 }

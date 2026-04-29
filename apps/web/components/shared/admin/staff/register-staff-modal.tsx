@@ -45,7 +45,9 @@ export function RegisterStaffModal({
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [mounted, setMounted] = useState(false);
-	const [role, setRole] = useState<string>(staff?.role || "kasir");
+	const [role, setRole] = useState<RegisterStaffInput["role"]>(
+		staff?.role === "manager" || staff?.role === "kurir" ? staff.role : "kasir",
+	);
 	const [outletId, setOutletId] = useState<string>(staff?.outlet_id || "");
 
 	useEffect(() => {
@@ -113,7 +115,7 @@ export function RegisterStaffModal({
 				className="contents"
 			>
 				{trigger || (
-					<Button className="bg-white text-slate-900 hover:bg-emerald-400 hover:text-white rounded-2xl px-8 h-14 font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-2xl shadow-white/5 flex items-center gap-3">
+					<Button className="bg-white text-slate-900 hover:bg-emerald-400 hover:text-slate-950 rounded-xl px-5 h-11 font-black text-xs uppercase tracking-widest shadow-lg shadow-white/5 flex items-center gap-2.5">
 						<UserPlus size={18} /> Registrasi Staf
 					</Button>
 				)}
@@ -129,17 +131,17 @@ export function RegisterStaffModal({
 							onClick={() => !isLoading && setIsOpen(false)}
 						/>
 
-						<div className="relative bg-white rounded-[3.5rem] shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col overflow-hidden animate-in zoom-in-95 duration-500 border border-white/20">
+						<div className="relative bg-white rounded-2xl sm:rounded-[2rem] shadow-2xl w-full max-w-xl max-h-[92vh] flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-2 duration-300 border border-white/20">
 							{/* Premium Header */}
-							<div className="px-10 pt-10 pb-8 bg-slate-50 relative overflow-hidden group">
-								<div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full -mr-24 -mt-24 blur-3xl transition-transform duration-1000 group-hover:scale-110" />
+							<div className="px-6 sm:px-8 pt-7 sm:pt-8 pb-6 bg-slate-50 relative overflow-hidden group">
+								<div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500/10 rounded-full -mr-24 -mt-24 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
 
 								<div className="relative flex items-center justify-between">
 									<div className="space-y-2">
 										<Badge className="bg-emerald-600 text-white border-none py-0.5 text-[8px] font-black uppercase tracking-[0.2em]">
 											Human Resource Admin
 										</Badge>
-										<h2 className="text-3xl font-black text-slate-900 tracking-tight font-[family-name:var(--font-heading)]">
+										<h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight font-[family-name:var(--font-heading)]">
 											{staff ? "Update" : "Registrasi"}{" "}
 											<span className="text-emerald-500 italic">Staf</span>
 										</h2>
@@ -150,7 +152,7 @@ export function RegisterStaffModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-500"
+										className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
 									>
 										<X size={20} />
 									</button>
@@ -158,7 +160,7 @@ export function RegisterStaffModal({
 							</div>
 
 							<div className="flex-1 overflow-y-auto custom-scrollbar">
-								<form onSubmit={handleSubmit} className="p-10 space-y-8">
+								<form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-6">
 									{error && (
 										<div className="p-5 rounded-2xl bg-rose-50 border border-rose-100 text-rose-600 text-xs font-bold flex items-center gap-4 animate-in shake-1 duration-300">
 											<AlertCircle size={20} />
@@ -181,12 +183,12 @@ export function RegisterStaffModal({
 												name="fullName"
 												defaultValue={staff?.full_name}
 												placeholder="Contoh: Muhammad Rafli"
-												className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
+												className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
 											/>
 										</div>
 									</div>
 
-									<div className="grid grid-cols-2 gap-6">
+									<div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 										<div className="space-y-2">
 											<label
 												htmlFor="staff-email"
@@ -203,7 +205,7 @@ export function RegisterStaffModal({
 													name="email"
 													defaultValue={staff?.email ?? ""} // Note: This might need careful handling if email changes
 													placeholder="staf@mahira.id"
-													className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
+													className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
 												/>
 											</div>
 										</div>
@@ -222,25 +224,30 @@ export function RegisterStaffModal({
 													name="phone"
 													defaultValue={staff?.phone ?? ""}
 													placeholder="0812..."
-													className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
+													className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
 												/>
 											</div>
 										</div>
 									</div>
 
-									<div className="grid grid-cols-2 gap-6">
+									<div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 										<div className="space-y-2">
 											<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
 												Otoritas Peran
 											</p>
-											<Select value={role} onValueChange={setRole}>
-												<SelectTrigger className="px-5 h-16 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white font-bold text-sm transition-all shadow-none">
+											<Select
+												value={role}
+												onValueChange={(value: RegisterStaffInput["role"]) =>
+													setRole(value)
+												}
+											>
+												<SelectTrigger className="px-5 h-12 rounded-xl border-slate-100 bg-slate-50 focus:bg-white font-bold text-sm transition-colors shadow-none">
 													<div className="flex items-center gap-3">
 														<Briefcase size={18} className="text-emerald-400" />
 														<SelectValue placeholder="Pilih Peran" />
 													</div>
 												</SelectTrigger>
-												<SelectContent className="rounded-3xl border-slate-100 shadow-2xl p-2">
+												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl p-2">
 													<SelectItem
 														value="kasir"
 														className="rounded-xl py-3 font-bold text-slate-600 focus:bg-emerald-50 focus:text-emerald-600 cursor-pointer"
@@ -267,13 +274,13 @@ export function RegisterStaffModal({
 												Penempatan Unit
 											</p>
 											<Select value={outletId} onValueChange={setOutletId}>
-												<SelectTrigger className="px-5 h-16 rounded-2xl border-slate-50 bg-slate-50 focus:bg-white font-bold text-sm transition-all shadow-none">
+												<SelectTrigger className="px-5 h-12 rounded-xl border-slate-100 bg-slate-50 focus:bg-white font-bold text-sm transition-colors shadow-none">
 													<div className="flex items-center gap-3">
 														<Building2 size={18} className="text-emerald-400" />
 														<SelectValue placeholder="Pilih Outlet" />
 													</div>
 												</SelectTrigger>
-												<SelectContent className="rounded-3xl border-slate-100 shadow-2xl p-2">
+												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl p-2">
 													{outlets.map((o) => (
 														<SelectItem
 															key={o.id}
@@ -313,7 +320,7 @@ export function RegisterStaffModal({
 														? "Isi hanya jika ingin mengganti password"
 														: "Kosongkan untuk password default"
 												}
-												className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
+												className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
 											/>
 										</div>
 									</div>
@@ -325,7 +332,7 @@ export function RegisterStaffModal({
 												variant="ghost"
 												onClick={handleDelete}
 												disabled={isLoading}
-												className="w-full sm:w-auto px-6 h-16 rounded-2xl bg-rose-50 text-rose-500 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest transition-all shadow-sm active:scale-95 flex items-center gap-2"
+												className="w-full sm:w-auto px-5 h-11 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest shadow-sm flex items-center gap-2"
 											>
 												<Trash2 size={18} /> Cabut Akses
 											</Button>
@@ -336,14 +343,14 @@ export function RegisterStaffModal({
 											variant="outline"
 											onClick={() => setIsOpen(false)}
 											disabled={isLoading}
-											className="w-full sm:w-auto h-16 px-10 rounded-2xl border-slate-100 font-black text-[10px] uppercase tracking-widest text-slate-400 hover:bg-slate-50 transition-all"
+											className="w-full sm:w-auto h-11 px-6 rounded-xl border-slate-100 font-black text-[10px] uppercase tracking-widest text-slate-500 hover:bg-slate-50"
 										>
 											Batal
 										</Button>
 										<Button
 											type="submit"
 											disabled={isLoading}
-											className="w-full sm:w-auto h-16 px-12 rounded-2xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.15em] shadow-2xl shadow-slate-900/10 hover:bg-emerald-600 transition-all active:scale-95 flex items-center gap-3"
+											className="w-full sm:w-auto h-11 px-7 rounded-xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-[0.15em] shadow-xl shadow-slate-900/10 hover:bg-emerald-600 flex items-center gap-3"
 										>
 											{isLoading ? (
 												<span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -357,7 +364,7 @@ export function RegisterStaffModal({
 							</div>
 
 							{/* Standard Warning Footer */}
-							<div className="bg-emerald-50 px-10 py-6 border-t border-emerald-100 flex items-center gap-4">
+							<div className="bg-emerald-50 px-6 sm:px-8 py-5 border-t border-emerald-100 flex items-center gap-4">
 								<div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
 									<ShieldCheck size={20} />
 								</div>

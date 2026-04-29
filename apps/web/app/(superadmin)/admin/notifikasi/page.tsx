@@ -39,7 +39,7 @@ export default function AdminNotificationPage() {
 	};
 
 	return (
-		<div className="space-y-8 pb-20">
+		<div className="space-y-6 sm:space-y-8 pb-16 sm:pb-20">
 			<div className="flex items-center gap-4">
 				<div className="p-3 bg-emerald-500/10 rounded-2xl text-emerald-600 dark:text-emerald-400">
 					<BellRing size={32} />
@@ -57,10 +57,10 @@ export default function AdminNotificationPage() {
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="grid grid-cols-1 lg:grid-cols-3 gap-8"
+				className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6"
 			>
 				{/* Form Section */}
-				<div className="lg:col-span-2 bg-card border rounded-3xl p-8 shadow-sm">
+				<div className="lg:col-span-2 bg-card border rounded-2xl p-5 sm:p-8 shadow-sm">
 					<form onSubmit={handleSubmit} className="space-y-6">
 						<div className="space-y-2">
 							<label htmlFor="notif-title" className="text-sm font-medium">
@@ -94,7 +94,7 @@ export default function AdminNotificationPage() {
 							></textarea>
 						</div>
 
-						<div className="grid grid-cols-2 gap-4">
+						<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 							<div className="space-y-2">
 								<label htmlFor="notif-type" className="text-sm font-medium">
 									Tipe
@@ -137,7 +137,7 @@ export default function AdminNotificationPage() {
 						<button
 							type="submit"
 							disabled={loading}
-							className="w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl font-bold flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-emerald-500/20 disabled:opacity-50"
+							className="w-full h-11 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-emerald-500/20 disabled:opacity-50"
 						>
 							{loading ? (
 								<Loader2 className="animate-spin" />
@@ -151,7 +151,7 @@ export default function AdminNotificationPage() {
 
 				{/* Info Section */}
 				<div className="space-y-6">
-					<div className="bg-emerald-500/5 border border-emerald-500/20 rounded-3xl p-6">
+					<div className="bg-emerald-500/5 border border-emerald-500/20 rounded-2xl p-5 sm:p-6">
 						<div className="flex items-center gap-3 mb-4 text-emerald-600 dark:text-emerald-400 font-bold">
 							<Megaphone size={20} />
 							Tips Promo
@@ -163,7 +163,7 @@ export default function AdminNotificationPage() {
 						</p>
 					</div>
 
-					<div className="bg-amber-500/5 border border-amber-500/20 rounded-3xl p-6">
+					<div className="bg-amber-500/5 border border-amber-500/20 rounded-2xl p-5 sm:p-6">
 						<div className="flex items-center gap-3 mb-4 text-amber-600 dark:text-amber-400 font-bold">
 							<ShieldAlert size={20} />
 							Keamanan

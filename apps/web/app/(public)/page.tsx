@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { JsonLd } from "@/components/shared/common/json-ld";
 import { HomeClient } from "@/components/shared/public/home/home-client";
 import { HomeSkeleton } from "@/components/shared/public/home/home-skeleton";
 import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
@@ -105,18 +106,14 @@ export default async function HomePage() {
 	const supabase = await createClient();
 	const testimonials = await getPublishedTestimonials();
 
-	// Fetch active services from the main outlet (Jatiwaringin)
 	const { data: services } = await supabase
 		.from("services")
 		.select("*")
 		.eq("is_active", true)
 		.order("sort_order", { ascending: true });
 
-	// Fetch some stats from real data
-	const { count: orderCount } = await supabase
-		.from("orders")
-		.select("*", { count: "exact", head: true })
-		.eq("status", "completed");
+	const { data: statsData } = await supabase.rpc("get_public_stats");
+	const orderCount = statsData?.[0]?.completed_orders_count || 0;
 
 	const { count: outletCount } = await supabase
 		.from("outlets")
@@ -130,7 +127,6 @@ export default async function HomePage() {
 		{ value: "24/7", label: "Tracking Online" },
 	];
 
-	// Fetch gallery items (show more for better overview)
 	const { data: galleryItems } = await supabase
 		.from("gallery")
 		.select("*")
@@ -138,21 +134,12 @@ export default async function HomePage() {
 		.order("sort_order", { ascending: true })
 		.limit(12);
 
-	// Fetch active business packages for homepage preview
 	const businessPackages = await getActiveBusinessPackages();
 
 	return (
-		<>
-			<script
-				type="application/ld+json"
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD structured data
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-			/>
-			<script
-				type="application/ld+json"
-				// biome-ignore lint/security/noDangerouslySetInnerHtml: FAQ JSON-LD
-				dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-			/>
+		<div key="home-root">
+			<JsonLd key="ld-main" id="home-business-jsonld" data={jsonLd} />
+			<JsonLd key="ld-faq" id="home-faq-jsonld" data={faqJsonLd} />
 			<div id="home-page-container">
 				<Suspense fallback={<HomeSkeleton />}>
 					<HomeClient
@@ -164,6 +151,6 @@ export default async function HomePage() {
 					/>
 				</Suspense>
 			</div>
-		</>
+		</div>
 	);
 }

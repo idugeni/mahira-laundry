@@ -111,7 +111,7 @@ export function LoyaltyClient({
 			<motion.div
 				initial={{ opacity: 0, y: 20 }}
 				animate={{ opacity: 1, y: 0 }}
-				className="bg-slate-900 rounded-[3rem] p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden group"
+				className="bg-slate-900 rounded-[2rem] p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden group"
 			>
 				<div className="absolute top-0 right-0 p-12 text-[200px] text-white/5 pointer-events-none group-hover:rotate-12 transition-transform duration-1000">
 					<HiOutlineBolt />
@@ -179,7 +179,7 @@ export function LoyaltyClient({
 			>
 				<div className="absolute inset-0 bg-brand-primary opacity-0 group-hover:opacity-5 rounded-[2.5rem] blur-3xl transition-opacity duration-1000" />
 				<div className="relative bg-white rounded-[2.5rem] border border-slate-100 p-8 sm:p-12 shadow-sm overflow-hidden min-h-[280px] flex flex-col md:flex-row items-center gap-10">
-					<div className="absolute top-0 right-0 p-12 text-[150px] text-slate-50 pointer-events-none group-hover:scale-110 transition-transform duration-1000 -mr-10 -mt-10">
+					<div className="absolute top-0 right-0 p-12 text-[150px] text-slate-50 pointer-events-none transition-transform duration-1000 -mr-10 -mt-10">
 						<HiOutlineShare />
 					</div>
 
@@ -215,7 +215,7 @@ export function LoyaltyClient({
 										navigator.clipboard.writeText(url);
 										toast.success("Link Referral Berhasil Disalin!");
 									}}
-									className="w-14 h-14 bg-slate-900 text-white rounded-2xl flex items-center justify-center text-xl hover:bg-blue-600 transition-all shadow-xl shadow-slate-200 active:scale-90"
+									className="w-14 h-14 bg-slate-900 text-white rounded-2xl flex items-center justify-center text-xl hover:bg-blue-600 transition-all shadow-xl shadow-slate-200"
 								>
 									<HiOutlineShare />
 								</button>
@@ -284,7 +284,7 @@ export function LoyaltyClient({
 									type="button"
 									onClick={() => handleRedeem(r.id)}
 									disabled={profile.loyalty_points < r.points_cost || !!loading}
-									className="w-full mt-10 py-4 rounded-2xl bg-slate-900 text-white text-xs font-black uppercase tracking-[3px] transition-all hover:bg-emerald-500 shadow-xl shadow-slate-100 disabled:bg-slate-100 disabled:text-slate-300 disabled:shadow-none active:scale-95"
+									className="w-full mt-10 py-4 rounded-2xl bg-slate-900 text-white text-xs font-black uppercase tracking-[3px] transition-all hover:bg-emerald-500 shadow-xl shadow-slate-100 disabled:bg-slate-100 disabled:text-slate-300 disabled:shadow-none"
 								>
 									{loading === r.id
 										? "Processing..."
@@ -299,7 +299,7 @@ export function LoyaltyClient({
 			</section>
 
 			{/* History - More Compact & Clean */}
-			<div className="bg-white rounded-[3rem] border border-slate-100 p-8 sm:p-12 shadow-sm">
+			<div className="bg-white rounded-[2rem] border border-slate-100 p-8 sm:p-12 shadow-sm">
 				<div className="flex items-center gap-4 mb-10 px-2">
 					<div className="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl shadow-lg shadow-slate-200">
 						<HiOutlineClipboardDocumentCheck />
@@ -321,7 +321,7 @@ export function LoyaltyClient({
 							>
 								<div className="flex items-center gap-6">
 									<div
-										className={`w-14 h-14 rounded-2xl flex flex-col items-center justify-center font-black text-lg transition-transform group-hover:scale-110 shrink-0 ${item.points > 0 ? "bg-emerald-50 text-emerald-600 shadow-sm shadow-emerald-100" : "bg-red-50 text-red-600"}`}
+										className={`w-14 h-14 rounded-2xl flex flex-col items-center justify-center font-black text-lg transition-transform shrink-0 ${item.points > 0 ? "bg-emerald-50 text-emerald-600 shadow-sm shadow-emerald-100" : "bg-red-50 text-red-600"}`}
 									>
 										{item.points > 0 ? "+" : ""}
 										{item.points}
@@ -369,7 +369,7 @@ export function LoyaltyClient({
 						))}
 					</div>
 				) : (
-					<div className="text-center py-24 bg-slate-50/30 rounded-[2.5rem] border-2 border-dashed border-slate-100">
+					<div className="text-center py-14 sm:py-16 bg-slate-50/30 rounded-[2.5rem] border-2 border-dashed border-slate-100">
 						<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm shadow-slate-200">
 							<span className="text-slate-100 text-4xl flex items-center justify-center">
 								<HiOutlineBolt />

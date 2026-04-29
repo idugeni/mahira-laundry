@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createClient } from "@/lib/supabase/server";
 import type { ActionResponse } from "@/lib/types";
 
 export type RegisterStaffInput = {
@@ -9,19 +10,40 @@ export type RegisterStaffInput = {
 	fullName: string;
 	email: string;
 	phone: string;
-	role: "manager" | "kasir" | "kurir" | "washer" | "ironer" | "qc";
+	role: "manager" | "kasir" | "kurir";
 	outletId: string;
 	password?: string;
 };
+
+async function assertSuperadmin() {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+
+	if (!user) {
+		throw new Error("Anda harus login untuk mengelola pegawai.");
+	}
+
+	const { data: profile } = await supabase
+		.from("profiles")
+		.select("role")
+		.eq("id", user.id)
+		.single();
+
+	if (profile?.role !== "superadmin") {
+		throw new Error("Akses superadmin diperlukan untuk mengelola pegawai.");
+	}
+}
 
 export async function registerStaffMember(
 	data: RegisterStaffInput,
 ): Promise<ActionResponse> {
 	try {
+		await assertSuperadmin();
 		const admin = createAdminClient();
 
 		if (data.id) {
-			// Update Existing
 			const { error: authError } = await admin.auth.admin.updateUserById(
 				data.id,
 				{
@@ -49,7 +71,6 @@ export async function registerStaffMember(
 
 			if (profileError) throw profileError;
 		} else {
-			// Create New
 			const { data: authUser, error: authError } =
 				await admin.auth.admin.createUser({
 					email: data.email,
@@ -88,20 +109,18 @@ export async function registerStaffMember(
 
 export async function deleteStaffMember(id: string): Promise<ActionResponse> {
 	try {
+		await assertSuperadmin();
 		const admin = createAdminClient();
 
-		// 1. Delete from Auth
 		const { error: authError } = await admin.auth.admin.deleteUser(id);
 		if (authError) throw authError;
 
-		// 2. Profile should be deleted via Cascade or manual if needed
-		// In some setups, profiles is linked via FK cascade.
 		const { error: profileError } = await admin
 			.from("profiles")
 			.delete()
 			.eq("id", id);
 		if (profileError) {
-			console.log("Profile already deleted or FK cascade handled it.");
+			console.warn("Profile already deleted or FK cascade handled it.");
 		}
 
 		revalidatePath("/pegawai");
@@ -120,6 +139,7 @@ export async function getStaffPerformance(
 	year: number,
 ) {
 	try {
+		await assertSuperadmin();
 		const admin = createAdminClient();
 		const start = new Date(year, month - 1, 1).toISOString();
 		const end = new Date(year, month, 0, 23, 59, 59).toISOString();
@@ -169,6 +189,7 @@ export async function getStaffPerformance(
 
 export async function getStaffLeaderboard(month: number, year: number) {
 	try {
+		await assertSuperadmin();
 		const admin = createAdminClient();
 		const start = new Date(year, month - 1, 1).toISOString();
 		const end = new Date(year, month, 0, 23, 59, 59).toISOString();

@@ -71,7 +71,6 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 		setMounted(true);
 	}, []);
 
-	// Fetch logs on mount
 	useEffect(() => {
 		async function fetchLogs() {
 			setLogsLoading(true);
@@ -386,7 +385,7 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 							<Button
 								onClick={handleUpdateStatus}
 								disabled={updating || newStatus === currentLead.status}
-								className="bg-slate-900 hover:bg-emerald-600 text-white rounded-2xl px-6 h-11 font-black text-[10px] uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl shadow-slate-900/10 disabled:opacity-50 disabled:hover:scale-100 flex items-center gap-2"
+								className="flex h-11 items-center gap-2 rounded-xl bg-slate-900 px-5 text-[10px] font-black uppercase tracking-widest text-white shadow-lg shadow-slate-900/10 transition-colors hover:bg-emerald-600 disabled:opacity-50"
 							>
 								{updating && <Loader2 size={14} className="animate-spin" />}
 								Ubah Status
@@ -401,7 +400,7 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 							<div className="mt-4">
 								<Link
 									href={`/admin/franchise?fullName=${encodeURIComponent(currentLead.full_name)}&email=${encodeURIComponent(currentLead.email)}`}
-									className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-widest transition-all hover:scale-105 active:scale-95 shadow-xl shadow-emerald-600/20"
+									className="inline-flex h-11 items-center gap-2 rounded-xl bg-emerald-600 px-5 text-xs font-black uppercase tracking-widest text-white shadow-lg shadow-emerald-600/20 transition-colors hover:bg-emerald-700"
 								>
 									<ExternalLink size={14} />
 									Onboarding Mitra

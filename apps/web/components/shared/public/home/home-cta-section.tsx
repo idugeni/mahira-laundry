@@ -13,12 +13,12 @@ export function HomeCtaSection() {
 					initial={{ opacity: 0, y: 40 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="group relative p-10 lg:p-16 rounded-[3rem] bg-slate-900 text-white shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden"
+					className="group relative p-10 lg:p-10 rounded-[2rem] bg-slate-900 text-white shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden"
 				>
 					{/* Elite Background Effects */}
 					<div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-brand-primary/20 via-transparent to-transparent opacity-50 group-hover:opacity-70 transition-opacity duration-1000" />
 					<div className="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-accent/10 rounded-full blur-[100px]" />
-					<div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10" />
+					<div className="absolute inset-0 opacity-10 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
 
 					<div className="relative z-10 flex flex-col lg:flex-row items-center gap-16">
 						<div className="flex-1 text-center lg:text-left">

@@ -567,14 +567,14 @@ export function PackageFormModal({
 							variant="outline"
 							onClick={() => !isSubmitting && onClose()}
 							disabled={isSubmitting}
-							className="flex-1 rounded-2xl h-12 font-black text-[10px] uppercase tracking-widest border-slate-100 hover:bg-slate-50"
+							className="flex-1 rounded-xl h-11 font-black text-[10px] uppercase tracking-widest border-slate-100 hover:bg-slate-50"
 						>
 							Batal
 						</Button>
 						<Button
 							type="submit"
 							disabled={isSubmitting}
-							className="flex-1 rounded-2xl h-12 font-black text-[10px] uppercase tracking-widest bg-slate-900 hover:bg-indigo-600 text-white shadow-xl shadow-slate-900/10 transition-all hover:scale-105 active:scale-95 disabled:opacity-50 flex items-center justify-center gap-2"
+							className="flex-1 rounded-xl h-11 font-black text-[10px] uppercase tracking-widest bg-slate-900 hover:bg-indigo-600 text-white shadow-lg shadow-slate-900/10 disabled:opacity-50 flex items-center justify-center gap-2"
 						>
 							{isSubmitting ? (
 								<>

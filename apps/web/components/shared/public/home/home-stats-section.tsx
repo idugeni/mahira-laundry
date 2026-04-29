@@ -26,9 +26,9 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
 	];
 
 	return (
-		<section className="py-24 relative bg-slate-900 overflow-hidden">
+		<section className="py-14 sm:py-16 relative bg-slate-900 overflow-hidden">
 			{/* Elite Decorative Elements */}
-			<div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20" />
+			<div className="absolute inset-0 opacity-20 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
 			<div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 			<div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
 

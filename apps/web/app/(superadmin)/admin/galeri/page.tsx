@@ -18,7 +18,6 @@ export default async function AdminGalleryPage() {
 		redirect("/login");
 	}
 
-	// Check superadmin role
 	const { data: profile } = await supabase
 		.from("profiles")
 		.select("role")
@@ -29,7 +28,6 @@ export default async function AdminGalleryPage() {
 		redirect("/dashboard");
 	}
 
-	// Fetch gallery items
 	const { data: galleryItems } = await supabase
 		.from("gallery")
 		.select("*")

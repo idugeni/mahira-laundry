@@ -35,7 +35,7 @@ export default async function SuperadminDashboardPage() {
 	const ordersGrowthPositive = parseFloat(stats.ordersGrowth) >= 0;
 
 	return (
-		<div className="space-y-8 pb-20 animate-fade-in-up">
+		<div className="space-y-6 sm:space-y-8 pb-16 sm:pb-20 animate-fade-in-up">
 			{/* Page Header */}
 			<div>
 				<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -47,15 +47,15 @@ export default async function SuperadminDashboardPage() {
 							Platform manajemen pusat Mahira Laundry Group.
 						</p>
 					</div>
-					<div className="flex items-center gap-2 text-xs text-slate-400 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-sm">
+					<div className="flex items-center gap-2 text-xs text-slate-500 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-sm">
 						<span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-						Live — Live — {formatDate(new Date())}
+						Live — {formatDate(new Date())}
 					</div>
 				</div>
 			</div>
 
 			{/* KPI Cards */}
-			<div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
 				<StatCard
 					title="Cabang Aktif"
 					value={stats.totalOutlets}
