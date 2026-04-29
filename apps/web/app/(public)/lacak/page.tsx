@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { TrackingClient } from "@/components/public/tracking-client";
+import { baseOpenGraph } from "@/lib/metadata";
 
 export const metadata: Metadata = {
 	title: "Lacak Pesanan | Mahira Laundry",
 	description: "Lacak status pesanan laundry Anda secara real-time.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Lacak Pesanan | Mahira Laundry",
 		description:
 			"Pantau status cucian Anda secara real-time dari jemput hingga antar.",

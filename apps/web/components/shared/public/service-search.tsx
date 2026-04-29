@@ -54,7 +54,7 @@ export function ServiceSearch({
 						onFocus={() => setIsFocused(true)}
 						onBlur={() => setTimeout(() => setIsFocused(false), 200)}
 						placeholder="Cari..."
-						className="w-40 focus:w-64 transition-all duration-500 bg-slate-100 border-none rounded-full py-2 pl-10 pr-10 text-xs font-bold text-slate-900 placeholder:text-slate-400 focus:ring-2 focus:ring-brand-primary/20"
+						className="w-40 focus:w-64 transition-all duration-500 bg-slate-100 border-none rounded-full py-2 pl-10 pr-10 text-xs font-bold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
 					/>
 					<div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-primary transition-colors">
 						<HiOutlineMagnifyingGlass size={16} />
@@ -102,7 +102,7 @@ export function ServiceSearch({
 						onFocus={() => setIsFocused(true)}
 						onBlur={() => setIsFocused(false)}
 						placeholder={placeholder}
-						className="flex-1 bg-transparent border-none focus:ring-0 py-4 md:py-6 px-3 md:px-6 text-base md:text-lg font-bold text-slate-900 placeholder:text-slate-300 min-w-0"
+						className="flex-1 bg-transparent border-none focus:outline-none focus:ring-0 py-4 md:py-6 px-3 md:px-6 text-base md:text-lg font-bold text-slate-900 placeholder:text-slate-300 min-w-0"
 					/>
 
 					<div className="pr-2 md:pr-4 flex items-center gap-1 md:gap-3">

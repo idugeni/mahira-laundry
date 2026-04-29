@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { baseOpenGraph } from "@/lib/metadata";
 
 export const metadata: Metadata = {
 	title: "Tentang Kami",
 	description:
 		"Tentang Mahira Laundry — Solusi laundry premium dengan standar kualitas internasional dan antar-jemput profesional.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Tentang",
 		description:
 			"Layanan laundry terpercaya dengan komitmen terhadap kebersihan dan kualitas kain Anda.",

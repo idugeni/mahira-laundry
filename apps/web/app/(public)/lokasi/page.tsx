@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { baseOpenGraph } from "@/lib/metadata";
 
 export const metadata: Metadata = {
 	title: "Lokasi Outlet",
 	description:
 		"Temukan outlet kami terdekat dan nikmati layanan laundry premium dengan standar kualitas tinggi di titik-titik strategis.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Lokasi Outlet",
 		description:
 			"Jaringan outlet kami yang siap melayani kebutuhan laundry Anda setiap hari.",

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PaketUsahaClient } from "@/components/shared/public/paket-usaha/paket-usaha-client";
 import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
+import { baseOpenGraph } from "@/lib/metadata";
 import type { BusinessPackage } from "@/lib/types";
 
 export const revalidate = 0;
@@ -10,12 +11,11 @@ export const metadata: Metadata = {
 	description:
 		"Mulai bisnis laundry Anda bersama Mahira dengan dukungan mesin, pelatihan, dan sistem manajemen terbaik.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Jual Paket Usaha Laundry Lengkap — Mahira Laundry",
 		description:
 			"Jual paket usaha laundry lengkap dan terpercaya. Mulai bisnis laundry Anda bersama Mahira dengan dukungan mesin, pelatihan, dan sistem manajemen terbaik.",
-		type: "website",
 		url: "/paket-usaha",
-		siteName: "Mahira Laundry",
 		images: [
 			{
 				url: "/og/paket-usaha.png",

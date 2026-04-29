@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/shared/public/legal-layout";
+import { baseOpenGraph } from "@/lib/metadata";
 
 export const metadata: Metadata = {
 	title: "Syarat & Ketentuan",
 	description:
 		"Syarat dan Ketentuan penggunaan layanan Mahira Laundry - Ketentuan layanan, tanggung jawab, dan aturan penggunaan.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Syarat & Ketentuan | Mahira Laundry",
 		description:
 			"Aturan dan panduan penggunaan layanan laundry Mahira secara transparan.",

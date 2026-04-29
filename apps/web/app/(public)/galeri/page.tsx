@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { GallerySection } from "@/components/shared/public/gallery/gallery-section";
+import { baseOpenGraph } from "@/lib/metadata";
 import { createClient } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
@@ -7,6 +8,7 @@ export const metadata: Metadata = {
 	description:
 		"Lihat hasil cucian, fasilitas, dan proses operasional Mahira Laundry melalui dokumentasi foto kualitas premium kami.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Galeri Hasil Layanan | Mahira Laundry",
 		description:
 			"Koleksi foto hasil layanan laundry premium dan fasilitas modern Mahira.",

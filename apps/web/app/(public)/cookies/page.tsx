@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { LegalLayout } from "@/components/shared/public/legal-layout";
+import { baseOpenGraph } from "@/lib/metadata";
 
 export const metadata: Metadata = {
 	title: "Kebijakan Cookie",
 	description:
 		"Informasi mengenai penggunaan cookie dan teknologi pelacakan di platform Mahira Laundry.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Kebijakan Cookie | Mahira Laundry",
 		description:
 			"Penjelasan mengenai penggunaan teknologi pelacakan untuk meningkatkan layanan kami.",

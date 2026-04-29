@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { baseOpenGraph } from "@/lib/metadata";
 
 export const metadata: Metadata = {
 	title: "Layanan Laundry Premium",
 	description:
 		"Daftar lengkap layanan laundry premium: cuci lipat, cuci setrika, express, dry cleaning, cuci sepatu, dan lainnya dengan standar kualitas tinggi.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Layanan",
 		description:
 			"Solusi laundry profesional dengan layanan lengkap. Mulai dari Rp 7.000/kg.",

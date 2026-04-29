@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/shared/common/json-ld";
 import { FAQClient } from "@/components/shared/public/faq-client";
+import { baseOpenGraph } from "@/lib/metadata";
 
 export const metadata: Metadata = {
 	title: "Pusat Bantuan & FAQ",
 	description:
 		"Cari jawaban cepat untuk pertanyaan yang sering ditanyakan mengenai layanan laundry premium Mahira, harga, antar-jemput, dan kemitraan.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Pusat Bantuan & FAQ | Mahira Laundry",
 		description:
 			"Solusi lengkap untuk segala pertanyaan Anda mengenai Mahira Laundry.",

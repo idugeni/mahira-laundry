@@ -5,6 +5,7 @@ import { HomeClient } from "@/components/shared/public/home/home-client";
 import { HomeSkeleton } from "@/components/shared/public/home/home-skeleton";
 import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
 import { PRIMARY_OUTLET } from "@/lib/constants";
+import { baseOpenGraph } from "@/lib/metadata";
 import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -16,18 +17,10 @@ export const metadata: Metadata = {
 	description:
 		"Mulai bisnis laundry sukses Anda dengan Paket Usaha Laundry Mahira. Investasi aman, sistem teruji, dan dukungan operasional penuh untuk profit maksimal.",
 	openGraph: {
+		...baseOpenGraph,
 		title: "Jual Paket Usaha Laundry Premium — Peluang Investasi Kemitraan",
 		description:
 			"Wujudkan impian memiliki bisnis laundry profesional. Pilih paket usaha laundry yang sesuai dengan budget dan target pasar Anda.",
-		type: "website",
-		images: [
-			{
-				url: "/og/paket-usaha.png",
-				width: 1200,
-				height: 630,
-				alt: "Mahira Laundry Premium Experience",
-			},
-		],
 	},
 };
 

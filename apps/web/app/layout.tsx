@@ -5,6 +5,7 @@ import { Toaster } from "sonner";
 import "./globals.css";
 import { JsonLd } from "@/components/shared/common/json-ld";
 import { cn } from "@/lib/utils";
+import { baseOpenGraph } from "@/lib/metadata";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -41,21 +42,10 @@ export const metadata: Metadata = {
 		"laundry business setup",
 	],
 	openGraph: {
+		...baseOpenGraph,
 		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
 		description:
 			"Peluang investasi bisnis laundry dengan sistem teruji dan dukungan penuh. Mulai usaha laundry premium Anda hari ini.",
-		type: "website",
-		locale: "id_ID",
-		siteName: "Mahira Laundry",
-		url: "https://mahiralaundry.id",
-		images: [
-			{
-				url: "/og/paket-usaha.png",
-				width: 1200,
-				height: 630,
-				alt: "Mahira Laundry Premium Experience",
-			},
-		],
 	},
 	twitter: {
 		card: "summary_large_image",
