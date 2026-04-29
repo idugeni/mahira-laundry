@@ -8,7 +8,7 @@ import { getDashboardUrl } from "@/lib/utils";
 export async function signUp(formData: FormData): Promise<void> {
 	const supabase = await createClient();
 
-	const data = {
+	const signUpData = {
 		email: formData.get("email") as string,
 		password: formData.get("password") as string,
 		options: {
@@ -21,13 +21,25 @@ export async function signUp(formData: FormData): Promise<void> {
 		},
 	};
 
-	const { error } = await supabase.auth.signUp(data);
+	const { data, error } = await supabase.auth.signUp(signUpData);
 
 	if (error) {
 		redirect(`/register?error=${encodeURIComponent(error.message)}`);
 	}
 
-	redirect("/register?success=verify-email");
+	let targetUrl = "/customer";
+	if (data?.user) {
+		const { data: profile } = await supabase
+			.from("profiles")
+			.select("role")
+			.eq("id", data.user.id)
+			.single();
+
+		targetUrl = getDashboardUrl(profile?.role);
+	}
+
+	revalidatePath("/", "layout");
+	redirect(targetUrl);
 }
 
 export async function signIn(formData: FormData): Promise<void> {

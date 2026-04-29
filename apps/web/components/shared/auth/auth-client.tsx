@@ -35,7 +35,6 @@ export function AuthClient({ type, action }: AuthClientProps) {
 	const searchParams = useSearchParams();
 	const supabase = createClient();
 	const error = searchParams.get("error");
-	const success = searchParams.get("success");
 
 	const [loading, setLoading] = useState(false);
 	const [formData, setFormData] = useState({
@@ -101,36 +100,6 @@ export function AuthClient({ type, action }: AuthClientProps) {
 			},
 		});
 	};
-
-	if (success === "verify-email") {
-		return (
-			<div className="h-screen w-full flex items-center justify-center bg-slate-50 p-6 relative overflow-hidden">
-				<div className="absolute inset-0 bg-brand-primary/5 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2" />
-				<motion.div
-					initial={{ opacity: 0, scale: 0.9, y: 20 }}
-					animate={{ opacity: 1, scale: 1, y: 0 }}
-					className="max-w-md w-full bg-white p-10 lg:p-14 rounded-[2rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] text-center border border-slate-100 relative z-10"
-				>
-					<div className="w-20 h-20 bg-brand-primary/10 text-brand-primary rounded-[2rem] flex items-center justify-center mx-auto mb-8 text-4xl shadow-inner">
-						<HiOutlineEnvelope />
-					</div>
-					<h1 className="text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900 mb-4 tracking-tighter">
-						Cek Email Anda
-					</h1>
-					<p className="text-slate-500 font-medium leading-relaxed mb-10 text-base">
-						Kami telah mengirimkan tautan verifikasi ke email Anda. Silakan klik
-						tautan tersebut untuk mengaktifkan akun Mahira Laundry Anda.
-					</p>
-					<Link
-						href="/login"
-						className="inline-flex py-4 px-10 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-brand-primary transition-all shadow-2xl shadow-slate-200"
-					>
-						Kembali ke Login
-					</Link>
-				</motion.div>
-			</div>
-		);
-	}
 
 	return (
 		<div className="h-screen w-full flex bg-slate-50 overflow-hidden">
