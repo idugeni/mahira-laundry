@@ -4,6 +4,8 @@ import {
 	createClient,
 	getBusinessPackageInquiries,
 } from "@/lib/supabase/server";
+import { formLimiter } from "@/lib/upstash/rate-limit";
+import { enqueueJob } from "@/lib/upstash/qstash";
 import type {
 	ActionResponse,
 	BusinessPackageInquiry,
@@ -15,6 +17,17 @@ import type {
 export async function submitBusinessInquiry(
 	data: SubmitInquiryInput,
 ): Promise<ActionResponse> {
+	const { success } = await formLimiter.limit(
+		data.phone || data.email || "anonymous",
+	);
+	if (!success) {
+		return {
+			success: false,
+			error:
+				"Terlalu banyak pengajuan. Silakan coba lagi dalam beberapa saat.",
+		};
+	}
+
 	try {
 		const supabase = await createClient();
 
@@ -42,6 +55,12 @@ export async function submitBusinessInquiry(
 			}
 			throw rpcError;
 		}
+
+		await enqueueJob("/api/jobs/inquiry-received", {
+			email: data.email,
+			fullName: data.full_name,
+			packageName: data.package_name,
+		});
 
 		return { success: true };
 	} catch (error) {

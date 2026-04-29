@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { enqueueJob } from "@/lib/upstash/qstash";
 
 const MitraSchema = z.object({
 	fullName: z.string().min(3),
@@ -81,13 +82,10 @@ export async function registerMitra(formData: Record<string, unknown>) {
 			if (profileError) {
 				console.error("Error linking mitra to outlet:", profileError);
 			} else {
-				// 4. Welcome notification
-				await admin.from("notifications").insert({
-					user_id: authUser.user.id,
-					type: "system",
-					title: "Selamat Datang Mitra Mahira!",
-					body: `Selamat bergabung di ekosistem Mahira Laundry. Outlet ${validated.outletName} Anda telah berhasil diinisialisasi.`,
-					data: { outlet_id: outlet.id },
+				await enqueueJob("/api/jobs/welcome-mitra", {
+					userId: authUser.user.id,
+					outletName: validated.outletName,
+					outletId: outlet.id,
 				});
 			}
 		}

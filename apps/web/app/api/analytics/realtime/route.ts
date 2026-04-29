@@ -1,5 +1,6 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { NextResponse } from "next/server";
+import { publicApiLimiter } from "@/lib/upstash/rate-limit";
 
 const analyticsClient = new BetaAnalyticsDataClient({
 	credentials: {
@@ -10,7 +11,13 @@ const analyticsClient = new BetaAnalyticsDataClient({
 
 const propertyId = process.env.GA_PROPERTY_ID;
 
-export async function GET() {
+export async function GET(request: Request) {
+	const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+	const { success } = await publicApiLimiter.limit(ip);
+	if (!success) {
+		return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+	}
+
 	if (
 		!process.env.GOOGLE_CLIENT_EMAIL ||
 		!process.env.GOOGLE_PRIVATE_KEY ||

@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { invalidateCache } from "@/lib/upstash/cache";
 import type { ActionResponse } from "@/lib/types";
 
 export type InventoryInput = {
@@ -89,6 +90,7 @@ export async function upsertInventory(
 		revalidatePath("/inventori");
 		revalidatePath("/admin/inventori");
 		revalidatePath("/manager");
+		await invalidateCache("inventory:*");
 		return { success: true };
 	} catch (error) {
 		console.error("Inventory action failed:", error);
@@ -104,6 +106,7 @@ export async function deleteInventory(id: string): Promise<ActionResponse> {
 
 		revalidatePath("/inventori");
 		revalidatePath("/admin/inventori");
+		await invalidateCache("inventory:*");
 		return { success: true };
 	} catch (error) {
 		console.error("Delete inventory failed:", error);
@@ -156,6 +159,7 @@ export async function restockInventory(
 
 		revalidatePath("/inventori");
 		revalidatePath("/admin/inventori");
+		await invalidateCache("inventory:*");
 		return { success: true };
 	} catch (error) {
 		console.error("Restock inventory failed:", error);
@@ -208,6 +212,7 @@ export async function adjustStock(
 
 		revalidatePath("/inventori");
 		revalidatePath("/admin/inventori");
+		await invalidateCache("inventory:*");
 		return { success: true };
 	} catch (error) {
 		return { success: false, error: (error as Error).message };
@@ -304,6 +309,7 @@ export async function transferInventory(data: {
 
 		revalidatePath("/inventori");
 		revalidatePath("/admin/inventori");
+		await invalidateCache("inventory:*");
 		return { success: true };
 	} catch (error) {
 		return { success: false, error: (error as Error).message };

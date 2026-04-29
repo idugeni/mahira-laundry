@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { formLimiter } from "@/lib/upstash/rate-limit";
 
 export async function redeemRewardAction(rewardId: string) {
 	const supabase = await createClient();
@@ -10,6 +11,11 @@ export async function redeemRewardAction(rewardId: string) {
 	} = await supabase.auth.getUser();
 
 	if (!user) return { error: "Silakan login terlebih dahulu." };
+
+	const { success } = await formLimiter.limit(user.id);
+	if (!success) {
+		return { error: "Terlalu banyak permintaan. Silakan coba lagi nanti." };
+	}
 
 	const { data, error } = await supabase.rpc("redeem_reward", {
 		p_user_id: user.id,

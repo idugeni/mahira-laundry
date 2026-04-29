@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { invalidateCache } from "@/lib/upstash/cache";
 import type { ActionResponse } from "@/lib/types";
 
 export type OutletInput = {
@@ -52,10 +53,12 @@ export async function upsertOutlet(data: OutletInput): Promise<ActionResponse> {
 
 		revalidatePath("/outlet");
 		revalidatePath("/admin/outlet");
+		await invalidateCache("outlets:*");
+		await invalidateCache("vouchers:*");
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Outlet action failed:", err);
+		console.error("Outlet upsert failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -68,6 +71,7 @@ export async function deleteOutlet(id: string): Promise<ActionResponse> {
 
 		revalidatePath("/outlet");
 		revalidatePath("/admin/outlet");
+		await invalidateCache("vouchers:*");
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;

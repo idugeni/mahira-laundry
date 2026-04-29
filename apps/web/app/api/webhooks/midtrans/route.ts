@@ -1,6 +1,14 @@
 import { NextResponse } from "next/server";
+import { publicApiLimiter } from "@/lib/upstash/rate-limit";
+import { enqueueJob } from "@/lib/upstash/qstash";
 
 export async function POST(request: Request) {
+	const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+	const { success } = await publicApiLimiter.limit(ip);
+	if (!success) {
+		return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+	}
+
 	try {
 		const body = await request.json();
 
@@ -17,6 +25,11 @@ export async function POST(request: Request) {
 		) {
 			if (fraud_status === "accept" || !fraud_status) {
 				console.log(`[Midtrans] Payment confirmed for: ${order_id}`);
+				await enqueueJob("/api/jobs/payment-confirmed", {
+					orderId: order_id,
+					amount: body.gross_amount,
+					method: body.payment_type,
+				});
 			}
 		} else if (
 			transaction_status === "deny" ||
