@@ -142,14 +142,15 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 						>
 							<Link
 								href="/paket-usaha"
-								className="group relative px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all duration-300 hover:bg-pink-700 text-sm"
+								className="group relative px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all duration-300 hover:bg-pink-700 text-sm inline-flex items-center gap-4"
 							>
-								<span className="relative flex items-center gap-2">
-									PILIH PAKET USAHA
-									<span className="inline-flex group-hover:translate-x-1 transition-transform duration-300 ease-out">
-										<HiOutlineArrowRight />
-									</span>
-								</span>
+								PILIH PAKET USAHA
+								<motion.div
+									animate={{ x: [0, 5, 0] }}
+									transition={{ repeat: Infinity, duration: 1.5 }}
+								>
+									<HiOutlineArrowRight size={18} />
+								</motion.div>
 							</Link>
 							<a
 								href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent("Halo Mahira, saya ingin konsultasi mengenai paket usaha laundry.")}`}

@@ -5,6 +5,7 @@ import { ChevronDown } from "lucide-react";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
+import { HiOutlineArrowRight } from "react-icons/hi2";
 import { MdOutlineLocalLaundryService } from "react-icons/md";
 import type { BusinessPackage } from "@/lib/types";
 
@@ -70,7 +71,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 			initial={{ opacity: 0, y: 30 }}
 			whileInView={{ opacity: 1, y: 0 }}
 			whileHover={{ y: -6 }}
-			viewport={{ once: true }}
+			viewport={{ once: false }}
 			transition={{
 				duration: 0.7,
 				delay: index * 0.1,
@@ -275,7 +276,7 @@ export function HomeBusinessPackagesSection({
 						<motion.div
 							initial={{ opacity: 0, x: -20 }}
 							whileInView={{ opacity: 1, x: 0 }}
-							viewport={{ once: true }}
+							viewport={{ once: false }}
 							className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6 border border-brand-primary/10"
 						>
 							<span className="text-sm">
@@ -286,7 +287,7 @@ export function HomeBusinessPackagesSection({
 						<motion.h2
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
+							viewport={{ once: false }}
 							className="text-4xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9]"
 						>
 							Pilih Paket <br />
@@ -296,7 +297,7 @@ export function HomeBusinessPackagesSection({
 					<motion.p
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
-						viewport={{ once: true }}
+						viewport={{ once: false }}
 						transition={{ delay: 0.3 }}
 						className="text-lg text-slate-500 font-medium max-w-sm text-center lg:text-left mx-auto lg:mx-0"
 					>
@@ -319,7 +320,7 @@ export function HomeBusinessPackagesSection({
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
+					viewport={{ once: false }}
 					className="text-center mt-20"
 				>
 					{/* FIX: Hapus inner motion.div yang redundan — tidak ada motion props di dalamnya */}
@@ -332,21 +333,7 @@ export function HomeBusinessPackagesSection({
 							animate={{ x: [0, 5, 0] }}
 							transition={{ repeat: Infinity, duration: 1.5 }}
 						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="18"
-								height="18"
-								viewBox="0 0 24 24"
-								fill="none"
-								stroke="currentColor"
-								strokeWidth="2"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								className="text-brand-primary"
-							>
-								<line x1="5" y1="12" x2="19" y2="12" />
-								<polyline points="12 5 19 12 12 19" />
-							</svg>
+							<HiOutlineArrowRight size={18} />
 						</motion.div>
 					</Link>
 				</motion.div>

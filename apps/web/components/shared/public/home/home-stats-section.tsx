@@ -8,9 +8,15 @@ import {
 } from "react-icons/hi2";
 import { MdOutlineFlashOn } from "react-icons/md";
 
+import { CountUp } from "@/components/ui/count-up";
+
 interface Stat {
 	value: string;
 	label: string;
+	numericValue?: number;
+	decimal?: number;
+	suffix?: string;
+	prefix?: string;
 }
 
 interface HomeStatsSectionProps {
@@ -54,7 +60,7 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
 								key={stat.label}
 								initial={{ opacity: 0, y: 30 }}
 								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true }}
+								viewport={{ once: false }}
 								transition={{ delay: i * 0.1, duration: 0.8 }}
 								className="relative group flex flex-col items-center text-center"
 							>
@@ -66,7 +72,18 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
 								</div>
 
 								<div className="text-4xl lg:text-5xl font-black text-white font-[family-name:var(--font-heading)] mb-2 tracking-tight">
-									{stat.value}
+									{stat.numericValue !== undefined ? (
+										<CountUp
+											to={stat.numericValue}
+											decimal={stat.decimal ?? 0}
+											suffix={stat.suffix ?? ""}
+											prefix={stat.prefix ?? ""}
+											duration={2}
+											delay={i * 0.15}
+										/>
+									) : (
+										stat.value
+									)}
 								</div>
 								<div className="text-[10px] lg:text-xs font-black text-brand-accent uppercase tracking-[0.3em] leading-relaxed">
 									{stat.label}

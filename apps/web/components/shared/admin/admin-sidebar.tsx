@@ -159,7 +159,7 @@ export function AdminSidebar({
 
 			{/* Mobile Top Bar */}
 			<div className="lg:hidden fixed top-0 left-0 right-0 z-30 bg-white px-4 h-14 flex items-center justify-between">
-				<MahiraLogo size={24} priority />
+				<MahiraLogo size={24} />
 				<button
 					type="button"
 					onClick={() => setMobileOpen(!mobileOpen)}

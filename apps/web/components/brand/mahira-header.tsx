@@ -79,16 +79,14 @@ export function MahiraHeader() {
 
 	return (
 		<div key="header-root-container">
-			<motion.header
+			<header
 				key="header-main"
-				initial={{ y: -64, opacity: 0 }}
-				animate={{ y: 0, opacity: 1 }}
 				className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-border"
 			>
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex items-center justify-between h-16 lg:h-20">
 						<Link href="/" className="flex items-center">
-							<MahiraLogo size={36} priority />
+							<MahiraLogo size={36} />
 						</Link>
 
 						{/* Desktop Nav */}
@@ -249,7 +247,7 @@ export function MahiraHeader() {
 						</button>
 					</div>
 				</div>
-			</motion.header>
+			</header>
 
 			{/* Mobile Sidebar */}
 			<AnimatePresence key="mobile-menu-presence">

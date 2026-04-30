@@ -44,7 +44,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
+					viewport={{ once: false }}
 					className="inline-flex items-center gap-2 px-3 py-1 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-widest mb-6"
 				>
 					<span className="animate-pulse flex items-center justify-center">
@@ -56,7 +56,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 				<motion.h2
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
+					viewport={{ once: false }}
 					transition={{ delay: 0.1 }}
 					className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-tight"
 				>

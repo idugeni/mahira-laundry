@@ -1,36 +1,29 @@
 "use client";
 
-import { motion } from "motion/react";
 import Image from "next/image";
 
 interface MahiraLogoProps {
 	size?: number;
 	className?: string;
 	showText?: boolean;
-	priority?: boolean;
 }
 
 export function MahiraLogo({
 	size = 40,
 	className = "",
 	showText = true,
-	priority = false,
 }: MahiraLogoProps) {
 	return (
-		<motion.div
-			initial={{ opacity: 0, x: -10 }}
-			animate={{ opacity: 1, x: 0 }}
-			className={`flex items-center gap-3 ${className}`}
-		>
+		<div className={`flex items-center gap-3 ${className}`}>
 			<Image
 				src="/logo.png"
 				alt="Mahira Laundry Logo"
 				width={size}
 				height={size}
 				className="object-contain"
-				priority={priority}
-				loading={priority ? "eager" : "lazy"}
-				fetchPriority={priority ? "high" : "auto"}
+				priority
+				loading="eager"
+				fetchPriority="high"
 			/>
 			{showText && (
 				<div className="flex flex-col">
@@ -43,6 +36,6 @@ export function MahiraLogo({
 					</span>
 				</div>
 			)}
-		</motion.div>
+		</div>
 	);
 }

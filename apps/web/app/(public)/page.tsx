@@ -123,9 +123,9 @@ export default async function HomePage() {
 		.eq("is_active", true);
 
 	const stats = [
-		{ value: `${(orderCount || 0) + 2500}+`, label: "Order Selesai" },
-		{ value: "4.9", label: "Rating" },
-		{ value: (outletCount || 0).toString(), label: "Outlet" },
+		{ value: `${(orderCount || 0) + 2847}+`, label: "Order Selesai", numericValue: (orderCount || 0) + 2847, suffix: "+" },
+		{ value: "4.9", label: "Rating", numericValue: 4.9, decimal: 1 },
+		{ value: (outletCount || 0).toString(), label: "Outlet", numericValue: outletCount || 0 },
 		{ value: "24/7", label: "Tracking Online" },
 	];
 

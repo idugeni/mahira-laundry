@@ -94,7 +94,7 @@ export function HomeServicesSection({
 						<motion.div
 							initial={{ opacity: 0, x: -20 }}
 							whileInView={{ opacity: 1, x: 0 }}
-							viewport={{ once: true }}
+							viewport={{ once: false }}
 							className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6 border border-brand-primary/10"
 						>
 							<span className="text-sm">
@@ -105,7 +105,7 @@ export function HomeServicesSection({
 						<motion.h2
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
+							viewport={{ once: false }}
 							className="text-4xl lg:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.9]"
 						>
 							Layanan <br />
@@ -115,7 +115,7 @@ export function HomeServicesSection({
 					<motion.p
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
-						viewport={{ once: true }}
+						viewport={{ once: false }}
 						transition={{ delay: 0.3 }}
 						className="text-lg text-slate-500 font-medium max-w-sm text-center lg:text-left mx-auto lg:mx-0"
 					>
@@ -127,6 +127,10 @@ export function HomeServicesSection({
 				<LayoutGroup>
 					<motion.div
 						layout
+						initial={{ opacity: 0 }}
+						whileInView={{ opacity: 1 }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5 }}
 						className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
 					>
 						<AnimatePresence mode="popLayout">
@@ -139,6 +143,7 @@ export function HomeServicesSection({
 										key={service.id}
 										initial={{ opacity: 0, y: 20 }}
 										whileInView={{ opacity: 1, y: 0 }}
+										viewport={{ once: false }}
 										whileHover={{ y: -8 }}
 										transition={{
 											duration: 0.5,
@@ -207,23 +212,21 @@ export function HomeServicesSection({
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
+					viewport={{ once: false }}
 					className="mt-20 text-center"
 				>
-					<motion.div className="inline-block">
-						<Link
-							href="/layanan"
-							className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-brand-primary transition-all duration-300 shadow-2xl shadow-slate-200 hover:shadow-brand-primary/40"
+					<Link
+						href="/layanan"
+						className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-50 text-slate-900 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 border border-slate-100"
+					>
+						Eksplor Semua Layanan
+						<motion.div
+							animate={{ x: [0, 5, 0] }}
+							transition={{ repeat: Infinity, duration: 1.5 }}
 						>
-							Eksplor Semua Layanan
-							<motion.div
-								animate={{ x: [0, 5, 0] }}
-								transition={{ repeat: Infinity, duration: 1.5 }}
-							>
-								<HiOutlineArrowRight size={18} />
-							</motion.div>
-						</Link>
-					</motion.div>
+							<HiOutlineArrowRight size={18} />
+						</motion.div>
+					</Link>
 				</motion.div>
 			</div>
 		</section>

@@ -15,7 +15,9 @@
 		"db:generate": "cd apps/web && npm run db:generate",
 		"db:migrate": "cd apps/web && npm run db:migrate",
 		"db:push": "cd apps/web && npm run db:push",
-		"db:studio": "cd apps/web && npm run db:studio"
+		"db:studio": "cd apps/web && npm run db:studio",
+		"update:web": "cd apps/web && npx npm-check-updates -u",
+		"install:web": "cd apps/web && npm install"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.13",

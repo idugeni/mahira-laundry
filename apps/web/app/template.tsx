@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
@@ -11,71 +10,86 @@ export default function RootTemplate({
 	children: React.ReactNode;
 }) {
 	const [loading, setLoading] = useState(true);
+	const [exiting, setExiting] = useState(false);
+	const [gone, setGone] = useState(false);
 	const pathname = usePathname();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: pathname intentionally restarts the route transition loader.
 	useEffect(() => {
-		// Reset loading state setiap kali pathname berubah
 		setLoading(true);
+		setExiting(false);
+		setGone(false);
 
-		const timer = setTimeout(() => {
+		const exitTimer = setTimeout(() => setExiting(true), 600);
+		const goneTimer = setTimeout(() => {
+			setGone(true);
 			setLoading(false);
-		}, 450); // Jeda premium yang pas (tidak terlalu lama, tidak terlalu cepat)
+		}, 900);
 
-		return () => clearTimeout(timer);
+		return () => {
+			clearTimeout(exitTimer);
+			clearTimeout(goneTimer);
+		};
 	}, [pathname]);
 
 	return (
 		<div key="template-root-wrapper">
-			<AnimatePresence key="template-presence" mode="wait">
-				{loading && (
-					<motion.div
-						key="loading-overlay"
-						initial={{ opacity: 1 }}
-						exit={{ opacity: 0 }}
-						transition={{ duration: 0.3 }}
-						className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white"
+			{/* Splash Screen — pure Tailwind CSS */}
+			{!gone && (
+				<div
+					className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+						exiting ? "opacity-0 scale-[1.02]" : "opacity-100 scale-100"
+					}`}
+				>
+					<div
+						className={`flex flex-col items-center gap-8 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+							exiting ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
+						}`}
 					>
-						<motion.div
-							initial={{ scale: 0.85, opacity: 0 }}
-							animate={{ scale: 1, opacity: 1 }}
-							transition={{ duration: 0.3 }}
-							className="flex flex-col items-center gap-6"
-						>
-							<div className="p-4 bg-slate-50 rounded-3xl shadow-sm border border-slate-100">
-								<MahiraLogo size={64} showText={false} priority />
-							</div>
-
-							<div className="flex flex-col items-center gap-2">
-								<div className="h-1 w-24 bg-slate-100 rounded-full overflow-hidden relative">
-									<motion.div
-										initial={{ left: "-100%" }}
-										animate={{ left: "100%" }}
-										transition={{
-											duration: 0.8,
-											repeat: Infinity,
-											ease: "easeInOut",
-										}}
-										className="absolute inset-0 w-1/2 bg-brand-primary"
+						{/* Circular logo with spinning ring */}
+						<div className="relative w-28 h-28 flex items-center justify-center">
+							{/* Spinning ring */}
+							<div className="absolute inset-0 rounded-full animate-spin" style={{ animationDuration: "1.5s" }}>
+								<svg viewBox="0 0 112 112" className="w-full h-full" fill="none">
+									<circle cx="56" cy="56" r="54" stroke="rgb(241 245 249)" strokeWidth="3" />
+									<circle
+										cx="56" cy="56" r="54"
+										stroke="url(#splash-gradient)"
+										strokeWidth="3"
+										strokeLinecap="round"
+										strokeDasharray="84 255"
 									/>
-								</div>
-								<span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-300">
-									Mahira Laundry
-								</span>
+									<defs>
+										<linearGradient id="splash-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+											<stop offset="0%" stopColor="rgb(219 39 119)" />
+											<stop offset="100%" stopColor="rgb(251 113 133)" />
+										</linearGradient>
+									</defs>
+								</svg>
 							</div>
-						</motion.div>
-					</motion.div>
-				)}
-			</AnimatePresence>
+							{/* Logo inside circle */}
+							<div className="w-20 h-20 rounded-full bg-slate-50/80 backdrop-blur-sm flex items-center justify-center shadow-sm border border-slate-100/80">
+								<MahiraLogo size={48} showText={false} />
+							</div>
+						</div>
 
-			<motion.div
-				key={`page-content-${pathname}`}
-				initial={{ opacity: 0 }}
-				animate={{ opacity: loading ? 0 : 1 }}
-				transition={{ duration: 0.4 }}
+						<div className="flex flex-col items-center gap-2">
+							<span className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-300">
+								Mahira Laundry
+							</span>
+						</div>
+					</div>
+				</div>
+			)}
+
+			{/* Page Content — CSS transition */}
+			<div
+				className={`transition-opacity duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+					gone ? "opacity-100" : "opacity-0"
+				}`}
 			>
 				{children}
-			</motion.div>
+			</div>
 		</div>
 	);
 }

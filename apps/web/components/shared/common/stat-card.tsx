@@ -67,7 +67,7 @@ export function StatCard({
 	return (
 		<div
 			className={cn(
-				"group relative overflow-hidden rounded-xl sm:rounded-2xl border p-4 sm:p-6 shadow-sm transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-200/40",
+				"group relative overflow-hidden rounded-xl sm:rounded-2xl border p-4 sm:p-6 shadow-sm will-change-transform backface-hidden transition-[border-color,transform,opacity] duration-300 ease-out hover:-translate-y-1",
 				styles.card,
 				className,
 			)}
@@ -75,7 +75,7 @@ export function StatCard({
 			{/* Decorative Elements */}
 			<div
 				className={cn(
-					"absolute -right-4 -top-4 h-32 w-32 rounded-full blur-[40px] opacity-[0.08] transition-opacity duration-500 group-hover:opacity-[0.12]",
+					"absolute -right-4 -top-4 h-32 w-32 rounded-full blur-[40px] opacity-[0.08] will-change-[opacity] transition-opacity duration-500 ease-out group-hover:opacity-[0.12]",
 					styles.glow,
 				)}
 			/>
@@ -83,7 +83,7 @@ export function StatCard({
 			{/* Left Accent Bar */}
 			<div
 				className={cn(
-					"absolute left-0 top-0 bottom-0 w-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+					"absolute left-0 top-0 bottom-0 w-1.5 opacity-0 will-change-[opacity] group-hover:opacity-100 transition-opacity duration-300 ease-out",
 					styles.accent,
 				)}
 			/>
@@ -92,7 +92,7 @@ export function StatCard({
 				<div className="flex items-center justify-between">
 					<div
 						className={cn(
-							"flex h-12 w-12 items-center justify-center rounded-2xl border text-lg shadow-inner-sm transition-transform duration-300 group-hover:-translate-y-0.5",
+							"flex h-12 w-12 items-center justify-center rounded-2xl border text-lg shadow-inner-sm will-change-transform transition-transform duration-300 ease-out group-hover:-translate-y-1",
 							styles.icon,
 						)}
 					>
@@ -136,7 +136,7 @@ export function StatCard({
 			</div>
 
 			{/* Bottom Decorative Pattern */}
-			<div className="absolute bottom-0 right-0 p-3 opacity-[0.03] group-hover:opacity-[0.07] transition-opacity duration-500">
+			<div className="absolute bottom-0 right-0 p-3 opacity-[0.03] will-change-[opacity] group-hover:opacity-[0.07] transition-opacity duration-500 ease-out">
 				<svg
 					width="40"
 					height="40"

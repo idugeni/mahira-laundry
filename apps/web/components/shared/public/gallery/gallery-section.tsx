@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -29,8 +29,11 @@ function GalleryCard({
 }) {
 	return (
 		<motion.div
+			initial={{ opacity: 0, y: 20 }}
+			whileInView={{ opacity: 1, y: 0 }}
 			whileHover={{ y: -4 }}
-			transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+			viewport={{ once: false }}
+			transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
 			className="group relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-100 cursor-pointer"
 			onClick={onClick}
 		>
@@ -133,6 +136,17 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 		return () => window.removeEventListener("keydown", handleKeyDown);
 	}, [selectedItem, handlePrev, handleNext]);
 
+	useEffect(() => {
+		if (selectedItem) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [selectedItem]);
+
 	return (
 		<section
 			className={`${isGalleryPage ? "pt-10 pb-32" : "py-14 sm:py-16"} bg-white relative overflow-hidden`}
@@ -149,7 +163,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 						<motion.div
 							initial={{ opacity: 0, y: -10 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
+							viewport={{ once: false }}
 							className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.2em] mb-6 border border-brand-primary/10"
 						>
 							<motion.span
@@ -164,7 +178,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 						<motion.h2
 							initial={{ opacity: 0, y: 30 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
+							viewport={{ once: false }}
 							transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
 							className="text-6xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
 						>
@@ -174,103 +188,101 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 					</div>
 
 					<motion.div
-						initial={{ opacity: 0, y: 20 }}
+						initial={{ opacity: 0, y: 10 }}
 						whileInView={{ opacity: 1, y: 0 }}
-						viewport={{ once: true }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
 						className="flex flex-wrap justify-center gap-3"
 					>
-						<LayoutGroup>
-							{categories.map((cat) => (
-								<button
-									type="button"
-									key={cat}
-									onClick={() => setFilter(cat)}
-									className={`relative px-8 py-4 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-200 ${
-										filter === cat
-											? "text-white"
-											: "text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300"
-									}`}
-								>
-									{filter === cat && (
-										<motion.div
-											layoutId="active-cat-bg"
-											className="absolute inset-0 bg-slate-900 rounded-full shadow-lg shadow-slate-900/20"
-											transition={{
-												type: "spring",
-												bounce: 0.15,
-												duration: 0.5,
-											}}
-										/>
-									)}
-									<span className="relative z-10">{cat}</span>
-								</button>
-							))}
-						</LayoutGroup>
+						{categories.map((cat) => (
+							<button
+								type="button"
+								key={cat}
+								onClick={() => setFilter(cat)}
+								className={`px-6 sm:px-8 py-3 sm:py-4 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 ease-out ${
+									filter === cat
+										? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 scale-105"
+										: "text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-sm"
+								}`}
+							>
+								{cat}
+							</button>
+						))}
 					</motion.div>
 				</div>
 
-				<AnimatePresence mode="wait">
-					<motion.div
-						key={filter}
-						initial={{ opacity: 0, y: 12 }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: -12 }}
-						transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-						className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-					>
-						{visibleItems.length === 0 ? (
-							<div className="col-span-full py-16 text-center bg-slate-50/50 rounded-[2rem] border-2 border-dashed border-slate-100 flex flex-col items-center justify-center">
-								<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-200 shadow-sm mb-6">
-									<HiOutlineViewColumns size={40} />
-								</div>
-								<p className="text-slate-400 font-black uppercase tracking-widest text-xs">
-									Galeri Belum Tersedia.
-								</p>
+				<motion.div
+					key={filter}
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
+					viewport={{ once: false }}
+					transition={{ duration: 0.3 }}
+					className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+				>
+					{visibleItems.length === 0 ? (
+						<div className="col-span-full py-16 text-center bg-slate-50/50 rounded-[2rem] border-2 border-dashed border-slate-100 flex flex-col items-center justify-center">
+							<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-200 shadow-sm mb-6">
+								<HiOutlineViewColumns size={40} />
 							</div>
-						) : (
-							visibleItems.map((item, i) => (
-								<GalleryCard
-									key={item.id}
-									item={item}
-									index={i}
-									onClick={() => setSelectedItem(item)}
-								/>
-							))
-						)}
-					</motion.div>
-				</AnimatePresence>
+							<p className="text-slate-400 font-black uppercase tracking-widest text-xs">
+								Galeri Belum Tersedia.
+							</p>
+						</div>
+					) : (
+						visibleItems.map((item, i) => (
+							<GalleryCard
+								key={item.id}
+								item={item}
+								index={i}
+								onClick={() => setSelectedItem(item)}
+							/>
+						))
+					)}
+				</motion.div>
 
 				{hasMore && (
 					<motion.div
-						initial={{ opacity: 0 }}
-						whileInView={{ opacity: 1 }}
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
 						className="mt-20 text-center"
 					>
 						<motion.button
 							type="button"
 							onClick={() => setDisplayLimit((prev) => prev + 6)}
-							className="inline-flex items-center gap-5 px-6 sm:px-8 py-6 bg-slate-900 text-white rounded-full font-black text-sm uppercase tracking-[0.2em] hover:bg-slate-800 transition-all duration-300 shadow-2xl shadow-slate-200"
+							className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-50 text-slate-900 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 border border-slate-100"
 						>
 							<span>Muat Koleksi Lain</span>
-							<HiOutlineArrowRight size={20} />
+							<motion.div
+								animate={{ x: [0, 5, 0] }}
+								transition={{ repeat: Infinity, duration: 1.5 }}
+							>
+								<HiOutlineArrowRight size={18} />
+							</motion.div>
 						</motion.button>
 					</motion.div>
 				)}
 
 				{!hasMore && showGalleryLink && (
 					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: false }}
+						transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
 						className="mt-20 text-center"
 					>
 						<Link
 							href="/galeri"
-							className="inline-flex items-center gap-4 px-10 py-5 border border-slate-200 text-slate-500 rounded-full font-black text-xs uppercase tracking-widest hover:border-brand-primary hover:text-brand-primary transition-all duration-300 group"
+							className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-50 text-slate-900 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 border border-slate-100"
 						>
 							<span>Buka Galeri Utama</span>
-							<span className="group-hover:translate-x-2 transition-transform">
-								<HiOutlineArrowRight />
-							</span>
+							<motion.div
+								animate={{ x: [0, 5, 0] }}
+								transition={{ repeat: Infinity, duration: 1.5 }}
+							>
+								<HiOutlineArrowRight size={18} />
+							</motion.div>
 						</Link>
 					</motion.div>
 				)}
@@ -283,7 +295,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-12 lg:p-20"
+						className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 lg:p-20"
 					>
 						<motion.div
 							initial={{ opacity: 0 }}
@@ -291,7 +303,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							exit={{ opacity: 0 }}
 							onClick={() => setSelectedItem(null)}
 							role="presentation"
-							className="absolute inset-0 bg-slate-950/98 backdrop-blur-2xl"
+							className="absolute inset-0 bg-black/30 backdrop-blur-sm"
 						/>
 
 						<motion.div
@@ -300,10 +312,10 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							exit={{ opacity: 0, scale: 0.95 }}
 							transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
 							onClick={(e: React.MouseEvent) => e.stopPropagation()}
-							className="relative w-full max-w-7xl aspect-[16/9] lg:aspect-[2/1] flex flex-col lg:flex-row bg-slate-950 rounded-[2rem] overflow-hidden shadow-[0_50px_200px_-50px_rgba(0,0,0,0.8)]"
+							className="relative w-full max-w-7xl h-[90dvh] sm:h-[85dvh] lg:h-auto lg:aspect-[2/1] flex flex-col lg:flex-row bg-white/80 backdrop-blur-md rounded-[2rem] overflow-hidden shadow-[0_50px_200px_-50px_rgba(0,0,0,0.8)]"
 						>
 							{/* Image Container - Full Height */}
-							<div className="relative w-full lg:w-3/5 aspect-[4/3] lg:aspect-auto lg:h-full overflow-hidden group">
+							<div className="relative w-full lg:w-3/5 flex-1 min-h-0 lg:flex-none lg:aspect-auto lg:h-full overflow-hidden group">
 								<AnimatePresence mode="wait">
 									<motion.div
 										key={selectedItem.id}
@@ -344,7 +356,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							</div>
 
 							{/* Info Section - Centered */}
-							<div className="flex-1 flex flex-col items-center justify-center p-8 sm:p-10 lg:p-12 relative bg-white">
+							<div className="flex-none sm:flex-1 sm:min-h-0 flex flex-col items-center justify-center p-6 sm:p-10 lg:p-12 relative bg-white max-h-[40dvh] sm:max-h-none lg:max-h-none overflow-y-auto">
 								<button
 									type="button"
 									onClick={() => setSelectedItem(null)}

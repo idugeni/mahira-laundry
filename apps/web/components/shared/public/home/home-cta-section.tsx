@@ -12,7 +12,7 @@ export function HomeCtaSection() {
 				<motion.div
 					initial={{ opacity: 0, y: 40 }}
 					whileInView={{ opacity: 1, y: 0 }}
-					viewport={{ once: true }}
+					viewport={{ once: false }}
 					transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
 					className="group relative p-10 lg:p-10 rounded-[2rem] bg-slate-900 text-white shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden"
 				>
@@ -20,7 +20,7 @@ export function HomeCtaSection() {
 					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 0.5 }}
-						viewport={{ once: true }}
+						viewport={{ once: false }}
 						transition={{ duration: 1.2, delay: 0.3 }}
 						className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-brand-primary/20 via-transparent to-transparent group-hover:opacity-70 transition-opacity duration-1000"
 					/>
@@ -32,7 +32,7 @@ export function HomeCtaSection() {
 							<motion.div
 								initial={{ opacity: 0, x: -20 }}
 								whileInView={{ opacity: 1, x: 0 }}
-								viewport={{ once: true }}
+								viewport={{ once: false }}
 								transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
 								className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-brand-accent text-[10px] font-black uppercase tracking-[0.2em] mb-8"
 							>
@@ -43,7 +43,7 @@ export function HomeCtaSection() {
 							<motion.h2
 								initial={{ opacity: 0, y: 20 }}
 								whileInView={{ opacity: 1, y: 0 }}
-								viewport={{ once: true }}
+								viewport={{ once: false }}
 								transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
 								className="text-3xl sm:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] leading-[1.1] mb-6"
 							>
@@ -56,7 +56,7 @@ export function HomeCtaSection() {
 							<motion.p
 								initial={{ opacity: 0 }}
 								whileInView={{ opacity: 1 }}
-								viewport={{ once: true }}
+								viewport={{ once: false }}
 								transition={{ duration: 0.6, delay: 0.35 }}
 								className="text-lg text-white/60 leading-relaxed max-w-xl mb-10"
 							>
@@ -68,7 +68,7 @@ export function HomeCtaSection() {
 							<motion.div
 								initial={{ opacity: 0 }}
 								whileInView={{ opacity: 1 }}
-								viewport={{ once: true }}
+								viewport={{ once: false }}
 								transition={{ duration: 0.6, delay: 0.5 }}
 								className="flex flex-wrap justify-center lg:justify-start gap-8 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
 							>
@@ -77,7 +77,7 @@ export function HomeCtaSection() {
 										key={feat}
 										initial={{ opacity: 0, x: -10 }}
 										whileInView={{ opacity: 1, x: 0 }}
-										viewport={{ once: true }}
+										viewport={{ once: false }}
 										transition={{ duration: 0.4, delay: 0.55 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
 										className="flex items-center gap-2 text-sm font-bold"
 									>
@@ -93,7 +93,7 @@ export function HomeCtaSection() {
 						<motion.div
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
-							viewport={{ once: true }}
+							viewport={{ once: false }}
 							transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
 							className="shrink-0 w-full lg:w-auto flex justify-center"
 						>

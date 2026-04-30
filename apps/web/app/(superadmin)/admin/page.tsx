@@ -62,7 +62,7 @@ export default async function SuperadminDashboardPage() {
 					subtitle="Operasional"
 					icon="🏪"
 					variant="default"
-					className="delay-100"
+					className="animate-fade-in-up opacity-0 delay-100"
 				/>
 				<StatCard
 					title="Order Bulan Ini"
@@ -75,7 +75,7 @@ export default async function SuperadminDashboardPage() {
 						positive: ordersGrowthPositive,
 						label: "vs bln lalu",
 					}}
-					className="delay-200"
+					className="animate-fade-in-up opacity-0 delay-200"
 				/>
 				<StatCard
 					title="Revenue Bulan Ini"
@@ -88,7 +88,7 @@ export default async function SuperadminDashboardPage() {
 						positive: revenueGrowthPositive,
 						label: "vs bln lalu",
 					}}
-					className="delay-200"
+					className="animate-fade-in-up opacity-0 delay-300"
 				/>
 				<StatCard
 					title="Total Pelanggan"
@@ -96,14 +96,14 @@ export default async function SuperadminDashboardPage() {
 					subtitle={`${stats.activeOrders} order aktif`}
 					icon="👥"
 					variant="success"
-					className="delay-300"
+					className="animate-fade-in-up opacity-0 delay-400"
 				/>
 			</div>
 
 			{/* Charts Row */}
 			<div className="grid lg:grid-cols-3 gap-6">
 				{/* Revenue Chart */}
-				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-sm">
+				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-sm will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="flex items-center justify-between mb-6">
 						<div>
 							<h2 className="text-base font-bold text-slate-900">
@@ -129,7 +129,7 @@ export default async function SuperadminDashboardPage() {
 				</div>
 
 				{/* Quick Stats */}
-				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-sm">
+				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-sm will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<h2 className="text-base font-bold text-slate-900 mb-4">
 						Ringkasan Cepat
 					</h2>
@@ -197,7 +197,7 @@ export default async function SuperadminDashboardPage() {
 
 			<div className="grid lg:grid-cols-3 gap-6">
 				{/* Recent Orders Table */}
-				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-sm overflow-hidden">
+				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-sm overflow-hidden will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
 						<div>
 							<h2 className="text-base font-bold text-slate-900">
@@ -242,7 +242,7 @@ export default async function SuperadminDashboardPage() {
 									{recentOrders.map((order) => (
 										<tr
 											key={order.id}
-											className="hover:bg-slate-50/50 transition-colors"
+											className="hover:bg-slate-50/50 transition-colors duration-200 ease-out"
 										>
 											<td className="px-6 py-3.5">
 												<p className="font-mono text-[10px] font-bold text-slate-500 uppercase">
@@ -268,7 +268,7 @@ export default async function SuperadminDashboardPage() {
 											<td className="px-6 py-3.5 text-right">
 												<a
 													href="/admin/antrian"
-													className="inline-flex items-center px-3 py-1 bg-slate-900 text-white text-[10px] font-bold rounded-lg hover:bg-slate-800 transition-colors uppercase tracking-widest"
+													className="inline-flex items-center px-3 py-1 bg-slate-900 text-white text-[10px] font-bold rounded-lg hover:bg-slate-800 active:scale-95 transition-[background-color,transform] duration-200 ease-out uppercase tracking-widest"
 												>
 													Proses
 												</a>
@@ -282,7 +282,7 @@ export default async function SuperadminDashboardPage() {
 				</div>
 
 				{/* Audit Logs */}
-				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-sm flex flex-col">
+				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-sm flex flex-col will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
 						<h2 className="text-base font-bold text-slate-900">Aktivitas</h2>
 						<span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
