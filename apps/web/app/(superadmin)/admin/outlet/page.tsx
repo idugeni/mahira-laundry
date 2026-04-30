@@ -148,7 +148,7 @@ export default async function OutletPage() {
 										</div>
 										<span
 											className={cn(
-												"absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-4 border-white shadow-sm flex items-center justify-center",
+												"absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-4 border-white shadow-xs flex items-center justify-center",
 												outlet.is_active ? "bg-emerald-500" : "bg-rose-500",
 											)}
 										/>

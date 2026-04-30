@@ -1,4 +1,4 @@
-import { Ratelimit, type Duration } from "@upstash/ratelimit";
+import { type Duration, Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { NextResponse } from "next/server";
 
@@ -34,7 +34,7 @@ const redis: Redis | null =
 		? new Redis({
 				url: process.env.UPSTASH_REDIS_REST_URL,
 				token: process.env.UPSTASH_REDIS_REST_TOKEN,
-		  })
+			})
 		: null;
 
 // ─── Noop Limiter ─────────────────────────────────────────────────────────────
@@ -45,16 +45,16 @@ const redis: Redis | null =
  * Dengan demikian kode consumer tidak perlu mengecek apakah limiter aktif.
  */
 function createNoopLimiter(): Pick<Ratelimit, "limit"> {
-		return {
-			limit: async () => ({
-				success: true,
-				pending: Promise.resolve(),
-				remaining: Number.MAX_SAFE_INTEGER,
-				limit: Number.MAX_SAFE_INTEGER,
-				reset: Date.now() + 60_000,
-			}),
-		};
-	}
+	return {
+		limit: async () => ({
+			success: true,
+			pending: Promise.resolve(),
+			remaining: Number.MAX_SAFE_INTEGER,
+			limit: Number.MAX_SAFE_INTEGER,
+			reset: Date.now() + 60_000,
+		}),
+	};
+}
 
 // ─── Factory ──────────────────────────────────────────────────────────────────
 

@@ -46,7 +46,7 @@ export function LegalLayout({
 						animate={{ opacity: 1 }}
 						className="inline-flex items-center gap-3 px-6 py-2.5 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] mb-10 border border-brand-primary/10"
 					>
-						<span className="w-5 h-5 flex items-center justify-center bg-white rounded-full shadow-sm">
+						<span className="w-5 h-5 flex items-center justify-center bg-white rounded-full shadow-xs">
 							<HiOutlineScale size={14} />
 						</span>
 						<span>Trust & Transparency</span>
@@ -94,7 +94,7 @@ export function LegalLayout({
 					initial={{ opacity: 0, y: 40 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.8, duration: 1 }}
-					className="relative p-10 lg:p-12 bg-white rounded-[2rem] border border-slate-100 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.04)]"
+					className="relative p-0 lg:p-10 xl:p-12 lg:bg-white lg:rounded-[2rem] lg:border lg:border-slate-100 lg:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.04)]"
 				>
 					<div className="prose prose-slate max-w-none prose-headings:font-black prose-headings:text-slate-900 prose-headings:font-[family-name:var(--font-heading)] prose-headings:tracking-tighter prose-p:text-lg prose-p:text-slate-600 prose-p:leading-relaxed prose-li:text-slate-600 prose-li:text-lg prose-h2:text-4xl prose-h2:mt-20 prose-h2:mb-10 prose-h2:border-b-2 prose-h2:border-slate-50 prose-h2:pb-4 font-medium">
 						{children}

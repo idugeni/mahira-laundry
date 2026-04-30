@@ -3,12 +3,11 @@
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import {
 	HiOutlineInformationCircle,
 	HiOutlineMapPin,
-	HiOutlinePhoto,
 	HiOutlineSparkles,
 } from "react-icons/hi2";
 import { MdOutlineLocalLaundryService } from "react-icons/md";
@@ -60,7 +59,6 @@ const quickPages = [
 ];
 
 export function CariClient({ services, galleryItems }: CariClientProps) {
-	const router = useRouter();
 	const searchParams = useSearchParams();
 	const [query, setQuery] = useState(searchParams.get("q") || "");
 

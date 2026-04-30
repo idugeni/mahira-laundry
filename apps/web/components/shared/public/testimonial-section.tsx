@@ -154,7 +154,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 			</div>
 
 			<div className="flex items-center gap-4">
-				<div className="w-12 h-12 rounded-full bg-brand-primary/10 border-2 border-white flex items-center justify-center font-black text-brand-primary text-sm shadow-sm ring-4 ring-slate-50">
+				<div className="w-12 h-12 rounded-full bg-brand-primary/10 border-2 border-white flex items-center justify-center font-black text-brand-primary text-sm shadow-xs ring-4 ring-slate-50">
 					{name.charAt(0)}
 				</div>
 				<div>

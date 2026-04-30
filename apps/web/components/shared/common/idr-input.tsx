@@ -36,7 +36,7 @@ export function IDRInput({
 			value={displayValue}
 			onChange={handleChange}
 			placeholder={placeholder}
-			className={`w-full px-4 py-2.5 rounded-lg border border-border bg-white text-sm focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary ${className}`}
+			className={`w-full px-4 py-2.5 rounded-lg border border-border bg-white text-sm focus:outline-hidden focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary ${className}`}
 		/>
 	);
 }

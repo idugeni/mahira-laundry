@@ -101,8 +101,8 @@ export default async function PegawaiPage({
 							Manajemen <span className="text-emerald-400 italic">Pegawai</span>
 						</h1>
 						<p className="text-slate-400 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
-							Kelola seluruh sumber daya manusia Mahira Group dari satu
-							titik kendali tertinggi.
+							Kelola seluruh sumber daya manusia Mahira Group dari satu titik
+							kendali tertinggi.
 						</p>
 					</div>
 
@@ -130,7 +130,7 @@ export default async function PegawaiPage({
 					<Input
 						name="q"
 						defaultValue={params.q ?? ""}
-						className="pl-11 pr-4 h-11 w-full bg-white rounded-xl border-slate-100 shadow-sm focus:ring-4 focus:ring-emerald-500/5 transition-all font-bold text-sm"
+						className="pl-11 pr-4 h-11 w-full bg-white rounded-xl border-slate-100 shadow-xs focus:ring-4 focus:ring-emerald-500/5 transition-all font-bold text-sm"
 						placeholder="Cari nama, telepon, outlet, atau role..."
 					/>
 				</form>
@@ -195,7 +195,7 @@ export default async function PegawaiPage({
 										</div>
 										<span
 											className={cn(
-												"absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-4 border-white shadow-sm",
+												"absolute -bottom-1 -right-1 w-6 h-6 rounded-full border-4 border-white shadow-xs",
 												s.is_active ? "bg-emerald-500" : "bg-slate-300",
 											)}
 										/>

@@ -51,7 +51,7 @@ export function OrderDetailStep({
 							onChange={(e) => onAddressChange(e.target.value)}
 							rows={3}
 							placeholder="Masukkan alamat lengkap..."
-							className="w-full p-6 bg-white border border-slate-100 rounded-[30px] font-medium outline-none focus:border-brand-primary/30 transition-all shadow-sm"
+							className="w-full p-6 bg-white border border-slate-100 rounded-[30px] font-medium outline-hidden focus:border-brand-primary/30 transition-all shadow-xs"
 						/>
 					</div>
 					<div className="grid grid-cols-2 gap-4">
@@ -67,7 +67,7 @@ export function OrderDetailStep({
 								type="date"
 								value={pickupDate}
 								onChange={(e) => onDateChange(e.target.value)}
-								className="w-full p-6 bg-white border border-slate-100 rounded-[30px] font-medium outline-none focus:border-brand-primary/30 transition-all shadow-sm"
+								className="w-full p-6 bg-white border border-slate-100 rounded-[30px] font-medium outline-hidden focus:border-brand-primary/30 transition-all shadow-xs"
 							/>
 						</div>
 						<div className="space-y-3">
@@ -75,7 +75,7 @@ export function OrderDetailStep({
 								Waktu
 							</p>
 							<Select value={pickupTime} onValueChange={onTimeChange}>
-								<SelectTrigger className="w-full h-[68px] px-6 bg-white border border-slate-100 rounded-[30px] font-bold outline-none focus:ring-brand-primary/20 transition-all shadow-sm">
+								<SelectTrigger className="w-full h-[68px] px-6 bg-white border border-slate-100 rounded-[30px] font-bold outline-hidden focus:ring-brand-primary/20 transition-all shadow-xs">
 									<SelectValue placeholder="Pilih Waktu" />
 								</SelectTrigger>
 								<SelectContent className="rounded-3xl border-slate-100 shadow-2xl">

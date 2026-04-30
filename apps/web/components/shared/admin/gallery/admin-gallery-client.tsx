@@ -300,33 +300,33 @@ export function AdminGalleryClient({
 					<div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6 px-4 sm:px-0">
 						<LayoutGroup>
 							<div className="flex flex-wrap items-center gap-2 sm:gap-3">
-							{["Semua", ...categories].map((cat) => (
-								<button
-									type="button"
-									key={cat}
-									onClick={() => handleCategoryChange(cat)}
-									className={cn(
-										"relative rounded-xl sm:rounded-2xl h-9 sm:h-11 px-3 sm:px-6 font-black text-[9px] sm:text-[10px] uppercase tracking-widest transition-colors duration-200",
-										activeCategory === cat
-											? "text-white"
-											: "text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300",
-									)}
-								>
-									{activeCategory === cat && (
-										<motion.div
-											layoutId="admin-active-cat-bg"
-											className="absolute inset-0 bg-indigo-600 rounded-xl sm:rounded-2xl shadow-lg shadow-indigo-500/20"
-											transition={{
-												type: "spring",
-												bounce: 0.15,
-												duration: 0.5,
-											}}
-										/>
-									)}
-									<span className="relative z-10">{cat}</span>
-								</button>
-							))}
-						</div>
+								{["Semua", ...categories].map((cat) => (
+									<button
+										type="button"
+										key={cat}
+										onClick={() => handleCategoryChange(cat)}
+										className={cn(
+											"relative rounded-xl sm:rounded-2xl h-9 sm:h-11 px-3 sm:px-6 font-black text-[9px] sm:text-[10px] uppercase tracking-widest transition-colors duration-200",
+											activeCategory === cat
+												? "text-white"
+												: "text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300",
+										)}
+									>
+										{activeCategory === cat && (
+											<motion.div
+												layoutId="admin-active-cat-bg"
+												className="absolute inset-0 bg-indigo-600 rounded-xl sm:rounded-2xl shadow-lg shadow-indigo-500/20"
+												transition={{
+													type: "spring",
+													bounce: 0.15,
+													duration: 0.5,
+												}}
+											/>
+										)}
+										<span className="relative z-10">{cat}</span>
+									</button>
+								))}
+							</div>
 						</LayoutGroup>
 					</div>
 
@@ -338,148 +338,148 @@ export function AdminGalleryClient({
 							exit={{ opacity: 0, y: -12 }}
 							transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
 						>
-						{filteredItems.length === 0 ? (
-							<div className="h-[300px] sm:h-[420px] flex flex-col items-center justify-center bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 text-slate-300 shadow-lg shadow-slate-200/40">
-								<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-5 border-4 border-dashed border-slate-100">
-									<ImageIcon size={32} />
+							{filteredItems.length === 0 ? (
+								<div className="h-[300px] sm:h-[420px] flex flex-col items-center justify-center bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 text-slate-300 shadow-lg shadow-slate-200/40">
+									<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-5 border-4 border-dashed border-slate-100">
+										<ImageIcon size={32} />
+									</div>
+									<h3 className="text-xl sm:text-2xl font-black uppercase text-slate-800 tracking-tight">
+										Perpustakaan Visual Kosong
+									</h3>
+									<p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-2">
+										Tidak ada aset pada kategori {activeCategory}
+									</p>
 								</div>
-								<h3 className="text-xl sm:text-2xl font-black uppercase text-slate-800 tracking-tight">
-									Perpustakaan Visual Kosong
-								</h3>
-								<p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-2">
-									Tidak ada aset pada kategori {activeCategory}
-								</p>
-							</div>
-						) : (
-							<>
-								<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
-									{paginatedItems.map((item) => (
-										<motion.div
-											key={item.id}
-											className="group relative bg-white rounded-none sm:rounded-2xl overflow-hidden border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-100 transition-shadow duration-300"
-									>
-										<div className="relative aspect-[4/3] overflow-hidden">
-											<Image
-												src={item.image_url}
-												alt={item.title}
-												fill
-												className="object-cover transition-opacity duration-300 group-hover:opacity-90"
-											/>
+							) : (
+								<>
+									<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
+										{paginatedItems.map((item) => (
+											<motion.div
+												key={item.id}
+												className="group relative bg-white rounded-none sm:rounded-2xl overflow-hidden border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-100 transition-shadow duration-300"
+											>
+												<div className="relative aspect-[4/3] overflow-hidden">
+													<Image
+														src={item.image_url}
+														alt={item.title}
+														fill
+														className="object-cover transition-opacity duration-300 group-hover:opacity-90"
+													/>
 
-											{/* Overlay Controls */}
-											<div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 sm:p-8">
-												<div className="flex items-center justify-between gap-4">
-													<div className="flex-1 min-w-0">
-														<Badge className="bg-white/20 backdrop-blur-md text-white border-none text-[8px] font-black uppercase tracking-widest mb-2 px-3">
-															{item.category}
-														</Badge>
-														<h4 className="font-black text-white text-lg sm:text-xl uppercase tracking-tight truncate">
-															{item.title}
-														</h4>
+													{/* Overlay Controls */}
+													<div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-6 sm:p-8">
+														<div className="flex items-center justify-between gap-4">
+															<div className="flex-1 min-w-0">
+																<Badge className="bg-white/20 backdrop-blur-md text-white border-none text-[8px] font-black uppercase tracking-widest mb-2 px-3">
+																	{item.category}
+																</Badge>
+																<h4 className="font-black text-white text-lg sm:text-xl uppercase tracking-tight truncate">
+																	{item.title}
+																</h4>
+															</div>
+															<div className="flex gap-2">
+																<Button
+																	size="icon"
+																	variant="ghost"
+																	className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/10 text-white hover:bg-white hover:text-slate-900 transition-colors"
+																	onClick={() => startEdit(item)}
+																>
+																	<Edit3 size={18} />
+																</Button>
+																<Button
+																	size="icon"
+																	variant="ghost"
+																	className="w-10 h-10 rounded-xl bg-red-500/20 backdrop-blur-xl border border-red-500/10 text-red-100 hover:bg-red-500 hover:text-white transition-colors"
+																	onClick={() =>
+																		handleDelete(item.id, item.image_url)
+																	}
+																>
+																	<Trash2 size={18} />
+																</Button>
+															</div>
+														</div>
 													</div>
-													<div className="flex gap-2">
-														<Button
-															size="icon"
-															variant="ghost"
-															className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/10 text-white hover:bg-white hover:text-slate-900 transition-colors"
-															onClick={() => startEdit(item)}
+												</div>
+
+												{/* Edit Mode or Normal Footer */}
+												{editingId === item.id ? (
+													<div className="p-4 sm:p-6 space-y-3 bg-slate-50">
+														<Input
+															value={editTitle}
+															onChange={(e) => setEditTitle(e.target.value)}
+															className="rounded-xl font-bold text-sm border-slate-200"
+															placeholder="Judul..."
+														/>
+														<Select
+															value={editCategory}
+															onValueChange={setEditCategory}
 														>
-															<Edit3 size={18} />
-														</Button>
-														<Button
-															size="icon"
-															variant="ghost"
-															className="w-10 h-10 rounded-xl bg-red-500/20 backdrop-blur-xl border border-red-500/10 text-red-100 hover:bg-red-500 hover:text-white transition-colors"
-															onClick={() =>
-																handleDelete(item.id, item.image_url)
-															}
-														>
-															<Trash2 size={18} />
-														</Button>
+															<SelectTrigger className="rounded-xl font-bold text-sm border-slate-200">
+																<SelectValue />
+															</SelectTrigger>
+															<SelectContent className="rounded-xl">
+																{categories.map((c) => (
+																	<SelectItem key={c} value={c}>
+																		{c}
+																	</SelectItem>
+																))}
+															</SelectContent>
+														</Select>
+														<div className="flex gap-2">
+															<Button
+																size="sm"
+																className="flex-1 rounded-xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-widest"
+																onClick={() => saveEdit(item.id)}
+															>
+																<Check size={14} className="mr-1" /> Simpan
+															</Button>
+															<Button
+																size="sm"
+																variant="outline"
+																className="rounded-xl font-black text-[10px] uppercase tracking-widest"
+																onClick={cancelEdit}
+															>
+																<X size={14} />
+															</Button>
+														</div>
 													</div>
-												</div>
-											</div>
-										</div>
-
-										{/* Edit Mode or Normal Footer */}
-										{editingId === item.id ? (
-											<div className="p-4 sm:p-6 space-y-3 bg-slate-50">
-												<Input
-													value={editTitle}
-													onChange={(e) => setEditTitle(e.target.value)}
-													className="rounded-xl font-bold text-sm border-slate-200"
-													placeholder="Judul..."
-												/>
-												<Select
-													value={editCategory}
-													onValueChange={setEditCategory}
-												>
-													<SelectTrigger className="rounded-xl font-bold text-sm border-slate-200">
-														<SelectValue />
-													</SelectTrigger>
-													<SelectContent className="rounded-xl">
-														{categories.map((c) => (
-															<SelectItem key={c} value={c}>
-																{c}
-															</SelectItem>
-														))}
-													</SelectContent>
-												</Select>
-												<div className="flex gap-2">
-													<Button
-														size="sm"
-														className="flex-1 rounded-xl bg-slate-900 text-white font-black text-[10px] uppercase tracking-widest"
-														onClick={() => saveEdit(item.id)}
-													>
-														<Check size={14} className="mr-1" /> Simpan
-													</Button>
-													<Button
-														size="sm"
-														variant="outline"
-														className="rounded-xl font-black text-[10px] uppercase tracking-widest"
-														onClick={cancelEdit}
-													>
-														<X size={14} />
-													</Button>
-												</div>
-											</div>
-										) : (
-											<div className="p-4 sm:p-6 group-hover:bg-slate-900 transition-colors duration-500">
-												<div className="flex items-center justify-between">
-													<div className="flex items-center gap-2">
-														<div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
-														<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-indigo-400 transition-colors truncate max-w-[120px]">
-															{item.title}
-														</p>
+												) : (
+													<div className="p-4 sm:p-6 group-hover:bg-slate-900 transition-colors duration-500">
+														<div className="flex items-center justify-between">
+															<div className="flex items-center gap-2">
+																<div className="w-1.5 h-1.5 rounded-full bg-indigo-500" />
+																<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest group-hover:text-indigo-400 transition-colors truncate max-w-[120px]">
+																	{item.title}
+																</p>
+															</div>
+															<Badge className="bg-slate-50 group-hover:bg-white/5 group-hover:text-slate-400 text-slate-400 border-none font-bold text-[9px] uppercase tracking-widest shadow-none">
+																{new Date(item.created_at).toLocaleDateString()}
+															</Badge>
+														</div>
 													</div>
-													<Badge className="bg-slate-50 group-hover:bg-white/5 group-hover:text-slate-400 text-slate-400 border-none font-bold text-[9px] uppercase tracking-widest shadow-none">
-														{new Date(item.created_at).toLocaleDateString()}
-													</Badge>
-												</div>
-											</div>
-										)}
-									</motion.div>
-								))}
-							</div>
+												)}
+											</motion.div>
+										))}
+									</div>
 
-							<PaginationControls
-								currentPage={currentPage}
-								totalPages={totalPages}
-								onPageChange={setCurrentPage}
-								totalItems={filteredItems.length}
-								itemsPerPage={pageSize}
-								onPageSizeChange={(size) => {
-									setPageSize(size);
-									setCurrentPage(1);
-								}}
-								pageSizeOptions={[12, 24, 48]}
-							/>
-						</>
-					)}
-					</motion.div>
-				</AnimatePresence>
+									<PaginationControls
+										currentPage={currentPage}
+										totalPages={totalPages}
+										onPageChange={setCurrentPage}
+										totalItems={filteredItems.length}
+										itemsPerPage={pageSize}
+										onPageSizeChange={(size) => {
+											setPageSize(size);
+											setCurrentPage(1);
+										}}
+										pageSizeOptions={[12, 24, 48]}
+									/>
+								</>
+							)}
+						</motion.div>
+					</AnimatePresence>
+				</div>
 			</div>
-		</div>
 		</div>
 	);
 }

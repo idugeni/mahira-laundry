@@ -98,7 +98,7 @@ export function ExpenseModal({
 								<div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
 								<div className="relative flex items-center justify-between">
 									<div className="flex items-center gap-3">
-										<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-rose-500">
+										<div className="w-12 h-12 rounded-2xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-rose-500">
 											<HiOutlineBanknotes size={24} />
 										</div>
 										<div>
@@ -113,7 +113,7 @@ export function ExpenseModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+										className="w-8 h-8 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
 										<HiOutlineXMark size={16} />
 									</button>
@@ -138,7 +138,7 @@ export function ExpenseModal({
 											<Select value={category} onValueChange={setCategory}>
 												<SelectTrigger
 													id="expense-category"
-													className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-rose-500/20 transition-all"
+													className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden focus:ring-rose-500/20 transition-all"
 												>
 													<SelectValue placeholder="Pilih Kategori" />
 												</SelectTrigger>
@@ -174,7 +174,7 @@ export function ExpenseModal({
 												id="expense-amount"
 												name="amount"
 												placeholder="0"
-												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-xl font-black outline-none ring-0 focus:border-rose-500 focus:bg-white transition-all"
+												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-xl font-black outline-hidden ring-0 focus:border-rose-500 focus:bg-white transition-all"
 											/>
 										</div>
 									</div>
@@ -195,7 +195,7 @@ export function ExpenseModal({
 												id="expense-notes"
 												name="notes"
 												placeholder="Contoh: Pembelian deterjen 10 liter"
-												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[100px] ring-0 focus:border-rose-500 focus:bg-white transition-all resize-none"
+												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden min-h-[100px] ring-0 focus:border-rose-500 focus:bg-white transition-all resize-none"
 											/>
 										</div>
 									</div>

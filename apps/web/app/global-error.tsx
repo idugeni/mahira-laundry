@@ -11,7 +11,7 @@ export default function GlobalError({
 	reset: () => void;
 }) {
 	return (
-		<html lang="id">
+		<html lang="id" data-scroll-behavior="smooth">
 			<body className="min-h-screen flex items-center justify-center bg-gradient-to-br from-red-50 via-white to-orange-50 font-sans">
 				<div className="text-center max-w-lg p-6">
 					<motion.div

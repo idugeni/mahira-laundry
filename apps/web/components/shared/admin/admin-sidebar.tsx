@@ -87,7 +87,7 @@ function SidebarContent({
 							className={cn(
 								"group flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150",
 								active
-									? "bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-sm shadow-pink-200"
+									? "bg-gradient-to-r from-pink-500 to-rose-500 text-white shadow-xs shadow-pink-200"
 									: "text-slate-500 hover:bg-slate-50 hover:text-slate-800",
 							)}
 						>
@@ -147,7 +147,7 @@ export function AdminSidebar({
 	return (
 		<>
 			{/* Desktop Sidebar */}
-			<aside className="hidden lg:flex lg:w-64 shrink-0 flex-col border-r border-slate-100 bg-white/95 backdrop-blur-sm sticky top-0 h-screen">
+			<aside className="hidden lg:flex lg:w-64 shrink-0 flex-col border-r border-slate-100 bg-white/95 backdrop-blur-xs sticky top-0 h-screen">
 				<SidebarContent
 					navItems={navItems}
 					panelLabel={panelLabel}
@@ -198,7 +198,7 @@ export function AdminSidebar({
 					<button
 						type="button"
 						aria-label="Tutup menu"
-						className="lg:hidden fixed inset-0 z-40 bg-black/30 backdrop-blur-sm cursor-default"
+						className="lg:hidden fixed inset-0 z-40 bg-black/30 backdrop-blur-xs cursor-default"
 						onClick={() => setMobileOpen(false)}
 					/>
 					<aside className="lg:hidden fixed top-0 left-0 bottom-0 z-50 w-72 bg-white shadow-2xl flex flex-col">

@@ -434,7 +434,7 @@ export function POSClient({
 										</span>
 									</div>
 									{item.notes && (
-										<div className="mt-2 w-full bg-slate-50 p-2 rounded border border-slate-100 italic text-[9px]">
+										<div className="mt-2 w-full bg-slate-50 p-2 rounded-sm border border-slate-100 italic text-[9px]">
 											<span className="font-bold not-italic mr-1 text-slate-400">
 												DETAIL:
 											</span>{" "}
@@ -509,7 +509,7 @@ export function POSClient({
 			{/* Left/Middle: Input Actions (Full Height, No Internal Scroll) */}
 			<div className="lg:col-span-8 flex flex-col gap-8 print:hidden">
 				{/* Customer Header */}
-				<div className="bg-white rounded-[2rem] p-6 border border-slate-200 shadow-sm flex flex-col md:flex-row items-center gap-6">
+				<div className="bg-white rounded-[2rem] p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row items-center gap-6">
 					<div className="relative flex-1 w-full">
 						<div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400">
 							<User className="w-5 h-5" />
@@ -522,7 +522,7 @@ export function POSClient({
 								setCustomerSearch(e.target.value);
 								if (selectedCustomer) setSelectedCustomer(null);
 							}}
-							className={`w-full pl-14 pr-4 py-4 rounded-2xl border border-slate-200 text-sm focus:ring-4 focus:ring-brand-primary/10 transition-all outline-none ${selectedCustomer ? "bg-emerald-50 border-emerald-200" : "bg-slate-50"}`}
+							className={`w-full pl-14 pr-4 py-4 rounded-2xl border border-slate-200 text-sm focus:ring-4 focus:ring-brand-primary/10 transition-all outline-hidden ${selectedCustomer ? "bg-emerald-50 border-emerald-200" : "bg-slate-50"}`}
 						/>
 						{isSearching && (
 							<div className="absolute right-5 top-1/2 -translate-y-1/2 w-5 h-5 border-2 border-brand-primary/30 border-t-brand-primary rounded-full animate-spin" />
@@ -596,7 +596,7 @@ export function POSClient({
 				</div>
 
 				{/* Input Form Section */}
-				<div className="bg-white rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden flex flex-col">
+				<div className="bg-white rounded-[2rem] border border-slate-200 shadow-xs overflow-hidden flex flex-col">
 					<div className="p-3 bg-slate-50/50 border-b border-slate-200 flex gap-2">
 						<Button
 							type="button"
@@ -605,7 +605,7 @@ export function POSClient({
 							className={cn(
 								"flex-1 flex items-center justify-center gap-3 h-auto py-4 rounded-[1.25rem] text-xs font-black transition-all",
 								activeTab === "manual"
-									? "bg-white text-brand-primary shadow-sm border border-slate-200"
+									? "bg-white text-brand-primary shadow-xs border border-slate-200"
 									: "text-slate-400 hover:text-brand-primary hover:bg-white/50",
 							)}
 						>
@@ -618,7 +618,7 @@ export function POSClient({
 							className={cn(
 								"flex-1 flex items-center justify-center gap-3 h-auto py-4 rounded-[1.25rem] text-xs font-black transition-all",
 								activeTab === "grid"
-									? "bg-white text-brand-primary shadow-sm border border-slate-200"
+									? "bg-white text-brand-primary shadow-xs border border-slate-200"
 									: "text-slate-400 hover:text-brand-primary hover:bg-white/50",
 							)}
 						>
@@ -840,7 +840,7 @@ export function POSClient({
 														<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
 															Total Harga Preview
 														</p>
-														<div className="w-full h-[58px] px-5 rounded-2xl bg-white border border-slate-200 flex items-center justify-end font-black text-xl text-slate-900 shadow-sm transition-all animate-in fade-in slide-in-from-bottom-2 duration-200">
+														<div className="w-full h-[58px] px-5 rounded-2xl bg-white border border-slate-200 flex items-center justify-end font-black text-xl text-slate-900 shadow-xs transition-all animate-in fade-in slide-in-from-bottom-2 duration-200">
 															{selectedService
 																? formatIDR(
 																		selectedService.price *
@@ -891,7 +891,7 @@ export function POSClient({
 										className={`p-6 rounded-[2rem] border transition-all text-left flex flex-col group ${selectedService?.id === service.id ? "border-brand-primary bg-brand-primary/5 ring-8 ring-brand-primary/5 shadow-lg" : "border-slate-100 bg-white hover:border-brand-primary hover:shadow-2xl hover:-translate-y-2"}`}
 									>
 										<div
-											className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm transition-transform ${selectedService?.id === service.id ? "bg-brand-primary text-white" : "bg-slate-50 text-slate-400"}`}
+											className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xs transition-transform ${selectedService?.id === service.id ? "bg-brand-primary text-white" : "bg-slate-50 text-slate-400"}`}
 										>
 											{service.icon || "🧺"}
 										</div>
@@ -913,7 +913,7 @@ export function POSClient({
 					</div>
 
 					<div className="p-6 bg-brand-primary/5 border-t border-brand-primary/10 flex gap-6 items-center">
-						<div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-primary shadow-sm ring-1 ring-brand-primary/10">
+						<div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-primary shadow-xs ring-1 ring-brand-primary/10">
 							<Info className="w-7 h-7" />
 						</div>
 						<p className="text-xs font-medium text-slate-700 leading-relaxed max-w-2xl">
@@ -942,7 +942,7 @@ export function POSClient({
 							</div>
 						</div>
 
-						<div className="p-4 bg-white rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
+						<div className="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
 							<div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400">
 								<Receipt className="w-5 h-5" />
 							</div>
@@ -1009,7 +1009,7 @@ export function POSClient({
 											<button
 												type="button"
 												onClick={() => removeFromCart(item.id)}
-												className="mt-4 p-2 bg-red-50 text-red-500 rounded-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white shadow-sm"
+												className="mt-4 p-2 bg-red-50 text-red-500 rounded-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white shadow-xs"
 											>
 												<Trash2 className="w-4 h-4" />
 											</button>

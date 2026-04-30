@@ -310,7 +310,7 @@ export function AdminPaketUsahaClient({
 								<div className="absolute top-0 right-0 w-32 h-32 bg-rose-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
 								<div className="relative flex items-center justify-between">
 									<div className="flex items-center gap-3">
-										<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-rose-100 flex items-center justify-center text-rose-500">
+										<div className="w-12 h-12 rounded-2xl bg-white shadow-xs border border-rose-100 flex items-center justify-center text-rose-500">
 											<Trash2 size={20} />
 										</div>
 										<div>
@@ -325,7 +325,7 @@ export function AdminPaketUsahaClient({
 									<button
 										type="button"
 										onClick={() => !deleteLoading && setDeleteConfirm(null)}
-										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+										className="w-8 h-8 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
 										<HiOutlineXMark size={16} />
 									</button>

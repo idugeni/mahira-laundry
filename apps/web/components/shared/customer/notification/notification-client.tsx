@@ -143,7 +143,7 @@ export function NotificationClient() {
 							animate={{ opacity: 1 }}
 							exit={{ opacity: 0 }}
 							onClick={() => setSelectedNotification(null)}
-							className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm"
+							className="absolute inset-0 bg-slate-900/60 backdrop-blur-xs"
 						/>
 						<motion.div
 							initial={{ opacity: 0, scale: 0.9, y: 20 }}

@@ -47,7 +47,7 @@ export default async function SuperadminDashboardPage() {
 							Platform manajemen pusat Mahira Group.
 						</p>
 					</div>
-					<div className="flex items-center gap-2 text-xs text-slate-500 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-sm">
+					<div className="flex items-center gap-2 text-xs text-slate-500 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-xs">
 						<span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
 						Live — {formatDate(new Date())}
 					</div>
@@ -62,7 +62,7 @@ export default async function SuperadminDashboardPage() {
 					subtitle="Operasional"
 					icon="🏪"
 					variant="default"
-					className="animate-fade-in-up opacity-0 delay-100"
+					className="animate-fade-in-up opacity-0 animate-delay-100"
 				/>
 				<StatCard
 					title="Order Bulan Ini"
@@ -75,7 +75,7 @@ export default async function SuperadminDashboardPage() {
 						positive: ordersGrowthPositive,
 						label: "vs bln lalu",
 					}}
-					className="animate-fade-in-up opacity-0 delay-200"
+					className="animate-fade-in-up opacity-0 animate-delay-200"
 				/>
 				<StatCard
 					title="Revenue Bulan Ini"
@@ -88,7 +88,7 @@ export default async function SuperadminDashboardPage() {
 						positive: revenueGrowthPositive,
 						label: "vs bln lalu",
 					}}
-					className="animate-fade-in-up opacity-0 delay-300"
+					className="animate-fade-in-up opacity-0 animate-delay-300"
 				/>
 				<StatCard
 					title="Total Pelanggan"
@@ -96,14 +96,14 @@ export default async function SuperadminDashboardPage() {
 					subtitle={`${stats.activeOrders} order aktif`}
 					icon="👥"
 					variant="success"
-					className="animate-fade-in-up opacity-0 delay-400"
+					className="animate-fade-in-up opacity-0 animate-delay-400"
 				/>
 			</div>
 
 			{/* Charts Row */}
 			<div className="grid lg:grid-cols-3 gap-6">
 				{/* Revenue Chart */}
-				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-sm will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
+				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-xs will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="flex items-center justify-between mb-6">
 						<div>
 							<h2 className="text-base font-bold text-slate-900">
@@ -129,7 +129,7 @@ export default async function SuperadminDashboardPage() {
 				</div>
 
 				{/* Quick Stats */}
-				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-sm will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
+				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-xs will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<h2 className="text-base font-bold text-slate-900 mb-4">
 						Ringkasan Cepat
 					</h2>
@@ -197,7 +197,7 @@ export default async function SuperadminDashboardPage() {
 
 			<div className="grid lg:grid-cols-3 gap-6">
 				{/* Recent Orders Table */}
-				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-sm overflow-hidden will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
+				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-xs overflow-hidden will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
 						<div>
 							<h2 className="text-base font-bold text-slate-900">
@@ -282,7 +282,7 @@ export default async function SuperadminDashboardPage() {
 				</div>
 
 				{/* Audit Logs */}
-				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-sm flex flex-col will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
+				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-xs flex flex-col will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
 						<h2 className="text-base font-bold text-slate-900">Aktivitas</h2>
 						<span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -290,7 +290,7 @@ export default async function SuperadminDashboardPage() {
 					<div className="p-4 space-y-4 flex-1">
 						{recentLogs.map((log) => (
 							<div key={log.id} className="flex gap-3">
-								<div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-200 flex-shrink-0" />
+								<div className="mt-1 w-1.5 h-1.5 rounded-full bg-slate-200 shrink-0" />
 								<div>
 									<p className="text-xs text-slate-700 leading-relaxed">
 										<span className="font-bold text-slate-900">

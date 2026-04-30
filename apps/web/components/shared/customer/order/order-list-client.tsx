@@ -194,7 +194,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 				</div>
 
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto lg:min-w-[600px]">
-					<div className="bg-white px-6 py-4 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4 w-full">
+					<div className="bg-white px-6 py-4 rounded-3xl border border-slate-100 shadow-xs flex items-center gap-4 w-full">
 						<div className="w-10 h-10 rounded-2xl bg-brand-primary/10 text-brand-primary flex items-center justify-center text-xl shrink-0">
 							<HiOutlineInbox />
 						</div>
@@ -208,7 +208,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 						</div>
 					</div>
 
-					<div className="bg-white px-6 py-4 rounded-3xl border border-slate-100 shadow-sm flex items-center gap-4 w-full">
+					<div className="bg-white px-6 py-4 rounded-3xl border border-slate-100 shadow-xs flex items-center gap-4 w-full">
 						<div className="w-10 h-10 rounded-2xl bg-amber-50 text-amber-500 flex items-center justify-center text-xl shrink-0">
 							<HiOutlineCreditCard />
 						</div>
@@ -235,7 +235,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 			</div>
 
 			{/* Toolbar */}
-			<div className="flex flex-col lg:flex-row gap-6 bg-white p-4 rounded-[2.5rem] border border-slate-100 shadow-sm">
+			<div className="flex flex-col lg:flex-row gap-6 bg-white p-4 rounded-[2.5rem] border border-slate-100 shadow-xs">
 				<div className="flex-1 relative group">
 					<span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-primary transition-colors text-xl">
 						<HiOutlineMagnifyingGlass />
@@ -245,7 +245,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 						value={search}
 						onChange={(e) => setSearch(e.target.value)}
 						placeholder="Cari Nomor Pesanan..."
-						className="w-full pl-12 pr-6 py-4 rounded-2xl bg-slate-50 focus:bg-white border-transparent focus:border-brand-primary/20 outline-none transition-all font-bold text-sm text-slate-900"
+						className="w-full pl-12 pr-6 py-4 rounded-2xl bg-slate-50 focus:bg-white border-transparent focus:border-brand-primary/20 outline-hidden transition-all font-bold text-sm text-slate-900"
 					/>
 				</div>
 
@@ -258,7 +258,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 								onClick={() => setFilter(f)}
 								className={`px-5 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all whitespace-nowrap ${
 									filter === f
-										? "bg-white text-slate-900 shadow-sm"
+										? "bg-white text-slate-900 shadow-xs"
 										: "text-slate-400 hover:text-slate-600"
 								}`}
 							>
@@ -273,7 +273,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 						<button
 							type="button"
 							onClick={() => setViewMode("list")}
-							className={`p-3 rounded-xl transition-all ${viewMode === "list" ? "bg-white text-brand-primary shadow-sm" : "text-slate-400"}`}
+							className={`p-3 rounded-xl transition-all ${viewMode === "list" ? "bg-white text-brand-primary shadow-xs" : "text-slate-400"}`}
 						>
 							<span className="text-xl flex items-center justify-center">
 								<HiOutlineListBullet />
@@ -282,7 +282,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 						<button
 							type="button"
 							onClick={() => setViewMode("grid")}
-							className={`p-3 rounded-xl transition-all ${viewMode === "grid" ? "bg-white text-brand-primary shadow-sm" : "text-slate-400"}`}
+							className={`p-3 rounded-xl transition-all ${viewMode === "grid" ? "bg-white text-brand-primary shadow-xs" : "text-slate-400"}`}
 						>
 							<span className="text-xl flex items-center justify-center">
 								<HiOutlineSquares2X2 />
@@ -310,7 +310,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 								initial={{ opacity: 0, scale: 0.9 }}
 								animate={{ opacity: 1, scale: 1 }}
 								exit={{ opacity: 0, scale: 0.9 }}
-								className="bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-100 transition-all group overflow-hidden p-6 sm:p-8"
+								className="bg-white rounded-[2rem] border border-slate-100 shadow-xs hover:shadow-xl hover:shadow-slate-100 transition-all group overflow-hidden p-6 sm:p-8"
 							>
 								<div
 									className={`flex ${viewMode === "list" ? "flex-col sm:flex-row items-center justify-between" : "flex-col"} gap-6`}
@@ -357,7 +357,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 											<button
 												type="button"
 												onClick={() => setOrderIdToDelete(order.id)}
-												className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shadow-sm"
+												className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shadow-xs"
 												title="Hapus Pesanan"
 											>
 												<span className="text-xl flex items-center justify-center">
@@ -385,7 +385,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 					<motion.div
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
-						className="bg-white rounded-[2rem] border border-slate-100 p-8 sm:p-12 shadow-sm text-center"
+						className="bg-white rounded-[2rem] border border-slate-100 p-8 sm:p-12 shadow-xs text-center"
 					>
 						<div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center mx-auto mb-8 text-slate-200">
 							<span className="text-4xl flex items-center justify-center">

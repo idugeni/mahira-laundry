@@ -4,19 +4,19 @@ import { Geist, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import { JsonLd } from "@/components/shared/common/json-ld";
-import { cn } from "@/lib/utils";
 import { baseOpenGraph } from "@/lib/metadata";
+import { cn } from "@/lib/utils";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
+const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 
 const plusJakartaSans = Plus_Jakarta_Sans({
-	variable: "--font-heading",
+	variable: "--font-plus-jakarta",
 	subsets: ["latin"],
 	weight: ["300", "400", "500", "600", "700"],
 });
 
 const inter = Inter({
-	variable: "--font-body",
+	variable: "--font-inter",
 	subsets: ["latin"],
 	weight: ["300", "400", "500", "600", "700"],
 });
@@ -123,8 +123,8 @@ const organizationSchema = {
 		availableLanguage: "Indonesian",
 	},
 	sameAs: [
-		"https://www.instagram.com/mahiralaundry",
-		"https://www.facebook.com/mahiralaundry",
+		"https://www.instagram.com/mahiralaundry.id",
+		"https://www.facebook.com/mahiralaundry.id",
 	],
 };
 
@@ -197,6 +197,7 @@ export default function RootLayout({
 		<html
 			lang="id"
 			suppressHydrationWarning
+			data-scroll-behavior="smooth"
 			className={cn(
 				"h-full",
 				"antialiased",

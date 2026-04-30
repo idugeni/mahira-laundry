@@ -160,7 +160,11 @@ export function HomeServicesSection({
 										<motion.div
 											className={`relative w-20 h-20 rounded-[2rem] ${styles.bg} flex items-center justify-center text-4xl ${styles.color} mb-10 shadow-2xl ${styles.shadow} ring-4 ring-white`}
 											whileHover={{ scale: 1.05, rotate: 3 }}
-											transition={{ type: "spring", stiffness: 300, damping: 20 }}
+											transition={{
+												type: "spring",
+												stiffness: 300,
+												damping: 20,
+											}}
 										>
 											{service.icon ? (
 												<span className="shrink-0">{service.icon}</span>
@@ -197,7 +201,11 @@ export function HomeServicesSection({
 											<motion.div
 												className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 transition-colors duration-300 group-hover:bg-brand-primary group-hover:text-white"
 												whileHover={{ x: 4 }}
-												transition={{ type: "spring", stiffness: 400, damping: 25 }}
+												transition={{
+													type: "spring",
+													stiffness: 400,
+													damping: 25,
+												}}
 											>
 												<HiOutlineArrowRight size={20} />
 											</motion.div>

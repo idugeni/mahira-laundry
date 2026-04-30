@@ -95,7 +95,7 @@ export function IncomeModal({
 								<div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
 								<div className="relative flex items-center justify-between">
 									<div className="flex items-center gap-3">
-										<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-emerald-500">
+										<div className="w-12 h-12 rounded-2xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-emerald-500">
 											<HiOutlineBanknotes size={24} />
 										</div>
 										<div>
@@ -111,7 +111,7 @@ export function IncomeModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+										className="w-8 h-8 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
 										<HiOutlineXMark size={16} />
 									</button>
@@ -140,7 +140,7 @@ export function IncomeModal({
 												name="amount"
 												min="1"
 												placeholder="0"
-												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-xl font-black outline-none ring-0 focus:border-emerald-500 focus:bg-white transition-all"
+												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-xl font-black outline-hidden ring-0 focus:border-emerald-500 focus:bg-white transition-all"
 											/>
 										</div>
 									</div>
@@ -162,7 +162,7 @@ export function IncomeModal({
 												id="income-description"
 												name="description"
 												placeholder="Contoh: Pembayaran royalti cabang Sudirman"
-												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[90px] ring-0 focus:border-emerald-500 focus:bg-white transition-all resize-none"
+												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden min-h-[90px] ring-0 focus:border-emerald-500 focus:bg-white transition-all resize-none"
 											/>
 										</div>
 									</div>
@@ -182,7 +182,7 @@ export function IncomeModal({
 											<Select value={outletId} onValueChange={setOutletId}>
 												<SelectTrigger
 													id="income-outlet"
-													className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-emerald-500/20 transition-all"
+													className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden focus:ring-emerald-500/20 transition-all"
 												>
 													<SelectValue placeholder="Pilih Outlet" />
 												</SelectTrigger>
@@ -219,7 +219,7 @@ export function IncomeModal({
 												type="date"
 												name="date"
 												defaultValue={new Date().toISOString().split("T")[0]}
-												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-emerald-500 focus:bg-white transition-all"
+												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden ring-0 focus:border-emerald-500 focus:bg-white transition-all"
 											/>
 										</div>
 									</div>

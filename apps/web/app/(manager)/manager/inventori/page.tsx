@@ -35,7 +35,7 @@ export default async function InventoriPage() {
 			<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
 				<div className="space-y-3">
 					<div className="flex items-center gap-3">
-						<div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 shadow-sm border border-amber-100 font-bold">
+						<div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center text-amber-600 shadow-xs border border-amber-100 font-bold">
 							<Package size={20} />
 						</div>
 						<h1 className="text-4xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tight uppercase">
@@ -52,7 +52,7 @@ export default async function InventoriPage() {
 					<div className="relative group">
 						<Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-amber-500 transition-colors" />
 						<Input
-							className="pl-11 pr-4 py-6 w-[300px] bg-white rounded-2xl border-slate-100 shadow-sm focus:ring-4 focus:ring-amber-500/5 transition-all font-bold text-sm"
+							className="pl-11 pr-4 py-6 w-[300px] bg-white rounded-2xl border-slate-100 shadow-xs focus:ring-4 focus:ring-amber-500/5 transition-all font-bold text-sm"
 							placeholder="Cari item inventori..."
 						/>
 					</div>

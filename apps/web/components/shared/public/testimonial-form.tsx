@@ -61,7 +61,7 @@ export function TestimonialForm() {
 	}
 
 	return (
-		<div className="bg-white rounded-[2.5rem] p-8 sm:p-10 shadow-sm">
+		<div className="bg-white rounded-[2.5rem] p-8 sm:p-10 shadow-xs">
 			<div className="flex items-center gap-4 mb-8">
 				<div className="w-12 h-12 rounded-2xl bg-brand-primary/10 text-brand-primary flex items-center justify-center text-xl">
 					<HiOutlineChatBubbleLeftRight />
@@ -126,7 +126,7 @@ export function TestimonialForm() {
 								<FormControl>
 									<Textarea
 										placeholder="Tuliskan pengalaman Anda di sini..."
-										className="w-full px-6 py-4 rounded-3xl bg-slate-50/50 outline-none focus:bg-white focus:ring-4 focus:ring-brand-primary/5 font-bold text-slate-900 transition-all resize-none min-h-[120px]"
+										className="w-full px-6 py-4 rounded-3xl bg-slate-50/50 outline-hidden focus:bg-white focus:ring-4 focus:ring-brand-primary/5 font-bold text-slate-900 transition-all resize-none min-h-[120px]"
 										{...field}
 									/>
 								</FormControl>

@@ -38,7 +38,7 @@ const nextConfig: NextConfig = {
 					{
 						key: "Content-Security-Policy",
 						value:
-							"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data: *.supabase.co images.unsplash.com i.pravatar.cc ui-avatars.com *.google-analytics.com *.googletagmanager.com; font-src 'self' fonts.gstatic.com; connect-src 'self' *.supabase.co *.google-analytics.com *.analytics.google.com *.googletagmanager.com; frame-ancestors 'none'; upgrade-insecure-requests;",
+							"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data: *.supabase.co images.unsplash.com i.pravatar.cc ui-avatars.com *.google-analytics.com *.googletagmanager.com; font-src 'self' fonts.gstatic.com; connect-src 'self' *.supabase.co *.google-analytics.com *.analytics.google.com *.googletagmanager.com; frame-src 'self' *.google.com; frame-ancestors 'none'; upgrade-insecure-requests;",
 					},
 					{
 						key: "X-Content-Type-Options",
@@ -59,7 +59,7 @@ const nextConfig: NextConfig = {
 					{
 						key: "Permissions-Policy",
 						value:
-							"camera=(), microphone=(), geolocation=(), interest-cohort=()",
+							"camera=(), microphone=(), geolocation=(self), interest-cohort=()",
 					},
 				],
 			},

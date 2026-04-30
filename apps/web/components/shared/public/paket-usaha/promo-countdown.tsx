@@ -29,7 +29,7 @@ function calculateTimeLeft(expiresAt: string): TimeLeft {
 function TimeUnit({ value, label }: { value: number | null; label: string }) {
 	return (
 		<div className="flex flex-col items-center">
-			<div className="bg-white/50 backdrop-blur-sm border border-brand-primary/10 rounded-xl px-2 py-1.5 min-w-[36px] flex items-center justify-center shadow-sm">
+			<div className="bg-white/50 backdrop-blur-xs border border-brand-primary/10 rounded-xl px-2 py-1.5 min-w-[36px] flex items-center justify-center shadow-xs">
 				<span className="text-sm font-black text-brand-primary tabular-nums tracking-tighter">
 					{value == null ? "--" : value.toString().padStart(2, "0")}
 				</span>

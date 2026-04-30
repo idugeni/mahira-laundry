@@ -137,7 +137,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 			</div>
 
 			{/* Quick Actions */}
-			<div className="bg-white rounded-2xl border border-slate-100 p-5 sm:p-8 shadow-sm overflow-hidden relative">
+			<div className="bg-white rounded-2xl border border-slate-100 p-5 sm:p-8 shadow-xs overflow-hidden relative">
 				<div className="absolute top-0 right-0 p-10 text-[180px] text-slate-50 pointer-events-none -mr-20 -mt-20">
 					<HiOutlinePlus />
 				</div>
@@ -176,7 +176,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 			</div>
 
 			{/* Recent orders */}
-			<div className="bg-white rounded-2xl border border-slate-100 p-5 sm:p-8 shadow-sm group">
+			<div className="bg-white rounded-2xl border border-slate-100 p-5 sm:p-8 shadow-xs group">
 				<div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10">
 					<h2 className="text-xl font-bold font-[family-name:var(--font-heading)] text-slate-900">
 						Order Terbaru
@@ -195,7 +195,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
-						className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-sm mb-6"
+						className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-xs mb-6"
 					>
 						<span className="text-4xl text-slate-100 flex items-center justify-center">
 							<HiOutlineInbox />

@@ -43,7 +43,7 @@ export function TentangClient() {
 						viewport={{ once: true }}
 						className="inline-flex items-center gap-3 px-6 py-2.5 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] mb-10 border border-brand-primary/10"
 					>
-						<span className="w-5 h-5 flex items-center justify-center bg-white rounded-full shadow-sm">
+						<span className="w-5 h-5 flex items-center justify-center bg-white rounded-full shadow-xs">
 							<HiOutlineSparkles size={14} />
 						</span>
 						<span>Visi & Warisan Kami</span>
@@ -143,7 +143,7 @@ export function TentangClient() {
 									transition={{ delay: i * 0.1 }}
 									className="flex items-start gap-6 p-6 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-100 transition-all group"
 								>
-									<div className="w-12 h-12 rounded-2xl bg-white text-brand-primary flex items-center justify-center font-black shrink-0 shadow-sm group-hover:bg-brand-primary group-hover:text-white transition-colors duration-500">
+									<div className="w-12 h-12 rounded-2xl bg-white text-brand-primary flex items-center justify-center font-black shrink-0 shadow-xs group-hover:bg-brand-primary group-hover:text-white transition-colors duration-500">
 										0{i + 1}
 									</div>
 									<p className="text-slate-600 font-bold leading-snug pt-2 text-lg">
@@ -240,9 +240,7 @@ export function TentangClient() {
 							Kami percaya bahwa kebersihan adalah bentuk penghormatan terhadap
 							diri sendiri. Mari rawat pakaian Anda dengan rasa hormat tersebut.
 						</p>
-						<motion.button
-							className="px-10 py-4.5 bg-white text-brand-primary rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-2xl hover:brightness-110 transition-all"
-						>
+						<motion.button className="px-10 py-4.5 bg-white text-brand-primary rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-2xl hover:brightness-110 transition-all">
 							Pesan Layanan Sekarang
 						</motion.button>
 					</div>

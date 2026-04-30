@@ -146,7 +146,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 									exit={{ opacity: 0, y: -10 }}
 									className="mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl text-red-600 text-[10px] font-bold flex gap-3 items-center"
 								>
-									<span className="w-5 h-5 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm text-red-400">
+									<span className="w-5 h-5 bg-white rounded-full flex items-center justify-center shrink-0 shadow-xs text-red-400">
 										<HiOutlineExclamationCircle size={14} />
 									</span>
 									<p>{error}</p>
@@ -173,7 +173,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 											value={formData.full_name}
 											onChange={handleChange}
 											placeholder="Nama Lengkap"
-											className="w-full pl-12 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-none transition-all font-bold text-slate-900 placeholder:font-medium placeholder:text-slate-400 text-sm"
+											className="w-full pl-12 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-hidden transition-all font-bold text-slate-900 placeholder:font-medium placeholder:text-slate-400 text-sm"
 										/>
 									</div>
 									<div className="relative group">
@@ -187,7 +187,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 											value={formData.phone}
 											onChange={handleChange}
 											placeholder="Nomor WhatsApp"
-											className="w-full pl-12 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-none transition-all font-bold text-slate-900 placeholder:font-medium placeholder:text-slate-400 text-sm"
+											className="w-full pl-12 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-hidden transition-all font-bold text-slate-900 placeholder:font-medium placeholder:text-slate-400 text-sm"
 										/>
 									</div>
 								</>
@@ -204,7 +204,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 									value={formData.email}
 									onChange={handleChange}
 									placeholder="Alamat Email"
-									className="w-full pl-12 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-none transition-all font-bold text-slate-900 placeholder:font-medium placeholder:text-slate-400 text-sm"
+									className="w-full pl-12 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-hidden transition-all font-bold text-slate-900 placeholder:font-medium placeholder:text-slate-400 text-sm"
 								/>
 							</div>
 
@@ -219,7 +219,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 									value={formData.password}
 									onChange={handleChange}
 									placeholder="Kata Sandi (Min. 6 Karakter)"
-									className="w-full pl-12 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-none transition-all font-bold text-slate-900 placeholder:font-medium placeholder:text-slate-400 text-sm"
+									className="w-full pl-12 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-hidden transition-all font-bold text-slate-900 placeholder:font-medium placeholder:text-slate-400 text-sm"
 								/>
 							</div>
 

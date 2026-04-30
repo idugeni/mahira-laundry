@@ -147,7 +147,7 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 			{/* Modal */}
 			<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
 				{/* Header */}
-				<div className="sticky top-0 z-10 bg-white/95 backdrop-blur-sm rounded-t-[2.5rem] px-8 pt-8 pb-5 border-b border-slate-50 flex items-start justify-between gap-4">
+				<div className="sticky top-0 z-10 bg-white/95 backdrop-blur-xs rounded-t-[2.5rem] px-8 pt-8 pb-5 border-b border-slate-50 flex items-start justify-between gap-4">
 					<div>
 						<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
 							Detail Lead
@@ -357,7 +357,7 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 									onChange={(e) =>
 										setNewStatus(e.target.value as InquiryStatus)
 									}
-									className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
+									className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
 								>
 									{ALL_STATUSES.map((s) => (
 										<option key={s} value={s}>
@@ -379,7 +379,7 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 									onChange={(e) => setNote(e.target.value)}
 									placeholder="Tambahkan catatan perubahan status..."
 									rows={3}
-									className="w-full rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all resize-none"
+									className="w-full rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-700 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all resize-none"
 								/>
 							</div>
 							<Button
@@ -439,7 +439,7 @@ interface InfoRowProps {
 function InfoRow({ icon, label, value }: InfoRowProps) {
 	return (
 		<div className="flex items-start gap-3 p-4 bg-slate-50 rounded-2xl">
-			<div className="w-7 h-7 rounded-xl bg-white flex items-center justify-center text-slate-400 shrink-0 shadow-sm">
+			<div className="w-7 h-7 rounded-xl bg-white flex items-center justify-center text-slate-400 shrink-0 shadow-xs">
 				{icon}
 			</div>
 			<div className="min-w-0">

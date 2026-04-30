@@ -27,7 +27,7 @@ export function ProfilForm({
 	onSubmit,
 }: ProfilFormProps) {
 	return (
-		<div className="bg-white rounded-[2.5rem] border border-slate-100 p-8 sm:p-10 shadow-sm">
+		<div className="bg-white rounded-[2.5rem] border border-slate-100 p-8 sm:p-10 shadow-xs">
 			<div className="flex items-center justify-between mb-8">
 				<h3 className="text-lg font-black text-slate-900 flex items-center gap-3">
 					<span className="w-8 h-8 rounded-xl bg-brand-primary/5 text-brand-primary flex items-center justify-center">
@@ -63,7 +63,7 @@ export function ProfilForm({
 								type="text"
 								defaultValue={profile.full_name}
 								disabled={!isEditing}
-								className="w-full pl-12 pr-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/30 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-none transition-all font-bold text-slate-900 disabled:opacity-60"
+								className="w-full pl-12 pr-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/30 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-hidden transition-all font-bold text-slate-900 disabled:opacity-60"
 							/>
 						</div>
 					</div>
@@ -85,7 +85,7 @@ export function ProfilForm({
 								defaultValue={profile.phone || ""}
 								disabled={!isEditing}
 								placeholder="Belum diatur"
-								className="w-full pl-12 pr-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/30 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-none transition-all font-bold text-slate-900 disabled:opacity-60"
+								className="w-full pl-12 pr-6 py-4 rounded-2xl border border-slate-100 bg-slate-50/30 focus:bg-white focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary outline-hidden transition-all font-bold text-slate-900 disabled:opacity-60"
 							/>
 						</div>
 					</div>
@@ -106,7 +106,7 @@ export function ProfilForm({
 							type="email"
 							value={profile.email || ""}
 							disabled
-							className="w-full pl-12 pr-6 py-4 rounded-2xl bg-slate-50/10 outline-none font-bold text-slate-400"
+							className="w-full pl-12 pr-6 py-4 rounded-2xl bg-slate-50/10 outline-hidden font-bold text-slate-400"
 						/>
 					</div>
 				</div>

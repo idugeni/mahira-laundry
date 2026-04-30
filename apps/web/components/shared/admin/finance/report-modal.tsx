@@ -83,7 +83,7 @@ export function ReportModal({
 								<div className="absolute top-0 right-0 w-32 h-32 bg-pink-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
 								<div className="relative flex items-center justify-between">
 									<div className="flex items-center gap-3">
-										<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-pink-500">
+										<div className="w-12 h-12 rounded-2xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-pink-500">
 											<HiOutlineDocumentChartBar size={24} />
 										</div>
 										<div>
@@ -99,7 +99,7 @@ export function ReportModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+										className="w-8 h-8 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
 										<HiOutlineXMark size={16} />
 									</button>
@@ -142,7 +142,7 @@ export function ReportModal({
 												onClick={() => setReportType(type.id as ReportType)}
 												className={`flex items-center gap-3 p-4 rounded-2xl border transition-all ${
 													reportType === type.id
-														? "bg-pink-50 border-pink-200 text-pink-600 shadow-sm"
+														? "bg-pink-50 border-pink-200 text-pink-600 shadow-xs"
 														: "bg-slate-50 border-slate-100 text-slate-500 hover:bg-slate-100"
 												}`}
 											>
@@ -169,7 +169,7 @@ export function ReportModal({
 												onChange={(e) =>
 													setDateRange({ ...dateRange, from: e.target.value })
 												}
-												className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-none focus:border-pink-500 transition-all"
+												className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-hidden focus:border-pink-500 transition-all"
 											/>
 										</div>
 										<div className="space-y-2">
@@ -182,7 +182,7 @@ export function ReportModal({
 												onChange={(e) =>
 													setDateRange({ ...dateRange, to: e.target.value })
 												}
-												className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-none focus:border-pink-500 transition-all"
+												className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-hidden focus:border-pink-500 transition-all"
 											/>
 										</div>
 									</div>

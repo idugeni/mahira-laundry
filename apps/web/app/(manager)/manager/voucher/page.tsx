@@ -25,14 +25,14 @@ export default async function VoucherPage() {
 				</div>
 				<button
 					type="button"
-					className="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl text-sm font-bold shadow-sm shadow-pink-500/20 hover:shadow-md transition-all"
+					className="px-5 py-2.5 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-xl text-sm font-bold shadow-xs shadow-pink-500/20 hover:shadow-md transition-all"
 				>
 					+ Buat Voucher
 				</button>
 			</div>
 
 			{vouchers.length === 0 ? (
-				<div className="bg-white rounded-2xl border border-border p-12 text-center shadow-sm">
+				<div className="bg-white rounded-2xl border border-border p-12 text-center shadow-xs">
 					<div className="text-4xl mb-4">🎟️</div>
 					<h3 className="text-lg font-bold text-slate-700">Belum ada promo</h3>
 					<p className="text-slate-500 text-sm mt-1">
@@ -59,7 +59,7 @@ export default async function VoucherPage() {
 						return (
 							<div
 								key={v.id}
-								className="bg-white rounded-2xl border border-slate-200/80 p-0 overflow-hidden shadow-sm hover:shadow-md hover:border-pink-200 transition-all flex flex-col"
+								className="bg-white rounded-2xl border border-slate-200/80 p-0 overflow-hidden shadow-xs hover:shadow-md hover:border-pink-200 transition-all flex flex-col"
 							>
 								{/* Card Header (Ticket style edge) */}
 								<div

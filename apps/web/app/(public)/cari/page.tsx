@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 };
 
 import { Suspense } from "react";
-import { CariClient } from "@/components/shared/public/cari-client";
 import { MahiraSpinner } from "@/components/shared/common/mahira-spinner";
+import { CariClient } from "@/components/shared/public/cari-client";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function CariPage() {

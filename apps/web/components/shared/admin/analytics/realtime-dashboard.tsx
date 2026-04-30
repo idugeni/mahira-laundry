@@ -128,7 +128,7 @@ export function RealtimeDashboard() {
 
 			<div className="grid lg:grid-cols-3 gap-6">
 				{/* Traffic Chart */}
-				<div className="lg:col-span-2 bg-white rounded-[2rem] border border-slate-200/80 p-6 lg:p-8 shadow-sm">
+				<div className="lg:col-span-2 bg-white rounded-[2rem] border border-slate-200/80 p-6 lg:p-8 shadow-xs">
 					<div className="flex items-center justify-between mb-8">
 						<div>
 							<h2 className="text-lg font-black text-slate-900 tracking-tight">
@@ -141,7 +141,7 @@ export function RealtimeDashboard() {
 						<div className="flex items-center gap-2 bg-slate-50 p-1.5 rounded-xl border border-slate-100">
 							<button
 								type="button"
-								className="px-3 py-1.5 text-[10px] font-black uppercase tracking-widest bg-white text-pink-600 rounded-lg shadow-sm flex items-center gap-2"
+								className="px-3 py-1.5 text-[10px] font-black uppercase tracking-widest bg-white text-pink-600 rounded-lg shadow-xs flex items-center gap-2"
 							>
 								<span className="w-1.5 h-1.5 bg-pink-600 rounded-full animate-ping" />
 								Realtime
@@ -160,7 +160,7 @@ export function RealtimeDashboard() {
 				</div>
 
 				{/* Realtime Cities/Devices */}
-				<div className="bg-white rounded-[2rem] border border-slate-200/80 p-6 lg:p-8 shadow-sm">
+				<div className="bg-white rounded-[2rem] border border-slate-200/80 p-6 lg:p-8 shadow-xs">
 					<h2 className="text-lg font-black text-slate-900 tracking-tight mb-6">
 						Lokasi Pengunjung (Realtime)
 					</h2>

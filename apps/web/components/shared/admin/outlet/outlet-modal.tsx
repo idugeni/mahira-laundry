@@ -155,7 +155,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
+										className="w-10 h-10 rounded-xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
 									>
 										<X size={20} />
 									</button>
@@ -213,7 +213,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 												name="name"
 												defaultValue={outlet?.name || ""}
 												placeholder="Contoh: Jatiwaringin Prime"
-												className="w-full px-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-none"
+												className="w-full px-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-hidden"
 											/>
 										</div>
 										<div className="space-y-2">
@@ -229,7 +229,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 												name="slug"
 												defaultValue={outlet?.slug || ""}
 												placeholder="jatiwaringin-prime"
-												className="w-full px-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-none"
+												className="w-full px-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-hidden"
 											/>
 										</div>
 									</div>
@@ -249,7 +249,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 												name="address"
 												defaultValue={outlet?.address || ""}
 												placeholder="Alamat lengkap operasional..."
-												className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-[2rem] text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-none min-h-[100px] resize-none"
+												className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-[2rem] text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-hidden min-h-[100px] resize-none"
 											/>
 										</div>
 									</div>
@@ -269,7 +269,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 													name="phone"
 													defaultValue={outlet?.phone || ""}
 													placeholder="+62..."
-													className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-none"
+													className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-hidden"
 												/>
 											</div>
 										</div>
@@ -287,7 +287,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 													type="number"
 													name="franchise_fee"
 													defaultValue={outlet?.franchise_fee || 0}
-													className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-none"
+													className="w-full pl-14 pr-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-hidden"
 												/>
 											</div>
 										</div>
@@ -300,7 +300,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 													type="checkbox"
 													name="is_active"
 													defaultChecked={outlet ? outlet.is_active : true}
-													className="peer h-7 w-7 cursor-pointer appearance-none rounded-xl border-2 border-slate-200 bg-white checked:border-indigo-600 checked:bg-indigo-600 transition-all shadow-sm"
+													className="peer h-7 w-7 cursor-pointer appearance-none rounded-xl border-2 border-slate-200 bg-white checked:border-indigo-600 checked:bg-indigo-600 transition-all shadow-xs"
 												/>
 												<span className="absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none font-bold">
 													✓
@@ -322,7 +322,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 													type="checkbox"
 													name="is_franchise"
 													defaultChecked={outlet?.is_franchise}
-													className="peer h-7 w-7 cursor-pointer appearance-none rounded-xl border-2 border-slate-200 bg-white checked:border-indigo-600 checked:bg-indigo-600 transition-all shadow-sm"
+													className="peer h-7 w-7 cursor-pointer appearance-none rounded-xl border-2 border-slate-200 bg-white checked:border-indigo-600 checked:bg-indigo-600 transition-all shadow-xs"
 												/>
 												<span className="absolute text-white opacity-0 peer-checked:opacity-100 transition-opacity pointer-events-none font-bold">
 													✓
@@ -346,7 +346,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 												variant="ghost"
 												onClick={handleDelete}
 												disabled={isLoading}
-												className="w-full sm:w-auto px-5 h-11 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest shadow-sm flex items-center gap-2"
+												className="w-full sm:w-auto px-5 h-11 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest shadow-xs flex items-center gap-2"
 											>
 												<Trash2 size={18} /> Hapus Unit
 											</Button>
@@ -379,7 +379,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 
 							{/* Caution Footer */}
 							<div className="bg-amber-50 px-10 py-6 border-t border-amber-100 flex items-center gap-4">
-								<div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-amber-500 shadow-sm shrink-0">
+								<div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-amber-500 shadow-xs shrink-0">
 									<AlertTriangle size={20} />
 								</div>
 								<p className="text-[10px] font-bold text-amber-700/80 leading-relaxed uppercase tracking-widest">

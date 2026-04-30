@@ -48,13 +48,13 @@ export function MahiraFooter({
 								},
 								{
 									icon: <FaInstagram />,
-									href: "#",
+									href: "https://www.instagram.com/mahiralaundry.id",
 									color: "hover:bg-[#E4405F]",
 									label: "Instagram",
 								},
 								{
 									icon: <FaFacebookF />,
-									href: "#",
+									href: "https://www.facebook.com/mahiralaundry.id",
 									color: "hover:bg-[#1877F2]",
 									label: "Facebook",
 								},

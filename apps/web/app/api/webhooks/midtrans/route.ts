@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { publicApiLimiter } from "@/lib/upstash/rate-limit";
 import { enqueueJob } from "@/lib/upstash/qstash";
+import { publicApiLimiter } from "@/lib/upstash/rate-limit";
 
 export async function POST(request: Request) {
 	const ip = request.headers.get("x-forwarded-for") ?? "unknown";

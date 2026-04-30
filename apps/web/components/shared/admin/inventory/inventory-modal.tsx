@@ -122,7 +122,7 @@ export function InventoryModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-9 h-9 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors"
+										className="w-9 h-9 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors"
 									>
 										<HiOutlineXMark size={20} />
 									</button>
@@ -175,7 +175,7 @@ export function InventoryModal({
 														type="number"
 														name="restock_amount"
 														placeholder="Masukkan jumlah tambahan..."
-														className="w-full pl-12 pr-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl text-xl font-black text-brand-primary placeholder:text-slate-300 placeholder:font-medium outline-none"
+														className="w-full pl-12 pr-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl text-xl font-black text-brand-primary placeholder:text-slate-300 placeholder:font-medium outline-hidden"
 													/>
 												</div>
 											</div>
@@ -200,7 +200,7 @@ export function InventoryModal({
 															name="name"
 															defaultValue={item?.name}
 															placeholder="Contoh: Deterjen Liquid"
-															className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 outline-none"
+															className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 outline-hidden"
 														/>
 													</div>
 												</div>
@@ -220,7 +220,7 @@ export function InventoryModal({
 															name="sku"
 															defaultValue={item?.sku}
 															placeholder="DET-001"
-															className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 outline-none"
+															className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 outline-hidden"
 														/>
 													</div>
 												</div>
@@ -243,7 +243,7 @@ export function InventoryModal({
 															name="category"
 															defaultValue={item?.category}
 															placeholder="Kategori"
-															className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 outline-none"
+															className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold placeholder:text-slate-300 outline-hidden"
 														/>
 													</div>
 												</div>
@@ -260,7 +260,7 @@ export function InventoryModal({
 														type="number"
 														name="quantity"
 														defaultValue={item?.quantity || 0}
-														className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none text-center"
+														className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden text-center"
 													/>
 												</div>
 												<div className="space-y-2">
@@ -276,7 +276,7 @@ export function InventoryModal({
 														name="unit"
 														defaultValue={item?.unit || "pcs"}
 														placeholder="kg/ltr/pcs"
-														className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none text-center"
+														className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden text-center"
 													/>
 												</div>
 											</div>
@@ -294,7 +294,7 @@ export function InventoryModal({
 														type="number"
 														name="min_stock"
 														defaultValue={item?.min_stock || 0}
-														className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none"
+														className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden"
 													/>
 												</div>
 												<div className="space-y-2">
@@ -313,7 +313,7 @@ export function InventoryModal({
 															name="notes"
 															defaultValue={item?.notes}
 															placeholder="..."
-															className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none"
+															className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden"
 														/>
 													</div>
 												</div>

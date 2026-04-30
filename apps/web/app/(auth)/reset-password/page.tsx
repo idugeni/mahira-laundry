@@ -95,7 +95,7 @@ export default function ResetPasswordPage({
 										exit={{ opacity: 0, height: 0 }}
 										className="mb-6 p-4 bg-red-50 border border-red-100 rounded-2xl flex items-center gap-3 text-red-600 text-[10px] font-bold overflow-hidden"
 									>
-										<span className="w-5 h-5 bg-white rounded-full flex items-center justify-center shrink-0 shadow-sm text-red-400">
+										<span className="w-5 h-5 bg-white rounded-full flex items-center justify-center shrink-0 shadow-xs text-red-400">
 											<HiOutlineExclamationCircle size={14} />
 										</span>
 										<p>{error}</p>
@@ -126,7 +126,7 @@ export default function ResetPasswordPage({
 													setFormData({ ...formData, password: e.target.value })
 												}
 												placeholder="Minimal 6 karakter"
-												className="w-full pl-14 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 text-sm font-bold text-slate-900 focus:outline-none focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary focus:bg-white transition-all placeholder:font-medium placeholder:text-slate-300"
+												className="w-full pl-14 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 text-sm font-bold text-slate-900 focus:outline-hidden focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary focus:bg-white transition-all placeholder:font-medium placeholder:text-slate-300"
 											/>
 										</div>
 									</div>
@@ -155,7 +155,7 @@ export default function ResetPasswordPage({
 													})
 												}
 												placeholder="Ulangi sandi baru"
-												className={`w-full pl-14 pr-6 py-3.5 rounded-[1.2rem] border bg-slate-50/50 text-sm font-bold text-slate-900 focus:outline-none focus:ring-4 focus:bg-white transition-all placeholder:font-medium placeholder:text-slate-300 ${
+												className={`w-full pl-14 pr-6 py-3.5 rounded-[1.2rem] border bg-slate-50/50 text-sm font-bold text-slate-900 focus:outline-hidden focus:ring-4 focus:bg-white transition-all placeholder:font-medium placeholder:text-slate-300 ${
 													formData.confirm_password &&
 													formData.confirm_password !== formData.password
 														? "border-red-300 focus:ring-red-100 focus:border-red-400"

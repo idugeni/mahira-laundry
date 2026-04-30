@@ -178,7 +178,7 @@ export function LoyaltyClient({
 				className="relative group h-full"
 			>
 				<div className="absolute inset-0 bg-brand-primary opacity-0 group-hover:opacity-5 rounded-[2.5rem] blur-3xl transition-opacity duration-1000" />
-				<div className="relative bg-white rounded-[2.5rem] border border-slate-100 p-8 sm:p-12 shadow-sm overflow-hidden min-h-[280px] flex flex-col md:flex-row items-center gap-10">
+				<div className="relative bg-white rounded-[2.5rem] border border-slate-100 p-8 sm:p-12 shadow-xs overflow-hidden min-h-[280px] flex flex-col md:flex-row items-center gap-10">
 					<div className="absolute top-0 right-0 p-12 text-[150px] text-slate-50 pointer-events-none transition-transform duration-1000 -mr-10 -mt-10">
 						<HiOutlineShare />
 					</div>
@@ -205,7 +205,7 @@ export function LoyaltyClient({
 								Your Invitation Code
 							</div>
 							<div className="flex items-center gap-3">
-								<div className="flex-1 bg-white px-6 py-4 rounded-2xl font-mono text-2xl font-black tracking-[4px] text-center text-slate-800 shadow-sm border border-slate-100">
+								<div className="flex-1 bg-white px-6 py-4 rounded-2xl font-mono text-2xl font-black tracking-[4px] text-center text-slate-800 shadow-xs border border-slate-100">
 									{profile.referral_code || "MHR-UNSET"}
 								</div>
 								<button
@@ -252,7 +252,7 @@ export function LoyaltyClient({
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
 							transition={{ delay: i * 0.1 }}
-							className="bg-white rounded-[2.5rem] border border-slate-100 p-8 shadow-sm hover:shadow-2xl hover:shadow-emerald-100 transition-all group relative overflow-hidden flex flex-col justify-between"
+							className="bg-white rounded-[2.5rem] border border-slate-100 p-8 shadow-xs hover:shadow-2xl hover:shadow-emerald-100 transition-all group relative overflow-hidden flex flex-col justify-between"
 						>
 							{/* Background Decoration Icon */}
 							<div className="absolute top-0 right-0 p-4 text-8xl text-emerald-500/5 opacity-0 group-hover:opacity-100 transition-all duration-500 pointer-events-none transform translate-x-8 -translate-y-8 group-hover:translate-x-4 group-hover:-translate-y-4 z-0">
@@ -299,7 +299,7 @@ export function LoyaltyClient({
 			</section>
 
 			{/* History - More Compact & Clean */}
-			<div className="bg-white rounded-[2rem] border border-slate-100 p-8 sm:p-12 shadow-sm">
+			<div className="bg-white rounded-[2rem] border border-slate-100 p-8 sm:p-12 shadow-xs">
 				<div className="flex items-center gap-4 mb-10 px-2">
 					<div className="w-12 h-12 rounded-2xl bg-slate-900 text-white flex items-center justify-center text-xl shadow-lg shadow-slate-200">
 						<HiOutlineClipboardDocumentCheck />
@@ -321,7 +321,7 @@ export function LoyaltyClient({
 							>
 								<div className="flex items-center gap-6">
 									<div
-										className={`w-14 h-14 rounded-2xl flex flex-col items-center justify-center font-black text-lg transition-transform shrink-0 ${item.points > 0 ? "bg-emerald-50 text-emerald-600 shadow-sm shadow-emerald-100" : "bg-red-50 text-red-600"}`}
+										className={`w-14 h-14 rounded-2xl flex flex-col items-center justify-center font-black text-lg transition-transform shrink-0 ${item.points > 0 ? "bg-emerald-50 text-emerald-600 shadow-xs shadow-emerald-100" : "bg-red-50 text-red-600"}`}
 									>
 										{item.points > 0 ? "+" : ""}
 										{item.points}
@@ -332,13 +332,13 @@ export function LoyaltyClient({
 												{item.description}
 											</p>
 											{item.orders?.order_number && (
-												<span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded text-[9px] font-black uppercase tracking-widest border border-blue-100">
+												<span className="px-2 py-0.5 bg-blue-50 text-blue-600 rounded-sm text-[9px] font-black uppercase tracking-widest border border-blue-100">
 													#{item.orders.order_number}
 												</span>
 											)}
 										</div>
 										<div className="flex items-center gap-3 mt-1.5">
-											<span className="text-[10px] font-black px-2 py-0.5 bg-white border border-slate-100 rounded text-slate-400 uppercase tracking-tighter">
+											<span className="text-[10px] font-black px-2 py-0.5 bg-white border border-slate-100 rounded-sm text-slate-400 uppercase tracking-tighter">
 												{item.type}
 											</span>
 											<p className="text-[10px] text-slate-300 font-black uppercase tracking-widest italic leading-none pt-0.5">
@@ -370,7 +370,7 @@ export function LoyaltyClient({
 					</div>
 				) : (
 					<div className="text-center py-14 sm:py-16 bg-slate-50/30 rounded-[2.5rem] border-2 border-dashed border-slate-100">
-						<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-sm shadow-slate-200">
+						<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-xs shadow-slate-200">
 							<span className="text-slate-100 text-4xl flex items-center justify-center">
 								<HiOutlineBolt />
 							</span>

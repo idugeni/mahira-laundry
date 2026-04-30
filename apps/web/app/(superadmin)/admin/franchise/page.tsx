@@ -189,7 +189,7 @@ export default async function FranchisePage() {
 										</div>
 										<span
 											className={cn(
-												"w-3 h-3 rounded-full border-2 border-white shadow-sm",
+												"w-3 h-3 rounded-full border-2 border-white shadow-xs",
 												outlet.is_active ? "bg-emerald-500" : "bg-rose-500",
 											)}
 										/>

@@ -36,7 +36,7 @@ export default async function ManagerLayananPage() {
 			</div>
 
 			{services.length === 0 ? (
-				<div className="bg-white rounded-xl border border-border p-12 text-center shadow-sm">
+				<div className="bg-white rounded-xl border border-border p-12 text-center shadow-xs">
 					<div className="text-4xl mb-4">🧺</div>
 					<h3 className="text-lg font-bold text-slate-700">
 						Belum ada layanan
@@ -46,7 +46,7 @@ export default async function ManagerLayananPage() {
 					</p>
 				</div>
 			) : (
-				<div className="bg-white rounded-xl border border-border overflow-hidden shadow-sm">
+				<div className="bg-white rounded-xl border border-border overflow-hidden shadow-xs">
 					<div className="overflow-x-auto">
 						<table className="w-full whitespace-nowrap">
 							<thead className="bg-slate-50 border-b border-slate-100">
@@ -86,7 +86,7 @@ export default async function ManagerLayananPage() {
 											</td>
 											<td className="px-5 py-4">
 												<div className="flex items-center gap-3">
-													<div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 flex items-center justify-center text-xl shadow-sm transition-transform">
+													<div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 flex items-center justify-center text-xl shadow-xs transition-transform">
 														{service.icon || "🧺"}
 													</div>
 													<div>

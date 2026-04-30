@@ -190,7 +190,7 @@ export function SuperadminFinanceClient({
 					<div className="flex items-center gap-2">
 						<Button
 							variant="outline"
-							className="rounded-xl h-11 px-4 sm:px-5 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50 shadow-sm transition-colors flex items-center gap-2"
+							className="rounded-xl h-11 px-4 sm:px-5 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white hover:bg-slate-50 shadow-xs transition-colors flex items-center gap-2"
 						>
 							<Calendar size={16} />{" "}
 							{new Date().toLocaleDateString("id-ID", {
@@ -207,7 +207,7 @@ export function SuperadminFinanceClient({
 				{/* === OVERVIEW TAB === */}
 				<TabsContent
 					value="overview"
-					className="space-y-8 focus-visible:outline-none"
+					className="space-y-8 focus-visible:outline-hidden"
 				>
 					{/* KPI Row */}
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-0 sm:gap-6">
@@ -329,7 +329,7 @@ export function SuperadminFinanceClient({
 				{/* === EXPENSES TAB === */}
 				<TabsContent
 					value="expenses"
-					className="space-y-8 focus-visible:outline-none"
+					className="space-y-8 focus-visible:outline-hidden"
 				>
 					<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 overflow-hidden">
 						<div className="p-6 sm:p-8 border-b border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -343,7 +343,7 @@ export function SuperadminFinanceClient({
 							</div>
 							<Button
 								variant="outline"
-								className="rounded-xl h-11 px-5 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white shadow-sm flex items-center gap-2 self-start sm:self-auto"
+								className="rounded-xl h-11 px-5 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white shadow-xs flex items-center gap-2 self-start sm:self-auto"
 							>
 								<Filter size={16} /> Filter Category
 							</Button>
@@ -484,7 +484,7 @@ export function SuperadminFinanceClient({
 				{/* === HISTORY TAB === */}
 				<TabsContent
 					value="history"
-					className="space-y-8 focus-visible:outline-none"
+					className="space-y-8 focus-visible:outline-hidden"
 				>
 					<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 overflow-hidden">
 						<div className="p-6 sm:p-8 border-b border-slate-50">

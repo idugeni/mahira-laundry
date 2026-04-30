@@ -200,7 +200,7 @@ export function PackageFormModal({
 					<div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/5 rounded-full -mr-24 -mt-24 blur-3xl" />
 					<div className="relative flex items-center justify-between">
 						<div className="flex items-center gap-3">
-							<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-indigo-100 flex items-center justify-center text-indigo-600">
+							<div className="w-12 h-12 rounded-2xl bg-white shadow-xs border border-indigo-100 flex items-center justify-center text-indigo-600">
 								<Package size={20} />
 							</div>
 							<div>
@@ -225,7 +225,7 @@ export function PackageFormModal({
 						<button
 							type="button"
 							onClick={() => !isSubmitting && onClose()}
-							className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+							className="w-8 h-8 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 						>
 							<HiOutlineXMark size={16} />
 						</button>
@@ -247,7 +247,7 @@ export function PackageFormModal({
 								id="pkg-name"
 								{...register("name")}
 								placeholder="Contoh: Paket Starter Laundry"
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 							{errors.name && (
 								<p className="text-[10px] font-bold text-rose-500">
@@ -266,7 +266,7 @@ export function PackageFormModal({
 							<select
 								id="pkg-tier"
 								{...register("tier")}
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all appearance-none cursor-pointer"
+								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all appearance-none cursor-pointer"
 							>
 								{TIER_OPTIONS.map((t) => (
 									<option key={t} value={t}>
@@ -297,7 +297,7 @@ export function PackageFormModal({
 								type="number"
 								min={1}
 								placeholder="0"
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 							{errors.price && (
 								<p className="text-[10px] font-bold text-rose-500">
@@ -322,7 +322,7 @@ export function PackageFormModal({
 								type="number"
 								min={0}
 								placeholder={watchPrice ? `< ${watchPrice}` : "0"}
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 							{errors.promo_price && (
 								<p className="text-[10px] font-bold text-rose-500">
@@ -347,7 +347,7 @@ export function PackageFormModal({
 							id="pkg-promo-expires"
 							{...register("promo_expires_at")}
 							type="datetime-local"
-							className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+							className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 						/>
 					</div>
 
@@ -367,7 +367,7 @@ export function PackageFormModal({
 							{...register("description")}
 							rows={3}
 							placeholder="Deskripsi singkat paket usaha..."
-							className="w-full px-4 py-3 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all resize-none"
+							className="w-full px-4 py-3 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all resize-none"
 						/>
 					</div>
 
@@ -406,7 +406,7 @@ export function PackageFormModal({
 										<input
 											{...register(`items.${index}.name`)}
 											placeholder="Nama item"
-											className="w-full h-10 px-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+											className="w-full h-10 px-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 										/>
 										{errors.items?.[index]?.name && (
 											<p className="text-[9px] font-bold text-rose-500 mt-0.5">
@@ -419,12 +419,12 @@ export function PackageFormModal({
 										type="number"
 										min={1}
 										placeholder="Qty"
-										className="w-full h-10 px-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+										className="w-full h-10 px-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 									/>
 									<input
 										{...register(`items.${index}.spec`)}
 										placeholder="Spesifikasi (opsional)"
-										className="w-full h-10 px-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+										className="w-full h-10 px-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 									/>
 									<button
 										type="button"
@@ -456,7 +456,7 @@ export function PackageFormModal({
 								type="number"
 								min={0}
 								placeholder="Contoh: 7"
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 						</div>
 
@@ -474,7 +474,7 @@ export function PackageFormModal({
 								id="pkg-support"
 								{...register("support_coverage")}
 								placeholder="Contoh: 12 bulan penuh"
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 						</div>
 					</div>
@@ -495,7 +495,7 @@ export function PackageFormModal({
 								id="pkg-roi"
 								{...register("estimated_roi")}
 								placeholder="Contoh: 12–18 bulan"
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 						</div>
 
@@ -513,7 +513,7 @@ export function PackageFormModal({
 								id="pkg-image-url"
 								{...register("image_url")}
 								placeholder="https://..."
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 						</div>
 					</div>
@@ -533,7 +533,7 @@ export function PackageFormModal({
 								type="number"
 								min={0}
 								placeholder="0"
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 						</div>
 
@@ -541,7 +541,7 @@ export function PackageFormModal({
 							<input
 								{...register("is_featured")}
 								type="checkbox"
-								className="w-4 h-4 rounded accent-indigo-600"
+								className="w-4 h-4 rounded-sm accent-indigo-600"
 							/>
 							<span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">
 								Featured
@@ -552,7 +552,7 @@ export function PackageFormModal({
 							<input
 								{...register("is_active")}
 								type="checkbox"
-								className="w-4 h-4 rounded accent-emerald-600"
+								className="w-4 h-4 rounded-sm accent-emerald-600"
 							/>
 							<span className="text-[10px] font-black text-slate-600 uppercase tracking-widest">
 								Aktif

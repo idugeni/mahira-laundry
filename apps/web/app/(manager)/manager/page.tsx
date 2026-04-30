@@ -208,14 +208,14 @@ export default async function ManagerDashboardPage() {
 								className={cn(
 									"group/item p-5 rounded-2xl border transition-all duration-300 flex items-center justify-between",
 									shift.active
-										? "bg-indigo-50/50 border-indigo-100 shadow-sm"
+										? "bg-indigo-50/50 border-indigo-100 shadow-xs"
 										: "bg-slate-50 border-slate-100 hover:bg-white hover:shadow-md",
 								)}
 							>
 								<div className="flex items-center gap-4">
 									<div
 										className={cn(
-											"w-12 h-12 rounded-xl flex items-center justify-center text-lg shadow-sm border border-white",
+											"w-12 h-12 rounded-xl flex items-center justify-center text-lg shadow-xs border border-white",
 											shift.active ? "bg-indigo-600 text-white" : "bg-white",
 										)}
 									>
@@ -308,7 +308,7 @@ export default async function ManagerDashboardPage() {
 											className="p-4 rounded-2xl flex items-center justify-between hover:bg-slate-50 group/row transition-all duration-300 border border-transparent hover:border-slate-100"
 										>
 											<div className="flex items-center gap-4 min-w-0">
-												<div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-sm font-black text-slate-500 border border-white shadow-sm transition-transform group-hover/row:scale-105">
+												<div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-sm font-black text-slate-500 border border-white shadow-xs transition-transform group-hover/row:scale-105">
 													{(Array.isArray(order.profiles)
 														? order.profiles[0]?.full_name?.charAt(0)
 														: order.profiles?.full_name?.charAt(0)) || "?"}
@@ -398,7 +398,7 @@ export default async function ManagerDashboardPage() {
 										className="p-5 rounded-2xl flex items-center justify-between bg-rose-50/30 hover:bg-rose-50/60 transition-all border border-rose-100/50"
 									>
 										<div className="flex items-center gap-4">
-											<div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-rose-500 shadow-sm border border-rose-100">
+											<div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-rose-500 shadow-xs border border-rose-100">
 												<AlertTriangle size={20} />
 											</div>
 											<div>

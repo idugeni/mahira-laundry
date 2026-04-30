@@ -74,9 +74,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 	const extraCount = pkg.items.length - MAX_ITEMS;
 
 	return (
-		<motion.div
-			className="relative flex flex-col h-full rounded-[2.5rem] border bg-white p-8 sm:p-10 transition-all duration-500 overflow-hidden group"
-		>
+		<motion.div className="relative flex flex-col h-full rounded-[2.5rem] border bg-white p-8 sm:p-10 transition-all duration-500 overflow-hidden group">
 			{/* Featured ribbon - Ultra Premium Style */}
 			{pkg.is_featured && (
 				<div className="absolute top-8 right-0 z-20">

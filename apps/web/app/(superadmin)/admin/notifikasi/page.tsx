@@ -60,7 +60,7 @@ export default function AdminNotificationPage() {
 				className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6"
 			>
 				{/* Form Section */}
-				<div className="lg:col-span-2 bg-card border rounded-2xl p-5 sm:p-8 shadow-sm">
+				<div className="lg:col-span-2 bg-card border rounded-2xl p-5 sm:p-8 shadow-xs">
 					<form onSubmit={handleSubmit} className="space-y-6">
 						<div className="space-y-2">
 							<label htmlFor="notif-title" className="text-sm font-medium">
@@ -70,7 +70,7 @@ export default function AdminNotificationPage() {
 								id="notif-title"
 								type="text"
 								placeholder="Contoh: Promo Ramadhan Berkah ✨"
-								className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+								className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-hidden transition-all"
 								value={formData.title}
 								onChange={(e) =>
 									setFormData({ ...formData, title: e.target.value })
@@ -86,7 +86,7 @@ export default function AdminNotificationPage() {
 								id="notif-body"
 								rows={5}
 								placeholder="Tulis pesan lengkap Anda di sini..."
-								className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all resize-none"
+								className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-hidden transition-all resize-none"
 								value={formData.body}
 								onChange={(e) =>
 									setFormData({ ...formData, body: e.target.value })
@@ -101,7 +101,7 @@ export default function AdminNotificationPage() {
 								</label>
 								<select
 									id="notif-type"
-									className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+									className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-hidden transition-all"
 									value={formData.type}
 									onChange={(e) =>
 										setFormData({
@@ -120,7 +120,7 @@ export default function AdminNotificationPage() {
 								</label>
 								<select
 									id="notif-target"
-									className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-none transition-all"
+									className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-hidden transition-all"
 									value={formData.targetRole}
 									onChange={(e) =>
 										setFormData({ ...formData, targetRole: e.target.value })

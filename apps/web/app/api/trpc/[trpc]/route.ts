@@ -1,8 +1,8 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { NextResponse } from "next/server";
+import { apiLimiter } from "@/lib/upstash/rate-limit";
 import { createContext } from "@/server/trpc/proxy";
 import { appRouter } from "@/server/trpc/root";
-import { apiLimiter } from "@/lib/upstash/rate-limit";
 
 const handler = async (req: Request) => {
 	const ip = req.headers.get("x-forwarded-for") ?? "unknown";

@@ -29,8 +29,8 @@ export default async function AnalyticsPage() {
 				<div
 					className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-colors ${
 						isConfigured
-							? "bg-emerald-50 border-emerald-100 text-emerald-600 shadow-sm shadow-emerald-100"
-							: "bg-amber-50 border-amber-100 text-amber-600 shadow-sm shadow-amber-100"
+							? "bg-emerald-50 border-emerald-100 text-emerald-600 shadow-xs shadow-emerald-100"
+							: "bg-amber-50 border-amber-100 text-amber-600 shadow-xs shadow-amber-100"
 					}`}
 				>
 					<span
@@ -53,7 +53,7 @@ export default async function AnalyticsPage() {
 						<p className="text-slate-500 text-sm leading-relaxed mb-8">
 							Dashboard Realtime memerlukan Google Analytics Data API. Silakan
 							lengkapi variabel berikut di{" "}
-							<code className="bg-slate-100 px-1.5 py-0.5 rounded text-slate-700">
+							<code className="bg-slate-100 px-1.5 py-0.5 rounded-sm text-slate-700">
 								.env
 							</code>
 							:
@@ -73,7 +73,7 @@ export default async function AnalyticsPage() {
 										key={step}
 										className="flex items-start gap-3 text-xs font-bold text-slate-600"
 									>
-										<span className="flex-shrink-0 w-5 h-5 bg-white border border-slate-200 rounded-full flex items-center justify-center text-[10px] text-slate-400">
+										<span className="shrink-0 w-5 h-5 bg-white border border-slate-200 rounded-full flex items-center justify-center text-[10px] text-slate-400">
 											{i + 1}
 										</span>
 										{step}

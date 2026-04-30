@@ -41,6 +41,7 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
 					xmlns="http://www.w3.org/2000/svg"
 					className="w-full h-[50px] sm:h-[80px]"
 					preserveAspectRatio="none"
+					aria-hidden="true"
 				>
 					<path
 						d="M0,45 C480,65 960,25 1440,45 L1440,80 L0,80 Z"
@@ -102,6 +103,7 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
 					xmlns="http://www.w3.org/2000/svg"
 					className="w-full h-[50px] sm:h-[80px]"
 					preserveAspectRatio="none"
+					aria-hidden="true"
 				>
 					<path
 						d="M0,45 C480,25 960,65 1440,45 L1440,0 L0,0 Z"

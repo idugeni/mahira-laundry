@@ -42,8 +42,8 @@ export default async function SuperadminLayananPage() {
 						</h1>
 						<p className="text-slate-500 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
 							Standardisasi harga, unit, dan durasi pengerjaan layanan di
-							seluruh jaringan Mahira Group. Kelola portofolio produk
-							premium Anda dari dashboard ini.
+							seluruh jaringan Mahira Group. Kelola portofolio produk premium
+							Anda dari dashboard ini.
 						</p>
 					</div>
 

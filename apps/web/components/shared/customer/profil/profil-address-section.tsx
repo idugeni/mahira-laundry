@@ -35,7 +35,7 @@ export function ProfilAddressSection({
 	onDeleteAddress,
 }: ProfilAddressSectionProps) {
 	return (
-		<div className="bg-white rounded-[2.5rem] border border-slate-100 p-8 sm:p-10 shadow-sm">
+		<div className="bg-white rounded-[2.5rem] border border-slate-100 p-8 sm:p-10 shadow-xs">
 			<div className="flex items-center justify-between mb-8">
 				<h3 className="text-lg font-black text-slate-900 flex items-center gap-3">
 					<span className="w-8 h-8 rounded-xl bg-brand-primary/5 text-brand-primary flex items-center justify-center">
@@ -76,7 +76,7 @@ export function ProfilAddressSection({
 								onChange={(e) =>
 									onNewAddrChange({ ...newAddr, label: e.target.value })
 								}
-								className="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none font-bold focus:border-brand-primary transition-all"
+								className="w-full px-5 py-3 rounded-xl border border-slate-200 outline-hidden font-bold focus:border-brand-primary transition-all"
 							/>
 						</div>
 						<div className="space-y-2">
@@ -94,7 +94,7 @@ export function ProfilAddressSection({
 									onNewAddrChange({ ...newAddr, detail: e.target.value })
 								}
 								rows={3}
-								className="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none font-bold focus:border-brand-primary transition-all resize-none"
+								className="w-full px-5 py-3 rounded-xl border border-slate-200 outline-hidden font-bold focus:border-brand-primary transition-all resize-none"
 							/>
 						</div>
 						<div className="flex gap-3">

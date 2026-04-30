@@ -61,7 +61,7 @@ export function AdminAvatarSection({ profile }: AdminAvatarSectionProps) {
 				)}
 
 				{loading && (
-					<div className="absolute inset-0 bg-indigo-600/60 backdrop-blur-sm flex items-center justify-center z-10">
+					<div className="absolute inset-0 bg-indigo-600/60 backdrop-blur-xs flex items-center justify-center z-10">
 						<div className="w-8 h-8 border-4 border-white/20 border-t-white rounded-full animate-spin" />
 					</div>
 				)}

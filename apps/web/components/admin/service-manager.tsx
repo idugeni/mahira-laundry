@@ -73,7 +73,7 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 					<Input
 						value={query}
 						onChange={(event) => setQuery(event.target.value)}
-						className="pl-11 pr-4 h-11 bg-white rounded-xl border-slate-100 shadow-sm focus:ring-4 focus:ring-indigo-500/5 transition-all font-bold text-sm"
+						className="pl-11 pr-4 h-11 bg-white rounded-xl border-slate-100 shadow-xs focus:ring-4 focus:ring-indigo-500/5 transition-all font-bold text-sm"
 						placeholder="Cari layanan laundry..."
 					/>
 				</div>
@@ -81,7 +81,7 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 				<div className="flex flex-wrap items-center gap-2 sm:gap-3">
 					<Button
 						variant="outline"
-						className="rounded-xl h-10 px-4 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white text-slate-600 hover:bg-slate-50 shadow-sm"
+						className="rounded-xl h-10 px-4 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white text-slate-600 hover:bg-slate-50 shadow-xs"
 					>
 						<LayoutGrid size={15} className="mr-2" /> {filteredServices.length}{" "}
 						Layanan

@@ -245,7 +245,7 @@ export function LayananClient({
 						viewport={{ once: true }}
 						className="inline-flex items-center gap-3 px-6 py-3 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] mb-8 border border-brand-primary/10"
 					>
-						<span className="w-5 h-5 flex items-center justify-center bg-white rounded-full shadow-sm">
+						<span className="w-5 h-5 flex items-center justify-center bg-white rounded-full shadow-xs">
 							<HiOutlineSparkles size={14} />
 						</span>
 						<span>Kualitas Tanpa Kompromi</span>
@@ -346,9 +346,7 @@ export function LayananClient({
 							Nikmati waktu luang Anda lebih banyak sementara kami menangani
 							tumpukan cucian Anda dengan standar kualitas hotel bintang lima.
 						</p>
-						<motion.div
-							className="inline-block"
-						>
+						<motion.div className="inline-block">
 							<Link
 								href={orderHref}
 								className="inline-flex items-center gap-4 px-10 py-4.5 bg-brand-primary text-white rounded-full font-black text-[10px] uppercase tracking-[0.2em] hover:bg-brand-primary/90 transition-all shadow-2xl shadow-brand-primary/40 group"

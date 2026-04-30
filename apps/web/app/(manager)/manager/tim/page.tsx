@@ -31,7 +31,7 @@ export default async function TimPage() {
 			<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
 				<div className="space-y-3">
 					<div className="flex items-center gap-3">
-						<div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-sm border border-indigo-100">
+						<div className="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-xs border border-indigo-100">
 							<Users size={20} />
 						</div>
 						<h1 className="text-4xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tight uppercase">
@@ -48,7 +48,7 @@ export default async function TimPage() {
 					<div className="relative group">
 						<Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
 						<Input
-							className="pl-11 pr-4 py-6 w-[280px] bg-white rounded-2xl border-slate-100 shadow-sm focus:ring-4 focus:ring-indigo-500/5 transition-all font-bold text-sm"
+							className="pl-11 pr-4 py-6 w-[280px] bg-white rounded-2xl border-slate-100 shadow-xs focus:ring-4 focus:ring-indigo-500/5 transition-all font-bold text-sm"
 							placeholder="Cari anggota tim..."
 						/>
 					</div>
@@ -103,7 +103,7 @@ export default async function TimPage() {
 											{s.full_name?.charAt(0) || <User />}
 										</div>
 										{s.is_active && (
-											<span className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full border-4 border-white shadow-sm" />
+											<span className="absolute -bottom-1 -right-1 w-5 h-5 bg-emerald-500 rounded-full border-4 border-white shadow-xs" />
 										)}
 									</div>
 									<div className="min-w-0">

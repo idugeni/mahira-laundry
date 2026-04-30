@@ -7,12 +7,11 @@ import {
 	HiOutlineBars3BottomRight,
 	HiOutlineChevronDown,
 	HiOutlineChevronRight,
-	HiOutlineGlobeAlt,
 	HiOutlineInformationCircle,
 	HiOutlineMapPin,
 	HiOutlinePhoto,
-	HiOutlineSquares2X2,
 	HiOutlineSparkles,
+	HiOutlineSquares2X2,
 	HiOutlineUser,
 	HiOutlineXMark,
 } from "react-icons/hi2";
@@ -78,7 +77,7 @@ export function MahiraHeader() {
 	}, [megaOpen]);
 
 	return (
-		<div key="header-root-container">
+		<div key="header-root-container" className="contents">
 			<header
 				key="header-main"
 				className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-border"
@@ -128,7 +127,7 @@ export function MahiraHeader() {
 											<div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-l border-t border-slate-100 rotate-45" />
 
 											<div className="grid grid-cols-2 gap-2">
-												{megaMenuItems.map((item, i) => {
+												{megaMenuItems.map((item) => {
 													const Icon = item.icon;
 													return (
 														<Link
@@ -190,7 +189,7 @@ export function MahiraHeader() {
 									className="flex items-center gap-3 pl-2 pr-6 py-1.5 bg-slate-100/50 rounded-full animate-pulse"
 								>
 									<div className="w-8 h-8 rounded-full bg-slate-200" />
-									<div className="h-4 w-12 bg-slate-200 rounded" />
+									<div className="h-4 w-12 bg-slate-200 rounded-sm" />
 								</div>
 							) : user ? (
 								<motion.div
@@ -258,7 +257,7 @@ export function MahiraHeader() {
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
 						onClick={() => setIsOpen(false)}
-						className="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-sm lg:hidden"
+						className="fixed inset-0 z-[60] bg-slate-900/40 backdrop-blur-xs lg:hidden"
 					/>
 				)}
 				{isOpen && (

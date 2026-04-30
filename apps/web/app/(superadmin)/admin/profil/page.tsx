@@ -307,7 +307,7 @@ export default async function SuperadminProfilPage() {
 									>
 										<div
 											className={cn(
-												"w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-500",
+												"w-4 h-4 rounded-full bg-white shadow-xs transition-transform duration-500",
 												item.active ? "translate-x-6" : "translate-x-0",
 											)}
 										/>

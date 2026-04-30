@@ -133,7 +133,7 @@ export function TrackingClient() {
 								value={query}
 								onChange={(e) => setQuery(e.target.value)}
 								placeholder="Masukkan ID Pesanan (ORD-XXXXX)"
-								className="w-full pl-16 pr-8 py-6 bg-slate-50 border border-slate-100 rounded-3xl text-lg font-black text-slate-900 outline-none focus:bg-white focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary transition-all placeholder:font-medium placeholder:text-slate-300"
+								className="w-full pl-16 pr-8 py-6 bg-slate-50 border border-slate-100 rounded-3xl text-lg font-black text-slate-900 outline-hidden focus:bg-white focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary transition-all placeholder:font-medium placeholder:text-slate-300"
 							/>
 						</div>
 
@@ -193,9 +193,9 @@ export function TrackingClient() {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						className="bg-red-50/50 backdrop-blur-sm border border-red-100 p-12 rounded-[3.5rem] text-center"
+						className="bg-red-50/50 backdrop-blur-xs border border-red-100 p-12 rounded-[3.5rem] text-center"
 					>
-						<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-red-400 mx-auto mb-6 shadow-sm">
+						<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-red-400 mx-auto mb-6 shadow-xs">
 							<HiOutlineMagnifyingGlass size={40} />
 						</div>
 						<h3 className="text-2xl font-black text-red-900 mb-2 tracking-tight">
@@ -248,7 +248,7 @@ export function TrackingClient() {
 						{/* Detail Grid */}
 						<div className="grid lg:grid-cols-12 gap-8 items-start">
 							{/* Timeline */}
-							<div className="lg:col-span-7 bg-white p-10 lg:p-14 rounded-[3.5rem] border border-slate-100 shadow-sm relative">
+							<div className="lg:col-span-7 bg-white p-10 lg:p-14 rounded-[3.5rem] border border-slate-100 shadow-xs relative">
 								<h3 className="text-2xl font-black text-slate-900 mb-12 flex items-center gap-4">
 									<span className="text-brand-primary">
 										<HiOutlineClock size={28} />
@@ -308,7 +308,7 @@ export function TrackingClient() {
 
 							{/* Summary */}
 							<div className="lg:col-span-5 space-y-8">
-								<div className="bg-white p-10 lg:p-14 rounded-[3.5rem] border border-slate-100 shadow-sm">
+								<div className="bg-white p-10 lg:p-14 rounded-[3.5rem] border border-slate-100 shadow-xs">
 									<h3 className="text-2xl font-black text-slate-900 mb-8 flex items-center gap-4">
 										<span className="text-brand-primary">
 											<HiOutlineReceiptPercent size={28} />
@@ -353,10 +353,8 @@ export function TrackingClient() {
 								</div>
 
 								{/* Delivery Info If Any */}
-								<motion.div
-									className="bg-brand-primary/5 p-10 rounded-[2rem] border border-brand-primary/10 flex items-center gap-6"
-								>
-									<div className="w-16 h-16 bg-white rounded-[2rem] flex items-center justify-center text-brand-primary shadow-sm">
+								<motion.div className="bg-brand-primary/5 p-10 rounded-[2rem] border border-brand-primary/10 flex items-center gap-6">
+									<div className="w-16 h-16 bg-white rounded-[2rem] flex items-center justify-center text-brand-primary shadow-xs">
 										<HiOutlineTruck size={32} />
 									</div>
 									<div>

@@ -104,7 +104,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 					>
 						<motion.div
 							variants={itemVariants}
-							className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black mb-8 border border-brand-primary/20 shadow-sm uppercase tracking-[0.2em]"
+							className="inline-flex items-center gap-2 px-4 py-2 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black mb-8 border border-brand-primary/20 shadow-xs uppercase tracking-[0.2em]"
 						>
 							<motion.span
 								animate={{ rotate: 360 }}
@@ -244,7 +244,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 											initial={{ opacity: 0, x: 20 }}
 											animate={{ opacity: 1, x: 0 }}
 											transition={{ delay: 0.5 + i * 0.1 }}
-											className="flex items-center justify-between p-5 rounded-2xl bg-slate-50 border border-slate-100 shadow-sm"
+											className="flex items-center justify-between p-5 rounded-2xl bg-slate-50 border border-slate-100 shadow-xs"
 										>
 											<div className="flex items-center gap-3">
 												<div className="w-2 h-2 rounded-full bg-brand-primary" />
@@ -286,8 +286,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 								</div>
 							</div>
 						</motion.div>
-
-							</div>
+					</div>
 				</div>
 			</div>
 		</section>

@@ -25,7 +25,7 @@ export default function ManagerLayout({
 			/>
 			<div className="flex-1 flex flex-col min-w-0">
 				{/* Top Header */}
-				<header className="h-14 lg:h-16 border-b border-slate-200/80 bg-white/90 backdrop-blur-sm flex items-center justify-between px-4 lg:px-8 mt-14 lg:mt-0 shadow-sm/30 sticky top-14 lg:top-0 z-30">
+				<header className="h-14 lg:h-16 border-b border-slate-200/80 bg-white/90 backdrop-blur-xs flex items-center justify-between px-4 lg:px-8 mt-14 lg:mt-0 shadow-xs/30 sticky top-14 lg:top-0 z-30">
 					<div className="hidden lg:flex items-center gap-2 text-sm text-slate-400">
 						<span className="font-medium text-slate-600">Mahira Laundry</span>
 						<span>/</span>
@@ -41,10 +41,7 @@ export default function ManagerLayout({
 				<main className="flex-1 p-4 lg:p-8 overflow-auto">{children}</main>
 				{/* Dashboard Footer */}
 				<footer className="p-4 lg:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
-					<p>
-						© {new Date().getFullYear()} Mahira Group. All rights
-						reserved.
-					</p>
+					<p>© {new Date().getFullYear()} Mahira Group. All rights reserved.</p>
 				</footer>
 			</div>
 		</div>

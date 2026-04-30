@@ -152,7 +152,7 @@ export function RegisterStaffModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
+										className="w-10 h-10 rounded-xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
 									>
 										<X size={20} />
 									</button>
@@ -183,7 +183,7 @@ export function RegisterStaffModal({
 												name="fullName"
 												defaultValue={staff?.full_name}
 												placeholder="Contoh: Muhammad Rafli"
-												className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
+												className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-hidden"
 											/>
 										</div>
 									</div>
@@ -205,7 +205,7 @@ export function RegisterStaffModal({
 													name="email"
 													defaultValue={staff?.email ?? ""} // Note: This might need careful handling if email changes
 													placeholder="staf@mahira.id"
-													className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
+													className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-hidden"
 												/>
 											</div>
 										</div>
@@ -224,7 +224,7 @@ export function RegisterStaffModal({
 													name="phone"
 													defaultValue={staff?.phone ?? ""}
 													placeholder="0812..."
-													className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
+													className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-hidden"
 												/>
 											</div>
 										</div>
@@ -320,7 +320,7 @@ export function RegisterStaffModal({
 														? "Isi hanya jika ingin mengganti password"
 														: "Kosongkan untuk password default"
 												}
-												className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-none"
+												className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-emerald-500/5 transition-all outline-hidden"
 											/>
 										</div>
 									</div>
@@ -332,7 +332,7 @@ export function RegisterStaffModal({
 												variant="ghost"
 												onClick={handleDelete}
 												disabled={isLoading}
-												className="w-full sm:w-auto px-5 h-11 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest shadow-sm flex items-center gap-2"
+												className="w-full sm:w-auto px-5 h-11 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest shadow-xs flex items-center gap-2"
 											>
 												<Trash2 size={18} /> Cabut Akses
 											</Button>
@@ -365,7 +365,7 @@ export function RegisterStaffModal({
 
 							{/* Standard Warning Footer */}
 							<div className="bg-emerald-50 px-6 sm:px-8 py-5 border-t border-emerald-100 flex items-center gap-4">
-								<div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-emerald-500 shadow-sm shrink-0">
+								<div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-emerald-500 shadow-xs shrink-0">
 									<ShieldCheck size={20} />
 								</div>
 								<p className="text-[10px] font-bold text-emerald-700/80 leading-relaxed uppercase tracking-widest">

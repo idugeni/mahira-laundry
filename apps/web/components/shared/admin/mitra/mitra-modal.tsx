@@ -64,7 +64,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 				className="contents"
 			>
 				{trigger || (
-					<span className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-sm hover:shadow-md transition-shadow cursor-pointer">
+					<span className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-xs hover:shadow-md transition-shadow cursor-pointer">
 						<HiOutlineUserGroup size={18} />
 						<span>Tambah Mitra Baru</span>
 					</span>
@@ -99,7 +99,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
+										className="w-10 h-10 rounded-xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
 									>
 										<HiOutlineXMark size={20} />
 									</button>
@@ -144,7 +144,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 														id="fullName"
 														name="fullName"
 														placeholder="Contoh: Budi Santoso"
-														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
+														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden ring-0 focus:border-indigo-500 focus:bg-white transition-all"
 													/>
 												</div>
 											</div>
@@ -165,7 +165,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 														id="email"
 														name="email"
 														placeholder="owner@email.com"
-														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
+														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden ring-0 focus:border-indigo-500 focus:bg-white transition-all"
 													/>
 												</div>
 											</div>
@@ -185,7 +185,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 														id="phone"
 														name="phone"
 														placeholder="0812..."
-														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
+														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden ring-0 focus:border-indigo-500 focus:bg-white transition-all"
 													/>
 												</div>
 											</div>
@@ -205,7 +205,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 														id="password"
 														name="password"
 														placeholder="Default: MitraMahira12!@"
-														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
+														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden ring-0 focus:border-indigo-500 focus:bg-white transition-all"
 													/>
 												</div>
 											</div>
@@ -240,7 +240,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 														id="outletName"
 														name="outletName"
 														placeholder="Mahira - Gading Serpong"
-														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
+														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden ring-0 focus:border-indigo-500 focus:bg-white transition-all"
 													/>
 												</div>
 											</div>
@@ -260,7 +260,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 														id="outletSlug"
 														name="outletSlug"
 														placeholder="gading-serpong"
-														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
+														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden ring-0 focus:border-indigo-500 focus:bg-white transition-all"
 													/>
 												</div>
 											</div>
@@ -280,7 +280,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 														id="outletAddress"
 														name="outletAddress"
 														placeholder="Jl. Boulevard Raya Blok M3 No. 45..."
-														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[80px] ring-0 focus:border-indigo-500 focus:bg-white transition-all resize-none"
+														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden min-h-[80px] ring-0 focus:border-indigo-500 focus:bg-white transition-all resize-none"
 													/>
 												</div>
 											</div>
@@ -303,7 +303,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 														defaultValue="5"
 														min="0"
 														max="100"
-														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none ring-0 focus:border-indigo-500 focus:bg-white transition-all"
+														className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden ring-0 focus:border-indigo-500 focus:bg-white transition-all"
 													/>
 												</div>
 												<p className="text-[10px] text-slate-400 italic ml-1">

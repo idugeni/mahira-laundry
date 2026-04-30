@@ -125,7 +125,7 @@ export function InquiryForm({
 	}
 
 	return (
-		<div className="mx-auto max-w-2xl rounded-2xl bg-white p-8 shadow-sm">
+		<div className="mx-auto max-w-2xl rounded-2xl bg-white p-8 shadow-xs">
 			<h3 className="mb-6 text-xl font-bold text-gray-900">
 				Ajukan Inquiry Paket Usaha
 			</h3>

@@ -33,7 +33,11 @@ function GalleryCard({
 			whileInView={{ opacity: 1, y: 0 }}
 			whileHover={{ y: -4 }}
 			viewport={{ once: false }}
-			transition={{ duration: 0.5, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+			transition={{
+				duration: 0.5,
+				delay: index * 0.1,
+				ease: [0.16, 1, 0.3, 1],
+			}}
 			className="group relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-100 cursor-pointer"
 			onClick={onClick}
 		>
@@ -49,6 +53,7 @@ function GalleryCard({
 					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 					className="object-cover"
 					priority={index < 3}
+					loading={index < 3 ? "eager" : "lazy"}
 				/>
 			</motion.div>
 
@@ -202,7 +207,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 								className={`px-6 sm:px-8 py-3 sm:py-4 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-300 ease-out ${
 									filter === cat
 										? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 scale-105"
-										: "text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-sm"
+										: "text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300 hover:shadow-xs"
 								}`}
 							>
 								{cat}
@@ -221,7 +226,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 				>
 					{visibleItems.length === 0 ? (
 						<div className="col-span-full py-16 text-center bg-slate-50/50 rounded-[2rem] border-2 border-dashed border-slate-100 flex flex-col items-center justify-center">
-							<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-200 shadow-sm mb-6">
+							<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-200 shadow-xs mb-6">
 								<HiOutlineViewColumns size={40} />
 							</div>
 							<p className="text-slate-400 font-black uppercase tracking-widest text-xs">
@@ -303,7 +308,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							exit={{ opacity: 0 }}
 							onClick={() => setSelectedItem(null)}
 							role="presentation"
-							className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+							className="absolute inset-0 bg-black/30 backdrop-blur-xs"
 						/>
 
 						<motion.div
@@ -381,7 +386,11 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 										key={`title-${selectedItem.id}`}
 										initial={{ opacity: 0, y: 20 }}
 										animate={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+										transition={{
+											duration: 0.5,
+											delay: 0.15,
+											ease: [0.16, 1, 0.3, 1],
+										}}
 										className="text-3xl sm:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-6"
 									>
 										{selectedItem.title}
@@ -391,7 +400,11 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 										key={`divider-${selectedItem.id}`}
 										initial={{ scaleX: 0 }}
 										animate={{ scaleX: 1 }}
-										transition={{ duration: 0.5, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+										transition={{
+											duration: 0.5,
+											delay: 0.25,
+											ease: [0.16, 1, 0.3, 1],
+										}}
 										className="w-12 h-px bg-brand-primary mx-auto mb-6"
 									/>
 

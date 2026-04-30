@@ -89,11 +89,11 @@ export function OrderServiceStep({
 									</div>
 								</div>
 								<div className="flex flex-col items-center lg:items-end gap-3">
-									<div className="flex items-center gap-4 bg-slate-50/50 p-1.5 rounded-2xl border border-slate-100 shadow-sm">
+									<div className="flex items-center gap-4 bg-slate-50/50 p-1.5 rounded-2xl border border-slate-100 shadow-xs">
 										<button
 											type="button"
 											onClick={() => onUpdateQuantity(service.id, -1)}
-											className="w-10 h-10 bg-white rounded-xl shadow-sm text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all"
+											className="w-10 h-10 bg-white rounded-xl shadow-xs text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all"
 										>
 											<HiOutlineChevronLeft />
 										</button>
@@ -108,12 +108,12 @@ export function OrderServiceStep({
 														(quantities[service.id] || 0),
 												)
 											}
-											className="w-12 text-center font-black text-lg bg-transparent text-slate-900 outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+											className="w-12 text-center font-black text-lg bg-transparent text-slate-900 outline-hidden [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 										/>
 										<button
 											type="button"
 											onClick={() => onUpdateQuantity(service.id, 1)}
-											className="w-10 h-10 bg-white rounded-xl shadow-sm text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all"
+											className="w-10 h-10 bg-white rounded-xl shadow-xs text-slate-400 hover:text-brand-primary flex items-center justify-center transition-all"
 										>
 											<HiOutlineChevronRight />
 										</button>
@@ -126,7 +126,7 @@ export function OrderServiceStep({
 												key={k}
 												type="button"
 												onClick={() => onSetQuantity(service.id, k)}
-												className="px-3 py-1 bg-white border border-slate-100 rounded-lg text-[10px] font-black text-slate-400 hover:text-brand-primary hover:border-brand-primary shadow-sm transition-all"
+												className="px-3 py-1 bg-white border border-slate-100 rounded-lg text-[10px] font-black text-slate-400 hover:text-brand-primary hover:border-brand-primary shadow-xs transition-all"
 											>
 												{k}Kg
 											</button>

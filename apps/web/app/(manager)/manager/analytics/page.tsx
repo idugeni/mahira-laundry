@@ -62,7 +62,7 @@ export default async function ManagerAnalyticsPage() {
 				{kpiStats.map((stat) => (
 					<div
 						key={stat.label}
-						className="bg-white rounded-xl border border-border p-5 hover:shadow-sm transition-shadow"
+						className="bg-white rounded-xl border border-border p-5 hover:shadow-xs transition-shadow"
 					>
 						<div className="flex items-center justify-between mb-3">
 							<span className="text-2xl">{stat.icon}</span>
@@ -81,7 +81,7 @@ export default async function ManagerAnalyticsPage() {
 			</div>
 
 			{/* Revenue chart */}
-			<div className="bg-white rounded-xl border border-border p-6 shadow-sm">
+			<div className="bg-white rounded-xl border border-border p-6 shadow-xs">
 				<h2 className="text-base font-bold text-slate-900 mb-4">
 					Tren Volume Order 14 Hari Terakhir
 				</h2>
@@ -98,7 +98,7 @@ export default async function ManagerAnalyticsPage() {
 
 			<div className="grid lg:grid-cols-2 gap-6">
 				{/* Top services Placeholder / Soon */}
-				<div className="bg-white rounded-xl border border-border p-6 shadow-sm">
+				<div className="bg-white rounded-xl border border-border p-6 shadow-xs">
 					<h2 className="text-base font-bold text-slate-900 mb-4">
 						Layanan Terpopuler (Mock)
 					</h2>
@@ -131,9 +131,9 @@ export default async function ManagerAnalyticsPage() {
 				</div>
 
 				{/* Heatmap Placeholder */}
-				<div className="bg-white rounded-xl border border-border p-6 shadow-sm">
+				<div className="bg-white rounded-xl border border-border p-6 shadow-xs">
 					<div className="flex flex-col h-full bg-slate-50 items-center justify-center text-center p-6 border-2 border-dashed border-slate-200 rounded-xl">
-						<div className="w-16 h-16 bg-white rounded-full shadow-sm flex items-center justify-center text-3xl mb-3">
+						<div className="w-16 h-16 bg-white rounded-full shadow-xs flex items-center justify-center text-3xl mb-3">
 							🔥
 						</div>
 						<h3 className="font-bold text-slate-700">Heatmap Demand</h3>

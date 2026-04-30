@@ -33,7 +33,7 @@ export function ProfilInfoCard({
 			transition={{ delay: 0.1 }}
 			className="lg:col-span-1"
 		>
-			<div className="bg-white rounded-[2.5rem] p-8 shadow-sm text-center relative overflow-hidden group">
+			<div className="bg-white rounded-[2.5rem] p-8 shadow-xs text-center relative overflow-hidden group">
 				<div className="absolute top-0 left-0 w-full h-24 bg-brand-gradient opacity-10" />
 
 				<div className="relative mt-4 mb-6 group/avatar">

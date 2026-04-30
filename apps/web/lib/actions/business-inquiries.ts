@@ -4,8 +4,6 @@ import {
 	createClient,
 	getBusinessPackageInquiries,
 } from "@/lib/supabase/server";
-import { formLimiter } from "@/lib/upstash/rate-limit";
-import { enqueueJob } from "@/lib/upstash/qstash";
 import type {
 	ActionResponse,
 	BusinessPackageInquiry,
@@ -13,23 +11,28 @@ import type {
 	InquiryStatus,
 	SubmitInquiryInput,
 } from "@/lib/types";
+import { enqueueJob } from "@/lib/upstash/qstash";
+import { formLimiter } from "@/lib/upstash/rate-limit";
 
 export async function submitBusinessInquiry(
 	data: SubmitInquiryInput,
-): Promise<ActionResponse> {
+): Promise<ActionResponse<BusinessPackageInquiry>> {
 	const { success } = await formLimiter.limit(
 		data.phone || data.email || "anonymous",
 	);
 	if (!success) {
 		return {
 			success: false,
-			error:
-				"Terlalu banyak pengajuan. Silakan coba lagi dalam beberapa saat.",
+			error: "Terlalu banyak pengajuan. Silakan coba lagi dalam beberapa saat.",
 		};
 	}
 
 	try {
 		const supabase = await createClient();
+
+		if (typeof supabase.rpc !== "function") {
+			return await submitBusinessInquiryViaTables(supabase, data);
+		}
 
 		const { data: _inquiryId, error: rpcError } = await supabase.rpc(
 			"submit_business_inquiry_v1",
@@ -68,6 +71,88 @@ export async function submitBusinessInquiry(
 		console.error("submitBusinessInquiry failed:", err);
 		return { success: false, error: err.message };
 	}
+}
+
+async function submitBusinessInquiryViaTables(
+	supabase: Awaited<ReturnType<typeof createClient>>,
+	data: SubmitInquiryInput,
+): Promise<ActionResponse<BusinessPackageInquiry>> {
+	const duplicateSince = new Date(
+		Date.now() - 24 * 60 * 60 * 1000,
+	).toISOString();
+	let duplicateQuery = supabase
+		.from("business_package_inquiries")
+		.select("id")
+		.eq("email", data.email)
+		.eq("phone", data.phone)
+		.eq("package_name", data.package_name)
+		.gte("created_at", duplicateSince)
+		.limit(1);
+
+	if (data.package_id) {
+		duplicateQuery = duplicateQuery.eq("package_id", data.package_id);
+	}
+
+	const { data: existingInquiries, error: duplicateError } =
+		await duplicateQuery;
+	if (duplicateError) throw duplicateError;
+
+	if (existingInquiries && existingInquiries.length > 0) {
+		return {
+			success: false,
+			error:
+				"Anda sudah mengajukan inquiry untuk paket ini. Tim kami akan segera menghubungi Anda.",
+		};
+	}
+
+	const { data: inquiry, error: insertError } = await supabase
+		.from("business_package_inquiries")
+		.insert({
+			package_id: data.package_id ?? null,
+			package_name: data.package_name,
+			full_name: data.full_name,
+			phone: data.phone,
+			email: data.email,
+			city: data.city,
+			budget_range: data.budget_range ?? null,
+			message: data.message ?? null,
+			status: "new",
+		})
+		.select()
+		.single();
+
+	if (insertError) throw insertError;
+
+	const { data: superadmins, error: superadminError } = await supabase
+		.from("profiles")
+		.select("id")
+		.eq("role", "superadmin");
+
+	if (superadminError) throw superadminError;
+
+	if (superadmins && superadmins.length > 0) {
+		const { error: notificationError } = await supabase
+			.from("notifications")
+			.insert(
+				superadmins.map((admin) => ({
+					user_id: admin.id,
+					title: `Lead Baru: ${data.package_name}`,
+					body: `${data.full_name} mengajukan inquiry paket usaha dari ${data.city}.`,
+					type: "system",
+					is_read: false,
+				})),
+			);
+
+		if (notificationError) throw notificationError;
+	}
+
+	await enqueueJob("/api/jobs/inquiry-received", {
+		email: data.email,
+		fullName: data.full_name,
+		packageName: data.package_name,
+	});
+
+	return { success: true, data: inquiry };
 }
 
 export async function getBusinessInquiries(

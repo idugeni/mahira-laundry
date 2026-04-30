@@ -80,7 +80,7 @@ export default function PrivacyPage() {
 					</p>
 				</div>
 
-				<div className="p-8 bg-slate-50 rounded-3xl border border-slate-100">
+				<div className="p-4 lg:p-8 bg-transparent lg:bg-slate-50 rounded-none lg:rounded-3xl border-0 lg:border lg:border-slate-100">
 					<h3 className="text-lg font-bold mb-2">Pertanyaan Hukum?</h3>
 					<p className="text-sm">
 						Jika Anda memiliki pertanyaan mengenai kebijakan privasi kami,

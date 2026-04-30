@@ -2,20 +2,18 @@ import { Client } from "@upstash/qstash";
 
 const QSTASH_TOKEN = process.env.QSTASH_TOKEN;
 
-if (!QSTASH_TOKEN) {
-	throw new Error("QSTASH_TOKEN must be set");
-}
-
-export const qstash = new Client({
-	token: QSTASH_TOKEN,
-});
+const qstash = QSTASH_TOKEN
+	? new Client({
+			token: QSTASH_TOKEN,
+		})
+	: null;
 
 export async function enqueueJob(
 	url: string,
 	body: Record<string, unknown>,
 	options?: { delay?: number; retries?: number },
 ) {
-	if (!process.env.QSTASH_TOKEN) {
+	if (!qstash) {
 		console.warn("[QStash] QSTASH_TOKEN not set, skipping job enqueue");
 		return;
 	}

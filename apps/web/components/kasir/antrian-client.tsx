@@ -249,7 +249,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 							onClick={() =>
 								setSortBy((prev) => (prev === "newest" ? "oldest" : "newest"))
 							}
-							className="px-6 py-7 h-auto border-slate-200 rounded-2xl hover:bg-slate-50 transition-all shadow-sm flex items-center gap-3 text-xs font-black uppercase tracking-widest text-slate-600 group"
+							className="px-6 py-7 h-auto border-slate-200 rounded-2xl hover:bg-slate-50 transition-all shadow-xs flex items-center gap-3 text-xs font-black uppercase tracking-widest text-slate-600 group"
 						>
 							{sortBy === "newest" ? (
 								<SortDesc className="w-5 h-5 transition-transform" />
@@ -276,7 +276,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 								setSearchTerm(e.target.value);
 								setCurrentPage(1);
 							}}
-							className="w-full pl-16 pr-8 py-8 bg-white rounded-3xl border border-slate-100 text-base font-bold shadow-2xl shadow-slate-200/40 transition-all outline-none focus:ring-8 focus:ring-brand-primary/5 focus:border-brand-primary/20"
+							className="w-full pl-16 pr-8 py-8 bg-white rounded-3xl border border-slate-100 text-base font-bold shadow-2xl shadow-slate-200/40 transition-all outline-hidden focus:ring-8 focus:ring-brand-primary/5 focus:border-brand-primary/20"
 						/>
 					</div>
 
@@ -380,7 +380,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 												<button
 													type="button"
 													onClick={() => setSelectedOrder(order)}
-													className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:text-brand-primary hover:bg-brand-primary/5 transition-all shadow-sm"
+													className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-50 text-slate-400 hover:text-brand-primary hover:bg-brand-primary/5 transition-all shadow-xs"
 													title="Lihat Detail"
 												>
 													<Eye size={18} />
@@ -518,7 +518,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 						variant="outline"
 						disabled={currentPage === 1}
 						onClick={() => setCurrentPage((prev) => prev - 1)}
-						className="p-4 h-auto bg-white border border-slate-100 rounded-2xl hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm"
+						className="p-4 h-auto bg-white border border-slate-100 rounded-2xl hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xs"
 					>
 						<ChevronLeft className="w-5 h-5" />
 					</Button>
@@ -546,7 +546,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 						variant="outline"
 						disabled={currentPage === totalPages}
 						onClick={() => setCurrentPage((prev) => prev + 1)}
-						className="p-4 h-auto bg-white border border-slate-100 rounded-2xl hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm"
+						className="p-4 h-auto bg-white border border-slate-100 rounded-2xl hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-xs"
 					>
 						<ChevronRight className="w-5 h-5" />
 					</Button>
@@ -594,7 +594,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 									<button
 										type="button"
 										onClick={() => setSelectedOrder(null)}
-										className="w-10 h-10 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-300"
+										className="w-10 h-10 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 hover:rotate-90 transition-all duration-300"
 									>
 										<X size={20} />
 									</button>
@@ -606,7 +606,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 								{/* Customer Contact Card */}
 								<div className="grid grid-cols-2 gap-6">
 									<div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 flex items-center gap-4">
-										<div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-primary shadow-sm border border-slate-50">
+										<div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-primary shadow-xs border border-slate-50">
 											<Phone size={20} />
 										</div>
 										<div className="flex flex-col">
@@ -619,7 +619,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 										</div>
 									</div>
 									<div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 flex items-center gap-4">
-										<div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-primary shadow-sm border border-slate-50">
+										<div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-brand-primary shadow-xs border border-slate-50">
 											<Calendar size={20} />
 										</div>
 										<div className="flex flex-col">
@@ -651,7 +651,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 										{selectedOrder.order_items?.map((item) => (
 											<div
 												key={item.id}
-												className="bg-white border border-slate-100 rounded-[2rem] p-6 shadow-sm flex items-center justify-between hover:border-brand-primary/20 transition-all"
+												className="bg-white border border-slate-100 rounded-[2rem] p-6 shadow-xs flex items-center justify-between hover:border-brand-primary/20 transition-all"
 											>
 												<div className="flex items-center gap-5">
 													<div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center text-slate-400">

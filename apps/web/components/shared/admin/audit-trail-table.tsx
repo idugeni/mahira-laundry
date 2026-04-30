@@ -253,7 +253,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 									</Badge>
 								</div>
 								<div className="flex items-center justify-between mt-2 pl-12">
-									<span className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 bg-slate-50 rounded text-slate-500 border border-slate-100">
+									<span className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 bg-slate-50 rounded-sm text-slate-500 border border-slate-100">
 										{TABLE_LABELS[log.table_name] || log.table_name}
 									</span>
 									<span className="text-[10px] text-slate-400 font-bold">

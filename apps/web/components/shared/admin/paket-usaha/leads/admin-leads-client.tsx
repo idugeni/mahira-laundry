@@ -161,7 +161,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 							id="filter-status"
 							value={currentStatus}
 							onChange={(e) => updateParam("status", e.target.value)}
-							className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
+							className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
 						>
 							<option value="">Semua Status</option>
 							{ALL_STATUSES.map((s) => (
@@ -186,7 +186,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 							placeholder="Cari nama paket..."
 							value={currentPackageName}
 							onChange={(e) => updateParam("package_name", e.target.value)}
-							className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
+							className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
 						/>
 					</div>
 
@@ -203,7 +203,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 							type="date"
 							value={currentDateFrom}
 							onChange={(e) => updateParam("date_from", e.target.value)}
-							className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
+							className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
 						/>
 					</div>
 
@@ -220,7 +220,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 							type="date"
 							value={currentDateTo}
 							onChange={(e) => updateParam("date_to", e.target.value)}
-							className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
+							className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
 						/>
 					</div>
 				</div>

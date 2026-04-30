@@ -100,7 +100,7 @@ export default function TermsPage() {
 					</p>
 				</div>
 
-				<div className="p-8 bg-brand-primary/5 rounded-3xl border border-brand-primary/10 border-dashed text-center">
+				<div className="p-4 lg:p-8 bg-transparent lg:bg-brand-primary/5 rounded-none lg:rounded-3xl border-0 lg:border lg:border-brand-primary/10 lg:border-dashed text-center">
 					<p className="text-slate-600 font-medium">
 						Semua item yang tidak diambil dalam waktu 30 hari di luar tanggung
 						jawab kami.

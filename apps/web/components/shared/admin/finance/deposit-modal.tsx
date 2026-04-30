@@ -85,7 +85,7 @@ export function DepositModal({
 								<div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
 								<div className="relative flex items-center justify-between">
 									<div className="flex items-center gap-3">
-										<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-emerald-500">
+										<div className="w-12 h-12 rounded-2xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-emerald-500">
 											<HiOutlineBanknotes size={24} />
 										</div>
 										<div>
@@ -100,7 +100,7 @@ export function DepositModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+										className="w-8 h-8 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
 										<HiOutlineXMark size={16} />
 									</button>
@@ -145,7 +145,7 @@ export function DepositModal({
 											value={amount || ""}
 											onChange={(e) => setAmount(Number(e.target.value))}
 											placeholder="0"
-											className="w-full pl-12 pr-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl text-2xl font-black outline-none ring-0 focus:border-emerald-500 focus:bg-white transition-all"
+											className="w-full pl-12 pr-6 py-5 bg-slate-50 border border-slate-100 rounded-2xl text-2xl font-black outline-hidden ring-0 focus:border-emerald-500 focus:bg-white transition-all"
 										/>
 									</div>
 								</div>

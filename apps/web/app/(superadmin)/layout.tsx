@@ -107,7 +107,7 @@ export default async function SuperadminLayout({
 						<AdminAvatar
 							fullName={profile?.full_name}
 							avatarUrl={profile?.avatar_url}
-							className="h-9 w-9 border-2 border-slate-200 shadow-sm cursor-pointer hover:border-slate-300 transition-colors"
+							className="h-9 w-9 border-2 border-slate-200 shadow-xs cursor-pointer hover:border-slate-300 transition-colors"
 						/>
 					</div>
 				</header>
@@ -117,10 +117,7 @@ export default async function SuperadminLayout({
 				</main>
 				{/* Dashboard Footer */}
 				<footer className="p-4 lg:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
-					<p>
-						© {new Date().getFullYear()} Mahira Group. All rights
-						reserved.
-					</p>
+					<p>© {new Date().getFullYear()} Mahira Group. All rights reserved.</p>
 				</footer>
 			</div>
 		</div>

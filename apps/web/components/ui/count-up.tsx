@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 
 interface CountUpProps {
 	to: number;

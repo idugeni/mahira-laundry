@@ -33,7 +33,11 @@ export function HomeCtaSection() {
 								initial={{ opacity: 0, x: -20 }}
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: false }}
-								transition={{ duration: 0.5, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+								transition={{
+									duration: 0.5,
+									delay: 0.1,
+									ease: [0.16, 1, 0.3, 1],
+								}}
 								className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full text-brand-accent text-[10px] font-black uppercase tracking-[0.2em] mb-8"
 							>
 								<span className="w-2 h-2 rounded-full bg-brand-accent animate-ping" />
@@ -44,7 +48,11 @@ export function HomeCtaSection() {
 								initial={{ opacity: 0, y: 20 }}
 								whileInView={{ opacity: 1, y: 0 }}
 								viewport={{ once: false }}
-								transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+								transition={{
+									duration: 0.6,
+									delay: 0.2,
+									ease: [0.16, 1, 0.3, 1],
+								}}
 								className="text-3xl sm:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] leading-[1.1] mb-6"
 							>
 								Nikmati Kualitas <br />
@@ -78,7 +86,11 @@ export function HomeCtaSection() {
 										initial={{ opacity: 0, x: -10 }}
 										whileInView={{ opacity: 1, x: 0 }}
 										viewport={{ once: false }}
-										transition={{ duration: 0.4, delay: 0.55 + i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+										transition={{
+											duration: 0.4,
+											delay: 0.55 + i * 0.1,
+											ease: [0.16, 1, 0.3, 1],
+										}}
 										className="flex items-center gap-2 text-sm font-bold"
 									>
 										<span className="text-brand-accent">
@@ -94,7 +106,11 @@ export function HomeCtaSection() {
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: false }}
-							transition={{ duration: 0.6, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+							transition={{
+								duration: 0.6,
+								delay: 0.6,
+								ease: [0.16, 1, 0.3, 1],
+							}}
 							className="shrink-0 w-full lg:w-auto flex justify-center"
 						>
 							<motion.a

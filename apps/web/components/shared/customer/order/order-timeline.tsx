@@ -29,7 +29,7 @@ export function OrderTimeline({ logs }: { logs: Log[] }) {
 		<div className="relative space-y-6 before:absolute before:inset-0 before:ml-4 before:-translate-x-px before:h-full before:w-0.5 before:bg-gradient-to-b before:from-indigo-500 before:via-slate-200 before:to-slate-100">
 			{logs.map((log, index) => (
 				<div key={log.id} className="relative flex items-center group">
-					<div className="absolute left-0 w-8 h-8 rounded-full bg-white border-2 border-indigo-500 flex items-center justify-center z-10 group-first:scale-110 shadow-sm group-first:shadow-indigo-200 transition-transform">
+					<div className="absolute left-0 w-8 h-8 rounded-full bg-white border-2 border-indigo-500 flex items-center justify-center z-10 group-first:scale-110 shadow-xs group-first:shadow-indigo-200 transition-transform">
 						{index === 0 ? (
 							<span className="text-indigo-600 w-5 h-5 flex items-center justify-center">
 								<HiOutlineCheckCircle />

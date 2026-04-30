@@ -157,7 +157,7 @@ export function ServiceModal({
 									<button
 										type="button"
 										onClick={() => setIsOpen(false)}
-										className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
+										className="w-10 h-10 rounded-xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors duration-200"
 									>
 										<span className="shrink-0">
 											<HiOutlineXMark size={20} />
@@ -187,7 +187,7 @@ export function ServiceModal({
 													name="name"
 													defaultValue={service?.name || ""}
 													placeholder="Contoh: Cuci Lipat"
-													className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none placeholder:font-medium placeholder:text-slate-300"
+													className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden placeholder:font-medium placeholder:text-slate-300"
 												/>
 											</div>
 										</div>
@@ -199,7 +199,7 @@ export function ServiceModal({
 											<Select value={category} onValueChange={setCategory}>
 												<SelectTrigger
 													aria-label="Kategori"
-													className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-brand-primary/20 transition-all"
+													className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden focus:ring-brand-primary/20 transition-all"
 												>
 													<SelectValue placeholder="Pilih Kategori" />
 												</SelectTrigger>
@@ -248,7 +248,7 @@ export function ServiceModal({
 											name="description"
 											defaultValue={service?.description || ""}
 											placeholder="Jelaskan detail cakupan layanan ini..."
-											className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[80px] resize-none placeholder:font-medium placeholder:text-slate-300"
+											className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden min-h-[80px] resize-none placeholder:font-medium placeholder:text-slate-300"
 										/>
 									</div>
 
@@ -271,7 +271,7 @@ export function ServiceModal({
 													"Detergen Premium, Setrika Uap, Parfum Signature, Kemasan Eksklusif"
 												}
 												placeholder="Contoh: Setrika Uap, Parfum Signature, Anti Bakteri"
-												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[100px] resize-none placeholder:font-medium placeholder:text-slate-300"
+												className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden min-h-[100px] resize-none placeholder:font-medium placeholder:text-slate-300"
 											/>
 										</div>
 									</div>
@@ -285,7 +285,7 @@ export function ServiceModal({
 											<Select value={unit} onValueChange={setUnit}>
 												<SelectTrigger
 													aria-label="Satuan"
-													className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:ring-brand-primary/20 transition-all"
+													className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden focus:ring-brand-primary/20 transition-all"
 												>
 													<SelectValue placeholder="Satuan" />
 												</SelectTrigger>
@@ -322,7 +322,7 @@ export function ServiceModal({
 													type="number"
 													name="price"
 													defaultValue={service?.price}
-													className="w-full pl-10 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none"
+													className="w-full pl-10 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden"
 												/>
 											</div>
 										</div>
@@ -343,7 +343,7 @@ export function ServiceModal({
 													type="number"
 													name="estimated_duration_hours"
 													defaultValue={service?.estimated_duration_hours || 24}
-													className="w-full pl-4 pr-12 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none"
+													className="w-full pl-4 pr-12 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden"
 												/>
 											</div>
 										</div>
@@ -367,7 +367,7 @@ export function ServiceModal({
 													name="icon"
 													defaultValue={service?.icon || "🧺"}
 													placeholder="Contoh: 🧺"
-													className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none placeholder:font-medium placeholder:text-slate-300"
+													className="w-full pl-12 pr-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden placeholder:font-medium placeholder:text-slate-300"
 												/>
 											</div>
 											<p className="text-[10px] text-slate-400 font-medium px-2">
@@ -406,7 +406,7 @@ export function ServiceModal({
 												name="slug"
 												defaultValue={service?.slug || ""}
 												placeholder="cuci-lipat"
-												className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none placeholder:font-medium placeholder:text-slate-300"
+												className="w-full px-6 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden placeholder:font-medium placeholder:text-slate-300"
 											/>
 										</div>
 									</div>

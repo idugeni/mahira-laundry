@@ -19,7 +19,7 @@ const TIER_STYLE: Record<
 > = {
 	Starter: {
 		badge: "bg-blue-100 text-blue-700",
-		accent: "border-blue-100 shadow-sm",
+		accent: "border-blue-100 shadow-xs",
 		featured: false,
 		gradient: "from-blue-500/5 to-transparent",
 	},
@@ -31,13 +31,13 @@ const TIER_STYLE: Record<
 	},
 	Premium: {
 		badge: "bg-purple-100 text-purple-700",
-		accent: "border-purple-100 shadow-sm",
+		accent: "border-purple-100 shadow-xs",
 		featured: false,
 		gradient: "from-purple-500/5 to-transparent",
 	},
 	Custom: {
 		badge: "bg-orange-100 text-orange-700",
-		accent: "border-orange-100 shadow-sm",
+		accent: "border-orange-100 shadow-xs",
 		featured: false,
 		gradient: "from-orange-500/5 to-transparent",
 	},
@@ -59,7 +59,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 		pkg.promo_expires_at != null &&
 		new Date(pkg.promo_expires_at) > new Date();
 
-		const discount = isPromoActive
+	const discount = isPromoActive
 		? Math.round(((pkg.price - (pkg.promo_price as number)) / pkg.price) * 100)
 		: 0;
 
@@ -153,8 +153,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 							{visibleItems.map((item, i) => (
 								<motion.li
 									layout
-									// FIX: Gunakan index sebagai key fallback agar unik meski item.name duplikat
-									key={`${item.name}-${i}`}
+									key={`${item.name}-${item.quantity ?? "item"}-${item.spec ?? "none"}`}
 									initial={{ opacity: 0, x: -10 }}
 									animate={{ opacity: 1, x: 0 }}
 									exit={{ opacity: 0, x: -10 }}
@@ -174,6 +173,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 											strokeLinecap="round"
 											strokeLinejoin="round"
 											className="text-brand-primary"
+											aria-hidden="true"
 										>
 											<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
 											<polyline points="22 4 12 14.01 9 11.01" />
@@ -244,6 +244,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 							strokeWidth="2"
 							strokeLinecap="round"
 							strokeLinejoin="round"
+							aria-hidden="true"
 						>
 							<line x1="5" y1="12" x2="19" y2="12" />
 							<polyline points="12 5 19 12 12 19" />

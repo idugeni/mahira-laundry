@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { format } from "date-fns";
 import { id } from "date-fns/locale";
@@ -260,7 +260,7 @@ export function AdminTestimonialsClient({
 									<div className="flex items-center gap-2">
 										<Button
 											variant="ghost"
-											className="w-10 h-10 p-0 rounded-xl bg-indigo-50 text-indigo-500 hover:bg-indigo-100 transition-colors shadow-sm"
+											className="w-10 h-10 p-0 rounded-xl bg-indigo-50 text-indigo-500 hover:bg-indigo-100 transition-colors shadow-xs"
 											onClick={() => openEdit(t)}
 											disabled={loading === t.id}
 											title="Edit testimoni"
@@ -270,7 +270,7 @@ export function AdminTestimonialsClient({
 										<Button
 											variant="ghost"
 											className={cn(
-												"w-10 h-10 p-0 rounded-xl transition-colors shadow-sm",
+												"w-10 h-10 p-0 rounded-xl transition-colors shadow-xs",
 												t.is_published
 													? "bg-amber-50 text-amber-500 hover:bg-amber-100"
 													: "bg-emerald-50 text-emerald-500 hover:bg-emerald-100",
@@ -286,7 +286,7 @@ export function AdminTestimonialsClient({
 										</Button>
 										<Button
 											variant="ghost"
-											className="w-10 h-10 p-0 rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-100 transition-colors shadow-sm"
+											className="w-10 h-10 p-0 rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-100 transition-colors shadow-xs"
 											onClick={() => handleDelete(t.id)}
 											disabled={loading === t.id}
 										>
@@ -394,7 +394,7 @@ export function AdminTestimonialsClient({
 								<div className="absolute top-0 right-0 w-32 h-32 bg-indigo-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
 								<div className="relative flex items-center justify-between">
 									<div className="flex items-center gap-3">
-										<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-indigo-600">
+										<div className="w-12 h-12 rounded-2xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-indigo-600">
 											<MessageSquare size={22} />
 										</div>
 										<div>
@@ -410,7 +410,7 @@ export function AdminTestimonialsClient({
 									<button
 										type="button"
 										onClick={() => setCreateOpen(false)}
-										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+										className="w-8 h-8 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
 										<HiOutlineXMark size={16} />
 									</button>
@@ -433,7 +433,7 @@ export function AdminTestimonialsClient({
 										type="text"
 										name="userId"
 										placeholder="UUID pengguna"
-										className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none focus:border-indigo-500 focus:bg-white transition-all"
+										className="w-full px-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden focus:border-indigo-500 focus:bg-white transition-all"
 									/>
 								</div>
 
@@ -481,7 +481,7 @@ export function AdminTestimonialsClient({
 											id="testimonial-content"
 											name="content"
 											placeholder="Tulis ulasan pelanggan..."
-											className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[100px] focus:border-indigo-500 focus:bg-white transition-all resize-none"
+											className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden min-h-[100px] focus:border-indigo-500 focus:bg-white transition-all resize-none"
 										/>
 									</div>
 								</div>
@@ -524,7 +524,7 @@ export function AdminTestimonialsClient({
 								<div className="absolute top-0 right-0 w-32 h-32 bg-amber-500/5 rounded-full -mr-16 -mt-16 blur-3xl" />
 								<div className="relative flex items-center justify-between">
 									<div className="flex items-center gap-3">
-										<div className="w-12 h-12 rounded-2xl bg-white shadow-sm border border-slate-100 flex items-center justify-center text-amber-500">
+										<div className="w-12 h-12 rounded-2xl bg-white shadow-xs border border-slate-100 flex items-center justify-center text-amber-500">
 											<Pencil size={20} />
 										</div>
 										<div>
@@ -539,7 +539,7 @@ export function AdminTestimonialsClient({
 									<button
 										type="button"
 										onClick={() => setEditOpen(false)}
-										className="w-8 h-8 rounded-full bg-white shadow-sm border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
+										className="w-8 h-8 rounded-full bg-white shadow-xs border border-slate-100 flex items-center justify-center text-slate-400 hover:text-slate-900 transition-all"
 									>
 										<HiOutlineXMark size={16} />
 									</button>
@@ -593,7 +593,7 @@ export function AdminTestimonialsClient({
 											name="content"
 											defaultValue={editTarget.content}
 											placeholder="Tulis ulasan pelanggan..."
-											className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-none min-h-[100px] focus:border-amber-500 focus:bg-white transition-all resize-none"
+											className="w-full pl-12 pr-5 py-4 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden min-h-[100px] focus:border-amber-500 focus:bg-white transition-all resize-none"
 										/>
 									</div>
 								</div>

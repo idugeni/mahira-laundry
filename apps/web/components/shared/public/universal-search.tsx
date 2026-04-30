@@ -54,7 +54,7 @@ export function UniversalSearch({
 						onFocus={() => setIsFocused(true)}
 						onBlur={() => setTimeout(() => setIsFocused(false), 200)}
 						placeholder="Cari..."
-						className="w-40 focus:w-64 transition-all duration-500 bg-slate-100 border-none rounded-full py-2 pl-10 pr-10 text-xs font-bold text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+						className="w-40 focus:w-64 transition-all duration-500 bg-slate-100 border-none rounded-full py-2 pl-10 pr-10 text-xs font-bold text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:ring-2 focus:ring-brand-primary/20"
 					/>
 					<div className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-primary transition-colors">
 						<HiOutlineMagnifyingGlass size={16} />
@@ -102,7 +102,7 @@ export function UniversalSearch({
 						onFocus={() => setIsFocused(true)}
 						onBlur={() => setTimeout(() => setIsFocused(false), 200)}
 						placeholder={placeholder}
-						className="flex-1 bg-transparent border-none focus:!outline-none focus:!ring-0 focus:!shadow-none focus:!border-none py-4 md:py-5 px-3 md:px-4 text-sm md:text-base font-semibold text-slate-900 placeholder:text-slate-400 min-w-0"
+						className="flex-1 bg-transparent border-none focus:!outline-hidden focus:!ring-0 focus:!shadow-none focus:!border-none py-4 md:py-5 px-3 md:px-4 text-sm md:text-base font-semibold text-slate-900 placeholder:text-slate-400 min-w-0"
 					/>
 
 					<div className="pr-3 md:pr-4 flex items-center gap-2">
@@ -123,8 +123,12 @@ export function UniversalSearch({
 
 						{!query && (
 							<div className="hidden md:flex items-center gap-1">
-								<kbd className="px-2 py-1 bg-slate-100 text-slate-400 rounded-lg text-[10px] font-black border border-slate-200 leading-none">⌘</kbd>
-								<kbd className="px-2 py-1 bg-slate-100 text-slate-400 rounded-lg text-[10px] font-black border border-slate-200 leading-none">K</kbd>
+								<kbd className="px-2 py-1 bg-slate-100 text-slate-400 rounded-lg text-[10px] font-black border border-slate-200 leading-none">
+									⌘
+								</kbd>
+								<kbd className="px-2 py-1 bg-slate-100 text-slate-400 rounded-lg text-[10px] font-black border border-slate-200 leading-none">
+									K
+								</kbd>
 							</div>
 						)}
 

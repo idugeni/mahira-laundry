@@ -137,7 +137,7 @@ export default async function LaporanPage() {
 							trigger={
 								<button
 									type="button"
-									className="group relative w-full bg-white rounded-none sm:rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-6 border-b sm:border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-indigo-500/5 hover:border-indigo-100 transition-all duration-300 text-left overflow-hidden flex flex-col gap-3 sm:gap-4 h-full"
+									className="group relative w-full bg-white rounded-none sm:rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-6 border-b sm:border border-slate-100 shadow-xs hover:shadow-xl hover:shadow-indigo-500/5 hover:border-indigo-100 transition-all duration-300 text-left overflow-hidden flex flex-col gap-3 sm:gap-4 h-full"
 								>
 									<div className="flex items-center justify-between gap-2">
 										<div
