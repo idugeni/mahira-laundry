@@ -46,6 +46,15 @@ export const metadata: Metadata = {
 		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
 		description:
 			"Peluang investasi bisnis laundry dengan sistem teruji dan dukungan penuh. Mulai usaha laundry premium Anda hari ini.",
+		url: baseUrl,
+		images: [
+			{
+				url: "/og/paket-usaha.png",
+				width: 1200,
+				height: 630,
+				alt: "Mahira Laundry Premium Experience",
+			},
+		],
 	},
 	twitter: {
 		card: "summary_large_image",

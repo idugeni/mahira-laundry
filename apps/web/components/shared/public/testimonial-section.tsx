@@ -126,7 +126,11 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 		"Pelanggan Setia";
 
 	return (
-		<div className="w-[350px] sm:w-[450px] shrink-0 p-8 bg-white/70 backdrop-blur-md rounded-[2.5rem] border border-white shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-brand-primary/5 transition-all duration-500 group">
+		<motion.div
+			whileHover={{ y: -6 }}
+			transition={{ type: "spring", stiffness: 300, damping: 25 }}
+			className="w-[350px] sm:w-[450px] shrink-0 p-8 bg-white/70 backdrop-blur-md rounded-[2.5rem] border border-white shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-brand-primary/5 transition-[box-shadow] duration-500 group"
+		>
 			<div className="flex gap-1 mb-6">
 				{Array.from({ length: testimonial.rating || 5 }, (_, i) => i).map(
 					(i) => (
@@ -161,6 +165,6 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 					</p>
 				</div>
 			</div>
-		</div>
+		</motion.div>
 	);
 }

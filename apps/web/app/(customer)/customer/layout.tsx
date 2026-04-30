@@ -163,7 +163,7 @@ export default function CustomerLayout({
 				{/* Dashboard Footer */}
 				<footer className="p-4 lg:p-6 text-center text-sm text-slate-500 bg-transparent shrink-0">
 					<p>
-						© {new Date().getFullYear()} Mahira Laundry Group. All rights
+						© {new Date().getFullYear()} Mahira Group. All rights
 						reserved.
 					</p>
 				</footer>

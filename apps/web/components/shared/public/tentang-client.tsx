@@ -38,8 +38,8 @@ export function TentangClient() {
 				{/* Hero Section */}
 				<div className="text-center mb-32">
 					<motion.div
-						initial={{ opacity: 0, scale: 0.8 }}
-						whileInView={{ opacity: 1, scale: 1 }}
+						initial={{ opacity: 0 }}
+						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
 						className="inline-flex items-center gap-3 px-6 py-2.5 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] mb-10 border border-brand-primary/10"
 					>
@@ -203,7 +203,6 @@ export function TentangClient() {
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
 									transition={{ delay: i * 0.1 }}
-									whileHover={{ y: -10 }}
 									className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] flex flex-col items-start gap-8 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.06)] transition-all duration-500 group"
 								>
 									<div
@@ -227,8 +226,8 @@ export function TentangClient() {
 
 				{/* Closing CTA */}
 				<motion.div
-					initial={{ opacity: 0, scale: 0.95 }}
-					whileInView={{ opacity: 1, scale: 1 }}
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
 					viewport={{ once: true }}
 					className="mt-40 p-10 lg:p-10 rounded-[2rem] bg-brand-primary text-center text-white relative overflow-hidden"
 				>
@@ -242,9 +241,7 @@ export function TentangClient() {
 							diri sendiri. Mari rawat pakaian Anda dengan rasa hormat tersebut.
 						</p>
 						<motion.button
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
-							className="px-10 py-4.5 bg-white text-brand-primary rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-2xl"
+							className="px-10 py-4.5 bg-white text-brand-primary rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-2xl hover:brightness-110 transition-all"
 						>
 							Pesan Layanan Sekarang
 						</motion.button>

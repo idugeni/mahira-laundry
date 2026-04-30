@@ -90,7 +90,7 @@ export function HomeServicesSection({
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 				<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-20 text-center lg:text-left">
-					<div className="max-w-2xl">
+					<div className="max-w-2xl text-center lg:text-left">
 						<motion.div
 							initial={{ opacity: 0, x: -20 }}
 							whileInView={{ opacity: 1, x: 0 }}
@@ -117,7 +117,7 @@ export function HomeServicesSection({
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
 						transition={{ delay: 0.3 }}
-						className="text-lg text-slate-500 font-medium max-w-sm"
+						className="text-lg text-slate-500 font-medium max-w-sm text-center lg:text-left mx-auto lg:mx-0"
 					>
 						Setiap helai kain ditangani oleh tenaga profesional dengan standar
 						kualitas terbaik.
@@ -137,30 +137,25 @@ export function HomeServicesSection({
 									<motion.div
 										layout
 										key={service.id}
-										initial={{ opacity: 0, scale: 0.9, y: 20 }}
-										whileInView={{ opacity: 1, scale: 1, y: 0 }}
-										viewport={{ once: true }}
+										initial={{ opacity: 0, y: 20 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										whileHover={{ y: -8 }}
 										transition={{
 											duration: 0.5,
 											delay: i * 0.1,
 											ease: [0.16, 1, 0.3, 1],
 										}}
-										whileHover={{
-											y: -15,
-											rotateX: 2,
-											rotateY: -2,
-											transition: { duration: 0.3 },
-										}}
 										onClick={() => onServiceClick(service.slug || service.id)}
-										className="group p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:border-brand-primary/30 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] transition-all cursor-pointer relative overflow-hidden perspective-1000"
+										className="group p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:border-brand-primary/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-[border-color,box-shadow] duration-500 ease-out cursor-pointer relative overflow-hidden"
 									>
 										<div
 											className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${styles.bg} rounded-bl-[5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
 										/>
 
 										<motion.div
-											whileHover={{ scale: 1.1, rotate: 10 }}
 											className={`relative w-20 h-20 rounded-[2rem] ${styles.bg} flex items-center justify-center text-4xl ${styles.color} mb-10 shadow-2xl ${styles.shadow} ring-4 ring-white`}
+											whileHover={{ scale: 1.05, rotate: 3 }}
+											transition={{ type: "spring", stiffness: 300, damping: 20 }}
 										>
 											{service.icon ? (
 												<span className="shrink-0">{service.icon}</span>
@@ -170,7 +165,7 @@ export function HomeServicesSection({
 										</motion.div>
 
 										<div className="relative">
-											<h3 className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900 mb-4 tracking-tight">
+											<h3 className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900 mb-4 tracking-tight transition-colors duration-300 group-hover:text-brand-primary">
 												{service.name}
 											</h3>
 											<p className="text-slate-500 leading-relaxed text-base mb-8 line-clamp-3 font-medium">
@@ -178,7 +173,7 @@ export function HomeServicesSection({
 											</p>
 										</div>
 
-										<div className="flex items-center justify-between pt-8 border-t border-slate-50">
+										<div className="flex items-center justify-between pt-8 border-t border-slate-50 group-hover:border-brand-primary/10 transition-colors duration-300">
 											<div className="flex flex-col">
 												<span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
 													Mulai Dari
@@ -195,8 +190,9 @@ export function HomeServicesSection({
 												</span>
 											</div>
 											<motion.div
-												whileHover={{ x: 5 }}
-												className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-brand-primary group-hover:text-white group-hover:shadow-lg group-hover:shadow-brand-primary/30 transition-all duration-300"
+												className="w-12 h-12 rounded-2xl bg-slate-50 flex items-center justify-center text-slate-400 transition-colors duration-300 group-hover:bg-brand-primary group-hover:text-white"
+												whileHover={{ x: 4 }}
+												transition={{ type: "spring", stiffness: 400, damping: 25 }}
 											>
 												<HiOutlineArrowRight size={20} />
 											</motion.div>
@@ -214,10 +210,10 @@ export function HomeServicesSection({
 					viewport={{ once: true }}
 					className="mt-20 text-center"
 				>
-					<motion.div whileHover={{ scale: 1.05 }} className="inline-block">
+					<motion.div className="inline-block">
 						<Link
 							href="/layanan"
-							className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-brand-primary transition-all shadow-2xl shadow-slate-200 hover:shadow-brand-primary/40"
+							className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-900 text-white rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-brand-primary transition-all duration-300 shadow-2xl shadow-slate-200 hover:shadow-brand-primary/40"
 						>
 							Eksplor Semua Layanan
 							<motion.div

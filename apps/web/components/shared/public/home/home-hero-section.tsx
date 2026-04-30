@@ -8,7 +8,6 @@ import { HiOutlineArrowRight, HiOutlineSparkles } from "react-icons/hi2";
 import {
 	MdOutlineLocalLaundryService,
 	MdOutlineRocketLaunch,
-	MdOutlineSupportAgent,
 } from "react-icons/md";
 
 import type { BusinessPackage } from "@/lib/types";
@@ -58,21 +57,44 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 	return (
 		<section
 			ref={containerRef}
-			className="relative pt-16 pb-48 lg:pt-24 lg:pb-32 overflow-hidden"
+			className="relative min-h-screen pt-16 pb-4 lg:pt-4 lg:pb-4 overflow-hidden flex flex-col"
 		>
-			{/* Animated Background Elements */}
-			<div className="absolute inset-0 bg-brand-gradient opacity-[0.02]" />
-			<motion.div
-				style={{ y: y1 }}
-				className="absolute -top-20 -right-20 w-[600px] h-[600px] bg-brand-primary/10 rounded-full blur-[120px] pointer-events-none"
-			/>
-			<motion.div
-				style={{ y: y2 }}
-				className="absolute -bottom-40 -left-20 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[100px] pointer-events-none"
-			/>
+			{/* Mesh Gradient Background */}
+			<div className="absolute inset-0 overflow-hidden pointer-events-none">
+				{/* Base warm tint */}
+				<div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(219,39,119,0.08),transparent)]" />
+				{/* Primary glow - top right */}
+				<motion.div
+					style={{ y: y1 }}
+					className="absolute -top-10 right-[10%] w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(219,39,119,0.12)_0%,transparent_70%)]"
+				/>
+				{/* Accent glow - bottom left */}
+				<motion.div
+					style={{ y: y2 }}
+					className="absolute -bottom-20 -left-[10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.10)_0%,transparent_70%)]"
+				/>
+				{/* Soft rose - center left */}
+				<motion.div
+					animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
+					transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+					className="absolute top-[30%] left-[5%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(244,114,182,0.08)_0%,transparent_70%)]"
+				/>
+				{/* Warm peach - center right */}
+				<motion.div
+					animate={{ x: [0, -20, 0], y: [0, 25, 0] }}
+					transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+					className="absolute top-[40%] right-[15%] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.06)_0%,transparent_70%)]"
+				/>
+				{/* Subtle violet accent - top center */}
+				<motion.div
+					animate={{ x: [0, 15, 0] }}
+					transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+					className="absolute top-[10%] left-[40%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(190,24,93,0.05)_0%,transparent_70%)]"
+				/>
+			</div>
 
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-				<div className="grid lg:grid-cols-2 gap-20 items-center">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex-1 flex items-start">
+				<div className="grid lg:grid-cols-2 gap-20 items-center w-full">
 					{/* Left Content */}
 					<motion.div
 						variants={containerVariants}
@@ -120,17 +142,11 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 						>
 							<Link
 								href="/paket-usaha"
-								className="group relative px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all hover:shadow-[0_20px_40px_rgba(var(--brand-primary-rgb),0.4)] text-sm"
+								className="group relative px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all duration-300 hover:bg-pink-700 text-sm"
 							>
-								<motion.div
-									initial={{ x: "-100%" }}
-									whileHover={{ x: "100%" }}
-									transition={{ duration: 0.5 }}
-									className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-								/>
 								<span className="relative flex items-center gap-2">
 									PILIH PAKET USAHA
-									<span className="group-hover:translate-x-2 transition-transform duration-300">
+									<span className="inline-flex group-hover:translate-x-1 transition-transform duration-300 ease-out">
 										<HiOutlineArrowRight />
 									</span>
 								</span>
@@ -139,7 +155,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 								href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent("Halo Mahira, saya ingin konsultasi mengenai paket usaha laundry.")}`}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="px-8 py-4 border-2 border-slate-200 rounded-full font-black text-slate-700 hover:border-brand-primary hover:text-brand-primary transition-all flex items-center gap-2 text-sm"
+								className="px-8 py-4 border-2 border-slate-200 rounded-full font-black text-slate-700 hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/5 transition-all duration-300 flex items-center gap-2 text-sm"
 							>
 								KONSULTASI GRATIS
 							</a>
@@ -154,8 +170,9 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 								{[1, 2, 3, 4].map((i) => (
 									<motion.div
 										key={`partner-avatar-${i}`}
-										whileHover={{ y: -5, zIndex: 10 }}
-										className="w-14 h-14 rounded-full border-4 border-white overflow-hidden shadow-lg cursor-pointer"
+										whileHover={{ y: -4 }}
+										transition={{ type: "spring", stiffness: 400, damping: 25 }}
+										className="w-14 h-14 rounded-full border-4 border-white overflow-hidden shadow-lg cursor-pointer relative z-0 hover:z-10"
 									>
 										<Image
 											src={`https://i.pravatar.cc/150?u=${i + 20}`}
@@ -180,7 +197,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 					</motion.div>
 
 					{/* Right Visual Content */}
-					<div className="relative py-12 lg:py-0 lg:h-[600px] flex items-center justify-center">
+					<div className="relative py-4 lg:py-0 lg:h-[600px] flex items-center justify-center">
 						<motion.div
 							initial={{ opacity: 0, x: 50 }}
 							animate={{ opacity: 1, x: 0 }}
@@ -269,25 +286,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 							</div>
 						</motion.div>
 
-						{/* Floating Stats Badge (Simplified for performance) */}
-						<motion.div
-							style={{ y: y1 }}
-							className="absolute -bottom-10 -right-4 lg:-bottom-6 lg:-right-12 z-20 p-5 lg:p-6 bg-slate-900 rounded-[2rem] shadow-2xl flex items-center gap-4 min-w-[220px] lg:min-w-[240px] border border-slate-800"
-						>
-							<div className="w-12 h-12 rounded-full bg-brand-accent/20 flex items-center justify-center text-2xl text-brand-accent">
-								<MdOutlineSupportAgent />
 							</div>
-							<div>
-								<p className="text-[10px] uppercase font-black text-brand-accent tracking-widest">
-									Full Support
-								</p>
-								<p className="text-sm font-black text-white leading-tight mt-0.5">
-									Bimbingan Bisnis <br />
-									Sampai Berhasil
-								</p>
-							</div>
-						</motion.div>
-					</div>
 				</div>
 			</div>
 		</section>

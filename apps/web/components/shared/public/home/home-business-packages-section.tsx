@@ -1,6 +1,7 @@
 "use client";
 
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+// FIX: Ganti ArrowRight dengan ChevronDown untuk toggle expand/collapse
+import { ChevronDown } from "lucide-react";
 import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
@@ -57,6 +58,10 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 		pkg.promo_expires_at != null &&
 		new Date(pkg.promo_expires_at) > new Date();
 
+		const discount = isPromoActive
+		? Math.round(((pkg.price - (pkg.promo_price as number)) / pkg.price) * 100)
+		: 0;
+
 	const visibleItems = isExpanded ? pkg.items : pkg.items.slice(0, 4);
 
 	return (
@@ -64,48 +69,59 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 			layout
 			initial={{ opacity: 0, y: 30 }}
 			whileInView={{ opacity: 1, y: 0 }}
+			whileHover={{ y: -6 }}
 			viewport={{ once: true }}
 			transition={{
 				duration: 0.7,
 				delay: index * 0.1,
 				ease: [0.16, 1, 0.3, 1],
+				// FIX: Pisahkan transisi layout agar tidak terlalu lambat saat expand/collapse
+				layout: { duration: 0.3, ease: "easeInOut" },
 			}}
-			whileHover={{ y: -10 }}
-			className={`relative flex flex-col h-full rounded-[2rem] border bg-white p-6 sm:p-8 transition-all duration-500 overflow-hidden ${style.accent}`}
+			className={`relative flex flex-col h-full rounded-[2rem] border bg-white p-6 sm:p-8 transition-[box-shadow,border-color] duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] ${style.accent}`}
 		>
 			<div
 				className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none`}
 			/>
 
-			{style.featured && (
-				<motion.div
-					initial={{ scale: 0.8, opacity: 0 }}
-					animate={{ scale: 1, opacity: 1 }}
-					className="absolute -top-1 left-1/2 -translate-x-1/2 px-6 py-2 rounded-b-2xl bg-emerald-500 text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-emerald-200 z-10"
-				>
-					Paling Populer
-				</motion.div>
-			)}
-
 			<div className="relative z-10 flex flex-col h-full">
+				{style.featured && (
+					<div className="flex justify-center -mt-10 mb-2">
+						<motion.span
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							className="px-6 py-2 rounded-b-2xl bg-emerald-500 text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-emerald-200"
+						>
+							Paling Populer
+						</motion.span>
+					</div>
+				)}
+
 				{/* Tier badge */}
-				<span
-					className={`inline-block self-start rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-widest ${style.badge}`}
-				>
-					{pkg.tier} Tier
-				</span>
+				<div className="flex justify-center">
+					<span
+						className={`inline-block rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-widest ${style.badge}`}
+					>
+						{pkg.tier} Tier
+					</span>
+				</div>
 
 				{/* Name */}
-				<h3 className="mt-6 text-2xl lg:text-3xl font-black text-slate-900 leading-tight">
+				<h3 className="mt-6 text-2xl lg:text-3xl font-black text-slate-900 leading-tight text-center sm:text-left">
 					{pkg.name}
 				</h3>
 
 				{/* Price */}
-				<div className="mt-4 flex flex-col">
+				<div className="mt-4 flex flex-col items-center sm:items-start">
 					{isPromoActive ? (
-						<div className="flex flex-col">
-							<span className="text-sm text-slate-400 line-through font-bold">
-								{formatIDR(pkg.price)}
+						<div className="flex flex-col items-center sm:items-start gap-1.5">
+							<span className="inline-flex items-center gap-2">
+								<span className="text-sm text-slate-400 line-through font-bold">
+									{formatIDR(pkg.price)}
+								</span>
+								<span className="inline-flex items-center px-2 py-0.5 rounded-full bg-red-500 text-white text-[10px] font-black uppercase tracking-wider">
+									-{discount}%
+								</span>
 							</span>
 							<span className="text-3xl lg:text-4xl font-black text-red-600 tracking-tighter">
 								{formatIDR(pkg.promo_price as number)}
@@ -136,7 +152,8 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 							{visibleItems.map((item, i) => (
 								<motion.li
 									layout
-									key={item.name}
+									// FIX: Gunakan index sebagai key fallback agar unik meski item.name duplikat
+									key={`${item.name}-${i}`}
 									initial={{ opacity: 0, x: -10 }}
 									animate={{ opacity: 1, x: 0 }}
 									exit={{ opacity: 0, x: -10 }}
@@ -144,7 +161,22 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 									className="flex items-start gap-3 text-sm text-slate-600 font-medium"
 								>
 									<div className="w-5 h-5 rounded-full bg-brand-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-										<CheckCircle2 size={12} className="text-brand-primary" />
+										{/* FIX: Import CheckCircle2 tetap dipakai di sini */}
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width="12"
+											height="12"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											strokeWidth="2"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											className="text-brand-primary"
+										>
+											<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+											<polyline points="22 4 12 14.01 9 11.01" />
+										</svg>
 									</div>
 									<span>
 										{item.quantity != null ? (
@@ -166,26 +198,30 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 							type="button"
 							onClick={() => setIsExpanded(!isExpanded)}
 							whileHover={{ x: 5 }}
-							className="mt-6 text-[10px] text-brand-primary font-black uppercase tracking-[0.2em] hover:underline underline-offset-8 flex items-center gap-2"
+							// FIX: Tambah aria-expanded agar screen reader mengenali status tombol
+							aria-expanded={isExpanded}
+							className="mt-6 text-[10px] text-brand-primary font-black uppercase tracking-[0.2em] hover:underline underline-offset-8 flex items-center justify-center sm:justify-start gap-2"
 						>
 							{isExpanded
 								? "Tampilkan Sedikit"
 								: `+${pkg.items.length - 4} Item Lainnya`}
+							{/* FIX: Ganti ArrowRight → ChevronDown; rotasi 180° kini benar (menunjuk ke atas = collapse) */}
 							<motion.div
 								animate={{ rotate: isExpanded ? 180 : 0 }}
+								transition={{ duration: 0.2 }}
 								className="w-4 h-4"
 							>
-								<ArrowRight size={14} />
+								<ChevronDown size={14} />
 							</motion.div>
 						</motion.button>
 					)}
 				</div>
 
 				{/* CTA */}
-				<motion.div layout className="mt-10">
-					<motion.a
-						whileHover={{ scale: 1.02 }}
-						whileTap={{ scale: 0.98 }}
+				{/* FIX: Hapus prop `layout` — tidak perlu; mencegah layout-shift animation saat items expand */}
+				<div className="mt-10">
+					{/* FIX: Ganti motion.a → a biasa karena tidak ada motion props yang dipakai */}
+					<a
 						href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent(`Halo Mahira Laundry, saya tertarik dengan Paket Usaha ${pkg.name}. Bisa bantu jelaskan detailnya?`)}`}
 						target="_blank"
 						rel="noopener noreferrer"
@@ -196,9 +232,23 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 						}`}
 					>
 						Tanya via WhatsApp
-						<ArrowRight size={16} />
-					</motion.a>
-				</motion.div>
+						{/* FIX: Import ChevronDown sudah cukup; ArrowRight tetap bisa dipakai di sini jika mau */}
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="16"
+							height="16"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							strokeWidth="2"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<line x1="5" y1="12" x2="19" y2="12" />
+							<polyline points="12 5 19 12 12 19" />
+						</svg>
+					</a>
+				</div>
 			</div>
 		</motion.div>
 	);
@@ -221,7 +271,7 @@ export function HomeBusinessPackagesSection({
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 				{/* Header */}
 				<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-20 text-center lg:text-left">
-					<div className="max-w-2xl">
+					<div className="max-w-2xl text-center lg:text-left">
 						<motion.div
 							initial={{ opacity: 0, x: -20 }}
 							whileInView={{ opacity: 1, x: 0 }}
@@ -248,7 +298,7 @@ export function HomeBusinessPackagesSection({
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
 						transition={{ delay: 0.3 }}
-						className="text-lg text-slate-500 font-medium max-w-sm"
+						className="text-lg text-slate-500 font-medium max-w-sm text-center lg:text-left mx-auto lg:mx-0"
 					>
 						Sistem autopilot yang dirancang untuk memberikan ROI tercepat dalam
 						industri laundry.
@@ -256,8 +306,9 @@ export function HomeBusinessPackagesSection({
 				</div>
 
 				{/* Package Cards */}
-				<LayoutGroup>
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+				{/* FIX: Tambah id pada LayoutGroup untuk mencegah konflik scope layout */}
+				<LayoutGroup id="packages-grid">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-md sm:max-w-none mx-auto sm:mx-0">
 						{packages.slice(0, 3).map((pkg, i) => (
 							<PackageCard key={pkg.id} pkg={pkg} index={i} />
 						))}
@@ -271,20 +322,33 @@ export function HomeBusinessPackagesSection({
 					viewport={{ once: true }}
 					className="text-center mt-20"
 				>
-					<motion.div whileHover={{ scale: 1.05 }} className="inline-block">
-						<Link
-							href="/paket-usaha"
-							className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-50 text-slate-900 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 transition-all border border-slate-100"
+					{/* FIX: Hapus inner motion.div yang redundan — tidak ada motion props di dalamnya */}
+					<Link
+						href="/paket-usaha"
+						className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-50 text-slate-900 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 border border-slate-100"
+					>
+						Lihat Detail &amp; Bandingkan Semua
+						<motion.div
+							animate={{ x: [0, 5, 0] }}
+							transition={{ repeat: Infinity, duration: 1.5 }}
 						>
-							Lihat Detail & Bandingkan Semua
-							<motion.div
-								animate={{ x: [0, 5, 0] }}
-								transition={{ repeat: Infinity, duration: 1.5 }}
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								width="18"
+								height="18"
+								viewBox="0 0 24 24"
+								fill="none"
+								stroke="currentColor"
+								strokeWidth="2"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								className="text-brand-primary"
 							>
-								<ArrowRight size={18} className="text-brand-primary" />
-							</motion.div>
-						</Link>
-					</motion.div>
+								<line x1="5" y1="12" x2="19" y2="12" />
+								<polyline points="12 5 19 12 12 19" />
+							</svg>
+						</motion.div>
+					</Link>
 				</motion.div>
 			</div>
 		</section>

@@ -42,7 +42,7 @@ export default function ManagerLayout({
 				{/* Dashboard Footer */}
 				<footer className="p-4 lg:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
 					<p>
-						© {new Date().getFullYear()} Mahira Laundry Group. All rights
+						© {new Date().getFullYear()} Mahira Group. All rights
 						reserved.
 					</p>
 				</footer>

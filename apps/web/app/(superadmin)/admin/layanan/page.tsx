@@ -7,7 +7,7 @@ import { getAllServices, getUserProfile } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
 	title: "Pusat Layanan",
-	description: "Manajemen katalog layanan premium Mahira Laundry Group.",
+	description: "Manajemen katalog layanan premium Mahira Group.",
 };
 
 export const dynamic = "force-dynamic";
@@ -42,7 +42,7 @@ export default async function SuperadminLayananPage() {
 						</h1>
 						<p className="text-slate-500 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
 							Standardisasi harga, unit, dan durasi pengerjaan layanan di
-							seluruh jaringan Mahira Laundry Group. Kelola portofolio produk
+							seluruh jaringan Mahira Group. Kelola portofolio produk
 							premium Anda dari dashboard ini.
 						</p>
 					</div>

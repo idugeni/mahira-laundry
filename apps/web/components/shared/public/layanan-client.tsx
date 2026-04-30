@@ -24,7 +24,7 @@ import {
 } from "react-icons/md";
 import { RiGraduationCapLine } from "react-icons/ri";
 import { ServiceDetailModal } from "@/components/shared/customer/order/service-detail-modal";
-import { ServiceSearch } from "@/components/shared/public/service-search";
+import { UniversalSearch } from "@/components/shared/public/universal-search";
 import { useAuth } from "@/hooks/use-auth";
 import type { Service } from "@/lib/types";
 import { formatIDR, getDashboardUrl } from "@/lib/utils";
@@ -240,8 +240,8 @@ export function LayananClient({
 				{/* Header */}
 				<div className="text-center mb-12">
 					<motion.div
-						initial={{ opacity: 0, scale: 0.8 }}
-						whileInView={{ opacity: 1, scale: 1 }}
+						initial={{ opacity: 0 }}
+						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
 						className="inline-flex items-center gap-3 px-6 py-3 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] mb-8 border border-brand-primary/10"
 					>
@@ -264,7 +264,7 @@ export function LayananClient({
 
 				{/* Search Bar Integration */}
 				<div className="mb-24">
-					<ServiceSearch
+					<UniversalSearch
 						variant="section"
 						placeholder="Cari layanan yang Anda butuhkan..."
 					/>
@@ -347,8 +347,6 @@ export function LayananClient({
 							tumpukan cucian Anda dengan standar kualitas hotel bintang lima.
 						</p>
 						<motion.div
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
 							className="inline-block"
 						>
 							<Link

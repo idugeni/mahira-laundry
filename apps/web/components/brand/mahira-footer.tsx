@@ -216,7 +216,7 @@ export function MahiraFooter({
 					<div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
 					<p>
-						© {new Date().getFullYear()} Mahira Laundry Group. Seluruh Hak Cipta
+						© {new Date().getFullYear()} Mahira Group. Seluruh Hak Cipta
 						Dilindungi.
 					</p>
 					<div className="flex gap-6">

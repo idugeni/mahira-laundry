@@ -23,7 +23,7 @@ import { cn, formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Manajemen Pegawai",
-	description: "Kelola dan pantau seluruh staf Mahira Laundry Group.",
+	description: "Kelola dan pantau seluruh staf Mahira Group.",
 };
 
 export const dynamic = "force-dynamic";
@@ -101,7 +101,7 @@ export default async function PegawaiPage({
 							Manajemen <span className="text-emerald-400 italic">Pegawai</span>
 						</h1>
 						<p className="text-slate-400 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
-							Kelola seluruh sumber daya manusia Mahira Laundry Group dari satu
+							Kelola seluruh sumber daya manusia Mahira Group dari satu
 							titik kendali tertinggi.
 						</p>
 					</div>

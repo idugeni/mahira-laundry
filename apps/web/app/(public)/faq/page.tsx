@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 		"Cari jawaban cepat untuk pertanyaan yang sering ditanyakan mengenai layanan laundry premium Mahira, harga, antar-jemput, dan kemitraan.",
 	openGraph: {
 		...baseOpenGraph,
+		url: "/faq",
 		title: "Pusat Bantuan & FAQ | Mahira Laundry",
 		description:
 			"Solusi lengkap untuk segala pertanyaan Anda mengenai Mahira Laundry.",

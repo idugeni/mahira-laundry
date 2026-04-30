@@ -236,7 +236,7 @@ export default async function SuperadminProfilPage() {
 									</h3>
 									<p className="text-slate-400 font-bold text-[11px] leading-relaxed max-w-[200px]">
 										Otoritas penuh atas infrastruktur{" "}
-										<span className="text-white">Mahira Laundry Group</span>.
+										<span className="text-white">Mahira Group</span>.
 									</p>
 								</div>
 							</div>

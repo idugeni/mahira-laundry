@@ -36,9 +36,9 @@ export function BackToTop() {
 					className="fixed bottom-8 right-8 z-[60] flex items-center justify-center"
 				>
 					<motion.div
-						initial={{ opacity: 0, y: 20, scale: 0.8 }}
-						animate={{ opacity: 1, y: 0, scale: 1 }}
-						exit={{ opacity: 0, y: 20, scale: 0.8 }}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
 						className="relative group"
 					>
 						{/* Circular Progress Stroke */}
@@ -67,8 +67,6 @@ export function BackToTop() {
 
 						<motion.button
 							onClick={scrollToTop}
-							whileHover={{ scale: 1.1 }}
-							whileTap={{ scale: 0.9 }}
 							className="absolute inset-2 bg-slate-900 text-white rounded-full flex items-center justify-center shadow-xl transition-colors hover:bg-brand-primary group-hover:shadow-[0_0_20px_rgba(var(--brand-primary-rgb),0.3)]"
 							aria-label="Back to top"
 						>

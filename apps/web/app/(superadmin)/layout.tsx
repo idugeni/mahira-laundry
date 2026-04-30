@@ -93,7 +93,7 @@ export default async function SuperadminLayout({
 				navItems={superadminNav}
 				panelLabel="Superadmin"
 				panelBadgeColor="bg-gradient-to-r from-red-500 to-pink-500 text-white"
-				headerInfo="Mahira Laundry Group"
+				headerInfo="Mahira Group"
 			/>
 			<div className="flex-1 flex flex-col min-w-0">
 				{/* Top Header */}
@@ -118,7 +118,7 @@ export default async function SuperadminLayout({
 				{/* Dashboard Footer */}
 				<footer className="p-4 lg:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
 					<p>
-						© {new Date().getFullYear()} Mahira Laundry Group. All rights
+						© {new Date().getFullYear()} Mahira Group. All rights
 						reserved.
 					</p>
 				</footer>

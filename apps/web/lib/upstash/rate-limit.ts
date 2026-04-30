@@ -1,26 +1,28 @@
 import { Ratelimit } from "@upstash/ratelimit";
-import { redis } from "./redis";
+import { redis } from "@/lib/upstash/redis";
+
+const redisClient = redis!;
 
 export const publicApiLimiter = new Ratelimit({
-	redis,
+	redis: redisClient,
 	limiter: Ratelimit.slidingWindow(10, "10 s"),
 	prefix: "mahira:ratelimit:public",
 });
 
 export const authLimiter = new Ratelimit({
-	redis,
+	redis: redisClient,
 	limiter: Ratelimit.slidingWindow(5, "60 s"),
 	prefix: "mahira:ratelimit:auth",
 });
 
 export const formLimiter = new Ratelimit({
-	redis,
+	redis: redisClient,
 	limiter: Ratelimit.slidingWindow(3, "60 s"),
 	prefix: "mahira:ratelimit:form",
 });
 
 export const apiLimiter = new Ratelimit({
-	redis,
+	redis: redisClient,
 	limiter: Ratelimit.slidingWindow(30, "10 s"),
 	prefix: "mahira:ratelimit:api",
 });

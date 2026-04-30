@@ -139,8 +139,6 @@ export function TrackingClient() {
 
 						<div className="flex gap-4">
 							<motion.button
-								whileHover={{ scale: 1.02 }}
-								whileTap={{ scale: 0.98 }}
 								type="button"
 								onClick={() => setIsScanning(!isScanning)}
 								className="px-8 py-6 bg-slate-900 text-white font-black rounded-3xl hover:bg-slate-800 transition-all flex items-center justify-center gap-3 shadow-xl shadow-slate-200"
@@ -154,8 +152,6 @@ export function TrackingClient() {
 							</motion.button>
 
 							<motion.button
-								whileHover={{ scale: 1.02 }}
-								whileTap={{ scale: 0.98 }}
 								type="submit"
 								disabled={loading}
 								className="px-6 sm:px-8 py-6 bg-brand-primary text-white font-black rounded-3xl hover:bg-brand-primary/90 transition-all disabled:opacity-50 shadow-xl shadow-brand-primary/30 flex-1 lg:flex-none"
@@ -194,9 +190,9 @@ export function TrackingClient() {
 			<AnimatePresence mode="wait">
 				{error && (
 					<motion.div
-						initial={{ opacity: 0, scale: 0.9 }}
-						animate={{ opacity: 1, scale: 1 }}
-						exit={{ opacity: 0, scale: 0.9 }}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
 						className="bg-red-50/50 backdrop-blur-sm border border-red-100 p-12 rounded-[3.5rem] text-center"
 					>
 						<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-red-400 mx-auto mb-6 shadow-sm">
@@ -358,7 +354,6 @@ export function TrackingClient() {
 
 								{/* Delivery Info If Any */}
 								<motion.div
-									whileHover={{ y: -5 }}
 									className="bg-brand-primary/5 p-10 rounded-[2rem] border border-brand-primary/10 flex items-center gap-6"
 								>
 									<div className="w-16 h-16 bg-white rounded-[2rem] flex items-center justify-center text-brand-primary shadow-sm">

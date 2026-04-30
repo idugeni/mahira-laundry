@@ -1,84 +1,68 @@
-# Mahira Laundry — Official Platform
+# Mahira Laundry
 
 <div align="center">
   <img src="https://mahiralaundry.id/logo.png" alt="Mahira Laundry Logo" width="120" />
   <p><strong>Cucian Bersih, Hidup Nyaman.</strong></p>
-  <p><i>The next-generation premium laundry management ecosystem.</i></p>
 </div>
 
 ---
 
-## 🌟 Overview
+## Tentang Mahira Laundry
 
-**Mahira Laundry** is a high-end, full-stack laundry management platform designed to deliver a seamless experience for both customers and business owners. Built with a focus on speed, aesthetics, and reliability, it bridges the gap between premium laundry services and modern digital convenience.
+**Mahira Laundry** adalah unit bisnis laundry dari **Mahira Group**, menyediakan layanan laundry premium di Jakarta yang menggabungkan kualitas pencucian profesional dengan kemudahan digital. Pesan, pantau, dan terima cucian Anda — semua dari smartphone.
 
-## 🚀 Key Modules
+🌐 **Kunjungi kami:** [mahiralaundry.id](https://mahiralaundry.id)
 
-### 📱 Customer PWA (Progressive Web App)
-A mobile-first experience for customers to:
-- **Real-time Tracking:** Monitor the status of orders from pickup to delivery.
-- **Loyalty Program:** Earn points and climb tiers (Bronze, Silver, Gold, Platinum).
-- **Service Explorer:** Discover premium treatments for shoes, dry cleaning, and express services.
+💬 **WhatsApp:** [+62 838-0651-8859](https://wa.me/6283806518859)
 
-### ⚡ Superadmin & Staff Dashboard
-A powerful command center featuring:
-- **Intelligent Queueing:** Manage orders and staff assignments with ease.
-- **Financial Analytics:** Real-time revenue tracking and performance insights.
-- **Inventory & Outlet Management:** Centralized control over multiple business locations.
+---
 
-### 💼 Business Package System
-A dedicated portal for entrepreneurs to explore franchise-like opportunities:
-- **ROI Analytics:** Transparent investment plans and profit estimations.
-- **Automated Setup:** "Autopilot" systems for new partners.
+## Layanan Kami
 
-## 🛠 Tech Stack
+### 🧺 Cuci Umum
+Paket reguler untuk pakaian sehari-hari — cuci, bilas, setrika, siap pakai.
 
-Our ecosystem is built using industry-leading technologies:
+### ✨ Dry Cleaning
+Perawatan khusus untuk pakaian formal, jas, gaun, dan bahan sensitif lainnya.
 
-- **Frontend:** [Next.js 16 (App Router)](https://nextjs.org/) with [Turbopack](https://nextjs.org/docs/app/api-reference/turbopack).
-- **Backend/Database:** [Supabase](https://supabase.com/) (PostgreSQL with RLS).
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/) for a sleek, modern UI.
-- **Animations:** [Motion (Framer Motion)](https://motion.dev/) for smooth, high-end transitions.
-- **Infrastructure:** [Vercel](https://vercel.com/) for high-performance deployment.
+### 👟 Cuci Sepatu
+Deep cleaning untuk sneakers, leather, dan segala jenis sepatu — kembali seperti baru.
 
-## 📦 Getting Started
+### ⚡ Express Service
+Butuh cepat? Selesai dalam hitungan jam dengan layanan express kami.
 
-### Prerequisites
-- Node.js (Latest stable version)
-- NPM or PNPM
+---
 
-### Installation
+## Keunggulan Digital
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/idugeni/mahira-laundry.git
-   cd mahira-laundry
-   ```
+### � Pesan & Pantau dari Mana Saja
+Lacak status pesanan secara real-time — dari penjemputan hingga pengantaran, langsung dari aplikasi web kami.
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+### 🏆 Program Loyalitas
+Setiap pesanan menghasilkan poin. Kumpulkan dan naik tier:
+- **Bronze** → **Silver** → **Gold** → **Platinum**
+- Tier lebih tinggi = diskon dan benefit eksklusif.
 
-3. **Configure Environment Variables:**
-   Create a `.env` file in `apps/web/` and add your Supabase credentials:
-   ```env
-   NEXT_PUBLIC_SUPABASE_URL=your_url
-   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=your_key
-   ```
+### 💳 Pembayaran Digital
+Bayar dengan metode pilihan Anda — transfer bank, e-wallet, QRIS, dan lainnya melalui Midtrans.
 
-4. **Run development server:**
-   ```bash
-   npm run dev
-   ```
+### 🔔 Notifikasi Otomatis
+Terima update pesanan langsung ke WhatsApp dan email — tanpa perlu bertanya.
+
+---
+
+## Mitra & Franchise
+
+Tertarik membuka outlet Mahira Laundry di bawah naungan Mahira Group? Kami menyediakan paket kemitraan dengan sistem terotomatisasi dan dukungan penuh.
+
+💬 Hubungi kami via [WhatsApp](https://wa.me/6283806518859) untuk informasi paket bisnis.
 
 ---
 
 <div align="center">
-  <p>© 2026 Mahira Laundry Group. All rights reserved.</p>
-  <p><strong>Owner:</strong> +62 838-0651-8859 (<a href="mailto:indimhrni@gmail.com">indimhrni@gmail.com</a>) | <strong>Maintained by:</strong> Eliyanto Sarage (<a href="mailto:officialelsa21@gmail.com">officialelsa21@gmail.com</a>)</p>
+  <p>© 2026 Mahira Group. All rights reserved.</p>
   <p>
     <a href="https://mahiralaundry.id">Official Website</a> • 
-    <a href="https://github.com/idugeni/mahira-laundry">GitHub</a>
+    <a href="https://wa.me/6283806518859">WhatsApp</a>
   </p>
 </div>

@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 		"Daftar lengkap layanan laundry premium: cuci lipat, cuci setrika, express, dry cleaning, cuci sepatu, dan lainnya dengan standar kualitas tinggi.",
 	openGraph: {
 		...baseOpenGraph,
+		url: "/layanan",
 		title: "Layanan",
 		description:
 			"Solusi laundry profesional dengan layanan lengkap. Mulai dari Rp 7.000/kg.",

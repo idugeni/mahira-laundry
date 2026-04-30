@@ -235,8 +235,6 @@ export function AuthClient({ type, action }: AuthClientProps) {
 							)}
 
 							<motion.button
-								whileHover={isFormValid && !loading ? { scale: 1.01 } : {}}
-								whileTap={isFormValid && !loading ? { scale: 0.99 } : {}}
 								type="submit"
 								disabled={!isFormValid || loading}
 								className="w-full py-4 bg-slate-900 text-white rounded-[1.2rem] font-black text-[10px] uppercase tracking-[0.2em] hover:bg-brand-primary disabled:bg-slate-100 disabled:text-slate-300 transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-3 mt-2"
@@ -275,8 +273,6 @@ export function AuthClient({ type, action }: AuthClientProps) {
 							</div>
 
 							<motion.button
-								whileHover={{ scale: 1.01 }}
-								whileTap={{ scale: 0.99 }}
 								type="button"
 								onClick={handleGoogleLogin}
 								className="w-full py-3.5 border-2 border-slate-100 rounded-[1.2rem] flex items-center justify-center gap-3 hover:bg-slate-50 transition-all font-black text-[9px] uppercase tracking-widest text-slate-500"

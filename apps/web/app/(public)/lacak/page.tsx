@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 	description: "Lacak status pesanan laundry Anda secara real-time.",
 	openGraph: {
 		...baseOpenGraph,
+		url: "/lacak",
 		title: "Lacak Pesanan | Mahira Laundry",
 		description:
 			"Pantau status cucian Anda secara real-time dari jemput hingga antar.",

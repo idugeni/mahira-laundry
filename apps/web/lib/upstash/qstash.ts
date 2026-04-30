@@ -1,7 +1,13 @@
 import { Client } from "@upstash/qstash";
 
+const QSTASH_TOKEN = process.env.QSTASH_TOKEN;
+
+if (!QSTASH_TOKEN) {
+	throw new Error("QSTASH_TOKEN must be set");
+}
+
 export const qstash = new Client({
-	token: process.env.QSTASH_TOKEN!,
+	token: QSTASH_TOKEN,
 });
 
 export async function enqueueJob(

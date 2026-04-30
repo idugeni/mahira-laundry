@@ -8,6 +8,7 @@ export const metadata: Metadata = {
 		"Kebijakan Privasi Mahira Laundry - Pelajari bagaimana kami melindungi data dan informasi privasi pelanggan kami.",
 	openGraph: {
 		...baseOpenGraph,
+		url: "/privacy",
 		title: "Kebijakan Privasi | Mahira Laundry",
 		description:
 			"Informasi mengenai cara kami menjaga dan melindungi data pribadi Anda.",

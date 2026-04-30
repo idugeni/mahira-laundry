@@ -133,8 +133,8 @@ export default function ComparisonTable({ packages }: ComparisonTableProps) {
 			{/* Mobile View: Seamless Cohesive List */}
 			<div className="md:hidden">
 				<motion.div
-					initial={{ opacity: 0, scale: 0.98 }}
-					whileInView={{ opacity: 1, scale: 1 }}
+					initial={{ opacity: 0 }}
+					whileInView={{ opacity: 1 }}
 					viewport={{ once: true }}
 					className="bg-white rounded-[2.5rem] border border-slate-100 shadow-xl shadow-slate-100 overflow-hidden"
 				>

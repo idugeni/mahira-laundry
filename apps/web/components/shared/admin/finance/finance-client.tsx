@@ -127,7 +127,7 @@ export function SuperadminFinanceClient({
 							Executive <span className="text-emerald-400 italic">Finance</span>
 						</h1>
 						<p className="text-slate-400 font-bold text-sm lg:text-lg max-w-2xl leading-relaxed">
-							Otoritas keuangan tertinggi Mahira Laundry Group. Monitoring
+							Otoritas keuangan tertinggi Mahira Group. Monitoring
 							profitabilitas, kontrol biaya operasional, dan analisis
 							pertumbuhan finansial seluruh cabang.
 						</p>

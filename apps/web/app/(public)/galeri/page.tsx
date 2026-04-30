@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { MahiraSpinner } from "@/components/shared/common/mahira-spinner";
 import { GallerySection } from "@/components/shared/public/gallery/gallery-section";
 import { baseOpenGraph } from "@/lib/metadata";
 import { createClient } from "@/lib/supabase/server";
@@ -9,6 +11,7 @@ export const metadata: Metadata = {
 		"Lihat hasil cucian, fasilitas, dan proses operasional Mahira Laundry melalui dokumentasi foto kualitas premium kami.",
 	openGraph: {
 		...baseOpenGraph,
+		url: "/galeri",
 		title: "Galeri Hasil Layanan | Mahira Laundry",
 		description:
 			"Koleksi foto hasil layanan laundry premium dan fasilitas modern Mahira.",
@@ -34,7 +37,19 @@ export default async function GalleryPage() {
 
 	return (
 		<div>
-			<GallerySection items={galleryItems || []} />
+			<Suspense
+				key="galeri-suspense"
+				fallback={
+					<div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
+						<MahiraSpinner size="lg" />
+						<p className="text-slate-400 font-medium animate-pulse text-sm uppercase tracking-widest">
+							Menyiapkan Galeri...
+						</p>
+					</div>
+				}
+			>
+				<GallerySection items={galleryItems || []} />
+			</Suspense>
 		</div>
 	);
 }

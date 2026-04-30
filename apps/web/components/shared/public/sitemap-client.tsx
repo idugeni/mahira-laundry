@@ -95,8 +95,8 @@ export function SitemapClient() {
 				{/* Header Section */}
 				<div className="text-center mb-24">
 					<motion.div
-						initial={{ opacity: 0, scale: 0.8 }}
-						animate={{ opacity: 1, scale: 1 }}
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
 						className="inline-flex items-center gap-3 px-6 py-2.5 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] mb-10 border border-brand-primary/10"
 					>
 						<span>Navigation Center</span>

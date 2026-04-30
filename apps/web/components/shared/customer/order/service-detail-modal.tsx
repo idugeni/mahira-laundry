@@ -210,8 +210,6 @@ export function ServiceDetailModal({
 								className="px-10 py-10 lg:px-16 border-t border-slate-50 bg-white"
 							>
 								<motion.a
-									whileHover={{ scale: 1.02, y: -2 }}
-									whileTap={{ scale: 0.98 }}
 									href={`https://wa.me/${PRIMARY_OUTLET.whatsapp}?text=Halo Mahira Laundry, saya ingin pesan layanan ${service.name}`}
 									target="_blank"
 									rel="noopener noreferrer"

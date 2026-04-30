@@ -173,8 +173,8 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 						</motion.div>
 
 						<motion.div
-							initial={{ opacity: 0, scale: 0.98 }}
-							whileInView={{ opacity: 1, scale: 1 }}
+							initial={{ opacity: 0 }}
+							whileInView={{ opacity: 1 }}
 							transition={{ duration: 1 }}
 							viewport={{ once: true }}
 							className="rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.05)] border border-slate-200"
@@ -193,8 +193,8 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 				<div className="absolute inset-0 bg-brand-gradient opacity-10" />
 				<div className="container relative z-10 mx-auto px-6 text-center">
 					<motion.div
-						initial={{ opacity: 0, scale: 0.9 }}
-						whileInView={{ opacity: 1, scale: 1 }}
+						initial={{ opacity: 0 }}
+						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
 						className="max-w-4xl mx-auto rounded-[2rem] bg-white/5 backdrop-blur-2xl p-10 lg:p-10 border-0 shadow-2xl"
 					>
@@ -207,8 +207,6 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 							secara gratis melalui WhatsApp."
 						</p>
 						<motion.a
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
 							href={waUrl}
 							target="_blank"
 							rel="noopener noreferrer"

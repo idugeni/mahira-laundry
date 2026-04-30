@@ -33,8 +33,8 @@ export default function NotFound() {
 
 			<div className="text-center max-w-2xl relative z-10">
 				<motion.div
-					initial={{ scale: 0.8, opacity: 0 }}
-					animate={{ scale: 1, opacity: 1 }}
+					initial={{ opacity: 0 }}
+					animate={{ opacity: 1 }}
 					transition={{ type: "spring", stiffness: 100, damping: 20 }}
 					className="relative inline-block mb-16"
 				>
@@ -81,7 +81,7 @@ export default function NotFound() {
 					</p>
 
 					<div className="mt-12 flex flex-wrap justify-center gap-6">
-						<motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+						<motion.div>
 							<Link
 								href="/"
 								className="inline-flex items-center gap-4 px-10 py-5 bg-slate-900 text-white rounded-full font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-2xl shadow-slate-200"
@@ -94,8 +94,6 @@ export default function NotFound() {
 						</motion.div>
 
 						<motion.button
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
 							type="button"
 							onClick={() => window.history.back()}
 							className="inline-flex items-center gap-4 px-10 py-5 border-2 border-slate-100 bg-white text-slate-600 rounded-full font-black text-xs uppercase tracking-widest hover:bg-slate-50 transition-all"

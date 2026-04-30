@@ -21,6 +21,15 @@ export const metadata: Metadata = {
 		title: "Jual Paket Usaha Laundry Premium — Peluang Investasi Kemitraan",
 		description:
 			"Wujudkan impian memiliki bisnis laundry profesional. Pilih paket usaha laundry yang sesuai dengan budget dan target pasar Anda.",
+		url: "/",
+		images: [
+			{
+				url: "/og/paket-usaha.png",
+				width: 1200,
+				height: 630,
+				alt: "Mahira Laundry Premium Experience",
+			},
+		],
 	},
 };
 

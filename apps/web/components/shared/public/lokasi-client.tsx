@@ -50,8 +50,8 @@ export function LokasiClient() {
 				{/* Header */}
 				<div className="text-center mb-24">
 					<motion.div
-						initial={{ opacity: 0, scale: 0.8 }}
-						whileInView={{ opacity: 1, scale: 1 }}
+						initial={{ opacity: 0 }}
+						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
 						className="inline-flex items-center gap-3 px-6 py-2.5 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] mb-8 border border-brand-primary/10"
 					>
@@ -91,7 +91,7 @@ export function LokasiClient() {
 									loading="lazy"
 									referrerPolicy="no-referrer-when-downgrade"
 									title="Lokasi Mahira Laundry"
-									className="grayscale group-hover:grayscale-0 transition-all duration-1000 scale-105"
+									className="grayscale group-hover:grayscale-0 transition-all duration-1000"
 								/>
 							) : (
 								<div className="w-full h-full flex flex-col items-center justify-center text-slate-400 gap-6">
@@ -216,8 +216,6 @@ export function LokasiClient() {
 									</div>
 
 									<motion.a
-										whileHover={{ scale: 1.02, y: -5 }}
-										whileTap={{ scale: 0.98 }}
 										href={outlet.links}
 										target="_blank"
 										rel="noopener noreferrer"

@@ -75,8 +75,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 
 	return (
 		<motion.div
-			whileHover={{ y: -12 }}
-			className="group relative flex flex-col h-full rounded-[2rem] border border-slate-100 bg-white shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] transition-all hover:shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] hover:border-brand-primary/20 overflow-hidden"
+			className="relative flex flex-col h-full rounded-[2.5rem] border bg-white p-8 sm:p-10 transition-all duration-500 overflow-hidden group"
 		>
 			{/* Featured ribbon - Ultra Premium Style */}
 			{pkg.is_featured && (
@@ -219,7 +218,6 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 
 						{extraCount > 0 && (
 							<motion.button
-								whileHover={{ x: 5 }}
 								type="button"
 								onClick={() => setIsExpanded(!isExpanded)}
 								className="mt-8 text-[10px] text-brand-primary font-black uppercase tracking-[0.2em] flex items-center gap-3 hover:opacity-70 transition-opacity"
@@ -241,15 +239,13 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 
 				{/* Action Button - High Contrast */}
 				<motion.a
-					whileHover={{ scale: 1.02 }}
-					whileTap={{ scale: 0.98 }}
 					href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent(`Halo Mahira Laundry, saya tertarik dengan Paket Usaha ${pkg.name}. Bisa bantu jelaskan detailnya?`)}`}
 					target="_blank"
 					rel="noopener noreferrer"
 					className="mt-8 w-full rounded-[2rem] bg-slate-900 px-8 py-4.5 text-[10px] font-black uppercase tracking-[0.3em] text-white text-center shadow-2xl shadow-slate-200 transition-all hover:bg-brand-primary hover:shadow-brand-primary/30 flex items-center justify-center gap-4 group/btn"
 				>
 					<span>Konsultasi Sekarang</span>
-					<span className="-rotate-90 group-hover/btn:translate-y-1 transition-transform">
+					<span className="-rotate-90">
 						<HiOutlineArrowDown size={18} />
 					</span>
 				</motion.a>

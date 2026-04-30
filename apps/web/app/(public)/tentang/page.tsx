@@ -7,6 +7,7 @@ export const metadata: Metadata = {
 		"Tentang Mahira Laundry — Solusi laundry premium dengan standar kualitas internasional dan antar-jemput profesional.",
 	openGraph: {
 		...baseOpenGraph,
+		url: "/tentang",
 		title: "Tentang",
 		description:
 			"Layanan laundry terpercaya dengan komitmen terhadap kebersihan dan kualitas kain Anda.",

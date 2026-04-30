@@ -1,9 +1,2 @@
 {
-	"json.schemaDownload.enable": true,
-	"json.schemas": [
-		{
-			"fileMatch": ["turbo.json"],
-			"url": "https://turbo.build/schema.json"
-		}
-	]
 }

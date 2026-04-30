@@ -384,7 +384,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 								</div>
 								<p className="text-[10px] font-bold text-amber-700/80 leading-relaxed uppercase tracking-widest">
 									Pastikan seluruh data yang diinput telah sesuai dengan dokumen
-									legal kemitraan Mahira Laundry Group.
+									legal kemitraan Mahira Group.
 								</p>
 							</div>
 						</div>

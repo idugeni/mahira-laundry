@@ -18,7 +18,7 @@ import {
 
 export const metadata: Metadata = {
 	title: "Dashboard Superadmin",
-	description: "Pusat kendali manajemen Mahira Laundry Group",
+	description: "Pusat kendali manajemen Mahira Group",
 };
 
 export const dynamic = "force-dynamic";
@@ -44,7 +44,7 @@ export default async function SuperadminDashboardPage() {
 							Dashboard Utama
 						</h1>
 						<p className="text-slate-500 mt-1 text-sm">
-							Platform manajemen pusat Mahira Laundry Group.
+							Platform manajemen pusat Mahira Group.
 						</p>
 					</div>
 					<div className="flex items-center gap-2 text-xs text-slate-500 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-sm">
