@@ -1,12 +1,6 @@
 "use client";
 
-import {
-	AnimatePresence,
-	LayoutGroup,
-	motion,
-	useMotionValue,
-	useSpring,
-} from "motion/react";
+import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -33,90 +27,60 @@ function GalleryCard({
 	index: number;
 	onClick: () => void;
 }) {
-	const mouseX = useMotionValue(0);
-	const mouseY = useMotionValue(0);
-
-	const springConfig = { damping: 25, stiffness: 200 };
-	const cursorX = useSpring(mouseX, springConfig);
-	const cursorY = useSpring(mouseY, springConfig);
-
-	const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-		const rect = e.currentTarget.getBoundingClientRect();
-		mouseX.set(e.clientX - rect.left);
-		mouseY.set(e.clientY - rect.top);
-	};
-
 	return (
 		<motion.div
-			layout
-			initial={{ opacity: 0, y: 30 }}
-			animate={{ opacity: 1, y: 0 }}
-			exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
-			transition={{
-				duration: 0.8,
-				delay: index * 0.05,
-				ease: [0.16, 1, 0.3, 1],
-			}}
-			whileHover={{ y: -10 }}
-			className="group relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-100 cursor-none"
-			onMouseMove={handleMouseMove}
+			whileHover={{ y: -4 }}
+			transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+			className="group relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-slate-100 cursor-pointer"
 			onClick={onClick}
 		>
-			<Image
-				src={item.image_url}
-				alt={item.title}
-				fill
-				sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-				className="object-cover transition-transform duration-1000"
-				priority={index < 3}
-			/>
+			<motion.div
+				className="absolute inset-0"
+				whileHover={{ scale: 1.05 }}
+				transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+			>
+				<Image
+					src={item.image_url}
+					alt={item.title}
+					fill
+					sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+					className="object-cover"
+					priority={index < 3}
+				/>
+			</motion.div>
 
 			{/* Overlay Gradient */}
-			<div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/10 to-transparent opacity-0 group-hover:opacity-90 transition-all duration-500" />
+			<div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-			<div className="absolute inset-0 flex flex-col justify-end p-10 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
-				<div className="flex items-center gap-3 mb-4">
-					<span className="w-10 h-px bg-brand-primary" />
-					<span className="text-[10px] font-black uppercase tracking-[0.4em] text-brand-primary">
+			{/* Content */}
+			<motion.div
+				className="absolute inset-0 flex flex-col justify-end p-8 sm:p-10"
+				initial={false}
+				animate={{ opacity: 0, y: 16 }}
+				whileHover={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+			>
+				<div className="flex items-center gap-3 mb-3">
+					<span className="w-8 h-px bg-brand-primary" />
+					<span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary">
 						{item.category || "PREMIUM"}
 					</span>
 				</div>
-				<h3 className="text-white font-black font-[family-name:var(--font-heading)] text-3xl leading-none tracking-tight mb-4">
+				<h3 className="text-white font-black font-[family-name:var(--font-heading)] text-2xl sm:text-3xl leading-none tracking-tight mb-3">
 					{item.title}
 				</h3>
-				<p className="text-slate-300 text-sm font-medium line-clamp-2 leading-relaxed">
+				<p className="text-white/70 text-sm font-medium line-clamp-2 leading-relaxed">
 					{item.description || "Dedikasi kami untuk hasil pengerjaan terbaik."}
 				</p>
 
-				<div className="mt-8 flex items-center gap-4">
-					<div className="w-12 h-12 rounded-full bg-white text-slate-900 flex items-center justify-center shadow-2xl">
-						<HiOutlineViewColumns size={20} />
+				<div className="mt-6 flex items-center gap-3">
+					<div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white flex items-center justify-center">
+						<HiOutlineViewColumns size={18} />
 					</div>
-					<span className="text-white text-[10px] font-black uppercase tracking-widest">
-						Detail View
+					<span className="text-white/80 text-[10px] font-black uppercase tracking-widest">
+						Lihat Detail
 					</span>
 				</div>
-			</div>
-
-			{/* Custom Cursor for Hover - Now actually following the mouse */}
-			<motion.div
-				className="absolute pointer-events-none z-30 opacity-0 group-hover:opacity-100 hidden lg:flex items-center justify-center"
-				style={{
-					left: cursorX,
-					top: cursorY,
-					x: "-50%",
-					y: "-50%",
-				}}
-			>
-				<motion.div
-					className="w-24 h-24 bg-brand-primary/20 backdrop-blur-md rounded-full border border-white/20 flex items-center justify-center text-white"
-					animate={{ scale: [1, 1.1, 1] }}
-					transition={{ repeat: Infinity, duration: 2 }}
-				>
-					<span className="text-[10px] font-black tracking-widest uppercase">
-						Lihat
-					</span>
-				</motion.div>
 			</motion.div>
 		</motion.div>
 	);
@@ -221,20 +185,20 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 									type="button"
 									key={cat}
 									onClick={() => setFilter(cat)}
-									className={`relative px-8 py-4 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${
+									className={`relative px-8 py-4 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-colors duration-200 ${
 										filter === cat
 											? "text-white"
-											: "text-slate-400 hover:text-slate-900 bg-slate-50/80"
+											: "text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300"
 									}`}
 								>
 									{filter === cat && (
 										<motion.div
 											layoutId="active-cat-bg"
-											className="absolute inset-0 bg-slate-900 rounded-full shadow-2xl shadow-slate-200"
+											className="absolute inset-0 bg-slate-900 rounded-full shadow-lg shadow-slate-900/20"
 											transition={{
 												type: "spring",
-												bounce: 0.2,
-												duration: 0.6,
+												bounce: 0.15,
+												duration: 0.5,
 											}}
 										/>
 									)}
@@ -245,25 +209,24 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 					</motion.div>
 				</div>
 
-				<motion.div
-					layout
-					className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-				>
-					<AnimatePresence mode="popLayout">
+				<AnimatePresence mode="wait">
+					<motion.div
+						key={filter}
+						initial={{ opacity: 0, y: 12 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -12 }}
+						transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+						className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+					>
 						{visibleItems.length === 0 ? (
-							<motion.div
-								initial={{ opacity: 0, scale: 0.9 }}
-								animate={{ opacity: 1, scale: 1 }}
-								exit={{ opacity: 0, scale: 0.9 }}
-								className="col-span-full py-16 text-center bg-slate-50/50 rounded-[2rem] border-2 border-dashed border-slate-100 flex flex-col items-center justify-center"
-							>
+							<div className="col-span-full py-16 text-center bg-slate-50/50 rounded-[2rem] border-2 border-dashed border-slate-100 flex flex-col items-center justify-center">
 								<div className="w-20 h-20 bg-white rounded-full flex items-center justify-center text-slate-200 shadow-sm mb-6">
 									<HiOutlineViewColumns size={40} />
 								</div>
 								<p className="text-slate-400 font-black uppercase tracking-widest text-xs">
 									Galeri Belum Tersedia.
 								</p>
-							</motion.div>
+							</div>
 						) : (
 							visibleItems.map((item, i) => (
 								<GalleryCard
@@ -274,21 +237,19 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 								/>
 							))
 						)}
-					</AnimatePresence>
-				</motion.div>
+					</motion.div>
+				</AnimatePresence>
 
 				{hasMore && (
 					<motion.div
-						initial={{ opacity: 0, y: 20 }}
-						whileInView={{ opacity: 1, y: 0 }}
+						initial={{ opacity: 0 }}
+						whileInView={{ opacity: 1 }}
 						className="mt-20 text-center"
 					>
 						<motion.button
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
 							type="button"
 							onClick={() => setDisplayLimit((prev) => prev + 6)}
-							className="inline-flex items-center gap-5 px-6 sm:px-8 py-6 bg-slate-900 text-white rounded-full font-black text-sm uppercase tracking-[0.2em] hover:bg-slate-800 transition-all shadow-2xl shadow-slate-200"
+							className="inline-flex items-center gap-5 px-6 sm:px-8 py-6 bg-slate-900 text-white rounded-full font-black text-sm uppercase tracking-[0.2em] hover:bg-slate-800 transition-all duration-300 shadow-2xl shadow-slate-200"
 						>
 							<span>Muat Koleksi Lain</span>
 							<HiOutlineArrowRight size={20} />
@@ -304,7 +265,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 					>
 						<Link
 							href="/galeri"
-							className="inline-flex items-center gap-4 px-10 py-5 border border-slate-200 text-slate-500 rounded-full font-black text-xs uppercase tracking-widest hover:border-brand-primary hover:text-brand-primary transition-all group"
+							className="inline-flex items-center gap-4 px-10 py-5 border border-slate-200 text-slate-500 rounded-full font-black text-xs uppercase tracking-widest hover:border-brand-primary hover:text-brand-primary transition-all duration-300 group"
 						>
 							<span>Buka Galeri Utama</span>
 							<span className="group-hover:translate-x-2 transition-transform">
@@ -322,7 +283,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						exit={{ opacity: 0 }}
-						className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-10 lg:p-12"
+						className="fixed inset-0 z-[100] flex items-center justify-center p-6 sm:p-12 lg:p-20"
 					>
 						<motion.div
 							initial={{ opacity: 0 }}
@@ -334,103 +295,116 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 						/>
 
 						<motion.div
-							initial={{ opacity: 0, scale: 0.9, y: 100 }}
-							animate={{ opacity: 1, scale: 1, y: 0 }}
-							exit={{ opacity: 0, scale: 0.9, y: 100 }}
-							transition={{ type: "spring", damping: 30, stiffness: 300 }}
+							initial={{ opacity: 0, scale: 0.95 }}
+							animate={{ opacity: 1, scale: 1 }}
+							exit={{ opacity: 0, scale: 0.95 }}
+							transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
 							onClick={(e: React.MouseEvent) => e.stopPropagation()}
-							className="relative w-full max-w-7xl h-full flex flex-col lg:flex-row bg-white rounded-[2rem] overflow-hidden shadow-[0_50px_200px_-50px_rgba(0,0,0,0.8)]"
+							className="relative w-full max-w-7xl aspect-[16/9] lg:aspect-[2/1] flex flex-col lg:flex-row bg-slate-950 rounded-[2rem] overflow-hidden shadow-[0_50px_200px_-50px_rgba(0,0,0,0.8)]"
 						>
-							{/* Image Container */}
-							<div className="relative w-full lg:w-2/3 h-1/2 lg:h-full bg-slate-950 overflow-hidden group">
+							{/* Image Container - Full Height */}
+							<div className="relative w-full lg:w-3/5 aspect-[4/3] lg:aspect-auto lg:h-full overflow-hidden group">
 								<AnimatePresence mode="wait">
 									<motion.div
 										key={selectedItem.id}
-										initial={{ opacity: 0, x: 100 }}
-										animate={{ opacity: 1, x: 0 }}
-										exit={{ opacity: 0, x: -100 }}
-										transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+										transition={{ duration: 0.3 }}
 										className="relative w-full h-full"
 									>
 										<Image
 											src={selectedItem.image_url}
 											alt={selectedItem.title}
 											fill
-											className="object-contain"
-											sizes="(max-width: 1024px) 100vw, 66vw"
+											className="object-cover"
+											sizes="(max-width: 1024px) 100vw, 60vw"
 											priority
 										/>
 									</motion.div>
 								</AnimatePresence>
 
 								{/* Navigation Buttons */}
-								<div className="absolute inset-0 flex items-center justify-between px-6 opacity-0 group-hover:opacity-100 transition-opacity">
+								<div className="absolute inset-0 flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
 									<button
 										type="button"
 										onClick={handlePrev}
-										className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 hover:bg-white hover:text-slate-900 transition-all"
+										className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 hover:bg-white hover:text-slate-900 transition-all duration-300"
 									>
-										<HiOutlineChevronLeft size={24} />
+										<HiOutlineChevronLeft size={20} />
 									</button>
 									<button
 										type="button"
 										onClick={handleNext}
-										className="w-14 h-14 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 hover:bg-white hover:text-slate-900 transition-all"
+										className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 hover:bg-white hover:text-slate-900 transition-all duration-300"
 									>
-										<HiOutlineChevronRight size={24} />
+										<HiOutlineChevronRight size={20} />
 									</button>
 								</div>
 							</div>
 
-							{/* Info Section */}
-							<div className="flex-1 p-8 lg:px-6 sm:px-8 lg:py-10 flex flex-col justify-between relative bg-white overflow-hidden">
+							{/* Info Section - Centered */}
+							<div className="flex-1 flex flex-col items-center justify-center p-8 sm:p-10 lg:p-12 relative bg-white">
 								<button
 									type="button"
 									onClick={() => setSelectedItem(null)}
-									className="absolute top-8 right-8 w-12 h-12 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors z-20"
+									className="absolute top-6 right-6 w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 hover:text-slate-900 transition-colors z-20"
 								>
-									<HiOutlineXMark size={24} />
+									<HiOutlineXMark size={20} />
 								</button>
 
-								<div>
+								<div className="text-center max-w-sm">
 									<motion.div
 										key={`meta-${selectedItem.id}`}
 										initial={{ opacity: 0, y: 10 }}
 										animate={{ opacity: 1, y: 0 }}
-										className="inline-flex px-4 py-1.5 bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] rounded-full mb-6"
+										transition={{ duration: 0.4, delay: 0.1 }}
+										className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] rounded-full mb-8 border border-brand-primary/10"
 									>
+										<span className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse" />
 										{selectedItem.category}
 									</motion.div>
+
 									<motion.h3
 										key={`title-${selectedItem.id}`}
 										initial={{ opacity: 0, y: 20 }}
 										animate={{ opacity: 1, y: 0 }}
-										className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter mb-6"
+										transition={{ duration: 0.5, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+										className="text-3xl sm:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-6"
 									>
 										{selectedItem.title}
 									</motion.h3>
+
+									<motion.div
+										key={`divider-${selectedItem.id}`}
+										initial={{ scaleX: 0 }}
+										animate={{ scaleX: 1 }}
+										transition={{ duration: 0.5, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
+										className="w-12 h-px bg-brand-primary mx-auto mb-6"
+									/>
+
 									<motion.p
 										key={`desc-${selectedItem.id}`}
 										initial={{ opacity: 0 }}
 										animate={{ opacity: 1 }}
-										transition={{ delay: 0.2 }}
-										className="text-slate-500 text-lg font-medium leading-relaxed italic"
+										transition={{ delay: 0.3 }}
+										className="text-slate-500 text-base font-medium leading-relaxed"
 									>
 										{selectedItem.description ||
 											"Setiap helai kain ditangani dengan presisi dan standar kebersihan tertinggi Mahira."}
 									</motion.p>
 								</div>
 
-								<div className="mt-8 pt-8 border-t border-slate-100 flex items-center justify-between">
-									<div className="flex items-center gap-4">
-										<div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center text-white">
-											<HiOutlinePhoto size={20} />
+								<div className="absolute bottom-6 left-8 right-8 flex items-center justify-between">
+									<div className="flex items-center gap-3">
+										<div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white">
+											<HiOutlinePhoto size={16} />
 										</div>
 										<div>
 											<p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
 												Portfolio
 											</p>
-											<p className="text-xs font-black text-slate-900">
+											<p className="text-[11px] font-black text-slate-900">
 												Mahira Premium
 											</p>
 										</div>

@@ -10,7 +10,7 @@ import {
 	Trash2,
 	X,
 } from "lucide-react";
-import { motion } from "motion/react";
+import { AnimatePresence, LayoutGroup, motion } from "motion/react";
 import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -298,47 +298,65 @@ export function AdminGalleryClient({
 				<div className="lg:col-span-8 flex flex-col gap-6 sm:gap-10">
 					{/* Filter Row */}
 					<div className="flex flex-wrap items-center justify-between gap-4 sm:gap-6 px-4 sm:px-0">
-						<div className="flex flex-wrap items-center gap-2 sm:gap-3">
+						<LayoutGroup>
+							<div className="flex flex-wrap items-center gap-2 sm:gap-3">
 							{["Semua", ...categories].map((cat) => (
-								<Button
+								<button
+									type="button"
 									key={cat}
-									variant="ghost"
-									className={cn(
-										"rounded-xl sm:rounded-2xl h-9 sm:h-11 px-3 sm:px-6 font-black text-[9px] sm:text-[10px] uppercase tracking-widest transition-all",
-										activeCategory === cat
-											? "bg-indigo-600 text-white shadow-lg shadow-indigo-500/20"
-											: "bg-white text-slate-400 border border-slate-100 hover:bg-slate-50",
-									)}
 									onClick={() => handleCategoryChange(cat)}
+									className={cn(
+										"relative rounded-xl sm:rounded-2xl h-9 sm:h-11 px-3 sm:px-6 font-black text-[9px] sm:text-[10px] uppercase tracking-widest transition-colors duration-200",
+										activeCategory === cat
+											? "text-white"
+											: "text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:border-slate-300",
+									)}
 								>
-									{cat}
-								</Button>
+									{activeCategory === cat && (
+										<motion.div
+											layoutId="admin-active-cat-bg"
+											className="absolute inset-0 bg-indigo-600 rounded-xl sm:rounded-2xl shadow-lg shadow-indigo-500/20"
+											transition={{
+												type: "spring",
+												bounce: 0.15,
+												duration: 0.5,
+											}}
+										/>
+									)}
+									<span className="relative z-10">{cat}</span>
+								</button>
 							))}
 						</div>
+						</LayoutGroup>
 					</div>
 
-					{filteredItems.length === 0 ? (
-						<div className="h-[300px] sm:h-[420px] flex flex-col items-center justify-center bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 text-slate-300 shadow-lg shadow-slate-200/40">
-							<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-5 border-4 border-dashed border-slate-100">
-								<ImageIcon size={32} />
+					<AnimatePresence mode="wait">
+						<motion.div
+							key={activeCategory}
+							initial={{ opacity: 0, y: 12 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -12 }}
+							transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+						>
+						{filteredItems.length === 0 ? (
+							<div className="h-[300px] sm:h-[420px] flex flex-col items-center justify-center bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 text-slate-300 shadow-lg shadow-slate-200/40">
+								<div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-5 border-4 border-dashed border-slate-100">
+									<ImageIcon size={32} />
+								</div>
+								<h3 className="text-xl sm:text-2xl font-black uppercase text-slate-800 tracking-tight">
+									Perpustakaan Visual Kosong
+								</h3>
+								<p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-2">
+									Tidak ada aset pada kategori {activeCategory}
+								</p>
 							</div>
-							<h3 className="text-xl sm:text-2xl font-black uppercase text-slate-800 tracking-tight">
-								Perpustakaan Visual Kosong
-							</h3>
-							<p className="text-slate-400 font-bold text-xs uppercase tracking-widest mt-2">
-								Tidak ada aset pada kategori {activeCategory}
-							</p>
-						</div>
-					) : (
-						<>
-							<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
-								{paginatedItems.map((item) => (
-									<motion.div
-										key={item.id}
-										layout
-										initial={{ opacity: 0, y: 8 }}
-										animate={{ opacity: 1, y: 0 }}
-										className="group relative bg-white rounded-none sm:rounded-2xl overflow-hidden border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-100 transition-shadow duration-300"
+						) : (
+							<>
+								<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-8">
+									{paginatedItems.map((item) => (
+										<motion.div
+											key={item.id}
+											className="group relative bg-white rounded-none sm:rounded-2xl overflow-hidden border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-indigo-500/10 hover:border-indigo-100 transition-shadow duration-300"
 									>
 										<div className="relative aspect-[4/3] overflow-hidden">
 											<Image
@@ -458,8 +476,10 @@ export function AdminGalleryClient({
 							/>
 						</>
 					)}
-				</div>
+					</motion.div>
+				</AnimatePresence>
 			</div>
+		</div>
 		</div>
 	);
 }
