@@ -23,26 +23,36 @@ export default async function IntegratedPOSPage() {
 
 	let outletId = profile?.outlet_id;
 
+	let outletName = PRIMARY_OUTLET.name;
+
 	if (!outletId && profile?.role === "superadmin") {
 		const { data: outlet } = await supabase
 			.from("outlets")
-			.select("id")
+			.select("id, name")
 			.eq("is_active", true)
 			.limit(1)
 			.single();
 		outletId = outlet?.id;
-	}
+		outletName = outlet?.name || PRIMARY_OUTLET.name;
+		} else if (outletId) {
+			const { data: outlet } = await supabase
+				.from("outlets")
+				.select("name")
+				.eq("id", outletId)
+				.maybeSingle();
+			outletName = outlet?.name || PRIMARY_OUTLET.name;
+		}
 
 	const finalOutletId = outletId || PRIMARY_OUTLET.id;
 
 	return (
-		<div className="space-y-8 pb-20">
+		<div className="space-y-8 sm:space-y-10">
 			<div>
-				<h1 className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900">
+				<h1 className="text-2xl sm:text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900">
 					Superadmin <span className="text-brand-gradient">POS</span>
 				</h1>
 				<p className="text-xs text-slate-500 font-medium uppercase tracking-widest mt-1">
-					Terminal Kasir — Outlet: {finalOutletId.split("-")[0]}
+					Terminal Kasir — {outletName}
 				</p>
 			</div>
 			<POSClient

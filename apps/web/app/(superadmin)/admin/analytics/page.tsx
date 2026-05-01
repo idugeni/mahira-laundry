@@ -1,6 +1,7 @@
 import { Info } from "lucide-react";
 import type { Metadata } from "next";
 import { RealtimeDashboard } from "@/components/shared/admin/analytics/realtime-dashboard";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Traffic Analytics",
@@ -15,11 +16,11 @@ export default async function AnalyticsPage() {
 	const isConfigured = !!gaId && gaId.startsWith("G-");
 
 	return (
-		<div className="space-y-8 pb-20 animate-fade-in-up">
+		<div className="space-y-8 animate-fade-in-up">
 			{/* Page Header */}
 			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 				<div>
-					<h1 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
+					<h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
 						Traffic Analytics
 					</h1>
 					<p className="text-slate-500 mt-1 text-sm">
@@ -27,14 +28,18 @@ export default async function AnalyticsPage() {
 					</p>
 				</div>
 				<div
-					className={`flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-colors ${
+					className={cn(
+						"flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-colors shadow-xs",
 						isConfigured
-							? "bg-emerald-50 border-emerald-100 text-emerald-600 shadow-xs shadow-emerald-100"
-							: "bg-amber-50 border-amber-100 text-amber-600 shadow-xs shadow-amber-100"
-					}`}
+							? "bg-emerald-50 border-emerald-100 text-emerald-600 shadow-emerald-100"
+							: "bg-amber-50 border-amber-100 text-amber-600 shadow-amber-100",
+					)}
 				>
 					<span
-						className={`w-2 h-2 rounded-full ${isConfigured ? "bg-emerald-500 animate-pulse" : "bg-amber-500"}`}
+						className={cn(
+							"w-2 h-2 rounded-full",
+							isConfigured ? "bg-emerald-500 animate-pulse" : "bg-amber-500",
+						)}
 					/>
 					{isConfigured ? `GA4 Active: ${gaId}` : "GA4 Not Configured"}
 				</div>

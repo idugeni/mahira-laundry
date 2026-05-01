@@ -11,6 +11,7 @@ import {
 	LayoutGrid,
 	Package,
 	PlusCircle,
+	Printer,
 	Receipt,
 	Scale,
 	ShoppingCart,
@@ -35,6 +36,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { searchCustomers } from "@/lib/actions/customers";
 import { createOrder } from "@/lib/actions/orders";
 import type { Profile, Service } from "@/lib/types";
+import { POS_CONFIG } from "@/lib/constants";
 import { cn, formatIDR } from "@/lib/utils";
 
 interface CartItem {
@@ -216,9 +218,9 @@ export function POSClient({
 		try {
 			const formData = new FormData();
 			formData.append("outlet_id", outletId);
-			formData.append("pickup_address", "In-Store POS (Direct)");
-			formData.append("delivery_address", "In-Store POS (Direct)");
-			formData.append("delivery_type", "pickup");
+			formData.append("pickup_address", POS_CONFIG.defaultAddress);
+			formData.append("delivery_address", POS_CONFIG.defaultAddress);
+			formData.append("delivery_type", POS_CONFIG.defaultDeliveryType);
 
 			let finalNotes = `POS Checkout — Method: ${paymentMethod}`;
 			if (!selectedCustomer && walkInName.trim() !== "") {
@@ -246,20 +248,18 @@ export function POSClient({
 			const result = await createOrder(formData);
 
 			if (result.success && result.data) {
-				toast.success(`Berhasil! Order ID: ${result.data.id.split("-")[0]}`);
+				toast.success(`Berhasil! Order: ${result.data.order_number || result.data.id.slice(0, 8)}`);
 
 				// Show receipt view
 				setReceiptData({
 					orderId: result.data.id,
-					orderNumber:
-						result.data.order_number ||
-						result.data.id.split("-")[0].toUpperCase(),
+					orderNumber: result.data.order_number || `ORD-${result.data.id.slice(0, 8).toUpperCase()}`,
 					items: [...cart],
 					total,
 					paymentMethod,
 					customerName: selectedCustomer
 						? selectedCustomer.full_name
-						: walkInName || "Walk-in Guest",
+						: walkInName || POS_CONFIG.walkInGuestLabel,
 					cashierName: cashierName || "Admin",
 					date: `${new Intl.DateTimeFormat("id-ID", {
 						day: "numeric",
@@ -271,7 +271,7 @@ export function POSClient({
 					})
 						.format(new Date())
 						.replace(/\./g, ":")} WIB`,
-					outletId: outletId.split("-")[0].toUpperCase(),
+					outletId: "POS TERMINAL",
 				});
 
 				setCart([]);
@@ -327,7 +327,7 @@ export function POSClient({
 	if (receiptData) {
 		const trackingUrl =
 			typeof window !== "undefined"
-				? `${window.location.origin}/lacak?id=${receiptData.orderId}`
+				? `${window.location.origin}${POS_CONFIG.trackingPath}?id=${receiptData.orderId}`
 				: "";
 
 		return (
@@ -471,50 +471,53 @@ export function POSClient({
 				</div>
 
 				<div className="flex flex-wrap items-center justify-center gap-3 print:hidden">
-					<button
+					<Button
 						type="button"
+						variant="secondary"
 						onClick={() => setReceiptData(null)}
-						className="px-6 py-3 rounded-2xl bg-slate-100 text-slate-600 font-bold hover:bg-slate-200 transition-colors"
+						className="rounded-2xl font-bold"
 					>
 						+ Order Baru
-					</button>
-					<button
+					</Button>
+					<Button
 						type="button"
 						onClick={handlePrintReceipt}
-						className="px-6 py-3 rounded-2xl bg-brand-primary text-white font-bold hover:bg-brand-primary/90 transition-colors shadow-lg shadow-brand-primary/20 flex items-center gap-2"
+						className="rounded-2xl bg-brand-primary text-white font-bold hover:bg-brand-primary/90 shadow-lg shadow-brand-primary/20"
 					>
-						<Receipt className="w-5 h-5" /> Cetak Langsung
-					</button>
-					<button
+						<Receipt className="w-5 h-5 mr-2" /> Cetak Langsung
+					</Button>
+					<Button
 						type="button"
+						variant="outline"
 						onClick={handleDownloadPNG}
-						className="px-6 py-3 rounded-2xl border border-slate-200 bg-white text-slate-700 font-bold hover:bg-slate-50 transition-colors flex items-center gap-2"
+						className="rounded-2xl font-bold"
 					>
 						🖼️ PNG
-					</button>
-					<button
+					</Button>
+					<Button
 						type="button"
+						variant="outline"
 						onClick={handleDownloadPDF}
-						className="px-6 py-3 rounded-2xl border border-slate-200 bg-white text-slate-700 font-bold hover:bg-slate-50 transition-colors flex items-center gap-2"
+						className="rounded-2xl font-bold"
 					>
 						📄 PDF
-					</button>
+					</Button>
 				</div>
 			</div>
 		);
 	}
 
 	return (
-		<div className="grid lg:grid-cols-12 gap-8 print:block">
+		<div className="grid md:grid-cols-12 gap-8 print:block">
 			{/* Left/Middle: Input Actions (Full Height, No Internal Scroll) */}
-			<div className="lg:col-span-8 flex flex-col gap-8 print:hidden">
+			<div className="md:col-span-8 flex flex-col gap-8 print:hidden">
 				{/* Customer Header */}
 				<div className="bg-white rounded-[2rem] p-6 border border-slate-200 shadow-xs flex flex-col md:flex-row items-center gap-6">
 					<div className="relative flex-1 w-full">
 						<div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400">
 							<User className="w-5 h-5" />
 						</div>
-						<input
+						<Input
 							type="text"
 							placeholder="Cari pelanggan (Nama/Email/Telepon)..."
 							value={customerSearch}
@@ -522,7 +525,7 @@ export function POSClient({
 								setCustomerSearch(e.target.value);
 								if (selectedCustomer) setSelectedCustomer(null);
 							}}
-							className={`w-full pl-14 pr-4 py-4 rounded-2xl border border-slate-200 text-sm focus:ring-4 focus:ring-brand-primary/10 transition-all outline-hidden ${selectedCustomer ? "bg-emerald-50 border-emerald-200" : "bg-slate-50"}`}
+							className={`w-full pl-14 pr-4 py-4 rounded-2xl border border-slate-200 text-sm focus:ring-4 focus:ring-brand-primary/10 transition-all ${selectedCustomer ? "bg-emerald-50 border-emerald-200" : "bg-slate-50"}`}
 						/>
 						{isSearching && (
 							<div className="absolute right-5 top-1/2 -translate-y-1/2 w-5 h-5 border-2 border-brand-primary/30 border-t-brand-primary rounded-full animate-spin" />
@@ -532,15 +535,16 @@ export function POSClient({
 						{!selectedCustomer && searchResults.length > 0 && (
 							<div className="absolute top-full left-0 right-0 mt-4 bg-white rounded-2xl shadow-2xl border border-slate-100 z-50 max-h-60 overflow-auto py-3 animate-in fade-in slide-in-from-top-2">
 								{searchResults.map((c) => (
-									<button
+									<Button
 										key={c.id}
 										type="button"
+										variant="ghost"
 										onClick={() => {
 											setSelectedCustomer(c);
 											setCustomerSearch(c.full_name);
 											setSearchResults([]);
 										}}
-										className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 transition-colors border-b border-slate-50 last:border-0"
+										className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 border-b border-slate-50 last:border-0 rounded-none h-auto"
 									>
 										<div className="text-left">
 											<p className="text-sm font-bold text-slate-900">
@@ -550,10 +554,10 @@ export function POSClient({
 												{c.phone || c.email}
 											</p>
 										</div>
-										<span className="text-[10px] font-black uppercase tracking-wider text-brand-primary bg-brand-primary/10 px-4 py-2 rounded-xl">
+										<Badge variant="secondary" className="text-[10px] font-black uppercase tracking-wider">
 											Pilih
-										</span>
-									</button>
+										</Badge>
+									</Button>
 								))}
 							</div>
 						)}
@@ -574,13 +578,15 @@ export function POSClient({
 									{selectedCustomer.full_name}
 								</p>
 							</div>
-							<button
+							<Button
 								type="button"
+								variant="ghost"
+								size="icon"
 								onClick={() => setSelectedCustomer(null)}
-								className="p-1.5 hover:bg-emerald-100 rounded-xl transition-colors text-emerald-600"
+								className="p-1.5 hover:bg-emerald-100 rounded-xl text-emerald-600 h-auto w-auto"
 							>
 								<X className="w-4 h-4" />
-							</button>
+							</Button>
 						</div>
 					) : (
 						<div className="relative flex-1 w-full">
@@ -629,7 +635,6 @@ export function POSClient({
 					<div className="p-8">
 						{activeTab === "manual" ? (
 							<div className="max-w-4xl mx-auto space-y-8">
-								<div className="space-y-8">
 									<div className="flex items-center justify-between">
 										<h2 className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900 flex items-center gap-4">
 											<div className="w-12 h-12 bg-brand-primary/10 rounded-2xl flex items-center justify-center text-brand-primary shadow-inner">
@@ -637,15 +642,16 @@ export function POSClient({
 											</div>
 											Input Pesanan & Timbangan
 										</h2>
-										<button
+										<Button
 											type="button"
+											variant={isPureManual ? "default" : "outline"}
 											onClick={() => setIsPureManual(!isPureManual)}
 											className={`text-[10px] font-black px-5 py-2.5 rounded-xl border-2 transition-all ${isPureManual ? "bg-brand-primary border-brand-primary text-white shadow-lg shadow-brand-primary/20" : "bg-white border-slate-200 text-slate-500 hover:border-brand-primary hover:text-brand-primary"}`}
 										>
 											{isPureManual
 												? "Layanan Custom Aktif ⚡"
 												: "Layanan Custom?"}
-										</button>
+										</Button>
 									</div>
 
 									<form onSubmit={addToCartFromForm} className="space-y-6">
@@ -697,11 +703,12 @@ export function POSClient({
 														{!selectedService && quickSearch.length > 0 && (
 															<div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-2xl shadow-2xl border border-slate-100 z-50 max-h-60 overflow-auto py-3 animate-in fade-in slide-in-from-top-2">
 																{filteredServices.map((s) => (
-																	<button
+																	<Button
 																		key={s.id}
 																		type="button"
+																		variant="ghost"
 																		onClick={() => handleSelectService(s)}
-																		className="w-full px-6 py-4 text-left hover:bg-brand-primary/5 transition-colors flex items-center justify-between group"
+																		className="w-full px-6 py-4 text-left hover:bg-brand-primary/5 flex items-center justify-between group rounded-none h-auto"
 																	>
 																		<div>
 																			<p className="text-sm font-bold group-hover:text-brand-primary transition-colors">
@@ -712,7 +719,7 @@ export function POSClient({
 																			</p>
 																		</div>
 																		<ChevronDown className="w-5 h-5 text-slate-300 -rotate-90 group-hover:text-brand-primary transition-colors" />
-																	</button>
+																	</Button>
 																))}
 															</div>
 														)}
@@ -879,16 +886,16 @@ export function POSClient({
 											<PlusCircle className="w-7 h-7" /> TAMBAHKAN KE TRANSAKSI
 										</Button>
 									</form>
-								</div>
 							</div>
 						) : (
 							<div className="grid grid-cols-2 md:grid-cols-4 gap-5">
 								{initialServices.map((service) => (
-									<button
+									<Button
 										key={service.id}
 										type="button"
+										variant="ghost"
 										onClick={() => handleSelectService(service)}
-										className={`p-6 rounded-[2rem] border transition-all text-left flex flex-col group ${selectedService?.id === service.id ? "border-brand-primary bg-brand-primary/5 ring-8 ring-brand-primary/5 shadow-lg" : "border-slate-100 bg-white hover:border-brand-primary hover:shadow-2xl hover:-translate-y-2"}`}
+										className={`p-6 rounded-[2rem] border transition-all text-left flex flex-col group h-auto w-full ${selectedService?.id === service.id ? "border-brand-primary bg-brand-primary/5 ring-8 ring-brand-primary/5 shadow-lg" : "border-slate-100 bg-white hover:border-brand-primary hover:shadow-2xl hover:-translate-y-2"}`}
 									>
 										<div
 											className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-xs transition-transform ${selectedService?.id === service.id ? "bg-brand-primary text-white" : "bg-slate-50 text-slate-400"}`}
@@ -898,7 +905,7 @@ export function POSClient({
 										<p className="font-black text-slate-900 text-sm leading-tight mb-2">
 											{service.name}
 										</p>
-										<div className="mt-auto pt-4 flex items-center justify-between border-t border-slate-50">
+										<div className="mt-auto pt-4 flex items-center justify-between border-t border-slate-50 w-full">
 											<p className="text-brand-primary font-black text-base">
 												{formatIDR(service.price)}
 											</p>
@@ -906,7 +913,7 @@ export function POSClient({
 												/{service.unit}
 											</span>
 										</div>
-									</button>
+									</Button>
 								))}
 							</div>
 						)}
@@ -929,9 +936,9 @@ export function POSClient({
 			</div>
 
 			{/* Right: Order Summary (Floating Sticky on Desktop) */}
-			<div className="lg:col-span-4 lg:sticky lg:top-8 sm:p-12 h-fit">
-				<div className="bg-white rounded-[2.5rem] flex flex-col shadow-2xl border border-slate-200 overflow-hidden outline outline-4 outline-slate-50">
-					<div className="p-8 border-b border-slate-100 bg-slate-50/30">
+			<div className="md:col-span-4 md:sticky md:top-8 p-4 md:p-0 h-fit">
+				<div className="bg-white rounded-2xl md:rounded-[2.5rem] flex flex-col shadow-2xl border border-slate-200 overflow-hidden">
+					<div className="p-4 md:p-8 border-b border-slate-100 bg-slate-50/30">
 						<div className="flex items-center justify-between mb-6">
 							<h3 className="text-xl font-black text-slate-900 flex items-center gap-4">
 								<ShoppingCart className="w-6 h-6 text-brand-primary" /> Rincian
@@ -942,7 +949,7 @@ export function POSClient({
 							</div>
 						</div>
 
-						<div className="p-4 bg-white rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
+						<div className="p-3 md:p-4 bg-white rounded-xl md:rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
 							<div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400">
 								<Receipt className="w-5 h-5" />
 							</div>
@@ -951,13 +958,13 @@ export function POSClient({
 									Lokasi Transaksi
 								</p>
 								<p className="text-sm font-black text-slate-900">
-									{outletId.split("-")[0].toUpperCase()} Terminal
+									POS Terminal
 								</p>
 							</div>
 						</div>
 					</div>
 
-					<div className="max-h-[40vh] overflow-y-auto px-8 py-6 space-y-4 custom-scrollbar">
+					<div className="md:max-h-[40vh] overflow-y-auto px-4 py-4 md:px-8 md:py-6 space-y-3 md:space-y-4 custom-scrollbar">
 						{cart.length === 0 ? (
 							<div className="flex flex-col items-center justify-center text-center py-14 sm:py-16 opacity-30">
 								<Package className="w-20 h-20 mb-6 text-slate-300" />
@@ -1006,13 +1013,15 @@ export function POSClient({
 											<p className="text-sm font-black text-brand-primary">
 												{formatIDR(item.qty * item.price)}
 											</p>
-											<button
+											<Button
 												type="button"
+												variant="ghost"
+												size="icon"
 												onClick={() => removeFromCart(item.id)}
-												className="mt-4 p-2 bg-red-50 text-red-500 rounded-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white shadow-xs"
+												className="mt-4 p-2 bg-red-50 text-red-500 rounded-xl opacity-0 group-hover:opacity-100 transition-all hover:bg-red-500 hover:text-white shadow-xs h-auto w-auto"
 											>
 												<Trash2 className="w-4 h-4" />
-											</button>
+											</Button>
 										</div>
 									</div>
 								</div>
@@ -1020,7 +1029,7 @@ export function POSClient({
 						)}
 					</div>
 
-					<div className="p-8 bg-slate-50 border-t border-slate-200/50 space-y-8">
+					<div className="p-4 md:p-8 bg-slate-50 border-t border-slate-200/50 space-y-4 md:space-y-8">
 						<div className="space-y-4">
 							<div className="flex justify-between items-center">
 								<span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
@@ -1030,7 +1039,7 @@ export function POSClient({
 									Nett Amount
 								</span>
 							</div>
-							<div className="flex justify-between items-center bg-white p-6 rounded-3xl border border-slate-200 shadow-inner">
+							<div className="flex justify-between items-center bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl border border-slate-200 shadow-inner">
 								<span className="text-sm font-black text-slate-900 uppercase tracking-widest opacity-20">
 									Rupiah
 								</span>
@@ -1040,7 +1049,7 @@ export function POSClient({
 							</div>
 						</div>
 
-						<div className="grid grid-cols-2 gap-4">
+						<div className="grid grid-cols-2 gap-3 md:gap-4">
 							<Button
 								type="button"
 								onClick={() => handleCheckout("tunai")}
@@ -1065,14 +1074,16 @@ export function POSClient({
 							</Button>
 						</div>
 
-						<button
+						<Button
 							type="button"
+							variant="outline"
 							onClick={handlePrintReceipt}
 							disabled={cart.length === 0}
-							className="w-full py-4 border-2 border-slate-200 bg-white text-slate-400 rounded-2xl text-[10px] font-black uppercase tracking-[0.4em] hover:text-slate-600 hover:border-slate-300 transition-all disabled:opacity-30 flex items-center justify-center gap-4"
+							className="w-full h-12 rounded-xl border-slate-200 text-slate-500 hover:text-slate-700 hover:border-slate-300 hover:bg-slate-50 font-bold text-xs tracking-wide"
 						>
-							<Receipt className="w-4 h-4" /> CETAK DRAFT STRUK (PREVIEW)
-						</button>
+							<Printer className="w-4 h-4 mr-2" />
+							Preview Struk
+						</Button>
 					</div>
 				</div>
 			</div>

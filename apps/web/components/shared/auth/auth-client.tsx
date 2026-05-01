@@ -122,13 +122,13 @@ export function AuthClient({ type, action }: AuthClientProps) {
 								<HiOutlineSparkles size={10} />
 								<span>Exclusive Access</span>
 							</motion.div>
-							<h1 className="text-3xl lg:text-4xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.95] mb-2">
+							<h1 className="text-3xl md:text-4xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.95] mb-2">
 								{isLogin ? "Selamat Datang" : "Bergabunglah"} <br />
 								<span className="text-brand-gradient">
 									{isLogin ? "Kembali." : "Sekarang."}
 								</span>
 							</h1>
-							<p className="text-slate-500 font-medium text-sm lg:text-base leading-relaxed">
+							<p className="text-slate-500 font-medium text-sm md:text-base leading-relaxed">
 								{isLogin
 									? "Masuk untuk melanjutkan standar kebersihan premium."
 									: "Mulai pengalaman perawatan pakaian terbaik bersama Mahira."}
@@ -137,7 +137,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 					</div>
 
 					{/* Card Content (Refined Scrollbar) */}
-					<div className="flex-1 overflow-y-auto custom-scrollbar px-8 lg:px-10 py-2 min-h-0">
+					<div className="flex-1 overflow-y-auto custom-scrollbar px-8 md:px-10 py-2 min-h-0">
 						<AnimatePresence mode="wait">
 							{error && (
 								<motion.div
@@ -313,7 +313,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 				onMouseLeave={handleMouseLeave}
 				role="application"
 				aria-label="Interactive visual effect"
-				className="hidden lg:block lg:flex-1 relative overflow-hidden bg-slate-900 group cursor-default h-full"
+				className="hidden md:block md:flex-1 relative overflow-hidden bg-slate-900 group cursor-default h-full"
 			>
 				{/* Background Gradients */}
 				<div className="absolute inset-0 bg-brand-gradient opacity-30 mix-blend-overlay" />

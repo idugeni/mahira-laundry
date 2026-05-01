@@ -11,7 +11,7 @@ import {
 	X,
 } from "lucide-react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiOutlineCamera } from "react-icons/hi2";
 import { toast } from "sonner";
@@ -111,17 +111,27 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 
 	return (
 		<>
-			<button
-				type="button"
-				onClick={() => setIsOpen(true)}
-				className="contents"
-			>
-				{trigger || (
-					<Button className="bg-slate-900 text-white rounded-2xl h-14 px-8 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-slate-900/10 hover:bg-slate-800 transition-all">
-						+ Tambah Outlet
-					</Button>
-				)}
-			</button>
+			{React.isValidElement(trigger) ? (
+				(() => {
+					const typedTrigger = trigger as React.ReactElement<{
+						onClick?: (e: React.MouseEvent) => void;
+					}>;
+					const existingOnClick = typedTrigger.props.onClick;
+					return React.cloneElement(typedTrigger, {
+						onClick: (e: React.MouseEvent) => {
+							existingOnClick?.(e);
+							setIsOpen(true);
+						},
+					});
+				})()
+			) : (
+				<Button
+					onClick={() => setIsOpen(true)}
+					className="bg-slate-900 text-white rounded-2xl h-14 px-8 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-slate-900/10 hover:bg-slate-800 transition-all"
+				>
+					{outlet ? "Edit Outlet" : "+ Tambah Outlet"}
+				</Button>
+			)}
 
 			{isOpen &&
 				mounted &&

@@ -1,13 +1,11 @@
-﻿import {
+import {
 	ArrowUpRight,
 	Briefcase,
 	Building2,
 	Coins,
-	FileText,
 	Globe,
 	Handshake,
 	Plus,
-	ShieldCheck,
 } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
@@ -25,19 +23,6 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-const sopItems = [
-	{ title: "Standar Kebersihan", icon: "🧼", status: "Aktif", version: "v2.1" },
-	{ title: "Prosedur Order", icon: "📋", status: "Aktif", version: "v3.0" },
-	{ title: "Quality Control", icon: "✅", status: "Aktif", version: "v1.8" },
-	{ title: "Handling Complaint", icon: "🗣️", status: "Aktif", version: "v2.3" },
-	{
-		title: "Prosedur Pembayaran",
-		icon: "💳",
-		status: "Aktif",
-		version: "v1.5",
-	},
-	{ title: "Onboarding Staf", icon: "👥", status: "Draft", version: "v0.9" },
-];
 
 export default async function FranchisePage() {
 	const allOutlets = await getOutletsWithStats();
@@ -48,9 +33,19 @@ export default async function FranchisePage() {
 		(sum, o) => sum + o.monthlyRevenue * (o.franchise_fee / 100),
 		0,
 	);
+	const totalLastMonthRoyalty = franchiseOutlets.reduce(
+		(sum, o) => sum + (o.lastMonthRevenue || 0) * (o.franchise_fee / 100),
+		0,
+	);
+	const royaltyGrowth =
+		totalLastMonthRoyalty > 0
+			? (((totalRoyalty - totalLastMonthRoyalty) / totalLastMonthRoyalty) * 100).toFixed(1)
+			: totalRoyalty > 0
+				? "100.0"
+				: "0.0";
 
 	return (
-		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+		<div className="space-y-8 sm:space-y-10  animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
 			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 group">
 				<div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-50 rounded-full -mr-48 -mt-48 blur-3xl opacity-60" />
@@ -63,7 +58,7 @@ export default async function FranchisePage() {
 							</Badge>
 							<span className="text-slate-200">•</span>
 							<span className="text-slate-400 text-sm font-bold uppercase tracking-widest flex items-center gap-2">
-								<Globe size={14} /> Jaringan Franchise Global
+								<Globe size={14} /> {franchiseOutlets.length} Mitra Terdaftar
 							</span>
 						</div>
 						<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight text-slate-900">
@@ -111,13 +106,13 @@ export default async function FranchisePage() {
 					subtitle={formatIDR(totalRoyalty)}
 					icon={<Coins size={24} />}
 					variant="success"
-					trend={{ value: "18%", positive: true, label: "vs bln lalu" }}
+					trend={{ value: `${Math.abs(parseFloat(royaltyGrowth))}%`, positive: parseFloat(royaltyGrowth) >= 0, label: "vs bln lalu" }}
 				/>
 				<StatCard
-					title="Standardisasi SOP"
-					value={sopItems.filter((s) => s.status === "Aktif").length}
-					subtitle="Dokumen aktif"
-					icon={<ShieldCheck size={24} />}
+					title="Cabang Aktif"
+					value={franchiseOutlets.filter((o) => o.is_active).length}
+					subtitle="Franchise operasional"
+					icon={<Building2 size={24} />}
 					variant="warning"
 				/>
 			</div>
@@ -243,74 +238,6 @@ export default async function FranchisePage() {
 				)}
 			</div>
 
-			{/* Digital Assets Section */}
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6">
-				<div className="lg:col-span-2 bg-slate-900 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden">
-					<div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full -mr-20 -mt-20 blur-3xl opacity-50" />
-					<div className="relative flex flex-col h-full">
-						<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
-							<h2 className="text-2xl font-black uppercase tracking-tight flex items-center gap-4">
-								<FileText className="text-indigo-400" /> SOP Digital &
-								Compliance
-							</h2>
-							<Button className="bg-indigo-400 hover:bg-white hover:text-slate-900 text-slate-900 rounded-xl px-4 h-10 font-black text-[10px] uppercase tracking-widest">
-								+ Upload SOP
-							</Button>
-						</div>
-
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-4 flex-1">
-							{sopItems.map((sop) => (
-								<div
-									key={sop.title}
-									className="bg-white/5 border border-white/10 rounded-2xl p-4 flex items-center justify-between hover:bg-white/10 transition-colors"
-								>
-									<div className="flex items-center gap-4">
-										<span className="text-2xl">{sop.icon}</span>
-										<div>
-											<p className="text-sm font-black uppercase tracking-tight">
-												{sop.title}
-											</p>
-											<p className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">
-												{sop.version}
-											</p>
-										</div>
-									</div>
-									<Badge
-										className={cn(
-											"px-2 py-0.5 rounded-lg text-[8px] font-black uppercase border-none shadow-none",
-											sop.status === "Aktif"
-												? "bg-emerald-500/20 text-emerald-400"
-												: "bg-amber-500/20 text-amber-400",
-										)}
-									>
-										{sop.status}
-									</Badge>
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
-
-				<div className="bg-indigo-600 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden flex flex-col justify-center gap-5">
-					<div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-white/10 to-transparent opacity-50" />
-					<div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-xl">
-						🏢
-					</div>
-					<div>
-						<h3 className="text-2xl font-black uppercase tracking-tight mb-2">
-							Pusat Bantuan Mitra
-						</h3>
-						<p className="text-indigo-100/70 font-bold text-sm leading-relaxed">
-							Semua mitra memiliki akses eksklusif ke tim pendukung operasional
-							pusat. Pastikan standardisasi tetap terjaga demi brand identity
-							Mahira.
-						</p>
-					</div>
-					<Button className="bg-white text-indigo-600 hover:bg-slate-900 hover:text-white rounded-xl h-11 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-indigo-900/20">
-						Hubungi Ops Team
-					</Button>
-				</div>
-			</div>
 		</div>
 	);
 }

@@ -1,4 +1,5 @@
 ﻿import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
+import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 
 const managerNav = [
@@ -23,14 +24,11 @@ export default function ManagerLayout({
 				panelBadgeColor="bg-gradient-to-r from-indigo-500 to-violet-500 text-white"
 				headerInfo={PRIMARY_OUTLET.name}
 			/>
-			<div className="flex-1 flex flex-col min-w-0">
-				{/* Top Header */}
-				<header className="h-14 lg:h-16 border-b border-slate-200/80 bg-white/90 backdrop-blur-xs flex items-center justify-between px-4 lg:px-8 mt-14 lg:mt-0 shadow-xs/30 sticky top-14 lg:top-0 z-30">
-					<div className="hidden lg:flex items-center gap-2 text-sm text-slate-400">
-						<span className="font-medium text-slate-600">Mahira Laundry</span>
-						<span>/</span>
-						<span>Panel Manager</span>
-					</div>
+			<div className="flex-1 flex flex-col min-w-0 pt-14 md:pt-0 min-h-screen">
+				{/* Top Header (desktop only) */}
+				<header className="hidden md:flex h-16 border-b border-slate-200/80 bg-white/90 backdrop-blur-xs items-center justify-between px-8 shadow-xs/30 sticky top-0 z-30">
+					<DynamicBreadcrumb />
+
 					<div className="flex items-center gap-3">
 						<span className="text-xs font-semibold text-indigo-600 bg-indigo-50 border border-indigo-200 px-3 py-1 rounded-full truncate max-w-[200px]">
 							📍 {PRIMARY_OUTLET.name}
@@ -38,9 +36,9 @@ export default function ManagerLayout({
 					</div>
 				</header>
 				{/* Main Content */}
-				<main className="flex-1 p-4 lg:p-8 overflow-auto">{children}</main>
+				<main className="p-4 md:p-8">{children}</main>
 				{/* Dashboard Footer */}
-				<footer className="p-4 lg:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
+				<footer className="p-4 md:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
 					<p>© {new Date().getFullYear()} Mahira Group. All rights reserved.</p>
 				</footer>
 			</div>

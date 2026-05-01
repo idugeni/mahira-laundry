@@ -111,7 +111,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 	return (
 		<div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* Stats Cards */}
-			<div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+			<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 				<StatCard
 					label="Total Leads"
 					value={stats.total}
@@ -148,7 +148,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 						Filter Leads
 					</p>
 				</div>
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
 					{/* Status */}
 					<div className="space-y-1.5">
 						<label

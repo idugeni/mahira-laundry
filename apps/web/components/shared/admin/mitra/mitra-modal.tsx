@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import {
 	HiOutlineBuildingOffice,
@@ -58,18 +58,29 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 
 	return (
 		<>
-			<button
-				type="button"
-				onClick={() => setIsOpen(true)}
-				className="contents"
-			>
-				{trigger || (
-					<span className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-xs hover:shadow-md transition-shadow cursor-pointer">
-						<HiOutlineUserGroup size={18} />
-						<span>Tambah Mitra Baru</span>
-					</span>
-				)}
-			</button>
+			{React.isValidElement(trigger) ? (
+				(() => {
+					const typedTrigger = trigger as React.ReactElement<{
+						onClick?: (e: React.MouseEvent) => void;
+					}>;
+					const existingOnClick = typedTrigger.props.onClick;
+					return React.cloneElement(typedTrigger, {
+						onClick: (e: React.MouseEvent) => {
+							existingOnClick?.(e);
+							setIsOpen(true);
+						},
+					});
+				})()
+			) : (
+				<button
+					type="button"
+					onClick={() => setIsOpen(true)}
+					className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-indigo-500 to-violet-500 text-white text-sm font-semibold rounded-xl shadow-xs hover:shadow-md transition-shadow cursor-pointer"
+				>
+					<HiOutlineUserGroup size={18} />
+					<span>Tambah Mitra Baru</span>
+				</button>
+			)}
 
 			{isOpen &&
 				mounted &&

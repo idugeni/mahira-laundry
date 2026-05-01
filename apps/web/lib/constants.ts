@@ -75,3 +75,10 @@ export const DELIVERY_ZONES = {
 	paid_5000: ["Gamprit", "Curug", "Pangkalan Jati"],
 	paid_10000: ["Kalimalang", "Lubang Buaya", "Jatimakmur"],
 };
+
+export const POS_CONFIG = {
+	defaultAddress: "In-Store POS (Direct)",
+	defaultDeliveryType: "pickup" as const,
+	walkInGuestLabel: "Walk-in Guest",
+	trackingPath: "/lacak",
+};

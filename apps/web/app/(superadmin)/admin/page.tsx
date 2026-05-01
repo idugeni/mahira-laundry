@@ -23,6 +23,38 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
+const TABLE_LABELS: Record<string, string> = {
+	orders: "Pesanan",
+	payments: "Pembayaran",
+	services: "Layanan",
+	outlets: "Cabang",
+	profiles: "Pengguna",
+	vouchers: "Voucher",
+	inventory: "Inventori",
+	gallery: "Galeri",
+	testimonials: "Testimoni",
+	business_packages: "Paket Usaha",
+	business_package_inquiries: "Leads",
+	delivery: "Pengiriman",
+	machines: "Mesin",
+};
+
+const ACTION_LABELS: Record<string, string> = {
+	create: "membuat",
+	update: "memperbarui",
+	delete: "menghapus",
+	login: "masuk",
+	logout: "keluar",
+	status_change: "mengubah status",
+	payment_confirmed: "mengonfirmasi pembayaran",
+	voucher_redeemed: "menebus voucher",
+	inventory_restock: "mengisi ulang stok",
+	inquiry_received: "menerima inquiry",
+	profile_update: "memperbarui profil",
+	gallery_upload: "mengunggah ke galeri",
+	testimonial_submit: "mengirim testimoni",
+};
+
 export default async function SuperadminDashboardPage() {
 	const [stats, revenueData, recentOrders, recentLogs] = await Promise.all([
 		getSuperadminDashboardStats(),
@@ -35,7 +67,7 @@ export default async function SuperadminDashboardPage() {
 	const ordersGrowthPositive = parseFloat(stats.ordersGrowth) >= 0;
 
 	return (
-		<div className="space-y-6 sm:space-y-8 pb-16 sm:pb-20 animate-fade-in-up">
+		<div className="space-y-6 sm:space-y-8 animate-fade-in-up">
 			{/* Page Header */}
 			<div>
 				<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -101,9 +133,9 @@ export default async function SuperadminDashboardPage() {
 			</div>
 
 			{/* Charts Row */}
-			<div className="grid lg:grid-cols-3 gap-6">
+			<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{/* Revenue Chart */}
-				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-xs will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
+				<div className="md:col-span-1 lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-xs will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="flex items-center justify-between mb-6">
 						<div>
 							<h2 className="text-base font-bold text-slate-900">
@@ -195,9 +227,9 @@ export default async function SuperadminDashboardPage() {
 				</div>
 			</div>
 
-			<div className="grid lg:grid-cols-3 gap-6">
+			<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{/* Recent Orders Table */}
-				<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-xs overflow-hidden will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
+				<div className="md:col-span-1 lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-xs overflow-hidden will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
 						<div>
 							<h2 className="text-base font-bold text-slate-900">
@@ -220,63 +252,43 @@ export default async function SuperadminDashboardPage() {
 							<p className="text-sm font-medium">Belum ada order</p>
 						</div>
 					) : (
-						<div className="overflow-x-auto">
-							<table className="w-full">
-								<thead>
-									<tr className="bg-slate-50/50 border-b border-slate-100">
-										<th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
-											No. Order
-										</th>
-										<th className="px-6 py-3 text-left text-xs font-semibold text-slate-500 uppercase tracking-wider">
-											Status
-										</th>
-										<th className="px-6 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">
-											Total
-										</th>
-										<th className="px-6 py-3 text-right text-xs font-semibold text-slate-500 uppercase tracking-wider">
-											Aksi
-										</th>
-									</tr>
-								</thead>
-								<tbody className="divide-y divide-slate-100">
-									{recentOrders.map((order) => (
-										<tr
-											key={order.id}
-											className="hover:bg-slate-50/50 transition-colors duration-200 ease-out"
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-3 p-4 md:p-6 divide-y md:divide-y-0 divide-slate-100">
+							{recentOrders.map((order) => (
+								<div
+									key={order.id}
+									className="group py-3 md:py-4 md:px-4 md:rounded-xl md:border border-slate-100 md:shadow-xs hover:md:shadow-md hover:md:border-slate-200 transition-[box-shadow,border-color] duration-200"
+								>
+									<div className="flex items-start justify-between gap-3">
+										<div className="min-w-0">
+											<p className="font-mono text-[10px] font-bold text-slate-500 uppercase">
+												{order.order_number}
+											</p>
+											<p className="text-xs font-bold text-slate-800 truncate">
+												{Array.isArray(order.profiles)
+													? order.profiles[0]?.full_name || "Guest"
+													: (order.profiles as { full_name?: string } | null)
+															?.full_name || "Guest"}
+											</p>
+										</div>
+										<span
+											className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider shrink-0 ${ORDER_STATUS_COLORS[order.status]}`}
 										>
-											<td className="px-6 py-3.5">
-												<p className="font-mono text-[10px] font-bold text-slate-500 uppercase">
-													{order.order_number}
-												</p>
-												<p className="text-xs font-bold text-slate-800">
-													{Array.isArray(order.profiles)
-														? order.profiles[0]?.full_name || "Guest"
-														: (order.profiles as { full_name?: string } | null)
-																?.full_name || "Guest"}
-												</p>
-											</td>
-											<td className="px-6 py-3.5">
-												<span
-													className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${ORDER_STATUS_COLORS[order.status]}`}
-												>
-													{ORDER_STATUS_LABELS[order.status]}
-												</span>
-											</td>
-											<td className="px-6 py-3.5 text-right font-black text-slate-900 text-xs">
-												{formatIDR(order.total || 0)}
-											</td>
-											<td className="px-6 py-3.5 text-right">
-												<a
-													href="/admin/antrian"
-													className="inline-flex items-center px-3 py-1 bg-slate-900 text-white text-[10px] font-bold rounded-lg hover:bg-slate-800 active:scale-95 transition-[background-color,transform] duration-200 ease-out uppercase tracking-widest"
-												>
-													Proses
-												</a>
-											</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
+											{ORDER_STATUS_LABELS[order.status]}
+										</span>
+									</div>
+									<div className="flex items-center justify-between mt-2">
+										<p className="font-black text-slate-900 text-xs">
+											{formatIDR(order.total || 0)}
+										</p>
+										<a
+											href="/admin/antrian"
+											className="inline-flex items-center px-3 py-1 bg-slate-900 text-white text-[10px] font-bold rounded-lg hover:bg-slate-800 active:scale-95 transition-[background-color,transform] duration-200 ease-out uppercase tracking-widest"
+										>
+											Proses
+										</a>
+									</div>
+								</div>
+							))}
 						</div>
 					)}
 				</div>
@@ -299,10 +311,10 @@ export default async function SuperadminDashboardPage() {
 												: (log.profiles as { full_name?: string } | null)
 														?.full_name || "System"}
 										</span>{" "}
-										{log.action.toLowerCase().replace("_", " ")}
+										{ACTION_LABELS[log.action] || log.action.toLowerCase().replace(/_/g, " ")}
 										{" pada "}
 										<span className="font-semibold text-slate-600">
-											{log.table_name}
+											{TABLE_LABELS[log.table_name] || log.table_name}
 										</span>
 									</p>
 									<p className="text-[10px] text-slate-400 font-medium mt-1">

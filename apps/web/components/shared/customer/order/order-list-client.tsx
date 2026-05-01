@@ -182,7 +182,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 				</AlertDialogContent>
 			</AlertDialog>
 			{/* Header & Quick Stats */}
-			<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 w-full">
+			<div className="flex flex-col md:flex-row md:items-end justify-between gap-8 w-full">
 				<div>
 					<h1 className="text-4xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tight">
 						Daftar{" "}
@@ -193,7 +193,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 					</p>
 				</div>
 
-				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full lg:w-auto lg:min-w-[600px]">
+				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full md:w-auto md:min-w-[600px]">
 					<div className="bg-white px-6 py-4 rounded-3xl border border-slate-100 shadow-xs flex items-center gap-4 w-full">
 						<div className="w-10 h-10 rounded-2xl bg-brand-primary/10 text-brand-primary flex items-center justify-center text-xl shrink-0">
 							<HiOutlineInbox />
@@ -235,7 +235,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 			</div>
 
 			{/* Toolbar */}
-			<div className="flex flex-col lg:flex-row gap-6 bg-white p-4 rounded-[2.5rem] border border-slate-100 shadow-xs">
+			<div className="flex flex-col md:flex-row gap-6 bg-white p-4 rounded-[2.5rem] border border-slate-100 shadow-xs">
 				<div className="flex-1 relative group">
 					<span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-primary transition-colors text-xl">
 						<HiOutlineMagnifyingGlass />

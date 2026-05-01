@@ -72,7 +72,7 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
 									<div className="absolute -inset-4 bg-brand-accent/5 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
 								</div>
 
-								<div className="text-4xl lg:text-5xl font-black text-white font-[family-name:var(--font-heading)] mb-2 tracking-tight">
+								<div className="text-4xl md:text-5xl font-black text-white font-[family-name:var(--font-heading)] mb-2 tracking-tight">
 									{stat.numericValue !== undefined ? (
 										<CountUp
 											to={stat.numericValue}
@@ -86,7 +86,7 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
 										stat.value
 									)}
 								</div>
-								<div className="text-[10px] lg:text-xs font-black text-brand-accent uppercase tracking-[0.3em] leading-relaxed">
+								<div className="text-[10px] md:text-xs font-black text-brand-accent uppercase tracking-[0.3em] leading-relaxed">
 									{stat.label}
 								</div>
 							</motion.div>

@@ -17,7 +17,8 @@
 		"db:push": "cd apps/web && npm run db:push",
 		"db:studio": "cd apps/web && npm run db:studio",
 		"update:web": "cd apps/web && npx npm-check-updates -u",
-		"install:web": "cd apps/web && npm install"
+		"install:web": "cd apps/web && npm install",
+		"postinstall": "node -e \"try{require('fs').unlinkSync(require('path').join('node_modules','html2canvas','tsconfig.json'))}catch(e){}\""
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^2.4.13",
@@ -25,7 +26,6 @@
 		"typescript": "^6.0.3"
 	},
 	"dependencies": {
-		"html2canvas": "^1.4.1",
 		"html5-qrcode": "^2.3.8",
 		"jspdf": "^4.2.1",
 		"next": "^16.2.4",

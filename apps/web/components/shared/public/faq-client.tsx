@@ -162,9 +162,9 @@ export function FAQClient() {
 
 			{/* Main Content */}
 			<section className="max-w-6xl mx-auto px-4 -mt-10 relative z-20">
-				<div className="flex flex-col lg:flex-row gap-8">
+				<div className="flex flex-col md:flex-row gap-8">
 					{/* Sidebar Categories */}
-					<div className="lg:w-1/3">
+					<div className="md:w-1/3">
 						<div className="sticky top-28 bg-white/70 backdrop-blur-xl p-4 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-white flex flex-col gap-2">
 							<p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 pl-4">
 								Kategori Pertanyaan
@@ -195,7 +195,7 @@ export function FAQClient() {
 					</div>
 
 					{/* FAQ Accordion */}
-					<div className="lg:w-2/3">
+					<div className="md:w-2/3">
 						<div className="space-y-4">
 							<AnimatePresence initial={false}>
 								{filteredCategories

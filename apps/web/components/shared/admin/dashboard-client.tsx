@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import Link from "next/link";
 import {
 	HiOutlineArchiveBox,
@@ -97,27 +96,22 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 
 	return (
 		<div className="space-y-8 pb-10">
-			<motion.div
-				initial={{ opacity: 0, x: -20 }}
-				animate={{ opacity: 1, x: 0 }}
-			>
+			<div className="animate-in fade-in slide-in-from-left-4 duration-500">
 				<h1 className="text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tight">
 					Ringkasan <span className="text-brand-gradient">Akun</span>
 				</h1>
 				<p className="text-slate-500 mt-2 font-medium">
 					Selamat datang kembali! Berikut status terbaru layanan Anda.
 				</p>
-			</motion.div>
+			</div>
 
 			{/* Quick Stats */}
-			<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+			<div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
 				{statsDisplay.map((stat, i) => (
-					<motion.div
+					<div
 						key={stat.label}
-						initial={{ opacity: 0, y: 20 }}
-						animate={{ opacity: 1, y: 0 }}
-						transition={{ delay: i * 0.1 }}
-						className={`bg-white rounded-2xl border ${stat.border} p-4 sm:p-5 hover:shadow-lg hover:shadow-slate-200/50 transition-shadow group`}
+						className={`animate-in fade-in slide-in-from-bottom-4 bg-white rounded-2xl border ${stat.border} p-4 sm:p-5 hover:shadow-lg hover:shadow-slate-200/50 transition-shadow group`}
+						style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
 					>
 						<div
 							className={`w-10 h-10 rounded-xl ${stat.bg} ${stat.color} flex items-center justify-center text-xl mb-4 transition-transform group-hover:-translate-y-0.5`}
@@ -132,7 +126,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 						<div className="text-[10px] sm:text-xs font-black text-slate-400 uppercase tracking-widest mt-1">
 							{stat.label}
 						</div>
-					</motion.div>
+					</div>
 				))}
 			</div>
 
@@ -144,13 +138,12 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 				<h2 className="text-xl font-bold font-[family-name:var(--font-heading)] mb-8 text-slate-900 relative z-10">
 					Aksi Cepat
 				</h2>
-				<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8 relative z-10">
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 relative z-10">
 					{actions.map((action, i) => (
-						<motion.div
+						<div
 							key={action.href}
-							initial={{ opacity: 0, scale: 0.95 }}
-							animate={{ opacity: 1, scale: 1 }}
-							transition={{ delay: 0.4 + i * 0.1 }}
+							className="animate-in fade-in zoom-in-95 duration-500"
+							style={{ animationDelay: `${400 + i * 100}ms`, animationFillMode: "both" }}
 						>
 							<Link
 								href={action.href}
@@ -170,7 +163,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 									{action.desc}
 								</span>
 							</Link>
-						</motion.div>
+						</div>
 					))}
 				</div>
 			</div>
@@ -192,15 +185,11 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 					</Link>
 				</div>
 				<div className="text-center py-14 sm:py-16 bg-slate-50/50 rounded-2xl border-2 border-dashed border-slate-100">
-					<motion.div
-						initial={{ opacity: 0 }}
-						whileInView={{ opacity: 1 }}
-						className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-xs mb-6"
-					>
+					<div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto shadow-xs mb-6 animate-in fade-in duration-700">
 						<span className="text-4xl text-slate-100 flex items-center justify-center">
 							<HiOutlineInbox />
 						</span>
-					</motion.div>
+					</div>
 					<p className="font-black text-slate-400 text-lg sm:text-xl">
 						Belum ada order.
 					</p>

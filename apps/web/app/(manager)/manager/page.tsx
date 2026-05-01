@@ -45,7 +45,7 @@ export default async function ManagerDashboardPage() {
 	]);
 
 	return (
-		<div className="space-y-10 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+		<div className="space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-1000">
 			{/* High-End Header */}
 			<div className="relative overflow-hidden bg-slate-900 rounded-[2rem] p-10 lg:p-14 text-white shadow-2xl shadow-slate-900/20 group">
 				{/* Vector Pattern */}

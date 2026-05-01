@@ -1,4 +1,4 @@
-﻿import {
+import {
 	Building2,
 	Clock,
 	CreditCard,
@@ -38,17 +38,27 @@ export default async function OutletPage() {
 		(s, o) => s + (Number(o.ordersThisMonth) || 0),
 		0,
 	);
+	const totalLastMonthRevenue = outlets.reduce(
+		(s, o) => s + (Number(o.lastMonthRevenue) || 0),
+		0,
+	);
+	const revenueGrowth =
+		totalLastMonthRevenue > 0
+			? (((totalRevenue - totalLastMonthRevenue) / totalLastMonthRevenue) * 100).toFixed(1)
+			: totalRevenue > 0
+				? "100.0"
+				: "0.0";
 
 	return (
-		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+		<div className="space-y-8 sm:space-y-10  animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
 			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 group">
-				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-colors duration-500 group-hover:bg-indigo-100" />
+				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-30 transition-opacity duration-500 group-hover:opacity-50" />
 
 				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
 					<div className="space-y-4">
 						<div className="flex items-center gap-3">
-							<Badge className="bg-indigo-50 text-indigo-600 border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
+							<Badge variant="outline" className="bg-indigo-50 text-indigo-700 border-indigo-200 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-colors">
 								Ekosistem Bisnis
 							</Badge>
 							<span className="text-slate-200">•</span>
@@ -87,7 +97,7 @@ export default async function OutletPage() {
 					subtitle={formatIDR(totalRevenue)}
 					icon={<CreditCard size={24} />}
 					variant="success"
-					trend={{ value: "12%", positive: true, label: "vs bln lalu" }}
+					trend={{ value: `${Math.abs(parseFloat(revenueGrowth))}%`, positive: parseFloat(revenueGrowth) >= 0, label: "vs bln lalu" }}
 				/>
 				<StatCard
 					title="Total Pesanan"
@@ -104,16 +114,16 @@ export default async function OutletPage() {
 					variant="primary"
 				/>
 				<StatCard
-					title="Rating Global"
-					value="4.9"
-					subtitle="Berdasarkan feedback"
-					icon={<TrendingUp size={24} />}
+					title="Cabang Franchise"
+					value={outlets.filter((o) => o.is_franchise).length}
+					subtitle={`${outlets.filter((o) => o.is_franchise && o.is_active).length} aktif`}
+					icon={<Users2 size={24} />}
 					variant="default"
 				/>
 			</div>
 
 			{/* Outlet Cards Grid */}
-			<div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-6">
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
 				{outlets.map((outlet) => (
 					<div
 						key={outlet.id}
@@ -207,7 +217,7 @@ export default async function OutletPage() {
 										{outlet.is_franchise ? "Fee" : "Stock"}
 									</p>
 									<p className="text-xl font-black text-amber-600">
-										{outlet.is_franchise ? `${outlet.franchise_fee}%` : "100%"}
+										{outlet.is_franchise ? `${outlet.franchise_fee}%` : "N/A"}
 									</p>
 								</div>
 							</div>
@@ -230,7 +240,7 @@ export default async function OutletPage() {
 									</div>
 									<div className="flex items-center gap-2 text-xs font-bold text-slate-400">
 										<Clock size={14} className="text-indigo-400" />
-										{outlet.operating_hours?.weekday || "07:00-21:00"}
+										{outlet.operating_hours?.weekday || "Belum diatur"}
 									</div>
 								</div>
 							</div>

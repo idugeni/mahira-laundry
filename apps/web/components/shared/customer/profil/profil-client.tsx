@@ -142,7 +142,7 @@ export function ProfilClient({ profile }: ProfilClientProps) {
 				</p>
 			</motion.div>
 
-			<div className="grid lg:grid-cols-3 gap-8">
+			<div className="grid md:grid-cols-3 gap-8">
 				<ProfilInfoCard
 					profile={profile}
 					loading={loading}
@@ -154,7 +154,7 @@ export function ProfilClient({ profile }: ProfilClientProps) {
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ delay: 0.2 }}
-					className="lg:col-span-2 space-y-8"
+					className="md:col-span-2 space-y-8"
 				>
 					<ProfilForm
 						profile={profile}

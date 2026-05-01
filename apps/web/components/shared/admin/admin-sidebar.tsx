@@ -1,10 +1,10 @@
 "use client";
 
-import { LogOut } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { type ReactNode, useState } from "react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
+import { AdminAvatarDropdown } from "@/components/shared/admin/admin-avatar-dropdown";
 import { cn } from "@/lib/utils";
 
 interface NavItem {
@@ -20,21 +20,16 @@ interface AdminSidebarProps {
 	panelBadge?: string;
 	panelBadgeColor?: string;
 	headerInfo?: string;
+	profile?: { full_name: string | null; avatar_url: string | null } | null;
 }
 
 interface SidebarContentProps {
 	navItems: NavItem[];
-	panelLabel: string;
-	panelBadgeColor: string;
-	headerInfo?: string;
 	onNavClick: () => void;
 }
 
 function SidebarContent({
 	navItems,
-	panelLabel,
-	panelBadgeColor,
-	headerInfo,
 	onNavClick,
 }: SidebarContentProps) {
 	const pathname = usePathname();
@@ -53,25 +48,6 @@ function SidebarContent({
 					<Link href="/" onClick={onNavClick}>
 						<MahiraLogo size={30} />
 					</Link>
-				</div>
-
-				{/* Panel Badge */}
-				<div className="px-4 pt-4 pb-1 text-center">
-					<div className="flex justify-center mb-1.5">
-						<span
-							className={cn(
-								"inline-block text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full",
-								panelBadgeColor,
-							)}
-						>
-							{panelLabel}
-						</span>
-					</div>
-					{headerInfo && (
-						<p className="text-xs font-bold text-slate-400 px-1 truncate text-center">
-							{headerInfo}
-						</p>
-					)}
 				</div>
 			</div>
 
@@ -117,21 +93,6 @@ function SidebarContent({
 				})}
 			</nav>
 
-			{/* Logout Area (Fixed/Bottom) */}
-			<div className="shrink-0 p-6 border-t border-slate-50 bg-white">
-				<form action="/api/auth/signout" method="POST">
-					<button
-						type="submit"
-						className="group flex items-center justify-center gap-2.5 w-full px-4 py-3 rounded-xl text-[10px] font-black uppercase tracking-widest text-slate-500 border border-slate-100 hover:border-red-100 hover:bg-red-50 hover:text-red-600 transition-[background-color,border-color,color,box-shadow] duration-200"
-					>
-						<LogOut
-							size={14}
-							className="transition-transform group-hover:-translate-x-0.5"
-						/>
-						<span>Logout Sesi</span>
-					</button>
-				</form>
-			</div>
 		</div>
 	);
 }
@@ -141,77 +102,87 @@ export function AdminSidebar({
 	panelLabel,
 	panelBadgeColor = "bg-red-100 text-red-600",
 	headerInfo,
+	profile,
 }: AdminSidebarProps) {
 	const [mobileOpen, setMobileOpen] = useState(false);
 
 	return (
 		<>
 			{/* Desktop Sidebar */}
-			<aside className="hidden lg:flex lg:w-64 shrink-0 flex-col border-r border-slate-100 bg-white/95 backdrop-blur-xs sticky top-0 h-screen">
+			<aside className="hidden md:flex md:w-64 shrink-0 flex-col border-r border-slate-100 bg-white/95 backdrop-blur-xs sticky top-0 h-screen">
 				<SidebarContent
 					navItems={navItems}
-					panelLabel={panelLabel}
-					panelBadgeColor={panelBadgeColor}
-					headerInfo={headerInfo}
 					onNavClick={() => {}}
 				/>
 			</aside>
 
 			{/* Mobile Top Bar */}
-			<div className="lg:hidden fixed top-0 left-0 right-0 z-30 bg-white px-4 h-14 flex items-center justify-between">
+			<div className="md:hidden fixed top-0 left-0 right-0 z-30 bg-white/80 backdrop-blur-md px-4 h-14 flex items-center justify-between border-b border-slate-100">
 				<MahiraLogo size={24} />
-				<button
-					type="button"
-					onClick={() => setMobileOpen(!mobileOpen)}
-					className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
-					aria-label="Toggle menu"
-				>
-					<svg
-						className="w-5 h-5"
-						fill="none"
-						stroke="currentColor"
-						viewBox="0 0 24 24"
-						aria-hidden="true"
-					>
-						{mobileOpen ? (
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M6 18L18 6M6 6l12 12"
-							/>
-						) : (
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M4 6h16M4 12h16M4 18h16"
-							/>
-						)}
-					</svg>
-				</button>
-			</div>
-
-			{/* Mobile Drawer */}
-			{mobileOpen && (
-				<>
+				<div className="flex items-center gap-3">
+					<AdminAvatarDropdown
+						fullName={profile?.full_name}
+						avatarUrl={profile?.avatar_url}
+						panelLabel={panelLabel}
+						panelBadgeColor={panelBadgeColor}
+						headerInfo={headerInfo}
+					/>
 					<button
 						type="button"
-						aria-label="Tutup menu"
-						className="lg:hidden fixed inset-0 z-40 bg-black/30 backdrop-blur-xs cursor-default"
-						onClick={() => setMobileOpen(false)}
-					/>
-					<aside className="lg:hidden fixed top-0 left-0 bottom-0 z-50 w-72 bg-white shadow-2xl flex flex-col">
-						<SidebarContent
-							navItems={navItems}
-							panelLabel={panelLabel}
-							panelBadgeColor={panelBadgeColor}
-							headerInfo={headerInfo}
-							onNavClick={() => setMobileOpen(false)}
-						/>
-					</aside>
-				</>
-			)}
+						onClick={() => setMobileOpen(!mobileOpen)}
+						className="p-2 rounded-lg text-slate-600 hover:bg-slate-100 transition-colors"
+						aria-label="Toggle menu"
+					>
+						<svg
+							className="w-5 h-5"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+							aria-hidden="true"
+						>
+							{mobileOpen ? (
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2}
+									d="M6 18L18 6M6 6l12 12"
+								/>
+							) : (
+								<path
+									strokeLinecap="round"
+									strokeLinejoin="round"
+									strokeWidth={2}
+									d="M4 6h16M4 12h16M4 18h16"
+								/>
+							)}
+						</svg>
+					</button>
+				</div>
+			</div>
+
+			{/* Mobile Drawer Overlay */}
+			<button
+				type="button"
+				aria-label="Tutup menu"
+				className={cn(
+					"md:hidden fixed inset-0 z-40 bg-black/30 backdrop-blur-xs cursor-default transition-opacity duration-300",
+					mobileOpen ? "opacity-100" : "opacity-0 pointer-events-none",
+				)}
+				onClick={() => setMobileOpen(false)}
+			/>
+
+			{/* Mobile Drawer Panel */}
+			<aside
+				className={cn(
+					"md:hidden fixed top-0 left-0 bottom-0 z-50 w-72 bg-white shadow-2xl flex flex-col transition-transform duration-300 ease-in-out",
+					mobileOpen ? "translate-x-0" : "-translate-x-full",
+				)}
+			>
+				<SidebarContent
+					navItems={navItems}
+					onNavClick={() => setMobileOpen(false)}
+				/>
+			</aside>
 		</>
 	);
 }

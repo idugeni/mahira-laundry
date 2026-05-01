@@ -14,7 +14,7 @@ import {
 	UserCircle,
 	UsersRound,
 } from "lucide-react";
-import { AdminAvatar } from "@/components/shared/admin/admin-avatar";
+import { AdminAvatarDropdown } from "@/components/shared/admin/admin-avatar-dropdown";
 import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
 import { getInquiryStats, getUserProfile } from "@/lib/supabase/server";
@@ -88,35 +88,36 @@ export default async function SuperadminLayout({
 	];
 
 	return (
-		<div className="min-h-screen flex bg-slate-50/50">
+		<div className="flex bg-slate-50/50">
 			<AdminSidebar
 				navItems={superadminNav}
 				panelLabel="Superadmin"
 				panelBadgeColor="bg-gradient-to-r from-red-500 to-pink-500 text-white"
 				headerInfo="Mahira Group"
+				profile={profile}
 			/>
-			<div className="flex-1 flex flex-col min-w-0">
-				{/* Top Header */}
-				<header className="h-14 lg:h-16 border-b border-slate-100 bg-white/80 backdrop-blur-md flex items-center justify-between px-4 lg:px-8 mt-14 lg:mt-0 sticky top-14 lg:top-0 z-30">
+			<div className="flex-1 flex flex-col min-w-0 pt-14 md:pt-0 min-h-screen">
+				{/* Top Header (desktop only) */}
+				<header className="hidden md:flex h-16 border-b border-slate-100 bg-white/80 backdrop-blur-md items-center justify-between px-8 sticky top-0 z-30">
 					<div className="flex items-center gap-3">
-						<div className="hidden lg:flex items-center">
-							<DynamicBreadcrumb />
-						</div>
+						<DynamicBreadcrumb />
 					</div>
 					<div className="flex items-center gap-4">
-						<AdminAvatar
+						<AdminAvatarDropdown
 							fullName={profile?.full_name}
 							avatarUrl={profile?.avatar_url}
-							className="h-9 w-9 border-2 border-slate-200 shadow-xs cursor-pointer hover:border-slate-300 transition-colors"
+							panelLabel="Superadmin"
+							panelBadgeColor="bg-gradient-to-r from-red-500 to-pink-500 text-white"
+							headerInfo="Mahira Group"
 						/>
 					</div>
 				</header>
 				{/* Main Content */}
-				<main className="flex-1 px-0 py-4 sm:px-4 lg:p-8 overflow-auto">
+				<main className="p-4 md:p-8">
 					{children}
 				</main>
 				{/* Dashboard Footer */}
-				<footer className="p-4 lg:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
+				<footer className="p-4 md:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
 					<p>© {new Date().getFullYear()} Mahira Group. All rights reserved.</p>
 				</footer>
 			</div>

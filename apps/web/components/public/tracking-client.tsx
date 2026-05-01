@@ -123,7 +123,7 @@ export function TrackingClient() {
 				<div className="absolute top-0 right-0 w-32 h-32 bg-brand-primary/5 rounded-full blur-3xl -mr-10 -mt-10" />
 
 				<form onSubmit={onSubmit} className="relative z-10 space-y-6">
-					<div className="flex flex-col lg:flex-row gap-4">
+					<div className="flex flex-col md:flex-row gap-4">
 						<div className="relative flex-1 group">
 							<span className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-brand-primary transition-colors">
 								<HiOutlineMagnifyingGlass size={24} />
@@ -154,7 +154,7 @@ export function TrackingClient() {
 							<motion.button
 								type="submit"
 								disabled={loading}
-								className="px-6 sm:px-8 py-6 bg-brand-primary text-white font-black rounded-3xl hover:bg-brand-primary/90 transition-all disabled:opacity-50 shadow-xl shadow-brand-primary/30 flex-1 lg:flex-none"
+								className="px-6 sm:px-8 py-6 bg-brand-primary text-white font-black rounded-3xl hover:bg-brand-primary/90 transition-all disabled:opacity-50 shadow-xl shadow-brand-primary/30 flex-1 md:flex-none"
 							>
 								{loading ? "Mencari..." : "Lacak Sekarang"}
 							</motion.button>
@@ -213,7 +213,7 @@ export function TrackingClient() {
 						className="space-y-8"
 					>
 						{/* Header Card */}
-						<div className="bg-slate-900 p-10 lg:p-14 rounded-[3.5rem] text-white relative overflow-hidden shadow-2xl">
+						<div className="bg-slate-900 p-8 md:p-10 lg:p-14 rounded-[3.5rem] text-white relative overflow-hidden shadow-2xl">
 							<div className="absolute top-0 right-0 w-96 h-96 bg-brand-primary opacity-20 blur-[120px] -mr-40 -mt-40" />
 
 							<div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-10">
@@ -226,7 +226,7 @@ export function TrackingClient() {
 											<HiOutlineSparkles size={18} />
 										</span>
 									</div>
-									<h2 className="text-5xl lg:text-7xl font-black font-[family-name:var(--font-heading)] leading-none tracking-tighter mb-4">
+									<h2 className="text-5xl md:text-6xl lg:text-7xl font-black font-[family-name:var(--font-heading)] leading-none tracking-tighter mb-4">
 										{order.order_number}
 									</h2>
 									<p className="text-slate-400 font-medium text-lg">
@@ -238,7 +238,7 @@ export function TrackingClient() {
 									<p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">
 										Total Pembayaran
 									</p>
-									<p className="text-4xl lg:text-5xl font-black text-brand-accent tracking-tighter">
+									<p className="text-4xl md:text-5xl font-black text-brand-accent tracking-tighter">
 										{formatIDR(order.total)}
 									</p>
 								</div>
@@ -246,9 +246,9 @@ export function TrackingClient() {
 						</div>
 
 						{/* Detail Grid */}
-						<div className="grid lg:grid-cols-12 gap-8 items-start">
+						<div className="grid md:grid-cols-12 gap-8 items-start">
 							{/* Timeline */}
-							<div className="lg:col-span-7 bg-white p-10 lg:p-14 rounded-[3.5rem] border border-slate-100 shadow-xs relative">
+							<div className="md:col-span-7 bg-white p-8 md:p-10 lg:p-14 rounded-[3.5rem] border border-slate-100 shadow-xs relative">
 								<h3 className="text-2xl font-black text-slate-900 mb-12 flex items-center gap-4">
 									<span className="text-brand-primary">
 										<HiOutlineClock size={28} />
@@ -307,8 +307,8 @@ export function TrackingClient() {
 							</div>
 
 							{/* Summary */}
-							<div className="lg:col-span-5 space-y-8">
-								<div className="bg-white p-10 lg:p-14 rounded-[3.5rem] border border-slate-100 shadow-xs">
+							<div className="md:col-span-5 space-y-8">
+								<div className="bg-white p-8 md:p-10 lg:p-14 rounded-[3.5rem] border border-slate-100 shadow-xs">
 									<h3 className="text-2xl font-black text-slate-900 mb-8 flex items-center gap-4">
 										<span className="text-brand-primary">
 											<HiOutlineReceiptPercent size={28} />

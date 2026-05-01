@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { AdminGalleryClient } from "@/components/shared/admin/gallery/admin-gallery-client";
 import { createClient } from "@/lib/supabase/server";

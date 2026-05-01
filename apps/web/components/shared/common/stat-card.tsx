@@ -134,19 +134,6 @@ export function StatCard({
 					)}
 				</div>
 			</div>
-
-			{/* Bottom Decorative Pattern */}
-			<div className="absolute bottom-0 right-0 p-3 opacity-[0.03] will-change-[opacity] group-hover:opacity-[0.07] transition-opacity duration-500 ease-out">
-				<svg
-					width="40"
-					height="40"
-					viewBox="0 0 40 40"
-					fill="currentColor"
-					aria-hidden="true"
-				>
-					<rect width="40" height="40" rx="8" />
-				</svg>
-			</div>
 		</div>
 	);
 }

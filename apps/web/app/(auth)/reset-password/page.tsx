@@ -75,7 +75,7 @@ export default function ResetPasswordPage({
 								<HiOutlineSparkles size={12} />
 								<span>Security Protocol</span>
 							</div>
-							<h1 className="text-2xl lg:text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-none tracking-tighter mb-3">
+							<h1 className="text-2xl md:text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-none tracking-tighter mb-3">
 								Password <span className="text-brand-gradient">Baru.</span>
 							</h1>
 							<p className="text-slate-500 font-medium text-sm px-4">
@@ -85,7 +85,7 @@ export default function ResetPasswordPage({
 					</div>
 
 					{/* Card Content (Refined Scrollbar) */}
-					<div className="flex-1 overflow-y-auto custom-scrollbar px-8 lg:px-10 py-2 min-h-0">
+					<div className="flex-1 overflow-y-auto custom-scrollbar px-8 md:px-10 py-2 min-h-0">
 						<div className="py-4">
 							<AnimatePresence mode="wait">
 								{error && (

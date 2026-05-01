@@ -90,7 +90,7 @@ export function LoyaltyClient({
 			{/* Header Section */}
 			<div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<h1 className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tight">
+					<h1 className="text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tight">
 						Sultan <span className="text-brand-gradient">Loyalty</span>
 					</h1>
 					<p className="text-slate-500 mt-3 font-medium text-lg">
@@ -118,7 +118,7 @@ export function LoyaltyClient({
 				</div>
 
 				<div className="relative z-10">
-					<div className="grid lg:grid-cols-[1fr_300px] gap-12 items-center">
+					<div className="grid md:grid-cols-[1fr_300px] gap-12 items-center">
 						<div>
 							<div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 backdrop-blur-md rounded-full mb-8">
 								<span className="w-2 h-2 rounded-full bg-brand-accent animate-ping" />
@@ -244,7 +244,7 @@ export function LoyaltyClient({
 					</div>
 				</div>
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+				<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
 					{rewards.map((r, i) => (
 						<motion.div
 							key={r.id}
@@ -361,7 +361,7 @@ export function LoyaltyClient({
 											<span className="text-[9px] text-slate-400">Pts</span>
 										</p>
 									</div>
-									<div className="hidden lg:flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 text-slate-200 group-hover:text-brand-primary transition-colors">
+									<div className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 text-slate-200 group-hover:text-brand-primary transition-colors">
 										<HiOutlineBolt />
 									</div>
 								</div>

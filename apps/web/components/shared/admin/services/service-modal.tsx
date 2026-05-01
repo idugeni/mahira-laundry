@@ -117,8 +117,7 @@ export function ServiceModal({
 
 	return (
 		<>
-			<button
-				type="button"
+			<div
 				onClick={() => setIsOpen(true)}
 				className="contents"
 			>
@@ -127,7 +126,7 @@ export function ServiceModal({
 						+ Tambah Layanan
 					</span>
 				)}
-			</button>
+			</div>
 
 			{isOpen &&
 				mounted &&

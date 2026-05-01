@@ -65,20 +65,20 @@ export function LokasiClient() {
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-						className="text-6xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.85] tracking-tighter"
+						className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.85] tracking-tighter"
 					>
 						Temukan <br />
 						<span className="text-brand-gradient">Kami Disini.</span>
 					</motion.h1>
 				</div>
 
-				<div className="grid lg:grid-cols-12 gap-12">
+				<div className="grid md:grid-cols-12 gap-8 lg:gap-12">
 					{/* Map Section */}
 					<motion.div
 						initial={{ opacity: 0, x: -30 }}
 						whileInView={{ opacity: 1, x: 0 }}
 						viewport={{ once: true }}
-						className="lg:col-span-7 h-full"
+						className="md:col-span-7 h-full"
 					>
 						<div className="relative rounded-[3.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] border-[12px] border-white h-full min-h-[500px] bg-slate-100 group">
 							{mounted ? (
@@ -136,7 +136,7 @@ export function LokasiClient() {
 					</motion.div>
 
 					{/* Outlet Details */}
-					<div className="lg:col-span-5">
+					<div className="md:col-span-5">
 						{outlets.map((outlet, i) => (
 							<motion.div
 								key={outlet.name}
@@ -144,7 +144,7 @@ export function LokasiClient() {
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: 0.2 + i * 0.1 }}
-								className="group relative bg-white rounded-[3.5rem] p-10 lg:p-14 border border-slate-100 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.04)] hover:shadow-[0_48px_80px_-16px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden h-full flex flex-col justify-between"
+								className="group relative bg-white rounded-[3.5rem] p-8 md:p-10 lg:p-14 border border-slate-100 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.04)] hover:shadow-[0_48px_80px_-16px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden h-full flex flex-col justify-between"
 							>
 								{/* Accent Decor */}
 								<div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-primary/5 rounded-full blur-3xl group-hover:bg-brand-primary/10 transition-colors duration-500" />
@@ -160,7 +160,7 @@ export function LokasiClient() {
 										</span>
 									</div>
 
-									<h2 className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-8">
+									<h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-8">
 										{outlet.name}
 									</h2>
 

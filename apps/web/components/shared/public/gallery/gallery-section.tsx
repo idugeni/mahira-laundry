@@ -185,7 +185,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: false }}
 							transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-							className="text-6xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
+							className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
 						>
 							Eksplorasi <br />
 							<span className="text-brand-gradient">Detail Kualitas.</span>
@@ -317,10 +317,10 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							exit={{ opacity: 0, scale: 0.95 }}
 							transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
 							onClick={(e: React.MouseEvent) => e.stopPropagation()}
-							className="relative w-full max-w-7xl h-[90dvh] sm:h-[85dvh] lg:h-auto lg:aspect-[2/1] flex flex-col lg:flex-row bg-white/80 backdrop-blur-md rounded-[2rem] overflow-hidden shadow-[0_50px_200px_-50px_rgba(0,0,0,0.8)]"
+							className="relative w-full max-w-7xl h-[90dvh] sm:h-[85dvh] md:h-auto md:aspect-[2/1] flex flex-col md:flex-row bg-white/80 backdrop-blur-md rounded-[2rem] overflow-hidden shadow-[0_50px_200px_-50px_rgba(0,0,0,0.8)]"
 						>
 							{/* Image Container - Full Height */}
-							<div className="relative w-full lg:w-3/5 flex-1 min-h-0 lg:flex-none lg:aspect-auto lg:h-full overflow-hidden group">
+							<div className="relative w-full md:w-3/5 flex-1 min-h-0 md:flex-none md:aspect-auto md:h-full overflow-hidden group">
 								<AnimatePresence mode="wait">
 									<motion.div
 										key={selectedItem.id}
@@ -361,7 +361,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							</div>
 
 							{/* Info Section - Centered */}
-							<div className="flex-none sm:flex-1 sm:min-h-0 flex flex-col items-center justify-center p-6 sm:p-10 lg:p-12 relative bg-white max-h-[40dvh] sm:max-h-none lg:max-h-none overflow-y-auto">
+							<div className="flex-none sm:flex-1 sm:min-h-0 flex flex-col items-center justify-center p-6 sm:p-10 md:p-12 relative bg-white max-h-[40dvh] sm:max-h-none md:max-h-none overflow-y-auto">
 								<button
 									type="button"
 									onClick={() => setSelectedItem(null)}
@@ -391,7 +391,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 											delay: 0.15,
 											ease: [0.16, 1, 0.3, 1],
 										}}
-										className="text-3xl sm:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-6"
+										className="text-3xl sm:text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-6"
 									>
 										{selectedItem.title}
 									</motion.h3>

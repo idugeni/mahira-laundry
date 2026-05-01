@@ -97,7 +97,7 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 					transition={{ duration: 0.5 }}
 					className="text-center mb-10"
 				>
-					<h1 className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter mb-3">
+					<h1 className="text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter mb-3">
 						Cari <span className="text-brand-gradient">Apapun</span>
 					</h1>
 					<p className="text-slate-500 font-medium">
@@ -258,7 +258,7 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 										Lihat Semua →
 									</Link>
 								</div>
-								<div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+								<div className="grid grid-cols-2 md:grid-cols-4 gap-3">
 									{filteredGallery.slice(0, 8).map((item, i) => (
 										<motion.div
 											key={item.id}

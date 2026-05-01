@@ -152,7 +152,7 @@ export async function getAllTestimonials() {
 	const supabase = await createClient();
 	const { data: testimonials, error } = await supabase
 		.from("testimonials")
-		.select("*, profiles(full_name)")
+		.select("*, profiles(full_name), guest_name")
 		.order("created_at", { ascending: false });
 
 	if (error) console.error("Error fetching all testimonials:", error);
@@ -393,14 +393,16 @@ export async function getPaymentMethodStats() {
 	return Object.entries(grouped).map(([method, total]) => ({ method, total }));
 }
 
-// Audit logs with optional filters
+// Audit logs with optional filters (deduplicated)
 export async function getAuditLogs(limit = 50, tableName?: string) {
 	const supabase = await createClient();
+	// Fetch more rows than needed so we can deduplicate client-side
+	const fetchLimit = Math.min(limit * 3, 200);
 	let query = supabase
 		.from("audit_logs")
 		.select("*, profiles(full_name, role)")
 		.order("created_at", { ascending: false })
-		.limit(limit);
+		.limit(fetchLimit);
 
 	if (tableName) {
 		query = query.eq("table_name", tableName);
@@ -411,7 +413,31 @@ export async function getAuditLogs(limit = 50, tableName?: string) {
 		console.error("Error fetching audit logs:", error);
 		return [];
 	}
-	return data || [];
+	if (!data) return [];
+
+	// Deduplicate: skip entries with same user+action+table+record within 5 min window
+	const seenWindows: Map<string, number> = new Map(); // key -> earliest timestamp
+	const deduped = [];
+		for (const log of data) {
+			// Only deduplicate logs that have a record_id, as these are likely
+			// to be duplicate entries for the same record action (e.g., from retries).
+			// Security events like login/logout without record_id should never be deduplicated.
+			if (log.record_id === null || log.record_id === undefined) {
+				deduped.push(log);
+				if (deduped.length >= limit) break;
+				continue;
+			}
+			const key = `${log.user_id}-${log.action}-${log.table_name}-${log.record_id}`;
+			const logTime = new Date(log.created_at).getTime();
+			const earliest = seenWindows.get(key);
+			if (earliest !== undefined && Math.abs(logTime - earliest) < 5 * 60 * 1000) {
+				continue; // duplicate within 5 min window
+			}
+			seenWindows.set(key, logTime);
+			deduped.push(log);
+		if (deduped.length >= limit) break;
+	}
+	return deduped;
 }
 
 // Outlets with order & revenue stats
@@ -430,9 +456,23 @@ export async function getOutletsWithStats() {
 		now.getMonth(),
 		1,
 	).toISOString();
+	const startOfLastMonth = new Date(
+		now.getFullYear(),
+		now.getMonth() - 1,
+		1,
+	).toISOString();
+	const endOfLastMonth = new Date(
+		now.getFullYear(),
+		now.getMonth(),
+		0,
+		23,
+		59,
+		59,
+		999,
+	).toISOString();
 
 	const statsPromises = outlets.map(async (outlet) => {
-		const [ordersRes, revenueRes] = await Promise.all([
+		const [ordersRes, revenueRes, lastMonthRevenueRes] = await Promise.all([
 			supabase
 				.from("orders")
 				.select("id", { count: "exact", head: true })
@@ -444,15 +484,25 @@ export async function getOutletsWithStats() {
 				.eq("outlet_id", outlet.id)
 				.eq("payment_status", "paid")
 				.gte("created_at", startOfMonth),
+			supabase
+				.from("orders")
+				.select("total")
+				.eq("outlet_id", outlet.id)
+				.eq("payment_status", "paid")
+				.gte("created_at", startOfLastMonth)
+				.lte("created_at", endOfLastMonth),
 		]);
 
 		const monthlyRevenue =
 			revenueRes.data?.reduce((s, o) => s + (o.total || 0), 0) || 0;
+		const lastMonthRevenue =
+			lastMonthRevenueRes.data?.reduce((s, o) => s + (o.total || 0), 0) || 0;
 
 		return {
 			...outlet,
 			ordersThisMonth: ordersRes.count || 0,
 			monthlyRevenue,
+			lastMonthRevenue,
 		};
 	});
 

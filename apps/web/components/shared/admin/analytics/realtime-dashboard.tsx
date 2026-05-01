@@ -86,7 +86,7 @@ export function RealtimeDashboard() {
 	return (
 		<div className="space-y-8">
 			{/* Traffic Summary Cards */}
-			<div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+			<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 				<StatCard
 					title="Users Aktif (Realtime)"
 					value={loading ? "..." : data?.activeUsers || 0}
@@ -126,9 +126,9 @@ export function RealtimeDashboard() {
 				/>
 			</div>
 
-			<div className="grid lg:grid-cols-3 gap-6">
+			<div className="grid md:grid-cols-3 gap-6">
 				{/* Traffic Chart */}
-				<div className="lg:col-span-2 bg-white rounded-[2rem] border border-slate-200/80 p-6 lg:p-8 shadow-xs">
+				<div className="md:col-span-2 bg-white rounded-[2rem] border border-slate-200/80 p-6 md:p-8 shadow-xs">
 					<div className="flex items-center justify-between mb-8">
 						<div>
 							<h2 className="text-lg font-black text-slate-900 tracking-tight">
@@ -160,7 +160,7 @@ export function RealtimeDashboard() {
 				</div>
 
 				{/* Realtime Cities/Devices */}
-				<div className="bg-white rounded-[2rem] border border-slate-200/80 p-6 lg:p-8 shadow-xs">
+				<div className="bg-white rounded-[2rem] border border-slate-200/80 p-6 md:p-8 shadow-xs">
 					<h2 className="text-lg font-black text-slate-900 tracking-tight mb-6">
 						Lokasi Pengunjung (Realtime)
 					</h2>

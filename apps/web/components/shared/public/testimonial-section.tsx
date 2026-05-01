@@ -58,7 +58,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: false }}
 					transition={{ delay: 0.1 }}
-					className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-tight"
+					className="text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-tight"
 				>
 					Dipercaya Ribuan <br />
 					<span className="text-brand-gradient">

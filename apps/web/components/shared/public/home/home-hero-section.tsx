@@ -57,7 +57,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 	return (
 		<section
 			ref={containerRef}
-			className="relative min-h-screen pt-16 pb-4 lg:pt-4 lg:pb-4 overflow-hidden flex flex-col"
+			className="relative min-h-screen pt-16 pb-4 md:pt-4 md:pb-4 overflow-hidden flex flex-col"
 		>
 			{/* Mesh Gradient Background */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -94,13 +94,13 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 			</div>
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex-1 flex items-start">
-				<div className="grid lg:grid-cols-2 gap-20 items-center w-full">
+				<div className="grid md:grid-cols-2 gap-10 lg:gap-20 items-center w-full">
 					{/* Left Content */}
 					<motion.div
 						variants={containerVariants}
 						initial="hidden"
 						animate="visible"
-						className="text-center lg:text-left flex flex-col items-center lg:items-start"
+						className="text-center md:text-left flex flex-col items-center md:items-start"
 					>
 						<motion.div
 							variants={itemVariants}
@@ -138,7 +138,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 						<motion.div
 							variants={itemVariants}
-							className="mt-8 flex flex-wrap justify-center lg:justify-start gap-4"
+							className="mt-8 flex flex-wrap justify-center md:justify-start gap-4"
 						>
 							<Link
 								href="/paket-usaha"
@@ -198,7 +198,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 					</motion.div>
 
 					{/* Right Visual Content */}
-					<div className="relative py-4 lg:py-0 lg:h-[600px] flex items-center justify-center">
+					<div className="relative py-4 md:py-0 md:h-[600px] flex items-center justify-center">
 						<motion.div
 							initial={{ opacity: 0, x: 50 }}
 							animate={{ opacity: 1, x: 0 }}

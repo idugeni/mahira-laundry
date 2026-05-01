@@ -192,7 +192,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 			if (result.error) {
 				toast.error(result.error);
 			} else {
-				toast.success(`Order #${id.split("-")[0]} diperbarui`);
+				toast.success(`Order diperbarui`);
 			}
 		} catch (error: unknown) {
 			toast.error((error as Error).message || "Gagal memperbarui status");
@@ -203,7 +203,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 		allStatuses.find((s) => s.id === activeTab) || allStatuses[0];
 
 	return (
-		<div className="max-w-[1400px] mx-auto space-y-12 pb-32 px-4 lg:px-8">
+		<div className="max-w-[1400px] mx-auto space-y-12 px-4 md:px-8">
 			{/* biome-ignore-start lint/security/noDangerouslySetInnerHtml: receipt HTML content */}
 			<style
 				dangerouslySetInnerHTML={{
@@ -228,7 +228,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 
 			{/* Premium Dashboard Header */}
 			<div className="flex flex-col gap-10 pt-6">
-				<div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+				<div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
 					<div className="space-y-2">
 						<h2 className="text-4xl font-black text-slate-900 tracking-tight uppercase font-[family-name:var(--font-heading)] flex items-center gap-4">
 							<span

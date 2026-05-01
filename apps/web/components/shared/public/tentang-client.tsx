@@ -53,7 +53,7 @@ export function TentangClient() {
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-						className="text-6xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
+						className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
 					>
 						Eksklusivitas <br />
 						<span className="text-brand-gradient">Mahira Laundry.</span>
@@ -70,7 +70,7 @@ export function TentangClient() {
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
 						transition={{ delay: 0.6 }}
-						className="mt-12 text-2xl lg:text-3xl text-slate-500 font-medium leading-relaxed italic max-w-3xl mx-auto"
+						className="mt-12 text-2xl md:text-3xl text-slate-500 font-medium leading-relaxed italic max-w-3xl mx-auto"
 					>
 						"Lahir dari visi{" "}
 						<strong className="text-slate-900 font-black">
@@ -87,7 +87,7 @@ export function TentangClient() {
 						initial={{ opacity: 0, y: 50 }}
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
-						className="relative group p-12 lg:p-12 bg-slate-900 rounded-[2rem] overflow-hidden"
+						className="relative group p-8 md:p-12 bg-slate-900 rounded-[2rem] overflow-hidden"
 					>
 						<div className="absolute top-0 right-0 p-12 text-[200px] text-white/5 font-black pointer-events-none select-none -mr-20 -mt-20">
 							VISI
@@ -97,10 +97,10 @@ export function TentangClient() {
 							<div className="w-20 h-20 bg-brand-primary rounded-3xl flex items-center justify-center text-white mb-10 shadow-2xl shadow-brand-primary/20 rotate-3 group-hover:rotate-6 transition-transform duration-500">
 								<HiOutlineRocketLaunch size={40} />
 							</div>
-							<h2 className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] mb-8 text-white tracking-tighter">
+							<h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] mb-8 text-white tracking-tighter">
 								Visi Utama Kami
 							</h2>
-							<p className="text-slate-400 text-xl lg:text-2xl leading-relaxed font-medium">
+							<p className="text-slate-400 text-lg md:text-xl lg:text-2xl leading-relaxed font-medium">
 								Menjadi layanan laundry terpercaya nomor satu di Indonesia
 								dengan standar kebersihan internasional yang menyatu dengan
 								teknologi modern untuk kenyamanan hidup Anda.
@@ -109,7 +109,7 @@ export function TentangClient() {
 					</motion.section>
 
 					{/* Misi Section */}
-					<div className="grid lg:grid-cols-2 gap-20 items-center">
+					<div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
 						<motion.div
 							initial={{ opacity: 0, x: -30 }}
 							whileInView={{ opacity: 1, x: 0 }}
@@ -118,7 +118,7 @@ export function TentangClient() {
 							<div className="w-20 h-20 bg-brand-accent/20 rounded-3xl flex items-center justify-center text-brand-accent-dark mb-10 shadow-inner">
 								<HiOutlineTrophy size={40} />
 							</div>
-							<h2 className="text-5xl lg:text-6xl font-black font-[family-name:var(--font-heading)] mb-8 text-slate-900 leading-[0.9] tracking-tighter">
+							<h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-[family-name:var(--font-heading)] mb-8 text-slate-900 leading-[0.9] tracking-tighter">
 								Misi <br />
 								<span className="text-brand-accent-dark">Operasional.</span>
 							</h2>
@@ -162,7 +162,7 @@ export function TentangClient() {
 							viewport={{ once: true }}
 							className="text-center mb-20"
 						>
-							<h2 className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter">
+							<h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter">
 								Filosofi Kerja Kami
 							</h2>
 						</motion.div>
@@ -229,11 +229,11 @@ export function TentangClient() {
 					initial={{ opacity: 0 }}
 					whileInView={{ opacity: 1 }}
 					viewport={{ once: true }}
-					className="mt-40 p-10 lg:p-10 rounded-[2rem] bg-brand-primary text-center text-white relative overflow-hidden"
+					className="mt-40 p-8 md:p-10 rounded-[2rem] bg-brand-primary text-center text-white relative overflow-hidden"
 				>
 					<div className="absolute top-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
 					<div className="relative z-10">
-						<h3 className="text-4xl lg:text-6xl font-black mb-8 tracking-tighter leading-tight">
+						<h3 className="text-3xl md:text-5xl lg:text-6xl font-black mb-8 tracking-tighter leading-tight">
 							Bergabung dalam <br /> Standard Mahira.
 						</h3>
 						<p className="text-white/80 text-xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed">

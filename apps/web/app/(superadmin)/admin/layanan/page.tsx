@@ -21,15 +21,15 @@ export default async function SuperadminLayananPage() {
 	const outletId = profile?.outlet_id || "jatiwaringin";
 
 	return (
-		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+		<div className="space-y-8 sm:space-y-10  animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
 			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 group">
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-colors duration-500 group-hover:bg-indigo-100" />
 
-				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
+				<div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8">
 					<div className="space-y-4">
 						<div className="flex items-center gap-3">
-							<Badge className="bg-indigo-50 text-indigo-600 border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
+							<Badge className="bg-indigo-50 text-indigo-600 hover:bg-indigo-100 hover:text-indigo-700 border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
 								Product Management
 							</Badge>
 							<span className="text-slate-200">•</span>
@@ -65,7 +65,7 @@ export default async function SuperadminLayananPage() {
 
 			<Suspense
 				fallback={
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 animate-pulse">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 animate-pulse">
 						{[1, 2, 3, 4, 5, 6].map((i) => (
 							<div key={i} className="h-72 bg-slate-50 rounded-2xl" />
 						))}

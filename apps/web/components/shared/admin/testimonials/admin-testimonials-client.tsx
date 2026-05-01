@@ -37,9 +37,10 @@ interface Testimonial {
 	rating: number;
 	is_published: boolean;
 	created_at: string;
+	guest_name?: string | null;
 	profiles: {
-		full_name: string;
-	};
+		full_name: string | null;
+	} | null;
 }
 
 interface AdminTestimonialsClientProps {
@@ -153,15 +154,15 @@ export function AdminTestimonialsClient({
 	}
 
 	return (
-		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+		<div className="space-y-8 sm:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-white rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border border-slate-100 shadow-xl shadow-slate-200/40 group">
+			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40 group">
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50" />
 
-				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+				<div className="relative flex flex-col md:flex-row md:items-center justify-between gap-8">
 					<div className="space-y-4">
 						<div className="flex items-center gap-3">
-							<Badge className="bg-amber-50 text-amber-600 border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
+							<Badge className="bg-amber-50 text-amber-600 hover:bg-amber-100 hover:text-amber-600 border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
 								Kualitas Layanan
 							</Badge>
 							<span className="text-slate-200">•</span>
@@ -169,10 +170,10 @@ export function AdminTestimonialsClient({
 								<MessageSquare size={14} /> {testimonials.length} Ulasan Total
 							</span>
 						</div>
-						<h1 className="text-4xl lg:text-6xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none text-slate-900">
+						<h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none text-slate-900">
 							Moderasi <span className="text-indigo-600 italic">Testimoni</span>
 						</h1>
-						<p className="text-slate-500 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
+						<p className="text-slate-500 font-bold text-sm md:text-base max-w-2xl leading-relaxed">
 							Kurasi ulasan pelanggan terbaik untuk ditampilkan pada etalase
 							digital Mahira Laundry. Pastikan standar kepuasan tetap terjaga.
 						</p>
@@ -240,11 +241,11 @@ export function AdminTestimonialsClient({
 								<div className="relative flex items-center justify-between">
 									<div className="flex items-center gap-4">
 										<div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-lg border-2 border-white shadow-md transition-transform duration-300 group-hover:-translate-y-0.5">
-											{t.profiles?.full_name?.charAt(0)}
+											{(t.guest_name || t.profiles?.full_name)?.charAt(0)}
 										</div>
 										<div className="min-w-0">
 											<p className="font-black text-slate-900 uppercase tracking-tight truncate max-w-[120px]">
-												{t.profiles?.full_name}
+												{t.guest_name || t.profiles?.full_name || "Anonim"}
 											</p>
 											<div className="flex items-center gap-1.5 mt-1">
 												<Calendar size={12} className="text-slate-400" />
@@ -346,36 +347,6 @@ export function AdminTestimonialsClient({
 					/>
 				</>
 			)}
-
-			{/* Moderation Guide */}
-			<div className="bg-slate-900 rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white relative overflow-hidden group">
-				<div className="absolute top-0 right-0 w-[400px] h-[400px] bg-indigo-500/10 rounded-full -mr-32 -mt-32 blur-3xl opacity-50" />
-
-				<div className="relative flex flex-col lg:flex-row items-center gap-10">
-					<div className="w-24 h-24 bg-white/10 rounded-[2rem] border border-white/10 flex items-center justify-center text-4xl shadow-2xl backdrop-blur-xl">
-						📋
-					</div>
-					<div className="flex-1 text-center lg:text-left">
-						<h3 className="text-2xl font-black uppercase tracking-tight mb-4">
-							Kebijakan Moderasi
-						</h3>
-						<p className="text-slate-400 font-bold text-sm leading-relaxed max-w-2xl">
-							Kami mengedepankan transparansi. Testimoni yang mengandung konten
-							negatif berlebihan harus tetap dimoderasi dengan bijak.
-							Publikasikan ulasan yang membangun reputasi Mahira Laundry secara
-							objektif.
-						</p>
-					</div>
-					<div className="flex gap-4">
-						<Button
-							variant="outline"
-							className="rounded-xl h-11 px-5 font-black text-[10px] uppercase tracking-widest border-white/20 bg-white/5 hover:bg-white hover:text-slate-900 transition-colors"
-						>
-							Pelajari SOP
-						</Button>
-					</div>
-				</div>
-			</div>
 
 			{/* ── Create Modal ── */}
 			{createOpen &&
@@ -532,7 +503,7 @@ export function AdminTestimonialsClient({
 												Edit <span className="text-amber-500">Testimoni</span>
 											</h2>
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
-												{editTarget.profiles?.full_name}
+												{editTarget.guest_name || editTarget.profiles?.full_name || "Anonim"}
 											</p>
 										</div>
 									</div>

@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { SuperadminFinanceClient } from "@/components/shared/admin/finance/finance-client";
 import {
 	getOutletsWithStats,

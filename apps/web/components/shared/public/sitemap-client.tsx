@@ -106,7 +106,7 @@ export function SitemapClient() {
 						initial={{ opacity: 0, y: 30 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-						className="text-5xl lg:text-7xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter"
+						className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.85] tracking-tighter"
 					>
 						Peta <span className="text-brand-gradient">Situs Kami.</span>
 					</motion.h1>

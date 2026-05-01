@@ -255,7 +255,7 @@ export function LayananClient({
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.8 }}
-						className="text-6xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
+						className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
 					>
 						Layanan <br />
 						<span className="text-brand-gradient">Terbaik Kami.</span>
@@ -329,7 +329,7 @@ export function LayananClient({
 					initial={{ opacity: 0, y: 50 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="mt-32 p-10 lg:p-10 rounded-[2rem] bg-slate-900 relative overflow-hidden text-center"
+					className="mt-32 p-8 md:p-10 rounded-[2rem] bg-slate-900 relative overflow-hidden text-center"
 				>
 					{/* Decorative background for CTA */}
 					<div className="absolute inset-0 opacity-20">
@@ -338,7 +338,7 @@ export function LayananClient({
 					</div>
 
 					<div className="relative z-10">
-						<h2 className="text-3xl lg:text-5xl font-black text-white mb-6 tracking-tighter leading-tight">
+						<h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mb-6 tracking-tighter leading-tight">
 							Pakaian Kotor? <br />
 							<span className="text-brand-accent">Biar Kami yang Atasi.</span>
 						</h2>

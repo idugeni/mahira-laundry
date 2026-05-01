@@ -58,7 +58,7 @@ export function OrderServiceStep({
 							key={service.id}
 							className="p-6 sm:p-8 bg-white rounded-[32px] border border-slate-100 group transition-all"
 						>
-							<div className="grid grid-cols-1 lg:grid-cols-[1fr_240px] gap-6 items-center">
+							<div className="grid grid-cols-1 md:grid-cols-[1fr_240px] gap-6 items-center">
 								<div className="flex items-start gap-6">
 									<div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center text-3xl text-slate-400 group-hover:text-brand-primary transition-colors shrink-0 shadow-inner">
 										<Icon />
@@ -88,7 +88,7 @@ export function OrderServiceStep({
 										</div>
 									</div>
 								</div>
-								<div className="flex flex-col items-center lg:items-end gap-3">
+								<div className="flex flex-col items-center md:items-end gap-3">
 									<div className="flex items-center gap-4 bg-slate-50/50 p-1.5 rounded-2xl border border-slate-100 shadow-xs">
 										<button
 											type="button"

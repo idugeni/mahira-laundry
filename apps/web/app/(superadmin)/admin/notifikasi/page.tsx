@@ -1,7 +1,6 @@
 "use client";
 
 import { BellRing, Loader2, Megaphone, Send, ShieldAlert } from "lucide-react";
-import { motion } from "motion/react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { broadcastNotification } from "@/lib/actions/notifications";
@@ -39,7 +38,7 @@ export default function AdminNotificationPage() {
 	};
 
 	return (
-		<div className="space-y-6 sm:space-y-8 pb-16 sm:pb-20">
+		<div className="space-y-6 sm:space-y-8 ">
 			<div className="flex items-center gap-4">
 				<div className="p-3 bg-emerald-500/10 rounded-2xl text-emerald-600 dark:text-emerald-400">
 					<BellRing size={32} />
@@ -54,11 +53,7 @@ export default function AdminNotificationPage() {
 				</div>
 			</div>
 
-			<motion.div
-				initial={{ opacity: 0, y: 20 }}
-				animate={{ opacity: 1, y: 0 }}
-				className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6"
-			>
+			<div className="grid grid-cols-1 lg:grid-cols-3 gap-5 sm:gap-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
 				{/* Form Section */}
 				<div className="lg:col-span-2 bg-card border rounded-2xl p-5 sm:p-8 shadow-xs">
 					<form onSubmit={handleSubmit} className="space-y-6">
@@ -174,7 +169,7 @@ export default function AdminNotificationPage() {
 						</p>
 					</div>
 				</div>
-			</motion.div>
+			</div>
 		</div>
 	);
 }

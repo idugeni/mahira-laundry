@@ -31,7 +31,7 @@ export function ProfilInfoCard({
 			initial={{ opacity: 0, y: 20 }}
 			animate={{ opacity: 1, y: 0 }}
 			transition={{ delay: 0.1 }}
-			className="lg:col-span-1"
+			className="md:col-span-1"
 		>
 			<div className="bg-white rounded-[2.5rem] p-8 shadow-xs text-center relative overflow-hidden group">
 				<div className="absolute top-0 left-0 w-full h-24 bg-brand-gradient opacity-10" />

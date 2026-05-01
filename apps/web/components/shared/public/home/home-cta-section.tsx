@@ -27,8 +27,8 @@ export function HomeCtaSection() {
 					<div className="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-accent/10 rounded-full blur-[100px]" />
 					<div className="absolute inset-0 opacity-10 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
 
-					<div className="relative z-10 flex flex-col lg:flex-row items-center gap-16">
-						<div className="flex-1 text-center lg:text-left">
+					<div className="relative z-10 flex flex-col md:flex-row items-center gap-12 lg:gap-16">
+						<div className="flex-1 text-center md:text-left">
 							<motion.div
 								initial={{ opacity: 0, x: -20 }}
 								whileInView={{ opacity: 1, x: 0 }}
@@ -78,7 +78,7 @@ export function HomeCtaSection() {
 								whileInView={{ opacity: 1 }}
 								viewport={{ once: false }}
 								transition={{ duration: 0.6, delay: 0.5 }}
-								className="flex flex-wrap justify-center lg:justify-start gap-8 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+								className="flex flex-wrap justify-center md:justify-start gap-8 opacity-40 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
 							>
 								{["Hygienic", "Professional", "Fast Result"].map((feat, i) => (
 									<motion.div
@@ -111,7 +111,7 @@ export function HomeCtaSection() {
 								delay: 0.6,
 								ease: [0.16, 1, 0.3, 1],
 							}}
-							className="shrink-0 w-full lg:w-auto flex justify-center"
+							className="shrink-0 w-full md:w-auto flex justify-center"
 						>
 							<motion.a
 								href={`https://wa.me/${PRIMARY_OUTLET.whatsapp}?text=Halo Mahira Laundry, saya ingin order laundry`}

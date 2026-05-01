@@ -148,96 +148,23 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 				</div>
 			) : (
 				<>
-					{/* DESKTOP TABLE */}
-					<div className="hidden md:block overflow-x-auto">
-						<table className="w-full text-left border-collapse">
-							<thead>
-								<tr className="bg-slate-50/50">
-									<th className="px-6 lg:px-10 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 whitespace-nowrap">
-										Timestamp
-									</th>
-									<th className="px-6 lg:px-10 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-										Actor
-									</th>
-									<th className="px-6 lg:px-10 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-										Action
-									</th>
-									<th className="px-6 lg:px-10 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-										Entity
-									</th>
-									<th className="px-6 lg:px-10 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-										Record ID
-									</th>
-								</tr>
-							</thead>
-							<tbody className="divide-y divide-slate-100">
-								{paginatedLogs.map((log) => (
-									<tr
-										key={log.id}
-										className="group hover:bg-slate-50/30 transition-colors"
-									>
-										<td className="px-6 lg:px-10 py-5 text-xs font-bold text-slate-400 whitespace-nowrap">
-											{formatDateTime(log.created_at)}
-										</td>
-										<td className="px-6 lg:px-10 py-5">
-											<div className="flex items-center gap-3">
-												<div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-[10px] group-hover:bg-slate-900 group-hover:text-white transition-colors shrink-0">
-													{log.profiles?.full_name?.charAt(0) || "S"}
-												</div>
-												<div>
-													<p className="text-sm font-black text-slate-900 uppercase tracking-tight leading-tight">
-														{log.profiles?.full_name || "SYSTEM"}
-													</p>
-													<p className="text-[8px] font-black uppercase tracking-widest text-slate-400">
-														{log.profiles?.role || "kernel"}
-													</p>
-												</div>
-											</div>
-										</td>
-										<td className="px-6 lg:px-10 py-5">
-											<Badge
-												className={cn(
-													"px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border",
-													ACTION_COLORS[log.action] ||
-														"bg-slate-100 text-slate-600 border-slate-200",
-												)}
-											>
-												{log.action.replace("_", " ")}
-											</Badge>
-										</td>
-										<td className="px-6 lg:px-10 py-5">
-											<span className="text-[10px] font-black uppercase tracking-widest px-2.5 py-1 bg-slate-50 rounded-lg text-slate-500 border border-slate-100">
-												{TABLE_LABELS[log.table_name] || log.table_name}
-											</span>
-										</td>
-										<td className="px-6 lg:px-10 py-5 font-mono text-[10px] font-black text-slate-300 group-hover:text-indigo-400 transition-colors">
-											{log.record_id
-												? `${log.record_id.slice(0, 12).toUpperCase()}...`
-												: "—"}
-										</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
-
-					{/* MOBILE CARDS */}
-					<div className="md:hidden divide-y divide-slate-100">
+					<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-0 md:gap-4 p-4 sm:p-6 lg:p-10 divide-y md:divide-y-0 divide-slate-100">
 						{paginatedLogs.map((log) => (
 							<div
 								key={log.id}
-								className="p-4 hover:bg-slate-50/50 transition-colors"
+								className="group p-4 md:p-5 md:rounded-2xl md:border border-slate-100 md:shadow-xs hover:md:shadow-lg hover:md:shadow-indigo-500/5 transition-[box-shadow] duration-300"
 							>
-								<div className="flex items-start justify-between gap-3">
-									<div className="flex items-center gap-3 flex-1 min-w-0">
-										<div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-[10px] shrink-0">
+								{/* Header: Actor + Action */}
+								<div className="flex items-start justify-between gap-3 mb-3">
+									<div className="flex items-center gap-3 min-w-0">
+										<div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600 font-bold text-[10px] group-hover:bg-slate-900 group-hover:text-white transition-colors shrink-0">
 											{log.profiles?.full_name?.charAt(0) || "S"}
 										</div>
 										<div className="min-w-0">
-											<p className="text-sm font-black text-slate-900 truncate">
+											<p className="text-sm font-black text-slate-900 uppercase tracking-tight truncate">
 												{log.profiles?.full_name || "SYSTEM"}
 											</p>
-											<p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">
+											<p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
 												{log.profiles?.role || "kernel"}
 											</p>
 										</div>
@@ -252,11 +179,13 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 										{log.action.replace("_", " ")}
 									</Badge>
 								</div>
-								<div className="flex items-center justify-between mt-2 pl-12">
-									<span className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 bg-slate-50 rounded-sm text-slate-500 border border-slate-100">
+
+								{/* Footer: Entity + Record + Time */}
+								<div className="flex items-center justify-between pt-3 border-t border-slate-50 gap-2">
+									<span className="text-[9px] font-black uppercase tracking-widest px-2 py-0.5 bg-slate-50 rounded-sm text-slate-500 border border-slate-100 truncate">
 										{TABLE_LABELS[log.table_name] || log.table_name}
 									</span>
-									<span className="text-[10px] text-slate-400 font-bold">
+									<span className="text-[10px] text-slate-400 font-bold whitespace-nowrap">
 										{formatDateTime(log.created_at)}
 									</span>
 								</div>

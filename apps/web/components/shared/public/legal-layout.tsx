@@ -56,7 +56,7 @@ export function LegalLayout({
 						initial={{ opacity: 0, y: 30 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-						className="text-5xl lg:text-7xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter"
+						className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.85] tracking-tighter"
 					>
 						{title.split(" ")[0]}{" "}
 						<span className="text-brand-gradient">
@@ -106,7 +106,7 @@ export function LegalLayout({
 					initial={{ opacity: 0, y: 30 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true }}
-					className="mt-32 p-12 lg:p-10 bg-slate-900 rounded-[2rem] flex flex-col lg:flex-row items-center justify-between gap-12 text-center lg:text-left relative overflow-hidden"
+					className="mt-32 p-8 md:p-10 bg-slate-900 rounded-[2rem] flex flex-col md:flex-row items-center justify-between gap-12 text-center md:text-left relative overflow-hidden"
 				>
 					{/* Accent for CTA */}
 					<div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary/20 rounded-full blur-[80px] -mr-20 -mt-20" />

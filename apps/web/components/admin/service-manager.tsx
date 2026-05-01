@@ -67,8 +67,8 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 	return (
 		<div className="space-y-8 sm:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* Action Toolbar */}
-			<div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 sm:gap-6">
-				<div className="relative group flex-1 max-w-md">
+			<div className="flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6">
+				<div className="relative group flex-1 md:max-w-md">
 					<Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors" />
 					<Input
 						value={query}
@@ -78,7 +78,7 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 					/>
 				</div>
 
-				<div className="flex flex-wrap items-center gap-2 sm:gap-3">
+				<div className="flex items-center justify-between gap-2 sm:gap-3">
 					<Button
 						variant="outline"
 						className="rounded-xl h-10 px-4 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white text-slate-600 hover:bg-slate-50 shadow-xs"
@@ -211,30 +211,6 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 					</div>
 				</div>
 			)}
-
-			{/* Strategy Box */}
-			<div className="bg-indigo-600 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden group shadow-xl shadow-indigo-500/20 transition-colors hover:bg-indigo-700 duration-300">
-				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/10 rounded-full -mr-40 -mt-40 blur-3xl opacity-50" />
-
-				<div className="relative flex flex-col lg:flex-row items-center gap-6">
-					<div className="w-16 h-16 bg-white/10 rounded-2xl border border-white/10 flex items-center justify-center text-2xl shadow-xl backdrop-blur-xl shrink-0">
-						💡
-					</div>
-					<div className="flex-1 text-center lg:text-left">
-						<h3 className="text-2xl font-black uppercase tracking-tight mb-4">
-							Optimasi Produk Laundry
-						</h3>
-						<p className="text-indigo-100/70 font-bold text-sm leading-relaxed max-w-2xl">
-							Standardisasi layanan di seluruh cabang sangat krusial. Pastikan
-							setiap layanan memiliki durasi estimasi yang akurat guna menjaga
-							kepuasan pelanggan dan efisiensi waktu operasional.
-						</p>
-					</div>
-					<Button className="bg-slate-900 hover:bg-white hover:text-indigo-600 text-white rounded-xl h-11 px-6 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-slate-900/20">
-						Analisis Performa
-					</Button>
-				</div>
-			</div>
 
 			{/* Integrated Modal Controller (URL Sync) */}
 			{selectedService && (

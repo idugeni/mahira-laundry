@@ -1,4 +1,4 @@
-﻿import {
+import {
 	Activity,
 	ArrowRight,
 	BarChart3,
@@ -74,7 +74,7 @@ export default async function LaporanPage() {
 	const auditLogs = await getAuditLogs(200);
 
 	return (
-		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+		<div className="space-y-8 sm:space-y-10  animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
 			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white shadow-xl shadow-slate-900/30 group">
 				<div className="absolute top-0 right-0 w-[300px] lg:w-[500px] h-[300px] lg:h-[500px] bg-indigo-500/10 rounded-full -mr-24 lg:-mr-40 -mt-24 lg:-mt-40 blur-3xl opacity-50" />
@@ -86,8 +86,8 @@ export default async function LaporanPage() {
 								Business Intelligence
 							</Badge>
 							<span className="text-slate-500 hidden sm:inline">•</span>
-							<span className="text-slate-400 text-xs lg:text-sm font-bold uppercase tracking-widest items-center gap-2 hidden sm:flex">
-								<Layers size={14} /> Comprehensive Auditing
+							<span className="text-slate-400 text-xs lg:text-sm font-bold uppercase tracking-widest flex items-center gap-2">
+								<Layers size={14} className="hidden sm:block" /> <span className="hidden sm:inline">Comprehensive Auditing</span>
 							</span>
 						</div>
 						<h1 className="text-2xl sm:text-4xl lg:text-6xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none text-white">
@@ -123,7 +123,7 @@ export default async function LaporanPage() {
 					<FileText size={20} className="text-indigo-600" /> Katalog Laporan
 				</h2>
 
-				<div className="grid grid-cols-2 lg:grid-cols-3 gap-0 sm:gap-4 lg:gap-5">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-0 sm:gap-4 lg:gap-5">
 					{reportCards.map((report) => (
 						<ReportModal
 							key={report.title}

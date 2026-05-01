@@ -89,8 +89,8 @@ export function HomeServicesSection({
 			/>
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-				<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-20 text-center lg:text-left">
-					<div className="max-w-2xl text-center lg:text-left">
+				<div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20 text-center md:text-left">
+					<div className="max-w-2xl text-center md:text-left">
 						<motion.div
 							initial={{ opacity: 0, x: -20 }}
 							whileInView={{ opacity: 1, x: 0 }}
@@ -106,7 +106,7 @@ export function HomeServicesSection({
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: false }}
-							className="text-4xl lg:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.9]"
+							className="text-4xl md:text-5xl lg:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.9]"
 						>
 							Layanan <br />
 							<span className="text-brand-gradient">Unggulan.</span>
@@ -117,7 +117,7 @@ export function HomeServicesSection({
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: false }}
 						transition={{ delay: 0.3 }}
-						className="text-lg text-slate-500 font-medium max-w-sm text-center lg:text-left mx-auto lg:mx-0"
+						className="text-lg text-slate-500 font-medium max-w-sm text-center md:text-left mx-auto md:mx-0"
 					>
 						Setiap helai kain ditangani oleh tenaga profesional dengan standar
 						kualitas terbaik.

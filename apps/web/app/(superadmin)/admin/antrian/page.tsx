@@ -16,14 +16,24 @@ export default async function IntegratedAntrianPage() {
 
 	let outletId = profile?.outlet_id;
 
+	let outletName = PRIMARY_OUTLET.name;
+
 	if (!outletId && profile?.role === "superadmin") {
+			const { data: outlet } = await supabase
+				.from("outlets")
+				.select("id, name")
+				.eq("is_active", true)
+				.limit(1)
+				.maybeSingle();
+		outletId = outlet?.id;
+		outletName = outlet?.name || PRIMARY_OUTLET.name;
+	} else if (outletId) {
 		const { data: outlet } = await supabase
 			.from("outlets")
-			.select("id")
-			.eq("is_active", true)
-			.limit(1)
+			.select("name")
+			.eq("id", outletId)
 			.single();
-		outletId = outlet?.id;
+		outletName = outlet?.name || PRIMARY_OUTLET.name;
 	}
 
 	const finalOutletId = outletId || PRIMARY_OUTLET.id;
@@ -36,14 +46,14 @@ export default async function IntegratedAntrianPage() {
 		.order("created_at", { ascending: false });
 
 	return (
-		<div className="space-y-8 pb-20 overflow-x-hidden">
+		<div className="space-y-8 sm:space-y-10 overflow-x-hidden">
 			<div>
-				<h1 className="text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900">
+				<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900">
 					Superadmin{" "}
 					<span className="inline-block text-brand-gradient">Antrian</span>
 				</h1>
 				<p className="text-slate-500 font-medium mt-1 uppercase tracking-widest text-xs">
-					Mengelola Antrian — Outlet: {finalOutletId.split("-")[0]}
+					Mengelola Antrian — {outletName}
 				</p>
 			</div>
 			<AntrianClient initialOrders={orders || []} />

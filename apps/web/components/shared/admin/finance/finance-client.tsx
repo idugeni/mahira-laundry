@@ -107,12 +107,12 @@ export function SuperadminFinanceClient({
 	);
 
 	return (
-		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+		<div className="space-y-8 sm:space-y-10 animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
-			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white shadow-xl shadow-slate-900/30 group">
+			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl md:rounded-[2rem] p-6 sm:p-8 md:p-10 text-white shadow-xl shadow-slate-900/30 group">
 				<div className="absolute top-0 right-0 w-[600px] h-[600px] bg-indigo-500/10 rounded-full -mr-48 -mt-48 blur-3xl opacity-60" />
 
-				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
+				<div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6 md:gap-8">
 					<div className="space-y-5">
 						<div className="flex items-center gap-3">
 							<Badge className="bg-emerald-500 text-white border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
@@ -123,10 +123,10 @@ export function SuperadminFinanceClient({
 								<Activity size={14} /> Real-time Cashflow
 							</span>
 						</div>
-						<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight">
+						<h1 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight">
 							Executive <span className="text-emerald-400 italic">Finance</span>
 						</h1>
-						<p className="text-slate-400 font-bold text-sm lg:text-lg max-w-2xl leading-relaxed">
+						<p className="text-slate-400 font-bold text-sm md:text-lg max-w-2xl leading-relaxed">
 							Otoritas keuangan tertinggi Mahira Group. Monitoring
 							profitabilitas, kontrol biaya operasional, dan analisis
 							pertumbuhan finansial seluruh cabang.
@@ -165,7 +165,7 @@ export function SuperadminFinanceClient({
 				className="w-full space-y-8"
 				onValueChange={setActiveTab}
 			>
-				<div className="flex flex-wrap items-center justify-between gap-4 px-4 lg:px-0">
+				<div className="flex flex-wrap items-center justify-between gap-4 px-4 md:px-0">
 					<TabsList className="bg-slate-100 p-1.5 rounded-2xl h-auto flex flex-wrap gap-1.5">
 						<TabsTrigger
 							value="overview"
@@ -210,7 +210,7 @@ export function SuperadminFinanceClient({
 					className="space-y-8 focus-visible:outline-hidden"
 				>
 					{/* KPI Row */}
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-0 sm:gap-6">
+					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 sm:gap-6">
 						<div className="group relative bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-indigo-500/10 transition-shadow duration-300">
 							<div className="flex items-center justify-between mb-6">
 								<div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shadow-md shadow-indigo-100">
@@ -280,9 +280,9 @@ export function SuperadminFinanceClient({
 						</div>
 					</div>
 
-					<div className="grid lg:grid-cols-5 gap-6 lg:gap-8">
+					<div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-8">
 						{/* Revenue Trend Chart */}
-						<div className="lg:col-span-3 bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40">
+						<div className="md:col-span-1 lg:col-span-3 bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40">
 							<div className="flex items-center justify-between mb-10">
 								<div>
 									<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
@@ -299,7 +299,7 @@ export function SuperadminFinanceClient({
 						</div>
 
 						{/* Payment Distribution Pie */}
-						<div className="lg:col-span-2 bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40">
+						<div className="md:col-span-1 lg:col-span-2 bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40">
 							<div className="mb-8">
 								<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
 									Distribusi Bayar
@@ -356,97 +356,24 @@ export function SuperadminFinanceClient({
 							</div>
 						) : (
 							<>
-								{/* DESKTOP TABLE */}
-								<div className="hidden md:block overflow-x-auto">
-									<table className="w-full text-left border-collapse">
-										<thead>
-											<tr className="bg-slate-50/50">
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-													Deskripsi & Kategori
-												</th>
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-													Unit Cabang
-												</th>
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-													Validator
-												</th>
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-													Waktu
-												</th>
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">
-													Nominal
-												</th>
-											</tr>
-										</thead>
-										<tbody className="divide-y divide-slate-100">
-											{paginatedExpenses.map((expense) => (
-												<tr
-													key={expense.id}
-													className="group hover:bg-slate-50/30 transition-colors"
-												>
-													<td className="px-6 py-4">
-														<div>
-															<p className="font-black text-slate-900 uppercase tracking-tight text-sm">
-																{expense.reason}
-															</p>
-															<Badge className="mt-1 bg-rose-50 text-rose-600 border-none text-[8px] font-black uppercase tracking-widest px-1.5 shadow-none">
-																{expense.category || "General"}
-															</Badge>
-														</div>
-													</td>
-													<td className="px-6 py-4">
-														<div className="flex items-center gap-2">
-															<Building2
-																size={14}
-																className="text-slate-300 shrink-0"
-															/>
-															<p className="text-sm font-bold text-slate-700">
-																{expense.outlets?.name || "Global"}
-															</p>
-														</div>
-													</td>
-													<td className="px-6 py-4">
-														<div className="flex items-center gap-2">
-															<div className="w-7 h-7 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-[10px] shrink-0">
-																{expense.profiles?.full_name?.charAt(0) || "?"}
-															</div>
-															<p className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
-																{expense.profiles?.full_name || "—"}
-															</p>
-														</div>
-													</td>
-													<td className="px-6 py-4 text-xs font-bold text-slate-400 whitespace-nowrap">
-														{formatDateTime(expense.created_at)}
-													</td>
-													<td className="px-6 py-4 text-right">
-														<p className="text-base font-black text-rose-600 whitespace-nowrap">
-															-{formatIDR(expense.amount)}
-														</p>
-													</td>
-												</tr>
-											))}
-										</tbody>
-									</table>
-								</div>
-
-								{/* MOBILE CARDS */}
-								<div className="md:hidden divide-y divide-slate-100">
+								<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-0 md:gap-4 md:p-6 divide-y md:divide-y-0 divide-slate-100">
 									{paginatedExpenses.map((expense) => (
 										<div
 											key={expense.id}
-											className="p-4 hover:bg-slate-50/50 transition-colors"
+											className="group p-4 md:p-5 md:rounded-2xl md:border border-slate-100 md:shadow-xs hover:md:shadow-lg hover:md:shadow-indigo-500/5 transition-[box-shadow] duration-300"
 										>
-											<div className="flex items-start justify-between gap-3">
+											{/* Header: Description + Amount */}
+											<div className="flex items-start justify-between gap-3 mb-3">
 												<div className="flex-1 min-w-0">
 													<p className="font-black text-slate-900 text-sm uppercase tracking-tight truncate">
 														{expense.reason}
 													</p>
-													<div className="flex items-center gap-2 mt-1 flex-wrap">
+													<div className="flex items-center gap-2 mt-1.5 flex-wrap">
 														<Badge className="bg-rose-50 text-rose-600 border-none text-[8px] font-black uppercase tracking-widest px-1.5 shadow-none">
 															{expense.category || "General"}
 														</Badge>
-														<span className="text-[10px] text-slate-400 font-bold">
-															{expense.outlets?.name || "Global"}
+														<span className="text-[10px] text-slate-400 font-bold flex items-center gap-1">
+															<Building2 size={10} /> {expense.outlets?.name || "Global"}
 														</span>
 													</div>
 												</div>
@@ -454,10 +381,17 @@ export function SuperadminFinanceClient({
 													-{formatIDR(expense.amount)}
 												</p>
 											</div>
-											<div className="flex items-center justify-between mt-2">
-												<span className="text-[10px] text-slate-400 font-bold">
-													{expense.profiles?.full_name || "—"}
-												</span>
+
+											{/* Footer: Validator + Time */}
+											<div className="flex items-center justify-between pt-3 border-t border-slate-50">
+												<div className="flex items-center gap-2">
+													<div className="w-6 h-6 rounded-lg bg-indigo-50 flex items-center justify-center text-indigo-600 font-black text-[9px] shrink-0">
+														{expense.profiles?.full_name?.charAt(0) || "?"}
+													</div>
+													<span className="text-[10px] font-bold text-slate-500 truncate max-w-[100px]">
+														{expense.profiles?.full_name || "—"}
+													</span>
+												</div>
 												<span className="text-[10px] text-slate-400 font-bold">
 													{formatDateTime(expense.created_at)}
 												</span>
@@ -466,7 +400,7 @@ export function SuperadminFinanceClient({
 									))}
 								</div>
 
-								<div className="px-6 pb-6">
+								<div className="px-4 md:px-6 pb-6">
 									<PaginationControls
 										currentPage={expensePage}
 										totalPages={expenseTotalPages}
@@ -503,83 +437,19 @@ export function SuperadminFinanceClient({
 							</div>
 						) : (
 							<>
-								{/* DESKTOP TABLE */}
-								<div className="hidden md:block overflow-x-auto">
-									<table className="w-full text-left border-collapse">
-										<thead>
-											<tr className="bg-slate-50/50">
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-													Order ID
-												</th>
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-													Pelanggan
-												</th>
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400">
-													Status Bayar
-												</th>
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">
-													Tanggal
-												</th>
-												<th className="px-6 py-5 text-[10px] font-black uppercase tracking-widest text-slate-400 text-right">
-													Amount
-												</th>
-											</tr>
-										</thead>
-										<tbody className="divide-y divide-slate-100">
-											{paginatedHistory.map((order) => (
-												<tr
-													key={order.id}
-													className="group hover:bg-slate-50/30 transition-colors"
-												>
-													<td className="px-6 py-4 font-mono text-xs font-black text-indigo-600">
-														#{order.order_number}
-													</td>
-													<td className="px-6 py-4">
-														<p className="text-sm font-black text-slate-900 uppercase tracking-tight">
-															{Array.isArray(order.profiles)
-																? order.profiles[0]?.full_name || "—"
-																: order.profiles?.full_name || "—"}
-														</p>
-													</td>
-													<td className="px-6 py-4">
-														<Badge
-															className={cn(
-																"px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border-none shadow-none",
-																order.payment_status === "paid"
-																	? "bg-emerald-50 text-emerald-600"
-																	: "bg-amber-50 text-amber-600",
-															)}
-														>
-															{order.payment_status === "paid"
-																? "✓ Settled"
-																: "⏳ Pending"}
-														</Badge>
-													</td>
-													<td className="px-6 py-4 text-right text-xs font-bold text-slate-400 whitespace-nowrap">
-														{formatDateTime(order.created_at)}
-													</td>
-													<td className="px-6 py-4 text-right font-black text-slate-900 text-base whitespace-nowrap">
-														{formatIDR(order.total)}
-													</td>
-												</tr>
-											))}
-										</tbody>
-									</table>
-								</div>
-
-								{/* MOBILE CARDS */}
-								<div className="md:hidden divide-y divide-slate-100">
+								<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-0 md:gap-4 md:p-6 divide-y md:divide-y-0 divide-slate-100">
 									{paginatedHistory.map((order) => (
 										<div
 											key={order.id}
-											className="p-4 hover:bg-slate-50/50 transition-colors"
+											className="group p-4 md:p-5 md:rounded-2xl md:border border-slate-100 md:shadow-xs hover:md:shadow-lg hover:md:shadow-indigo-500/5 transition-[box-shadow] duration-300"
 										>
-											<div className="flex items-start justify-between gap-3">
-												<div>
+											{/* Header: Order ID + Amount */}
+											<div className="flex items-start justify-between gap-3 mb-3">
+												<div className="min-w-0">
 													<p className="font-mono text-xs font-black text-indigo-600">
 														#{order.order_number}
 													</p>
-													<p className="font-black text-slate-900 text-sm mt-0.5">
+													<p className="font-black text-slate-900 text-sm mt-0.5 truncate">
 														{Array.isArray(order.profiles)
 															? order.profiles[0]?.full_name || "—"
 															: order.profiles?.full_name || "—"}
@@ -589,7 +459,9 @@ export function SuperadminFinanceClient({
 													{formatIDR(order.total)}
 												</p>
 											</div>
-											<div className="flex items-center justify-between mt-2">
+
+											{/* Footer: Status + Time */}
+											<div className="flex items-center justify-between pt-3 border-t border-slate-50">
 												<Badge
 													className={cn(
 														"px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-widest border-none shadow-none",
@@ -610,7 +482,7 @@ export function SuperadminFinanceClient({
 									))}
 								</div>
 
-								<div className="px-6 pb-6">
+								<div className="px-4 md:px-6 pb-6">
 									<PaginationControls
 										currentPage={historyPage}
 										totalPages={historyTotalPages}
@@ -627,11 +499,11 @@ export function SuperadminFinanceClient({
 			</Tabs>
 
 			{/* Reconciliation Notice */}
-			<div className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100 flex flex-col lg:flex-row items-center gap-6 group hover:bg-white hover:border-indigo-100 transition-colors duration-300">
+			<div className="bg-slate-50 rounded-2xl p-6 sm:p-8 border border-slate-100 flex flex-col md:flex-row items-center gap-6 group hover:bg-white hover:border-indigo-100 transition-colors duration-300">
 				<div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-xl shadow-md border border-slate-50 shrink-0">
 					🏦
 				</div>
-				<div className="flex-1 text-center lg:text-left">
+				<div className="flex-1 text-center md:text-left">
 					<h3 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight mb-3">
 						Rekonsiliasi Midtrans Audit
 					</h3>

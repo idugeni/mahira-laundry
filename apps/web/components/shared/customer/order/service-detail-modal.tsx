@@ -74,7 +74,7 @@ export function ServiceDetailModal({
 						className="relative w-full max-w-4xl bg-white rounded-t-[2rem] sm:rounded-[2rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col md:flex-row z-10 max-h-[95vh]"
 					>
 						{/* Left Side: Brand Visual Strip */}
-						<div className="relative w-full md:w-[35%] bg-slate-900 p-10 lg:p-14 flex flex-col items-center justify-center text-center shrink-0">
+						<div className="relative w-full md:w-[35%] bg-slate-900 p-10 md:p-14 flex flex-col items-center justify-center text-center shrink-0">
 							{/* Background Decorative */}
 							<div className="absolute inset-0 bg-brand-gradient opacity-20 mix-blend-overlay" />
 							<div className="absolute top-0 left-0 w-full h-full bg-brand-primary/10 blur-[80px] rounded-full" />
@@ -82,7 +82,7 @@ export function ServiceDetailModal({
 							<div className="relative z-10 w-full flex flex-col items-center gap-8">
 								<motion.div
 									variants={itemVariants}
-									className="w-24 h-24 lg:w-32 lg:h-32 rounded-[2.5rem] bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-6xl shadow-2xl relative rotate-3 group"
+									className="w-24 h-24 md:w-32 md:h-32 rounded-[2.5rem] bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-6xl shadow-2xl relative rotate-3 group"
 								>
 									{service.icon || "🧺"}
 									<div className="absolute -bottom-2 -right-2 w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center shadow-xl border-4 border-slate-900">
@@ -101,7 +101,7 @@ export function ServiceDetailModal({
 										Investasi Bersih
 									</span>
 									<div className="flex flex-col items-center pt-4">
-										<h3 className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] tracking-tighter leading-none text-brand-accent">
+										<h3 className="text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] tracking-tighter leading-none text-brand-accent">
 											{formatIDR(Number(service.price))}
 										</h3>
 										<p className="text-[10px] font-black text-white/40 uppercase tracking-[0.4em] mt-4">
@@ -132,10 +132,10 @@ export function ServiceDetailModal({
 								<HiOutlineXMark size={24} />
 							</button>
 
-							<div className="flex-1 overflow-y-auto px-10 py-12 lg:px-16 lg:py-16 custom-scrollbar">
+							<div className="flex-1 overflow-y-auto px-10 py-12 md:px-16 md:py-16 custom-scrollbar">
 								<div className="space-y-12">
 									<motion.div variants={itemVariants} className="text-left">
-										<h2 className="text-4xl lg:text-5xl font-black text-slate-900 font-[family-name:var(--font-heading)] tracking-tighter leading-[0.9] mb-6">
+										<h2 className="text-4xl md:text-5xl font-black text-slate-900 font-[family-name:var(--font-heading)] tracking-tighter leading-[0.9] mb-6">
 											{service.name}
 										</h2>
 										<div className="flex flex-wrap items-center gap-6">
@@ -161,7 +161,7 @@ export function ServiceDetailModal({
 											<HiOutlineTag size={14} />
 											<span>Layanan Overview</span>
 										</div>
-										<p className="text-slate-500 text-lg lg:text-xl leading-relaxed font-medium italic">
+										<p className="text-slate-500 text-lg md:text-xl leading-relaxed font-medium italic">
 											"
 											{service.description ||
 												"Komitmen kami adalah memberikan hasil pengerjaan terbaik untuk setiap serat pakaian Anda."}
@@ -207,7 +207,7 @@ export function ServiceDetailModal({
 							{/* Footer Actions */}
 							<motion.div
 								variants={itemVariants}
-								className="px-10 py-10 lg:px-16 border-t border-slate-50 bg-white"
+								className="px-10 py-10 md:px-16 border-t border-slate-50 bg-white"
 							>
 								<motion.a
 									href={`https://wa.me/${PRIMARY_OUTLET.whatsapp}?text=Halo Mahira Laundry, saya ingin pesan layanan ${service.name}`}

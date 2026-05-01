@@ -14,6 +14,7 @@ import {
 	HiOutlineUserCircle,
 } from "react-icons/hi2";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
+import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
 
 const customerNav = [
 	{ href: "/customer", label: "Dashboard", icon: HiOutlineSquares2X2 },
@@ -54,12 +55,12 @@ export default function CustomerLayout({
 	};
 
 	return (
-		<div className="min-h-screen flex flex-col lg:flex-row bg-slate-50/50">
+		<div className="min-h-screen flex flex-col md:flex-row bg-slate-50/50">
 			{/* Sidebar ... */}
 			<motion.aside
 				initial={{ x: -260 }}
 				animate={{ x: 0 }}
-				className="hidden lg:flex lg:w-64 flex-col bg-white shadow-[20px_0_40px_-15px_rgba(0,0,0,0.03)] sticky top-0 h-screen"
+				className="hidden md:flex md:w-64 flex-col bg-white shadow-[20px_0_40px_-15px_rgba(0,0,0,0.03)] sticky top-0 h-screen"
 			>
 				<div className="p-6 mb-2">
 					<Link href="/">
@@ -111,22 +112,19 @@ export default function CustomerLayout({
 			</motion.aside>
 
 			{/* Main content */}
-			<div className="flex-1 flex flex-col min-w-0 pb-20 lg:pb-0">
-				<header className="h-16 lg:h-20 bg-white/80 backdrop-blur-md flex items-center justify-between px-4 sm:px-8 sticky top-0 z-30">
-					<div className="flex items-center gap-3 lg:hidden">
+			<div className="flex-1 flex flex-col min-w-0 pb-20 md:pb-0">
+				<header className="h-16 md:h-20 bg-white/80 backdrop-blur-md flex items-center justify-between px-4 sm:px-8 sticky top-0 z-30">
+					<div className="flex items-center gap-3 md:hidden">
 						<Link href="/">
 							<MahiraLogo size={28} showText={false} />
 						</Link>
 						<div className="w-px h-6 bg-slate-200 mx-1" />
-						<h2 className="font-bold font-[family-name:var(--font-heading)] text-slate-800 text-sm truncate">
-							{customerNav.find((n) => n.href === pathname)?.label || "Menu"}
-						</h2>
+						<DynamicBreadcrumb />
 					</div>
 
-					<h2 className="hidden lg:block font-bold font-[family-name:var(--font-heading)] text-slate-800">
-						{customerNav.find((n) => n.href === pathname)?.label ||
-							"Portal Pelanggan"}
-					</h2>
+					<div className="hidden md:flex items-center">
+						<DynamicBreadcrumb />
+					</div>
 
 					<div className="flex items-center gap-2 sm:gap-3">
 						<NotificationPopover />
@@ -161,13 +159,13 @@ export default function CustomerLayout({
 				</main>
 
 				{/* Dashboard Footer */}
-				<footer className="p-4 lg:p-6 text-center text-sm text-slate-500 bg-transparent shrink-0">
+				<footer className="p-4 md:p-6 text-center text-sm text-slate-500 bg-transparent shrink-0">
 					<p>© {new Date().getFullYear()} Mahira Group. All rights reserved.</p>
 				</footer>
 			</div>
 
 			{/* Mobile Bottom Navigation */}
-			<nav className="lg:hidden fixed bottom-0 left-0 w-full bg-white shadow-[0_-10px_30px_-5px_rgba(0,0,0,0.05)] px-2 py-2 flex items-center justify-around z-40 pb-safe">
+			<nav className="md:hidden fixed bottom-0 left-0 w-full bg-white shadow-[0_-10px_30px_-5px_rgba(0,0,0,0.05)] px-2 py-2 flex items-center justify-around z-40 pb-safe">
 				{customerNav.map((item) => {
 					const isActive = pathname === item.href;
 					return (

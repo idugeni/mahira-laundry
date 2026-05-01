@@ -108,7 +108,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 				</div>
 
 				{/* Name */}
-				<h3 className="mt-6 text-2xl lg:text-3xl font-black text-slate-900 leading-tight text-center sm:text-left">
+				<h3 className="mt-6 text-2xl md:text-3xl font-black text-slate-900 leading-tight text-center sm:text-left">
 					{pkg.name}
 				</h3>
 
@@ -124,12 +124,12 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 									-{discount}%
 								</span>
 							</span>
-							<span className="text-3xl lg:text-4xl font-black text-red-600 tracking-tighter">
+							<span className="text-3xl md:text-4xl font-black text-red-600 tracking-tighter">
 								{formatIDR(pkg.promo_price as number)}
 							</span>
 						</div>
 					) : (
-						<span className="text-3xl lg:text-4xl font-black text-slate-900 tracking-tighter">
+						<span className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter">
 							{formatIDR(pkg.price)}
 						</span>
 					)}
@@ -272,8 +272,8 @@ export function HomeBusinessPackagesSection({
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 				{/* Header */}
-				<div className="flex flex-col lg:flex-row lg:items-end justify-between gap-10 mb-20 text-center lg:text-left">
-					<div className="max-w-2xl text-center lg:text-left">
+				<div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20 text-center md:text-left">
+					<div className="max-w-2xl text-center md:text-left">
 						<motion.div
 							initial={{ opacity: 0, x: -20 }}
 							whileInView={{ opacity: 1, x: 0 }}
@@ -289,7 +289,7 @@ export function HomeBusinessPackagesSection({
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: false }}
-							className="text-4xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9]"
+							className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9]"
 						>
 							Pilih Paket <br />
 							<span className="text-brand-gradient">Usaha Anda.</span>
@@ -300,7 +300,7 @@ export function HomeBusinessPackagesSection({
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: false }}
 						transition={{ delay: 0.3 }}
-						className="text-lg text-slate-500 font-medium max-w-sm text-center lg:text-left mx-auto lg:mx-0"
+						className="text-lg text-slate-500 font-medium max-w-sm text-center md:text-left mx-auto md:mx-0"
 					>
 						Sistem autopilot yang dirancang untuk memberikan ROI tercepat dalam
 						industri laundry.

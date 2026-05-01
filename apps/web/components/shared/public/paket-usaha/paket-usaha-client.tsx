@@ -68,7 +68,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 						initial={{ opacity: 0, y: 30 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-						className="max-w-4xl mx-auto text-4xl font-black leading-[0.95] text-white sm:text-6xl lg:text-7xl tracking-tighter"
+						className="max-w-4xl mx-auto text-4xl font-black leading-[0.95] text-white sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter"
 					>
 						Bangun Bisnis <br />
 						<span className="text-brand-gradient">Laundry Masa Depan.</span>
@@ -196,9 +196,9 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
-						className="max-w-4xl mx-auto rounded-[2rem] bg-white/5 backdrop-blur-2xl p-10 lg:p-10 border-0 shadow-2xl"
+						className="max-w-4xl mx-auto rounded-[2rem] bg-white/5 backdrop-blur-2xl p-8 md:p-10 border-0 shadow-2xl"
 					>
-						<h2 className="text-3xl lg:text-4xl font-black text-white mb-4 tracking-tighter leading-tight">
+						<h2 className="text-3xl md:text-4xl font-black text-white mb-4 tracking-tighter leading-tight">
 							Wujudkan Mimpi <br />
 							<span className="text-brand-accent">Menjadi Wirausaha.</span>
 						</h2>

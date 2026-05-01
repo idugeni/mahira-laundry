@@ -1,2 +1,15 @@
 {
+	"files.exclude": {
+		"**/node_modules/.cache": true
+	},
+	"search.exclude": {
+		"**/node_modules": true
+	},
+	"js/ts.tsserver.watchOptions": {
+		"excludeDirectories": [
+			"**/node_modules",
+			"**/.git",
+			"**/.next"
+		]
+	}
 }

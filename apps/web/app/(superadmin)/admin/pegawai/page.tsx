@@ -1,4 +1,4 @@
-﻿import {
+import {
 	Building2,
 	Clock,
 	Edit,
@@ -32,6 +32,8 @@ type PegawaiSearchParams = Promise<{
 	q?: string;
 	role?: string;
 }>;
+
+const PEGAWAI_PATH = "/admin/pegawai" as const;
 
 const roleTabs = [
 	{ label: "Semua", value: "all" },
@@ -76,11 +78,11 @@ export default async function PegawaiPage({
 		if (query) nextParams.set("q", query);
 		if (role !== "all") nextParams.set("role", role);
 		const queryString = nextParams.toString();
-		return queryString ? `/admin/pegawai?${queryString}` : "/admin/pegawai";
+		return queryString ? `${PEGAWAI_PATH}?${queryString}` : PEGAWAI_PATH;
 	}
 
 	return (
-		<div className="space-y-8 sm:space-y-10 pb-16 sm:pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
+		<div className="space-y-8 sm:space-y-10  animate-in fade-in slide-in-from-bottom-4 duration-700">
 			{/* High-End Header */}
 			<div className="relative overflow-hidden bg-slate-900 rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 text-white shadow-xl shadow-slate-900/20 group">
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-500/10 rounded-full -mr-40 -mt-40 blur-3xl" />
@@ -97,7 +99,7 @@ export default async function PegawaiPage({
 								{staff.length} Staf Terdaftar
 							</span>
 						</div>
-						<h1 className="text-4xl lg:text-6xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none">
+						<h1 className="text-3xl sm:text-4xl lg:text-6xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none">
 							Manajemen <span className="text-emerald-400 italic">Pegawai</span>
 						</h1>
 						<p className="text-slate-400 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
@@ -118,10 +120,10 @@ export default async function PegawaiPage({
 			</div>
 
 			{/* Filter Section */}
-			<div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+			<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
 				<form
-					action="/admin/pegawai"
-					className="relative group w-full sm:max-w-sm"
+					action={PEGAWAI_PATH}
+					className="relative group w-full lg:max-w-sm"
 				>
 					<Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
 					{activeRole !== "all" && (
@@ -282,26 +284,6 @@ export default async function PegawaiPage({
 					))}
 				</div>
 			)}
-
-			{/* Info footer */}
-			<div className="bg-emerald-50 rounded-2xl p-6 sm:p-8 border border-emerald-100 flex flex-col lg:flex-row items-center gap-6 shadow-lg shadow-emerald-500/5 transition-colors hover:bg-white duration-300">
-				<div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-2xl shadow-md border-2 border-emerald-100">
-					💡
-				</div>
-				<div className="text-center lg:text-left flex-1">
-					<p className="text-lg font-black text-emerald-900 uppercase tracking-tight mb-2">
-						Pusat Informasi SDM
-					</p>
-					<p className="text-emerald-700/70 font-bold text-sm leading-relaxed max-w-3xl">
-						Seluruh kredensial staf Mahira Laundry dikelola dengan enkripsi
-						tinggi. Perubahan peran (role) akan berdampak langsung pada hak
-						akses aplikasi Kasir dan Kurir di seleruh cabang.
-					</p>
-				</div>
-				<Button className="bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl h-14 px-8 font-black text-[10px] uppercase tracking-widest shadow-xl shadow-emerald-900/10">
-					Lihat Panduan
-				</Button>
-			</div>
 		</div>
 	);
 }
