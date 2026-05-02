@@ -10,6 +10,7 @@ import {
 	HiOutlineXMark,
 } from "react-icons/hi2";
 import { toast } from "sonner";
+import { IconCheckbox } from "@/components/shared/common/icon-checkbox";
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -69,6 +70,19 @@ export function ServiceModal({
 	useEffect(() => {
 		setMounted(true);
 	}, []);
+
+	useEffect(() => {
+		if (service) {
+			setIsExpress(service.is_express || false);
+			setIsFeatured(service.is_featured || false);
+			setIsActive(service.is_active);
+		} else {
+			// Reset to defaults for new service
+			setIsExpress(false);
+			setIsFeatured(false);
+			setIsActive(true);
+		}
+	}, [service]);
 
 	const handleDelete = async () => {
 		if (!service) return;
@@ -428,71 +442,30 @@ export function ServiceModal({
 											Pengaturan Tambahan
 										</p>
 										<div className="flex flex-wrap items-center gap-6 p-4 bg-slate-50 border border-slate-100 rounded-2xl">
-											<label className="flex items-center gap-3 cursor-pointer group/check shrink-0">
-												<input
-													type="checkbox"
-													name="is_express"
-													checked={isExpress}
-													onChange={(e) => setIsExpress(e.target.checked)}
-													className="hidden"
-												/>
-												<div
-													className={`relative flex items-center justify-center w-6 h-6 rounded-lg border-2 transition-all ${isExpress ? "border-amber-500 bg-amber-500" : "border-slate-200 bg-white group-hover/check:border-amber-200"}`}
-												>
-													{isExpress && (
-														<span className="absolute text-white pointer-events-none text-[10px] animate-fade-in">
-															⚡
-														</span>
-													)}
-												</div>
-												<span className="text-xs font-black text-slate-600 group-hover/check:text-slate-900 transition-colors uppercase tracking-widest">
-													Express
-												</span>
-											</label>
-
-											<label className="flex items-center gap-3 cursor-pointer group/check shrink-0">
-												<input
-													type="checkbox"
-													name="is_featured"
-													checked={isFeatured}
-													onChange={(e) => setIsFeatured(e.target.checked)}
-													className="hidden"
-												/>
-												<div
-													className={`relative flex items-center justify-center w-6 h-6 rounded-lg border-2 transition-all ${isFeatured ? "border-brand-primary bg-brand-primary" : "border-slate-200 bg-white group-hover/check:border-brand-primary/40"}`}
-												>
-													{isFeatured && (
-														<span className="absolute text-white pointer-events-none text-[10px] animate-fade-in">
-															⭐
-														</span>
-													)}
-												</div>
-												<span className="text-xs font-black text-slate-600 group-hover/check:text-slate-900 transition-colors uppercase tracking-widest">
-													Featured
-												</span>
-											</label>
-
-											<label className="flex items-center gap-3 cursor-pointer group/check shrink-0">
-												<input
-													type="checkbox"
-													name="is_active"
-													checked={isActive}
-													onChange={(e) => setIsActive(e.target.checked)}
-													className="hidden"
-												/>
-												<div
-													className={`relative flex items-center justify-center w-6 h-6 rounded-lg border-2 transition-all ${isActive ? "border-emerald-500 bg-emerald-500" : "border-slate-200 bg-white group-hover/check:border-emerald-200"}`}
-												>
-													{isActive && (
-														<span className="absolute text-white pointer-events-none text-xs animate-fade-in">
-															✓
-														</span>
-													)}
-												</div>
-												<span className="text-xs font-black text-slate-600 group-hover/check:text-slate-900 transition-colors uppercase tracking-widest">
-													Aktif
-												</span>
-											</label>
+											<IconCheckbox
+												name="is_express"
+												checked={isExpress}
+												onChange={setIsExpress}
+												icon="⚡"
+												label="Express"
+												activeColor="amber"
+											/>
+											<IconCheckbox
+												name="is_featured"
+												checked={isFeatured}
+												onChange={setIsFeatured}
+												icon="⭐"
+												label="Featured"
+												activeColor="brand"
+											/>
+											<IconCheckbox
+												name="is_active"
+												checked={isActive}
+												onChange={setIsActive}
+												icon="✓"
+												label="Aktif"
+												activeColor="emerald"
+											/>
 										</div>
 									</div>
 

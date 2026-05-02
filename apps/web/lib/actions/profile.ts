@@ -80,7 +80,7 @@ export async function sendPasswordReset() {
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
-	if (!user || !user.email) return { error: "Unauthorized" };
+	if (!user?.email) return { error: "Unauthorized" };
 
 	const { error } = await supabase.auth.resetPasswordForEmail(user.email, {
 		redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback?type=recovery`,

@@ -57,7 +57,7 @@ const ROLE_ROOTS: Record<string, string> = {
 };
 
 function getRoleRoot(pathname: string): string {
-	const segment = "/" + pathname.split("/")[1];
+	const segment = `/${pathname.split("/")[1]}`;
 	return ROLE_ROOTS[segment] || "/";
 }
 
@@ -69,13 +69,13 @@ interface Crumb {
 
 function buildCrumbs(pathname: string): Crumb[] {
 	const normalized = pathname.replace(/\/$/, "") || "/";
-	const root = getRoleRoot(normalized);
+	const _root = getRoleRoot(normalized);
 	const segments = normalized.split("/").filter(Boolean);
 	const crumbs: Crumb[] = [];
 
 	// Build each level
 	for (let i = 1; i <= segments.length; i++) {
-		const href = "/" + segments.slice(0, i).join("/");
+		const href = `/${segments.slice(0, i).join("/")}`;
 		const label = PATH_LABELS[href];
 		if (!label) continue;
 		crumbs.push({

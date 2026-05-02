@@ -36,7 +36,7 @@ export function PaginatedGrid<T extends { id?: string }>({
 	} = usePagination(items, defaultPageSize);
 
 	if (items.length === 0) {
-		return emptyState ? <>{emptyState}</> : null;
+		return emptyState ? emptyState : null;
 	}
 
 	return (

@@ -75,7 +75,7 @@ export function MahiraHeader() {
 	const megaRef = useRef<HTMLDivElement>(null);
 	const { user, profile, loading } = useAuth();
 
-	const getInitials = (name?: string) => {
+	const _getInitials = (name?: string) => {
 		if (!name) return "??";
 		return name
 			.split(" ")

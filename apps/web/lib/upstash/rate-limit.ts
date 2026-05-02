@@ -174,7 +174,7 @@ export async function applyRateLimit({
 
 	try {
 		result = await limiter.limit(identifier);
-	} catch (err) {
+	} catch (_err) {
 		// Redis error — fail-open agar layanan tidak down total
 		return null;
 	}

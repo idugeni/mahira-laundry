@@ -8,7 +8,6 @@ import {
 	Package,
 	Phone,
 	Plus,
-	TrendingUp,
 	Users2,
 } from "lucide-react";
 import type { Metadata } from "next";
