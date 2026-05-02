@@ -12,10 +12,7 @@ interface OrderModeSelectorProps {
 	onSelectWhatsapp: () => void;
 }
 
-export function OrderModeSelector({
-	onSelectForm,
-	onSelectWhatsapp,
-}: OrderModeSelectorProps) {
+export function OrderModeSelector({ onSelectForm, onSelectWhatsapp }: OrderModeSelectorProps) {
 	return (
 		<motion.div
 			key="selection"
@@ -38,12 +35,10 @@ export function OrderModeSelector({
 				<div className="w-20 h-20 bg-brand-primary/10 rounded-[28px] flex items-center justify-center text-3xl text-brand-primary mb-6 group-hover:bg-brand-primary group-hover:text-white transition-all duration-500 shadow-lg shadow-brand-primary/20">
 					<HiOutlineShoppingBag />
 				</div>
-				<h3 className="text-xl font-black text-slate-900 mb-2">
-					Pilih Sendiri
-				</h3>
+				<h3 className="text-xl font-black text-slate-900 mb-2">Pilih Sendiri</h3>
 				<p className="text-sm text-slate-500 font-medium leading-relaxed mb-8 px-4">
-					Pilih layanan, hitung estimasi biaya, dan tentukan jadwal jemput
-					secara mandiri melalui form.
+					Pilih layanan, hitung estimasi biaya, dan tentukan jadwal jemput secara mandiri melalui
+					form.
 				</p>
 				<div className="flex items-center gap-2 text-brand-primary font-bold text-xs uppercase tracking-widest bg-brand-primary/5 px-6 py-2.5 rounded-full group-hover:bg-brand-primary group-hover:text-white transition-all">
 					Mulai Form <HiOutlineChevronRight />
@@ -66,8 +61,7 @@ export function OrderModeSelector({
 				</div>
 				<h3 className="text-xl font-black text-slate-900 mb-2">Pesan via WA</h3>
 				<p className="text-sm text-slate-500 font-medium leading-relaxed mb-8 px-4">
-					Malas isi form? Chat admin kami sekarang, kami akan bantu buatkan
-					pesanan untuk Anda.
+					Malas isi form? Chat admin kami sekarang, kami akan bantu buatkan pesanan untuk Anda.
 				</p>
 				<div className="flex items-center gap-2 text-emerald-600 font-bold text-xs uppercase tracking-widest bg-emerald-50 px-6 py-2.5 rounded-full group-hover:bg-emerald-500 group-hover:text-white transition-all">
 					Chat Admin <HiOutlineChevronRight />

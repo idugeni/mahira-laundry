@@ -9,8 +9,7 @@ export const metadata: Metadata = {
 		...baseOpenGraph,
 		url: "/layanan",
 		title: "Layanan",
-		description:
-			"Solusi laundry profesional dengan layanan lengkap. Mulai dari Rp 7.000/kg.",
+		description: "Solusi laundry profesional dengan layanan lengkap. Mulai dari Rp 7.000/kg.",
 		images: [
 			{
 				url: "/og/layanan.png",

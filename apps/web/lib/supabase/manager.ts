@@ -15,17 +15,11 @@ export async function getManagerDashboardStats() {
 			.from("orders")
 			.select("final_total")
 			.eq("payment_status", "paid")
-			.gte(
-				"created_at",
-				new Date(new Date().setHours(0, 0, 0, 0)).toISOString(),
-			),
+			.gte("created_at", new Date(new Date().setHours(0, 0, 0, 0)).toISOString()),
 	]);
 
 	const todayRevenue =
-		revenueRes.data?.reduce(
-			(sum, order) => sum + (order.final_total || 0),
-			0,
-		) || 0;
+		revenueRes.data?.reduce((sum, order) => sum + (order.final_total || 0), 0) || 0;
 
 	return {
 		activeOrders: activeOrdersRes.count || 0,

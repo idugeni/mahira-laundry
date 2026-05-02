@@ -1,12 +1,4 @@
-import {
-	ArrowUpRight,
-	Briefcase,
-	Building2,
-	Coins,
-	Globe,
-	Handshake,
-	Plus,
-} from "lucide-react";
+import { ArrowUpRight, Briefcase, Building2, Coins, Globe, Handshake, Plus } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { MitraModal } from "@/components/shared/admin/mitra/mitra-modal";
@@ -39,10 +31,7 @@ export default async function FranchisePage() {
 	);
 	const royaltyGrowth =
 		totalLastMonthRoyalty > 0
-			? (
-					((totalRoyalty - totalLastMonthRoyalty) / totalLastMonthRoyalty) *
-					100
-				).toFixed(1)
+			? (((totalRoyalty - totalLastMonthRoyalty) / totalLastMonthRoyalty) * 100).toFixed(1)
 			: totalRoyalty > 0
 				? "100.0"
 				: "0.0";
@@ -68,9 +57,8 @@ export default async function FranchisePage() {
 							Portal <span className="text-indigo-600 italic">Kemitraan</span>
 						</h1>
 						<p className="text-slate-500 font-bold text-sm lg:text-lg max-w-2xl leading-relaxed">
-							Ekspansi bisnis Mahira Laundry melalui manajemen mitra strategis,
-							pengawasan model bisnis franchise, dan standardisasi SOP
-							operasional secara digital.
+							Ekspansi bisnis Mahira Laundry melalui manajemen mitra strategis, pengawasan model
+							bisnis franchise, dan standardisasi SOP operasional secara digital.
 						</p>
 					</div>
 
@@ -152,14 +140,13 @@ export default async function FranchisePage() {
 								Belum Ada Mitra
 							</h3>
 							<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-4 max-w-lg leading-relaxed mx-auto text-center">
-								Portal kemitraan siap untuk onboarding. Tambahkan mitra pertama
-								untuk memperluas jangkauan bisnis Anda.
+								Portal kemitraan siap untuk onboarding. Tambahkan mitra pertama untuk memperluas
+								jangkauan bisnis Anda.
 							</p>
 						</div>
 					}
 					renderItem={(outlet) => {
-						const royaltyAmount =
-							outlet.monthlyRevenue * (outlet.franchise_fee / 100);
+						const royaltyAmount = outlet.monthlyRevenue * (outlet.franchise_fee / 100);
 						return (
 							<div className="group relative bg-white rounded-2xl border border-slate-100 p-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-indigo-500/10 transition-[box-shadow,border-color] duration-300 overflow-hidden flex flex-col">
 								<div className="absolute top-0 right-0 p-8 text-indigo-50/50 group-hover:text-indigo-100/50 transition-colors pointer-events-none">
@@ -219,9 +206,7 @@ export default async function FranchisePage() {
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
 												Volume
 											</p>
-											<p className="text-lg font-black text-slate-900">
-												{outlet.ordersThisMonth}
-											</p>
+											<p className="text-lg font-black text-slate-900">{outlet.ordersThisMonth}</p>
 										</div>
 									</div>
 								</div>

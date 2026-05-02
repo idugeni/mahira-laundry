@@ -9,8 +9,7 @@ export const metadata: Metadata = {
 		...baseOpenGraph,
 		url: "/lacak",
 		title: "Lacak Pesanan | Mahira Laundry",
-		description:
-			"Pantau status cucian Anda secara real-time dari jemput hingga antar.",
+		description: "Pantau status cucian Anda secara real-time dari jemput hingga antar.",
 		images: [
 			{
 				url: "/og/lacak.png",
@@ -30,9 +29,7 @@ export default function LacakPage() {
 					<h1 className="text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900">
 						Lacak <span className="text-brand-primary">Pesanan</span>
 					</h1>
-					<p className="text-slate-500 mt-2">
-						Masukkan Nomor Pesanan atau ID dari struk Anda
-					</p>
+					<p className="text-slate-500 mt-2">Masukkan Nomor Pesanan atau ID dari struk Anda</p>
 				</div>
 				<TrackingClient />
 			</div>

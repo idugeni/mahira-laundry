@@ -126,8 +126,7 @@ export function FAQClient() {
 						transition={{ delay: 0.1 }}
 						className="text-4xl md:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900 mb-6 tracking-tight"
 					>
-						Ada yang bisa kami{" "}
-						<span className="text-brand-primary">bantu?</span>
+						Ada yang bisa kami <span className="text-brand-primary">bantu?</span>
 					</motion.h1>
 
 					<motion.p
@@ -136,8 +135,8 @@ export function FAQClient() {
 						transition={{ delay: 0.2 }}
 						className="text-lg text-slate-600 mb-10 max-w-2xl mx-auto"
 					>
-						Cari jawaban cepat untuk pertanyaan yang sering ditanyakan mengenai
-						layanan, harga, hingga kemitraan kami.
+						Cari jawaban cepat untuk pertanyaan yang sering ditanyakan mengenai layanan, harga,
+						hingga kemitraan kami.
 					</motion.p>
 
 					<motion.div
@@ -218,9 +217,7 @@ export function FAQClient() {
 											>
 												<button
 													type="button"
-													onClick={() =>
-														setOpenIndex(openIndex === idx ? null : idx)
-													}
+													onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
 													className="w-full flex items-center justify-between p-6 md:p-8 text-left"
 												>
 													<span
@@ -262,12 +259,9 @@ export function FAQClient() {
 											<HiOutlineMagnifyingGlass />
 										</span>
 									</div>
-									<h3 className="text-xl font-bold text-slate-900 mb-2">
-										Maaf, tidak ada hasil
-									</h3>
+									<h3 className="text-xl font-bold text-slate-900 mb-2">Maaf, tidak ada hasil</h3>
 									<p className="text-slate-500">
-										Kami tidak dapat menemukan jawaban untuk "{searchQuery}".{" "}
-										<br />
+										Kami tidak dapat menemukan jawaban untuk "{searchQuery}". <br />
 										Coba gunakan kata kunci lain atau hubungi CS kami.
 									</p>
 								</div>
@@ -286,8 +280,7 @@ export function FAQClient() {
 							Masih punya pertanyaan lain?
 						</h2>
 						<p className="text-slate-400 mb-8 max-w-lg mx-auto">
-							Tim customer service kami siap membantu Anda 24/7 untuk segala
-							pertanyaan mendesak.
+							Tim customer service kami siap membantu Anda 24/7 untuk segala pertanyaan mendesak.
 						</p>
 						<a
 							href="https://wa.me/6283806518859"

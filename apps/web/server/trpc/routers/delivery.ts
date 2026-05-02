@@ -7,9 +7,7 @@ export const deliveryRouter = router({
 		const supabase = await createClient();
 		const { data } = await supabase
 			.from("delivery")
-			.select(
-				"*, orders(order_number, customer_id, profiles(full_name, phone))",
-			)
+			.select("*, orders(order_number, customer_id, profiles(full_name, phone))")
 			.eq("courier_id", ctx.userId)
 			.in("status", ["assigned", "on_the_way", "arrived"])
 			.order("created_at", { ascending: false });

@@ -1,9 +1,6 @@
 "use server";
 
-import {
-	createClient,
-	getBusinessPackageInquiries,
-} from "@/lib/supabase/server";
+import { createClient, getBusinessPackageInquiries } from "@/lib/supabase/server";
 import type {
 	ActionResponse,
 	BusinessPackageInquiry,
@@ -17,9 +14,7 @@ import { formLimiter } from "@/lib/upstash/rate-limit";
 export async function submitBusinessInquiry(
 	data: SubmitInquiryInput,
 ): Promise<ActionResponse<BusinessPackageInquiry>> {
-	const { success } = await formLimiter.limit(
-		data.phone || data.email || "anonymous",
-	);
+	const { success } = await formLimiter.limit(data.phone || data.email || "anonymous");
 	if (!success) {
 		return {
 			success: false,
@@ -34,19 +29,16 @@ export async function submitBusinessInquiry(
 			return await submitBusinessInquiryViaTables(supabase, data);
 		}
 
-		const { data: _inquiryId, error: rpcError } = await supabase.rpc(
-			"submit_business_inquiry_v1",
-			{
-				p_full_name: data.full_name,
-				p_phone: data.phone,
-				p_email: data.email,
-				p_city: data.city,
-				p_package_id: data.package_id,
-				p_package_name: data.package_name,
-				p_budget_range: data.budget_range,
-				p_message: data.message,
-			},
-		);
+		const { data: _inquiryId, error: rpcError } = await supabase.rpc("submit_business_inquiry_v1", {
+			p_full_name: data.full_name,
+			p_phone: data.phone,
+			p_email: data.email,
+			p_city: data.city,
+			p_package_id: data.package_id,
+			p_package_name: data.package_name,
+			p_budget_range: data.budget_range,
+			p_message: data.message,
+		});
 
 		if (rpcError) {
 			if (rpcError.message === "Duplicate inquiry") {
@@ -76,9 +68,7 @@ async function submitBusinessInquiryViaTables(
 	supabase: Awaited<ReturnType<typeof createClient>>,
 	data: SubmitInquiryInput,
 ): Promise<ActionResponse<BusinessPackageInquiry>> {
-	const duplicateSince = new Date(
-		Date.now() - 24 * 60 * 60 * 1000,
-	).toISOString();
+	const duplicateSince = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
 	let duplicateQuery = supabase
 		.from("business_package_inquiries")
 		.select("id")
@@ -92,8 +82,7 @@ async function submitBusinessInquiryViaTables(
 		duplicateQuery = duplicateQuery.eq("package_id", data.package_id);
 	}
 
-	const { data: existingInquiries, error: duplicateError } =
-		await duplicateQuery;
+	const { data: existingInquiries, error: duplicateError } = await duplicateQuery;
 	if (duplicateError) throw duplicateError;
 
 	if (existingInquiries && existingInquiries.length > 0) {
@@ -130,17 +119,15 @@ async function submitBusinessInquiryViaTables(
 	if (superadminError) throw superadminError;
 
 	if (superadmins && superadmins.length > 0) {
-		const { error: notificationError } = await supabase
-			.from("notifications")
-			.insert(
-				superadmins.map((admin) => ({
-					user_id: admin.id,
-					title: `Lead Baru: ${data.package_name}`,
-					body: `${data.full_name} mengajukan inquiry paket usaha dari ${data.city}.`,
-					type: "system",
-					is_read: false,
-				})),
-			);
+		const { error: notificationError } = await supabase.from("notifications").insert(
+			superadmins.map((admin) => ({
+				user_id: admin.id,
+				title: `Lead Baru: ${data.package_name}`,
+				body: `${data.full_name} mengajukan inquiry paket usaha dari ${data.city}.`,
+				type: "system",
+				is_read: false,
+			})),
+		);
 
 		if (notificationError) throw notificationError;
 	}
@@ -191,15 +178,13 @@ export async function updateInquiryStatus(
 
 		if (!user) throw new Error("Unauthorized");
 
-		const { error: logError } = await supabase
-			.from("business_package_inquiry_logs")
-			.insert({
-				inquiry_id: id,
-				changed_by: user.id,
-				old_status: oldStatus,
-				new_status: status,
-				note: note ?? null,
-			});
+		const { error: logError } = await supabase.from("business_package_inquiry_logs").insert({
+			inquiry_id: id,
+			changed_by: user.id,
+			old_status: oldStatus,
+			new_status: status,
+			note: note ?? null,
+		});
 
 		if (logError) throw logError;
 
@@ -237,8 +222,7 @@ export async function exportInquiriesCSV(
 	try {
 		const inquiries = await getBusinessPackageInquiries(filters);
 
-		const header =
-			"full_name,phone,email,city,package_name,status,budget_range,message,created_at";
+		const header = "full_name,phone,email,city,package_name,status,budget_range,message,created_at";
 
 		const escapeField = (value: string | null | undefined): string => {
 			const str = value ?? "";

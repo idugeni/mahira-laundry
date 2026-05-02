@@ -11,21 +11,16 @@ interface AdminAvatarProps {
 	defaultInitials?: string;
 }
 
-function getInitials(
-	fullName?: string | null,
-	defaultInitials: string = "??",
-): string {
+function getInitials(fullName?: string | null, defaultInitials: string = "??"): string {
 	if (!fullName) return defaultInitials;
 	const parts = fullName.trim().split(/\s+/);
-	if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
-	return (parts[0].charAt(0) + parts[1].charAt(0)).toUpperCase();
+	if (parts.length === 1) return (parts[0]?.charAt(0) ?? "?").toUpperCase();
+	return (
+		((parts[0]?.charAt(0) ?? "") + (parts[1]?.charAt(0) ?? "")).toUpperCase() || defaultInitials
+	);
 }
 
-export function AdminAvatar({
-	fullName,
-	avatarUrl,
-	className,
-}: AdminAvatarProps) {
+export function AdminAvatar({ fullName, avatarUrl, className }: AdminAvatarProps) {
 	// Cache-bust only after client hydration to avoid server/client srcSet mismatch
 	const [cacheBust, setCacheBust] = useState(false);
 

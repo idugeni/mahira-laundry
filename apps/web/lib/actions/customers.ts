@@ -3,9 +3,7 @@
 import { createClient } from "@/lib/supabase/server";
 import type { ActionResponse, Profile } from "@/lib/types";
 
-export async function searchCustomers(
-	query: string,
-): Promise<ActionResponse<Profile[]>> {
+export async function searchCustomers(query: string): Promise<ActionResponse<Profile[]>> {
 	try {
 		const supabase = await createClient();
 

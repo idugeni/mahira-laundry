@@ -100,8 +100,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 								<div className="relative flex items-center justify-between">
 									<div>
 										<h2 className="text-2xl font-black text-slate-900 tracking-tight">
-											Onboarding{" "}
-											<span className="text-indigo-600">Mitra Baru</span>
+											Onboarding <span className="text-indigo-600">Mitra Baru</span>
 										</h2>
 										<p className="text-xs font-bold text-slate-400 mt-1 uppercase tracking-wider">
 											Registrasi Akun Owner & Inisialisasi Outlet Franchise
@@ -318,8 +317,7 @@ export function MitraModal({ trigger }: { trigger?: React.ReactNode } = {}) {
 													/>
 												</div>
 												<p className="text-[10px] text-slate-400 italic ml-1">
-													Persentase bagi hasil bulanan yang akan dipotong dari
-													pendapatan outlet.
+													Persentase bagi hasil bulanan yang akan dipotong dari pendapatan outlet.
 												</p>
 											</div>
 										</div>

@@ -27,9 +27,7 @@ const OrderSchema = z.object({
 		.min(1),
 });
 
-export async function createOrder(
-	formData: FormData,
-): Promise<ActionResponse<Order>> {
+export async function createOrder(formData: FormData): Promise<ActionResponse<Order>> {
 	const supabase = await createClient();
 	const {
 		data: { user },
@@ -49,10 +47,7 @@ export async function createOrder(
 		});
 
 		const finalCustomerId = validatedData.customer_id || user.id;
-		const generatedOrderNumber = Math.random()
-			.toString(36)
-			.substring(2, 8)
-			.toUpperCase();
+		const generatedOrderNumber = Math.random().toString(36).substring(2, 8).toUpperCase();
 
 		const serverTotal = validatedData.items.reduce((acc, item) => {
 			const sub = item.quantity * item.unit_price * (item.is_express ? 1.5 : 1);
@@ -90,9 +85,7 @@ export async function createOrder(
 			notes: item.notes,
 		}));
 
-		const { error: itemsError } = await supabase
-			.from("order_items")
-			.insert(orderItems);
+		const { error: itemsError } = await supabase.from("order_items").insert(orderItems);
 		if (itemsError) return { success: false, error: itemsError.message };
 
 		await supabase.from("order_status_logs").insert({
@@ -111,7 +104,7 @@ export async function createOrder(
 		if (error instanceof z.ZodError) {
 			return {
 				success: false,
-				error: `Data tidak valid: ${error.issues[0].message}`,
+				error: `Data tidak valid: ${error.issues[0]?.message ?? "Validation error"}`,
 			};
 		}
 		return {
@@ -152,10 +145,7 @@ export async function updateOrderStatus(
 		Object.assign(updateData, { [timeField]: now });
 	}
 
-	const { error } = await supabase
-		.from("orders")
-		.update(updateData)
-		.eq("id", orderId);
+	const { error } = await supabase.from("orders").update(updateData).eq("id", orderId);
 
 	if (error) return { success: false, error: error.message };
 
@@ -170,10 +160,7 @@ export async function updateOrderStatus(
 	return { success: true };
 }
 
-export async function cancelOrder(
-	orderId: string,
-	reason: string,
-): Promise<ActionResponse> {
+export async function cancelOrder(orderId: string, reason: string): Promise<ActionResponse> {
 	const supabase = await createClient();
 	const {
 		data: { user },
@@ -230,10 +217,7 @@ export async function assignStaffToOrder(data: {
 		if (data.role === "qc") updateData.qc_id = data.staffId;
 		if (data.role === "kasir") updateData.kasir_id = data.staffId;
 
-		const { error } = await supabase
-			.from("orders")
-			.update(updateData)
-			.eq("id", data.orderId);
+		const { error } = await supabase.from("orders").update(updateData).eq("id", data.orderId);
 
 		if (error) throw error;
 		revalidatePath("/admin/pos");
@@ -244,9 +228,7 @@ export async function assignStaffToOrder(data: {
 	}
 }
 
-export async function trackOrder(
-	orderIdentifier: string,
-): Promise<ActionResponse<Order>> {
+export async function trackOrder(orderIdentifier: string): Promise<ActionResponse<Order>> {
 	try {
 		const supabase = await createClient();
 

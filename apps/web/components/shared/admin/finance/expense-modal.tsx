@@ -37,7 +37,7 @@ export function ExpenseModal({
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [mounted, setMounted] = useState(false);
-	const [category, setCategory] = useState(CATEGORIES[0].id);
+	const [category, setCategory] = useState(CATEGORIES[0]?.id ?? "");
 
 	useEffect(() => {
 		setMounted(true);
@@ -68,11 +68,7 @@ export function ExpenseModal({
 
 	return (
 		<>
-			<button
-				type="button"
-				onClick={() => setIsOpen(true)}
-				className="contents"
-			>
+			<button type="button" onClick={() => setIsOpen(true)} className="contents">
 				{trigger || (
 					<span className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-rose-500 px-3.5 text-sm font-semibold text-white shadow-md shadow-rose-100 transition-colors hover:bg-rose-600">
 						<HiOutlineBanknotes size={18} />
@@ -144,11 +140,7 @@ export function ExpenseModal({
 												</SelectTrigger>
 												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
 													{CATEGORIES.map((cat) => (
-														<SelectItem
-															key={cat.id}
-															value={cat.id}
-															className="font-bold py-3"
-														>
+														<SelectItem key={cat.id} value={cat.id} className="font-bold py-3">
 															{cat.label}
 														</SelectItem>
 													))}

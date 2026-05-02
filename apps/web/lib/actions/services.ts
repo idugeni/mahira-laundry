@@ -21,9 +21,7 @@ export type ServiceInput = {
 	is_featured?: boolean;
 };
 
-export async function upsertService(
-	data: ServiceInput,
-): Promise<ActionResponse> {
+export async function upsertService(data: ServiceInput): Promise<ActionResponse> {
 	try {
 		const supabase = await createClient();
 
@@ -46,10 +44,7 @@ export async function upsertService(
 
 		let result: { error: { message: string } | null };
 		if (data.id) {
-			result = await supabase
-				.from("services")
-				.update(serviceData)
-				.eq("id", data.id);
+			result = await supabase.from("services").update(serviceData).eq("id", data.id);
 		} else {
 			result = await supabase.from("services").insert(serviceData);
 		}

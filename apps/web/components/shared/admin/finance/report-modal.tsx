@@ -19,19 +19,14 @@ interface ReportModalProps {
 	trigger: React.ReactNode;
 }
 
-export function ReportModal({
-	initialType = "harian",
-	trigger,
-}: ReportModalProps) {
+export function ReportModal({ initialType = "harian", trigger }: ReportModalProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [mounted, setMounted] = useState(false);
 	const [reportType, setReportType] = useState<ReportType>(initialType);
-	const [dateRange, setDateRange] = useState({
-		from: new Date(new Date().setDate(new Date().getDate() - 30))
-			.toISOString()
-			.split("T")[0],
-		to: new Date().toISOString().split("T")[0],
+	const [dateRange, setDateRange] = useState<{ from: string; to: string }>({
+		from: new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().split("T")[0] ?? "",
+		to: new Date().toISOString().split("T")[0] ?? "",
 	});
 
 	useEffect(() => {
@@ -88,8 +83,7 @@ export function ReportModal({
 										</div>
 										<div>
 											<h2 className="text-xl font-black text-slate-900 tracking-tight">
-												Kustomisasi{" "}
-												<span className="text-pink-600">Laporan</span>
+												Kustomisasi <span className="text-pink-600">Laporan</span>
 											</h2>
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
 												Filter & Ekspor Data Operasional
@@ -166,9 +160,7 @@ export function ReportModal({
 											<input
 												type="date"
 												value={dateRange.from}
-												onChange={(e) =>
-													setDateRange({ ...dateRange, from: e.target.value })
-												}
+												onChange={(e) => setDateRange({ ...dateRange, from: e.target.value || "" })}
 												className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-hidden focus:border-pink-500 transition-all"
 											/>
 										</div>
@@ -179,9 +171,7 @@ export function ReportModal({
 											<input
 												type="date"
 												value={dateRange.to}
-												onChange={(e) =>
-													setDateRange({ ...dateRange, to: e.target.value })
-												}
+												onChange={(e) => setDateRange({ ...dateRange, to: e.target.value || "" })}
 												className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-hidden focus:border-pink-500 transition-all"
 											/>
 										</div>
@@ -206,8 +196,8 @@ export function ReportModal({
 										)}
 									</button>
 									<p className="text-[10px] text-center text-slate-400 mt-4 px-8 italic">
-										Data yang diekspor disinkronkan langsung dengan basis data
-										utama Mahira Laundry untuk akurasi pelaporan.
+										Data yang diekspor disinkronkan langsung dengan basis data utama Mahira Laundry
+										untuk akurasi pelaporan.
 									</p>
 								</div>
 							</div>

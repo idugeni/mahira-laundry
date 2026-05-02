@@ -20,11 +20,7 @@ interface ServiceDetailModalProps {
 	onClose: () => void;
 }
 
-export function ServiceDetailModal({
-	service,
-	isOpen,
-	onClose,
-}: ServiceDetailModalProps) {
+export function ServiceDetailModal({ service, isOpen, onClose }: ServiceDetailModalProps) {
 	if (!service) return null;
 
 	const containerVariants = {
@@ -92,10 +88,7 @@ export function ServiceDetailModal({
 									</div>
 								</motion.div>
 
-								<motion.div
-									variants={itemVariants}
-									className="text-white space-y-2"
-								>
+								<motion.div variants={itemVariants} className="text-white space-y-2">
 									<span className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 rounded-full text-[9px] font-black uppercase tracking-[0.3em] text-brand-primary border border-white/5">
 										<HiOutlineSparkles size={12} />
 										Investasi Bersih
@@ -143,9 +136,7 @@ export function ServiceDetailModal({
 												<span className="text-brand-primary">
 													<HiOutlineClock size={16} />
 												</span>
-												<span>
-													{service.estimated_duration_hours} Jam Pengerjaan
-												</span>
+												<span>{service.estimated_duration_hours} Jam Pengerjaan</span>
 											</div>
 											{service.is_express && (
 												<div className="flex items-center gap-3 text-amber-600 text-[10px] font-black uppercase tracking-widest bg-amber-50 px-4 py-2 rounded-full border border-amber-100">

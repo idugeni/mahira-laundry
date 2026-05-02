@@ -80,8 +80,8 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 						transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
 						className="mx-auto mt-8 max-w-2xl text-lg font-medium leading-relaxed text-slate-400"
 					>
-						Kami tidak hanya menjual peralatan, kami membangun sistem kesuksesan
-						untuk Anda. Bergabunglah dengan standar premium Mahira Laundry.
+						Kami tidak hanya menjual peralatan, kami membangun sistem kesuksesan untuk Anda.
+						Bergabunglah dengan standar premium Mahira Laundry.
 					</motion.p>
 
 					<motion.div
@@ -92,17 +92,13 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 					>
 						<motion.button
 							onClick={() =>
-								document
-									.getElementById("packages")
-									?.scrollIntoView({ behavior: "smooth" })
+								document.getElementById("packages")?.scrollIntoView({ behavior: "smooth" })
 							}
 							animate={{ y: [0, 10, 0] }}
 							transition={{ duration: 2, repeat: Infinity }}
 							className="text-white/30 hover:text-brand-accent transition-colors flex flex-col items-center gap-2 mx-auto"
 						>
-							<span className="text-[10px] font-black uppercase tracking-[0.3em]">
-								Lihat Paket
-							</span>
+							<span className="text-[10px] font-black uppercase tracking-[0.3em]">Lihat Paket</span>
 							<HiOutlineArrowDown size={24} />
 						</motion.button>
 					</motion.div>
@@ -110,10 +106,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 			</section>
 
 			{/* Package Cards - Staggered Motion */}
-			<section
-				id="packages"
-				className="py-14 sm:py-16 bg-slate-50 relative overflow-hidden"
-			>
+			<section id="packages" className="py-14 sm:py-16 bg-slate-50 relative overflow-hidden">
 				<div className="container relative z-10 mx-auto px-6">
 					<div className="mb-16 text-center">
 						<h2 className="text-3xl font-black tracking-tighter text-slate-900 sm:text-4xl">
@@ -152,10 +145,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 
 			{/* Comparison Table - Reveal Animation */}
 			{packages.length > 0 && (
-				<section
-					id="perbandingan"
-					className="bg-white py-14 sm:py-16 scroll-mt-24"
-				>
+				<section id="perbandingan" className="bg-white py-14 sm:py-16 scroll-mt-24">
 					<div className="container mx-auto px-6">
 						<motion.div
 							initial={{ opacity: 0, y: 30 }}
@@ -164,8 +154,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 							className="mb-16 text-center"
 						>
 							<h2 className="text-3xl font-black tracking-tighter text-slate-900 sm:text-4xl">
-								Bandingkan{" "}
-								<span className="text-brand-gradient">Paket Usaha</span>
+								Bandingkan <span className="text-brand-gradient">Paket Usaha</span>
 							</h2>
 							<div className="mt-4 flex justify-center">
 								<div className="h-1.5 w-24 bg-brand-primary rounded-full" />
@@ -186,10 +175,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 			)}
 
 			{/* WhatsApp CTA Section - High Impact Motion */}
-			<section
-				id="contact-wa"
-				className="py-16 bg-slate-900 relative overflow-hidden"
-			>
+			<section id="contact-wa" className="py-16 bg-slate-900 relative overflow-hidden">
 				<div className="absolute inset-0 bg-brand-gradient opacity-10" />
 				<div className="container relative z-10 mx-auto px-6 text-center">
 					<motion.div
@@ -203,8 +189,8 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 							<span className="text-brand-accent">Menjadi Wirausaha.</span>
 						</h2>
 						<p className="text-xl text-slate-400 mb-12 font-medium leading-relaxed max-w-2xl mx-auto italic">
-							"Konsultasikan kebutuhan bisnis laundry Anda dengan tim ahli kami
-							secara gratis melalui WhatsApp."
+							"Konsultasikan kebutuhan bisnis laundry Anda dengan tim ahli kami secara gratis
+							melalui WhatsApp."
 						</p>
 						<motion.a
 							href={waUrl}

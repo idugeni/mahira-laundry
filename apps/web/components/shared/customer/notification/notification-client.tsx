@@ -17,8 +17,7 @@ import type { AppNotification } from "@/lib/types";
 
 export function NotificationClient() {
 	const { notifications, unreadCount, markAsRead } = useNotifications();
-	const [selectedNotification, setSelectedNotification] =
-		useState<AppNotification | null>(null);
+	const [selectedNotification, setSelectedNotification] = useState<AppNotification | null>(null);
 
 	const getIcon = (type: string) => {
 		switch (type) {
@@ -59,8 +58,7 @@ export function NotificationClient() {
 			<div className="flex items-center justify-between">
 				<div>
 					<h1 className="text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900">
-						Pusat{" "}
-						<span className="inline-block text-brand-gradient">Notifikasi</span>
+						Pusat <span className="inline-block text-brand-gradient">Notifikasi</span>
 					</h1>
 					<p className="text-slate-500 mt-1 font-medium">
 						Informasi terbaru mengenai cucian dan promo Anda.
@@ -171,11 +169,9 @@ export function NotificationClient() {
 
 							<div className="p-10 text-center">
 								<span className="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 px-4 py-1.5 rounded-full inline-block mb-6">
-									{format(
-										new Date(selectedNotification.created_at),
-										"eeee, d MMMM yyyy • HH:mm",
-										{ locale: idLocale },
-									)}
+									{format(new Date(selectedNotification.created_at), "eeee, d MMMM yyyy • HH:mm", {
+										locale: idLocale,
+									})}
 								</span>
 								<h2 className="text-2xl font-black text-slate-900 mb-4">
 									{selectedNotification.title}

@@ -68,15 +68,9 @@ function getServiceStyles(name: string) {
 	};
 }
 
-export function HomeServicesSection({
-	services,
-	onServiceClick,
-}: HomeServicesSectionProps) {
+export function HomeServicesSection({ services, onServiceClick }: HomeServicesSectionProps) {
 	return (
-		<section
-			className="py-14 sm:py-16 relative bg-slate-50/40 overflow-hidden"
-			id="layanan"
-		>
+		<section className="py-14 sm:py-16 relative bg-slate-50/40 overflow-hidden" id="layanan">
 			{/* Animated background accent */}
 			<motion.div
 				animate={{
@@ -119,8 +113,7 @@ export function HomeServicesSection({
 						transition={{ delay: 0.3 }}
 						className="text-lg text-slate-500 font-medium max-w-sm text-center md:text-left mx-auto md:mx-0"
 					>
-						Setiap helai kain ditangani oleh tenaga profesional dengan standar
-						kualitas terbaik.
+						Setiap helai kain ditangani oleh tenaga profesional dengan standar kualitas terbaik.
 					</motion.p>
 				</div>
 
@@ -166,11 +159,7 @@ export function HomeServicesSection({
 												damping: 20,
 											}}
 										>
-											{service.icon ? (
-												<span className="shrink-0">{service.icon}</span>
-											) : (
-												<Icon />
-											)}
+											{service.icon ? <span className="shrink-0">{service.icon}</span> : <Icon />}
 										</motion.div>
 
 										<div className="relative">
@@ -228,10 +217,7 @@ export function HomeServicesSection({
 						className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-50 text-slate-900 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 border border-slate-100"
 					>
 						Eksplor Semua Layanan
-						<motion.div
-							animate={{ x: [0, 5, 0] }}
-							transition={{ repeat: Infinity, duration: 1.5 }}
-						>
+						<motion.div animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
 							<HiOutlineArrowRight size={18} />
 						</motion.div>
 					</Link>

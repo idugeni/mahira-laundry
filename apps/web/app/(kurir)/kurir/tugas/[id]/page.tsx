@@ -12,17 +12,11 @@ export async function generateMetadata({
 	};
 }
 
-export default async function TugasDetailPage({
-	params,
-}: {
-	params: Promise<{ id: string }>;
-}) {
+export default async function TugasDetailPage({ params }: { params: Promise<{ id: string }> }) {
 	const { id: _id } = await params;
 	return (
 		<div className="max-w-2xl space-y-6">
-			<h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">
-				Detail Tugas
-			</h1>
+			<h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Detail Tugas</h1>
 			<div className="bg-white rounded-xl border border-border p-6 space-y-4">
 				<div className="flex justify-between items-start">
 					<div>
@@ -35,15 +29,11 @@ export default async function TugasDetailPage({
 				</div>
 				<div>
 					<span className="text-sm font-medium">Alamat Jemput</span>
-					<p className="text-sm text-muted-foreground">
-						Jl. Jatiwaringin Raya No. 10, Bekasi
-					</p>
+					<p className="text-sm text-muted-foreground">Jl. Jatiwaringin Raya No. 10, Bekasi</p>
 				</div>
 				<div>
 					<span className="text-sm font-medium">Pelanggan</span>
-					<p className="text-sm text-muted-foreground">
-						Andi Setiawan • 08123456789
-					</p>
+					<p className="text-sm text-muted-foreground">Andi Setiawan • 08123456789</p>
 				</div>
 				<div className="flex gap-3 pt-4 border-t border-border">
 					<button

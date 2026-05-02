@@ -13,10 +13,8 @@ export const useOutletStore = create<OutletState>()(
 		(set) => ({
 			selectedOutletId: null,
 			selectedOutletName: null,
-			setOutlet: (id, name) =>
-				set({ selectedOutletId: id, selectedOutletName: name }),
-			clearOutlet: () =>
-				set({ selectedOutletId: null, selectedOutletName: null }),
+			setOutlet: (id, name) => set({ selectedOutletId: id, selectedOutletName: name }),
+			clearOutlet: () => set({ selectedOutletId: null, selectedOutletName: null }),
 		}),
 		{ name: "mahira-outlet" },
 	),

@@ -83,8 +83,7 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 						variant="outline"
 						className="rounded-xl h-10 px-4 font-black text-[10px] uppercase tracking-widest border-slate-100 bg-white text-slate-600 hover:bg-slate-50 shadow-xs"
 					>
-						<LayoutGrid size={15} className="mr-2" /> {filteredServices.length}{" "}
-						Layanan
+						<LayoutGrid size={15} className="mr-2" /> {filteredServices.length} Layanan
 					</Button>
 					<ServiceModal
 						outletId={outletId}
@@ -117,9 +116,7 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 						<div className="relative flex flex-col h-full gap-8">
 							<div className="flex items-start gap-5">
 								<div className="w-14 h-14 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center text-2xl transition-[background-color,border-color,box-shadow,transform] duration-300 group-hover:-translate-y-0.5 group-hover:bg-indigo-50 group-hover:border-indigo-100 shadow-md shadow-slate-100 group-hover:shadow-indigo-100">
-									{service.icon || (
-										<Package size={28} className="text-slate-300" />
-									)}
+									{service.icon || <Package size={28} className="text-slate-300" />}
 								</div>
 								<div className="flex-1 min-w-0">
 									<h3 className="text-xl font-black text-slate-900 uppercase tracking-tight truncate group-hover:text-indigo-600 transition-colors">
@@ -167,9 +164,7 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 									<Button
 										variant="ghost"
 										className="w-10 h-10 p-0 rounded-xl hover:bg-indigo-50 text-slate-300 hover:text-indigo-600 transition-all"
-										onClick={() =>
-											handleServiceClick(service.slug ?? service.id)
-										}
+										onClick={() => handleServiceClick(service.slug ?? service.id)}
 									>
 										<Edit3 size={18} />
 									</Button>
@@ -197,8 +192,8 @@ export function ServiceManager({ services, outletId }: ServiceManagerProps) {
 							Katalog Masih Kosong
 						</h3>
 						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-4 max-w-lg leading-relaxed text-center mx-auto">
-							Daftar layanan premium Anda akan muncul di sini. Mari mulai dengan
-							mendaftarkan jenis layanan laundry pertama Anda.
+							Daftar layanan premium Anda akan muncul di sini. Mari mulai dengan mendaftarkan jenis
+							layanan laundry pertama Anda.
 						</p>
 						<ServiceModal
 							outletId={outletId}

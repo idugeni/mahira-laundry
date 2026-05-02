@@ -6,11 +6,7 @@ import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
 import { cn } from "@/lib/utils";
 
-export default function KurirLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function KurirLayout({ children }: { children: React.ReactNode }) {
 	const [mobileOpen, setMobileOpen] = useState(false);
 
 	return (

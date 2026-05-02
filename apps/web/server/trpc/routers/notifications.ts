@@ -17,24 +17,19 @@ export const notificationsRouter = router({
 				.select("*", { count: "exact" })
 				.eq("user_id", ctx.userId)
 				.order("created_at", { ascending: false })
-				.range(
-					(input.page - 1) * input.pageSize,
-					input.page * input.pageSize - 1,
-				);
+				.range((input.page - 1) * input.pageSize, input.page * input.pageSize - 1);
 			return { data: data || [], total: count || 0 };
 		}),
 
-	markRead: protectedProcedure
-		.input(z.string().uuid())
-		.mutation(async ({ input }) => {
-			const supabase = await createClient();
-			const { error } = await supabase
-				.from("notifications")
-				.update({ is_read: true, read_at: new Date().toISOString() })
-				.eq("id", input);
-			if (error) throw error;
-			return { success: true };
-		}),
+	markRead: protectedProcedure.input(z.string().uuid()).mutation(async ({ input }) => {
+		const supabase = await createClient();
+		const { error } = await supabase
+			.from("notifications")
+			.update({ is_read: true, read_at: new Date().toISOString() })
+			.eq("id", input);
+		if (error) throw error;
+		return { success: true };
+	}),
 
 	markAllRead: protectedProcedure.mutation(async ({ ctx }) => {
 		const supabase = await createClient();

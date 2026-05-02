@@ -43,10 +43,7 @@ export const protectedProcedure = t.procedure.use(isAuthed);
 
 // Middleware: require staff role
 const isStaff = t.middleware(({ ctx, next }) => {
-	if (
-		!ctx.userId ||
-		!["kasir", "kurir", "manager", "superadmin"].includes(ctx.role || "")
-	) {
+	if (!ctx.userId || !["kasir", "kurir", "manager", "superadmin"].includes(ctx.role || "")) {
 		throw new TRPCError({ code: "FORBIDDEN", message: "Akses ditolak" });
 	}
 	return next({ ctx });

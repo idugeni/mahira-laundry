@@ -19,8 +19,7 @@ import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Laporan & Audit",
-	description:
-		"Log audit trail dan laporan operasional lengkap seluruh cabang Mahira Laundry.",
+	description: "Log audit trail dan laporan operasional lengkap seluruh cabang Mahira Laundry.",
 };
 
 export const dynamic = "force-dynamic";
@@ -95,17 +94,14 @@ export default async function LaporanPage() {
 							Pusat <span className="text-indigo-400 italic">Laporan</span>
 						</h1>
 						<p className="text-slate-400 font-bold text-xs sm:text-sm lg:text-base max-w-2xl leading-relaxed">
-							Analisis mendalam operasional bisnis Mahira Laundry. Pantau jejak
-							audit digital dan hasilkan laporan performa eksekutif dalam satu
-							klik.
+							Analisis mendalam operasional bisnis Mahira Laundry. Pantau jejak audit digital dan
+							hasilkan laporan performa eksekutif dalam satu klik.
 						</p>
 					</div>
 
 					<div className="flex items-center gap-3">
 						<div className="text-right">
-							<p className="text-2xl lg:text-3xl font-black text-white">
-								{auditLogs?.length || 0}
-							</p>
+							<p className="text-2xl lg:text-3xl font-black text-white">{auditLogs?.length || 0}</p>
 							<p className="text-[9px] lg:text-[10px] font-black text-slate-500 uppercase tracking-widest">
 								Recent Events
 							</p>

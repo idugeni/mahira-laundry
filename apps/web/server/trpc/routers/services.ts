@@ -7,11 +7,7 @@ export const servicesRouter = router({
 		.input(z.object({ outletId: z.string().uuid().optional() }))
 		.query(async ({ input }) => {
 			const supabase = await createClient();
-			let query = supabase
-				.from("services")
-				.select("*")
-				.eq("is_active", true)
-				.order("sort_order");
+			let query = supabase.from("services").select("*").eq("is_active", true).order("sort_order");
 			if (input.outletId) query = query.eq("outlet_id", input.outletId);
 			const { data } = await query;
 			return data || [];
@@ -31,16 +27,22 @@ export const servicesRouter = router({
 				isExpress: z.boolean().default(false),
 			}),
 		)
-		.mutation(async ({ input }) => {
-			const supabase = await createClient();
-			const { data, error } = await supabase
-				.from("services")
-				.insert(input)
-				.select()
-				.single();
-			if (error) throw error;
-			return data;
-		}),
+			.mutation(async ({ input }) => {
+				const supabase = await createClient();
+				const { outletId, estimatedDurationHours, isExpress, ...dbInput } = input;
+				const { data, error } = await supabase
+					.from("services")
+					.insert({
+						...dbInput,
+						outlet_id: outletId,
+						estimated_duration_hours: estimatedDurationHours,
+						is_express: isExpress,
+					})
+					.select()
+					.single();
+				if (error) throw error;
+				return data;
+			}),
 
 	update: managerProcedure
 		.input(
@@ -55,10 +57,7 @@ export const servicesRouter = router({
 		.mutation(async ({ input }) => {
 			const { id, ...updates } = input;
 			const supabase = await createClient();
-			const { error } = await supabase
-				.from("services")
-				.update(updates)
-				.eq("id", id);
+			const { error } = await supabase.from("services").update(updates).eq("id", id);
 			if (error) throw error;
 			return { success: true };
 		}),

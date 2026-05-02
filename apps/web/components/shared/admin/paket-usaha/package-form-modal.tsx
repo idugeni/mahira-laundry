@@ -10,10 +10,7 @@ import { HiOutlineXMark } from "react-icons/hi2";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
-import {
-	createBusinessPackage,
-	updateBusinessPackage,
-} from "@/lib/actions/business-packages";
+import { createBusinessPackage, updateBusinessPackage } from "@/lib/actions/business-packages";
 import type { BusinessPackage, PackageTier } from "@/lib/types";
 
 // ─── Zod Schema ───────────────────────────────────────────────────────────────
@@ -68,12 +65,7 @@ interface PackageFormModalProps {
 
 // ─── Tier Options ─────────────────────────────────────────────────────────────
 
-const TIER_OPTIONS: PackageTier[] = [
-	"Starter",
-	"Standard",
-	"Premium",
-	"Custom",
-];
+const TIER_OPTIONS: PackageTier[] = ["Starter", "Standard", "Premium", "Custom"];
 
 // ─── Helper ───────────────────────────────────────────────────────────────────
 
@@ -85,11 +77,7 @@ function toDatetimeLocal(iso?: string | null): string {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
-export function PackageFormModal({
-	package: pkg,
-	onSuccess,
-	onClose,
-}: PackageFormModalProps) {
+export function PackageFormModal({ package: pkg, onSuccess, onClose }: PackageFormModalProps) {
 	const isEdit = pkg != null;
 
 	const {
@@ -216,9 +204,7 @@ export function PackageFormModal({
 									)}
 								</h2>
 								<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
-									{isEdit
-										? `ID: ${pkg.id.slice(0, 8)}…`
-										: "Isi semua field yang diperlukan"}
+									{isEdit ? `ID: ${pkg.id.slice(0, 8)}…` : "Isi semua field yang diperlukan"}
 								</p>
 							</div>
 						</div>
@@ -250,9 +236,7 @@ export function PackageFormModal({
 								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 							{errors.name && (
-								<p className="text-[10px] font-bold text-rose-500">
-									{errors.name.message}
-								</p>
+								<p className="text-[10px] font-bold text-rose-500">{errors.name.message}</p>
 							)}
 						</div>
 
@@ -275,9 +259,7 @@ export function PackageFormModal({
 								))}
 							</select>
 							{errors.tier && (
-								<p className="text-[10px] font-bold text-rose-500">
-									{errors.tier.message}
-								</p>
+								<p className="text-[10px] font-bold text-rose-500">{errors.tier.message}</p>
 							)}
 						</div>
 					</div>
@@ -300,9 +282,7 @@ export function PackageFormModal({
 								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 							{errors.price && (
-								<p className="text-[10px] font-bold text-rose-500">
-									{errors.price.message}
-								</p>
+								<p className="text-[10px] font-bold text-rose-500">{errors.price.message}</p>
 							)}
 						</div>
 
@@ -325,9 +305,7 @@ export function PackageFormModal({
 								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 							/>
 							{errors.promo_price && (
-								<p className="text-[10px] font-bold text-rose-500">
-									{errors.promo_price.message}
-								</p>
+								<p className="text-[10px] font-bold text-rose-500">{errors.promo_price.message}</p>
 							)}
 						</div>
 					</div>
@@ -339,9 +317,7 @@ export function PackageFormModal({
 							className="text-[10px] font-black text-slate-400 uppercase tracking-widest"
 						>
 							Berakhir Promo{" "}
-							<span className="text-slate-300 font-bold normal-case tracking-normal">
-								opsional
-							</span>
+							<span className="text-slate-300 font-bold normal-case tracking-normal">opsional</span>
 						</label>
 						<input
 							id="pkg-promo-expires"
@@ -358,9 +334,7 @@ export function PackageFormModal({
 							className="text-[10px] font-black text-slate-400 uppercase tracking-widest"
 						>
 							Deskripsi{" "}
-							<span className="text-slate-300 font-bold normal-case tracking-normal">
-								opsional
-							</span>
+							<span className="text-slate-300 font-bold normal-case tracking-normal">opsional</span>
 						</label>
 						<textarea
 							id="pkg-description"
@@ -379,9 +353,7 @@ export function PackageFormModal({
 							</span>
 							<button
 								type="button"
-								onClick={() =>
-									append({ name: "", quantity: undefined, spec: "" })
-								}
+								onClick={() => append({ name: "", quantity: undefined, spec: "" })}
 								className="flex items-center gap-1.5 text-[10px] font-black text-indigo-600 uppercase tracking-widest hover:text-indigo-800 transition-colors"
 							>
 								<Plus size={12} /> Tambah Item
@@ -582,8 +554,7 @@ export function PackageFormModal({
 								</>
 							) : (
 								<>
-									<Package size={14} />{" "}
-									{isEdit ? "Simpan Perubahan" : "Buat Paket"}
+									<Package size={14} /> {isEdit ? "Simpan Perubahan" : "Buat Paket"}
 								</>
 							)}
 						</Button>

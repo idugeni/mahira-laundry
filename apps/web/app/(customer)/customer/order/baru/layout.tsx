@@ -6,10 +6,6 @@ export const metadata: Metadata = {
 		"Buat pesanan laundry baru di Mahira Laundry. Pilih outlet, layanan, dan jadwal pickup yang Anda inginkan.",
 };
 
-export default function OrderBaruLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function OrderBaruLayout({ children }: { children: React.ReactNode }) {
 	return children;
 }

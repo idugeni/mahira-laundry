@@ -2,11 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import {
-	HiOutlineArrowLeft,
-	HiOutlineHome,
-	HiOutlineSparkles,
-} from "react-icons/hi2";
+import { HiOutlineArrowLeft, HiOutlineHome, HiOutlineSparkles } from "react-icons/hi2";
 
 export default function NotFound() {
 	return (
@@ -76,8 +72,8 @@ export default function NotFound() {
 					</h1>
 
 					<p className="mt-8 text-slate-500 text-xl font-medium max-w-lg mx-auto leading-relaxed">
-						Maaf, sepertinya halaman yang Anda cari terselip di tumpukan cucian
-						lain. Mari kembali ke jalur yang benar.
+						Maaf, sepertinya halaman yang Anda cari terselip di tumpukan cucian lain. Mari kembali
+						ke jalur yang benar.
 					</p>
 
 					<div className="mt-12 flex flex-wrap justify-center gap-6">

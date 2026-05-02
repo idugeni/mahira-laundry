@@ -83,9 +83,7 @@ const rows: {
 		label: "Tier Level",
 		getValue: (pkg) => (
 			<span className="inline-flex items-center gap-2">
-				{pkg.tier === "Premium" && (
-					<span className="text-brand-accent text-[10px]">👑</span>
-				)}
+				{pkg.tier === "Premium" && <span className="text-brand-accent text-[10px]">👑</span>}
 				{pkg.tier}
 			</span>
 		),
@@ -114,9 +112,7 @@ const rows: {
 	{
 		label: "Masa Training",
 		getValue: (pkg) =>
-			pkg.training_duration_days
-				? `${pkg.training_duration_days} Hari Intensif`
-				: "-",
+			pkg.training_duration_days ? `${pkg.training_duration_days} Hari Intensif` : "-",
 	},
 	{
 		label: "Dukungan Support",

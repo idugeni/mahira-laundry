@@ -28,20 +28,17 @@ export default async function AdminPaketUsahaPage() {
 							</Badge>
 						</div>
 						<h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight text-slate-900">
-							Paket{" "}
-							<span className="text-indigo-600 italic">Usaha Laundry</span>
+							Paket <span className="text-indigo-600 italic">Usaha Laundry</span>
 						</h1>
 						<p className="text-slate-500 font-bold text-xs sm:text-sm md:text-sm lg:text-base max-w-2xl leading-relaxed">
-							Kelola paket kemitraan laundry yang ditawarkan kepada calon mitra.
-							Atur harga, fitur, dan promo untuk setiap tier paket.
+							Kelola paket kemitraan laundry yang ditawarkan kepada calon mitra. Atur harga, fitur,
+							dan promo untuk setiap tier paket.
 						</p>
 					</div>
 
 					<div className="flex items-center gap-4 shrink-0">
 						<div className="text-left md:text-right">
-							<p className="text-xl sm:text-2xl font-black text-slate-900">
-								{packages.length}
-							</p>
+							<p className="text-xl sm:text-2xl font-black text-slate-900">{packages.length}</p>
 							<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
 								Total Paket
 							</p>

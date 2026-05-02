@@ -1,29 +1,15 @@
 "use client";
 
-import {
-	CheckCircle2,
-	Download,
-	Filter,
-	Sparkles,
-	TrendingUp,
-	Users,
-} from "lucide-react";
+import { CheckCircle2, Download, Filter, Sparkles, TrendingUp, Users } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 import { LeadDetailModal } from "@/components/shared/admin/paket-usaha/leads/lead-detail-modal";
-import {
-	PaginationControls,
-	usePagination,
-} from "@/components/shared/common/pagination-controls";
+import { PaginationControls, usePagination } from "@/components/shared/common/pagination-controls";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { exportInquiriesCSV } from "@/lib/actions/business-inquiries";
-import type {
-	BusinessPackageInquiry,
-	InquiryStats,
-	InquiryStatus,
-} from "@/lib/types";
+import type { BusinessPackageInquiry, InquiryStats, InquiryStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 interface AdminLeadsClientProps {
@@ -47,19 +33,12 @@ const STATUS_COLORS: Record<InquiryStatus, string> = {
 	rejected: "bg-rose-50 text-rose-500",
 };
 
-const ALL_STATUSES: InquiryStatus[] = [
-	"new",
-	"contacted",
-	"negotiating",
-	"converted",
-	"rejected",
-];
+const ALL_STATUSES: InquiryStatus[] = ["new", "contacted", "negotiating", "converted", "rejected"];
 
 export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const [selectedLead, setSelectedLead] =
-		useState<BusinessPackageInquiry | null>(null);
+	const [selectedLead, setSelectedLead] = useState<BusinessPackageInquiry | null>(null);
 	const [exportLoading, setExportLoading] = useState(false);
 	const {
 		currentPage,
@@ -269,8 +248,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 							Belum Ada Leads
 						</h3>
 						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-3 max-w-sm mx-auto leading-relaxed">
-							Belum ada inquiry yang masuk atau tidak ada yang cocok dengan
-							filter aktif.
+							Belum ada inquiry yang masuk atau tidak ada yang cocok dengan filter aktif.
 						</p>
 					</div>
 				) : (
@@ -279,14 +257,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 							<table className="w-full">
 								<thead>
 									<tr className="border-b border-slate-50">
-										{[
-											"Nama",
-											"Telepon",
-											"Paket",
-											"Kota",
-											"Tanggal",
-											"Status",
-										].map((col) => (
+										{["Nama", "Telepon", "Paket", "Kota", "Tanggal", "Status"].map((col) => (
 											<th
 												key={col}
 												className="text-left px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest first:pl-8 last:pr-8"
@@ -314,9 +285,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 												)}
 											</td>
 											<td className="px-6 py-5">
-												<p className="text-sm font-bold text-slate-700">
-													{lead.phone}
-												</p>
+												<p className="text-sm font-bold text-slate-700">{lead.phone}</p>
 											</td>
 											<td className="px-6 py-5">
 												<p className="text-sm font-bold text-slate-700 truncate max-w-[160px]">
@@ -324,20 +293,15 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 												</p>
 											</td>
 											<td className="px-6 py-5">
-												<p className="text-sm font-bold text-slate-700">
-													{lead.city}
-												</p>
+												<p className="text-sm font-bold text-slate-700">{lead.city}</p>
 											</td>
 											<td className="px-6 py-5">
 												<p className="text-sm font-bold text-slate-700">
-													{new Date(lead.created_at).toLocaleDateString(
-														"id-ID",
-														{
-															day: "2-digit",
-															month: "short",
-															year: "numeric",
-														},
-													)}
+													{new Date(lead.created_at).toLocaleDateString("id-ID", {
+														day: "2-digit",
+														month: "short",
+														year: "numeric",
+													})}
 												</p>
 											</td>
 											<td className="px-6 pr-8 py-5">
@@ -371,10 +335,7 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 			</div>
 
 			{selectedLead && (
-				<LeadDetailModal
-					lead={selectedLead}
-					onClose={() => setSelectedLead(null)}
-				/>
+				<LeadDetailModal lead={selectedLead} onClose={() => setSelectedLead(null)} />
 			)}
 		</div>
 	);
@@ -390,12 +351,7 @@ interface StatCardProps {
 function StatCard({ label, value, icon, color }: StatCardProps) {
 	return (
 		<div className="bg-white rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40 p-6 flex items-center gap-4">
-			<div
-				className={cn(
-					"w-12 h-12 rounded-2xl flex items-center justify-center shrink-0",
-					color,
-				)}
-			>
+			<div className={cn("w-12 h-12 rounded-2xl flex items-center justify-center shrink-0", color)}>
 				{icon}
 			</div>
 			<div>

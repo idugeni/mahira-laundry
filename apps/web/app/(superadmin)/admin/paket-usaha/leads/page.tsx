@@ -22,9 +22,7 @@ interface AdminLeadsPageProps {
 	}>;
 }
 
-export default async function AdminLeadsPage({
-	searchParams,
-}: AdminLeadsPageProps) {
+export default async function AdminLeadsPage({ searchParams }: AdminLeadsPageProps) {
 	const params = await searchParams;
 
 	const filters: InquiryFilters = {};
@@ -33,10 +31,7 @@ export default async function AdminLeadsPage({
 	if (params.date_from) filters.date_from = params.date_from;
 	if (params.date_to) filters.date_to = params.date_to;
 
-	const [leads, stats] = await Promise.all([
-		getBusinessInquiries(filters),
-		getInquiryStats(),
-	]);
+	const [leads, stats] = await Promise.all([getBusinessInquiries(filters), getInquiryStats()]);
 
 	return (
 		<div className="space-y-8 sm:space-y-10  animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -55,8 +50,8 @@ export default async function AdminLeadsPage({
 							Leads <span className="text-emerald-600 italic">Paket Usaha</span>
 						</h1>
 						<p className="text-slate-500 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
-							Kelola inquiry dari calon mitra usaha laundry. Pantau status,
-							lakukan follow-up, dan konversi leads menjadi mitra aktif.
+							Kelola inquiry dari calon mitra usaha laundry. Pantau status, lakukan follow-up, dan
+							konversi leads menjadi mitra aktif.
 						</p>
 					</div>
 

@@ -67,9 +67,7 @@ export async function uploadExpenseReceipt(
 		const fileName = `${Math.random().toString(36).substring(2)}_${Date.now()}.${fileExt}`;
 		const filePath = `receipts/${fileName}`;
 
-		const { error: uploadError } = await supabase.storage
-			.from("receipts")
-			.upload(filePath, file);
+		const { error: uploadError } = await supabase.storage.from("receipts").upload(filePath, file);
 
 		if (uploadError) throw uploadError;
 

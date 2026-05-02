@@ -46,11 +46,7 @@ interface RegisterStaffModalProps {
 	trigger?: React.ReactNode;
 }
 
-export function RegisterStaffModal({
-	staff,
-	outlets,
-	trigger,
-}: RegisterStaffModalProps) {
+export function RegisterStaffModal({ staff, outlets, trigger }: RegisterStaffModalProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -98,16 +94,10 @@ export function RegisterStaffModal({
 		const result = await registerStaffMember(data);
 
 		if (result.success) {
-			toast.success(
-				staff
-					? "Data tim berhasil disinkronisasi"
-					: "Anggota tim baru telah aktif",
-			);
+			toast.success(staff ? "Data tim berhasil disinkronisasi" : "Anggota tim baru telah aktif");
 			setIsOpen(false);
 		} else {
-			setError(
-				result.error || "Interupsi sistem: Gagal mendaftarkan unit SDM.",
-			);
+			setError(result.error || "Interupsi sistem: Gagal mendaftarkan unit SDM.");
 			toast.error("Registrasi gagal. Periksa kembali data.");
 		}
 		setIsLoading(false);
@@ -253,9 +243,7 @@ export function RegisterStaffModal({
 											</p>
 											<Select
 												value={role}
-												onValueChange={(value: RegisterStaffInput["role"]) =>
-													setRole(value)
-												}
+												onValueChange={(value: RegisterStaffInput["role"]) => setRole(value)}
 											>
 												<SelectTrigger className="px-5 h-12 rounded-xl border-slate-100 bg-slate-50 focus:bg-white font-bold text-sm transition-colors shadow-none">
 													<div className="flex items-center gap-3">
@@ -385,8 +373,8 @@ export function RegisterStaffModal({
 									<ShieldCheck size={20} />
 								</div>
 								<p className="text-[10px] font-bold text-emerald-700/80 leading-relaxed uppercase tracking-widest">
-									Seluruh akses staf dipantau oleh sistem audit keamanan Mahira
-									Laundry. Pastikan data akun valid.
+									Seluruh akses staf dipantau oleh sistem audit keamanan Mahira Laundry. Pastikan
+									data akun valid.
 								</p>
 							</div>
 						</div>
@@ -404,8 +392,8 @@ export function RegisterStaffModal({
 							Cabut Akses Staf?
 						</AlertDialogTitle>
 						<AlertDialogDescription className="text-slate-500 font-medium text-base">
-							Akses {staff?.full_name || "staf ini"} akan dicabut dari sistem
-							secara permanen. Tindakan ini{" "}
+							Akses {staff?.full_name || "staf ini"} akan dicabut dari sistem secara permanen.
+							Tindakan ini{" "}
 							<span className="text-red-600 font-bold underline decoration-2 underline-offset-4">
 								tidak dapat dibatalkan
 							</span>

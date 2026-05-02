@@ -7,10 +7,7 @@ export async function getAllInventory(outletId?: string) {
 		cacheKey,
 		async () => {
 			const supabase = await createClient();
-			let query = supabase
-				.from("inventory")
-				.select("*")
-				.order("name", { ascending: true });
+			let query = supabase.from("inventory").select("*").order("name", { ascending: true });
 			if (outletId) query = query.eq("outlet_id", outletId);
 			const { data } = await query;
 			return data || [];
@@ -25,10 +22,7 @@ export async function getAllServices(outletId?: string) {
 		cacheKey,
 		async () => {
 			const supabase = await createClient();
-			let query = supabase
-				.from("services")
-				.select("*")
-				.order("sort_order", { ascending: true });
+			let query = supabase.from("services").select("*").order("sort_order", { ascending: true });
 			if (outletId) query = query.eq("outlet_id", outletId);
 			const { data } = await query;
 			return data || [];
@@ -43,12 +37,8 @@ export async function getAllVouchers(outletId?: string) {
 		cacheKey,
 		async () => {
 			const supabase = await createClient();
-			let query = supabase
-				.from("vouchers")
-				.select("*")
-				.order("created_at", { ascending: false });
-			if (outletId)
-				query = query.or(`outlet_id.eq.${outletId},outlet_id.is.null`);
+			let query = supabase.from("vouchers").select("*").order("created_at", { ascending: false });
+			if (outletId) query = query.or(`outlet_id.eq.${outletId},outlet_id.is.null`);
 			const { data } = await query;
 			return data || [];
 		},

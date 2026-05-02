@@ -7,17 +7,11 @@ async function handler(request: Request) {
 		const { email, fullName, packageName } = body;
 
 		if (!email || !fullName) {
-			return NextResponse.json(
-				{ error: "Missing email or fullName" },
-				{ status: 400 },
-			);
+			return NextResponse.json({ error: "Missing email or fullName" }, { status: 400 });
 		}
 
 		if (!process.env.RESEND_API_KEY) {
-			return NextResponse.json(
-				{ error: "RESEND_API_KEY not configured" },
-				{ status: 500 },
-			);
+			return NextResponse.json({ error: "RESEND_API_KEY not configured" }, { status: 500 });
 		}
 
 		try {
@@ -41,13 +35,10 @@ async function handler(request: Request) {
 					`,
 				}),
 			});
-		} catch (emailError) {
-			console.error("[Inquiry Job] Email send failed:", emailError);
-		}
+		} catch (_emailError) {}
 
 		return NextResponse.json({ success: true });
-	} catch (error) {
-		console.error("[Inquiry Job] Error:", error);
+	} catch (_error) {
 		return NextResponse.json({ error: "Internal error" }, { status: 500 });
 	}
 }

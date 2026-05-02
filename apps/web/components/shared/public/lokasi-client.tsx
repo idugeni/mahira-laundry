@@ -117,13 +117,11 @@ export function LokasiClient() {
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
 												Alamat Presisi
 											</p>
-											<p className="text-sm font-black text-slate-900">
-												Jatiwaringin, Bekasi
-											</p>
+											<p className="text-sm font-black text-slate-900">Jatiwaringin, Bekasi</p>
 										</div>
 									</div>
 									<a
-										href={outlets[0].links}
+										href={outlets[0]?.links ?? "#"}
 										target="_blank"
 										rel="noopener noreferrer"
 										className="pointer-events-auto px-6 py-3 bg-brand-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-brand-primary/90 transition-all"
@@ -195,17 +193,13 @@ export function LokasiClient() {
 												</span>
 												<div className="space-y-2">
 													<div className="flex items-center gap-4">
-														<span className="text-xs font-bold text-slate-400 w-16">
-															Sen - Jum
-														</span>
+														<span className="text-xs font-bold text-slate-400 w-16">Sen - Jum</span>
 														<span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-black text-slate-900 uppercase tracking-wider">
 															{outlet.hours.weekday}
 														</span>
 													</div>
 													<div className="flex items-center gap-4">
-														<span className="text-xs font-bold text-slate-400 w-16">
-															Sab - Min
-														</span>
+														<span className="text-xs font-bold text-slate-400 w-16">Sab - Min</span>
 														<span className="px-3 py-1 bg-brand-accent/20 text-brand-accent-dark rounded-full text-[10px] font-black uppercase tracking-wider">
 															{outlet.hours.weekend}
 														</span>

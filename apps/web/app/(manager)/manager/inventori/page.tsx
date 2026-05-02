@@ -22,10 +22,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function InventoriPage() {
-	const [profile, items] = await Promise.all([
-		getUserProfile(),
-		getAllInventory(),
-	]);
+	const [profile, items] = await Promise.all([getUserProfile(), getAllInventory()]);
 
 	const outletId = profile?.outlet_id || "";
 
@@ -43,8 +40,8 @@ export default async function InventoriPage() {
 						</h1>
 					</div>
 					<p className="text-slate-400 font-bold text-sm tracking-wide uppercase">
-						Mengelola <span className="text-slate-900">{items.length}</span>{" "}
-						kategori persediaan operasional outlet
+						Mengelola <span className="text-slate-900">{items.length}</span> kategori persediaan
+						operasional outlet
 					</p>
 				</div>
 
@@ -71,8 +68,7 @@ export default async function InventoriPage() {
 							Gudang Kosong
 						</h3>
 						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-3 max-w-md mx-auto leading-relaxed">
-							Mulai tambahkan barang persediaan Anda untuk melacak penggunaan
-							operasional laundry.
+							Mulai tambahkan barang persediaan Anda untuk melacak penggunaan operasional laundry.
 						</p>
 					</div>
 				</div>
@@ -101,16 +97,10 @@ export default async function InventoriPage() {
 										<div
 											className={cn(
 												"w-12 h-12 rounded-2xl flex items-center justify-center border-2 border-white shadow-lg transition-transform duration-500",
-												isLow
-													? "bg-rose-50 text-rose-500"
-													: "bg-emerald-50 text-emerald-500",
+												isLow ? "bg-rose-50 text-rose-500" : "bg-emerald-50 text-emerald-500",
 											)}
 										>
-											{isLow ? (
-												<AlertTriangle size={24} />
-											) : (
-												<CheckCircle2 size={24} />
-											)}
+											{isLow ? <AlertTriangle size={24} /> : <CheckCircle2 size={24} />}
 										</div>
 										<div className="min-w-0">
 											<h3 className="text-lg font-black text-slate-800 uppercase tracking-tight truncate pr-4">

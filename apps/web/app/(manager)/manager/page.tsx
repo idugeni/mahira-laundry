@@ -16,11 +16,7 @@ import { OrderTrendChart } from "@/components/shared/admin/admin-charts";
 import { StatCard } from "@/components/shared/common/stat-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-	ORDER_STATUS_COLORS,
-	ORDER_STATUS_LABELS,
-	PRIMARY_OUTLET,
-} from "@/lib/constants";
+import { ORDER_STATUS_COLORS, ORDER_STATUS_LABELS, PRIMARY_OUTLET } from "@/lib/constants";
 import {
 	getLowStockItems,
 	getManagerDashboardStats,
@@ -157,11 +153,7 @@ export default async function ManagerDashboardPage() {
 					</div>
 
 					<div className="relative">
-						<Suspense
-							fallback={
-								<div className="h-72 bg-slate-50 rounded-3xl animate-pulse" />
-							}
-						>
+						<Suspense fallback={<div className="h-72 bg-slate-50 rounded-3xl animate-pulse" />}>
 							<div className="h-72">
 								<OrderTrendChart data={orderTrend} />
 							</div>
@@ -225,18 +217,14 @@ export default async function ManagerDashboardPage() {
 										<p className="text-[11px] font-black uppercase tracking-widest text-slate-400 group-hover/item:text-slate-500 transition-colors">
 											{shift.label}
 										</p>
-										<p className="text-xs font-bold text-slate-700">
-											{shift.time}
-										</p>
+										<p className="text-xs font-bold text-slate-700">{shift.time}</p>
 									</div>
 								</div>
 
 								<Badge
 									className={cn(
 										"px-3 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border-none",
-										shift.active
-											? "bg-indigo-600 text-white"
-											: "bg-slate-200 text-slate-500",
+										shift.active ? "bg-indigo-600 text-white" : "bg-slate-200 text-slate-500",
 									)}
 								>
 									{shift.status}
@@ -250,10 +238,7 @@ export default async function ManagerDashboardPage() {
 						className="mt-8 group w-full justify-between h-auto py-4 hover:bg-slate-50 font-black text-[10px] uppercase tracking-widest text-slate-500"
 					>
 						Selengkapnya{" "}
-						<ArrowRight
-							size={14}
-							className="group-hover:translate-x-1 transition-transform"
-						/>
+						<ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
 					</Button>
 				</div>
 			</div>
@@ -294,10 +279,7 @@ export default async function ManagerDashboardPage() {
 									(order: {
 										id: string;
 										order_number: string;
-										profiles:
-											| { full_name: string | null }
-											| { full_name: string | null }[]
-											| null;
+										profiles: { full_name: string | null } | { full_name: string | null }[] | null;
 										status: string;
 										created_at: string;
 										total: number;
@@ -320,9 +302,7 @@ export default async function ManagerDashboardPage() {
 															: order.profiles?.full_name) || "Guest User"}
 													</p>
 													<p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-														<span className="text-indigo-400">
-															#{order.order_number}
-														</span>
+														<span className="text-indigo-400">#{order.order_number}</span>
 														<span>•</span>
 														<span>
 															{new Intl.DateTimeFormat("id-ID", {
@@ -338,16 +318,13 @@ export default async function ManagerDashboardPage() {
 												<Badge
 													className={cn(
 														"text-[9px] font-black px-2.5 py-1 rounded-lg border-none shadow-none uppercase tracking-widest",
-														ORDER_STATUS_COLORS[order.status] ||
-															"bg-slate-100 text-slate-500",
+														ORDER_STATUS_COLORS[order.status] || "bg-slate-100 text-slate-500",
 													)}
 												>
 													{ORDER_STATUS_LABELS[order.status] || order.status}
 												</Badge>
 												<span className="text-sm font-black text-slate-900">
-													{order.final_total
-														? formatIDR(order.final_total)
-														: "—"}
+													{order.final_total ? formatIDR(order.final_total) : "—"}
 												</span>
 											</div>
 										</div>
@@ -406,8 +383,7 @@ export default async function ManagerDashboardPage() {
 													{item.name}
 												</p>
 												<p className="text-[10px] font-bold text-rose-400 uppercase tracking-widest">
-													Stok: {item.quantity} {item.unit} · Limit:{" "}
-													{item.min_stock}
+													Stok: {item.quantity} {item.unit} · Limit: {item.min_stock}
 												</p>
 											</div>
 										</div>

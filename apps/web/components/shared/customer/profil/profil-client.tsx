@@ -46,9 +46,7 @@ export function ProfilClient({ profile }: ProfilClientProps) {
 	const [loading, setLoading] = useState(false);
 	const [showAddAddress, setShowAddAddress] = useState(false);
 	const [newAddr, setNewAddr] = useState({ label: "", detail: "" });
-	const [deleteAddressIndex, setDeleteAddressIndex] = useState<number | null>(
-		null,
-	);
+	const [deleteAddressIndex, setDeleteAddressIndex] = useState<number | null>(null);
 	const router = useRouter();
 
 	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -102,9 +100,7 @@ export function ProfilClient({ profile }: ProfilClientProps) {
 	async function handleDeleteAddress() {
 		if (deleteAddressIndex === null) return;
 		setLoading(true);
-		const updatedAddresses = profile.addresses.filter(
-			(_, i) => i !== deleteAddressIndex,
-		);
+		const updatedAddresses = profile.addresses.filter((_, i) => i !== deleteAddressIndex);
 		const formData = new FormData();
 		formData.append("full_name", profile.full_name);
 		formData.append("phone", profile.phone || "");
@@ -122,9 +118,7 @@ export function ProfilClient({ profile }: ProfilClientProps) {
 		}
 	}
 
-	async function handleAvatarChange(
-		event: React.ChangeEvent<HTMLInputElement>,
-	) {
+	async function handleAvatarChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const file = event.target.files?.[0];
 		if (!file) return;
 		setLoading(true);
@@ -160,8 +154,7 @@ export function ProfilClient({ profile }: ProfilClientProps) {
 							Hapus Alamat?
 						</AlertDialogTitle>
 						<AlertDialogDescription className="text-slate-500 font-medium text-base">
-							Alamat ini akan dihapus dari profil Anda. Tindakan ini tidak dapat
-							dibatalkan.
+							Alamat ini akan dihapus dari profil Anda. Tindakan ini tidak dapat dibatalkan.
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">
@@ -181,10 +174,7 @@ export function ProfilClient({ profile }: ProfilClientProps) {
 					</AlertDialogFooter>
 				</AlertDialogContent>
 			</AlertDialog>
-			<motion.div
-				initial={{ opacity: 0, x: -20 }}
-				animate={{ opacity: 1, x: 0 }}
-			>
+			<motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
 				<h1 className="text-3xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tight">
 					Profil <span className="text-brand-gradient">Saya</span>
 				</h1>
@@ -194,11 +184,7 @@ export function ProfilClient({ profile }: ProfilClientProps) {
 			</motion.div>
 
 			<div className="grid md:grid-cols-3 gap-8">
-				<ProfilInfoCard
-					profile={profile}
-					loading={loading}
-					onAvatarChange={handleAvatarChange}
-				/>
+				<ProfilInfoCard profile={profile} loading={loading} onAvatarChange={handleAvatarChange} />
 
 				{/* Right Col - Forms */}
 				<motion.div

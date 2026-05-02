@@ -27,11 +27,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import {
-	deleteOutlet,
-	uploadOutletImage,
-	upsertOutlet,
-} from "@/lib/actions/outlets";
+import { deleteOutlet, uploadOutletImage, upsertOutlet } from "@/lib/actions/outlets";
 import type { Outlet } from "@/lib/types";
 
 interface OutletModalProps {
@@ -103,9 +99,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 
 		if (result.success) {
 			toast.success(
-				outlet
-					? "Data outlet berhasil disinkronisasi"
-					: "Unit bisnis baru telah terdaftar",
+				outlet ? "Data outlet berhasil disinkronisasi" : "Unit bisnis baru telah terdaftar",
 			);
 			setIsOpen(false);
 		} else {
@@ -182,12 +176,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 									{/* Luxury Image Upload */}
 									<div className="relative group/outlet-img w-full h-44 rounded-2xl bg-slate-50 border-4 border-dashed border-slate-100 overflow-hidden flex items-center justify-center transition-colors hover:border-indigo-200">
 										{imageUrl ? (
-											<Image
-												src={imageUrl}
-												alt="Preview"
-												fill
-												className="object-cover"
-											/>
+											<Image src={imageUrl} alt="Preview" fill className="object-cover" />
 										) : (
 											<div className="flex flex-col items-center gap-4 text-slate-300">
 												<div className="w-14 h-14 rounded-full bg-white flex items-center justify-center shadow-lg shadow-slate-100">
@@ -201,9 +190,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 										<label className="absolute inset-0 bg-slate-900/20 backdrop-blur-[1px] opacity-0 group-hover/outlet-img:opacity-100 flex items-center justify-center transition-all cursor-pointer z-10">
 											<div className="bg-white px-6 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-slate-900 font-black text-[10px] uppercase tracking-widest">
 												<HiOutlineCamera size={20} />
-												<span>
-													{imageUrl ? "Ganti Visual" : "Pilih Visual"}
-												</span>
+												<span>{imageUrl ? "Ganti Visual" : "Pilih Visual"}</span>
 											</div>
 											<input
 												type="file"
@@ -398,8 +385,8 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 									<AlertTriangle size={20} />
 								</div>
 								<p className="text-[10px] font-bold text-amber-700/80 leading-relaxed uppercase tracking-widest">
-									Pastikan seluruh data yang diinput telah sesuai dengan dokumen
-									legal kemitraan Mahira Group.
+									Pastikan seluruh data yang diinput telah sesuai dengan dokumen legal kemitraan
+									Mahira Group.
 								</p>
 							</div>
 						</div>
@@ -417,9 +404,8 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 							Hapus Outlet?
 						</AlertDialogTitle>
 						<AlertDialogDescription className="text-slate-500 font-medium text-base">
-							<span className="text-red-600 font-bold">PERINGATAN:</span>{" "}
-							Menghapus outlet akan menghapus seluruh data terkait secara
-							permanen. Tindakan ini{" "}
+							<span className="text-red-600 font-bold">PERINGATAN:</span> Menghapus outlet akan
+							menghapus seluruh data terkait secara permanen. Tindakan ini{" "}
 							<span className="text-red-600 font-bold underline decoration-2 underline-offset-4">
 								tidak dapat dibatalkan
 							</span>

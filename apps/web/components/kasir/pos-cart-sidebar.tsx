@@ -35,8 +35,7 @@ export function PosCartSidebar({
 				<div className="p-4 md:p-8 border-b border-slate-100 bg-slate-50/30">
 					<div className="flex items-center justify-between mb-6">
 						<h3 className="text-xl font-black text-slate-900 flex items-center gap-4">
-							<ShoppingCart className="w-6 h-6 text-brand-primary" /> Rincian
-							Order
+							<ShoppingCart className="w-6 h-6 text-brand-primary" /> Rincian Order
 						</h3>
 						<div className="px-4 py-1.5 bg-brand-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-primary/20">
 							{cart.length} Layanan
@@ -73,9 +72,7 @@ export function PosCartSidebar({
 								<div className="flex justify-between items-start gap-4">
 									<div className="flex-1 min-w-0">
 										<div className="flex items-center gap-2 mb-1">
-											<p className="text-sm font-black text-slate-900 truncate">
-												{item.name}
-											</p>
+											<p className="text-sm font-black text-slate-900 truncate">{item.name}</p>
 											{item.isManual && (
 												<Badge
 													variant="secondary"
@@ -86,8 +83,7 @@ export function PosCartSidebar({
 											)}
 										</div>
 										<p className="text-xs font-bold text-slate-400">
-											{item.qty} {item.unit}{" "}
-											<span className="mx-1 opacity-30">|</span>{" "}
+											{item.qty} {item.unit} <span className="mx-1 opacity-30">|</span>{" "}
 											{formatIDR(item.price)}
 										</p>
 										{item.notes && (
@@ -136,7 +132,7 @@ export function PosCartSidebar({
 								Rupiah
 							</span>
 							<span className="text-4xl font-black text-slate-900 flex items-baseline gap-1">
-								{total.toLocaleString("id-ID")}
+								{formatIDR(total)}
 							</span>
 						</div>
 					</div>

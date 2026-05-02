@@ -37,11 +37,7 @@ const analyticsClient = new BetaAnalyticsDataClient({
 const propertyId = process.env.GA_PROPERTY_ID;
 
 export async function GET() {
-	if (
-		!process.env.GOOGLE_CLIENT_EMAIL ||
-		!process.env.GOOGLE_PRIVATE_KEY ||
-		!propertyId
-	) {
+	if (!process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY || !propertyId) {
 		return NextResponse.json(
 			{ error: "Google Analytics credentials not configured" },
 			{ status: 500 },
@@ -72,26 +68,20 @@ export async function GET() {
 			property: `properties/${propertyId}`,
 			dateRanges: [{ startDate, endDate: today }],
 			dimensions: [{ name: "date" }],
-			metrics: [
-				{ name: "sessions" },
-				{ name: "activeUsers" },
-				{ name: "screenPageViews" },
-			],
+			metrics: [{ name: "sessions" }, { name: "activeUsers" }, { name: "screenPageViews" }],
 			orderBys: [{ dimension: { orderType: "ALPHANUMERIC" }, desc: false }],
 		});
 
 		const dailyTrend =
 			trendResponse.rows?.map((row) => {
-				const dateStr = row.dimensionValues?.[0].value || "";
+				const dateStr = row.dimensionValues?.[0]?.value || "";
 				// GA4 date format: YYYYMMDD → readable
-				const formatted = dateStr
-					? `${dateStr.slice(6, 8)}/${dateStr.slice(4, 6)}`
-					: "";
+				const formatted = dateStr ? `${dateStr.slice(6, 8)}/${dateStr.slice(4, 6)}` : "";
 				return {
 					date: formatted,
-					sessions: Number(row.metricValues?.[0].value || 0),
-					activeUsers: Number(row.metricValues?.[1].value || 0),
-					pageViews: Number(row.metricValues?.[2].value || 0),
+					sessions: Number(row.metricValues?.[0]?.value || 0),
+					activeUsers: Number(row.metricValues?.[1]?.value || 0),
+					pageViews: Number(row.metricValues?.[2]?.value || 0),
 				};
 			}) || [];
 
@@ -107,9 +97,9 @@ export async function GET() {
 
 		const topPages =
 			pagesResponse.rows?.map((row) => ({
-				path: row.dimensionValues?.[0].value || "/",
-				pageViews: Number(row.metricValues?.[0].value || 0),
-				users: Number(row.metricValues?.[1].value || 0),
+				path: row.dimensionValues?.[0]?.value || "/",
+				pageViews: Number(row.metricValues?.[0]?.value || 0),
+				users: Number(row.metricValues?.[1]?.value || 0),
 			})) || [];
 
 		// ── Summary stats ──
@@ -127,11 +117,11 @@ export async function GET() {
 
 		const summaryRow = summaryResponse.rows?.[0];
 		const summary = {
-			sessions: Number(summaryRow?.metricValues?.[0].value || 0),
-			activeUsers: Number(summaryRow?.metricValues?.[1].value || 0),
-			pageViews: Number(summaryRow?.metricValues?.[2].value || 0),
-			bounceRate: Number(summaryRow?.metricValues?.[3].value || 0),
-			avgSessionDuration: Number(summaryRow?.metricValues?.[4].value || 0),
+			sessions: Number(summaryRow?.metricValues?.[0]?.value || 0),
+			activeUsers: Number(summaryRow?.metricValues?.[1]?.value || 0),
+			pageViews: Number(summaryRow?.metricValues?.[2]?.value || 0),
+			bounceRate: Number(summaryRow?.metricValues?.[3]?.value || 0),
+			avgSessionDuration: Number(summaryRow?.metricValues?.[4]?.value || 0),
 		};
 
 		const payload = {
@@ -153,10 +143,7 @@ export async function GET() {
 		});
 	} catch (err: unknown) {
 		const errorMessage =
-			err instanceof Error
-				? err.message
-				: "Failed to fetch historical analytics";
-		console.error("GA4 Historical API Error:", err);
+			err instanceof Error ? err.message : "Failed to fetch historical analytics";
 		return NextResponse.json({ error: errorMessage }, { status: 500 });
 	}
 }

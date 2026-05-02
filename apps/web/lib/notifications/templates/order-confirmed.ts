@@ -1,9 +1,6 @@
 import { APP_NAME } from "@/lib/constants";
 
-export function orderConfirmedTemplate(
-	orderNumber: string,
-	customerName: string,
-) {
+export function orderConfirmedTemplate(orderNumber: string, customerName: string) {
 	return {
 		subject: `${APP_NAME} — Order ${orderNumber} Dikonfirmasi`,
 		whatsapp: `Halo ${customerName}! 🎉\n\nOrder ${orderNumber} Anda telah dikonfirmasi.\nKami akan segera memproses cucian Anda.\n\nTerima kasih,\n${APP_NAME}`,

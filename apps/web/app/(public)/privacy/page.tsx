@@ -10,8 +10,7 @@ export const metadata: Metadata = {
 		...baseOpenGraph,
 		url: "/privacy",
 		title: "Kebijakan Privasi | Mahira Laundry",
-		description:
-			"Informasi mengenai cara kami menjaga dan melindungi data pribadi Anda.",
+		description: "Informasi mengenai cara kami menjaga dan melindungi data pribadi Anda.",
 		images: [
 			{
 				url: "/og/legal.png",
@@ -38,27 +37,23 @@ export default function PrivacyPage() {
 				<div>
 					<h2 className="text-2xl">1. Komitmen Privasi Kami</h2>
 					<p>
-						Di Mahira Laundry, privasi Anda adalah prioritas utama kami.
-						Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan,
-						menggunakan, dan melindungi informasi pribadi Anda saat Anda
-						menggunakan layanan laundry dan aplikasi kami.
+						Di Mahira Laundry, privasi Anda adalah prioritas utama kami. Kebijakan Privasi ini
+						menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi
+						Anda saat Anda menggunakan layanan laundry dan aplikasi kami.
 					</p>
 				</div>
 
 				<div>
 					<h2 className="text-2xl">2. Informasi yang Kami Kumpulkan</h2>
 					<p>
-						Kami mengumpulkan informasi yang Anda berikan langsung kepada kami,
-						termasuk namun tidak terbatas pada:
+						Kami mengumpulkan informasi yang Anda berikan langsung kepada kami, termasuk namun tidak
+						terbatas pada:
 					</p>
 					<ul className="list-disc pl-6 mt-4 space-y-2">
 						<li>Nama lengkap dan informasi kontak (No. WhatsApp, Email).</li>
 						<li>Alamat penjemputan dan pengantaran laundry.</li>
 						<li>Riwayat pesanan dan preferensi layanan.</li>
-						<li>
-							Informasi perangkat dan akses lokasi untuk fitur peta
-							antar-jemput.
-						</li>
+						<li>Informasi perangkat dan akses lokasi untuk fitur peta antar-jemput.</li>
 					</ul>
 				</div>
 
@@ -77,18 +72,17 @@ export default function PrivacyPage() {
 				<div>
 					<h2 className="text-2xl">4. Keamanan Data</h2>
 					<p>
-						Kami menggunakan enkripsi standar industri dan protokol keamanan
-						modern (Supabase Auth & RLS) untuk melindungi data Anda dari akses
-						yang tidak sah. Kami tidak pernah menjual data pribadi Anda kepada
-						pihak ketiga untuk tujuan pemasaran.
+						Kami menggunakan enkripsi standar industri dan protokol keamanan modern (Supabase Auth &
+						RLS) untuk melindungi data Anda dari akses yang tidak sah. Kami tidak pernah menjual
+						data pribadi Anda kepada pihak ketiga untuk tujuan pemasaran.
 					</p>
 				</div>
 
 				<div className="p-4 lg:p-8 bg-transparent lg:bg-slate-50 rounded-none lg:rounded-3xl border-0 lg:border lg:border-slate-100">
 					<h3 className="text-lg font-bold mb-2">Pertanyaan Hukum?</h3>
 					<p className="text-sm">
-						Jika Anda memiliki pertanyaan mengenai kebijakan privasi kami,
-						silakan hubungi tim legal kami melalui
+						Jika Anda memiliki pertanyaan mengenai kebijakan privasi kami, silakan hubungi tim legal
+						kami melalui
 						<strong> help@mahiralaundry.id</strong>.
 					</p>
 				</div>

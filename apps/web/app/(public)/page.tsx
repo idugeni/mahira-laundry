@@ -38,8 +38,7 @@ const jsonLd = {
 	"@type": "LaundryBusiness",
 	name: "Mahira Laundry",
 	image: "https://mahiralaundry.id/logo.png",
-	description:
-		"Penyedia paket usaha laundry premium dan solusi bisnis laundry terlengkap.",
+	description: "Penyedia paket usaha laundry premium dan solusi bisnis laundry terlengkap.",
 	"@id": "https://mahiralaundry.id",
 	url: "https://mahiralaundry.id",
 	telephone: PRIMARY_OUTLET.phone,

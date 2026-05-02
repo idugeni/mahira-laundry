@@ -1,21 +1,11 @@
 "use client";
 
-import {
-	AnimatePresence,
-	motion,
-	useMotionValue,
-	useSpring,
-	useTransform,
-} from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { GiChelseaBoot } from "react-icons/gi";
-import {
-	HiOutlineArrowRight,
-	HiOutlineMagnifyingGlass,
-	HiOutlineSparkles,
-} from "react-icons/hi2";
+import { HiOutlineArrowRight, HiOutlineMagnifyingGlass, HiOutlineSparkles } from "react-icons/hi2";
 import {
 	MdOutlineDryCleaning,
 	MdOutlineFlashOn,
@@ -113,9 +103,7 @@ function ServiceCard({
 						</span>
 						<span className="text-2xl font-black text-slate-900 tracking-tighter">
 							{formatIDR(service.price)}
-							<span className="text-xs text-slate-400 font-medium ml-1">
-								/{service.unit}
-							</span>
+							<span className="text-xs text-slate-400 font-medium ml-1">/{service.unit}</span>
 						</span>
 					</div>
 					<div className="w-12 h-12 rounded-full border border-slate-100 flex items-center justify-center text-slate-400 group-hover:bg-brand-primary group-hover:text-white group-hover:border-brand-primary transition-all duration-500">
@@ -132,11 +120,7 @@ function ServiceCard({
 	);
 }
 
-export function LayananClient({
-	initialServices,
-}: {
-	initialServices: Service[];
-}) {
+export function LayananClient({ initialServices }: { initialServices: Service[] }) {
 	const { user, profile, loading } = useAuth();
 	const router = useRouter();
 	const searchParams = useSearchParams();
@@ -146,9 +130,7 @@ export function LayananClient({
 	useEffect(() => {
 		const serviceSlug = searchParams.get("s");
 		if (serviceSlug) {
-			const service = initialServices.find(
-				(s) => s.id === serviceSlug || s.slug === serviceSlug,
-			);
+			const service = initialServices.find((s) => s.id === serviceSlug || s.slug === serviceSlug);
 			if (service) {
 				setSelectedService(service);
 				setIsDetailOpen(true);
@@ -187,14 +169,10 @@ export function LayananClient({
 
 	const getServiceStyles = (name: string) => {
 		const n = name.toLowerCase();
-		if (n.includes("sepatu"))
-			return { color: "text-teal-500", bg: "bg-teal-50" };
-		if (n.includes("setrika"))
-			return { color: "text-orange-500", bg: "bg-orange-50" };
-		if (n.includes("express"))
-			return { color: "text-yellow-500", bg: "bg-yellow-50" };
-		if (n.includes("dry"))
-			return { color: "text-purple-500", bg: "bg-purple-50" };
+		if (n.includes("sepatu")) return { color: "text-teal-500", bg: "bg-teal-50" };
+		if (n.includes("setrika")) return { color: "text-orange-500", bg: "bg-orange-50" };
+		if (n.includes("express")) return { color: "text-yellow-500", bg: "bg-yellow-50" };
+		if (n.includes("dry")) return { color: "text-purple-500", bg: "bg-purple-50" };
 		if (n.includes("kost")) return { color: "text-pink-500", bg: "bg-pink-50" };
 		return { color: "text-blue-500", bg: "bg-blue-50" };
 	};
@@ -264,10 +242,7 @@ export function LayananClient({
 
 				{/* Search Bar Integration */}
 				<div className="mb-24">
-					<UniversalSearch
-						variant="section"
-						placeholder="Cari layanan yang Anda butuhkan..."
-					/>
+					<UniversalSearch variant="section" placeholder="Cari layanan yang Anda butuhkan..." />
 				</div>
 
 				{/* Grid */}
@@ -290,12 +265,9 @@ export function LayananClient({
 								<div className="w-20 h-20 bg-slate-200/50 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-400">
 									<HiOutlineMagnifyingGlass size={40} />
 								</div>
-								<h3 className="text-2xl font-black text-slate-900 mb-2">
-									Layanan tidak ditemukan
-								</h3>
+								<h3 className="text-2xl font-black text-slate-900 mb-2">Layanan tidak ditemukan</h3>
 								<p className="text-slate-500 font-medium">
-									Maaf, kami tidak dapat menemukan layanan dengan kata kunci "
-									{query}"
+									Maaf, kami tidak dapat menemukan layanan dengan kata kunci "{query}"
 								</p>
 								<button
 									type="button"
@@ -343,8 +315,8 @@ export function LayananClient({
 							<span className="text-brand-accent">Biar Kami yang Atasi.</span>
 						</h2>
 						<p className="text-slate-400 text-lg mb-12 max-w-2xl mx-auto font-medium">
-							Nikmati waktu luang Anda lebih banyak sementara kami menangani
-							tumpukan cucian Anda dengan standar kualitas hotel bintang lima.
+							Nikmati waktu luang Anda lebih banyak sementara kami menangani tumpukan cucian Anda
+							dengan standar kualitas hotel bintang lima.
 						</p>
 						<motion.div className="inline-block">
 							<Link

@@ -31,11 +31,7 @@ const statusLabels: Record<string, string> = {
 	cancelled: "Dibatalkan",
 };
 
-export default async function OrderDetailPage({
-	params,
-}: {
-	params: Promise<{ id: string }>;
-}) {
+export default async function OrderDetailPage({ params }: { params: Promise<{ id: string }> }) {
 	const { id } = await params;
 	const supabase = await createClient();
 
@@ -125,10 +121,7 @@ export default async function OrderDetailPage({
 					</h3>
 					<div className="space-y-6 relative before:absolute before:left-[5px] before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-50">
 						{getTimeline().map((item) => (
-							<div
-								key={item.status}
-								className="flex items-start gap-6 relative"
-							>
+							<div key={item.status} className="flex items-start gap-6 relative">
 								<div
 									className={`w-3 h-3 rounded-full mt-1.5 z-10 ${item.done ? "bg-brand-primary shadow-[0_0_0_4px_rgba(26,107,74,0.1)]" : "bg-slate-200"}`}
 								/>
@@ -173,16 +166,12 @@ export default async function OrderDetailPage({
 									className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl"
 								>
 									<div>
-										<div className="text-sm font-bold text-slate-900">
-											{item.service_name}
-										</div>
+										<div className="text-sm font-bold text-slate-900">{item.service_name}</div>
 										<div className="text-xs text-slate-500 font-medium mt-0.5">
 											{item.quantity} {item.unit}
 										</div>
 									</div>
-									<span className="font-black text-slate-900">
-										{formatIDR(item.subtotal)}
-									</span>
+									<span className="font-black text-slate-900">{formatIDR(item.subtotal)}</span>
 								</div>
 							),
 						)}

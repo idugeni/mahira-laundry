@@ -15,10 +15,7 @@ const MitraSchema = z.object({
 	outletSlug: z
 		.string()
 		.min(3)
-		.regex(
-			/^[a-z0-9-]+$/,
-			"Slug must be lowercase and only contain numbers and hyphens",
-		),
+		.regex(/^[a-z0-9-]+$/, "Slug must be lowercase and only contain numbers and hyphens"),
 	outletAddress: z.string().min(5),
 	franchiseFee: z.number().min(0).max(100),
 });
@@ -52,17 +49,16 @@ export async function registerMitra(formData: Record<string, unknown>) {
 		}
 
 		// 2. Create Auth User
-		const { data: authUser, error: authError } =
-			await admin.auth.admin.createUser({
-				email: validated.email,
-				password: validated.password || "MitraMahira12!@",
-				email_confirm: true,
-				user_metadata: {
-					full_name: validated.fullName,
-					role: "manager",
-					phone: validated.phone,
-				},
-			});
+		const { data: authUser, error: authError } = await admin.auth.admin.createUser({
+			email: validated.email,
+			password: validated.password || "MitraMahira12!@",
+			email_confirm: true,
+			user_metadata: {
+				full_name: validated.fullName,
+				role: "manager",
+				phone: validated.phone,
+			},
+		});
 
 		if (authError) {
 			await admin.from("outlets").delete().eq("id", outlet.id);
@@ -97,7 +93,7 @@ export async function registerMitra(formData: Record<string, unknown>) {
 		return { success: true, outletId: outlet.id };
 	} catch (error) {
 		if (error instanceof z.ZodError) {
-			return { success: false, error: error.issues[0].message };
+			return { success: false, error: error.issues[0]?.message ?? "Validation error" };
 		}
 		return {
 			success: false,

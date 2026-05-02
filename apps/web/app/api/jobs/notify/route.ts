@@ -8,10 +8,7 @@ async function handler(request: Request) {
 		const { orderId, newStatus, customerPhone, customerName } = body;
 
 		if (!orderId || !newStatus) {
-			return NextResponse.json(
-				{ error: "Missing orderId or newStatus" },
-				{ status: 400 },
-			);
+			return NextResponse.json({ error: "Missing orderId or newStatus" }, { status: 400 });
 		}
 
 		const supabase = await createClient();
@@ -56,14 +53,11 @@ async function handler(request: Request) {
 						message,
 					}),
 				});
-			} catch (waError) {
-				console.error("[Notify Job] WhatsApp send failed:", waError);
-			}
+			} catch (_waError) {}
 		}
 
 		return NextResponse.json({ success: true });
-	} catch (error) {
-		console.error("[Notify Job] Error:", error);
+	} catch (_error) {
 		return NextResponse.json({ error: "Internal error" }, { status: 500 });
 	}
 }

@@ -5,17 +5,13 @@ import { formatIDR } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Kelola Layanan",
-	description:
-		"Kelola daftar layanan, harga, dan durasi pengerjaan di Mahira Laundry.",
+	description: "Kelola daftar layanan, harga, dan durasi pengerjaan di Mahira Laundry.",
 };
 
 export const dynamic = "force-dynamic";
 
 export default async function ManagerLayananPage() {
-	const [profile, services] = await Promise.all([
-		getUserProfile(),
-		getAllServices(),
-	]);
+	const [profile, services] = await Promise.all([getUserProfile(), getAllServices()]);
 
 	const outletId = profile?.outlet_id || "";
 
@@ -38,9 +34,7 @@ export default async function ManagerLayananPage() {
 			{services.length === 0 ? (
 				<div className="bg-white rounded-xl border border-border p-12 text-center shadow-xs">
 					<div className="text-4xl mb-4">🧺</div>
-					<h3 className="text-lg font-bold text-slate-700">
-						Belum ada layanan
-					</h3>
+					<h3 className="text-lg font-bold text-slate-700">Belum ada layanan</h3>
 					<p className="text-slate-500 text-sm mt-1">
 						Anda belum menambahkan layanan apapun ke cabang ini.
 					</p>
@@ -77,22 +71,15 @@ export default async function ManagerLayananPage() {
 							<tbody className="divide-y divide-slate-100">
 								{services.map((service, index) => {
 									return (
-										<tr
-											key={service.id}
-											className="hover:bg-slate-50/70 transition-colors group"
-										>
-											<td className="px-5 py-4 text-sm font-medium text-slate-400">
-												{index + 1}
-											</td>
+										<tr key={service.id} className="hover:bg-slate-50/70 transition-colors group">
+											<td className="px-5 py-4 text-sm font-medium text-slate-400">{index + 1}</td>
 											<td className="px-5 py-4">
 												<div className="flex items-center gap-3">
 													<div className="w-10 h-10 rounded-xl bg-gradient-to-br from-slate-50 to-slate-100 border border-slate-200 flex items-center justify-center text-xl shadow-xs transition-transform">
 														{service.icon || "🧺"}
 													</div>
 													<div>
-														<p className="text-sm font-bold text-slate-900">
-															{service.name}
-														</p>
+														<p className="text-sm font-bold text-slate-900">{service.name}</p>
 														{service.description && (
 															<p className="text-xs text-slate-400 mt-0.5 truncate max-w-[200px]">
 																{service.description}

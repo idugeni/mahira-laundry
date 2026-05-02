@@ -12,11 +12,7 @@ export function useRealtimeDelivery(orderId?: string) {
 		if (!orderId) return;
 
 		const fetchDelivery = async () => {
-			const { data } = await supabase
-				.from("delivery")
-				.select("*")
-				.eq("order_id", orderId)
-				.single();
+			const { data } = await supabase.from("delivery").select("*").eq("order_id", orderId).single();
 			if (data) setDelivery(data as unknown as Delivery);
 		};
 

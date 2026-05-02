@@ -3,11 +3,7 @@ import { MahiraHeader } from "@/components/brand/mahira-header";
 import { BackToTop } from "@/components/shared/common/back-to-top";
 import { createClient } from "@/lib/supabase/server";
 
-export default async function PublicLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default async function PublicLayout({ children }: { children: React.ReactNode }) {
 	const supabase = await createClient();
 	const { data: services } = await supabase
 		.from("services")
@@ -19,10 +15,7 @@ export default async function PublicLayout({
 	return (
 		<div className="flex flex-col min-h-screen">
 			<MahiraHeader key="public-header" />
-			<main
-				key="public-main"
-				className="flex-1 flex items-start justify-center"
-			>
+			<main key="public-main" className="flex-1 flex items-start justify-center">
 				{children}
 			</main>
 			<MahiraFooter key="public-footer" services={services || []} />

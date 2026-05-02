@@ -5,10 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { HiOutlineArrowRight, HiOutlineSparkles } from "react-icons/hi2";
-import {
-	MdOutlineLocalLaundryService,
-	MdOutlineRocketLaunch,
-} from "react-icons/md";
+import { MdOutlineLocalLaundryService, MdOutlineRocketLaunch } from "react-icons/md";
 import { Badge } from "@/components/ui/badge";
 
 import type { BusinessPackage } from "@/lib/types";
@@ -143,9 +140,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 						>
 							Punya Bisnis Laundry
 							<br />
-							<span className="inline-block text-brand-gradient py-2">
-								Autopilot, Tanpa Pusing
-							</span>
+							<span className="inline-block text-brand-gradient py-2">Autopilot, Tanpa Pusing</span>
 							<br />
 							Mulai dari Nol.
 						</motion.h1>
@@ -154,10 +149,9 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 							variants={itemVariants}
 							className="mt-6 text-lg text-slate-500 leading-relaxed max-w-lg font-medium"
 						>
-							Tinggalkan cara lama yang ribet dan rawan rugi. Kami siapkan
-							sistem teruji: mulai dari mesin premium, training SDM, hingga
-							operasional otomatis. Anda terima beres dan tinggal pantau profit
-							setiap hari.
+							Tinggalkan cara lama yang ribet dan rawan rugi. Kami siapkan sistem teruji: mulai dari
+							mesin premium, training SDM, hingga operasional otomatis. Anda terima beres dan
+							tinggal pantau profit setiap hari.
 						</motion.p>
 
 						<motion.div
@@ -187,10 +181,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 						</motion.div>
 
 						{/* Social Proof */}
-						<motion.div
-							variants={itemVariants}
-							className="mt-16 flex items-center gap-6"
-						>
+						<motion.div variants={itemVariants} className="mt-16 flex items-center gap-6">
 							<div className="flex -space-x-4">
 								{[1, 2, 3, 4].map((i) => (
 									<motion.div

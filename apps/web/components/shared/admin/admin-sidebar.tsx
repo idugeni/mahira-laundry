@@ -77,9 +77,7 @@ function SidebarContent({ navItems, onNavClick }: SidebarContentProps) {
 								<span
 									className={cn(
 										"text-[10px] font-black min-w-[18px] h-[18px] flex items-center justify-center rounded-full px-1",
-										active
-											? "bg-white/30 text-white"
-											: "bg-red-100 text-red-600",
+										active ? "bg-white/30 text-white" : "bg-red-100 text-red-600",
 									)}
 								>
 									{item.badge > 99 ? "99+" : item.badge}
@@ -171,10 +169,7 @@ export function AdminSidebar({
 					mobileOpen ? "translate-x-0" : "-translate-x-full",
 				)}
 			>
-				<SidebarContent
-					navItems={navItems}
-					onNavClick={() => setMobileOpen(false)}
-				/>
+				<SidebarContent navItems={navItems} onNavClick={() => setMobileOpen(false)} />
 			</aside>
 		</>
 	);

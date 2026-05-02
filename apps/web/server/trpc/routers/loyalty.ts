@@ -27,10 +27,7 @@ export const loyaltyRouter = router({
 				.select("*", { count: "exact" })
 				.eq("user_id", ctx.userId)
 				.order("created_at", { ascending: false })
-				.range(
-					(input.page - 1) * input.pageSize,
-					input.page * input.pageSize - 1,
-				);
+				.range((input.page - 1) * input.pageSize, input.page * input.pageSize - 1);
 			return { data: data || [], total: count || 0 };
 		}),
 
@@ -58,10 +55,7 @@ export const loyaltyRouter = router({
 				balance_after: newBalance,
 			});
 
-			await supabase
-				.from("profiles")
-				.update({ loyalty_points: newBalance })
-				.eq("id", ctx.userId);
+			await supabase.from("profiles").update({ loyalty_points: newBalance }).eq("id", ctx.userId);
 
 			return { success: true, newBalance };
 		}),

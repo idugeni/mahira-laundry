@@ -1,0 +1,42 @@
+declare namespace NodeJS {
+	interface ProcessEnv {
+		// Public
+		NEXT_PUBLIC_APP_NAME: string;
+		NEXT_PUBLIC_APP_URL: string;
+		NEXT_PUBLIC_SUPABASE_URL: string;
+		NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: string;
+		NEXT_PUBLIC_GA_ID: string;
+		NEXT_PUBLIC_GOOGLE_MAPS_KEY: string;
+		NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: string;
+		NEXT_PUBLIC_MAP_CENTER_LAT: string;
+		NEXT_PUBLIC_MAP_CENTER_LNG: string;
+		NEXT_PUBLIC_MAP_DEFAULT_ZOOM: string;
+		NEXT_PUBLIC_WHATSAPP_CS: string;
+
+		// Server-only
+		SUPABASE_SECRET_KEY: string;
+		RESEND_API_KEY: string;
+		RESEND_FROM_NAME: string;
+		RESEND_FROM_EMAIL: string;
+		FONNTE_API_KEY: string;
+		MIDTRANS_IS_PRODUCTION: string;
+		MIDTRANS_SERVER_KEY: string;
+		QSTASH_TOKEN: string;
+		QSTASH_CURRENT_SIGNING_KEY: string;
+		UPSTASH_REDIS_REST_URL: string;
+		UPSTASH_REDIS_REST_TOKEN: string;
+		GA_PROPERTY_ID: string;
+		GOOGLE_CLIENT_EMAIL: string;
+		GOOGLE_PRIVATE_KEY: string;
+
+		// Rate limits
+		RATE_LIMIT_PUBLIC_REQ: string;
+		RATE_LIMIT_PUBLIC_WINDOW_S: string;
+		RATE_LIMIT_AUTH_REQ: string;
+		RATE_LIMIT_AUTH_WINDOW_S: string;
+		RATE_LIMIT_FORM_REQ: string;
+		RATE_LIMIT_FORM_WINDOW_S: string;
+		RATE_LIMIT_API_REQ: string;
+		RATE_LIMIT_API_WINDOW_S: string;
+	}
+}

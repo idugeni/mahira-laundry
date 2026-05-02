@@ -104,8 +104,7 @@ export function OrderServiceStep({
 											onChange={(e) =>
 												onUpdateQuantity(
 													service.id,
-													parseFloat(e.target.value) -
-														(quantities[service.id] || 0),
+													parseFloat(e.target.value) - (quantities[service.id] || 0),
 												)
 											}
 											className="w-12 text-center font-black text-lg bg-transparent text-slate-900 outline-hidden [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"

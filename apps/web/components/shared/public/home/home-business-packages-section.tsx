@@ -53,7 +53,7 @@ function formatIDR(amount: number) {
 
 function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 	const [isExpanded, setIsExpanded] = useState(false);
-	const style = TIER_STYLE[pkg.tier] ?? TIER_STYLE.Starter;
+	const style = TIER_STYLE[pkg.tier] ?? TIER_STYLE["Starter"]!;
 	const isPromoActive =
 		pkg.promo_price != null &&
 		pkg.promo_expires_at != null &&
@@ -81,9 +81,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 			}}
 			className={`relative flex flex-col h-full rounded-[2rem] border bg-white p-6 sm:p-8 transition-[box-shadow,border-color] duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] ${style.accent}`}
 		>
-			<div
-				className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none`}
-			/>
+			<div className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none`} />
 
 			<div className="relative z-10 flex flex-col h-full">
 				{style.featured && (
@@ -181,9 +179,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 									</div>
 									<span>
 										{item.quantity != null ? (
-											<span className="font-black text-slate-900">
-												{item.quantity}×{" "}
-											</span>
+											<span className="font-black text-slate-900">{item.quantity}× </span>
 										) : (
 											""
 										)}
@@ -203,9 +199,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 							aria-expanded={isExpanded}
 							className="mt-6 text-[10px] text-brand-primary font-black uppercase tracking-[0.2em] hover:underline underline-offset-8 flex items-center justify-center sm:justify-start gap-2"
 						>
-							{isExpanded
-								? "Tampilkan Sedikit"
-								: `+${pkg.items.length - 4} Item Lainnya`}
+							{isExpanded ? "Tampilkan Sedikit" : `+${pkg.items.length - 4} Item Lainnya`}
 							{/* FIX: Ganti ArrowRight → ChevronDown; rotasi 180° kini benar (menunjuk ke atas = collapse) */}
 							<motion.div
 								animate={{ rotate: isExpanded ? 180 : 0 }}
@@ -256,9 +250,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 	);
 }
 
-export function HomeBusinessPackagesSection({
-	packages,
-}: HomeBusinessPackagesSectionProps) {
+export function HomeBusinessPackagesSection({ packages }: HomeBusinessPackagesSectionProps) {
 	if (packages.length === 0) return null;
 
 	return (
@@ -302,8 +294,7 @@ export function HomeBusinessPackagesSection({
 						transition={{ delay: 0.3 }}
 						className="text-lg text-slate-500 font-medium max-w-sm text-center md:text-left mx-auto md:mx-0"
 					>
-						Sistem autopilot yang dirancang untuk memberikan ROI tercepat dalam
-						industri laundry.
+						Sistem autopilot yang dirancang untuk memberikan ROI tercepat dalam industri laundry.
 					</motion.p>
 				</div>
 
@@ -330,10 +321,7 @@ export function HomeBusinessPackagesSection({
 						className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-50 text-slate-900 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 border border-slate-100"
 					>
 						Lihat Detail &amp; Bandingkan Semua
-						<motion.div
-							animate={{ x: [0, 5, 0] }}
-							transition={{ repeat: Infinity, duration: 1.5 }}
-						>
+						<motion.div animate={{ x: [0, 5, 0] }} transition={{ repeat: Infinity, duration: 1.5 }}>
 							<HiOutlineArrowRight size={18} />
 						</motion.div>
 					</Link>

@@ -17,9 +17,7 @@ export type InventoryInput = {
 	notes?: string;
 };
 
-export async function upsertInventory(
-	data: InventoryInput,
-): Promise<ActionResponse> {
+export async function upsertInventory(data: InventoryInput): Promise<ActionResponse> {
 	try {
 		const supabase = await createClient();
 		const {
@@ -66,11 +64,7 @@ export async function upsertInventory(
 				});
 			}
 		} else {
-			result = await supabase
-				.from("inventory")
-				.insert(inventoryData)
-				.select()
-				.single();
+			result = await supabase.from("inventory").insert(inventoryData).select().single();
 
 			if (result.data) {
 				await supabase.from("inventory_logs").insert({
@@ -236,8 +230,7 @@ export async function transferInventory(data: {
 			.single();
 
 		if (sourceError || !source) throw new Error("Item asal tidak ditemukan");
-		if (Number(source.quantity) < data.amount)
-			throw new Error("Stok tidak mencukupi");
+		if (Number(source.quantity) < data.amount) throw new Error("Stok tidak mencukupi");
 
 		// 2. Reduce from source
 		await adjustStock(
@@ -258,18 +251,15 @@ export async function transferInventory(data: {
 		// biome-ignore lint/suspicious/noImplicitAnyLet: targetId is assigned in both branches
 		let targetId;
 		if (targetItems && targetItems.length > 0) {
-			targetId = targetItems[0].id;
-			const newQty = Number(targetItems[0].quantity) + data.amount;
-			await supabase
-				.from("inventory")
-				.update({ quantity: newQty })
-				.eq("id", targetId);
+			targetId = targetItems[0]?.id;
+			const newQty = Number(targetItems[0]?.quantity) + data.amount;
+			await supabase.from("inventory").update({ quantity: newQty }).eq("id", targetId);
 
 			await supabase.from("inventory_logs").insert({
 				inventory_id: targetId,
 				type: "in",
 				quantity: data.amount,
-				previous_quantity: Number(targetItems[0].quantity),
+				previous_quantity: Number(targetItems[0]?.quantity),
 				new_quantity: newQty,
 				user_id: user?.id,
 				notes: `Transfer masuk dari outlet asal. ${data.notes || ""}`,

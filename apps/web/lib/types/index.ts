@@ -7,12 +7,7 @@
 // ENUMS
 // ─────────────────────────────────────────────
 
-export type UserRole =
-	| "customer"
-	| "kasir"
-	| "kurir"
-	| "manager"
-	| "superadmin";
+export type UserRole = "customer" | "kasir" | "kurir" | "manager" | "superadmin";
 
 export type OrderStatus =
 	| "pending"
@@ -25,12 +20,7 @@ export type OrderStatus =
 	| "completed"
 	| "cancelled";
 
-export type PaymentStatus =
-	| "unpaid"
-	| "pending"
-	| "paid"
-	| "refunded"
-	| "failed";
+export type PaymentStatus = "unpaid" | "pending" | "paid" | "refunded" | "failed";
 
 export type PaymentMethod =
 	| "cash"
@@ -43,12 +33,7 @@ export type PaymentMethod =
 
 export type DeliveryType = "pickup" | "delivery" | "both";
 
-export type DeliveryStatus =
-	| "assigned"
-	| "on_the_way"
-	| "arrived"
-	| "completed"
-	| "failed";
+export type DeliveryStatus = "assigned" | "on_the_way" | "arrived" | "completed" | "failed";
 
 export type ServiceUnit = "kg" | "item" | "pasang" | "meter";
 
@@ -56,12 +41,7 @@ export type LoyaltyTier = "bronze" | "silver" | "gold" | "platinum";
 
 export type ShiftType = "pagi" | "siang" | "malam";
 
-export type NotificationType =
-	| "order_update"
-	| "payment"
-	| "delivery"
-	| "promotion"
-	| "system";
+export type NotificationType = "order_update" | "payment" | "delivery" | "promotion" | "system";
 
 export type VoucherType = "percentage" | "fixed_amount" | "free_delivery";
 
@@ -279,12 +259,7 @@ export interface ActionResponse<T = void> {
 // PAKET USAHA LAUNDRY
 // ─────────────────────────────────────────────
 
-export type InquiryStatus =
-	| "new"
-	| "contacted"
-	| "negotiating"
-	| "converted"
-	| "rejected";
+export type InquiryStatus = "new" | "contacted" | "negotiating" | "converted" | "rejected";
 
 export type PackageTier = "Starter" | "Standard" | "Premium" | "Custom";
 

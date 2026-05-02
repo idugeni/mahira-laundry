@@ -8,20 +8,13 @@ export async function getDashboardStats() {
 	if (!user) return null;
 
 	const [ordersRes, activeOrdersRes, profileRes] = await Promise.all([
-		supabase
-			.from("orders")
-			.select("id", { count: "exact", head: true })
-			.eq("customer_id", user.id),
+		supabase.from("orders").select("id", { count: "exact", head: true }).eq("customer_id", user.id),
 		supabase
 			.from("orders")
 			.select("id", { count: "exact", head: true })
 			.eq("customer_id", user.id)
 			.not("status", "in", '("completed","cancelled")'),
-		supabase
-			.from("profiles")
-			.select("loyalty_points, loyalty_tier")
-			.eq("id", user.id)
-			.single(),
+		supabase.from("profiles").select("loyalty_points, loyalty_tier").eq("id", user.id).single(),
 	]);
 
 	return {

@@ -9,11 +9,7 @@ import type { ActionResponse } from "@/lib/types";
  * Top up customer balance
  * Processed by Cashier/Admin
  */
-export async function topUpBalance(
-	customerId: string,
-	amount: number,
-	notes?: string,
-) {
+export async function topUpBalance(customerId: string, amount: number, notes?: string) {
 	try {
 		const supabase = await createClient();
 		const admin = createAdminClient();
@@ -34,15 +30,13 @@ export async function topUpBalance(
 		const newBalance = Number(profile.balance || 0) + amount;
 
 		// 2. Create transaction log
-		const { error: logError } = await admin
-			.from("deposit_transactions")
-			.insert({
-				profile_id: customerId,
-				amount: amount,
-				type: "topup",
-				notes: notes || "Top up saldo manual",
-				actor_id: actor.id,
-			});
+		const { error: logError } = await admin.from("deposit_transactions").insert({
+			profile_id: customerId,
+			amount: amount,
+			type: "topup",
+			notes: notes || "Top up saldo manual",
+			actor_id: actor.id,
+		});
 
 		if (logError) throw logError;
 
@@ -120,9 +114,7 @@ export async function recordIncome(data: {
 			.eq("id", user.id)
 			.single();
 		if (profile?.role !== "superadmin") {
-			throw new Error(
-				"Akses ditolak. Hanya superadmin yang dapat mencatat pemasukan.",
-			);
+			throw new Error("Akses ditolak. Hanya superadmin yang dapat mencatat pemasukan.");
 		}
 
 		const { error } = await supabase.from("income").insert({

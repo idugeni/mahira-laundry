@@ -12,9 +12,7 @@ export default function ErrorPage({
 	error: Error & { digest?: string };
 	reset: () => void;
 }) {
-	useEffect(() => {
-		console.error("[Mahira Laundry] Error:", error);
-	}, [error]);
+	useEffect(() => {}, []);
 
 	return (
 		<div className="min-h-[100dvh] flex items-center justify-center p-6 bg-white/50">
@@ -45,8 +43,8 @@ export default function ErrorPage({
 					transition={{ delay: 0.25 }}
 					className="mt-2 text-muted-foreground text-sm"
 				>
-					Maaf, terjadi gangguan saat memuat halaman ini. Tim kami sudah
-					diberitahu dan sedang bekerja untuk memperbaikinya.
+					Maaf, terjadi gangguan saat memuat halaman ini. Tim kami sudah diberitahu dan sedang
+					bekerja untuk memperbaikinya.
 				</motion.p>
 
 				{error.digest && (

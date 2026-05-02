@@ -50,8 +50,7 @@ export async function signIn(formData: FormData): Promise<void> {
 		password: formData.get("password") as string,
 	};
 
-	const { error, data: authData } =
-		await supabase.auth.signInWithPassword(data);
+	const { error, data: authData } = await supabase.auth.signInWithPassword(data);
 
 	if (error) {
 		redirect(`/login?error=${encodeURIComponent(error.message)}`);
@@ -82,20 +81,15 @@ export async function signOut(): Promise<void> {
 export async function resetPassword(formData: FormData): Promise<void> {
 	const supabase = await createClient();
 
-	const { error } = await supabase.auth.resetPasswordForEmail(
-		formData.get("email") as string,
-		{
-			redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback?type=recovery`,
-		},
-	);
+	const { error } = await supabase.auth.resetPasswordForEmail(formData.get("email") as string, {
+		redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback?type=recovery`,
+	});
 
 	if (error) {
 		redirect(`/lupa-password?error=${encodeURIComponent(error.message)}`);
 	}
 
-	redirect(
-		"/lupa-password?success=Link reset password telah dikirim ke email Anda.",
-	);
+	redirect("/lupa-password?success=Link reset password telah dikirim ke email Anda.");
 }
 
 export async function signInWithGoogle(): Promise<void> {
@@ -134,7 +128,5 @@ export async function updatePassword(formData: FormData): Promise<void> {
 		redirect(`/reset-password?error=${encodeURIComponent(error.message)}`);
 	}
 
-	redirect(
-		"/login?success=Password Anda berhasil diperbarui. Silakan masuk kembali.",
-	);
+	redirect("/login?success=Password Anda berhasil diperbarui. Silakan masuk kembali.");
 }

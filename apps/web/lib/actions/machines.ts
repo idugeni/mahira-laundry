@@ -38,11 +38,7 @@ export async function upsertMachine(data: {
 				.select()
 				.single();
 		} else {
-			result = await supabase
-				.from("machines")
-				.insert(machineData)
-				.select()
-				.single();
+			result = await supabase.from("machines").insert(machineData).select().single();
 		}
 
 		if (result.error) throw result.error;

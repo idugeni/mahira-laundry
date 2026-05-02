@@ -26,8 +26,7 @@ export async function POST(request: Request) {
 		}
 
 		return NextResponse.json({ status: "ok" });
-	} catch (error) {
-		console.error("[Supabase Webhook] Error:", error);
+	} catch (_error) {
 		return NextResponse.json({ error: "Internal error" }, { status: 500 });
 	}
 }

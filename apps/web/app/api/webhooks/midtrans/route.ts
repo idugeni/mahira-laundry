@@ -19,12 +19,8 @@ export async function POST(request: Request) {
 
 		const { transaction_status, order_id, fraud_status } = body;
 
-		if (
-			transaction_status === "capture" ||
-			transaction_status === "settlement"
-		) {
+		if (transaction_status === "capture" || transaction_status === "settlement") {
 			if (fraud_status === "accept" || !fraud_status) {
-				console.log(`[Midtrans] Payment confirmed for: ${order_id}`);
 				await enqueueJob("/api/jobs/payment-confirmed", {
 					orderId: order_id,
 					amount: body.gross_amount,
@@ -36,12 +32,10 @@ export async function POST(request: Request) {
 			transaction_status === "cancel" ||
 			transaction_status === "expire"
 		) {
-			console.log(`[Midtrans] Payment failed for: ${order_id}`);
 		}
 
 		return NextResponse.json({ status: "ok" });
-	} catch (error) {
-		console.error("[Midtrans Webhook] Error:", error);
+	} catch (_error) {
 		return NextResponse.json({ error: "Internal error" }, { status: 500 });
 	}
 }

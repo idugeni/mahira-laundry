@@ -37,19 +37,12 @@ const formSchema = z.object({
 	phone: z
 		.string()
 		.min(1, "Nomor telepon wajib diisi")
-		.refine(
-			(val) => val.replace(/\D/g, "").length >= 10,
-			"Nomor telepon minimal 10 digit",
-		),
+		.refine((val) => val.replace(/\D/g, "").length >= 10, "Nomor telepon minimal 10 digit"),
 	email: z.string().email("Format email tidak valid"),
 	city: z.string().min(2, "Kota/kabupaten minimal 2 karakter"),
 	package_name: z.string().min(1, "Pilih paket yang diminati"),
 	budget_range: z.string().optional(),
-	message: z
-		.string()
-		.max(500, "Pesan maksimal 500 karakter")
-		.optional()
-		.or(z.literal("")),
+	message: z.string().max(500, "Pesan maksimal 500 karakter").optional().or(z.literal("")),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -59,10 +52,7 @@ interface InquiryFormProps {
 	packages: BusinessPackage[];
 }
 
-export function InquiryForm({
-	defaultPackageName,
-	packages,
-}: InquiryFormProps) {
+export function InquiryForm({ defaultPackageName, packages }: InquiryFormProps) {
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -83,9 +73,7 @@ export function InquiryForm({
 	}, [defaultPackageName, form]);
 
 	async function onSubmit(values: FormValues) {
-		const selectedPackage = packages.find(
-			(p) => p.name === values.package_name,
-		);
+		const selectedPackage = packages.find((p) => p.name === values.package_name);
 
 		const result = await submitBusinessInquiry({
 			package_id: selectedPackage?.id,
@@ -99,9 +87,7 @@ export function InquiryForm({
 		});
 
 		if (result.success) {
-			toast.success(
-				"Terima kasih! Tim kami akan menghubungi Anda dalam 1x24 jam kerja.",
-			);
+			toast.success("Terima kasih! Tim kami akan menghubungi Anda dalam 1x24 jam kerja.");
 			form.reset({
 				full_name: "",
 				phone: "",
@@ -120,9 +106,7 @@ export function InquiryForm({
 
 	return (
 		<div className="mx-auto max-w-2xl rounded-2xl bg-white p-8 shadow-xs">
-			<h3 className="mb-6 text-xl font-bold text-gray-900">
-				Ajukan Inquiry Paket Usaha
-			</h3>
+			<h3 className="mb-6 text-xl font-bold text-gray-900">Ajukan Inquiry Paket Usaha</h3>
 
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
@@ -150,15 +134,10 @@ export function InquiryForm({
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>
-									Nomor Telepon / WhatsApp{" "}
-									<span className="text-red-500">*</span>
+									Nomor Telepon / WhatsApp <span className="text-red-500">*</span>
 								</FormLabel>
 								<FormControl>
-									<Input
-										type="tel"
-										placeholder="Contoh: 08123456789"
-										{...field}
-									/>
+									<Input type="tel" placeholder="Contoh: 08123456789" {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -175,11 +154,7 @@ export function InquiryForm({
 									Email <span className="text-red-500">*</span>
 								</FormLabel>
 								<FormControl>
-									<Input
-										type="email"
-										placeholder="contoh@email.com"
-										{...field}
-									/>
+									<Input type="email" placeholder="contoh@email.com" {...field} />
 								</FormControl>
 								<FormMessage />
 							</FormItem>
@@ -193,8 +168,7 @@ export function InquiryForm({
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>
-									Kota / Kabupaten Domisili{" "}
-									<span className="text-red-500">*</span>
+									Kota / Kabupaten Domisili <span className="text-red-500">*</span>
 								</FormLabel>
 								<FormControl>
 									<Input placeholder="Contoh: Surabaya" {...field} />
@@ -239,10 +213,7 @@ export function InquiryForm({
 						render={({ field }) => (
 							<FormItem>
 								<FormLabel>Modal yang Disiapkan (opsional)</FormLabel>
-								<Select
-									onValueChange={field.onChange}
-									value={field.value ?? ""}
-								>
+								<Select onValueChange={field.onChange} value={field.value ?? ""}>
 									<FormControl>
 										<SelectTrigger>
 											<SelectValue placeholder="Pilih kisaran modal" />
@@ -277,9 +248,7 @@ export function InquiryForm({
 									/>
 								</FormControl>
 								<div className="flex justify-end">
-									<span className="text-xs text-gray-400">
-										{(field.value ?? "").length}/500
-									</span>
+									<span className="text-xs text-gray-400">{(field.value ?? "").length}/500</span>
 								</div>
 								<FormMessage />
 							</FormItem>

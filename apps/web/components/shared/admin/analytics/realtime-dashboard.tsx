@@ -70,9 +70,7 @@ function formatBounceRate(rate: number): string {
 export function RealtimeDashboard() {
 	const [mode, setMode] = useState<Mode>("realtime");
 	const [realtimeData, setRealtimeData] = useState<RealtimeData | null>(null);
-	const [historicalData, setHistoricalData] = useState<HistoricalData | null>(
-		null,
-	);
+	const [historicalData, setHistoricalData] = useState<HistoricalData | null>(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
@@ -88,8 +86,7 @@ export function RealtimeDashboard() {
 			setRealtimeData(json);
 			setError(null);
 		} catch (err: unknown) {
-			const errorMessage =
-				err instanceof Error ? err.message : "Failed to fetch";
+			const errorMessage = err instanceof Error ? err.message : "Failed to fetch";
 			setError(errorMessage);
 		} finally {
 			setLoading(false);
@@ -108,8 +105,7 @@ export function RealtimeDashboard() {
 			setHistoricalData(json);
 			setError(null);
 		} catch (err: unknown) {
-			const errorMessage =
-				err instanceof Error ? err.message : "Failed to fetch";
+			const errorMessage = err instanceof Error ? err.message : "Failed to fetch";
 			setError(errorMessage);
 		} finally {
 			setLoading(false);
@@ -227,12 +223,10 @@ export function RealtimeDashboard() {
 						{mode === "realtime" ? (
 							realtimeData?.deviceBreakdown ? (
 								<TrafficChart
-									data={realtimeData.deviceBreakdown
-										.slice(0, 7)
-										.map((item, i) => ({
-											day: item.city || `Kota ${i + 1}`,
-											count: item.users,
-										}))}
+									data={realtimeData.deviceBreakdown.slice(0, 7).map((item, i) => ({
+										day: item.city || `Kota ${i + 1}`,
+										count: item.users,
+									}))}
 								/>
 							) : (
 								<EmptyChart loading={loading} />
@@ -259,30 +253,28 @@ export function RealtimeDashboard() {
 			</div>
 
 			{/* Bottom: Top Pages (realtime) or Bounce/Duration (historical) */}
-			{mode === "realtime" &&
-				realtimeData?.topPages &&
-				realtimeData.topPages.length > 0 && (
-					<div className="bg-white rounded-2xl sm:rounded-[2rem] border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-xs">
-						<h2 className="text-base sm:text-lg font-black text-slate-900 tracking-tight mb-4 sm:mb-6">
-							Halaman Aktif (Realtime)
-						</h2>
-						<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
-							{realtimeData.topPages.slice(0, 8).map((item) => (
-								<div
-									key={item.page}
-									className="p-2 sm:p-3 bg-slate-50/50 rounded-xl sm:rounded-2xl border border-slate-100/50 hover:bg-slate-50 hover:border-slate-200 transition-colors overflow-hidden"
-								>
-									<p className="text-[10px] sm:text-xs font-bold text-slate-700 truncate">
-										{item.page}
-									</p>
-									<p className="text-[9px] sm:text-[10px] font-black text-emerald-500 mt-0.5 sm:mt-1">
-										{item.users} active
-									</p>
-								</div>
-							))}
-						</div>
+			{mode === "realtime" && realtimeData?.topPages && realtimeData.topPages.length > 0 && (
+				<div className="bg-white rounded-2xl sm:rounded-[2rem] border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-xs">
+					<h2 className="text-base sm:text-lg font-black text-slate-900 tracking-tight mb-4 sm:mb-6">
+						Halaman Aktif (Realtime)
+					</h2>
+					<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3">
+						{realtimeData.topPages.slice(0, 8).map((item) => (
+							<div
+								key={item.page}
+								className="p-2 sm:p-3 bg-slate-50/50 rounded-xl sm:rounded-2xl border border-slate-100/50 hover:bg-slate-50 hover:border-slate-200 transition-colors overflow-hidden"
+							>
+								<p className="text-[10px] sm:text-xs font-bold text-slate-700 truncate">
+									{item.page}
+								</p>
+								<p className="text-[9px] sm:text-[10px] font-black text-emerald-500 mt-0.5 sm:mt-1">
+									{item.users} active
+								</p>
+							</div>
+						))}
 					</div>
-				)}
+				</div>
+			)}
 		</div>
 	);
 }
@@ -297,13 +289,7 @@ function EmptyChart({ loading }: { loading: boolean }) {
 	);
 }
 
-function RealtimeCards({
-	data,
-	loading,
-}: {
-	data: RealtimeData | null;
-	loading: boolean;
-}) {
+function RealtimeCards({ data, loading }: { data: RealtimeData | null; loading: boolean }) {
 	return (
 		<div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
 			<StatCard
@@ -311,11 +297,7 @@ function RealtimeCards({
 				value={loading ? "..." : data?.activeUsers || 0}
 				subtitle="30 menit terakhir"
 				icon={
-					loading ? (
-						<Loader2 className="w-6 h-6 animate-spin" />
-					) : (
-						<Users className="w-6 h-6" />
-					)
+					loading ? <Loader2 className="w-6 h-6 animate-spin" /> : <Users className="w-6 h-6" />
 				}
 				variant="primary"
 				trend={{ value: "Live", positive: true }}
@@ -348,8 +330,7 @@ function RealtimeCards({
 					loading
 						? "..."
 						: data?.deviceBreakdown
-							? new Set(data.deviceBreakdown.map((d) => d.city).filter(Boolean))
-									.size
+							? new Set(data.deviceBreakdown.map((d) => d.city).filter(Boolean)).size
 							: 0
 				}
 				subtitle="Lokasi pengunjung"
@@ -361,13 +342,7 @@ function RealtimeCards({
 	);
 }
 
-function HistoricalCards({
-	data,
-	loading,
-}: {
-	data: HistoricalData | null;
-	loading: boolean;
-}) {
+function HistoricalCards({ data, loading }: { data: HistoricalData | null; loading: boolean }) {
 	const s = data?.summary;
 	return (
 		<div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
@@ -394,9 +369,7 @@ function HistoricalCards({
 			/>
 			<StatCard
 				title="Avg. Duration"
-				value={
-					loading ? "..." : s ? formatDuration(s.avgSessionDuration) : "0s"
-				}
+				value={loading ? "..." : s ? formatDuration(s.avgSessionDuration) : "0s"}
 				subtitle="7 hari terakhir"
 				icon={<Clock className="w-6 h-6" />}
 				variant="warning"
@@ -405,13 +378,7 @@ function HistoricalCards({
 	);
 }
 
-function RealtimeLocationPanel({
-	data,
-	loading,
-}: {
-	data: RealtimeData | null;
-	loading: boolean;
-}) {
+function RealtimeLocationPanel({ data, loading }: { data: RealtimeData | null; loading: boolean }) {
 	return (
 		<div className="bg-white rounded-2xl sm:rounded-[2rem] border border-slate-200/80 p-4 sm:p-6 md:p-8 shadow-xs">
 			<h2 className="text-base sm:text-lg font-black text-slate-900 tracking-tight mb-4 sm:mb-6">
@@ -440,20 +407,14 @@ function RealtimeLocationPanel({
 								</span>
 							</div>
 							<div className="text-right shrink-0">
-								<p className="text-[10px] sm:text-xs font-black text-slate-900">
-									{item.users}
-								</p>
-								<p className="text-[9px] sm:text-[10px] font-bold text-emerald-500">
-									Active
-								</p>
+								<p className="text-[10px] sm:text-xs font-black text-slate-900">{item.users}</p>
+								<p className="text-[9px] sm:text-[10px] font-bold text-emerald-500">Active</p>
 							</div>
 						</div>
 					))
 				) : (
 					<div className="text-center py-10">
-						<p className="text-slate-400 text-xs">
-							Belum ada pengunjung aktif saat ini.
-						</p>
+						<p className="text-slate-400 text-xs">Belum ada pengunjung aktif saat ini.</p>
 					</div>
 				)}
 			</div>
@@ -514,9 +475,7 @@ function HistoricalTopPagesPanel({
 								<p className="text-[10px] sm:text-xs font-black text-slate-900">
 									{item.pageViews.toLocaleString()}
 								</p>
-								<p className="text-[9px] sm:text-[10px] font-bold text-indigo-500">
-									views
-								</p>
+								<p className="text-[9px] sm:text-[10px] font-bold text-indigo-500">views</p>
 							</div>
 						</div>
 					))

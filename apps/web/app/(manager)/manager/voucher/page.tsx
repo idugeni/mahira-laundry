@@ -108,25 +108,13 @@ export default async function VoucherPage() {
 										<div className="flex items-center justify-between text-xs font-medium">
 											<span className="text-slate-500">
 												Digunakan:{" "}
-												<strong
-													className={
-														isActive ? "text-slate-900" : "text-slate-700"
-													}
-												>
+												<strong className={isActive ? "text-slate-900" : "text-slate-700"}>
 													{used}
 												</strong>{" "}
 												/ {limit}
 											</span>
-											<span
-												className={
-													isActive ? "text-emerald-600" : "text-red-500"
-												}
-											>
-												{isActive
-													? "Aktif"
-													: isExpired
-														? "Kedaluwarsa"
-														: "Nonaktif"}
+											<span className={isActive ? "text-emerald-600" : "text-red-500"}>
+												{isActive ? "Aktif" : isExpired ? "Kedaluwarsa" : "Nonaktif"}
 											</span>
 										</div>
 									</div>

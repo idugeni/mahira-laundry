@@ -53,9 +53,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 		},
 		{
 			label: "Tier",
-			value:
-				realStats.loyaltyTier.charAt(0).toUpperCase() +
-				realStats.loyaltyTier.slice(1),
+			value: realStats.loyaltyTier.charAt(0).toUpperCase() + realStats.loyaltyTier.slice(1),
 			icon: HiOutlineBanknotes,
 			color: "text-purple-600",
 			bg: "bg-purple-50",
@@ -196,9 +194,7 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 							<HiOutlineInbox />
 						</span>
 					</div>
-					<p className="font-black text-slate-400 text-lg sm:text-xl">
-						Belum ada order.
-					</p>
+					<p className="font-black text-slate-400 text-lg sm:text-xl">Belum ada order.</p>
 					<p className="text-sm font-medium text-slate-400 mt-2 mb-10 max-w-[240px] mx-auto leading-relaxed">
 						Mulai nikmati layanan laundry premium pertama Anda hari ini!
 					</p>

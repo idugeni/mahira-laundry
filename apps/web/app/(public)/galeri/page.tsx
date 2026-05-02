@@ -13,8 +13,7 @@ export const metadata: Metadata = {
 		...baseOpenGraph,
 		url: "/galeri",
 		title: "Galeri Hasil Layanan | Mahira Laundry",
-		description:
-			"Koleksi foto hasil layanan laundry premium dan fasilitas modern Mahira.",
+		description: "Koleksi foto hasil layanan laundry premium dan fasilitas modern Mahira.",
 		images: [
 			{
 				url: "/og/galeri.png",

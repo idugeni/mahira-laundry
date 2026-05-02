@@ -52,16 +52,11 @@ export default async function AnalyticsPage() {
 						<div className="w-16 h-16 bg-slate-50 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl">
 							⚙️
 						</div>
-						<h2 className="text-2xl font-black text-slate-900 mb-3">
-							Konfigurasi API Dibutuhkan
-						</h2>
+						<h2 className="text-2xl font-black text-slate-900 mb-3">Konfigurasi API Dibutuhkan</h2>
 						<p className="text-slate-500 text-sm leading-relaxed mb-8">
-							Dashboard Realtime memerlukan Google Analytics Data API. Silakan
-							lengkapi variabel berikut di{" "}
-							<code className="bg-slate-100 px-1.5 py-0.5 rounded-sm text-slate-700">
-								.env
-							</code>
-							:
+							Dashboard Realtime memerlukan Google Analytics Data API. Silakan lengkapi variabel
+							berikut di{" "}
+							<code className="bg-slate-100 px-1.5 py-0.5 rounded-sm text-slate-700">.env</code>:
 						</p>
 						<div className="bg-slate-50 rounded-2xl p-6 text-left border border-slate-100">
 							<h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">

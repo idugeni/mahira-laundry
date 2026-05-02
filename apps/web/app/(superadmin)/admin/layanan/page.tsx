@@ -13,10 +13,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function SuperadminLayananPage() {
-	const [profile, services] = await Promise.all([
-		getUserProfile(),
-		getAllServices(),
-	]);
+	const [profile, services] = await Promise.all([getUserProfile(), getAllServices()]);
 
 	const outletId = profile?.outlet_id || "jatiwaringin";
 
@@ -41,17 +38,14 @@ export default async function SuperadminLayananPage() {
 							Katalog <span className="text-indigo-600 italic">Layanan</span>
 						</h1>
 						<p className="text-slate-500 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
-							Standardisasi harga, unit, dan durasi pengerjaan layanan di
-							seluruh jaringan Mahira Group. Kelola portofolio produk premium
-							Anda dari dashboard ini.
+							Standardisasi harga, unit, dan durasi pengerjaan layanan di seluruh jaringan Mahira
+							Group. Kelola portofolio produk premium Anda dari dashboard ini.
 						</p>
 					</div>
 
 					<div className="flex items-center gap-4">
 						<div className="text-left lg:text-right">
-							<p className="text-2xl font-black text-slate-900">
-								{services?.length || 0}
-							</p>
+							<p className="text-2xl font-black text-slate-900">{services?.length || 0}</p>
 							<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
 								Layanan Aktif
 							</p>

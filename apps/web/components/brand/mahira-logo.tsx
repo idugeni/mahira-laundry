@@ -8,11 +8,7 @@ interface MahiraLogoProps {
 	showText?: boolean;
 }
 
-export function MahiraLogo({
-	size = 40,
-	className = "",
-	showText = true,
-}: MahiraLogoProps) {
+export function MahiraLogo({ size = 40, className = "", showText = true }: MahiraLogoProps) {
 	return (
 		<div className={`flex items-center gap-3 ${className}`}>
 			<Image

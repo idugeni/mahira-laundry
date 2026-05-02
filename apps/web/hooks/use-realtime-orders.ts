@@ -11,10 +11,7 @@ export function useRealtimeOrders(outletId?: string) {
 	useEffect(() => {
 		// Initial fetch
 		const fetchOrders = async () => {
-			let query = supabase
-				.from("orders")
-				.select("*")
-				.order("created_at", { ascending: false });
+			let query = supabase.from("orders").select("*").order("created_at", { ascending: false });
 			if (outletId) query = query.eq("outlet_id", outletId);
 			const { data } = await query;
 			if (data) setOrders(data as unknown as Order[]);
@@ -41,9 +38,7 @@ export function useRealtimeOrders(outletId?: string) {
 					if (payload.eventType === "INSERT") {
 						setOrders((prev) => [payload.new, ...prev]);
 					} else if (payload.eventType === "UPDATE") {
-						setOrders((prev) =>
-							prev.map((o) => (o.id === payload.new.id ? payload.new : o)),
-						);
+						setOrders((prev) => prev.map((o) => (o.id === payload.new.id ? payload.new : o)));
 					} else if (payload.eventType === "DELETE") {
 						setOrders((prev) => prev.filter((o) => o.id !== payload.old.id));
 					}

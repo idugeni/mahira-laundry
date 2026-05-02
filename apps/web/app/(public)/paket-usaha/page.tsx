@@ -98,12 +98,9 @@ export default async function PaketUsahaPage() {
 						className="flex min-h-[60vh] flex-col items-center justify-center gap-6 px-4 py-14 sm:py-16 text-center"
 					>
 						<div className="max-w-md">
-							<h1 className="mb-3 text-2xl font-bold text-gray-800">
-								Paket Sedang Diperbarui
-							</h1>
+							<h1 className="mb-3 text-2xl font-bold text-gray-800">Paket Sedang Diperbarui</h1>
 							<p className="mb-6 text-gray-600">
-								Paket sedang diperbarui, hubungi kami untuk informasi lebih
-								lanjut.
+								Paket sedang diperbarui, hubungi kami untuk informasi lebih lanjut.
 							</p>
 							<a
 								href={waUrl}

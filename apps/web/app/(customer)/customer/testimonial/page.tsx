@@ -22,12 +22,11 @@ export default function TestimonialPage() {
 						<span>Suara Sultan Mahira</span>
 					</div>
 					<h1 className="text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] mb-6 leading-tight">
-						Bagikan Pengalaman{" "}
-						<span className="text-brand-accent">Sultan Anda</span>
+						Bagikan Pengalaman <span className="text-brand-accent">Sultan Anda</span>
 					</h1>
 					<p className="text-white/60 text-lg font-medium leading-relaxed">
-						Kepuasan Anda adalah prioritas utama kami. Bantu kami memberikan
-						layanan yang lebih baik dengan membagikan ulasan jujur Anda.
+						Kepuasan Anda adalah prioritas utama kami. Bantu kami memberikan layanan yang lebih baik
+						dengan membagikan ulasan jujur Anda.
 					</p>
 				</div>
 			</div>

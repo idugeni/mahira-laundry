@@ -9,8 +9,7 @@ export const metadata: Metadata = {
 		...baseOpenGraph,
 		url: "/lokasi",
 		title: "Lokasi Outlet",
-		description:
-			"Jaringan outlet kami yang siap melayani kebutuhan laundry Anda setiap hari.",
+		description: "Jaringan outlet kami yang siap melayani kebutuhan laundry Anda setiap hari.",
 		images: [
 			{
 				url: "/og/lokasi.png",

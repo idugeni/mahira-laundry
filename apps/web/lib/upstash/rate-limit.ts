@@ -17,10 +17,7 @@ const REDIS_TIMEOUT_MS = 3_000;
 
 type LimitResult = Awaited<ReturnType<Ratelimit["limit"]>>;
 
-type LimiterOpts = Omit<
-	ConstructorParameters<typeof Ratelimit>[0],
-	"redis" | "ephemeralCache"
->;
+type LimiterOpts = Omit<ConstructorParameters<typeof Ratelimit>[0], "redis" | "ephemeralCache">;
 
 // ─── Redis Singleton ──────────────────────────────────────────────────────────
 

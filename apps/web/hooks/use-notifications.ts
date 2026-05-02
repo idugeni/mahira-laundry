@@ -53,12 +53,7 @@ export function useNotifications() {
 		return () => {
 			supabase.removeChannel(channel);
 		};
-	}, [
-		supabase.from,
-		supabase.channel,
-		supabase.auth.getUser,
-		supabase.removeChannel,
-	]);
+	}, [supabase.from, supabase.channel, supabase.auth.getUser, supabase.removeChannel]);
 
 	const markAsRead = async (id: string) => {
 		await supabase
@@ -66,9 +61,7 @@ export function useNotifications() {
 			.update({ is_read: true, read_at: new Date().toISOString() })
 			.eq("id", id);
 
-		setNotifications((prev) =>
-			prev.map((n) => (n.id === id ? { ...n, is_read: true } : n)),
-		);
+		setNotifications((prev) => prev.map((n) => (n.id === id ? { ...n, is_read: true } : n)));
 		setUnreadCount((prev) => Math.max(0, prev - 1));
 	};
 

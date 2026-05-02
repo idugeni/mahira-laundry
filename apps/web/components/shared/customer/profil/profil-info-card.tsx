@@ -68,12 +68,8 @@ export function ProfilInfoCard({
 					/>
 				</div>
 
-				<h2 className="text-xl font-black text-slate-900 leading-tight">
-					{profile.full_name}
-				</h2>
-				<p className="text-sm text-slate-400 font-medium mt-1">
-					{profile.email}
-				</p>
+				<h2 className="text-xl font-black text-slate-900 leading-tight">{profile.full_name}</h2>
+				<p className="text-sm text-slate-400 font-medium mt-1">{profile.email}</p>
 
 				<div className="mt-8 pt-8 border-t border-slate-50 space-y-4">
 					<div className="flex items-center justify-between">
@@ -88,9 +84,7 @@ export function ProfilInfoCard({
 						<span className="text-xs font-bold text-slate-400 uppercase tracking-widest text-[10px]">
 							Poin
 						</span>
-						<span className="text-lg font-black text-slate-900">
-							{profile.loyalty_points}
-						</span>
+						<span className="text-lg font-black text-slate-900">{profile.loyalty_points}</span>
 					</div>
 				</div>
 			</div>

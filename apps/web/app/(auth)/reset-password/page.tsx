@@ -27,8 +27,7 @@ export default function ResetPasswordPage({
 	const [loading, setLoading] = useState(false);
 
 	const isFormValid =
-		formData.password.length >= 6 &&
-		formData.confirm_password === formData.password;
+		formData.password.length >= 6 && formData.confirm_password === formData.password;
 
 	const handleAction = async (data: FormData) => {
 		setLoading(true);
@@ -122,9 +121,7 @@ export default function ResetPasswordPage({
 												type="password"
 												required
 												value={formData.password}
-												onChange={(e) =>
-													setFormData({ ...formData, password: e.target.value })
-												}
+												onChange={(e) => setFormData({ ...formData, password: e.target.value })}
 												placeholder="Minimal 6 karakter"
 												className="w-full pl-14 pr-6 py-3.5 rounded-[1.2rem] border border-slate-100 bg-slate-50/50 text-sm font-bold text-slate-900 focus:outline-hidden focus:ring-4 focus:ring-brand-primary/10 focus:border-brand-primary focus:bg-white transition-all placeholder:font-medium placeholder:text-slate-300"
 											/>
@@ -211,10 +208,7 @@ export default function ResetPasswordPage({
 					<div className="p-8 pt-4 pb-8 shrink-0 text-center flex flex-col gap-4">
 						<p className="text-slate-400 font-medium text-[13px]">
 							Butuh bantuan?{" "}
-							<Link
-								href="/lokasi"
-								className="text-brand-primary font-black hover:underline ml-1"
-							>
+							<Link href="/lokasi" className="text-brand-primary font-black hover:underline ml-1">
 								Hubungi Admin
 							</Link>
 						</p>

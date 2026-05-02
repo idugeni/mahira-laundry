@@ -10,12 +10,7 @@ interface LegalLayoutProps {
 	children: React.ReactNode;
 }
 
-export function LegalLayout({
-	title,
-	subtitle,
-	lastUpdated,
-	children,
-}: LegalLayoutProps) {
+export function LegalLayout({ title, subtitle, lastUpdated, children }: LegalLayoutProps) {
 	return (
 		<div className="bg-white min-h-screen py-16 relative overflow-hidden">
 			{/* Decorative Cinematic Background */}
@@ -59,9 +54,7 @@ export function LegalLayout({
 						className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.85] tracking-tighter"
 					>
 						{title.split(" ")[0]}{" "}
-						<span className="text-brand-gradient">
-							{title.split(" ").slice(1).join(" ")}
-						</span>
+						<span className="text-brand-gradient">{title.split(" ").slice(1).join(" ")}</span>
 					</motion.h1>
 
 					<motion.p

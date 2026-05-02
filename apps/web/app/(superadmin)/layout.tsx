@@ -19,15 +19,8 @@ import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
 import { getInquiryStats, getUserProfile } from "@/lib/supabase/server";
 
-export default async function SuperadminLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
-	const [profile, inquiryStats] = await Promise.all([
-		getUserProfile(),
-		getInquiryStats(),
-	]);
+export default async function SuperadminLayout({ children }: { children: React.ReactNode }) {
+	const [profile, inquiryStats] = await Promise.all([getUserProfile(), getInquiryStats()]);
 
 	const superadminNav = [
 		{ href: "/admin", label: "Dashboard", icon: <LayoutDashboard size={17} /> },

@@ -22,11 +22,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { updateInquiryStatus } from "@/lib/actions/business-inquiries";
 import { createClient } from "@/lib/supabase/client";
-import type {
-	BusinessPackageInquiry,
-	InquiryLog,
-	InquiryStatus,
-} from "@/lib/types";
+import type { BusinessPackageInquiry, InquiryLog, InquiryStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 interface LeadDetailModalProps {
@@ -50,13 +46,7 @@ const STATUS_COLORS: Record<InquiryStatus, string> = {
 	rejected: "bg-rose-50 text-rose-500",
 };
 
-const ALL_STATUSES: InquiryStatus[] = [
-	"new",
-	"contacted",
-	"negotiating",
-	"converted",
-	"rejected",
-];
+const ALL_STATUSES: InquiryStatus[] = ["new", "contacted", "negotiating", "converted", "rejected"];
 
 export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 	const [currentLead, setCurrentLead] = useState<BusinessPackageInquiry>(lead);
@@ -101,11 +91,7 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 		}
 		setUpdating(true);
 		try {
-			const res = await updateInquiryStatus(
-				currentLead.id,
-				newStatus,
-				note.trim() || undefined,
-			);
+			const res = await updateInquiryStatus(currentLead.id, newStatus, note.trim() || undefined);
 			if (!res.success) {
 				toast.error(res.error ?? "Gagal mengubah status.");
 				return;
@@ -190,16 +176,8 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 								label="Telepon / WhatsApp"
 								value={currentLead.phone}
 							/>
-							<InfoRow
-								icon={<Mail size={14} />}
-								label="Email"
-								value={currentLead.email}
-							/>
-							<InfoRow
-								icon={<MapPin size={14} />}
-								label="Kota"
-								value={currentLead.city}
-							/>
+							<InfoRow icon={<Mail size={14} />} label="Email" value={currentLead.email} />
+							<InfoRow icon={<MapPin size={14} />} label="Kota" value={currentLead.city} />
 							<InfoRow
 								icon={<Package size={14} />}
 								label="Paket Diminati"
@@ -213,16 +191,13 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 							<InfoRow
 								icon={<Clock size={14} />}
 								label="Tanggal Inquiry"
-								value={new Date(currentLead.created_at).toLocaleDateString(
-									"id-ID",
-									{
-										day: "2-digit",
-										month: "long",
-										year: "numeric",
-										hour: "2-digit",
-										minute: "2-digit",
-									},
-								)}
+								value={new Date(currentLead.created_at).toLocaleDateString("id-ID", {
+									day: "2-digit",
+									month: "long",
+									year: "numeric",
+									hour: "2-digit",
+									minute: "2-digit",
+								})}
 							/>
 						</div>
 						{currentLead.message && (
@@ -289,19 +264,13 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 															<Badge
 																className={cn(
 																	"px-2 py-0.5 rounded-lg text-[9px] font-black uppercase tracking-widest border-none shadow-none",
-																	STATUS_COLORS[
-																		log.old_status as InquiryStatus
-																	] ?? "bg-slate-50 text-slate-500",
+																	STATUS_COLORS[log.old_status as InquiryStatus] ??
+																		"bg-slate-50 text-slate-500",
 																)}
 															>
-																{STATUS_LABELS[
-																	log.old_status as InquiryStatus
-																] ?? log.old_status}
+																{STATUS_LABELS[log.old_status as InquiryStatus] ?? log.old_status}
 															</Badge>
-															<ArrowRight
-																size={10}
-																className="text-slate-300"
-															/>
+															<ArrowRight size={10} className="text-slate-300" />
 														</>
 													)}
 													<Badge
@@ -311,8 +280,7 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 																"bg-slate-50 text-slate-500",
 														)}
 													>
-														{STATUS_LABELS[log.new_status as InquiryStatus] ??
-															log.new_status}
+														{STATUS_LABELS[log.new_status as InquiryStatus] ?? log.new_status}
 													</Badge>
 												</div>
 												{log.note && (
@@ -321,16 +289,13 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 													</p>
 												)}
 												<p className="text-[10px] font-bold text-slate-300 mt-1">
-													{new Date(log.created_at).toLocaleDateString(
-														"id-ID",
-														{
-															day: "2-digit",
-															month: "short",
-															year: "numeric",
-															hour: "2-digit",
-															minute: "2-digit",
-														},
-													)}
+													{new Date(log.created_at).toLocaleDateString("id-ID", {
+														day: "2-digit",
+														month: "short",
+														year: "numeric",
+														hour: "2-digit",
+														minute: "2-digit",
+													})}
 												</p>
 											</div>
 										</div>
@@ -354,9 +319,7 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 								<select
 									id="lead-new-status"
 									value={newStatus}
-									onChange={(e) =>
-										setNewStatus(e.target.value as InquiryStatus)
-									}
+									onChange={(e) => setNewStatus(e.target.value as InquiryStatus)}
 									className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
 								>
 									{ALL_STATUSES.map((s) => (
@@ -424,9 +387,7 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 
 function SectionTitle({ children }: { children: React.ReactNode }) {
 	return (
-		<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-			{children}
-		</p>
+		<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{children}</p>
 	);
 }
 
@@ -443,12 +404,8 @@ function InfoRow({ icon, label, value }: InfoRowProps) {
 				{icon}
 			</div>
 			<div className="min-w-0">
-				<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
-					{label}
-				</p>
-				<p className="text-sm font-bold text-slate-800 mt-0.5 break-words">
-					{value}
-				</p>
+				<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{label}</p>
+				<p className="text-sm font-bold text-slate-800 mt-0.5 break-words">{value}</p>
 			</div>
 		</div>
 	);

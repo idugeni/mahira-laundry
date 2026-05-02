@@ -15,10 +15,7 @@ import {
 	Wallet,
 } from "lucide-react";
 import { useState } from "react";
-import {
-	PaymentPieChart,
-	RevenueBarChart,
-} from "@/components/shared/admin/admin-charts";
+import { PaymentPieChart, RevenueBarChart } from "@/components/shared/admin/admin-charts";
 import { ExpenseModal } from "@/components/shared/admin/finance/expense-modal";
 import { IncomeModal } from "@/components/shared/admin/finance/income-modal";
 import { PaginationControls } from "@/components/shared/common/pagination-controls";
@@ -50,10 +47,7 @@ interface PaymentStatPoint {
 interface RecentOrder {
 	id: string;
 	order_number: string;
-	profiles:
-		| { full_name: string | null }
-		| { full_name: string | null }[]
-		| null;
+	profiles: { full_name: string | null } | { full_name: string | null }[] | null;
 	payment_status: string;
 	created_at: string;
 	total: number;
@@ -98,9 +92,7 @@ export function SuperadminFinanceClient({
 		expensePage * expensePageSize,
 	);
 
-	const historyTotalPages = Math.ceil(
-		recentPaidOrders.length / historyPageSize,
-	);
+	const historyTotalPages = Math.ceil(recentPaidOrders.length / historyPageSize);
 	const paginatedHistory = recentPaidOrders.slice(
 		(historyPage - 1) * historyPageSize,
 		historyPage * historyPageSize,
@@ -127,9 +119,8 @@ export function SuperadminFinanceClient({
 							Executive <span className="text-emerald-400 italic">Finance</span>
 						</h1>
 						<p className="text-slate-400 font-bold text-sm md:text-lg max-w-2xl leading-relaxed">
-							Otoritas keuangan tertinggi Mahira Group. Monitoring
-							profitabilitas, kontrol biaya operasional, dan analisis
-							pertumbuhan finansial seluruh cabang.
+							Otoritas keuangan tertinggi Mahira Group. Monitoring profitabilitas, kontrol biaya
+							operasional, dan analisis pertumbuhan finansial seluruh cabang.
 						</p>
 					</div>
 
@@ -160,11 +151,7 @@ export function SuperadminFinanceClient({
 				</div>
 			</div>
 
-			<Tabs
-				defaultValue="overview"
-				className="w-full space-y-8"
-				onValueChange={setActiveTab}
-			>
+			<Tabs defaultValue="overview" className="w-full space-y-8" onValueChange={setActiveTab}>
 				<div className="flex flex-wrap items-center justify-between gap-4 px-4 md:px-0">
 					<TabsList className="bg-slate-100 p-1.5 rounded-2xl h-auto flex flex-wrap gap-1.5">
 						<TabsTrigger
@@ -205,10 +192,7 @@ export function SuperadminFinanceClient({
 				</div>
 
 				{/* === OVERVIEW TAB === */}
-				<TabsContent
-					value="overview"
-					className="space-y-8 focus-visible:outline-hidden"
-				>
+				<TabsContent value="overview" className="space-y-8 focus-visible:outline-hidden">
 					{/* KPI Row */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-0 sm:gap-6">
 						<div className="group relative bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-indigo-500/10 transition-shadow duration-300">
@@ -234,9 +218,7 @@ export function SuperadminFinanceClient({
 							<h3 className="text-3xl font-black text-slate-900 tracking-tight mb-1">
 								{formatCompact(stats.totalRevenue)}
 							</h3>
-							<p className="text-xs font-bold text-slate-400">
-								{formatIDR(stats.totalRevenue)}
-							</p>
+							<p className="text-xs font-bold text-slate-400">{formatIDR(stats.totalRevenue)}</p>
 						</div>
 
 						<div className="group relative bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-rose-500/10 transition-shadow duration-300">
@@ -254,9 +236,7 @@ export function SuperadminFinanceClient({
 							<h3 className="text-3xl font-black text-slate-900 tracking-tight mb-1">
 								{formatCompact(stats.totalExpenses)}
 							</h3>
-							<p className="text-xs font-bold text-slate-400">
-								{formatIDR(stats.totalExpenses)}
-							</p>
+							<p className="text-xs font-bold text-slate-400">{formatIDR(stats.totalExpenses)}</p>
 						</div>
 
 						<div className="group relative bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-b sm:border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-xl hover:shadow-emerald-500/10 transition-shadow duration-300">
@@ -274,9 +254,7 @@ export function SuperadminFinanceClient({
 							<h3 className="text-3xl font-black text-slate-900 tracking-tight mb-1">
 								{formatCompact(stats.netProfit)}
 							</h3>
-							<p className="text-xs font-bold text-slate-400">
-								{formatIDR(stats.netProfit)}
-							</p>
+							<p className="text-xs font-bold text-slate-400">{formatIDR(stats.netProfit)}</p>
 						</div>
 					</div>
 
@@ -327,10 +305,7 @@ export function SuperadminFinanceClient({
 				</TabsContent>
 
 				{/* === EXPENSES TAB === */}
-				<TabsContent
-					value="expenses"
-					className="space-y-8 focus-visible:outline-hidden"
-				>
+				<TabsContent value="expenses" className="space-y-8 focus-visible:outline-hidden">
 					<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 overflow-hidden">
 						<div className="p-6 sm:p-8 border-b border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 							<div>
@@ -373,8 +348,7 @@ export function SuperadminFinanceClient({
 															{expense.category || "General"}
 														</Badge>
 														<span className="text-[10px] text-slate-400 font-bold flex items-center gap-1">
-															<Building2 size={10} />{" "}
-															{expense.outlets?.name || "Global"}
+															<Building2 size={10} /> {expense.outlets?.name || "Global"}
 														</span>
 													</div>
 												</div>
@@ -417,10 +391,7 @@ export function SuperadminFinanceClient({
 				</TabsContent>
 
 				{/* === HISTORY TAB === */}
-				<TabsContent
-					value="history"
-					className="space-y-8 focus-visible:outline-hidden"
-				>
+				<TabsContent value="history" className="space-y-8 focus-visible:outline-hidden">
 					<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 overflow-hidden">
 						<div className="p-6 sm:p-8 border-b border-slate-50">
 							<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight">
@@ -471,9 +442,7 @@ export function SuperadminFinanceClient({
 															: "bg-amber-50 text-amber-600",
 													)}
 												>
-													{order.payment_status === "paid"
-														? "✓ Settled"
-														: "⏳ Pending"}
+													{order.payment_status === "paid" ? "✓ Settled" : "⏳ Pending"}
 												</Badge>
 												<span className="text-[10px] text-slate-400 font-bold">
 													{formatDateTime(order.created_at)}
@@ -509,10 +478,9 @@ export function SuperadminFinanceClient({
 						Rekonsiliasi Midtrans Audit
 					</h3>
 					<p className="text-slate-400 font-bold text-sm leading-relaxed max-w-3xl">
-						Laporan ini menggabungkan data pencatatan Point of Sales (POS) dan
-						verifikasi settlement dari Payment Gateway. Dalam masa transisi,
-						beberapa data mungkin memerlukan sinkronisasi manual harian sebelum
-						pukul 23:59 WIB.
+						Laporan ini menggabungkan data pencatatan Point of Sales (POS) dan verifikasi settlement
+						dari Payment Gateway. Dalam masa transisi, beberapa data mungkin memerlukan sinkronisasi
+						manual harian sebelum pukul 23:59 WIB.
 					</p>
 				</div>
 				<Button

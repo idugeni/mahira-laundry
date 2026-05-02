@@ -97,8 +97,8 @@ export function LupaPasswordClient({
 										Email Terkirim!
 									</h3>
 									<p className="text-slate-500 font-medium leading-relaxed mb-8 text-sm">
-										Link reset password telah dikirim ke email Anda. Silakan
-										periksa kotak masuk atau folder spam.
+										Link reset password telah dikirim ke email Anda. Silakan periksa kotak masuk
+										atau folder spam.
 									</p>
 									<Link
 										href="/login"
@@ -186,10 +186,7 @@ export function LupaPasswordClient({
 						{!success && (
 							<p className="text-slate-400 font-medium text-[13px]">
 								Sudah ingat password?{" "}
-								<Link
-									href="/login"
-									className="text-brand-primary font-black hover:underline ml-1"
-								>
+								<Link href="/login" className="text-brand-primary font-black hover:underline ml-1">
 									Masuk
 								</Link>
 							</p>

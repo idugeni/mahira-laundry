@@ -26,11 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	const supabase = createClient();
 
 	const fetchProfile = async (userId: string) => {
-		const { data, error } = await supabase
-			.from("profiles")
-			.select("*")
-			.eq("id", userId)
-			.single();
+		const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single();
 		if (error) {
 			// Profile fetch failed — user may not have a profile row yet
 		}
@@ -76,8 +72,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 				user,
 				profile,
 				loading,
-				refreshProfile: () =>
-					user ? fetchProfile(user.id) : Promise.resolve(),
+				refreshProfile: () => (user ? fetchProfile(user.id) : Promise.resolve()),
 			}}
 		>
 			{children}

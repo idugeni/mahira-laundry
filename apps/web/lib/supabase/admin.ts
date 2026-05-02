@@ -12,9 +12,7 @@ export function createAdminClient() {
 	const supabaseKey = process.env.SUPABASE_SECRET_KEY;
 
 	if (!supabaseKey) {
-		throw new Error(
-			"SUPABASE_SECRET_KEY wajib diset untuk operasi admin Supabase.",
-		);
+		throw new Error("SUPABASE_SECRET_KEY wajib diset untuk operasi admin Supabase.");
 	}
 
 	return createClient(supabaseUrl, supabaseKey, {

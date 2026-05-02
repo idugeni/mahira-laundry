@@ -5,11 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import {
-	HiOutlineInformationCircle,
-	HiOutlineMapPin,
-	HiOutlineSparkles,
-} from "react-icons/hi2";
+import { HiOutlineInformationCircle, HiOutlineMapPin, HiOutlineSparkles } from "react-icons/hi2";
 import { MdOutlineLocalLaundryService } from "react-icons/md";
 import { UniversalSearch } from "@/components/shared/public/universal-search";
 import { formatIDR } from "@/lib/utils";
@@ -79,9 +75,7 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 
 	const filteredGallery = q
 		? galleryItems.filter(
-				(g) =>
-					g.title.toLowerCase().includes(q) ||
-					g.category?.toLowerCase().includes(q),
+				(g) => g.title.toLowerCase().includes(q) || g.category?.toLowerCase().includes(q),
 			)
 		: [];
 
@@ -112,19 +106,12 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 					transition={{ duration: 0.5, delay: 0.1 }}
 					className="mb-12"
 				>
-					<UniversalSearch
-						variant="section"
-						placeholder="Cari layanan, galeri, lokasi..."
-					/>
+					<UniversalSearch variant="section" placeholder="Cari layanan, galeri, lokasi..." />
 				</motion.div>
 
 				{/* No query - Quick Links */}
 				{!q && (
-					<motion.div
-						initial={{ opacity: 0 }}
-						animate={{ opacity: 1 }}
-						transition={{ delay: 0.2 }}
-					>
+					<motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>
 						<p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">
 							Jelajahi
 						</p>
@@ -144,9 +131,7 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 											<p className="text-sm font-bold text-slate-900 group-hover:text-brand-primary transition-colors">
 												{page.label}
 											</p>
-											<p className="text-[11px] text-slate-400">
-												{page.description}
-											</p>
+											<p className="text-[11px] text-slate-400">{page.description}</p>
 										</div>
 									</Link>
 								);
@@ -233,9 +218,7 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 													<p className="text-sm font-black text-slate-900">
 														{formatIDR(service.price)}
 													</p>
-													<p className="text-[10px] text-slate-400">
-														/{service.unit}
-													</p>
+													<p className="text-[10px] text-slate-400">/{service.unit}</p>
 												</div>
 											</Link>
 										</motion.div>
@@ -285,9 +268,7 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 														{item.title}
 													</p>
 													{item.category && (
-														<p className="text-[10px] text-slate-400">
-															{item.category}
-														</p>
+														<p className="text-[10px] text-slate-400">{item.category}</p>
 													)}
 												</div>
 											</Link>
@@ -307,9 +288,7 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 								<div className="w-20 h-20 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-6 text-slate-300">
 									<HiOutlineSparkles size={32} />
 								</div>
-								<h3 className="text-xl font-black text-slate-900 mb-2">
-									Tidak ditemukan
-								</h3>
+								<h3 className="text-xl font-black text-slate-900 mb-2">Tidak ditemukan</h3>
 								<p className="text-slate-500 font-medium mb-6">
 									Tidak ada hasil untuk &ldquo;{query}&rdquo;
 								</p>

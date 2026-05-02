@@ -1,10 +1,6 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import {
-	protectedProcedure,
-	router,
-	staffProcedure,
-} from "@/server/trpc/proxy";
+import { protectedProcedure, router, staffProcedure } from "@/server/trpc/proxy";
 
 export const ordersRouter = router({
 	list: protectedProcedure
@@ -22,10 +18,7 @@ export const ordersRouter = router({
 				.select("*, order_items(*)", { count: "exact" })
 				.eq("customer_id", ctx.userId)
 				.order("created_at", { ascending: false })
-				.range(
-					(input.page - 1) * input.pageSize,
-					input.page * input.pageSize - 1,
-				);
+				.range((input.page - 1) * input.pageSize, input.page * input.pageSize - 1);
 
 			if (input.status) query = query.eq("status", input.status);
 
@@ -33,17 +26,15 @@ export const ordersRouter = router({
 			return { data: data || [], total: count || 0 };
 		}),
 
-	getById: protectedProcedure
-		.input(z.string().uuid())
-		.query(async ({ input }) => {
-			const supabase = await createClient();
-			const { data } = await supabase
-				.from("orders")
-				.select("*, order_items(*, services(*)), payments(*), delivery(*)")
-				.eq("id", input)
-				.single();
-			return data;
-		}),
+	getById: protectedProcedure.input(z.string().uuid()).query(async ({ input }) => {
+		const supabase = await createClient();
+		const { data } = await supabase
+			.from("orders")
+			.select("*, order_items(*, services(*)), payments(*), delivery(*)")
+			.eq("id", input)
+			.single();
+		return data;
+	}),
 
 	updateStatus: staffProcedure
 		.input(

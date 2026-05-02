@@ -93,9 +93,7 @@ export function AdminAvatarDropdown({
 							</div>
 						</div>
 						{headerInfo && (
-							<p className="text-[10px] font-bold text-slate-400 mt-2 truncate">
-								{headerInfo}
-							</p>
+							<p className="text-[10px] font-bold text-slate-400 mt-2 truncate">{headerInfo}</p>
 						)}
 					</div>
 

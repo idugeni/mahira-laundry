@@ -146,9 +146,7 @@ export function TrackingClient() {
 								<span className="text-brand-accent">
 									<HiOutlineQrCode size={24} />
 								</span>
-								<span className="text-xs uppercase tracking-widest">
-									Scan QR
-								</span>
+								<span className="text-xs uppercase tracking-widest">Scan QR</span>
 							</motion.button>
 
 							<motion.button
@@ -262,9 +260,7 @@ export function TrackingClient() {
 
 									{order.order_status_logs
 										?.sort(
-											(a, b) =>
-												new Date(b.created_at).getTime() -
-												new Date(a.created_at).getTime(),
+											(a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
 										)
 										.map((log, i) => (
 											<motion.div
@@ -327,13 +323,10 @@ export function TrackingClient() {
 														{item.service_name}
 													</p>
 													<p className="text-xs font-black text-slate-400 uppercase tracking-widest">
-														{item.quantity} {item.unit}{" "}
-														{item.is_express && "• EXPRESS"}
+														{item.quantity} {item.unit} {item.is_express && "• EXPRESS"}
 													</p>
 												</div>
-												<p className="font-black text-slate-900">
-													{formatIDR(item.subtotal)}
-												</p>
+												<p className="font-black text-slate-900">{formatIDR(item.subtotal)}</p>
 											</div>
 										))}
 
@@ -362,8 +355,7 @@ export function TrackingClient() {
 											Butuh Antar Jemput?
 										</h4>
 										<p className="text-sm font-medium text-slate-500 leading-relaxed">
-											Hubungi admin kami untuk menjadwalkan pengambilan pakaian
-											kotor Anda.
+											Hubungi admin kami untuk menjadwalkan pengambilan pakaian kotor Anda.
 										</p>
 									</div>
 								</motion.div>

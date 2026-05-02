@@ -36,11 +36,7 @@ const customerNav = [
 import { NotificationPopover } from "@/components/shared/common/notification-popover";
 import { useAuth } from "@/hooks/use-auth";
 
-export default function CustomerLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function CustomerLayout({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
 	const { profile } = useAuth();
 
@@ -118,10 +114,7 @@ export default function CustomerLayout({
 
 					<div className="flex items-center gap-2 sm:gap-3">
 						<NotificationPopover />
-						<Link
-							href="/customer/profil"
-							className="w-8 h-8 rounded-full overflow-hidden relative"
-						>
+						<Link href="/customer/profil" className="w-8 h-8 rounded-full overflow-hidden relative">
 							<AdminAvatar
 								fullName={profile?.full_name}
 								avatarUrl={profile?.avatar_url}
@@ -161,14 +154,10 @@ export default function CustomerLayout({
 								isActive ? "text-brand-primary" : "text-slate-400"
 							}`}
 						>
-							<span
-								className={`text-2xl transition-transform ${isActive ? "scale-110" : ""}`}
-							>
+							<span className={`text-2xl transition-transform ${isActive ? "scale-110" : ""}`}>
 								<item.icon />
 							</span>
-							<span className="text-[10px] font-bold uppercase tracking-tighter">
-								{item.label}
-							</span>
+							<span className="text-[10px] font-bold uppercase tracking-tighter">{item.label}</span>
 						</Link>
 					);
 				})}

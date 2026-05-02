@@ -30,11 +30,7 @@ const analyticsClient = new BetaAnalyticsDataClient({
 const propertyId = process.env.GA_PROPERTY_ID;
 
 export async function GET() {
-	if (
-		!process.env.GOOGLE_CLIENT_EMAIL ||
-		!process.env.GOOGLE_PRIVATE_KEY ||
-		!propertyId
-	) {
+	if (!process.env.GOOGLE_CLIENT_EMAIL || !process.env.GOOGLE_PRIVATE_KEY || !propertyId) {
 		return NextResponse.json(
 			{ error: "Google Analytics credentials not configured" },
 			{ status: 500 },
@@ -64,19 +60,19 @@ export async function GET() {
 
 		const activeUsers =
 			response.rows?.reduce((acc, row) => {
-				return acc + Number(row.metricValues?.[0].value || 0);
+				return acc + Number(row.metricValues?.[0]?.value || 0);
 			}, 0) || 0;
 
 		const eventCount =
 			response.rows?.reduce((acc, row) => {
-				return acc + Number(row.metricValues?.[1].value || 0);
+				return acc + Number(row.metricValues?.[1]?.value || 0);
 			}, 0) || 0;
 
 		const deviceBreakdown =
 			response.rows?.map((row) => ({
-				device: row.dimensionValues?.[0].value,
-				city: row.dimensionValues?.[1].value,
-				users: Number(row.metricValues?.[0].value || 0),
+				device: row.dimensionValues?.[0]?.value,
+				city: row.dimensionValues?.[1]?.value,
+				users: Number(row.metricValues?.[0]?.value || 0),
 			})) || [];
 
 		// ── Top active pages ──
@@ -88,8 +84,8 @@ export async function GET() {
 
 		const topPages =
 			pagesResponse.rows?.map((row) => ({
-				page: row.dimensionValues?.[0].value || "/",
-				users: Number(row.metricValues?.[0].value || 0),
+				page: row.dimensionValues?.[0]?.value || "/",
+				users: Number(row.metricValues?.[0]?.value || 0),
 			})) || [];
 
 		const payload = {
@@ -112,9 +108,7 @@ export async function GET() {
 			},
 		});
 	} catch (err: unknown) {
-		const errorMessage =
-			err instanceof Error ? err.message : "Failed to fetch realtime analytics";
-		console.error("GA4 Realtime API Error:", err);
+		const errorMessage = err instanceof Error ? err.message : "Failed to fetch realtime analytics";
 		return NextResponse.json({ error: errorMessage }, { status: 500 });
 	}
 }

@@ -33,9 +33,7 @@ export async function broadcastNotification(data: {
 			is_read: false,
 		}));
 
-		const { error: insertError } = await supabase
-			.from("notifications")
-			.insert(notifications);
+		const { error: insertError } = await supabase.from("notifications").insert(notifications);
 
 		if (insertError) throw insertError;
 

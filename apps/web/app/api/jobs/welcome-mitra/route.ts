@@ -8,10 +8,7 @@ async function handler(request: Request) {
 		const { userId, outletName, outletId } = body;
 
 		if (!userId || !outletName) {
-			return NextResponse.json(
-				{ error: "Missing userId or outletName" },
-				{ status: 400 },
-			);
+			return NextResponse.json({ error: "Missing userId or outletName" }, { status: 400 });
 		}
 
 		const supabase = await createClient();
@@ -25,8 +22,7 @@ async function handler(request: Request) {
 		});
 
 		return NextResponse.json({ success: true });
-	} catch (error) {
-		console.error("[Welcome Mitra Job] Error:", error);
+	} catch (_error) {
 		return NextResponse.json({ error: "Internal error" }, { status: 500 });
 	}
 }

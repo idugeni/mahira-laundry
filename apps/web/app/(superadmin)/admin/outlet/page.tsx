@@ -30,24 +30,12 @@ export const dynamic = "force-dynamic";
 export default async function OutletPage() {
 	const outlets = await getOutletsWithStats();
 
-	const totalRevenue = outlets.reduce(
-		(s, o) => s + (Number(o.monthlyRevenue) || 0),
-		0,
-	);
-	const totalOrders = outlets.reduce(
-		(s, o) => s + (Number(o.ordersThisMonth) || 0),
-		0,
-	);
-	const totalLastMonthRevenue = outlets.reduce(
-		(s, o) => s + (Number(o.lastMonthRevenue) || 0),
-		0,
-	);
+	const totalRevenue = outlets.reduce((s, o) => s + (Number(o.monthlyRevenue) || 0), 0);
+	const totalOrders = outlets.reduce((s, o) => s + (Number(o.ordersThisMonth) || 0), 0);
+	const totalLastMonthRevenue = outlets.reduce((s, o) => s + (Number(o.lastMonthRevenue) || 0), 0);
 	const revenueGrowth =
 		totalLastMonthRevenue > 0
-			? (
-					((totalRevenue - totalLastMonthRevenue) / totalLastMonthRevenue) *
-					100
-				).toFixed(1)
+			? (((totalRevenue - totalLastMonthRevenue) / totalLastMonthRevenue) * 100).toFixed(1)
 			: totalRevenue > 0
 				? "100.0"
 				: "0.0";
@@ -76,9 +64,8 @@ export default async function OutletPage() {
 							Manajemen <span className="text-indigo-600 italic">Outlet</span>
 						</h1>
 						<p className="text-slate-500 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
-							Monitoring performa, pengelolaan aset, dan ekspansi jaringan
-							bisnis Mahira Laundry secara terpusat dalam satu dashboard
-							eksekutif.
+							Monitoring performa, pengelolaan aset, dan ekspansi jaringan bisnis Mahira Laundry
+							secara terpusat dalam satu dashboard eksekutif.
 						</p>
 					</div>
 
@@ -142,11 +129,7 @@ export default async function OutletPage() {
 					<div className="group relative bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 p-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-indigo-500/10 transition-[box-shadow,border-color] duration-300 overflow-hidden">
 						{/* Background Decorative Pattern */}
 						<div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
-							{outlet.is_franchise ? (
-								<Users2 size={120} />
-							) : (
-								<Building2 size={120} />
-							)}
+							{outlet.is_franchise ? <Users2 size={120} /> : <Building2 size={120} />}
 						</div>
 
 						<div className="relative space-y-6">
@@ -269,9 +252,8 @@ export default async function OutletPage() {
 								Belum Ada Jaringan
 							</h3>
 							<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-4 max-w-lg leading-relaxed">
-								Sistem siap untuk diintegrasikan dengan outlet-outlet baru.
-								Silakan klik tombol Registrasi Outlet untuk mulai membangun
-								ekosistem bisnis Anda.
+								Sistem siap untuk diintegrasikan dengan outlet-outlet baru. Silakan klik tombol
+								Registrasi Outlet untuk mulai membangun ekosistem bisnis Anda.
 							</p>
 						</div>
 					</div>

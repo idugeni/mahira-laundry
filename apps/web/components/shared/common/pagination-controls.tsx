@@ -1,11 +1,6 @@
 "use client";
 
-import {
-	ChevronLeft,
-	ChevronRight,
-	ChevronsLeft,
-	ChevronsRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -186,9 +181,7 @@ export function PaginationControls({
 						<div>{rowsSelector}</div>
 					</div>
 				)}
-				{pageNavButtons && (
-					<div className="flex justify-center">{pageNavButtons}</div>
-				)}
+				{pageNavButtons && <div className="flex justify-center">{pageNavButtons}</div>}
 			</div>
 
 			{/* md layout: compact three-column grid */}
@@ -222,10 +215,7 @@ export function usePagination<T>(items: T[], defaultPageSize = 10) {
 		}
 	}, [totalPages, currentPage]);
 
-	const paginatedItems = items.slice(
-		(currentPage - 1) * pageSize,
-		currentPage * pageSize,
-	);
+	const paginatedItems = items.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
 	const handlePageSizeChange = (newSize: number) => {
 		setPageSize(newSize);

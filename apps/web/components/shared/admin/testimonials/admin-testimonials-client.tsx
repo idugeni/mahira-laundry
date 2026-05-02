@@ -15,10 +15,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import {
-	HiOutlineChatBubbleBottomCenterText,
-	HiOutlineXMark,
-} from "react-icons/hi2";
+import { HiOutlineChatBubbleBottomCenterText, HiOutlineXMark } from "react-icons/hi2";
 import { toast } from "sonner";
 import { PaginationControls } from "@/components/shared/common/pagination-controls";
 import {
@@ -57,9 +54,7 @@ interface AdminTestimonialsClientProps {
 	testimonials: Testimonial[];
 }
 
-export function AdminTestimonialsClient({
-	testimonials,
-}: AdminTestimonialsClientProps) {
+export function AdminTestimonialsClient({ testimonials }: AdminTestimonialsClientProps) {
 	const [loading, setLoading] = useState<string | null>(null);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [deleteId, setDeleteId] = useState<string | null>(null);
@@ -85,20 +80,12 @@ export function AdminTestimonialsClient({
 		currentPage * ITEMS_PER_PAGE,
 	);
 
-	async function handleToggleStatus(
-		testimonialId: string,
-		currentStatus: boolean,
-	) {
+	async function handleToggleStatus(testimonialId: string, currentStatus: boolean) {
 		setLoading(testimonialId);
 		try {
 			const res = await updateTestimonialStatus(testimonialId, !currentStatus);
 			if (res.error) toast.error(res.error);
-			else
-				toast.success(
-					!currentStatus
-						? "Testimoni dipublikasikan!"
-						: "Testimoni disembunyikan!",
-				);
+			else toast.success(!currentStatus ? "Testimoni dipublikasikan!" : "Testimoni disembunyikan!");
 		} catch (_err) {
 			toast.error("Gagal memperbarui status.");
 		} finally {
@@ -167,10 +154,7 @@ export function AdminTestimonialsClient({
 
 	return (
 		<div className="space-y-8 sm:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-			<AlertDialog
-				open={!!deleteId}
-				onOpenChange={(open: boolean) => !open && setDeleteId(null)}
-			>
+			<AlertDialog open={!!deleteId} onOpenChange={(open: boolean) => !open && setDeleteId(null)}>
 				<AlertDialogContent className="rounded-[2.5rem] border-slate-100 p-8">
 					<AlertDialogHeader>
 						<div className="w-16 h-16 rounded-3xl bg-red-50 text-red-500 flex items-center justify-center text-3xl mb-4 mx-auto sm:mx-0 shadow-inner">
@@ -180,8 +164,7 @@ export function AdminTestimonialsClient({
 							Hapus Testimoni?
 						</AlertDialogTitle>
 						<AlertDialogDescription className="text-slate-500 font-medium text-base">
-							Testimoni ini akan dihapus secara permanen dan tidak dapat
-							dikembalikan.
+							Testimoni ini akan dihapus secara permanen dan tidak dapat dikembalikan.
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">
@@ -219,8 +202,8 @@ export function AdminTestimonialsClient({
 							Moderasi <span className="text-indigo-600 italic">Testimoni</span>
 						</h1>
 						<p className="text-slate-500 font-bold text-sm md:text-base max-w-2xl leading-relaxed">
-							Kurasi ulasan pelanggan terbaik untuk ditampilkan pada etalase
-							digital Mahira Laundry. Pastikan standar kepuasan tetap terjaga.
+							Kurasi ulasan pelanggan terbaik untuk ditampilkan pada etalase digital Mahira Laundry.
+							Pastikan standar kepuasan tetap terjaga.
 						</p>
 					</div>
 
@@ -266,8 +249,8 @@ export function AdminTestimonialsClient({
 							Belum Ada Suara
 						</h3>
 						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-4 max-w-lg leading-relaxed text-center mx-auto">
-							Kotak saran digital Mahira Laundry masih kosong. Mari kita
-							kumpulkan ulasan dari pelanggan setia.
+							Kotak saran digital Mahira Laundry masih kosong. Mari kita kumpulkan ulasan dari
+							pelanggan setia.
 						</p>
 					</div>
 				</div>
@@ -324,11 +307,7 @@ export function AdminTestimonialsClient({
 											onClick={() => handleToggleStatus(t.id, t.is_published)}
 											disabled={loading === t.id}
 										>
-											{t.is_published ? (
-												<XCircle size={24} />
-											) : (
-												<CheckCircle2 size={24} />
-											)}
+											{t.is_published ? <XCircle size={24} /> : <CheckCircle2 size={24} />}
 										</Button>
 										<Button
 											variant="ghost"
@@ -415,8 +394,7 @@ export function AdminTestimonialsClient({
 										</div>
 										<div>
 											<h2 className="text-xl font-black text-slate-900 tracking-tight">
-												Tambah{" "}
-												<span className="text-indigo-600">Testimoni</span>
+												Tambah <span className="text-indigo-600">Testimoni</span>
 											</h2>
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
 												Buat testimoni atas nama pengguna
@@ -548,9 +526,7 @@ export function AdminTestimonialsClient({
 												Edit <span className="text-amber-500">Testimoni</span>
 											</h2>
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
-												{editTarget.guest_name ||
-													editTarget.profiles?.full_name ||
-													"Anonim"}
+												{editTarget.guest_name || editTarget.profiles?.full_name || "Anonim"}
 											</p>
 										</div>
 									</div>

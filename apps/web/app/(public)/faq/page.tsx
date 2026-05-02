@@ -11,8 +11,7 @@ export const metadata: Metadata = {
 		...baseOpenGraph,
 		url: "/faq",
 		title: "Pusat Bantuan & FAQ | Mahira Laundry",
-		description:
-			"Solusi lengkap untuk segala pertanyaan Anda mengenai Mahira Laundry.",
+		description: "Solusi lengkap untuk segala pertanyaan Anda mengenai Mahira Laundry.",
 		images: [
 			{
 				url: "/og/legal.png",

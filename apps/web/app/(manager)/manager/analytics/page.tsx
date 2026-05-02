@@ -1,10 +1,7 @@
 ﻿import type { Metadata } from "next";
 import { Suspense } from "react";
 import { OrderTrendChart } from "@/components/shared/admin/admin-charts";
-import {
-	getManagerDashboardStats,
-	getOrdersByDay,
-} from "@/lib/supabase/server";
+import { getManagerDashboardStats, getOrdersByDay } from "@/lib/supabase/server";
 import { formatIDR } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -16,10 +13,7 @@ export const metadata: Metadata = {
 export const dynamic = "force-dynamic";
 
 export default async function ManagerAnalyticsPage() {
-	const [stats, orderTrend] = await Promise.all([
-		getManagerDashboardStats(),
-		getOrdersByDay(14),
-	]);
+	const [stats, orderTrend] = await Promise.all([getManagerDashboardStats(), getOrdersByDay(14)]);
 
 	const kpiStats = [
 		{
@@ -54,9 +48,7 @@ export default async function ManagerAnalyticsPage() {
 
 	return (
 		<div className="space-y-6 animate-fade-in-up">
-			<h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">
-				Analytics & KPI
-			</h1>
+			<h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Analytics & KPI</h1>
 
 			<div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
 				{kpiStats.map((stat) => (
@@ -66,16 +58,12 @@ export default async function ManagerAnalyticsPage() {
 					>
 						<div className="flex items-center justify-between mb-3">
 							<span className="text-2xl">{stat.icon}</span>
-							<span className={`text-xs font-semibold ${stat.color}`}>
-								{stat.change}
-							</span>
+							<span className={`text-xs font-semibold ${stat.color}`}>{stat.change}</span>
 						</div>
 						<div className="text-xl lg:text-2xl font-bold font-[family-name:var(--font-heading)]">
 							{stat.value}
 						</div>
-						<div className="text-xs text-muted-foreground mt-1">
-							{stat.label}
-						</div>
+						<div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
 					</div>
 				))}
 			</div>
@@ -85,11 +73,7 @@ export default async function ManagerAnalyticsPage() {
 				<h2 className="text-base font-bold text-slate-900 mb-4">
 					Tren Volume Order 14 Hari Terakhir
 				</h2>
-				<Suspense
-					fallback={
-						<div className="h-64 bg-slate-50 animate-pulse rounded-xl" />
-					}
-				>
+				<Suspense fallback={<div className="h-64 bg-slate-50 animate-pulse rounded-xl" />}>
 					<div className="h-64">
 						<OrderTrendChart data={orderTrend} />
 					</div>
@@ -99,9 +83,7 @@ export default async function ManagerAnalyticsPage() {
 			<div className="grid lg:grid-cols-2 gap-6">
 				{/* Top services Placeholder / Soon */}
 				<div className="bg-white rounded-xl border border-border p-6 shadow-xs">
-					<h2 className="text-base font-bold text-slate-900 mb-4">
-						Layanan Terpopuler (Mock)
-					</h2>
+					<h2 className="text-base font-bold text-slate-900 mb-4">Layanan Terpopuler (Mock)</h2>
 					{[
 						"Cuci Setrika Reguler",
 						"Express Cuci Setrika",
@@ -125,8 +107,7 @@ export default async function ManagerAnalyticsPage() {
 						</div>
 					))}
 					<p className="text-[10px] text-center text-slate-400 mt-4">
-						Data layanan terpopuler akan otomatis sinkron pada rilis Analytics
-						v2
+						Data layanan terpopuler akan otomatis sinkron pada rilis Analytics v2
 					</p>
 				</div>
 

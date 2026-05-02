@@ -1,12 +1,6 @@
 "use client";
 
-import {
-	AnimatePresence,
-	motion,
-	useMotionValue,
-	useSpring,
-	useTransform,
-} from "motion/react";
+import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -124,9 +118,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 							</motion.div>
 							<h1 className="text-3xl md:text-4xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.95] mb-2">
 								{isLogin ? "Selamat Datang" : "Bergabunglah"} <br />
-								<span className="text-brand-gradient">
-									{isLogin ? "Kembali." : "Sekarang."}
-								</span>
+								<span className="text-brand-gradient">{isLogin ? "Kembali." : "Sekarang."}</span>
 							</h1>
 							<p className="text-slate-500 font-medium text-sm md:text-base leading-relaxed">
 								{isLogin
@@ -353,8 +345,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 							<span className="text-brand-accent">Kualitas Hidup.</span>
 						</h2>
 						<p className="text-white/30 text-lg max-w-sm leading-relaxed font-medium italic">
-							"Kami tidak hanya mencuci pakaian, kami merawat memori dan
-							kenyamanan Anda."
+							"Kami tidak hanya mencuci pakaian, kami merawat memori dan kenyamanan Anda."
 						</p>
 					</motion.div>
 				</div>
@@ -374,9 +365,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 							<p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-0.5">
 								Real-time Status
 							</p>
-							<p className="font-black text-sm leading-tight">
-								Cucian Selesai!
-							</p>
+							<p className="font-black text-sm leading-tight">Cucian Selesai!</p>
 						</div>
 					</div>
 				</motion.div>
@@ -400,9 +389,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 							<p className="text-[8px] font-black text-white/30 uppercase tracking-widest mb-0.5">
 								Loyalty Points
 							</p>
-							<p className="font-black text-sm leading-tight">
-								+100 Poin Mahira
-							</p>
+							<p className="font-black text-sm leading-tight">+100 Poin Mahira</p>
 						</div>
 					</div>
 				</motion.div>

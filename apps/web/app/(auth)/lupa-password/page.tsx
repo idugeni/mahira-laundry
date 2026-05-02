@@ -3,8 +3,7 @@ import { LupaPasswordClient } from "@/app/(auth)/lupa-password/lupa-password-cli
 
 export const metadata: Metadata = {
 	title: "Lupa Password",
-	description:
-		"Reset password akun Mahira Laundry Anda dengan aman melalui email terdaftar.",
+	description: "Reset password akun Mahira Laundry Anda dengan aman melalui email terdaftar.",
 };
 
 export default function LupaPasswordPage({

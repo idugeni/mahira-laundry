@@ -19,11 +19,7 @@ interface DepositModalProps {
 	currentBalance: number;
 }
 
-export function DepositModal({
-	customerId,
-	customerName,
-	currentBalance,
-}: DepositModalProps) {
+export function DepositModal({ customerId, customerName, currentBalance }: DepositModalProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [mounted, setMounted] = useState(false);
@@ -44,9 +40,7 @@ export function DepositModal({
 		const result = await topUpBalance(customerId, amount);
 
 		if (result.success) {
-			toast.success(
-				`Saldo ${customerName} berhasil ditambah ${formatIDR(amount)}`,
-			);
+			toast.success(`Saldo ${customerName} berhasil ditambah ${formatIDR(amount)}`);
 			setIsOpen(false);
 			setAmount(0);
 		} else {
@@ -118,14 +112,10 @@ export function DepositModal({
 											<p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
 												{customerName}
 											</p>
-											<p className="text-xs font-bold text-slate-700">
-												Saldo Saat Ini
-											</p>
+											<p className="text-xs font-bold text-slate-700">Saldo Saat Ini</p>
 										</div>
 									</div>
-									<p className="text-lg font-black text-slate-900">
-										{formatIDR(currentBalance)}
-									</p>
+									<p className="text-lg font-black text-slate-900">{formatIDR(currentBalance)}</p>
 								</div>
 
 								<div className="space-y-3">

@@ -1,10 +1,6 @@
 "use client";
 
-import {
-	HiOutlineCheckCircle,
-	HiOutlineClock,
-	HiOutlineUser,
-} from "react-icons/hi2";
+import { HiOutlineCheckCircle, HiOutlineClock, HiOutlineUser } from "react-icons/hi2";
 import { formatDateTime } from "@/lib/utils";
 
 interface Log {
@@ -52,9 +48,7 @@ export function OrderTimeline({ logs }: { logs: Log[] }) {
 						</div>
 
 						{log.notes && (
-							<p className="text-xs text-slate-500 mb-2 leading-relaxed italic">
-								"{log.notes}"
-							</p>
+							<p className="text-xs text-slate-500 mb-2 leading-relaxed italic">"{log.notes}"</p>
 						)}
 
 						{log.profiles?.full_name && (

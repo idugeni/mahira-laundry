@@ -13,11 +13,7 @@ interface FooterService {
 	id?: string;
 }
 
-export function MahiraFooter({
-	services = [],
-}: {
-	services?: FooterService[];
-}) {
+export function MahiraFooter({ services = [] }: { services?: FooterService[] }) {
 	const displayServices = services.map((s) => ({
 		name: s.name,
 		path: `/layanan?s=${s.slug || s.id}`,
@@ -34,9 +30,9 @@ export function MahiraFooter({
 					>
 						<MahiraLogo size={36} showText={true} />
 						<p className="mt-6 text-sm text-slate-400 leading-relaxed">
-							Partner terpercaya untuk membangun bisnis laundry sukses. Kami
-							menghadirkan paket usaha laundry lengkap dengan sistem autopilot
-							dan dukungan peralatan premium untuk profit maksimal.
+							Partner terpercaya untuk membangun bisnis laundry sukses. Kami menghadirkan paket
+							usaha laundry lengkap dengan sistem autopilot dan dukungan peralatan premium untuk
+							profit maksimal.
 						</p>
 						<div className="mt-8 flex gap-3">
 							{[
@@ -66,9 +62,7 @@ export function MahiraFooter({
 									aria-label={social.label}
 									className={`w-9 h-9 rounded-full bg-white/5 flex items-center justify-center transition-colors ${social.color}`}
 								>
-									<span className="w-4 h-4 flex items-center justify-center">
-										{social.icon}
-									</span>
+									<span className="w-4 h-4 flex items-center justify-center">{social.icon}</span>
 								</motion.a>
 							))}
 						</div>
@@ -107,10 +101,7 @@ export function MahiraFooter({
 							</li>
 							{displayServices.map((service) => (
 								<li key={service.path}>
-									<Link
-										href={service.path}
-										className="hover:text-brand-primary transition-colors"
-									>
+									<Link href={service.path} className="hover:text-brand-primary transition-colors">
 										{service.name}
 									</Link>
 								</li>
@@ -129,18 +120,12 @@ export function MahiraFooter({
 						</h4>
 						<ul className="space-y-3 text-sm text-slate-400">
 							<li>
-								<Link
-									href="/tentang"
-									className="hover:text-brand-primary transition-colors"
-								>
+								<Link href="/tentang" className="hover:text-brand-primary transition-colors">
 									Tentang Mahira
 								</Link>
 							</li>
 							<li>
-								<Link
-									href="/lokasi"
-									className="hover:text-brand-primary transition-colors"
-								>
+								<Link href="/lokasi" className="hover:text-brand-primary transition-colors">
 									Jaringan Outlet
 								</Link>
 							</li>
@@ -153,18 +138,12 @@ export function MahiraFooter({
 								</Link>
 							</li>
 							<li>
-								<Link
-									href="/privacy"
-									className="hover:text-brand-primary transition-colors"
-								>
+								<Link href="/privacy" className="hover:text-brand-primary transition-colors">
 									Kebijakan Privasi
 								</Link>
 							</li>
 							<li>
-								<Link
-									href="/terms"
-									className="hover:text-brand-primary transition-colors"
-								>
+								<Link href="/terms" className="hover:text-brand-primary transition-colors">
 									Syarat & Ketentuan
 								</Link>
 							</li>
@@ -193,9 +172,7 @@ export function MahiraFooter({
 								<span className="w-4 h-4 flex items-center justify-center text-brand-primary shrink-0 mt-0.5">
 									<HiOutlineMapPin />
 								</span>
-								<span className="leading-relaxed">
-									{PRIMARY_OUTLET.address}
-								</span>
+								<span className="leading-relaxed">{PRIMARY_OUTLET.address}</span>
 							</li>
 							<li className="flex items-center gap-3">
 								<span className="w-4 h-4 flex items-center justify-center text-brand-primary shrink-0">
@@ -215,24 +192,15 @@ export function MahiraFooter({
 					{/* Smooth Gradient Divider */}
 					<div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
 
-					<p>
-						© {new Date().getFullYear()} Mahira Group. Seluruh Hak Cipta
-						Dilindungi.
-					</p>
+					<p>© {new Date().getFullYear()} Mahira Group. Seluruh Hak Cipta Dilindungi.</p>
 					<div className="flex gap-6">
-						<Link
-							href="/privacy"
-							className="hover:text-white transition-colors"
-						>
+						<Link href="/privacy" className="hover:text-white transition-colors">
 							Privacy
 						</Link>
 						<Link href="/terms" className="hover:text-white transition-colors">
 							Terms
 						</Link>
-						<Link
-							href="/cookies"
-							className="hover:text-white transition-colors"
-						>
+						<Link href="/cookies" className="hover:text-white transition-colors">
 							Cookies
 						</Link>
 					</div>

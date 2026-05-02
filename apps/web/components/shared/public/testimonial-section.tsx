@@ -61,9 +61,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 					className="text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-tight"
 				>
 					Dipercaya Ribuan <br />
-					<span className="text-brand-gradient">
-						Pelanggan Setia Setiap Hari
-					</span>
+					<span className="text-brand-gradient">Pelanggan Setia Setiap Hari</span>
 				</motion.h2>
 			</div>
 
@@ -120,10 +118,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 }
 
 function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
-	const name =
-		testimonial.guest_name ||
-		testimonial.profiles?.full_name ||
-		"Pelanggan Setia";
+	const name = testimonial.guest_name || testimonial.profiles?.full_name || "Pelanggan Setia";
 
 	return (
 		<motion.div
@@ -132,16 +127,11 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 			className="w-[350px] sm:w-[450px] shrink-0 p-8 bg-white/70 backdrop-blur-md rounded-[2.5rem] border border-white shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-brand-primary/5 transition-[box-shadow] duration-500 group"
 		>
 			<div className="flex gap-1 mb-6">
-				{Array.from({ length: testimonial.rating || 5 }, (_, i) => i).map(
-					(i) => (
-						<span
-							key={`star-${testimonial.id}-${i}`}
-							className="text-amber-400 transition-transform"
-						>
-							<HiStar />
-						</span>
-					),
-				)}
+				{Array.from({ length: testimonial.rating || 5 }, (_, i) => i).map((i) => (
+					<span key={`star-${testimonial.id}-${i}`} className="text-amber-400 transition-transform">
+						<HiStar />
+					</span>
+				))}
 			</div>
 
 			<div className="relative">

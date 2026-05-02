@@ -12,11 +12,7 @@ const kasirNav = [
 	{ href: "/kasir/shift", label: "Shift", icon: "🕐" },
 ];
 
-export default function KasirLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function KasirLayout({ children }: { children: React.ReactNode }) {
 	const [mobileOpen, setMobileOpen] = useState(false);
 
 	return (
@@ -128,9 +124,7 @@ export default function KasirLayout({
 			<div className="flex-1 flex flex-col min-w-0 pt-14 md:pt-0">
 				<header className="hidden md:flex h-16 border-b border-border bg-white items-center justify-between px-6">
 					<DynamicBreadcrumb />
-					<span className="text-sm text-muted-foreground">
-						Mahira Laundry Jatiwaringin
-					</span>
+					<span className="text-sm text-muted-foreground">Mahira Laundry Jatiwaringin</span>
 				</header>
 				<main className="flex-1 p-4 md:p-6 overflow-auto">{children}</main>
 				<footer className="p-4 md:p-6 border-t border-border text-center text-sm text-muted-foreground bg-white/50 shrink-0">

@@ -87,7 +87,7 @@ function buildCrumbs(pathname: string): Crumb[] {
 
 	// If root itself is the current page, ensure it's marked as last
 	if (crumbs.length === 1) {
-		crumbs[0].isLast = true;
+		crumbs[0]!.isLast = true;
 	}
 
 	return crumbs;
@@ -100,10 +100,7 @@ interface DynamicBreadcrumbProps {
 	compact?: boolean;
 }
 
-export function DynamicBreadcrumb({
-	homeHref,
-	compact = true,
-}: DynamicBreadcrumbProps) {
+export function DynamicBreadcrumb({ homeHref, compact = true }: DynamicBreadcrumbProps) {
 	const pathname = usePathname();
 	const normalized = pathname.replace(/\/$/, "") || "/";
 	const root = getRoleRoot(normalized);

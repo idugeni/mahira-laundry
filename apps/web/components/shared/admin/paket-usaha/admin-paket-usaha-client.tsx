@@ -1,23 +1,12 @@
 "use client";
 
-import {
-	Edit3,
-	Layers,
-	Package,
-	Plus,
-	ToggleLeft,
-	ToggleRight,
-	Trash2,
-} from "lucide-react";
+import { Edit3, Layers, Package, Plus, ToggleLeft, ToggleRight, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { createPortal } from "react-dom";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { toast } from "sonner";
 import { PackageFormModal } from "@/components/shared/admin/paket-usaha/package-form-modal";
-import {
-	PaginationControls,
-	usePagination,
-} from "@/components/shared/common/pagination-controls";
+import { PaginationControls, usePagination } from "@/components/shared/common/pagination-controls";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -38,14 +27,10 @@ const TIER_COLORS: Record<string, string> = {
 	Custom: "bg-emerald-50 text-emerald-600",
 };
 
-export function AdminPaketUsahaClient({
-	packages: initialPackages,
-}: AdminPaketUsahaClientProps) {
+export function AdminPaketUsahaClient({ packages: initialPackages }: AdminPaketUsahaClientProps) {
 	const [packages, setPackages] = useState<BusinessPackage[]>(initialPackages);
 	// undefined = modal closed, null = create mode, BusinessPackage = edit mode
-	const [modalPackage, setModalPackage] = useState<
-		BusinessPackage | null | undefined
-	>(undefined);
+	const [modalPackage, setModalPackage] = useState<BusinessPackage | null | undefined>(undefined);
 	const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 	const [deleteLoading, setDeleteLoading] = useState(false);
 	const [toggleLoading, setToggleLoading] = useState<string | null>(null);
@@ -67,9 +52,7 @@ export function AdminPaketUsahaClient({
 			if (!res.success) {
 				toast.error(res.error ?? "Gagal mengubah status paket.");
 			} else {
-				setPackages((prev) =>
-					prev.map((p) => (p.id === id ? { ...p, is_active: newActive } : p)),
-				);
+				setPackages((prev) => prev.map((p) => (p.id === id ? { ...p, is_active: newActive } : p)));
 				toast.success(newActive ? "Paket diaktifkan." : "Paket dinonaktifkan.");
 			}
 		} catch {
@@ -146,8 +129,7 @@ export function AdminPaketUsahaClient({
 						Belum Ada Paket
 					</h3>
 					<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-3 max-w-sm mx-auto leading-relaxed">
-						Tambahkan paket usaha laundry pertama untuk ditampilkan ke calon
-						mitra.
+						Tambahkan paket usaha laundry pertama untuk ditampilkan ke calon mitra.
 					</p>
 					<Button
 						onClick={() => setModalPackage(null)}
@@ -197,9 +179,7 @@ export function AdminPaketUsahaClient({
 										<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
 											Harga
 										</p>
-										<p className="font-black text-slate-900 text-lg">
-											{formatIDR(pkg.price)}
-										</p>
+										<p className="font-black text-slate-900 text-lg">{formatIDR(pkg.price)}</p>
 									</div>
 									{pkg.promo_price != null && (
 										<div className="flex items-center gap-2 bg-emerald-50/50 rounded-xl px-3 py-2 border border-emerald-100/50">
@@ -223,9 +203,7 @@ export function AdminPaketUsahaClient({
 											"flex items-center gap-2 transition-colors disabled:opacity-50",
 											pkg.is_active ? "text-emerald-600" : "text-slate-400",
 										)}
-										title={
-											pkg.is_active ? "Nonaktifkan paket" : "Aktifkan paket"
-										}
+										title={pkg.is_active ? "Nonaktifkan paket" : "Aktifkan paket"}
 									>
 										{toggleLoading === pkg.id ? (
 											<span className="w-5 h-5 border-2 border-current/30 border-t-current rounded-full animate-spin" />
@@ -326,10 +304,8 @@ export function AdminPaketUsahaClient({
 							<div className="p-8 space-y-6">
 								<p className="text-sm font-bold text-slate-600 leading-relaxed">
 									Apakah Anda yakin ingin menghapus paket{" "}
-									<span className="font-black text-slate-900">
-										{packageToDelete?.name}
-									</span>
-									? Paket yang memiliki inquiry terkait tidak dapat dihapus.
+									<span className="font-black text-slate-900">{packageToDelete?.name}</span>? Paket
+									yang memiliki inquiry terkait tidak dapat dihapus.
 								</p>
 
 								<div className="flex items-center gap-3">

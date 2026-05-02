@@ -1,10 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import {
-	HiOutlineChatBubbleOvalLeftEllipsis,
-	HiOutlineChevronRight,
-} from "react-icons/hi2";
+import { HiOutlineChatBubbleOvalLeftEllipsis, HiOutlineChevronRight } from "react-icons/hi2";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 
 interface OrderWhatsappPanelProps {
@@ -24,12 +21,10 @@ export function OrderWhatsappPanel({ onBack }: OrderWhatsappPanelProps) {
 				<div className="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center text-5xl text-emerald-500 mx-auto mb-8 shadow-inner">
 					<HiOutlineChatBubbleOvalLeftEllipsis />
 				</div>
-				<h2 className="text-2xl font-black text-slate-900 mb-4">
-					Siap Membantu!
-				</h2>
+				<h2 className="text-2xl font-black text-slate-900 mb-4">Siap Membantu!</h2>
 				<p className="text-slate-500 font-medium mb-10 leading-relaxed text-sm">
-					Tim kami akan membantu Anda menjadwalkan penjemputan dan pencucian
-					melalui obrolan WhatsApp.
+					Tim kami akan membantu Anda menjadwalkan penjemputan dan pencucian melalui obrolan
+					WhatsApp.
 				</p>
 
 				<div className="space-y-4">

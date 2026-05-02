@@ -72,12 +72,8 @@ export function TentangClient() {
 						transition={{ delay: 0.6 }}
 						className="mt-12 text-2xl md:text-3xl text-slate-500 font-medium leading-relaxed italic max-w-3xl mx-auto"
 					>
-						"Lahir dari visi{" "}
-						<strong className="text-slate-900 font-black">
-							Indira Maharani
-						</strong>{" "}
-						untuk menghadirkan standar kebersihan premium yang melampaui
-						ekspektasi."
+						"Lahir dari visi <strong className="text-slate-900 font-black">Indira Maharani</strong>{" "}
+						untuk menghadirkan standar kebersihan premium yang melampaui ekspektasi."
 					</motion.p>
 				</div>
 
@@ -101,9 +97,8 @@ export function TentangClient() {
 								Visi Utama Kami
 							</h2>
 							<p className="text-slate-400 text-lg md:text-xl lg:text-2xl leading-relaxed font-medium">
-								Menjadi layanan laundry terpercaya nomor satu di Indonesia
-								dengan standar kebersihan internasional yang menyatu dengan
-								teknologi modern untuk kenyamanan hidup Anda.
+								Menjadi layanan laundry terpercaya nomor satu di Indonesia dengan standar kebersihan
+								internasional yang menyatu dengan teknologi modern untuk kenyamanan hidup Anda.
 							</p>
 						</div>
 					</motion.section>
@@ -123,8 +118,8 @@ export function TentangClient() {
 								<span className="text-brand-accent-dark">Operasional.</span>
 							</h2>
 							<p className="text-slate-500 text-lg font-medium leading-relaxed">
-								Kami tidak hanya mencuci pakaian, kami merawat memori dan
-								investasi Anda melalui standar pengerjaan yang ketat.
+								Kami tidak hanya mencuci pakaian, kami merawat memori dan investasi Anda melalui
+								standar pengerjaan yang ketat.
 							</p>
 						</motion.div>
 
@@ -146,9 +141,7 @@ export function TentangClient() {
 									<div className="w-12 h-12 rounded-2xl bg-white text-brand-primary flex items-center justify-center font-black shrink-0 shadow-xs group-hover:bg-brand-primary group-hover:text-white transition-colors duration-500">
 										0{i + 1}
 									</div>
-									<p className="text-slate-600 font-bold leading-snug pt-2 text-lg">
-										{misi}
-									</p>
+									<p className="text-slate-600 font-bold leading-snug pt-2 text-lg">{misi}</p>
 								</motion.div>
 							))}
 						</div>
@@ -237,8 +230,8 @@ export function TentangClient() {
 							Bergabung dalam <br /> Standard Mahira.
 						</h3>
 						<p className="text-white/80 text-xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-							Kami percaya bahwa kebersihan adalah bentuk penghormatan terhadap
-							diri sendiri. Mari rawat pakaian Anda dengan rasa hormat tersebut.
+							Kami percaya bahwa kebersihan adalah bentuk penghormatan terhadap diri sendiri. Mari
+							rawat pakaian Anda dengan rasa hormat tersebut.
 						</p>
 						<motion.button className="px-10 py-4.5 bg-white text-brand-primary rounded-full font-black text-[10px] uppercase tracking-[0.2em] shadow-2xl hover:brightness-110 transition-all">
 							Pesan Layanan Sekarang

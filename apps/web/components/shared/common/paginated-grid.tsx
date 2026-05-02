@@ -1,10 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import {
-	PaginationControls,
-	usePagination,
-} from "@/components/shared/common/pagination-controls";
+import { PaginationControls, usePagination } from "@/components/shared/common/pagination-controls";
 
 interface PaginatedGridProps<T> {
 	items: T[];

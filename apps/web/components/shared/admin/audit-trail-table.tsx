@@ -49,9 +49,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 	const filtered = auditLogs.filter((log) => {
 		const matchesSearch =
 			!searchQuery ||
-			log.profiles?.full_name
-				?.toLowerCase()
-				.includes(searchQuery.toLowerCase()) ||
+			log.profiles?.full_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			log.table_name.toLowerCase().includes(searchQuery.toLowerCase()) ||
 			log.action.toLowerCase().includes(searchQuery.toLowerCase());
 
@@ -61,10 +59,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 	});
 
 	const totalPages = Math.ceil(filtered.length / pageSize);
-	const paginatedLogs = filtered.slice(
-		(currentPage - 1) * pageSize,
-		currentPage * pageSize,
-	);
+	const paginatedLogs = filtered.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
 	const handleSearch = (query: string) => {
 		setSearchQuery(query);
@@ -136,9 +131,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 						<History size={32} />
 					</div>
 					<h3 className="text-xl font-black uppercase tracking-tight text-slate-800">
-						{searchQuery || actionFilter
-							? "Tidak Ada Hasil"
-							: "No Activity Detected"}
+						{searchQuery || actionFilter ? "Tidak Ada Hasil" : "No Activity Detected"}
 					</h3>
 					<p className="text-[10px] font-black uppercase tracking-widest mt-2">
 						{searchQuery || actionFilter
@@ -172,8 +165,7 @@ export function AuditTrailTable({ auditLogs }: { auditLogs: AuditLog[] }) {
 									<Badge
 										className={cn(
 											"px-2 py-0.5 rounded-full text-[8px] font-black uppercase tracking-widest border shrink-0",
-											ACTION_COLORS[log.action] ||
-												"bg-slate-100 text-slate-600 border-slate-200",
+											ACTION_COLORS[log.action] || "bg-slate-100 text-slate-600 border-slate-200",
 										)}
 									>
 										{log.action.replace("_", " ")}

@@ -22,8 +22,7 @@ interface CartState {
 export const useCartStore = create<CartState>((set, get) => ({
 	items: [],
 	addItem: (item) => {
-		const subtotal =
-			item.quantity * item.unitPrice * (item.isExpress ? 1.5 : 1);
+		const subtotal = item.quantity * item.unitPrice * (item.isExpress ? 1.5 : 1);
 		set((state) => {
 			const existing = state.items.find((i) => i.serviceId === item.serviceId);
 			if (existing) {
@@ -33,8 +32,7 @@ export const useCartStore = create<CartState>((set, get) => ({
 							? {
 									...i,
 									quantity: item.quantity,
-									subtotal:
-										item.quantity * i.unitPrice * (i.isExpress ? 1.5 : 1),
+									subtotal: item.quantity * i.unitPrice * (i.isExpress ? 1.5 : 1),
 								}
 							: i,
 					),

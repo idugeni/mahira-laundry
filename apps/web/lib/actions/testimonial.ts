@@ -37,10 +37,7 @@ export async function submitTestimonial(formData: FormData) {
 	}
 }
 
-export async function updateTestimonialStatus(
-	id: string,
-	is_published: boolean,
-) {
+export async function updateTestimonialStatus(id: string, is_published: boolean) {
 	const supabase = await createClient();
 	const {
 		data: { user },
@@ -57,10 +54,7 @@ export async function updateTestimonialStatus(
 	}
 
 	try {
-		const { error } = await supabase
-			.from("testimonials")
-			.update({ is_published })
-			.eq("id", id);
+		const { error } = await supabase.from("testimonials").update({ is_published }).eq("id", id);
 
 		if (error) throw error;
 		revalidatePath("/");

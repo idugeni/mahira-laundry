@@ -48,9 +48,7 @@ export function TestimonialForm() {
 			if (result.error) {
 				toast.error(result.error);
 			} else {
-				toast.success(
-					"Testimoni berhasil dikirim! Akan muncul setelah disetujui admin.",
-				);
+				toast.success("Testimoni berhasil dikirim! Akan muncul setelah disetujui admin.");
 				form.reset();
 			}
 		} catch (_err) {
@@ -67,9 +65,7 @@ export function TestimonialForm() {
 					<HiOutlineChatBubbleLeftRight />
 				</div>
 				<div>
-					<h3 className="text-xl font-black text-slate-900">
-						Berikan Testimoni
-					</h3>
+					<h3 className="text-xl font-black text-slate-900">Berikan Testimoni</h3>
 					<p className="text-sm text-slate-400 font-medium">
 						Bagikan pengalaman Anda menggunakan jasa Mahira.
 					</p>
@@ -99,9 +95,7 @@ export function TestimonialForm() {
 											>
 												<span
 													className={
-														star <= (hover || field.value)
-															? "text-amber-400"
-															: "text-slate-100"
+														star <= (hover || field.value) ? "text-amber-400" : "text-slate-100"
 													}
 												>
 													<HiStar size={32} />

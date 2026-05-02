@@ -1,13 +1,7 @@
 // Auto-generated Supabase Database types
 // Run: npx supabase gen types typescript --local > types/database.ts
 
-export type Json =
-	| string
-	| number
-	| boolean
-	| null
-	| { [key: string]: Json | undefined }
-	| Json[];
+export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
 export interface Database {
 	public: {
@@ -59,10 +53,7 @@ export interface Database {
 					created_at: string;
 					updated_at: string;
 				};
-				Insert: Omit<
-					Database["public"]["Tables"]["profiles"]["Row"],
-					"created_at" | "updated_at"
-				>;
+				Insert: Omit<Database["public"]["Tables"]["profiles"]["Row"], "created_at" | "updated_at">;
 				Update: Partial<Database["public"]["Tables"]["profiles"]["Insert"]>;
 			};
 			orders: {
@@ -145,14 +136,7 @@ export interface Database {
 				| "completed"
 				| "cancelled";
 			payment_status: "unpaid" | "pending" | "paid" | "refunded" | "failed";
-			payment_method:
-				| "cash"
-				| "qris"
-				| "bank_transfer"
-				| "gopay"
-				| "ovo"
-				| "dana"
-				| "shopeepay";
+			payment_method: "cash" | "qris" | "bank_transfer" | "gopay" | "ovo" | "dana" | "shopeepay";
 			delivery_type: "pickup" | "delivery" | "both";
 			service_unit: "kg" | "item" | "pasang" | "meter";
 			loyalty_tier: "bronze" | "silver" | "gold" | "platinum";

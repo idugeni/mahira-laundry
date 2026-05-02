@@ -1,10 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import {
-	HiOutlineCheckCircle,
-	HiOutlineInformationCircle,
-} from "react-icons/hi2";
+import { HiOutlineCheckCircle, HiOutlineInformationCircle } from "react-icons/hi2";
 import { formatIDR } from "@/lib/utils";
 
 interface Service {
@@ -64,10 +61,7 @@ export function OrderConfirmStep({
 							{services.map(
 								(s) =>
 									(quantities[s.id] || 0) > 0 && (
-										<div
-											key={s.id}
-											className="flex justify-between items-center text-sm"
-										>
+										<div key={s.id} className="flex justify-between items-center text-sm">
 											<span className="text-white/60">
 												{s.name} ({quantities[s.id]} {s.unit})
 											</span>
@@ -98,9 +92,8 @@ export function OrderConfirmStep({
 						<HiOutlineInformationCircle />
 					</span>
 					<p className="text-xs text-amber-900 font-medium leading-relaxed">
-						<b>Penting:</b> Berat pasti dan total tagihan akan ditentukan
-						setelah penimbangan fisik di outlet. Anda akan menerima notifikasi
-						tagihan final segera setelah proses tuntas.
+						<b>Penting:</b> Berat pasti dan total tagihan akan ditentukan setelah penimbangan fisik
+						di outlet. Anda akan menerima notifikasi tagihan final segera setelah proses tuntas.
 					</p>
 				</div>
 				<button

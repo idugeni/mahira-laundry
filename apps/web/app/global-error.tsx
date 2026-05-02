@@ -39,8 +39,7 @@ export default function GlobalError({
 						transition={{ delay: 0.3 }}
 						className="mt-3 text-gray-500"
 					>
-						Kami mengalami masalah teknis yang tidak terduga. Silakan coba muat
-						ulang halaman.
+						Kami mengalami masalah teknis yang tidak terduga. Silakan coba muat ulang halaman.
 					</motion.p>
 
 					{error.digest && (

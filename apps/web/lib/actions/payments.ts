@@ -10,11 +10,7 @@ export async function createPayment(orderId: string, method: string) {
 	} = await supabase.auth.getUser();
 	if (!user) return { error: "Unauthorized" };
 
-	const { data: order } = await supabase
-		.from("orders")
-		.select("total")
-		.eq("id", orderId)
-		.single();
+	const { data: order } = await supabase.from("orders").select("total").eq("id", orderId).single();
 
 	if (!order) return { error: "Order tidak ditemukan" };
 
@@ -35,10 +31,7 @@ export async function createPayment(orderId: string, method: string) {
 	if (error) return { error: error.message };
 
 	if (method === "cash") {
-		await supabase
-			.from("orders")
-			.update({ status: "confirmed" })
-			.eq("id", orderId);
+		await supabase.from("orders").update({ status: "confirmed" }).eq("id", orderId);
 	}
 
 	revalidatePath("/order");

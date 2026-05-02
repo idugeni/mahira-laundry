@@ -18,9 +18,7 @@ export function IDRInput({
 	className = "",
 	id,
 }: IDRInputProps) {
-	const [displayValue, setDisplayValue] = useState(
-		value ? formatIDR(value) : "",
-	);
+	const [displayValue, setDisplayValue] = useState(value ? formatIDR(value) : "");
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const raw = e.target.value.replace(/[^\d]/g, "");

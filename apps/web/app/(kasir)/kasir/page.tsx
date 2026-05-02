@@ -35,7 +35,5 @@ export default async function POSPage() {
 
 	const finalOutletId = outletId || PRIMARY_OUTLET.id;
 
-	return (
-		<POSClient initialServices={services || []} outletId={finalOutletId} />
-	);
+	return <POSClient initialServices={services || []} outletId={finalOutletId} />;
 }

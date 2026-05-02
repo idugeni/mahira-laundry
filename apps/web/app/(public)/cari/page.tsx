@@ -3,8 +3,7 @@ import { baseOpenGraph } from "@/lib/metadata";
 
 export const metadata: Metadata = {
 	title: "Cari",
-	description:
-		"Cari layanan, galeri, lokasi outlet, dan informasi lainnya tentang Mahira Laundry.",
+	description: "Cari layanan, galeri, lokasi outlet, dan informasi lainnya tentang Mahira Laundry.",
 	openGraph: {
 		...baseOpenGraph,
 		url: "/cari",
@@ -48,10 +47,7 @@ export default async function CariPage() {
 					</div>
 				}
 			>
-				<CariClient
-					services={services || []}
-					galleryItems={galleryItems || []}
-				/>
+				<CariClient services={services || []} galleryItems={galleryItems || []} />
 			</Suspense>
 		</div>
 	);

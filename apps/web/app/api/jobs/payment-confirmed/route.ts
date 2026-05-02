@@ -8,10 +8,7 @@ async function handler(request: Request) {
 		const { orderId, customerId, amount, method } = body;
 
 		if (!orderId || !customerId) {
-			return NextResponse.json(
-				{ error: "Missing orderId or customerId" },
-				{ status: 400 },
-			);
+			return NextResponse.json({ error: "Missing orderId or customerId" }, { status: 400 });
 		}
 
 		const supabase = await createClient();
@@ -25,8 +22,7 @@ async function handler(request: Request) {
 		});
 
 		return NextResponse.json({ success: true });
-	} catch (error) {
-		console.error("[Payment Confirmed Job] Error:", error);
+	} catch (_error) {
 		return NextResponse.json({ error: "Internal error" }, { status: 500 });
 	}
 }

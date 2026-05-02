@@ -56,18 +56,12 @@ interface POSClientProps {
 	cashierName?: string;
 }
 
-export function POSClient({
-	initialServices,
-	outletId,
-	cashierName,
-}: POSClientProps) {
+export function POSClient({ initialServices, outletId, cashierName }: POSClientProps) {
 	// Core State
 	const [cart, setCart] = useState<CartItem[]>([]);
 	const [customerSearch, setCustomerSearch] = useState("");
 	const [searchResults, setSearchResults] = useState<Profile[]>([]);
-	const [selectedCustomer, setSelectedCustomer] = useState<Profile | null>(
-		null,
-	);
+	const [selectedCustomer, setSelectedCustomer] = useState<Profile | null>(null);
 	const [walkInName, setWalkInName] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [isSearching, setIsSearching] = useState(false);
@@ -110,9 +104,7 @@ export function POSClient({
 
 	const filteredServices = useMemo(() => {
 		if (!quickSearch) return initialServices;
-		return initialServices.filter((s) =>
-			s.name.toLowerCase().includes(quickSearch.toLowerCase()),
-		);
+		return initialServices.filter((s) => s.name.toLowerCase().includes(quickSearch.toLowerCase()));
 	}, [quickSearch, initialServices]);
 
 	// Debounced customer search
@@ -197,9 +189,7 @@ export function POSClient({
 
 	const _updateQty = (id: string, newQty: number) => {
 		if (newQty <= 0) return;
-		setCart((prev) =>
-			prev.map((i) => (i.id === id ? { ...i, qty: newQty } : i)),
-		);
+		setCart((prev) => prev.map((i) => (i.id === id ? { ...i, qty: newQty } : i)));
 	};
 
 	const removeFromCart = (id: string) => {
@@ -234,7 +224,7 @@ export function POSClient({
 
 			const orderItems = cart.map((item) => ({
 				service_id:
-					item.serviceId === "manual" ? initialServices[0].id : item.serviceId, // Fallback if manual
+					item.serviceId === "manual" ? (initialServices[0]?.id ?? item.serviceId) : item.serviceId,
 				service_name: item.name,
 				quantity: item.qty,
 				unit: item.unit,
@@ -248,16 +238,13 @@ export function POSClient({
 			const result = await createOrder(formData);
 
 			if (result.success && result.data) {
-				toast.success(
-					`Berhasil! Order: ${result.data.order_number || result.data.id.slice(0, 8)}`,
-				);
+				toast.success(`Berhasil! Order: ${result.data.order_number || result.data.id.slice(0, 8)}`);
 
 				// Show receipt view
 				setReceiptData({
 					orderId: result.data.id,
 					orderNumber:
-						result.data.order_number ||
-						`ORD-${result.data.id.slice(0, 8).toUpperCase()}`,
+						result.data.order_number || `ORD-${result.data.id.slice(0, 8).toUpperCase()}`,
 					items: [...cart],
 					total,
 					paymentMethod,
@@ -345,10 +332,7 @@ export function POSClient({
 							TRANSAKSI BERHASIL
 						</h2>
 						<p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
-							Nomor Order:{" "}
-							<span className="text-brand-primary">
-								{receiptData.orderNumber}
-							</span>
+							Nomor Order: <span className="text-brand-primary">{receiptData.orderNumber}</span>
 						</p>
 					</div>
 				</div>
@@ -381,9 +365,7 @@ export function POSClient({
 						style={{ fontFamily: "monospace" }}
 					>
 						<div className="text-center border-b-2 border-dashed border-slate-200 pb-6 mb-6">
-							<h1 className="text-2xl font-black uppercase tracking-tighter">
-								MAHIRA LAUNDRY
-							</h1>
+							<h1 className="text-2xl font-black uppercase tracking-tighter">MAHIRA LAUNDRY</h1>
 							<p className="text-[10px] mt-2 font-bold opacity-50">
 								CABANG: {receiptData.outletId}
 							</p>
@@ -399,21 +381,15 @@ export function POSClient({
 							</div>
 							<div className="flex justify-between">
 								<span>PELANGGAN</span>
-								<span className="font-bold uppercase">
-									{receiptData.customerName}
-								</span>
+								<span className="font-bold uppercase">{receiptData.customerName}</span>
 							</div>
 							<div className="flex justify-between">
 								<span>KASIR</span>
-								<span className="font-bold uppercase">
-									{receiptData.cashierName}
-								</span>
+								<span className="font-bold uppercase">{receiptData.cashierName}</span>
 							</div>
 							<div className="flex justify-between">
 								<span>METODE</span>
-								<span className="font-bold uppercase">
-									{receiptData.paymentMethod}
-								</span>
+								<span className="font-bold uppercase">{receiptData.paymentMethod}</span>
 							</div>
 						</div>
 
@@ -428,9 +404,7 @@ export function POSClient({
 								>
 									<div className="w-full flex justify-between items-start mb-1">
 										<p className="font-bold flex-1 uppercase">{item.name}</p>
-										<p className="font-bold text-right ml-2">
-											{formatIDR(item.qty * item.price)}
-										</p>
+										<p className="font-bold text-right ml-2">{formatIDR(item.qty * item.price)}</p>
 									</div>
 									<div className="flex justify-between w-full text-slate-500">
 										<span>
@@ -439,9 +413,7 @@ export function POSClient({
 									</div>
 									{item.notes && (
 										<div className="mt-2 w-full bg-slate-50 p-2 rounded-sm border border-slate-100 italic text-[9px]">
-											<span className="font-bold not-italic mr-1 text-slate-400">
-												DETAIL:
-											</span>{" "}
+											<span className="font-bold not-italic mr-1 text-slate-400">DETAIL:</span>{" "}
 											{item.notes}
 										</div>
 									)}
@@ -467,9 +439,7 @@ export function POSClient({
 								<p className="text-slate-500 mt-1">mahiralaundry.com/lacak</p>
 							</div>
 							<p className="text-xs font-bold mt-4">Terima Kasih!</p>
-							<p className="text-[10px] text-slate-500 italic">
-								Cucian Bersih, Hidup Nyaman.
-							</p>
+							<p className="text-[10px] text-slate-500 italic">Cucian Bersih, Hidup Nyaman.</p>
 						</div>
 					</div>
 				</div>
@@ -551,9 +521,7 @@ export function POSClient({
 										className="w-full px-6 py-4 flex items-center justify-between hover:bg-slate-50 border-b border-slate-50 last:border-0 rounded-none h-auto"
 									>
 										<div className="text-left">
-											<p className="text-sm font-bold text-slate-900">
-												{c.full_name}
-											</p>
+											<p className="text-sm font-bold text-slate-900">{c.full_name}</p>
 											<p className="text-[10px] text-slate-500 font-mono mt-1">
 												{c.phone || c.email}
 											</p>
@@ -581,9 +549,7 @@ export function POSClient({
 								<p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest leading-none mb-1">
 									Customer
 								</p>
-								<p className="text-sm font-black text-emerald-900">
-									{selectedCustomer.full_name}
-								</p>
+								<p className="text-sm font-black text-emerald-900">{selectedCustomer.full_name}</p>
 							</div>
 							<Button
 								type="button"
@@ -655,9 +621,7 @@ export function POSClient({
 										onClick={() => setIsPureManual(!isPureManual)}
 										className={`text-[10px] font-black px-5 py-2.5 rounded-xl border-2 transition-all ${isPureManual ? "bg-brand-primary border-brand-primary text-white shadow-lg shadow-brand-primary/20" : "bg-white border-slate-200 text-slate-500 hover:border-brand-primary hover:text-brand-primary"}`}
 									>
-										{isPureManual
-											? "Layanan Custom Aktif ⚡"
-											: "Layanan Custom?"}
+										{isPureManual ? "Layanan Custom Aktif ⚡" : "Layanan Custom?"}
 									</Button>
 								</div>
 
@@ -754,9 +718,7 @@ export function POSClient({
 														inputMode="decimal"
 														placeholder="0.00"
 														value={quickQty}
-														onFocus={(e) =>
-															(e.target as HTMLInputElement).select()
-														}
+														onFocus={(e) => (e.target as HTMLInputElement).select()}
 														onChange={(e) => {
 															const val = e.target.value.replace(",", ".");
 															if (val === "" || /^\d*\.?\d*$/.test(val)) {
@@ -766,9 +728,7 @@ export function POSClient({
 														className="h-[58px] px-5 rounded-2xl border border-slate-200 bg-white focus:ring-4 focus:ring-brand-primary/10 transition-all font-black text-brand-primary text-xl"
 													/>
 													<div className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] font-black uppercase">
-														{isPureManual
-															? manualUnit
-															: selectedService?.unit || "kg"}
+														{isPureManual ? manualUnit : selectedService?.unit || "kg"}
 													</div>
 												</div>
 											</div>
@@ -782,10 +742,7 @@ export function POSClient({
 														>
 															Satuan
 														</label>
-														<Select
-															value={manualUnit}
-															onValueChange={setManualUnit}
-														>
+														<Select value={manualUnit} onValueChange={setManualUnit}>
 															<SelectTrigger
 																id="pos-unit-select"
 																className="w-full h-[58px] px-5 bg-white border border-slate-200 rounded-2xl font-bold"
@@ -793,34 +750,19 @@ export function POSClient({
 																<SelectValue placeholder="Pilih Satuan" />
 															</SelectTrigger>
 															<SelectContent className="rounded-2xl shadow-2xl">
-																<SelectItem
-																	value="kg"
-																	className="font-bold py-3"
-																>
+																<SelectItem value="kg" className="font-bold py-3">
 																	Kilogram (kg)
 																</SelectItem>
-																<SelectItem
-																	value="pcs"
-																	className="font-bold py-3"
-																>
+																<SelectItem value="pcs" className="font-bold py-3">
 																	Pcs / Satuan
 																</SelectItem>
-																<SelectItem
-																	value="m2"
-																	className="font-bold py-3"
-																>
+																<SelectItem value="m2" className="font-bold py-3">
 																	Meter Persegi (m2)
 																</SelectItem>
-																<SelectItem
-																	value="pasang"
-																	className="font-bold py-3"
-																>
+																<SelectItem value="pasang" className="font-bold py-3">
 																	Pasang
 																</SelectItem>
-																<SelectItem
-																	value="set"
-																	className="font-bold py-3"
-																>
+																<SelectItem value="set" className="font-bold py-3">
 																	Set
 																</SelectItem>
 															</SelectContent>
@@ -841,9 +783,7 @@ export function POSClient({
 															value={manualPrice}
 															onChange={(e) => {
 																const val = e.target.value.replace(/\D/g, "");
-																setManualPrice(
-																	val ? formatIDR(parseInt(val, 10)) : "",
-																);
+																setManualPrice(val ? formatIDR(parseInt(val, 10)) : "");
 															}}
 															className="h-[58px] px-5 rounded-2xl border border-slate-200 bg-white focus:ring-4 focus:ring-brand-primary/10 transition-all font-black text-slate-900"
 														/>
@@ -856,10 +796,7 @@ export function POSClient({
 													</p>
 													<div className="w-full h-[58px] px-5 rounded-2xl bg-white border border-slate-200 flex items-center justify-end font-black text-xl text-slate-900 shadow-xs transition-all animate-in fade-in slide-in-from-bottom-2 duration-200">
 														{selectedService
-															? formatIDR(
-																	selectedService.price *
-																		parseFloat(quickQty || "0"),
-																)
+															? formatIDR(selectedService.price * parseFloat(quickQty || "0"))
 															: "Rp 0"}
 													</div>
 												</div>
@@ -871,8 +808,8 @@ export function POSClient({
 												htmlFor="pos-item-notes"
 												className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 flex items-center gap-2"
 											>
-												<Info className="w-3 h-3 text-brand-primary" /> Rincian
-												Item (Cth: 5 Kemeja, 3 Celana Kain)
+												<Info className="w-3 h-3 text-brand-primary" /> Rincian Item (Cth: 5 Kemeja,
+												3 Celana Kain)
 											</label>
 											<Textarea
 												id="pos-item-notes"
@@ -934,9 +871,9 @@ export function POSClient({
 							<span className="font-black text-brand-primary uppercase mr-2 tracking-widest">
 								Tips Kasir:
 							</span>
-							Gunakan tab **Manual** untuk menimbang laundry secara presisi
-							hingga satuan gram. Jangan lupa tambahkan rincian barang pada
-							kolom catatan untuk transparansi layanan ke pelanggan.
+							Gunakan tab **Manual** untuk menimbang laundry secara presisi hingga satuan gram.
+							Jangan lupa tambahkan rincian barang pada kolom catatan untuk transparansi layanan ke
+							pelanggan.
 						</p>
 					</div>
 				</div>
@@ -948,8 +885,7 @@ export function POSClient({
 					<div className="p-4 md:p-8 border-b border-slate-100 bg-slate-50/30">
 						<div className="flex items-center justify-between mb-6">
 							<h3 className="text-xl font-black text-slate-900 flex items-center gap-4">
-								<ShoppingCart className="w-6 h-6 text-brand-primary" /> Rincian
-								Order
+								<ShoppingCart className="w-6 h-6 text-brand-primary" /> Rincian Order
 							</h3>
 							<div className="px-4 py-1.5 bg-brand-primary text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-lg shadow-brand-primary/20">
 								{cart.length} Layanan
@@ -964,9 +900,7 @@ export function POSClient({
 								<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">
 									Lokasi Transaksi
 								</p>
-								<p className="text-sm font-black text-slate-900">
-									POS Terminal
-								</p>
+								<p className="text-sm font-black text-slate-900">POS Terminal</p>
 							</div>
 						</div>
 					</div>
@@ -988,9 +922,7 @@ export function POSClient({
 									<div className="flex justify-between items-start gap-4">
 										<div className="flex-1 min-w-0">
 											<div className="flex items-center gap-2 mb-1">
-												<p className="text-sm font-black text-slate-900 truncate">
-													{item.name}
-												</p>
+												<p className="text-sm font-black text-slate-900 truncate">{item.name}</p>
 												{item.isManual && (
 													<Badge
 														variant="secondary"
@@ -1001,8 +933,7 @@ export function POSClient({
 												)}
 											</div>
 											<p className="text-xs font-bold text-slate-400">
-												{item.qty} {item.unit}{" "}
-												<span className="mx-1 opacity-30">|</span>{" "}
+												{item.qty} {item.unit} <span className="mx-1 opacity-30">|</span>{" "}
 												{formatIDR(item.price)}
 											</p>
 											{item.notes && (

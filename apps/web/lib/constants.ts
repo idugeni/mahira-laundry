@@ -5,8 +5,7 @@ export const PRIMARY_OUTLET = {
 	id: "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
 	name: "Mahira Laundry Premium",
 	slug: "jatiwaringin",
-	address:
-		"Jl. Raya Jatiwaringin No. 12, Pondok Gede, Kota Bekasi, Jawa Barat 17411",
+	address: "Jl. Raya Jatiwaringin No. 12, Pondok Gede, Kota Bekasi, Jawa Barat 17411",
 	phone: "0838-0651-8859",
 	whatsapp: "6283806518859",
 	whatsapp_clean: "6283806518859",

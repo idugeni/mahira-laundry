@@ -1,14 +1,4 @@
-import {
-	Building2,
-	Clock,
-	Edit,
-	Eye,
-	Phone,
-	Search,
-	Trash2,
-	UserPlus,
-	Users,
-} from "lucide-react";
+import { Building2, Clock, Edit, Eye, Phone, Search, Trash2, UserPlus, Users } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { RegisterStaffModal } from "@/components/shared/admin/staff/register-staff-modal";
@@ -16,10 +6,7 @@ import { PaginatedGrid } from "@/components/shared/common/paginated-grid";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-	getOutletsWithStats,
-	getStaffManagementList,
-} from "@/lib/supabase/server";
+import { getOutletsWithStats, getStaffManagementList } from "@/lib/supabase/server";
 import { cn, formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
@@ -43,9 +30,7 @@ const roleTabs = [
 	{ label: "Kurir", value: "kurir" },
 ];
 
-function getOutletName(
-	staff: Awaited<ReturnType<typeof getStaffManagementList>>[number],
-) {
+function getOutletName(staff: Awaited<ReturnType<typeof getStaffManagementList>>[number]) {
 	return (Array.isArray(staff.outlets) ? staff.outlets[0]?.name : null) || "";
 }
 
@@ -59,10 +44,7 @@ export default async function PegawaiPage({
 	const activeRole = roleTabs.some((tab) => tab.value === params.role)
 		? (params.role as string)
 		: "all";
-	const [staff, outlets] = await Promise.all([
-		getStaffManagementList(),
-		getOutletsWithStats(),
-	]);
+	const [staff, outlets] = await Promise.all([getStaffManagementList(), getOutletsWithStats()]);
 	const filteredStaff = staff.filter((s) => {
 		const matchesRole = activeRole === "all" || s.role === activeRole;
 		const outletName = getOutletName(s);
@@ -104,8 +86,7 @@ export default async function PegawaiPage({
 							Manajemen <span className="text-emerald-400 italic">Pegawai</span>
 						</h1>
 						<p className="text-slate-400 font-bold text-sm lg:text-base max-w-2xl leading-relaxed">
-							Kelola seluruh sumber daya manusia Mahira Group dari satu titik
-							kendali tertinggi.
+							Kelola seluruh sumber daya manusia Mahira Group dari satu titik kendali tertinggi.
 						</p>
 					</div>
 
@@ -122,14 +103,9 @@ export default async function PegawaiPage({
 
 			{/* Filter Section */}
 			<div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-				<form
-					action={PEGAWAI_PATH}
-					className="relative group w-full lg:max-w-sm"
-				>
+				<form action={PEGAWAI_PATH} className="relative group w-full lg:max-w-sm">
 					<Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 group-focus-within:text-emerald-500 transition-colors" />
-					{activeRole !== "all" && (
-						<input type="hidden" name="role" value={activeRole} />
-					)}
+					{activeRole !== "all" && <input type="hidden" name="role" value={activeRole} />}
 					<Input
 						name="q"
 						defaultValue={params.q ?? ""}
@@ -166,8 +142,7 @@ export default async function PegawaiPage({
 							Data Tidak Ditemukan
 						</h3>
 						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-4 max-w-lg leading-relaxed mx-auto">
-							Ubah kata kunci atau filter peran untuk melihat daftar pegawai
-							lainnya.
+							Ubah kata kunci atau filter peran untuk melihat daftar pegawai lainnya.
 						</p>
 					</div>
 				</div>
@@ -255,13 +230,9 @@ export default async function PegawaiPage({
 								<div className="flex items-center justify-between">
 									<div className="flex items-center gap-3 text-slate-400">
 										<Phone size={14} className="text-emerald-400" />
-										<span className="text-[10px] font-black uppercase tracking-widest">
-											Kontak
-										</span>
+										<span className="text-[10px] font-black uppercase tracking-widest">Kontak</span>
 									</div>
-									<span className="text-xs font-bold text-slate-700">
-										{s.phone || "—"}
-									</span>
+									<span className="text-xs font-bold text-slate-700">{s.phone || "—"}</span>
 								</div>
 
 								<div className="flex items-center justify-between">

@@ -120,9 +120,7 @@ export function ServiceModal({
 			category: formData.get("category") as string,
 			unit: formData.get("unit") as string,
 			price: Number(formData.get("price")),
-			estimated_duration_hours: Number(
-				formData.get("estimated_duration_hours"),
-			),
+			estimated_duration_hours: Number(formData.get("estimated_duration_hours")),
 			icon: formData.get("icon") as string,
 			features: featuresArr,
 			is_active: formData.get("is_active") === "on",
@@ -143,11 +141,7 @@ export function ServiceModal({
 
 	return (
 		<>
-			<button
-				type="button"
-				onClick={() => setIsOpen(true)}
-				className="contents"
-			>
+			<button type="button" onClick={() => setIsOpen(true)} className="contents">
 				{trigger || (
 					<span className="px-5 py-2.5 bg-brand-primary text-white text-sm font-black rounded-xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-shadow duration-200 inline-block cursor-pointer">
 						+ Tambah Layanan
@@ -236,22 +230,13 @@ export function ServiceModal({
 													<SelectItem value="satuan" className="font-bold py-3">
 														Satuan
 													</SelectItem>
-													<SelectItem
-														value="specialist"
-														className="font-bold py-3"
-													>
+													<SelectItem value="specialist" className="font-bold py-3">
 														Spesial (Sepatu/Tas)
 													</SelectItem>
-													<SelectItem
-														value="bedding"
-														className="font-bold py-3"
-													>
+													<SelectItem value="bedding" className="font-bold py-3">
 														Bedding & Karpet
 													</SelectItem>
-													<SelectItem
-														value="express"
-														className="font-bold py-3"
-													>
+													<SelectItem value="express" className="font-bold py-3">
 														Layanan Kilat
 													</SelectItem>
 													<SelectItem value="luxury" className="font-bold py-3">
@@ -517,8 +502,7 @@ export function ServiceModal({
 							Hapus Layanan?
 						</AlertDialogTitle>
 						<AlertDialogDescription className="text-slate-500 font-medium text-base">
-							Layanan ini akan dihapus secara permanen dan tidak dapat
-							dikembalikan.
+							Layanan ini akan dihapus secara permanen dan tidak dapat dikembalikan.
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">

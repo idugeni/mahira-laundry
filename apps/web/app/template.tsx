@@ -4,11 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 
-export default function RootTemplate({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function RootTemplate({ children }: { children: React.ReactNode }) {
 	const [exiting, setExiting] = useState(false);
 	const [gone, setGone] = useState(false);
 	const pathname = usePathname();
@@ -50,19 +46,8 @@ export default function RootTemplate({
 								className="absolute inset-0 rounded-full animate-spin"
 								style={{ animationDuration: "1.5s" }}
 							>
-								<svg
-									viewBox="0 0 112 112"
-									className="w-full h-full"
-									fill="none"
-									aria-hidden="true"
-								>
-									<circle
-										cx="56"
-										cy="56"
-										r="54"
-										stroke="rgb(241 245 249)"
-										strokeWidth="3"
-									/>
+								<svg viewBox="0 0 112 112" className="w-full h-full" fill="none" aria-hidden="true">
+									<circle cx="56" cy="56" r="54" stroke="rgb(241 245 249)" strokeWidth="3" />
 									<circle
 										cx="56"
 										cy="56"
@@ -73,13 +58,7 @@ export default function RootTemplate({
 										strokeDasharray="84 255"
 									/>
 									<defs>
-										<linearGradient
-											id="splash-gradient"
-											x1="0%"
-											y1="0%"
-											x2="100%"
-											y2="100%"
-										>
+										<linearGradient id="splash-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
 											<stop offset="0%" stopColor="rgb(219 39 119)" />
 											<stop offset="100%" stopColor="rgb(251 113 133)" />
 										</linearGradient>

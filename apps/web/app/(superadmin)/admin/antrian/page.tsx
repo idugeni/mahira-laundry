@@ -49,8 +49,7 @@ export default async function IntegratedAntrianPage() {
 		<div className="space-y-8 sm:space-y-10 overflow-x-hidden">
 			<div>
 				<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900">
-					Superadmin{" "}
-					<span className="inline-block text-brand-gradient">Antrian</span>
+					Superadmin <span className="inline-block text-brand-gradient">Antrian</span>
 				</h1>
 				<p className="text-slate-500 font-medium mt-1 uppercase tracking-widest text-xs">
 					Mengelola Antrian — {outletName}

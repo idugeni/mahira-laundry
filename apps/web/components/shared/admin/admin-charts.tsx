@@ -47,7 +47,7 @@ export function RevenueBarChart({ data }: RevenueChartProps) {
 				<div className="bg-white border border-slate-200 rounded-xl p-3 shadow-lg">
 					<p className="text-xs font-semibold text-slate-500 mb-1">{label}</p>
 					<p className="text-lg font-black text-pink-600">
-						{formatCompact(payload[0].value)}
+						{formatCompact(payload[0]?.value ?? 0)}
 					</p>
 				</div>
 			);
@@ -59,21 +59,14 @@ export function RevenueBarChart({ data }: RevenueChartProps) {
 		<div className="w-full h-full min-h-[200px]" style={{ minHeight: 200 }}>
 			{mounted && (
 				<ResponsiveContainer width="100%" height="100%">
-					<BarChart
-						data={data}
-						margin={{ top: 4, right: 4, left: -20, bottom: 0 }}
-					>
+					<BarChart data={data} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
 						<defs>
 							<linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
 								<stop offset="0%" stopColor="#ec4899" stopOpacity={0.9} />
 								<stop offset="100%" stopColor="#f43f5e" stopOpacity={0.6} />
 							</linearGradient>
 						</defs>
-						<CartesianGrid
-							strokeDasharray="3 3"
-							stroke="#f1f5f9"
-							vertical={false}
-						/>
+						<CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
 						<XAxis
 							dataKey="month"
 							tick={{ fontSize: 11, fill: "#94a3b8" }}
@@ -87,12 +80,7 @@ export function RevenueBarChart({ data }: RevenueChartProps) {
 							tickFormatter={(v) => formatCompact(v)}
 						/>
 						<Tooltip content={<CustomTooltip />} cursor={{ fill: "#f1f5f9" }} />
-						<Bar
-							dataKey="revenue"
-							fill="url(#revenueGrad)"
-							radius={[6, 6, 0, 0]}
-							maxBarSize={48}
-						/>
+						<Bar dataKey="revenue" fill="url(#revenueGrad)" radius={[6, 6, 0, 0]} maxBarSize={48} />
 					</BarChart>
 				</ResponsiveContainer>
 			)}
@@ -121,9 +109,7 @@ export function OrderTrendChart({ data }: OrderTrendChartProps) {
 			return (
 				<div className="bg-white border border-slate-200 rounded-xl p-3 shadow-lg">
 					<p className="text-xs font-semibold text-slate-500 mb-1">{label}</p>
-					<p className="text-lg font-black text-indigo-600">
-						{payload[0].value} order
-					</p>
+					<p className="text-lg font-black text-indigo-600">{payload[0]?.value ?? 0} order</p>
 				</div>
 			);
 		}
@@ -134,21 +120,14 @@ export function OrderTrendChart({ data }: OrderTrendChartProps) {
 		<div className="w-full h-full min-h-[200px]" style={{ minHeight: 200 }}>
 			{mounted && (
 				<ResponsiveContainer width="100%" height="100%">
-					<AreaChart
-						data={data}
-						margin={{ top: 4, right: 4, left: -20, bottom: 0 }}
-					>
+					<AreaChart data={data} margin={{ top: 4, right: 4, left: -20, bottom: 0 }}>
 						<defs>
 							<linearGradient id="orderGrad" x1="0" y1="0" x2="0" y2="1">
 								<stop offset="0%" stopColor="#6366f1" stopOpacity={0.25} />
 								<stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
 							</linearGradient>
 						</defs>
-						<CartesianGrid
-							strokeDasharray="3 3"
-							stroke="#f1f5f9"
-							vertical={false}
-						/>
+						<CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
 						<XAxis
 							dataKey="day"
 							tick={{ fontSize: 10, fill: "#94a3b8" }}
@@ -217,15 +196,13 @@ export function PaymentPieChart({ data }: PaymentPieChartProps) {
 		payload?: { value: number; name: string }[];
 	}) => {
 		if (active && payload?.length) {
-			const { name, value } = payload[0];
+			const { name, value } = payload[0] ?? { name: "", value: 0 };
 			return (
 				<div className="bg-white border border-slate-200 rounded-xl p-3 shadow-lg">
 					<p className="text-xs font-semibold text-slate-500 mb-1">
 						{PAYMENT_LABELS[name] || name}
 					</p>
-					<p className="text-base font-black text-slate-900">
-						{formatCompact(value)}
-					</p>
+					<p className="text-base font-black text-slate-900">{formatCompact(value)}</p>
 				</div>
 			);
 		}
@@ -248,18 +225,13 @@ export function PaymentPieChart({ data }: PaymentPieChartProps) {
 							paddingAngle={3}
 						>
 							{data.map((entry) => (
-								<Cell
-									key={entry.method}
-									fill={PAYMENT_COLORS[entry.method] || "#94a3b8"}
-								/>
+								<Cell key={entry.method} fill={PAYMENT_COLORS[entry.method] || "#94a3b8"} />
 							))}
 						</Pie>
 						<Tooltip content={<CustomTooltip />} />
 						<Legend
 							formatter={(value: string) => (
-								<span className="text-xs text-slate-600">
-									{PAYMENT_LABELS[value] || value}
-								</span>
+								<span className="text-xs text-slate-600">{PAYMENT_LABELS[value] || value}</span>
 							)}
 						/>
 					</PieChart>

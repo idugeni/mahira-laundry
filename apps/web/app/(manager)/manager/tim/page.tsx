@@ -39,8 +39,8 @@ export default async function TimPage() {
 						</h1>
 					</div>
 					<p className="text-slate-400 font-bold text-sm tracking-wide uppercase">
-						Ditemukan <span className="text-slate-900">{staff.length}</span>{" "}
-						staf terdaftar dalam sistem operasional
+						Ditemukan <span className="text-slate-900">{staff.length}</span> staf terdaftar dalam
+						sistem operasional
 					</p>
 				</div>
 
@@ -72,8 +72,7 @@ export default async function TimPage() {
 							Tim Masih Kosong
 						</h3>
 						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-3 max-w-md mx-auto leading-relaxed">
-							Tambahkan kasir atau kurir untuk memulai sinkronisasi operasional
-							di cabang ini.
+							Tambahkan kasir atau kurir untuk memulai sinkronisasi operasional di cabang ini.
 						</p>
 					</div>
 				</div>
@@ -142,9 +141,7 @@ export default async function TimPage() {
 											Telepon
 										</span>
 									</div>
-									<span className="text-xs font-bold text-slate-700">
-										{s.phone || "—"}
-									</span>
+									<span className="text-xs font-bold text-slate-700">{s.phone || "—"}</span>
 								</div>
 
 								<div className="flex items-center justify-between">
@@ -154,9 +151,7 @@ export default async function TimPage() {
 											Otoritas
 										</span>
 									</div>
-									<span className="text-xs font-bold text-slate-700 uppercase">
-										{s.role}
-									</span>
+									<span className="text-xs font-bold text-slate-700 uppercase">{s.role}</span>
 								</div>
 
 								<div className="flex items-center justify-between">

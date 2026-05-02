@@ -1,13 +1,4 @@
-import {
-	AlertCircle,
-	Bell,
-	LogOut,
-	Mail,
-	Phone,
-	Settings2,
-	ShieldCheck,
-	User,
-} from "lucide-react";
+import { AlertCircle, Bell, LogOut, Mail, Phone, Settings2, ShieldCheck, User } from "lucide-react";
 import type { Metadata } from "next";
 import { AdminAvatarSection } from "@/components/shared/admin/profil/admin-avatar-section";
 import { AdminSecuritySection } from "@/components/shared/admin/profil/admin-security-section";
@@ -83,8 +74,7 @@ export default async function SuperadminProfilPage() {
 					<div className="bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/35 space-y-8">
 						<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-slate-50 pb-6">
 							<h2 className="text-xl sm:text-2xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-3">
-								<ShieldCheck className="text-indigo-600" size={28} /> Identitas
-								& Kredensial
+								<ShieldCheck className="text-indigo-600" size={28} /> Identitas & Kredensial
 							</h2>
 							{profile.is_active && (
 								<Badge className="bg-emerald-50 text-emerald-600 border-none px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
@@ -175,9 +165,7 @@ export default async function SuperadminProfilPage() {
 						</div>
 					</div>
 
-					<AdminSecuritySection
-						email={authUser?.email || profile?.email || ""}
-					/>
+					<AdminSecuritySection email={authUser?.email || profile?.email || ""} />
 				</div>
 
 				{/* Sidebar Settings */}
@@ -204,8 +192,7 @@ export default async function SuperadminProfilPage() {
 									desc: "Notifikasi real-time di browser",
 								},
 							].map((item) => {
-								const active =
-									profile.notification_preferences?.[item.key] ?? true;
+								const active = profile.notification_preferences?.[item.key] ?? true;
 								return (
 									<div
 										key={item.key}
@@ -215,9 +202,7 @@ export default async function SuperadminProfilPage() {
 											<p className="font-black text-slate-800 uppercase tracking-tight text-[11px] mb-1">
 												{item.label}
 											</p>
-											<p className="text-[10px] text-slate-400 font-bold">
-												{item.desc}
-											</p>
+											<p className="text-[10px] text-slate-400 font-bold">{item.desc}</p>
 										</div>
 										<div
 											className={cn(
@@ -247,8 +232,8 @@ export default async function SuperadminProfilPage() {
 								Zone Integritas
 							</h4>
 							<p className="text-[10px] text-slate-400 font-bold leading-relaxed px-4">
-								Pastikan Anda tidak membagikan kredensial akses kepada pihak
-								manapun demi integritas data {APP_NAME}.
+								Pastikan Anda tidak membagikan kredensial akses kepada pihak manapun demi integritas
+								data {APP_NAME}.
 							</p>
 						</div>
 					</div>

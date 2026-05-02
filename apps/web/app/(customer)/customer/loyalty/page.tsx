@@ -1,11 +1,7 @@
 ﻿import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { LoyaltyClient } from "@/components/shared/customer/loyalty/loyalty-client";
-import {
-	getLoyaltyHistory,
-	getRewards,
-	getUserProfile,
-} from "@/lib/supabase/server";
+import { getLoyaltyHistory, getRewards, getUserProfile } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
 	title: "Loyalty & Poin",
@@ -24,7 +20,5 @@ export default async function LoyaltyPage() {
 		redirect("/login");
 	}
 
-	return (
-		<LoyaltyClient profile={profile} history={history} rewards={rewards} />
-	);
+	return <LoyaltyClient profile={profile} history={history} rewards={rewards} />;
 }

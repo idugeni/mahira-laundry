@@ -9,16 +9,11 @@ export default function ShiftPage() {
 	const days = ["Sen", "Sel", "Rab", "Kam", "Jum", "Sab", "Min"];
 	return (
 		<div className="space-y-6">
-			<h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">
-				Jadwal Shift
-			</h1>
+			<h1 className="text-2xl font-bold font-[family-name:var(--font-heading)]">Jadwal Shift</h1>
 			<div className="bg-white rounded-xl border border-border p-6">
 				<div className="grid grid-cols-7 gap-2 mb-4">
 					{days.map((day) => (
-						<div
-							key={day}
-							className="text-center text-sm font-medium text-muted-foreground"
-						>
+						<div key={day} className="text-center text-sm font-medium text-muted-foreground">
 							{day}
 						</div>
 					))}

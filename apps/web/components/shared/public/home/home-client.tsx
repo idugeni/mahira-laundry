@@ -11,12 +11,7 @@ import { HomeServicesSection } from "@/components/shared/public/home/home-servic
 import { HomeStatsSection } from "@/components/shared/public/home/home-stats-section";
 import { TestimonialSection } from "@/components/shared/public/testimonial-section";
 import { useAuth } from "@/hooks/use-auth";
-import type {
-	BusinessPackage,
-	GalleryItem,
-	Service,
-	Testimonial,
-} from "@/lib/types";
+import type { BusinessPackage, GalleryItem, Service, Testimonial } from "@/lib/types";
 import { getDashboardUrl } from "@/lib/utils";
 
 interface Stat {
@@ -49,9 +44,7 @@ export function HomeClient({
 	useEffect(() => {
 		const serviceSlug = searchParams.get("s");
 		if (serviceSlug) {
-			const service = initialServices.find(
-				(s) => s.id === serviceSlug || s.slug === serviceSlug,
-			);
+			const service = initialServices.find((s) => s.id === serviceSlug || s.slug === serviceSlug);
 			if (service) {
 				setSelectedService(service);
 				setIsDetailOpen(true);

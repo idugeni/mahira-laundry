@@ -36,26 +36,21 @@ async function assertSuperadmin() {
 	}
 }
 
-export async function registerStaffMember(
-	data: RegisterStaffInput,
-): Promise<ActionResponse> {
+export async function registerStaffMember(data: RegisterStaffInput): Promise<ActionResponse> {
 	try {
 		await assertSuperadmin();
 		const admin = createAdminClient();
 
 		if (data.id) {
-			const { error: authError } = await admin.auth.admin.updateUserById(
-				data.id,
-				{
-					email: data.email,
-					user_metadata: {
-						full_name: data.fullName,
-						role: data.role,
-						phone: data.phone,
-					},
-					...(data.password ? { password: data.password } : {}),
+			const { error: authError } = await admin.auth.admin.updateUserById(data.id, {
+				email: data.email,
+				user_metadata: {
+					full_name: data.fullName,
+					role: data.role,
+					phone: data.phone,
 				},
-			);
+				...(data.password ? { password: data.password } : {}),
+			});
 
 			if (authError) throw authError;
 
@@ -71,17 +66,16 @@ export async function registerStaffMember(
 
 			if (profileError) throw profileError;
 		} else {
-			const { data: authUser, error: authError } =
-				await admin.auth.admin.createUser({
-					email: data.email,
-					password: data.password || "Mahira123!",
-					email_confirm: true,
-					user_metadata: {
-						full_name: data.fullName,
-						role: data.role,
-						phone: data.phone,
-					},
-				});
+			const { data: authUser, error: authError } = await admin.auth.admin.createUser({
+				email: data.email,
+				password: data.password || "Mahira123!",
+				email_confirm: true,
+				user_metadata: {
+					full_name: data.fullName,
+					role: data.role,
+					phone: data.phone,
+				},
+			});
 
 			if (authError) throw authError;
 
@@ -114,10 +108,7 @@ export async function deleteStaffMember(id: string): Promise<ActionResponse> {
 		const { error: authError } = await admin.auth.admin.deleteUser(id);
 		if (authError) throw authError;
 
-		const { error: profileError } = await admin
-			.from("profiles")
-			.delete()
-			.eq("id", id);
+		const { error: profileError } = await admin.from("profiles").delete().eq("id", id);
 		if (profileError) {
 			// Profile already deleted or FK cascade handled it
 		}
@@ -131,11 +122,7 @@ export async function deleteStaffMember(id: string): Promise<ActionResponse> {
 	}
 }
 
-export async function getStaffPerformance(
-	staffId: string,
-	month: number,
-	year: number,
-) {
+export async function getStaffPerformance(staffId: string, month: number, year: number) {
 	try {
 		await assertSuperadmin();
 		const admin = createAdminClient();
@@ -205,10 +192,7 @@ export async function getStaffLeaderboard(month: number, year: number) {
 
 		if (error) throw error;
 
-		const leaderboard: Record<
-			string,
-			{ id: string; washed: number; ironed: number }
-		> = {};
+		const leaderboard: Record<string, { id: string; washed: number; ironed: number }> = {};
 
 		orders?.forEach((order) => {
 			const kg =
@@ -224,7 +208,7 @@ export async function getStaffLeaderboard(month: number, year: number) {
 						washed: 0,
 						ironed: 0,
 					};
-				leaderboard[order.washer_id].washed += kg;
+				leaderboard[order.washer_id]!.washed += kg;
 			}
 			if (order.ironer_id) {
 				if (!leaderboard[order.ironer_id])
@@ -233,7 +217,7 @@ export async function getStaffLeaderboard(month: number, year: number) {
 						washed: 0,
 						ironed: 0,
 					};
-				leaderboard[order.ironer_id].ironed += kg;
+				leaderboard[order.ironer_id]!.ironed += kg;
 			}
 		});
 

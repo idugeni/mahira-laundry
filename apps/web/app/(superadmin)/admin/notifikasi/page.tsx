@@ -67,9 +67,7 @@ export default function AdminNotificationPage() {
 								placeholder="Contoh: Promo Ramadhan Berkah ✨"
 								className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-hidden transition-all"
 								value={formData.title}
-								onChange={(e) =>
-									setFormData({ ...formData, title: e.target.value })
-								}
+								onChange={(e) => setFormData({ ...formData, title: e.target.value })}
 							/>
 						</div>
 
@@ -83,9 +81,7 @@ export default function AdminNotificationPage() {
 								placeholder="Tulis pesan lengkap Anda di sini..."
 								className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-hidden transition-all resize-none"
 								value={formData.body}
-								onChange={(e) =>
-									setFormData({ ...formData, body: e.target.value })
-								}
+								onChange={(e) => setFormData({ ...formData, body: e.target.value })}
 							></textarea>
 						</div>
 
@@ -117,9 +113,7 @@ export default function AdminNotificationPage() {
 									id="notif-target"
 									className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-hidden transition-all"
 									value={formData.targetRole}
-									onChange={(e) =>
-										setFormData({ ...formData, targetRole: e.target.value })
-									}
+									onChange={(e) => setFormData({ ...formData, targetRole: e.target.value })}
 								>
 									<option value="">Semua Pengguna</option>
 									<option value="customer">Pelanggan Saja</option>
@@ -134,11 +128,7 @@ export default function AdminNotificationPage() {
 							disabled={loading}
 							className="w-full h-11 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity shadow-lg shadow-emerald-500/20 disabled:opacity-50"
 						>
-							{loading ? (
-								<Loader2 className="animate-spin" />
-							) : (
-								<Send size={20} />
-							)}
+							{loading ? <Loader2 className="animate-spin" /> : <Send size={20} />}
 							Sebarkan Notifikasi Sekarang
 						</button>
 					</form>
@@ -152,9 +142,8 @@ export default function AdminNotificationPage() {
 							Tips Promo
 						</div>
 						<p className="text-sm text-muted-foreground leading-relaxed">
-							Gunakan emoji dan bahasa yang menarik untuk meningkatkan
-							engagement pelanggan Mahira. Notifikasi akan muncul di aplikasi
-							dan segera terkirim ke target.
+							Gunakan emoji dan bahasa yang menarik untuk meningkatkan engagement pelanggan Mahira.
+							Notifikasi akan muncul di aplikasi dan segera terkirim ke target.
 						</p>
 					</div>
 
@@ -164,8 +153,8 @@ export default function AdminNotificationPage() {
 							Keamanan
 						</div>
 						<p className="text-sm text-muted-foreground leading-relaxed">
-							Pastikan informasi sistem benar sebelum menyebarkannya ke kurir
-							atau kasir karena tidak dapat dibatalkan.
+							Pastikan informasi sistem benar sebelum menyebarkannya ke kurir atau kasir karena
+							tidak dapat dibatalkan.
 						</p>
 					</div>
 				</div>

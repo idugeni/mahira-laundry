@@ -187,10 +187,7 @@ export function MahiraHeader() {
 												{megaMenuItems.map((item) => {
 													const Icon = item.icon;
 													return (
-														<motion.div
-															key={item.href}
-															variants={megaItemVariants}
-														>
+														<motion.div key={item.href} variants={megaItemVariants}>
 															<Link
 																href={item.href}
 																onClick={() => setMegaOpen(false)}
@@ -398,9 +395,7 @@ export function MahiraHeader() {
 												</div>
 												<div className="flex-1 min-w-0">
 													<p className="text-sm font-bold">{item.label}</p>
-													<p className="text-[11px] text-slate-400 truncate">
-														{item.description}
-													</p>
+													<p className="text-[11px] text-slate-400 truncate">{item.description}</p>
 												</div>
 												<span className="text-slate-300">
 													<HiOutlineChevronRight size={16} />

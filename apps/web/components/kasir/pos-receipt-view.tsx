@@ -14,10 +14,7 @@ interface PosReceiptViewProps {
 	onNewOrder: () => void;
 }
 
-export function PosReceiptView({
-	receiptData,
-	onNewOrder,
-}: PosReceiptViewProps) {
+export function PosReceiptView({ receiptData, onNewOrder }: PosReceiptViewProps) {
 	const receiptRef = useRef<HTMLDivElement>(null);
 
 	const handlePrintReceipt = () => {
@@ -72,10 +69,7 @@ export function PosReceiptView({
 						TRANSAKSI BERHASIL
 					</h2>
 					<p className="text-slate-500 font-bold uppercase tracking-widest text-xs">
-						Nomor Order:{" "}
-						<span className="text-brand-primary">
-							{receiptData.orderNumber}
-						</span>
+						Nomor Order: <span className="text-brand-primary">{receiptData.orderNumber}</span>
 					</p>
 				</div>
 			</div>
@@ -107,12 +101,8 @@ export function PosReceiptView({
 					style={{ fontFamily: "monospace" }}
 				>
 					<div className="text-center border-b-2 border-dashed border-slate-200 pb-6 mb-6">
-						<h1 className="text-2xl font-black uppercase tracking-tighter">
-							MAHIRA LAUNDRY
-						</h1>
-						<p className="text-[10px] mt-2 font-bold opacity-50">
-							CABANG: {receiptData.outletId}
-						</p>
+						<h1 className="text-2xl font-black uppercase tracking-tighter">MAHIRA LAUNDRY</h1>
+						<p className="text-[10px] mt-2 font-bold opacity-50">CABANG: {receiptData.outletId}</p>
 						<p className="text-[10px] uppercase font-bold tracking-widest mt-1">
 							{receiptData.date}
 						</p>
@@ -125,21 +115,15 @@ export function PosReceiptView({
 						</div>
 						<div className="flex justify-between">
 							<span>PELANGGAN</span>
-							<span className="font-bold uppercase">
-								{receiptData.customerName}
-							</span>
+							<span className="font-bold uppercase">{receiptData.customerName}</span>
 						</div>
 						<div className="flex justify-between">
 							<span>KASIR</span>
-							<span className="font-bold uppercase">
-								{receiptData.cashierName}
-							</span>
+							<span className="font-bold uppercase">{receiptData.cashierName}</span>
 						</div>
 						<div className="flex justify-between">
 							<span>METODE</span>
-							<span className="font-bold uppercase">
-								{receiptData.paymentMethod}
-							</span>
+							<span className="font-bold uppercase">{receiptData.paymentMethod}</span>
 						</div>
 					</div>
 
@@ -154,9 +138,7 @@ export function PosReceiptView({
 							>
 								<div className="w-full flex justify-between items-start mb-1">
 									<p className="font-bold flex-1 uppercase">{item.name}</p>
-									<p className="font-bold text-right ml-2">
-										{formatIDR(item.qty * item.price)}
-									</p>
+									<p className="font-bold text-right ml-2">{formatIDR(item.qty * item.price)}</p>
 								</div>
 								<div className="flex justify-between w-full text-slate-500">
 									<span>
@@ -165,9 +147,7 @@ export function PosReceiptView({
 								</div>
 								{item.notes && (
 									<div className="mt-2 w-full bg-slate-50 p-2 rounded-sm border border-slate-100 italic text-[9px]">
-										<span className="font-bold not-italic mr-1 text-slate-400">
-											DETAIL:
-										</span>{" "}
+										<span className="font-bold not-italic mr-1 text-slate-400">DETAIL:</span>{" "}
 										{item.notes}
 									</div>
 								)}
@@ -193,9 +173,7 @@ export function PosReceiptView({
 							<p className="text-slate-500 mt-1">mahiralaundry.com/lacak</p>
 						</div>
 						<p className="text-xs font-bold mt-4">Terima Kasih!</p>
-						<p className="text-[10px] text-slate-500 italic">
-							Cucian Bersih, Hidup Nyaman.
-						</p>
+						<p className="text-[10px] text-slate-500 italic">Cucian Bersih, Hidup Nyaman.</p>
 					</div>
 				</div>
 			</div>

@@ -24,8 +24,7 @@ export const analyticsRouter = router({
 				.eq("outlet_id", input.outletId)
 				.eq("status", "completed");
 
-			const totalRevenue =
-				revenueData?.reduce((sum, o) => sum + Number(o.total), 0) || 0;
+			const totalRevenue = revenueData?.reduce((sum, o) => sum + Number(o.total), 0) || 0;
 
 			const { count: totalCustomers } = await supabase
 				.from("orders")
@@ -59,12 +58,9 @@ export const analyticsRouter = router({
 				.select("service_name, quantity")
 				.in(
 					"order_id",
-					(
-						await supabase
-							.from("orders")
-							.select("id")
-							.eq("outlet_id", input.outletId)
-					).data?.map((o) => o.id) || [],
+					(await supabase.from("orders").select("id").eq("outlet_id", input.outletId)).data?.map(
+						(o) => o.id,
+					) || [],
 				);
 
 			const serviceMap = new Map<string, number>();

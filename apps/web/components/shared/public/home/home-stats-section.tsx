@@ -1,11 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import {
-	HiOutlineMapPin,
-	HiOutlineSparkles,
-	HiOutlineStar,
-} from "react-icons/hi2";
+import { HiOutlineMapPin, HiOutlineSparkles, HiOutlineStar } from "react-icons/hi2";
 import { MdOutlineFlashOn } from "react-icons/md";
 
 import { CountUp } from "@/components/ui/count-up";
@@ -43,10 +39,7 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
 					preserveAspectRatio="none"
 					aria-hidden="true"
 				>
-					<path
-						d="M0,45 C480,65 960,25 1440,45 L1440,80 L0,80 Z"
-						fill="rgb(15 23 42)"
-					/>
+					<path d="M0,45 C480,65 960,25 1440,45 L1440,80 L0,80 Z" fill="rgb(15 23 42)" />
 				</svg>
 			</div>
 
@@ -105,10 +98,7 @@ export function HomeStatsSection({ stats }: HomeStatsSectionProps) {
 					preserveAspectRatio="none"
 					aria-hidden="true"
 				>
-					<path
-						d="M0,45 C480,25 960,65 1440,45 L1440,0 L0,0 Z"
-						fill="rgb(15 23 42)"
-					/>
+					<path d="M0,45 C480,25 960,65 1440,45 L1440,0 L0,0 Z" fill="rgb(15 23 42)" />
 				</svg>
 			</div>
 		</div>

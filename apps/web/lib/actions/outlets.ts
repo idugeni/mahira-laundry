@@ -35,10 +35,7 @@ export async function upsertOutlet(data: OutletInput): Promise<ActionResponse> {
 
 		let result: { error: { message: string } | null };
 		if (data.id) {
-			result = await supabase
-				.from("outlets")
-				.update(outletData)
-				.eq("id", data.id);
+			result = await supabase.from("outlets").update(outletData).eq("id", data.id);
 		} else {
 			result = await supabase.from("outlets").insert({
 				...outletData,

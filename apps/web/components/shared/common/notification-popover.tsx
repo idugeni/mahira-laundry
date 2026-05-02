@@ -18,17 +18,13 @@ import type { AppNotification } from "@/lib/types";
 
 export function NotificationPopover() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [selectedNotification, setSelectedNotification] =
-		useState<AppNotification | null>(null);
+	const [selectedNotification, setSelectedNotification] = useState<AppNotification | null>(null);
 	const { notifications, unreadCount, markAsRead } = useNotifications();
 	const popoverRef = useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
-			if (
-				popoverRef.current &&
-				!popoverRef.current.contains(event.target as Node)
-			) {
+			if (popoverRef.current && !popoverRef.current.contains(event.target as Node)) {
 				setIsOpen(false);
 			}
 		}
@@ -77,9 +73,7 @@ export function NotificationPopover() {
 				type="button"
 				onClick={() => setIsOpen(!isOpen)}
 				className={`relative p-2 rounded-xl transition-all ${
-					isOpen
-						? "bg-brand-primary/10 text-brand-primary"
-						: "text-slate-500 hover:bg-slate-100"
+					isOpen ? "bg-brand-primary/10 text-brand-primary" : "text-slate-500 hover:bg-slate-100"
 				}`}
 			>
 				<span className="w-5 h-5 flex items-center justify-center text-xl">
@@ -102,9 +96,7 @@ export function NotificationPopover() {
 						className="absolute right-0 mt-4 w-[380px] sm:w-[420px] bg-white rounded-[2rem] border border-slate-100 shadow-2xl z-50 overflow-hidden"
 					>
 						<div className="p-6 border-b border-slate-50 flex items-center justify-between bg-slate-50/50">
-							<h3 className="font-black text-slate-900 tracking-tight">
-								Notifikasi
-							</h3>
+							<h3 className="font-black text-slate-900 tracking-tight">Notifikasi</h3>
 							<span className="text-[10px] font-black uppercase tracking-widest text-brand-primary bg-brand-primary/10 px-3 py-1 rounded-full">
 								{unreadCount} Baru
 							</span>
@@ -212,11 +204,9 @@ export function NotificationPopover() {
 
 							<div className="p-10 text-center">
 								<span className="text-[10px] font-black uppercase tracking-widest text-slate-400 bg-slate-50 px-4 py-1.5 rounded-full inline-block mb-6">
-									{format(
-										new Date(selectedNotification.created_at),
-										"eeee, d MMMM yyyy • HH:mm",
-										{ locale: idLocale },
-									)}
+									{format(new Date(selectedNotification.created_at), "eeee, d MMMM yyyy • HH:mm", {
+										locale: idLocale,
+									})}
 								</span>
 								<h2 className="text-2xl font-black text-slate-900 mb-4">
 									{selectedNotification.title}

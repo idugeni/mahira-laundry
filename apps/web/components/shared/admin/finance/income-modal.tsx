@@ -65,11 +65,7 @@ export function IncomeModal({
 
 	return (
 		<>
-			<button
-				type="button"
-				onClick={() => setIsOpen(true)}
-				className="contents"
-			>
+			<button type="button" onClick={() => setIsOpen(true)} className="contents">
 				{trigger || (
 					<span className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-emerald-500 px-3.5 text-sm font-semibold text-white shadow-md shadow-emerald-100 transition-colors hover:bg-emerald-600">
 						<HiOutlineBanknotes size={18} />
@@ -100,8 +96,7 @@ export function IncomeModal({
 										</div>
 										<div>
 											<h2 className="text-xl font-black text-slate-900 tracking-tight">
-												Tambah{" "}
-												<span className="text-emerald-600">Pemasukan</span>
+												Tambah <span className="text-emerald-600">Pemasukan</span>
 											</h2>
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
 												Catat Pendapatan & Pemasukan

@@ -1,11 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import {
-	HiOutlineEnvelope,
-	HiOutlinePhone,
-	HiOutlineUser,
-} from "react-icons/hi2";
+import { HiOutlineEnvelope, HiOutlinePhone, HiOutlineUser } from "react-icons/hi2";
 
 interface ProfilFormProps {
 	profile: {

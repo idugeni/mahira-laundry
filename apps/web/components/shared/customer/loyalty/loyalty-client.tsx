@@ -47,11 +47,7 @@ interface LoyaltyClientProps {
 	rewards: Reward[];
 }
 
-export function LoyaltyClient({
-	profile,
-	history,
-	rewards,
-}: LoyaltyClientProps) {
+export function LoyaltyClient({ profile, history, rewards }: LoyaltyClientProps) {
 	const [loading, setLoading] = useState<string | null>(null);
 	const nextTierPoints =
 		profile.loyalty_tier === "bronze"
@@ -61,12 +57,9 @@ export function LoyaltyClient({
 				: profile.loyalty_tier === "gold"
 					? 10000
 					: 0;
-	const progress =
-		nextTierPoints > 0 ? (profile.loyalty_points / nextTierPoints) * 100 : 100;
+	const progress = nextTierPoints > 0 ? (profile.loyalty_points / nextTierPoints) * 100 : 100;
 	const remainingPoints =
-		nextTierPoints > profile.loyalty_points
-			? nextTierPoints - profile.loyalty_points
-			: 0;
+		nextTierPoints > profile.loyalty_points ? nextTierPoints - profile.loyalty_points : 0;
 
 	const handleRedeem = async (rewardId: string) => {
 		if (loading) return;
@@ -130,8 +123,7 @@ export function LoyaltyClient({
 								{profile.full_name}
 							</h2>
 							<p className="text-white/40 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
-								Mahira Elite Club since{" "}
-								{format(new Date(profile.created_at), "yyyy")}
+								Mahira Elite Club since {format(new Date(profile.created_at), "yyyy")}
 							</p>
 
 							{nextTierPoints > 0 && (
@@ -192,10 +184,8 @@ export function LoyaltyClient({
 						</h2>
 						<p className="text-slate-500 font-medium max-w-md leading-relaxed">
 							Ajak teman Sultan Anda bergabung. Dapatkan{" "}
-							<span className="text-slate-900 font-black">
-								25 poin eksklusif
-							</span>{" "}
-							setiap kali kerabat Anda menyelesaikan pesanan pertama mereka.
+							<span className="text-slate-900 font-black">25 poin eksklusif</span> setiap kali
+							kerabat Anda menyelesaikan pesanan pertama mereka.
 						</p>
 					</div>
 
@@ -267,9 +257,7 @@ export function LoyaltyClient({
 										</span>
 										<div className="text-lg font-black text-emerald-600 font-[family-name:var(--font-heading)] flex items-center gap-1">
 											{r.points_cost}{" "}
-											<span className="text-[10px] uppercase font-black opacity-40">
-												Pts
-											</span>
+											<span className="text-[10px] uppercase font-black opacity-40">Pts</span>
 										</div>
 									</div>
 									<h3 className="text-xl font-black text-slate-900 mb-2 uppercase tracking-tight leading-tight group-hover:text-emerald-700 transition-colors">
@@ -306,8 +294,7 @@ export function LoyaltyClient({
 					</div>
 					<div>
 						<h2 className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900">
-							Riwayat{" "}
-							<span className="text-slate-400 font-medium">Sultan Points</span>
+							Riwayat <span className="text-slate-400 font-medium">Sultan Points</span>
 						</h2>
 					</div>
 				</div>
@@ -342,11 +329,7 @@ export function LoyaltyClient({
 												{item.type}
 											</span>
 											<p className="text-[10px] text-slate-300 font-black uppercase tracking-widest italic leading-none pt-0.5">
-												{format(
-													new Date(item.created_at),
-													"dd MMM yyyy • HH:mm",
-													{ locale: id },
-												)}
+												{format(new Date(item.created_at), "dd MMM yyyy • HH:mm", { locale: id })}
 											</p>
 										</div>
 									</div>
@@ -357,8 +340,7 @@ export function LoyaltyClient({
 											Saldo Akhir
 										</p>
 										<p className="text-lg font-black text-slate-900 font-[family-name:var(--font-heading)] leading-none">
-											{item.balance_after}{" "}
-											<span className="text-[9px] text-slate-400">Pts</span>
+											{item.balance_after} <span className="text-[9px] text-slate-400">Pts</span>
 										</p>
 									</div>
 									<div className="hidden md:flex items-center justify-center w-10 h-10 rounded-full bg-slate-50 text-slate-200 group-hover:text-brand-primary transition-colors">

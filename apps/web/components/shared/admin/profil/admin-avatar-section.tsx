@@ -20,9 +20,7 @@ export function AdminAvatarSection({ profile }: AdminAvatarSectionProps) {
 	const fileInputRef = useRef<HTMLInputElement>(null);
 	const router = useRouter();
 
-	async function handleAvatarChange(
-		event: React.ChangeEvent<HTMLInputElement>,
-	) {
+	async function handleAvatarChange(event: React.ChangeEvent<HTMLInputElement>) {
 		const file = event.target.files?.[0];
 		if (!file) return;
 

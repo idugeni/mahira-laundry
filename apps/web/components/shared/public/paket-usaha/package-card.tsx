@@ -263,9 +263,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 										<div className="flex flex-col">
 											<span>
 												{item.quantity != null && (
-													<span className="font-black text-slate-900 mr-1">
-														{item.quantity}x{" "}
-													</span>
+													<span className="font-black text-slate-900 mr-1">{item.quantity}x </span>
 												)}
 												{item.name}
 											</span>
@@ -293,9 +291,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 										<HiOutlineChevronDown size={12} />
 									)}
 								</div>
-								{isExpanded
-									? "Tampilkan Utama"
-									: `+${extraCount} Fasilitas Lainnya`}
+								{isExpanded ? "Tampilkan Utama" : `+${extraCount} Fasilitas Lainnya`}
 							</motion.button>
 						)}
 					</div>

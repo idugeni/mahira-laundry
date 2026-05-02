@@ -38,11 +38,7 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-	addGalleryItem,
-	deleteGalleryItem,
-	updateGalleryItem,
-} from "@/lib/actions/gallery";
+import { addGalleryItem, deleteGalleryItem, updateGalleryItem } from "@/lib/actions/gallery";
 import type { GalleryItem } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -86,9 +82,7 @@ function CategoryDropdown({
 					open && "bg-white ring-4 ring-indigo-500/10",
 				)}
 			>
-				<span className={cn(!value && "text-slate-400")}>
-					{value || placeholder}
-				</span>
+				<span className={cn(!value && "text-slate-400")}>{value || placeholder}</span>
 				<ChevronDown
 					size={17}
 					className={cn(
@@ -115,8 +109,7 @@ function CategoryDropdown({
 									className={cn(
 										"flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm font-black text-slate-600 transition-colors",
 										"hover:bg-indigo-50 hover:text-indigo-600",
-										active &&
-											"bg-indigo-600 text-white hover:bg-indigo-600 hover:text-white",
+										active && "bg-indigo-600 text-white hover:bg-indigo-600 hover:text-white",
 									)}
 								>
 									<span>{option}</span>
@@ -131,15 +124,11 @@ function CategoryDropdown({
 	);
 }
 
-export function AdminGalleryClient({
-	initialItems,
-}: {
-	initialItems: GalleryItem[];
-}) {
+export function AdminGalleryClient({ initialItems }: { initialItems: GalleryItem[] }) {
 	const [items, setItems] = useState(initialItems);
 	const [isUploading, setIsUploading] = useState(false);
 	const [preview, setPreview] = useState<string | null>(null);
-	const [category, setCategory] = useState(categories[0]);
+	const [category, setCategory] = useState(categories[0] ?? "");
 	const [activeCategory, setActiveCategory] = useState("Semua");
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(12);
@@ -150,15 +139,10 @@ export function AdminGalleryClient({
 	const [deleteImageUrl, setDeleteImageUrl] = useState<string | null>(null);
 
 	const filteredItems =
-		activeCategory === "Semua"
-			? items
-			: items.filter((item) => item.category === activeCategory);
+		activeCategory === "Semua" ? items : items.filter((item) => item.category === activeCategory);
 
 	const totalPages = Math.ceil(filteredItems.length / pageSize);
-	const paginatedItems = filteredItems.slice(
-		(currentPage - 1) * pageSize,
-		currentPage * pageSize,
-	);
+	const paginatedItems = filteredItems.slice((currentPage - 1) * pageSize, currentPage * pageSize);
 
 	const handleCategoryChange = (cat: string) => {
 		setActiveCategory(cat);
@@ -168,7 +152,7 @@ export function AdminGalleryClient({
 	function startEdit(item: GalleryItem) {
 		setEditingId(item.id);
 		setEditTitle(item.title);
-		setEditCategory(item.category || categories[0]);
+		setEditCategory(item.category || (categories[0] ?? ""));
 	}
 
 	function cancelEdit() {
@@ -187,11 +171,7 @@ export function AdminGalleryClient({
 			loading: "Menyimpan perubahan...",
 			success: () => {
 				setItems(
-					items.map((i) =>
-						i.id === id
-							? { ...i, title: editTitle, category: editCategory }
-							: i,
-					),
+					items.map((i) => (i.id === id ? { ...i, title: editTitle, category: editCategory } : i)),
 				);
 				cancelEdit();
 				return "Aset visual berhasil diperbarui!";
@@ -252,9 +232,12 @@ export function AdminGalleryClient({
 		<div className="space-y-8 sm:space-y-12">
 			<AlertDialog
 				open={!!deleteId}
-				onOpenChange={(open: boolean) =>
-					!open && (setDeleteId(null), setDeleteImageUrl(null))
-				}
+				onOpenChange={(open: boolean) => {
+					if (!open) {
+						setDeleteId(null);
+						setDeleteImageUrl(null);
+					}
+				}}
 			>
 				<AlertDialogContent className="rounded-[2.5rem] border-slate-100 p-8">
 					<AlertDialogHeader>
@@ -265,8 +248,7 @@ export function AdminGalleryClient({
 							Hapus Aset Visual?
 						</AlertDialogTitle>
 						<AlertDialogDescription className="text-slate-500 font-medium text-base">
-							Aset visual ini akan dihapus secara permanen dan tidak dapat
-							dikembalikan.
+							Aset visual ini akan dihapus secara permanen dan tidak dapat dikembalikan.
 						</AlertDialogDescription>
 					</AlertDialogHeader>
 					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">
@@ -306,8 +288,8 @@ export function AdminGalleryClient({
 						</h1>
 
 						<p className="max-w-2xl text-xs font-bold leading-relaxed text-slate-400 sm:text-sm md:text-base">
-							Etalase digital kualitas Mahira Laundry. Kelola dokumentasi
-							fasilitas, proses, dan hasil layanan dalam satu pusat kendali.
+							Etalase digital kualitas Mahira Laundry. Kelola dokumentasi fasilitas, proses, dan
+							hasil layanan dalam satu pusat kendali.
 						</p>
 					</div>
 
@@ -466,10 +448,7 @@ export function AdminGalleryClient({
 								{paginatedItems.map((item, index) => (
 									<div
 										key={item.id}
-										className={cn(
-											"group relative",
-											editingId === item.id && "z-40",
-										)}
+										className={cn("group relative", editingId === item.id && "z-40")}
 									>
 										<Card className="overflow-visible rounded-none border-b border-slate-100 py-0 shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-100 hover:shadow-2xl hover:shadow-indigo-500/10 sm:rounded-3xl sm:border">
 											<CardContent className="relative aspect-[4/3] overflow-hidden rounded-t-none p-0 sm:rounded-t-3xl">
@@ -507,9 +486,7 @@ export function AdminGalleryClient({
 																size="icon"
 																variant="ghost"
 																className="h-10 w-10 rounded-xl border border-red-500/10 bg-red-500/20 text-red-100 backdrop-blur-xl transition-colors hover:bg-red-500 hover:text-white"
-																onClick={() =>
-																	confirmDelete(item.id, item.image_url)
-																}
+																onClick={() => confirmDelete(item.id, item.image_url)}
 															>
 																<Trash2 size={18} />
 															</Button>

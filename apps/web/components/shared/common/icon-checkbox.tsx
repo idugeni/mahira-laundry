@@ -9,29 +9,28 @@ interface IconCheckboxProps {
 	activeColor: string; // e.g. "amber" → border-amber-500 bg-amber-500
 }
 
-const colorMap: Record<string, { border: string; bg: string; hover: string }> =
-	{
-		amber: {
-			border: "border-amber-500",
-			bg: "bg-amber-500",
-			hover: "group-hover/check:border-amber-200",
-		},
-		brand: {
-			border: "border-brand-primary",
-			bg: "bg-brand-primary",
-			hover: "group-hover/check:border-brand-primary/40",
-		},
-		emerald: {
-			border: "border-emerald-500",
-			bg: "bg-emerald-500",
-			hover: "group-hover/check:border-emerald-200",
-		},
-		rose: {
-			border: "border-rose-500",
-			bg: "bg-rose-500",
-			hover: "group-hover/check:border-rose-200",
-		},
-	};
+const colorMap: Record<string, { border: string; bg: string; hover: string }> = {
+	amber: {
+		border: "border-amber-500",
+		bg: "bg-amber-500",
+		hover: "group-hover/check:border-amber-200",
+	},
+	brand: {
+		border: "border-brand-primary",
+		bg: "bg-brand-primary",
+		hover: "group-hover/check:border-brand-primary/40",
+	},
+	emerald: {
+		border: "border-emerald-500",
+		bg: "bg-emerald-500",
+		hover: "group-hover/check:border-emerald-200",
+	},
+	rose: {
+		border: "border-rose-500",
+		bg: "bg-rose-500",
+		hover: "group-hover/check:border-rose-200",
+	},
+};
 
 export function IconCheckbox({
 	name,
@@ -41,7 +40,7 @@ export function IconCheckbox({
 	label,
 	activeColor,
 }: IconCheckboxProps) {
-	const colors = colorMap[activeColor] || colorMap.brand;
+	const colors = colorMap[activeColor] ?? colorMap["brand"]!;
 
 	return (
 		<label className="flex items-center gap-3 cursor-pointer group/check shrink-0">

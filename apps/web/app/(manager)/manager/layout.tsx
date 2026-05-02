@@ -11,11 +11,7 @@ const managerNav = [
 	{ href: "/manager/tim", label: "Tim", icon: "👥" },
 ];
 
-export default function ManagerLayout({
-	children,
-}: {
-	children: React.ReactNode;
-}) {
+export default function ManagerLayout({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="min-h-screen flex bg-slate-50/50">
 			<AdminSidebar

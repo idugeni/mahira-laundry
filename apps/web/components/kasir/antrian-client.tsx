@@ -199,8 +199,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 		}
 	};
 
-	const currentStatusInfo =
-		allStatuses.find((s) => s.id === activeTab) || allStatuses[0];
+	const currentStatusInfo = allStatuses.find((s) => s.id === activeTab) ?? allStatuses[0]!;
 
 	return (
 		<div className="max-w-[1400px] mx-auto space-y-12 px-4 md:px-8">
@@ -237,18 +236,15 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 							{currentStatusInfo.label} Antrian
 						</h2>
 						<p className="text-slate-400 font-semibold text-sm tracking-wide">
-							Ditemukan{" "}
-							<span className="text-slate-900">{filteredOrders.length}</span>{" "}
-							pesanan pada kategori ini
+							Ditemukan <span className="text-slate-900">{filteredOrders.length}</span> pesanan pada
+							kategori ini
 						</p>
 					</div>
 
 					<div className="flex items-center gap-3">
 						<Button
 							variant="outline"
-							onClick={() =>
-								setSortBy((prev) => (prev === "newest" ? "oldest" : "newest"))
-							}
+							onClick={() => setSortBy((prev) => (prev === "newest" ? "oldest" : "newest"))}
 							className="px-6 py-7 h-auto border-slate-200 rounded-2xl hover:bg-slate-50 transition-all shadow-xs flex items-center gap-3 text-xs font-black uppercase tracking-widest text-slate-600 group"
 						>
 							{sortBy === "newest" ? (
@@ -256,9 +252,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 							) : (
 								<SortAsc className="w-5 h-5 transition-transform" />
 							)}
-							<span>
-								Urutkan: {sortBy === "newest" ? "Terbaru" : "Terlama"}
-							</span>
+							<span>Urutkan: {sortBy === "newest" ? "Terbaru" : "Terlama"}</span>
 						</Button>
 					</div>
 				</div>
@@ -311,14 +305,10 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 												: "text-slate-400 hover:text-slate-600 hover:bg-white/40"
 										}`}
 									>
-										<span className="uppercase tracking-[0.2em]">
-											{status.label}
-										</span>
+										<span className="uppercase tracking-[0.2em]">{status.label}</span>
 										{count > 0 && (
 											<Badge
-												variant={
-													activeTab === status.id ? "default" : "secondary"
-												}
+												variant={activeTab === status.id ? "default" : "secondary"}
 												className={`text-[10px] px-2 py-0 h-5 min-w-[20px] justify-center ${activeTab === status.id ? "bg-brand-primary text-white" : "bg-slate-200 text-slate-500"}`}
 											>
 												{count}
@@ -347,9 +337,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 					>
 						{paginatedOrders.length > 0 ? (
 							paginatedOrders.map((order) => {
-								const colInfo =
-									allStatuses.find((s) => s.id === order.status) ||
-									allStatuses[0];
+								const colInfo = allStatuses.find((s) => s.id === order.status) ?? allStatuses[0]!;
 								return (
 									<motion.div
 										key={order.id}
@@ -393,9 +381,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 
 												<Select
 													value={order.status}
-													onValueChange={(val: string) =>
-														handleStatusChange(order.id, val)
-													}
+													onValueChange={(val: string) => handleStatusChange(order.id, val)}
 												>
 													<SelectTrigger className="w-[140px] h-9 bg-slate-50 border-none rounded-xl text-[10px] font-black uppercase tracking-widest focus:ring-brand-primary/20">
 														<SelectValue placeholder="Status" />
@@ -420,15 +406,13 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 										<div className="flex-1 space-y-6">
 											<div className="space-y-3">
 												<h4 className="text-2xl font-black text-slate-900 leading-tight uppercase tracking-tight">
-													{order.order_items?.[0]?.service_name ||
-														"Layanan Unknown"}
+													{order.order_items?.[0]?.service_name || "Layanan Unknown"}
 												</h4>
 												{(order.order_items?.length ?? 0) > 1 && (
 													<div className="flex items-center gap-2 py-1 px-3 bg-brand-primary/5 rounded-full w-fit">
 														<Package className="w-3 h-3 text-brand-primary" />
 														<span className="text-[10px] font-black text-brand-primary uppercase tracking-widest">
-															+{(order.order_items?.length ?? 0) - 1} Item
-															Tambahan
+															+{(order.order_items?.length ?? 0) - 1} Item Tambahan
 														</span>
 													</div>
 												)}
@@ -458,9 +442,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 										<div className="mt-12 pt-8 border-t border-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
 											<div className="flex items-center gap-4">
 												<div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center text-lg font-black text-slate-500 border border-white shadow-lg">
-													{order.customer?.full_name?.charAt(0) || (
-														<User className="w-6 h-6" />
-													)}
+													{order.customer?.full_name?.charAt(0) || <User className="w-6 h-6" />}
 												</div>
 												<div className="flex flex-col">
 													<span className="text-[10px] font-black text-slate-300 uppercase tracking-widest">
@@ -561,12 +543,8 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 					{selectedOrder && (
 						<div className="flex flex-col max-h-[90vh]">
 							<DialogHeader className="sr-only">
-								<DialogTitle>
-									Order Detail #{selectedOrder.order_number}
-								</DialogTitle>
-								<DialogDescription>
-									Rincian pesanan pelanggan Mahira Laundry
-								</DialogDescription>
+								<DialogTitle>Order Detail #{selectedOrder.order_number}</DialogTitle>
+								<DialogDescription>Rincian pesanan pelanggan Mahira Laundry</DialogDescription>
 							</DialogHeader>
 
 							{/* Visual Modal Header */}
@@ -579,9 +557,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 											<span className="px-3 py-1 bg-brand-primary/10 text-brand-primary rounded-lg text-[10px] font-black uppercase tracking-widest">
 												Order Detail
 											</span>
-											<span className="text-slate-300 font-bold text-sm">
-												/
-											</span>
+											<span className="text-slate-300 font-bold text-sm">/</span>
 											<span className="text-slate-400 font-bold text-sm uppercase tracking-widest italic">
 												#{selectedOrder.order_number}
 											</span>
@@ -659,9 +635,7 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 													</div>
 													<div className="flex flex-col">
 														<span className="text-sm font-black text-slate-800 uppercase tracking-wide">
-															{item.services?.name ||
-																item.service_name ||
-																"Custom Service"}
+															{item.services?.name || item.service_name || "Custom Service"}
 														</span>
 														<span className="text-[10px] font-bold text-slate-400">
 															{item.quantity} {item.services?.unit || "kg"}

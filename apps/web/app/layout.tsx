@@ -105,8 +105,7 @@ const organizationSchema = {
 	name: "Mahira Laundry",
 	url: baseUrl,
 	logo: `${baseUrl}/logo.png`,
-	description:
-		"Penyedia paket usaha laundry premium dan kemitraan bisnis terpercaya.",
+	description: "Penyedia paket usaha laundry premium dan kemitraan bisnis terpercaya.",
 	address: {
 		"@type": "PostalAddress",
 		streetAddress: "Jl. Jatiwaringin No. 28",
@@ -208,17 +207,9 @@ export default function RootLayout({
 			)}
 		>
 			<head>
-				<JsonLd
-					key="jsonld-organization"
-					id="jsonld-organization"
-					data={organizationSchema}
-				/>
+				<JsonLd key="jsonld-organization" id="jsonld-organization" data={organizationSchema} />
 				<JsonLd key="jsonld-website" id="jsonld-website" data={websiteSchema} />
-				<JsonLd
-					key="jsonld-navigation"
-					id="jsonld-navigation"
-					data={navigationSchema}
-				/>
+				<JsonLd key="jsonld-navigation" id="jsonld-navigation" data={navigationSchema} />
 			</head>
 			<body
 				suppressHydrationWarning

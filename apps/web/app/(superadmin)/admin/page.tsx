@@ -9,12 +9,7 @@ import {
 	getSuperadminDashboardStats,
 	getSuperadminRevenueByMonth,
 } from "@/lib/supabase/server";
-import {
-	formatCompact,
-	formatDate,
-	formatDateTime,
-	formatIDR,
-} from "@/lib/utils";
+import { formatCompact, formatDate, formatDateTime, formatIDR } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Dashboard Superadmin",
@@ -75,9 +70,7 @@ export default async function SuperadminDashboardPage() {
 						<h1 className="text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
 							Dashboard Utama
 						</h1>
-						<p className="text-slate-500 mt-1 text-sm">
-							Platform manajemen pusat Mahira Group.
-						</p>
+						<p className="text-slate-500 mt-1 text-sm">Platform manajemen pusat Mahira Group.</p>
 					</div>
 					<div className="flex items-center gap-2 text-xs text-slate-500 bg-white px-3 py-2 rounded-xl border border-slate-200 shadow-xs">
 						<span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -138,22 +131,14 @@ export default async function SuperadminDashboardPage() {
 				<div className="md:col-span-1 lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-xs will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="flex items-center justify-between mb-6">
 						<div>
-							<h2 className="text-base font-bold text-slate-900">
-								Revenue 6 Bulan Terakhir
-							</h2>
-							<p className="text-xs text-slate-400 mt-0.5">
-								Pembayaran yang sudah dikonfirmasi
-							</p>
+							<h2 className="text-base font-bold text-slate-900">Revenue 6 Bulan Terakhir</h2>
+							<p className="text-xs text-slate-400 mt-0.5">Pembayaran yang sudah dikonfirmasi</p>
 						</div>
 						<span className="text-xs bg-pink-50 text-pink-600 border border-pink-100 px-2.5 py-1 rounded-lg font-semibold">
 							💰 Bulan ini: {formatCompact(stats.totalRevenue)}
 						</span>
 					</div>
-					<Suspense
-						fallback={
-							<div className="h-64 bg-slate-50 rounded-xl animate-pulse" />
-						}
-					>
+					<Suspense fallback={<div className="h-64 bg-slate-50 rounded-xl animate-pulse" />}>
 						<div className="h-64 w-full">
 							<RevenueBarChart data={revenueData} />
 						</div>
@@ -162,23 +147,17 @@ export default async function SuperadminDashboardPage() {
 
 				{/* Quick Stats */}
 				<div className="bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 p-5 sm:p-6 shadow-xs will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
-					<h2 className="text-base font-bold text-slate-900 mb-4">
-						Ringkasan Cepat
-					</h2>
+					<h2 className="text-base font-bold text-slate-900 mb-4">Ringkasan Cepat</h2>
 					<div className="space-y-4">
 						<div className="flex items-center justify-between py-3 border-b border-slate-100 last:border-0">
 							<div className="flex items-center gap-3">
 								<span className="text-xl">📦</span>
 								<div>
-									<p className="text-xs font-semibold text-slate-700">
-										Order Aktif
-									</p>
+									<p className="text-xs font-semibold text-slate-700">Order Aktif</p>
 									<p className="text-xs text-slate-400">Sedang diproses</p>
 								</div>
 							</div>
-							<span className="text-lg font-black text-amber-600">
-								{stats.activeOrders}
-							</span>
+							<span className="text-lg font-black text-amber-600">{stats.activeOrders}</span>
 						</div>
 						<div className="flex items-center justify-between py-3 border-b border-slate-100 last:border-0">
 							<div className="flex items-center gap-3">
@@ -188,31 +167,23 @@ export default async function SuperadminDashboardPage() {
 									<p className="text-xs text-slate-400">Semua aktif</p>
 								</div>
 							</div>
-							<span className="text-lg font-black text-slate-900">
-								{stats.totalOutlets}
-							</span>
+							<span className="text-lg font-black text-slate-900">{stats.totalOutlets}</span>
 						</div>
 						<div className="flex items-center justify-between py-3 border-b border-slate-100 last:border-0">
 							<div className="flex items-center gap-3">
 								<span className="text-xl">👥</span>
 								<div>
-									<p className="text-xs font-semibold text-slate-700">
-										Pelanggan
-									</p>
+									<p className="text-xs font-semibold text-slate-700">Pelanggan</p>
 									<p className="text-xs text-slate-400">Terdaftar</p>
 								</div>
 							</div>
-							<span className="text-lg font-black text-slate-900">
-								{stats.totalCustomers}
-							</span>
+							<span className="text-lg font-black text-slate-900">{stats.totalCustomers}</span>
 						</div>
 						<div className="flex items-center justify-between py-3">
 							<div className="flex items-center gap-3">
 								<span className="text-xl">📈</span>
 								<div>
-									<p className="text-xs font-semibold text-slate-700">
-										Growth Revenue
-									</p>
+									<p className="text-xs font-semibold text-slate-700">Growth Revenue</p>
 									<p className="text-xs text-slate-400">vs bulan lalu</p>
 								</div>
 							</div>
@@ -232,9 +203,7 @@ export default async function SuperadminDashboardPage() {
 				<div className="md:col-span-1 lg:col-span-2 bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-200/80 shadow-xs overflow-hidden will-change-transform transition-[border-color,transform] duration-300 ease-out hover:-translate-y-0.5 hover:border-slate-300">
 					<div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
 						<div>
-							<h2 className="text-base font-bold text-slate-900">
-								Order Terbaru
-							</h2>
+							<h2 className="text-base font-bold text-slate-900">Order Terbaru</h2>
 							<p className="text-xs text-slate-400 mt-0.5">
 								8 transaksi terakhir dari semua cabang
 							</p>
@@ -266,8 +235,7 @@ export default async function SuperadminDashboardPage() {
 											<p className="text-xs font-bold text-slate-800 truncate">
 												{Array.isArray(order.profiles)
 													? order.profiles[0]?.full_name || "Guest"
-													: (order.profiles as { full_name?: string } | null)
-															?.full_name || "Guest"}
+													: (order.profiles as { full_name?: string } | null)?.full_name || "Guest"}
 											</p>
 										</div>
 										<span
@@ -308,11 +276,9 @@ export default async function SuperadminDashboardPage() {
 										<span className="font-bold text-slate-900">
 											{Array.isArray(log.profiles)
 												? log.profiles[0]?.full_name
-												: (log.profiles as { full_name?: string } | null)
-														?.full_name || "System"}
+												: (log.profiles as { full_name?: string } | null)?.full_name || "System"}
 										</span>{" "}
-										{ACTION_LABELS[log.action] ||
-											log.action.toLowerCase().replace(/_/g, " ")}
+										{ACTION_LABELS[log.action] || log.action.toLowerCase().replace(/_/g, " ")}
 										{" pada "}
 										<span className="font-semibold text-slate-600">
 											{TABLE_LABELS[log.table_name] || log.table_name}

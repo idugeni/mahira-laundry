@@ -73,9 +73,7 @@ export function ProfilAddressSection({
 								type="text"
 								placeholder="Label"
 								value={newAddr.label}
-								onChange={(e) =>
-									onNewAddrChange({ ...newAddr, label: e.target.value })
-								}
+								onChange={(e) => onNewAddrChange({ ...newAddr, label: e.target.value })}
 								className="w-full px-5 py-3 rounded-xl border border-slate-200 outline-hidden font-bold focus:border-brand-primary transition-all"
 							/>
 						</div>
@@ -90,9 +88,7 @@ export function ProfilAddressSection({
 								id="addr-detail"
 								placeholder="Jl. Raya No. 123..."
 								value={newAddr.detail}
-								onChange={(e) =>
-									onNewAddrChange({ ...newAddr, detail: e.target.value })
-								}
+								onChange={(e) => onNewAddrChange({ ...newAddr, detail: e.target.value })}
 								rows={3}
 								className="w-full px-5 py-3 rounded-xl border border-slate-200 outline-hidden font-bold focus:border-brand-primary transition-all resize-none"
 							/>
@@ -129,12 +125,8 @@ export function ProfilAddressSection({
 										<HiOutlineMapPin />
 									</div>
 									<div>
-										<p className="font-black text-slate-900">
-											{addr.label || "Alamat"}
-										</p>
-										<p className="text-xs text-slate-400 font-medium mt-0.5">
-											{addr.detail}
-										</p>
+										<p className="font-black text-slate-900">{addr.label || "Alamat"}</p>
+										<p className="text-xs text-slate-400 font-medium mt-0.5">{addr.detail}</p>
 									</div>
 								</div>
 								<button
@@ -151,9 +143,7 @@ export function ProfilAddressSection({
 				) : (
 					!showAddAddress && (
 						<div className="text-center py-10 bg-slate-50/50 rounded-[2rem]">
-							<p className="text-sm font-bold text-slate-300">
-								Belum ada alamat tersimpan.
-							</p>
+							<p className="text-sm font-bold text-slate-300">Belum ada alamat tersimpan.</p>
 							<button
 								type="button"
 								onClick={onShowAddAddress}

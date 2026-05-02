@@ -2,24 +2,9 @@ import { createClient } from "./auth";
 
 function getDateRanges() {
 	const now = new Date();
-	const startOfMonth = new Date(
-		now.getFullYear(),
-		now.getMonth(),
-		1,
-	).toISOString();
-	const startOfLastMonth = new Date(
-		now.getFullYear(),
-		now.getMonth() - 1,
-		1,
-	).toISOString();
-	const endOfLastMonth = new Date(
-		now.getFullYear(),
-		now.getMonth(),
-		0,
-		23,
-		59,
-		59,
-	).toISOString();
+	const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1).toISOString();
+	const startOfLastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString();
+	const endOfLastMonth = new Date(now.getFullYear(), now.getMonth(), 0, 23, 59, 59).toISOString();
 	return { startOfMonth, startOfLastMonth, endOfLastMonth };
 }
 
@@ -37,10 +22,7 @@ export async function getSuperadminDashboardStats() {
 		activeOrdersRes,
 		expensesRes,
 	] = await Promise.all([
-		supabase
-			.from("outlets")
-			.select("id", { count: "exact", head: true })
-			.eq("is_active", true),
+		supabase.from("outlets").select("id", { count: "exact", head: true }).eq("is_active", true),
 		supabase
 			.from("orders")
 			.select("id", { count: "exact", head: true })
@@ -61,10 +43,7 @@ export async function getSuperadminDashboardStats() {
 			.eq("payment_status", "paid")
 			.gte("created_at", startOfLastMonth)
 			.lte("created_at", endOfLastMonth),
-		supabase
-			.from("profiles")
-			.select("id", { count: "exact", head: true })
-			.eq("role", "customer"),
+		supabase.from("profiles").select("id", { count: "exact", head: true }).eq("role", "customer"),
 		supabase
 			.from("orders")
 			.select("id", { count: "exact", head: true })
@@ -72,27 +51,21 @@ export async function getSuperadminDashboardStats() {
 		supabase.from("expenses").select("amount").gte("created_at", startOfMonth),
 	]);
 
-	const totalRevenue =
-		revenueRes.data?.reduce((sum, o) => sum + (o.total || 0), 0) || 0;
+	const totalRevenue = revenueRes.data?.reduce((sum, o) => sum + (o.total || 0), 0) || 0;
 	const lastMonthRevenue =
 		revenueLastMonthRes.data?.reduce((sum, o) => sum + (o.total || 0), 0) || 0;
 
-	const totalExpenses =
-		expensesRes.data?.reduce((sum, e) => sum + (Number(e.amount) || 0), 0) || 0;
+	const totalExpenses = expensesRes.data?.reduce((sum, e) => sum + (Number(e.amount) || 0), 0) || 0;
 	const ordersThisMonth = ordersThisMonthRes.count || 0;
 	const ordersLastMonth = ordersLastMonthRes.count || 0;
 
 	const revenueGrowth =
 		lastMonthRevenue > 0
-			? (((totalRevenue - lastMonthRevenue) / lastMonthRevenue) * 100).toFixed(
-					1,
-				)
+			? (((totalRevenue - lastMonthRevenue) / lastMonthRevenue) * 100).toFixed(1)
 			: "0";
 	const ordersGrowth =
 		ordersLastMonth > 0
-			? (((ordersThisMonth - ordersLastMonth) / ordersLastMonth) * 100).toFixed(
-					1,
-				)
+			? (((ordersThisMonth - ordersLastMonth) / ordersLastMonth) * 100).toFixed(1)
 			: "0";
 
 	return {
@@ -218,10 +191,7 @@ export async function getRecentOrders(limit = 10) {
 
 export async function getPaymentMethodStats() {
 	const supabase = await createClient();
-	const { data } = await supabase
-		.from("payments")
-		.select("method, amount")
-		.eq("status", "paid");
+	const { data } = await supabase.from("payments").select("method, amount").eq("status", "paid");
 
 	const grouped: Record<string, number> = {};
 	for (const row of data || []) {
@@ -262,10 +232,7 @@ export async function getAuditLogs(limit = 50, tableName?: string) {
 		const key = `${log.user_id}-${log.action}-${log.table_name}-${log.record_id}`;
 		const logTime = new Date(log.created_at).getTime();
 		const earliest = seenWindows.get(key);
-		if (
-			earliest !== undefined &&
-			Math.abs(logTime - earliest) < 5 * 60 * 1000
-		) {
+		if (earliest !== undefined && Math.abs(logTime - earliest) < 5 * 60 * 1000) {
 			continue;
 		}
 		seenWindows.set(key, logTime);
@@ -308,10 +275,8 @@ export async function getOutletsWithStats() {
 				.lte("created_at", endOfLastMonth),
 		]);
 
-		const monthlyRevenue =
-			revenueRes.data?.reduce((s, o) => s + (o.total || 0), 0) || 0;
-		const lastMonthRevenue =
-			lastMonthRevenueRes.data?.reduce((s, o) => s + (o.total || 0), 0) || 0;
+		const monthlyRevenue = revenueRes.data?.reduce((s, o) => s + (o.total || 0), 0) || 0;
+		const lastMonthRevenue = lastMonthRevenueRes.data?.reduce((s, o) => s + (o.total || 0), 0) || 0;
 
 		return {
 			...outlet,

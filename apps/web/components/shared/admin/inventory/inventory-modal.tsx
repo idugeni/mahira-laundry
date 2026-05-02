@@ -22,12 +22,7 @@ interface InventoryModalProps {
 	trigger?: React.ReactNode;
 }
 
-export function InventoryModal({
-	item,
-	outletId,
-	mode = "create",
-	trigger,
-}: InventoryModalProps) {
+export function InventoryModal({ item, outletId, mode = "create", trigger }: InventoryModalProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const [mounted, setMounted] = useState(false);
@@ -78,11 +73,7 @@ export function InventoryModal({
 
 	return (
 		<>
-			<button
-				type="button"
-				onClick={() => setIsOpen(true)}
-				className="contents"
-			>
+			<button type="button" onClick={() => setIsOpen(true)} className="contents">
 				{trigger || (
 					<span className="inline-flex h-10 cursor-pointer items-center rounded-xl bg-brand-primary px-4 text-sm font-black text-white shadow-md shadow-brand-primary/20 transition-colors hover:bg-brand-primary/90">
 						+ Tambah Item

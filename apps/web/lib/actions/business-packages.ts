@@ -25,11 +25,7 @@ export async function createBusinessPackage(
 	data: CreatePackageInput,
 ): Promise<ActionResponse<BusinessPackage>> {
 	try {
-		if (
-			data.promo_price != null &&
-			data.price != null &&
-			data.promo_price >= data.price
-		) {
+		if (data.promo_price != null && data.price != null && data.promo_price >= data.price) {
 			return {
 				success: false,
 				error: "Harga promo harus lebih kecil dari harga normal.",
@@ -58,11 +54,7 @@ export async function updateBusinessPackage(
 	data: UpdatePackageInput,
 ): Promise<ActionResponse<BusinessPackage>> {
 	try {
-		if (
-			data.promo_price != null &&
-			data.price != null &&
-			data.promo_price >= data.price
-		) {
+		if (data.promo_price != null && data.price != null && data.promo_price >= data.price) {
 			return {
 				success: false,
 				error: "Harga promo harus lebih kecil dari harga normal.",
@@ -87,9 +79,7 @@ export async function updateBusinessPackage(
 	}
 }
 
-export async function deleteBusinessPackage(
-	id: string,
-): Promise<ActionResponse> {
+export async function deleteBusinessPackage(id: string): Promise<ActionResponse> {
 	try {
 		const supabase = await createClient();
 
@@ -107,10 +97,7 @@ export async function deleteBusinessPackage(
 			};
 		}
 
-		const { error } = await supabase
-			.from("business_packages")
-			.delete()
-			.eq("id", id);
+		const { error } = await supabase.from("business_packages").delete().eq("id", id);
 
 		if (error) throw error;
 

@@ -141,8 +141,8 @@ export function SitemapClient() {
 						transition={{ delay: 0.4 }}
 						className="mt-8 text-lg text-slate-400 max-w-xl mx-auto leading-relaxed font-medium"
 					>
-						Temukan semua informasi dan layanan Mahira Laundry dengan mudah
-						melalui navigasi terstruktur kami.
+						Temukan semua informasi dan layanan Mahira Laundry dengan mudah melalui navigasi
+						terstruktur kami.
 					</motion.p>
 				</div>
 
@@ -226,9 +226,7 @@ export function SitemapClient() {
 								<HiOutlineChatBubbleLeftRight size={24} />
 							</div>
 							<div>
-								<p className="text-lg font-black">
-									Tidak menemukan yang Anda cari?
-								</p>
+								<p className="text-lg font-black">Tidak menemukan yang Anda cari?</p>
 								<p className="text-sm text-white/60 font-medium mt-1">
 									Hubungi kami via WhatsApp untuk bantuan langsung
 								</p>

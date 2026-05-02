@@ -36,11 +36,10 @@ export default function CookiesPage() {
 						1. Apa itu Cookie?
 					</h2>
 					<p className="text-slate-600 leading-relaxed">
-						Cookie adalah file teks kecil yang disimpan di perangkat Anda
-						(komputer atau perangkat seluler) saat Anda mengunjungi situs web
-						kami. Cookie memungkinkan situs web untuk mengenali perangkat Anda
-						dan menyimpan informasi tentang preferensi atau aktivitas masa lalu
-						Anda.
+						Cookie adalah file teks kecil yang disimpan di perangkat Anda (komputer atau perangkat
+						seluler) saat Anda mengunjungi situs web kami. Cookie memungkinkan situs web untuk
+						mengenali perangkat Anda dan menyimpan informasi tentang preferensi atau aktivitas masa
+						lalu Anda.
 					</p>
 				</section>
 
@@ -53,19 +52,16 @@ export default function CookiesPage() {
 					</p>
 					<ul className="list-disc pl-6 space-y-3 text-slate-600">
 						<li>
-							<strong>Cookie Esensial:</strong> Diperlukan agar fitur dasar
-							situs web dapat berfungsi, seperti login akun dan keamanan
-							transaksi.
+							<strong>Cookie Esensial:</strong> Diperlukan agar fitur dasar situs web dapat
+							berfungsi, seperti login akun dan keamanan transaksi.
 						</li>
 						<li>
-							<strong>Cookie Performa:</strong> Membantu kami memahami bagaimana
-							pengunjung berinteraksi dengan situs kami (misalnya, halaman mana
-							yang paling sering dikunjungi).
+							<strong>Cookie Performa:</strong> Membantu kami memahami bagaimana pengunjung
+							berinteraksi dengan situs kami (misalnya, halaman mana yang paling sering dikunjungi).
 						</li>
 						<li>
-							<strong>Cookie Preferensi:</strong> Mengingat pilihan yang Anda
-							buat (seperti bahasa atau lokasi outlet) untuk memberikan
-							pengalaman yang lebih personal.
+							<strong>Cookie Preferensi:</strong> Mengingat pilihan yang Anda buat (seperti bahasa
+							atau lokasi outlet) untuk memberikan pengalaman yang lebih personal.
 						</li>
 					</ul>
 				</section>
@@ -75,12 +71,10 @@ export default function CookiesPage() {
 						3. Kontrol Cookie Anda
 					</h2>
 					<p className="text-slate-600 leading-relaxed">
-						Anda memiliki hak untuk memutuskan apakah akan menerima atau menolak
-						cookie. Anda dapat mengatur atau mengubah kontrol browser web Anda
-						untuk menerima atau menghapus cookie. Jika Anda memilih untuk
-						menolak cookie, Anda tetap dapat menggunakan situs web kami,
-						meskipun akses Anda ke beberapa fungsi dan area mungkin akan
-						terbatas.
+						Anda memiliki hak untuk memutuskan apakah akan menerima atau menolak cookie. Anda dapat
+						mengatur atau mengubah kontrol browser web Anda untuk menerima atau menghapus cookie.
+						Jika Anda memilih untuk menolak cookie, Anda tetap dapat menggunakan situs web kami,
+						meskipun akses Anda ke beberapa fungsi dan area mungkin akan terbatas.
 					</p>
 				</section>
 
@@ -89,10 +83,9 @@ export default function CookiesPage() {
 						4. Pembaruan Kebijakan
 					</h2>
 					<p className="text-slate-600 leading-relaxed">
-						Kami dapat memperbarui Kebijakan Cookie ini dari waktu ke waktu
-						untuk mencerminkan perubahan pada cookie yang kami gunakan atau
-						karena alasan operasional, hukum, atau peraturan lainnya. Silakan
-						kunjungi halaman ini secara berkala untuk tetap mendapatkan
+						Kami dapat memperbarui Kebijakan Cookie ini dari waktu ke waktu untuk mencerminkan
+						perubahan pada cookie yang kami gunakan atau karena alasan operasional, hukum, atau
+						peraturan lainnya. Silakan kunjungi halaman ini secara berkala untuk tetap mendapatkan
 						informasi tentang penggunaan cookie kami.
 					</p>
 				</section>

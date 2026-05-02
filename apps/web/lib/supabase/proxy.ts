@@ -45,16 +45,8 @@ export async function updateSession(request: NextRequest) {
 	} = await supabase.auth.getUser();
 
 	// Protect authenticated routes
-	const protectedPaths = [
-		"/customer",
-		"/admin",
-		"/manager",
-		"/kasir",
-		"/kurir",
-	];
-	const isProtectedPath = protectedPaths.some((path) =>
-		request.nextUrl.pathname.startsWith(path),
-	);
+	const protectedPaths = ["/customer", "/admin", "/manager", "/kasir", "/kurir"];
+	const isProtectedPath = protectedPaths.some((path) => request.nextUrl.pathname.startsWith(path));
 
 	if (!user && isProtectedPath) {
 		const url = request.nextUrl.clone();
@@ -79,10 +71,7 @@ export async function updateSession(request: NextRequest) {
 			request.nextUrl.pathname.startsWith(path),
 		);
 
-		if (
-			protectedRoute &&
-			!protectedRoute.roles.some((role) => role === profileRole)
-		) {
+		if (protectedRoute && !protectedRoute.roles.some((role) => role === profileRole)) {
 			const dashboardUrl = getDashboardUrl(profileRole);
 			const targetUrl = request.nextUrl.pathname.startsWith(dashboardUrl)
 				? "/customer"
@@ -98,9 +87,7 @@ export async function updateSession(request: NextRequest) {
 
 	// Redirect logged in users from auth pages
 	const authPaths = ["/login", "/register", "/lupa-password"];
-	const isAuthPath = authPaths.some((path) =>
-		request.nextUrl.pathname.startsWith(path),
-	);
+	const isAuthPath = authPaths.some((path) => request.nextUrl.pathname.startsWith(path));
 
 	if (user && isAuthPath) {
 		const targetUrl = getDashboardUrl(profileRole);

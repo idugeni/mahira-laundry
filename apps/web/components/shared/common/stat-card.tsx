@@ -103,9 +103,7 @@ export function StatCard({
 						<div
 							className={cn(
 								"flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-widest shrink-0",
-								trend.positive
-									? "bg-emerald-50 text-emerald-600"
-									: "bg-rose-50 text-rose-600",
+								trend.positive ? "bg-emerald-50 text-emerald-600" : "bg-rose-50 text-rose-600",
 							)}
 						>
 							{trend.positive ? "↑" : "↓"} {trend.value}

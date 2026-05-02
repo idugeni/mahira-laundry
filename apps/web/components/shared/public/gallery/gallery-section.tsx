@@ -104,30 +104,23 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 	const showGalleryLink = !isGalleryPage && items.length > 0;
 
 	const filteredItems =
-		filter === "Semua"
-			? items
-			: items.filter((item) => item.category === filter);
+		filter === "Semua" ? items : items.filter((item) => item.category === filter);
 
 	const visibleItems = filteredItems.slice(0, displayLimit);
 	const hasMore = filteredItems.length > displayLimit;
 
 	const handleNext = useCallback(() => {
 		if (!selectedItem) return;
-		const currentIndex = filteredItems.findIndex(
-			(item) => item.id === selectedItem.id,
-		);
+		const currentIndex = filteredItems.findIndex((item) => item.id === selectedItem.id);
 		const nextIndex = (currentIndex + 1) % filteredItems.length;
-		setSelectedItem(filteredItems[nextIndex]);
+		setSelectedItem(filteredItems[nextIndex] ?? null);
 	}, [selectedItem, filteredItems]);
 
 	const handlePrev = useCallback(() => {
 		if (!selectedItem) return;
-		const currentIndex = filteredItems.findIndex(
-			(item) => item.id === selectedItem.id,
-		);
-		const prevIndex =
-			(currentIndex - 1 + filteredItems.length) % filteredItems.length;
-		setSelectedItem(filteredItems[prevIndex]);
+		const currentIndex = filteredItems.findIndex((item) => item.id === selectedItem.id);
+		const prevIndex = (currentIndex - 1 + filteredItems.length) % filteredItems.length;
+		setSelectedItem(filteredItems[prevIndex] ?? null);
 	}, [selectedItem, filteredItems]);
 
 	useEffect(() => {
@@ -429,9 +422,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 											<p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
 												Portfolio
 											</p>
-											<p className="text-[11px] font-black text-slate-900">
-												Mahira Premium
-											</p>
+											<p className="text-[11px] font-black text-slate-900">Mahira Premium</p>
 										</div>
 									</div>
 									<div className="text-right">
@@ -439,11 +430,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 											Katalog
 										</p>
 										<p className="text-xl font-black text-brand-primary tabular-nums">
-											{(
-												filteredItems.findIndex(
-													(i) => i.id === selectedItem.id,
-												) + 1
-											)
+											{(filteredItems.findIndex((i) => i.id === selectedItem.id) + 1)
 												.toString()
 												.padStart(2, "0")}
 										</p>

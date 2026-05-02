@@ -19,10 +19,7 @@ export async function updateProfile(formData: FormData) {
 		),
 	};
 
-	const { error } = await supabase
-		.from("profiles")
-		.update(profileData)
-		.eq("id", user.id);
+	const { error } = await supabase.from("profiles").update(profileData).eq("id", user.id);
 
 	if (error) return { error: error.message };
 
@@ -69,8 +66,7 @@ export async function updateAvatar(formData: FormData) {
 
 		return { success: true, url: publicUrl };
 	} catch (error: unknown) {
-		const errorMessage =
-			error instanceof Error ? error.message : "Gagal memperbarui foto profil";
+		const errorMessage = error instanceof Error ? error.message : "Gagal memperbarui foto profil";
 		return { error: errorMessage };
 	}
 }

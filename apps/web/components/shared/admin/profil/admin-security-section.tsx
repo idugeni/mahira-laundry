@@ -5,11 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-	sendPasswordReset,
-	updatePassword,
-	updateRecoveryEmail,
-} from "@/lib/actions/profile";
+import { sendPasswordReset, updatePassword, updateRecoveryEmail } from "@/lib/actions/profile";
 
 interface AdminSecuritySectionProps {
 	email: string;
@@ -32,8 +28,7 @@ export function AdminSecuritySection({ email }: AdminSecuritySectionProps) {
 	const [resetLoading, setResetLoading] = useState(false);
 
 	const isPasswordValid =
-		passwords.newPassword.length >= 6 &&
-		passwords.confirmPassword === passwords.newPassword;
+		passwords.newPassword.length >= 6 && passwords.confirmPassword === passwords.newPassword;
 
 	const handlePasswordChange = async () => {
 		if (!isPasswordValid) return;
@@ -117,9 +112,7 @@ export function AdminSecuritySection({ email }: AdminSecuritySectionProps) {
 									type={showNewPassword ? "text" : "password"}
 									placeholder="Password baru (min. 6 karakter)"
 									value={passwords.newPassword}
-									onChange={(e) =>
-										setPasswords({ ...passwords, newPassword: e.target.value })
-									}
+									onChange={(e) => setPasswords({ ...passwords, newPassword: e.target.value })}
 									className="pl-11 pr-11 h-11 bg-white border-slate-200 rounded-xl font-bold text-sm focus:bg-white transition-all shadow-none"
 								/>
 								<button
@@ -143,8 +136,7 @@ export function AdminSecuritySection({ email }: AdminSecuritySectionProps) {
 										})
 									}
 									className={`pl-11 pr-11 h-11 bg-white rounded-xl font-bold text-sm focus:bg-white transition-all shadow-none ${
-										passwords.confirmPassword &&
-										passwords.confirmPassword !== passwords.newPassword
+										passwords.confirmPassword && passwords.confirmPassword !== passwords.newPassword
 											? "border-red-300 focus:border-red-400"
 											: "border-slate-200 focus:border-indigo-600"
 									}`}
@@ -154,19 +146,14 @@ export function AdminSecuritySection({ email }: AdminSecuritySectionProps) {
 									onClick={() => setShowConfirmPassword(!showConfirmPassword)}
 									className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
 								>
-									{showConfirmPassword ? (
-										<EyeOff size={16} />
-									) : (
-										<Eye size={16} />
-									)}
+									{showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
 								</button>
 							</div>
-							{passwords.confirmPassword &&
-								passwords.confirmPassword !== passwords.newPassword && (
-									<p className="text-[9px] text-red-500 font-black uppercase tracking-widest ml-1">
-										Password tidak cocok.
-									</p>
-								)}
+							{passwords.confirmPassword && passwords.confirmPassword !== passwords.newPassword && (
+								<p className="text-[9px] text-red-500 font-black uppercase tracking-widest ml-1">
+									Password tidak cocok.
+								</p>
+							)}
 							<div className="flex gap-3">
 								<Button
 									onClick={() => {
@@ -214,8 +201,7 @@ export function AdminSecuritySection({ email }: AdminSecuritySectionProps) {
 							<Mail size={16} className="text-indigo-600" /> Recovery Email
 						</h4>
 						<p className="text-xs text-slate-500 font-bold leading-relaxed">
-							Email pemulihan saat ini:{" "}
-							<span className="text-slate-700">{email}</span>
+							Email pemulihan saat ini: <span className="text-slate-700">{email}</span>
 						</p>
 					</div>
 

@@ -35,25 +35,18 @@ interface OrderClientProps {
 	user: { id: string; email?: string } | null;
 }
 
-export function OrderClient({
-	initialOutlets,
-	initialServices,
-	user: _user,
-}: OrderClientProps) {
+export function OrderClient({ initialOutlets, initialServices, user: _user }: OrderClientProps) {
 	const router = useRouter();
 	const [orderMode, setOrderMode] = useState<"form" | "whatsapp" | null>(null);
 	const [currentStep, setCurrentStep] = useState(0);
-	const [selectedOutlet] = useState<string | null>(
-		initialOutlets[0]?.id || null,
-	);
+	const [selectedOutlet] = useState<string | null>(initialOutlets[0]?.id || null);
 	const [quantities, setQuantities] = useState<Record<string, number>>({});
 	const [pickupAddress, setPickupAddress] = useState("");
 	const [pickupDate, setPickupDate] = useState("");
 	const [pickupTime, setPickupTime] = useState("08:00 - 12:00");
 	const [loading, setLoading] = useState(false);
 
-	const handleNext = () =>
-		setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
+	const handleNext = () => setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
 	const handleBack = () => {
 		if (currentStep === 0) {
 			setOrderMode(null);
@@ -131,14 +124,14 @@ export function OrderClient({
 						? "Buat Pesanan Baru"
 						: orderMode === "whatsapp"
 							? "Pesan Cepat via WA"
-							: `Langkah ${currentStep + 1}: ${steps[currentStep].name}`}
+							: `Langkah ${currentStep + 1}: ${steps[currentStep]?.name ?? ""}`}
 				</h1>
 				<p className="text-slate-500 font-medium">
 					{orderMode === null
 						? "Pilih metode pemesanan yang paling nyaman untuk Anda"
 						: orderMode === "whatsapp"
 							? "Hubungi admin kami untuk pemesanan instan"
-							: `Silakan lengkapi detail ${steps[currentStep].name.toLowerCase()} Anda`}
+							: `Silakan lengkapi detail ${steps[currentStep]?.name?.toLowerCase() ?? ""} Anda`}
 				</p>
 			</div>
 
@@ -163,10 +156,7 @@ export function OrderClient({
 							<div className="flex items-center justify-between relative">
 								<div className="absolute top-1/2 left-0 w-full h-0.5 bg-slate-100 -translate-y-1/2" />
 								{steps.map((step, i) => (
-									<div
-										key={step.name}
-										className="relative z-10 flex flex-col items-center"
-									>
+									<div key={step.name} className="relative z-10 flex flex-col items-center">
 										<div
 											className={`w-12 h-12 rounded-2xl flex items-center justify-center border-4 border-slate-50 transition-all duration-500 ${
 												i <= currentStep
@@ -180,9 +170,7 @@ export function OrderClient({
 										</div>
 										<span
 											className={`absolute -bottom-8 whitespace-nowrap text-[10px] font-black uppercase tracking-widest ${
-												i <= currentStep
-													? "text-brand-primary"
-													: "text-slate-300"
+												i <= currentStep ? "text-brand-primary" : "text-slate-300"
 											}`}
 										>
 											{step.name}

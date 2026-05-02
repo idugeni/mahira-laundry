@@ -13,9 +13,7 @@ type OrderRow = {
 	total: number;
 	outlets?: { name?: string } | null;
 	profiles?: { full_name?: string; phone?: string } | null;
-	order_items?:
-		| { service_name?: string; quantity?: number; unit?: string }[]
-		| null;
+	order_items?: { service_name?: string; quantity?: number; unit?: string }[] | null;
 };
 
 type ExpenseRow = {
@@ -78,9 +76,7 @@ export async function generateReportData(
 		Status: order.status,
 		Payment: order.payment_status,
 		Total: order.total,
-		Items: order.order_items
-			?.map((i) => `${i.service_name} (${i.quantity} ${i.unit})`)
-			.join(", "),
+		Items: order.order_items?.map((i) => `${i.service_name} (${i.quantity} ${i.unit})`).join(", "),
 	}));
 
 	const totalRevenue = (orders as OrderRow[])
@@ -94,9 +90,7 @@ export async function generateReportData(
 	const netProfit = totalRevenue - totalExpenses;
 
 	const totalOrders = orders.length;
-	const completedOrders = (orders as OrderRow[]).filter(
-		(o) => o.status === "completed",
-	).length;
+	const completedOrders = (orders as OrderRow[]).filter((o) => o.status === "completed").length;
 
 	const outletStats: Record<string, { count: number; revenue: number }> = {};
 	(orders as OrderRow[]).forEach((o) => {

@@ -56,8 +56,7 @@ export function HomeCtaSection() {
 								className="text-3xl sm:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] leading-[1.1] mb-6"
 							>
 								Nikmati Kualitas <br />
-								<span className="text-brand-gradient">Perawatan Pakaian</span>{" "}
-								<br />
+								<span className="text-brand-gradient">Perawatan Pakaian</span> <br />
 								Terbaik Hari Ini
 							</motion.h2>
 
@@ -68,9 +67,8 @@ export function HomeCtaSection() {
 								transition={{ duration: 0.6, delay: 0.35 }}
 								className="text-lg text-white/60 leading-relaxed max-w-xl mb-10"
 							>
-								Berikan yang terbaik untuk pakaian favorit Anda. Tim profesional
-								kami siap memberikan hasil yang higienis, wangi, dan rapi
-								sempurna.
+								Berikan yang terbaik untuk pakaian favorit Anda. Tim profesional kami siap
+								memberikan hasil yang higienis, wangi, dan rapi sempurna.
 							</motion.p>
 
 							<motion.div

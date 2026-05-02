@@ -20,8 +20,7 @@ interface DeliveryClientProps {
 export function DeliveryClient({ initialDeliveries }: DeliveryClientProps) {
 	const [optimisticDeliveries, addOptimisticDelivery] = useOptimistic(
 		initialDeliveries,
-		(state, { id, status }) =>
-			state.map((d) => (d.id === id ? { ...d, status } : d)),
+		(state, { id, status }) => state.map((d) => (d.id === id ? { ...d, status } : d)),
 	);
 
 	const handleUpdateStatus = async (id: string, status: string) => {
@@ -49,7 +48,7 @@ export function DeliveryClient({ initialDeliveries }: DeliveryClientProps) {
 						</div>
 						<div>
 							<div className="font-black text-slate-900 group-hover:text-brand-primary transition-colors">
-								{delivery.orders?.id.split("-")[0].toUpperCase()} •{" "}
+								{delivery.orders?.id.split("-")[0]?.toUpperCase()} •{" "}
 								{delivery.type === "pickup" ? "Penjemputan" : "Pengantaran"}
 							</div>
 							<div className="text-xs font-bold text-slate-400 mt-1 uppercase tracking-widest">

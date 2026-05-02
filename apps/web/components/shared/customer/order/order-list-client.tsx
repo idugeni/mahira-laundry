@@ -44,10 +44,7 @@ interface OrderListClientProps {
 	orders: Order[];
 }
 
-const statusMap: Record<
-	string,
-	{ label: string; color: string; icon: React.ReactNode }
-> = {
+const statusMap: Record<string, { label: string; color: string; icon: React.ReactNode }> = {
 	pending: {
 		label: "Menunggu",
 		color: "bg-amber-50 text-amber-600 border-amber-100",
@@ -95,9 +92,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 
 	const filteredOrders = useMemo(() => {
 		return orders.filter((order) => {
-			const matchesSearch = order.order_number
-				.toLowerCase()
-				.includes(search.toLowerCase());
+			const matchesSearch = order.order_number.toLowerCase().includes(search.toLowerCase());
 			const isActive = !["completed", "cancelled"].includes(order.status);
 
 			let matchesFilter = true;
@@ -110,15 +105,9 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 	}, [orders, search, filter]);
 
 	const stats = useMemo(() => {
-		const activeCount = orders.filter(
-			(o) => !["completed", "cancelled"].includes(o.status),
-		).length;
+		const activeCount = orders.filter((o) => !["completed", "cancelled"].includes(o.status)).length;
 		const monthlyTotal = orders
-			.filter(
-				(o) =>
-					isSameMonth(new Date(o.created_at), new Date()) &&
-					o.status !== "cancelled",
-			)
+			.filter((o) => isSameMonth(new Date(o.created_at), new Date()) && o.status !== "cancelled")
 			.reduce((acc, curr) => acc + (Number(curr.total) || 0), 0);
 		return { activeCount, monthlyTotal };
 	}, [orders]);
@@ -185,8 +174,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 			<div className="flex flex-col md:flex-row md:items-end justify-between gap-8 w-full">
 				<div>
 					<h1 className="text-4xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tight">
-						Daftar{" "}
-						<span className="inline-block text-brand-gradient">Pesanan</span>
+						Daftar <span className="inline-block text-brand-gradient">Pesanan</span>
 					</h1>
 					<p className="text-slate-500 mt-2 font-medium">
 						Kelola dan pantau seluruh cucian Anda di satu tempat.
@@ -202,9 +190,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 							<p className="text-[10px] font-black uppercase tracking-widest text-slate-400">
 								Aktif
 							</p>
-							<p className="text-xl font-black text-slate-900 leading-none">
-								{stats.activeCount}
-							</p>
+							<p className="text-xl font-black text-slate-900 leading-none">{stats.activeCount}</p>
 						</div>
 					</div>
 
@@ -342,9 +328,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 											<div className="flex items-center gap-3 mt-1">
 												<p className="text-xs text-slate-400 font-bold uppercase tracking-tighter">
 													{order.order_items.length} Item •{" "}
-													<span className="text-slate-900">
-														{formatIDR(order.total)}
-													</span>
+													<span className="text-slate-900">{formatIDR(order.total)}</span>
 												</p>
 											</div>
 										</div>
@@ -392,9 +376,7 @@ export function OrderListClient({ orders }: OrderListClientProps) {
 								<HiOutlineInbox />
 							</span>
 						</div>
-						<h3 className="text-2xl font-black text-slate-900 mb-2">
-							Tidak ditemukan
-						</h3>
+						<h3 className="text-2xl font-black text-slate-900 mb-2">Tidak ditemukan</h3>
 						<p className="text-slate-500 font-medium max-w-sm mx-auto mb-10">
 							Coba sesuaikan kata kunci pencarian atau filter status Anda.
 						</p>
