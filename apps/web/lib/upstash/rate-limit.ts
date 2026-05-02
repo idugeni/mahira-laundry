@@ -71,10 +71,7 @@ function createNoopLimiter(): Pick<Ratelimit, "limit"> {
 function createLimiter(opts: LimiterOpts): Pick<Ratelimit, "limit"> {
 	if (!redis) {
 		if (process.env.NODE_ENV === "production") {
-			console.warn(
-				`[ratelimit] Redis tidak tersedia — limiter "${opts.prefix}" berjalan dalam mode noop. ` +
-					"Pastikan UPSTASH_REDIS_REST_URL dan UPSTASH_REDIS_REST_TOKEN sudah di-set.",
-			);
+			// Redis unavailable — limiter running in noop mode
 		}
 		return createNoopLimiter();
 	}
@@ -178,9 +175,7 @@ export async function applyRateLimit({
 	try {
 		result = await limiter.limit(identifier);
 	} catch (err) {
-		// Jika Redis error (bukan timeout yang sudah ditangani internal),
-		// fail-open agar layanan tidak down total.
-		console.error("[ratelimit] Gagal memeriksa rate limit:", err);
+		// Redis error — fail-open agar layanan tidak down total
 		return null;
 	}
 

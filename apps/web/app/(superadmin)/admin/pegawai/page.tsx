@@ -12,6 +12,7 @@ import {
 import type { Metadata } from "next";
 import Link from "next/link";
 import { RegisterStaffModal } from "@/components/shared/admin/staff/register-staff-modal";
+import { PaginatedGrid } from "@/components/shared/common/paginated-grid";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -171,12 +172,13 @@ export default async function PegawaiPage({
 					</div>
 				</div>
 			) : (
-				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
-					{filteredStaff.map((s) => (
-						<div
-							key={s.id}
-							className="group relative bg-white rounded-none sm:rounded-2xl border-b sm:border border-slate-100 p-6 flex flex-col gap-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-emerald-500/10 transition-[box-shadow,border-color,background-color] duration-300 overflow-hidden h-full"
-						>
+				<PaginatedGrid
+					items={filteredStaff}
+					defaultPageSize={9}
+					pageSizeOptions={[9, 18, 36]}
+					gridClassName="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6"
+					renderItem={(s) => (
+						<div className="group relative bg-white rounded-none sm:rounded-2xl border-b sm:border border-slate-100 p-6 flex flex-col gap-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-emerald-500/10 transition-[box-shadow,border-color,background-color] duration-300 overflow-hidden h-full">
 							{/* Background Decoration */}
 							<div
 								className={cn(
@@ -281,8 +283,8 @@ export default async function PegawaiPage({
 								</Button>
 							</div>
 						</div>
-					))}
-				</div>
+					)}
+				/>
 			)}
 		</div>
 	);

@@ -14,6 +14,10 @@ import { createPortal } from "react-dom";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { toast } from "sonner";
 import { PackageFormModal } from "@/components/shared/admin/paket-usaha/package-form-modal";
+import {
+	PaginationControls,
+	usePagination,
+} from "@/components/shared/common/pagination-controls";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -45,6 +49,16 @@ export function AdminPaketUsahaClient({
 	const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 	const [deleteLoading, setDeleteLoading] = useState(false);
 	const [toggleLoading, setToggleLoading] = useState<string | null>(null);
+
+	const {
+		currentPage,
+		totalPages,
+		totalItems,
+		paginatedItems,
+		setCurrentPage,
+		pageSize,
+		setPageSize,
+	} = usePagination(packages, 9);
 
 	async function handleToggle(id: string, newActive: boolean) {
 		setToggleLoading(id);
@@ -143,103 +157,122 @@ export function AdminPaketUsahaClient({
 					</Button>
 				</div>
 			) : (
-				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
-					{packages.map((pkg) => (
-						<div
-							key={pkg.id}
-							className="group relative bg-white rounded-none sm:rounded-2xl border-b sm:border border-slate-100 p-5 sm:p-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-indigo-500/10 transition-[box-shadow,border-color] duration-300 overflow-hidden"
-						>
-							{/* Card Header */}
-							<div className="flex items-center justify-between mb-5">
-								<div className="flex items-center gap-3 min-w-0">
-									<div className="w-11 h-11 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5">
-										<Package size={20} />
-									</div>
-									<div className="min-w-0">
-										<p className="font-black text-slate-900 text-sm uppercase tracking-tight truncate">
-											{pkg.name}
-										</p>
-										{pkg.description && (
-											<p className="text-[10px] font-bold text-slate-400 truncate mt-0.5">
-												{pkg.description}
+				<>
+					<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
+						{paginatedItems.map((pkg) => (
+							<div
+								key={pkg.id}
+								className="group relative bg-white rounded-none sm:rounded-2xl border-b sm:border border-slate-100 p-5 sm:p-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-indigo-500/10 transition-[box-shadow,border-color] duration-300 overflow-hidden"
+							>
+								{/* Card Header */}
+								<div className="flex items-center justify-between mb-5">
+									<div className="flex items-center gap-3 min-w-0">
+										<div className="w-11 h-11 rounded-2xl bg-indigo-50 flex items-center justify-center text-indigo-600 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5">
+											<Package size={20} />
+										</div>
+										<div className="min-w-0">
+											<p className="font-black text-slate-900 text-sm uppercase tracking-tight truncate">
+												{pkg.name}
 											</p>
+											{pkg.description && (
+												<p className="text-[10px] font-bold text-slate-400 truncate mt-0.5">
+													{pkg.description}
+												</p>
+											)}
+										</div>
+									</div>
+									<Badge
+										className={cn(
+											"px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border-none shadow-none shrink-0",
+											TIER_COLORS[pkg.tier] ?? "bg-slate-100 text-slate-600",
 										)}
+									>
+										{pkg.tier}
+									</Badge>
+								</div>
+
+								{/* Price Section */}
+								<div className="space-y-4 mb-5">
+									<div className="flex items-baseline justify-between">
+										<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+											Harga
+										</p>
+										<p className="font-black text-slate-900 text-lg">
+											{formatIDR(pkg.price)}
+										</p>
+									</div>
+									{pkg.promo_price != null && (
+										<div className="flex items-center gap-2 bg-emerald-50/50 rounded-xl px-3 py-2 border border-emerald-100/50">
+											<span className="text-[9px] font-black text-emerald-600 uppercase tracking-widest">
+												Promo
+											</span>
+											<span className="font-black text-emerald-600 text-sm">
+												{formatIDR(pkg.promo_price)}
+											</span>
+										</div>
+									)}
+								</div>
+
+								{/* Footer: Status + Actions */}
+								<div className="pt-5 border-t border-slate-50 flex items-center justify-between">
+									<button
+										type="button"
+										onClick={() => handleToggle(pkg.id, !pkg.is_active)}
+										disabled={toggleLoading === pkg.id}
+										className={cn(
+											"flex items-center gap-2 transition-colors disabled:opacity-50",
+											pkg.is_active ? "text-emerald-600" : "text-slate-400",
+										)}
+										title={
+											pkg.is_active ? "Nonaktifkan paket" : "Aktifkan paket"
+										}
+									>
+										{toggleLoading === pkg.id ? (
+											<span className="w-5 h-5 border-2 border-current/30 border-t-current rounded-full animate-spin" />
+										) : pkg.is_active ? (
+											<ToggleRight size={24} />
+										) : (
+											<ToggleLeft size={24} />
+										)}
+										<span className="text-[10px] font-black uppercase tracking-widest">
+											{pkg.is_active ? "Aktif" : "Nonaktif"}
+										</span>
+									</button>
+
+									<div className="flex items-center gap-1.5">
+										<Button
+											variant="ghost"
+											size="sm"
+											onClick={() => setModalPackage(pkg)}
+											className="w-9 h-9 p-0 rounded-xl hover:bg-indigo-50 text-slate-300 hover:text-indigo-600 transition-all"
+											title="Edit paket"
+										>
+											<Edit3 size={16} />
+										</Button>
+										<Button
+											variant="ghost"
+											size="sm"
+											onClick={() => setDeleteConfirm(pkg.id)}
+											className="w-9 h-9 p-0 rounded-xl hover:bg-rose-50 text-slate-300 hover:text-rose-500 transition-all"
+											title="Hapus paket"
+										>
+											<Trash2 size={16} />
+										</Button>
 									</div>
 								</div>
-								<Badge
-									className={cn(
-										"px-2.5 py-1 rounded-lg text-[9px] font-black uppercase tracking-widest border-none shadow-none shrink-0",
-										TIER_COLORS[pkg.tier] ?? "bg-slate-100 text-slate-600",
-									)}
-								>
-									{pkg.tier}
-								</Badge>
 							</div>
-
-							{/* Price Section */}
-							<div className="space-y-4 mb-5">
-								<div className="flex items-baseline justify-between">
-									<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Harga</p>
-									<p className="font-black text-slate-900 text-lg">
-										{formatIDR(pkg.price)}
-									</p>
-								</div>
-								{pkg.promo_price != null && (
-									<div className="flex items-center gap-2 bg-emerald-50/50 rounded-xl px-3 py-2 border border-emerald-100/50">
-										<span className="text-[9px] font-black text-emerald-600 uppercase tracking-widest">Promo</span>
-										<span className="font-black text-emerald-600 text-sm">{formatIDR(pkg.promo_price)}</span>
-									</div>
-								)}
-							</div>
-
-							{/* Footer: Status + Actions */}
-							<div className="pt-5 border-t border-slate-50 flex items-center justify-between">
-								<button
-									type="button"
-									onClick={() => handleToggle(pkg.id, !pkg.is_active)}
-									disabled={toggleLoading === pkg.id}
-									className={cn(
-										"flex items-center gap-2 transition-colors disabled:opacity-50",
-										pkg.is_active ? "text-emerald-600" : "text-slate-400",
-									)}
-									title={pkg.is_active ? "Nonaktifkan paket" : "Aktifkan paket"}
-								>
-									{toggleLoading === pkg.id ? (
-										<span className="w-5 h-5 border-2 border-current/30 border-t-current rounded-full animate-spin" />
-									) : pkg.is_active ? (
-										<ToggleRight size={24} />
-									) : (
-										<ToggleLeft size={24} />
-									)}
-									<span className="text-[10px] font-black uppercase tracking-widest">
-										{pkg.is_active ? "Aktif" : "Nonaktif"}
-									</span>
-								</button>
-
-								<div className="flex items-center gap-1.5">
-									<Button
-										variant="ghost"
-										size="sm"
-										onClick={() => setModalPackage(pkg)}
-										className="w-9 h-9 p-0 rounded-xl hover:bg-indigo-50 text-slate-300 hover:text-indigo-600 transition-all"
-										title="Edit paket"
-									>
-										<Edit3 size={16} />
-									</Button>
-									<Button
-										variant="ghost"
-										size="sm"
-										onClick={() => setDeleteConfirm(pkg.id)}
-										className="w-9 h-9 p-0 rounded-xl hover:bg-rose-50 text-slate-300 hover:text-rose-500 transition-all"
-										title="Hapus paket"
-									>
-										<Trash2 size={16} />
-									</Button>
-								</div>
-							</div>
-						</div>
-					))}
-				</div>
+						))}
+					</div>
+					<PaginationControls
+						currentPage={currentPage}
+						totalPages={totalPages}
+						onPageChange={setCurrentPage}
+						totalItems={totalItems}
+						itemsPerPage={pageSize}
+						onPageSizeChange={setPageSize}
+						pageSizeOptions={[9, 18, 36]}
+					/>
+				</>
 			)}
 
 			{/* PackageFormModal */}

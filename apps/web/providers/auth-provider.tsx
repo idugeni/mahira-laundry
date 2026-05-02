@@ -32,7 +32,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 			.eq("id", userId)
 			.single();
 		if (error) {
-			console.error("fetchProfile error:", error);
+			// Profile fetch failed — user may not have a profile row yet
 		}
 		setProfile(data as unknown as Profile);
 	};

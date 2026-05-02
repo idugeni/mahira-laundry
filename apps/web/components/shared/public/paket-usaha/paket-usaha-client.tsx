@@ -210,7 +210,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 							href={waUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="inline-flex items-center gap-4 rounded-full bg-brand-accent px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 shadow-2xl shadow-brand-accent/20 transition-all"
+							className="inline-flex items-center gap-4 rounded-full bg-brand-accent px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 shadow-2xl shadow-brand-accent/20 transition-all duration-300 hover:bg-slate-900 hover:text-brand-accent hover:shadow-slate-900/30"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

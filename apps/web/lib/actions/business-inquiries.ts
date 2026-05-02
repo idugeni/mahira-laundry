@@ -68,7 +68,6 @@ export async function submitBusinessInquiry(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("submitBusinessInquiry failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -207,7 +206,6 @@ export async function updateInquiryStatus(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("updateInquiryStatus failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -229,7 +227,6 @@ export async function updateInquiryConvertedOutlet(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("updateInquiryConvertedOutlet failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -267,7 +264,6 @@ export async function exportInquiriesCSV(
 		return { success: true, data: csvString };
 	} catch (error) {
 		const err = error as Error;
-		console.error("exportInquiriesCSV failed:", err);
 		return { success: false, error: err.message };
 	}
 }

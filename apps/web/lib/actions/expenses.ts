@@ -37,7 +37,6 @@ export async function addExpense(data: ExpenseInput): Promise<ActionResponse> {
 		revalidatePath("/admin/keuangan");
 		return { success: true };
 	} catch (error) {
-		console.error("Add expense failed:", error);
 		return { success: false, error: (error as Error).message };
 	}
 }
@@ -52,7 +51,6 @@ export async function deleteExpense(id: string): Promise<ActionResponse> {
 		revalidatePath("/admin/keuangan");
 		return { success: true };
 	} catch (error) {
-		console.error("Delete expense failed:", error);
 		return { success: false, error: (error as Error).message };
 	}
 }

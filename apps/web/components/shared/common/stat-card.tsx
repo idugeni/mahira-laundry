@@ -67,7 +67,7 @@ export function StatCard({
 	return (
 		<div
 			className={cn(
-				"group relative overflow-hidden rounded-xl sm:rounded-2xl border p-4 sm:p-6 shadow-xs will-change-transform backface-hidden transition-[border-color,transform,opacity] duration-300 ease-out hover:-translate-y-1",
+				"group relative overflow-hidden rounded-xl sm:rounded-2xl border p-3 sm:p-4 md:p-6 shadow-xs will-change-transform backface-hidden transition-[border-color,transform,opacity] duration-300 ease-out hover:-translate-y-1",
 				styles.card,
 				className,
 			)}
@@ -88,11 +88,11 @@ export function StatCard({
 				)}
 			/>
 
-			<div className="relative flex flex-col gap-6">
-				<div className="flex items-center justify-between">
+			<div className="relative flex flex-col gap-3 sm:gap-6">
+				<div className="flex items-center justify-between gap-2">
 					<div
 						className={cn(
-							"flex h-12 w-12 items-center justify-center rounded-2xl border text-lg shadow-inner-sm will-change-transform transition-transform duration-300 ease-out group-hover:-translate-y-1",
+							"flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl sm:rounded-2xl border text-lg shadow-inner-sm will-change-transform transition-transform duration-300 ease-out group-hover:-translate-y-1",
 							styles.icon,
 						)}
 					>
@@ -102,7 +102,7 @@ export function StatCard({
 					{trend && (
 						<div
 							className={cn(
-								"flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[10px] font-black uppercase tracking-widest",
+								"flex items-center gap-1 px-2 py-1 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl text-[9px] sm:text-[10px] font-black uppercase tracking-widest shrink-0",
 								trend.positive
 									? "bg-emerald-50 text-emerald-600"
 									: "bg-rose-50 text-rose-600",
@@ -114,13 +114,13 @@ export function StatCard({
 				</div>
 
 				<div className="flex-1 min-w-0">
-					<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2">
+					<p className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] text-slate-400 mb-1 sm:mb-2 truncate">
 						{title}
 					</p>
 					<div className="flex items-baseline gap-2">
 						<p
 							className={cn(
-								"text-3xl sm:text-4xl font-black tracking-tight font-[family-name:var(--font-heading)]",
+								"text-2xl sm:text-3xl md:text-4xl font-black tracking-tight font-[family-name:var(--font-heading)] truncate",
 								styles.value,
 							)}
 						>
@@ -128,7 +128,7 @@ export function StatCard({
 						</p>
 					</div>
 					{(subtitle || trend?.label) && (
-						<p className="text-[10px] font-bold text-slate-400 mt-3 flex items-center gap-2 uppercase tracking-widest truncate">
+						<p className="text-[9px] sm:text-[10px] font-bold text-slate-400 mt-1 sm:mt-3 flex items-center gap-2 uppercase tracking-widest truncate">
 							{subtitle || trend?.label}
 						</p>
 					)}

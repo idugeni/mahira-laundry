@@ -7,7 +7,6 @@ import { GallerySection } from "@/components/shared/public/gallery/gallery-secti
 import { HomeBusinessPackagesSection } from "@/components/shared/public/home/home-business-packages-section";
 import { HomeCtaSection } from "@/components/shared/public/home/home-cta-section";
 import { HomeHeroSection } from "@/components/shared/public/home/home-hero-section";
-import { HomeSearchSection } from "@/components/shared/public/home/home-search-section";
 import { HomeServicesSection } from "@/components/shared/public/home/home-services-section";
 import { HomeStatsSection } from "@/components/shared/public/home/home-stats-section";
 import { TestimonialSection } from "@/components/shared/public/testimonial-section";
@@ -80,7 +79,6 @@ export function HomeClient({
 				dashboardHref={dashboardHref}
 				packages={businessPackages}
 			/>
-			<HomeSearchSection />
 			<HomeStatsSection stats={stats} />
 			<HomeServicesSection
 				services={initialServices}

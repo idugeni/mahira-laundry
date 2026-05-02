@@ -373,7 +373,8 @@ export function SuperadminFinanceClient({
 															{expense.category || "General"}
 														</Badge>
 														<span className="text-[10px] text-slate-400 font-bold flex items-center gap-1">
-															<Building2 size={10} /> {expense.outlets?.name || "Global"}
+															<Building2 size={10} />{" "}
+															{expense.outlets?.name || "Global"}
 														</span>
 													</div>
 												</div>

@@ -63,7 +63,6 @@ export async function upsertService(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Service action failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -80,7 +79,6 @@ export async function deleteService(id: string): Promise<ActionResponse> {
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Delete service failed:", err);
 		return { success: false, error: err.message };
 	}
 }

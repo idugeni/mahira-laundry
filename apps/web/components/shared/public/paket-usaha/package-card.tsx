@@ -8,8 +8,10 @@ import {
 	HiOutlineCheck,
 	HiOutlineChevronDown,
 	HiOutlineChevronUp,
-	HiOutlineInformationCircle,
+	HiOutlineRocketLaunch,
+	HiOutlineShieldCheck,
 	HiOutlineSparkles,
+	HiOutlineTrophy,
 } from "react-icons/hi2";
 import PromoCountdown from "@/components/shared/public/paket-usaha/promo-countdown";
 import type { BusinessPackage } from "@/lib/types";
@@ -20,27 +22,41 @@ interface PackageCardProps {
 
 const tierConfig: Record<
 	string,
-	{ label: string; className: string; icon: string }
+	{
+		label: string;
+		className: string;
+		icon: string;
+		gradient: string;
+		glow: string;
+	}
 > = {
 	Starter: {
 		label: "Starter",
 		className: "bg-blue-50 text-blue-600 border-blue-100",
 		icon: "🌱",
+		gradient: "from-blue-500 to-cyan-400",
+		glow: "shadow-blue-500/20",
 	},
 	Standard: {
 		label: "Standard",
 		className: "bg-emerald-50 text-emerald-600 border-emerald-100",
 		icon: "🚀",
+		gradient: "from-emerald-500 to-teal-400",
+		glow: "shadow-emerald-500/20",
 	},
 	Premium: {
 		label: "Premium",
 		className: "bg-purple-50 text-purple-600 border-purple-100",
 		icon: "👑",
+		gradient: "from-purple-500 to-pink-400",
+		glow: "shadow-purple-500/20",
 	},
 	Custom: {
 		label: "Custom",
 		className: "bg-orange-50 text-orange-600 border-orange-100",
 		icon: "⚙️",
+		gradient: "from-orange-500 to-amber-400",
+		glow: "shadow-orange-500/20",
 	},
 };
 
@@ -65,6 +81,8 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 		label: pkg.tier,
 		className: "bg-slate-50 text-slate-600 border-slate-100",
 		icon: "📦",
+		gradient: "from-slate-500 to-slate-400",
+		glow: "shadow-slate-500/20",
 	};
 
 	const promoActive = isPromoActive(pkg.promo_price, pkg.promo_expires_at);
@@ -74,41 +92,55 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 	const extraCount = pkg.items.length - MAX_ITEMS;
 
 	return (
-		<motion.div className="relative flex flex-col h-full rounded-[2.5rem] border bg-white p-8 sm:p-10 transition-all duration-500 overflow-hidden group">
-			{/* Featured ribbon - Ultra Premium Style */}
+		<motion.div className="relative flex flex-col h-full rounded-[2.5rem] border border-slate-100 bg-white p-8 sm:p-10 transition-all duration-500 overflow-hidden group hover:shadow-2xl hover:shadow-slate-200/50 hover:border-slate-200">
+			{/* Animated background glow */}
+			<div
+				className={`absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br ${tier.gradient} rounded-full blur-[80px] opacity-0 group-hover:opacity-15 transition-opacity duration-700`}
+			/>
+
+			{/* Featured Ribbon - Clean diagonal top-right corner */}
 			{pkg.is_featured && (
-				<div className="absolute top-8 right-0 z-20">
-					<div className="bg-gradient-to-r from-brand-accent to-orange-400 text-slate-900 text-[10px] font-black px-5 py-2 rounded-l-full shadow-xl flex items-center gap-2 uppercase tracking-[0.2em]">
-						<span className="animate-pulse">
-							<HiOutlineSparkles />
+				<div className="absolute top-0 right-0 w-[140px] h-[140px] overflow-hidden z-20">
+					<div className="absolute top-[26px] right-[-36px] rotate-45 bg-gradient-to-r from-brand-accent to-orange-400 text-slate-900 text-[9px] font-black px-8 py-1.5 text-center uppercase tracking-[0.2em] shadow-lg shadow-brand-accent/20 whitespace-nowrap">
+						<span className="inline-flex items-center gap-1.5">
+							<HiOutlineSparkles size={12} />
+							Rekomendasi
 						</span>
-						Rekomendasi
 					</div>
 				</div>
 			)}
 
 			{/* Image with Advanced Overlay */}
 			{pkg.image_url && (
-				<div className="relative h-64 w-full overflow-hidden">
+				<div className="relative h-64 w-[calc(100%+4rem)] sm:w-[calc(100%+5rem)] -ml-8 sm:-ml-10 -mt-8 sm:-mt-10 overflow-hidden rounded-2xl z-0">
 					<Image
 						src={pkg.image_url}
 						alt={pkg.name}
 						fill
-						className="object-cover transition-transform duration-[1.5s]"
+						className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
 						sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 					/>
 					<div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent" />
 				</div>
 			)}
 
-			<div className="flex flex-1 flex-col p-10 lg:p-12">
-				{/* Tier Info - Cleaned up (No ID) */}
-				<div className="flex items-center gap-3 mb-6">
+			<div className="flex flex-1 flex-col pt-6 pb-2">
+				{/* Tier Info + Franchise Status */}
+				<div className="flex items-center justify-center gap-2 mb-6 flex-wrap">
 					<span
 						className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] border ${tier.className}`}
 					>
 						<span>{tier.icon}</span>
 						{tier.label}
+					</span>
+
+					{/* Franchise Status Badge */}
+					<span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-100 px-3 py-1.5 text-[9px] font-black uppercase tracking-[0.15em] text-emerald-600">
+						<span className="relative flex h-2 w-2">
+							<span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+							<span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+						</span>
+						Open Now
 					</span>
 				</div>
 
@@ -124,25 +156,59 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 					</p>
 				)}
 
+				{/* Estimasi Profit / ROI Section - Modern Glassmorphism */}
+				{pkg.estimated_roi && (
+					<motion.div
+						initial={{ opacity: 0, y: 10 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.6, delay: 0.2 }}
+						className="mt-8 relative overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-brand-primary/5 via-emerald-50/50 to-brand-accent/5 border border-brand-primary/10 p-5"
+					>
+						{/* Subtle animated shimmer */}
+						<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shimmer" />
+
+						<div className="relative z-10">
+							<div className="flex items-center justify-between mb-3">
+								<div className="flex items-center gap-2">
+									<span className="text-brand-primary">
+										<HiOutlineTrophy size={16} />
+									</span>
+									<span className="text-[10px] font-black uppercase tracking-[0.2em] text-brand-primary">
+										Estimasi Profit
+									</span>
+								</div>
+								<span className="inline-flex items-center gap-1 rounded-full bg-brand-accent/10 border border-brand-accent/20 px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.15em] text-brand-accent">
+									<HiOutlineRocketLaunch size={10} />
+									ROI Cepat & Teruji
+								</span>
+							</div>
+							<p className="text-xl font-black text-slate-900 tracking-tight">
+								{pkg.estimated_roi}
+							</p>
+						</div>
+					</motion.div>
+				)}
+
 				{/* Price Section - Ultra Premium Promo Highlight */}
 				<div
-					className={`mt-10 mb-10 p-8 rounded-[2.5rem] border relative overflow-hidden transition-all duration-500 ${
+					className={`mt-8 mb-8 p-8 rounded-[2rem] border relative overflow-hidden transition-all duration-500 ${
 						promoActive
-							? "bg-brand-primary/5 border-brand-primary/10 shadow-inner"
-							: "bg-slate-50 border-slate-100"
+							? "bg-brand-primary/5 border-brand-primary/20 shadow-lg shadow-brand-primary/10"
+							: "bg-slate-900 border-slate-800 shadow-xl shadow-slate-900/20"
 					}`}
 				>
-					{/* Decorative Icon */}
-					<div
-						className={`absolute -top-2 -right-2 p-4 transition-colors ${
-							promoActive ? "text-brand-primary/10" : "text-slate-100"
-						}`}
-					>
-						<HiOutlineInformationCircle size={64} />
+					{/* Verified badge centered at top */}
+					<div className="flex justify-center mb-4">
+						<span
+							className={`inline-flex items-center gap-1.5 rounded-full backdrop-blur-sm px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.15em] ${promoActive ? "bg-brand-primary/10 text-brand-primary/50" : "bg-white/10 text-white/60"}`}
+						>
+							<HiOutlineShieldCheck size={10} />
+							Verified
+						</span>
 					</div>
 
 					<p
-						className={`text-[10px] font-black uppercase tracking-[0.3em] mb-3 ${
+						className={`text-center text-[10px] font-black uppercase tracking-[0.3em] mb-3 ${
 							promoActive ? "text-brand-primary" : "text-slate-400"
 						}`}
 					>
@@ -150,12 +216,12 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 					</p>
 
 					{promoActive ? (
-						<div className="flex flex-col gap-1">
-							<div className="flex items-baseline gap-3 flex-wrap">
+						<div className="flex flex-col items-center gap-1">
+							<div className="flex items-baseline gap-3 flex-wrap justify-center">
 								<span className="text-4xl font-black text-brand-primary tracking-tighter">
 									{formatIDR(pkg.promo_price as number)}
 								</span>
-								<span className="text-lg text-slate-300 line-through font-bold opacity-60">
+								<span className="text-lg text-slate-500 line-through font-bold opacity-60">
 									{formatIDR(pkg.price)}
 								</span>
 							</div>
@@ -164,7 +230,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 							</div>
 						</div>
 					) : (
-						<span className="text-4xl font-black text-slate-900 tracking-tighter">
+						<span className="text-5xl font-black text-white tracking-tighter block text-center">
 							{formatIDR(pkg.price)}
 						</span>
 					)}
@@ -175,7 +241,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 					<div className="flex-1">
 						<div className="flex items-center gap-3 mb-6">
 							<div className="h-px flex-1 bg-slate-100" />
-							<p className="text-[10px] font-black text-slate-300 uppercase tracking-[0.3em]">
+							<p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em]">
 								Fasilitas Lengkap
 							</p>
 							<div className="h-px flex-1 bg-slate-100" />

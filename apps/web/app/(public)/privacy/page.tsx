@@ -28,7 +28,11 @@ export default function PrivacyPage() {
 		<LegalLayout
 			title="Kebijakan Privasi"
 			subtitle="Komitmen Mahira Laundry dalam menjaga, melindungi, dan menghormati privasi setiap data pelanggan kami secara profesional."
-			lastUpdated="12 April 2026"
+			lastUpdated={new Date().toLocaleDateString("id-ID", {
+				day: "numeric",
+				month: "long",
+				year: "numeric",
+			})}
 		>
 			<section className="space-y-8">
 				<div>

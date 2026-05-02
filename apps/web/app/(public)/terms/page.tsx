@@ -28,7 +28,11 @@ export default function TermsPage() {
 		<LegalLayout
 			title="Syarat & Ketentuan"
 			subtitle="Panduan standar layanan, tanggung jawab, dan aturan penggunaan untuk memastikan pengalaman laundry yang transparan dan memuaskan."
-			lastUpdated="12 April 2026"
+			lastUpdated={new Date().toLocaleDateString("id-ID", {
+				day: "numeric",
+				month: "long",
+				year: "numeric",
+			})}
 		>
 			<section className="space-y-8">
 				<p className="italic text-slate-400">

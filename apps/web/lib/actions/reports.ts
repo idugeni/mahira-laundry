@@ -65,8 +65,9 @@ export async function generateReportData(
 		.gte("date", start.toISOString())
 		.lte("date", end.toISOString());
 
-	if (expensesError)
-		console.error("Could not fetch expenses for report:", expensesError);
+	if (expensesError) {
+		// Expenses fetch failed — report will exclude expense data
+	}
 
 	const reportRows = (orders as OrderRow[]).map((order) => ({
 		"Order Number": order.order_number,

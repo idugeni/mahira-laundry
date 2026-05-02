@@ -84,8 +84,8 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 
 				if (error) throw error;
 				setLogs(data ?? []);
-			} catch (err) {
-				console.error("Failed to fetch inquiry logs:", err);
+			} catch (_err) {
+				toast.error("Gagal memuat riwayat inquiry.");
 			} finally {
 				setLogsLoading(false);
 			}

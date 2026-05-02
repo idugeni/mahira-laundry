@@ -21,6 +21,16 @@ import {
 } from "react-icons/hi2";
 import { toast } from "sonner";
 import { PaginationControls } from "@/components/shared/common/pagination-controls";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -52,6 +62,7 @@ export function AdminTestimonialsClient({
 }: AdminTestimonialsClientProps) {
 	const [loading, setLoading] = useState<string | null>(null);
 	const [currentPage, setCurrentPage] = useState(1);
+	const [deleteId, setDeleteId] = useState<string | null>(null);
 
 	const [createOpen, setCreateOpen] = useState(false);
 	const [createLoading, setCreateLoading] = useState(false);
@@ -95,17 +106,18 @@ export function AdminTestimonialsClient({
 		}
 	}
 
-	async function handleDelete(testimonialId: string) {
-		if (!confirm("Hapus testimoni ini secara permanen?")) return;
-		setLoading(testimonialId);
+	async function handleDelete() {
+		if (!deleteId) return;
+		setLoading(deleteId);
 		try {
-			const res = await deleteTestimonial(testimonialId);
+			const res = await deleteTestimonial(deleteId);
 			if (res.error) toast.error(res.error);
 			else toast.success("Testimoni dihapus.");
 		} catch (_err) {
 			toast.error("Gagal menghapus.");
 		} finally {
 			setLoading(null);
+			setDeleteId(null);
 		}
 	}
 
@@ -155,6 +167,39 @@ export function AdminTestimonialsClient({
 
 	return (
 		<div className="space-y-8 sm:space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+			<AlertDialog
+				open={!!deleteId}
+				onOpenChange={(open: boolean) => !open && setDeleteId(null)}
+			>
+				<AlertDialogContent className="rounded-[2.5rem] border-slate-100 p-8">
+					<AlertDialogHeader>
+						<div className="w-16 h-16 rounded-3xl bg-red-50 text-red-500 flex items-center justify-center text-3xl mb-4 mx-auto sm:mx-0 shadow-inner">
+							<Trash2 />
+						</div>
+						<AlertDialogTitle className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900">
+							Hapus Testimoni?
+						</AlertDialogTitle>
+						<AlertDialogDescription className="text-slate-500 font-medium text-base">
+							Testimoni ini akan dihapus secara permanen dan tidak dapat
+							dikembalikan.
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">
+						<AlertDialogCancel className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs border-slate-100 hover:bg-slate-50 transition-all">
+							Batal
+						</AlertDialogCancel>
+						<AlertDialogAction
+							onClick={(e: React.MouseEvent) => {
+								e.preventDefault();
+								handleDelete();
+							}}
+							className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 transition-all"
+						>
+							Hapus Sekarang
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
 			{/* High-End Header */}
 			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl md:rounded-[2rem] p-6 sm:p-8 md:p-10 border-y sm:border border-slate-100 shadow-xl shadow-slate-200/40 group">
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50" />
@@ -288,7 +333,7 @@ export function AdminTestimonialsClient({
 										<Button
 											variant="ghost"
 											className="w-10 h-10 p-0 rounded-xl bg-rose-50 text-rose-500 hover:bg-rose-100 transition-colors shadow-xs"
-											onClick={() => handleDelete(t.id)}
+											onClick={() => setDeleteId(t.id)}
 											disabled={loading === t.id}
 										>
 											<Trash2 size={24} />
@@ -503,7 +548,9 @@ export function AdminTestimonialsClient({
 												Edit <span className="text-amber-500">Testimoni</span>
 											</h2>
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-0.5">
-												{editTarget.guest_name || editTarget.profiles?.full_name || "Anonim"}
+												{editTarget.guest_name ||
+													editTarget.profiles?.full_name ||
+													"Anonim"}
 											</p>
 										</div>
 									</div>

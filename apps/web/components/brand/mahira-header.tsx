@@ -16,6 +16,7 @@ import {
 	HiOutlineXMark,
 } from "react-icons/hi2";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
+import { AdminAvatar } from "@/components/shared/admin/admin-avatar";
 import { UniversalSearch } from "@/components/shared/public/universal-search";
 import { useAuth } from "@/hooks/use-auth";
 import { getDashboardUrl } from "@/lib/utils";
@@ -24,28 +25,49 @@ const megaMenuItems = [
 	{
 		href: "/layanan",
 		label: "Layanan",
-		description: "Daftar layanan laundry & dry cleaning premium",
+		description: "Laundry & dry cleaning premium",
 		icon: HiOutlineSparkles,
+		badge: "Populer",
 	},
 	{
 		href: "/galeri",
 		label: "Galeri",
-		description: "Portofolio hasil kerja berkualitas tinggi",
+		description: "Portofolio hasil kerja terbaik",
 		icon: HiOutlinePhoto,
+		badge: null,
 	},
 	{
 		href: "/lokasi",
 		label: "Lokasi",
-		description: "Temukan outlet Mahira terdekat",
+		description: "Temukan outlet terdekat",
 		icon: HiOutlineMapPin,
+		badge: null,
 	},
 	{
 		href: "/tentang",
 		label: "Tentang",
 		description: "Cerita & visi Mahira Laundry",
 		icon: HiOutlineInformationCircle,
+		badge: null,
 	},
 ];
+
+const megaContainerVariants = {
+	hidden: { opacity: 0 },
+	visible: {
+		opacity: 1,
+		transition: { staggerChildren: 0.06 },
+	},
+};
+
+const megaItemVariants = {
+	hidden: { opacity: 0, y: 12 },
+	visible: {
+		opacity: 1,
+		y: 0,
+		transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] },
+	},
+};
 
 export function MahiraHeader() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -97,16 +119,16 @@ export function MahiraHeader() {
 								<button
 									type="button"
 									onClick={() => setMegaOpen(!megaOpen)}
-									className={`flex items-center gap-1.5 text-sm font-bold transition-colors duration-200 ${
+									className={`flex items-center gap-1.5 text-sm font-bold transition-all duration-300 px-4 py-2 rounded-full ${
 										megaOpen
-											? "text-brand-primary"
-											: "text-slate-500 hover:text-brand-primary"
+											? "text-brand-primary bg-brand-primary/5 shadow-sm shadow-brand-primary/10"
+											: "text-slate-500 hover:text-brand-primary hover:bg-slate-50"
 									}`}
 								>
 									Jelajahi
 									<motion.span
 										animate={{ rotate: megaOpen ? 180 : 0 }}
-										transition={{ duration: 0.2 }}
+										transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
 										className="inline-flex"
 									>
 										<HiOutlineChevronDown size={14} />
@@ -117,53 +139,99 @@ export function MahiraHeader() {
 								<AnimatePresence>
 									{megaOpen && (
 										<motion.div
-											initial={{ opacity: 0, y: 8, scale: 0.98 }}
+											initial={{ opacity: 0, y: 10, scale: 0.96 }}
 											animate={{ opacity: 1, y: 0, scale: 1 }}
-											exit={{ opacity: 0, y: 8, scale: 0.98 }}
-											transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-											className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-[480px] p-3 bg-white rounded-[1.5rem] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] border border-slate-100"
+											exit={{ opacity: 0, y: 6, scale: 0.98 }}
+											transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+											className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[520px] bg-white rounded-[1.5rem] shadow-[0_50px_100px_-20px_rgba(0,0,0,0.15)] overflow-hidden"
 										>
-											{/* Arrow */}
-											<div className="absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white border-l border-t border-slate-100 rotate-45" />
+											{/* Featured Promo Strip */}
+											<Link
+												href="/paket-usaha"
+												onClick={() => setMegaOpen(false)}
+												className="group flex items-center justify-between mx-4 mt-4 px-5 py-3.5 bg-gradient-to-r from-brand-primary/5 to-brand-accent/5 rounded-2xl hover:from-brand-primary/10 hover:to-brand-accent/10 transition-all duration-300"
+											>
+												<div className="flex items-center gap-3">
+													<div className="w-9 h-9 rounded-xl bg-brand-primary/10 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-all duration-300">
+														<HiOutlineSparkles size={18} />
+													</div>
+													<div>
+														<p className="text-sm font-black text-slate-900 group-hover:text-brand-primary transition-colors duration-300">
+															Paket Usaha
+															<span className="ml-2 text-[9px] font-black text-brand-accent bg-brand-accent/10 px-2 py-0.5 rounded-full uppercase tracking-wider">
+																Baru
+															</span>
+														</p>
+														<p className="text-[11px] text-slate-400 mt-0.5">
+															Mulai bisnis laundry Anda
+														</p>
+													</div>
+												</div>
+												<span className="text-brand-primary group-hover:translate-x-1 transition-transform duration-300">
+													<HiOutlineChevronRight size={16} />
+												</span>
+											</Link>
 
-											<div className="grid grid-cols-2 gap-2">
+											{/* Divider */}
+											<div className="mx-4 my-3">
+												<div className="h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
+											</div>
+
+											{/* Menu Grid */}
+											<motion.div
+												variants={megaContainerVariants}
+												initial="hidden"
+												animate="visible"
+												className="grid grid-cols-2 gap-1 px-3 pb-3"
+											>
 												{megaMenuItems.map((item) => {
 													const Icon = item.icon;
 													return (
-														<Link
+														<motion.div
 															key={item.href}
-															href={item.href}
-															onClick={() => setMegaOpen(false)}
-															className="group flex items-start gap-3 p-4 rounded-xl hover:bg-slate-50 transition-colors duration-200"
+															variants={megaItemVariants}
 														>
-															<div className="w-10 h-10 rounded-xl bg-brand-primary/5 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-200 shrink-0">
-																<Icon size={20} />
-															</div>
-															<div>
-																<p className="text-sm font-bold text-slate-900 group-hover:text-brand-primary transition-colors duration-200">
-																	{item.label}
-																</p>
-																<p className="text-[11px] text-slate-400 leading-snug mt-0.5">
-																	{item.description}
-																</p>
-															</div>
-														</Link>
+															<Link
+																href={item.href}
+																onClick={() => setMegaOpen(false)}
+																className="group flex items-start gap-3 p-3.5 rounded-2xl hover:bg-brand-primary/5 transition-all duration-300 relative"
+															>
+																<div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-brand-primary group-hover:text-white group-hover:shadow-lg group-hover:shadow-brand-primary/25 transition-all duration-300 shrink-0">
+																	<Icon size={20} />
+																</div>
+																<div className="min-w-0">
+																	<div className="flex items-center gap-2">
+																		<p className="text-sm font-bold text-slate-900 group-hover:text-brand-primary transition-colors duration-300">
+																			{item.label}
+																		</p>
+																		{item.badge && (
+																			<span className="text-[8px] font-black text-brand-accent bg-brand-accent/10 px-1.5 py-0.5 rounded-full uppercase tracking-wider">
+																				{item.badge}
+																			</span>
+																		)}
+																	</div>
+																	<p className="text-[11px] text-slate-400 leading-snug mt-0.5 group-hover:text-slate-500 transition-colors duration-300">
+																		{item.description}
+																	</p>
+																</div>
+															</Link>
+														</motion.div>
 													);
 												})}
-											</div>
+											</motion.div>
 
 											{/* CTA Footer */}
-											<div className="mt-2 pt-2 border-t border-slate-50">
+											<div className="mx-3 mb-3 mt-1 pt-3 border-t border-slate-100/60">
 												<Link
 													href="/layanan"
 													onClick={() => setMegaOpen(false)}
-													className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-brand-primary/5 transition-colors duration-200 group"
+													className="flex items-center justify-between px-4 py-3 rounded-xl hover:bg-brand-primary/5 transition-all duration-300 group"
 												>
-													<span className="text-xs font-bold text-slate-500 group-hover:text-brand-primary transition-colors">
-														Lihat Semua Layanan
+													<span className="text-xs font-bold text-slate-400 group-hover:text-brand-primary transition-colors duration-300">
+														Lihat Semua Layanan →
 													</span>
-													<span className="text-brand-primary group-hover:translate-x-1 transition-transform duration-200">
-														<HiOutlineChevronRight size={14} />
+													<span className="w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-brand-primary group-hover:text-white transition-all duration-300">
+														<HiOutlineChevronRight size={12} />
 													</span>
 												</Link>
 											</div>
@@ -201,9 +269,11 @@ export function MahiraHeader() {
 										href={dashboardHref}
 										className="group flex items-center gap-3 pl-2 pr-6 py-1.5 bg-slate-900 text-white rounded-full hover:bg-slate-800 transition-colors duration-200"
 									>
-										<div className="w-8 h-8 rounded-full bg-brand-accent text-slate-900 flex items-center justify-center font-bold text-xs ring-2 ring-slate-800 group-hover:ring-brand-accent transition-all">
-											{getInitials(profile?.full_name as string)}
-										</div>
+										<AdminAvatar
+											fullName={profile?.full_name}
+											avatarUrl={profile?.avatar_url}
+											className="w-8 h-8 ring-2 ring-slate-800 group-hover:ring-brand-accent transition-all"
+										/>
 										<div className="flex flex-col items-start leading-none">
 											<span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
 												Dashboard
@@ -352,9 +422,11 @@ export function MahiraHeader() {
 										className="flex items-center justify-between w-full px-6 py-4 bg-slate-900 text-white rounded-[2rem] font-black shadow-xl shadow-slate-200"
 									>
 										<div className="flex items-center gap-4">
-											<div className="w-10 h-10 rounded-full bg-brand-accent text-slate-900 flex items-center justify-center font-bold">
-												{getInitials(profile?.full_name as string)}
-											</div>
+											<AdminAvatar
+												fullName={profile?.full_name}
+												avatarUrl={profile?.avatar_url}
+												className="w-10 h-10"
+											/>
 											<div className="flex flex-col items-start leading-tight">
 												<span className="text-[10px] text-slate-400 uppercase tracking-widest">
 													Akses Portal

@@ -19,12 +19,12 @@ export default async function IntegratedAntrianPage() {
 	let outletName = PRIMARY_OUTLET.name;
 
 	if (!outletId && profile?.role === "superadmin") {
-			const { data: outlet } = await supabase
-				.from("outlets")
-				.select("id, name")
-				.eq("is_active", true)
-				.limit(1)
-				.maybeSingle();
+		const { data: outlet } = await supabase
+			.from("outlets")
+			.select("id, name")
+			.eq("is_active", true)
+			.limit(1)
+			.maybeSingle();
 		outletId = outlet?.id;
 		outletName = outlet?.name || PRIMARY_OUTLET.name;
 	} else if (outletId) {

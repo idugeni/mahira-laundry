@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -14,6 +13,7 @@ import {
 	HiOutlineUserCircle,
 } from "react-icons/hi2";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
+import { AdminAvatar } from "@/components/shared/admin/admin-avatar";
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
 
 const customerNav = [
@@ -43,16 +43,6 @@ export default function CustomerLayout({
 }) {
 	const pathname = usePathname();
 	const { profile } = useAuth();
-
-	const getInitials = (name?: string) => {
-		if (!name) return "??";
-		return name
-			.split(" ")
-			.map((n) => n[0])
-			.join("")
-			.toUpperCase()
-			.substring(0, 2);
-	};
 
 	return (
 		<div className="min-h-screen flex flex-col md:flex-row bg-slate-50/50">
@@ -130,29 +120,24 @@ export default function CustomerLayout({
 						<NotificationPopover />
 						<Link
 							href="/customer/profil"
-							className="w-8 h-8 rounded-full bg-brand-primary/10 border border-brand-primary/20 flex items-center justify-center text-xs font-bold text-brand-primary overflow-hidden relative"
+							className="w-8 h-8 rounded-full overflow-hidden relative"
 						>
-							{profile?.avatar_url ? (
-								<Image
-									src={profile.avatar_url}
-									alt={profile.full_name || "Avatar"}
-									fill
-									className="object-cover object-top"
-								/>
-							) : (
-								getInitials(profile?.full_name as string)
-							)}
+							<AdminAvatar
+								fullName={profile?.full_name}
+								avatarUrl={profile?.avatar_url}
+								className="w-8 h-8 border border-brand-primary/20"
+							/>
 						</Link>
 					</div>
 				</header>
 
-				<main className="flex-1 p-4 sm:p-8">
+				<main className="flex-1 p-4 sm:p-8 flex items-start justify-center">
 					<motion.div
 						key={pathname}
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 0.3 }}
-						className="max-w-5xl mx-auto"
+						className="w-full max-w-5xl"
 					>
 						{children}
 					</motion.div>

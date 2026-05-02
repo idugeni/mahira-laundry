@@ -311,7 +311,8 @@ export default async function SuperadminDashboardPage() {
 												: (log.profiles as { full_name?: string } | null)
 														?.full_name || "System"}
 										</span>{" "}
-										{ACTION_LABELS[log.action] || log.action.toLowerCase().replace(/_/g, " ")}
+										{ACTION_LABELS[log.action] ||
+											log.action.toLowerCase().replace(/_/g, " ")}
 										{" pada "}
 										<span className="font-semibold text-slate-600">
 											{TABLE_LABELS[log.table_name] || log.table_name}

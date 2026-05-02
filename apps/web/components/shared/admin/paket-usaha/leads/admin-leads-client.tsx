@@ -12,6 +12,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 import { LeadDetailModal } from "@/components/shared/admin/paket-usaha/leads/lead-detail-modal";
+import {
+	PaginationControls,
+	usePagination,
+} from "@/components/shared/common/pagination-controls";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { exportInquiriesCSV } from "@/lib/actions/business-inquiries";
@@ -57,6 +61,15 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 	const [selectedLead, setSelectedLead] =
 		useState<BusinessPackageInquiry | null>(null);
 	const [exportLoading, setExportLoading] = useState(false);
+	const {
+		currentPage,
+		totalPages,
+		totalItems,
+		paginatedItems,
+		setCurrentPage,
+		pageSize,
+		setPageSize,
+	} = usePagination(leads, 10);
 
 	// Read current filter values from URL
 	const currentStatus = searchParams.get("status") ?? "";
@@ -261,87 +274,102 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 						</p>
 					</div>
 				) : (
-					<div className="overflow-x-auto">
-						<table className="w-full">
-							<thead>
-								<tr className="border-b border-slate-50">
-									{[
-										"Nama",
-										"Telepon",
-										"Paket",
-										"Kota",
-										"Tanggal",
-										"Status",
-									].map((col) => (
-										<th
-											key={col}
-											className="text-left px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest first:pl-8 last:pr-8"
-										>
-											{col}
-										</th>
-									))}
-								</tr>
-							</thead>
-							<tbody className="divide-y divide-slate-50">
-								{leads.map((lead) => (
-									<tr
-										key={lead.id}
-										onClick={() => setSelectedLead(lead)}
-										className="group hover:bg-slate-50/50 transition-colors cursor-pointer"
-									>
-										<td className="pl-8 pr-6 py-5">
-											<p className="font-black text-slate-900 text-sm uppercase tracking-tight">
-												{lead.full_name}
-											</p>
-											{lead.email && (
-												<p className="text-[10px] font-bold text-slate-400 mt-0.5 truncate max-w-[180px]">
-													{lead.email}
-												</p>
-											)}
-										</td>
-										<td className="px-6 py-5">
-											<p className="text-sm font-bold text-slate-700">
-												{lead.phone}
-											</p>
-										</td>
-										<td className="px-6 py-5">
-											<p className="text-sm font-bold text-slate-700 truncate max-w-[160px]">
-												{lead.package_name}
-											</p>
-										</td>
-										<td className="px-6 py-5">
-											<p className="text-sm font-bold text-slate-700">
-												{lead.city}
-											</p>
-										</td>
-										<td className="px-6 py-5">
-											<p className="text-sm font-bold text-slate-700">
-												{new Date(lead.created_at).toLocaleDateString("id-ID", {
-													day: "2-digit",
-													month: "short",
-													year: "numeric",
-												})}
-											</p>
-										</td>
-										<td className="px-6 pr-8 py-5">
-											<Badge
-												className={cn(
-													"px-3 py-1 rounded-xl text-[9px] font-black uppercase tracking-widest border-none shadow-none",
-													STATUS_COLORS[lead.status],
-												)}
+					<>
+						<div className="overflow-x-auto">
+							<table className="w-full">
+								<thead>
+									<tr className="border-b border-slate-50">
+										{[
+											"Nama",
+											"Telepon",
+											"Paket",
+											"Kota",
+											"Tanggal",
+											"Status",
+										].map((col) => (
+											<th
+												key={col}
+												className="text-left px-6 py-5 text-[10px] font-black text-slate-400 uppercase tracking-widest first:pl-8 last:pr-8"
 											>
-												{STATUS_LABELS[lead.status]}
-											</Badge>
-										</td>
+												{col}
+											</th>
+										))}
 									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
+								</thead>
+								<tbody className="divide-y divide-slate-50">
+									{paginatedItems.map((lead) => (
+										<tr
+											key={lead.id}
+											onClick={() => setSelectedLead(lead)}
+											className="group hover:bg-slate-50/50 transition-colors cursor-pointer"
+										>
+											<td className="pl-8 pr-6 py-5">
+												<p className="font-black text-slate-900 text-sm uppercase tracking-tight">
+													{lead.full_name}
+												</p>
+												{lead.email && (
+													<p className="text-[10px] font-bold text-slate-400 mt-0.5 truncate max-w-[180px]">
+														{lead.email}
+													</p>
+												)}
+											</td>
+											<td className="px-6 py-5">
+												<p className="text-sm font-bold text-slate-700">
+													{lead.phone}
+												</p>
+											</td>
+											<td className="px-6 py-5">
+												<p className="text-sm font-bold text-slate-700 truncate max-w-[160px]">
+													{lead.package_name}
+												</p>
+											</td>
+											<td className="px-6 py-5">
+												<p className="text-sm font-bold text-slate-700">
+													{lead.city}
+												</p>
+											</td>
+											<td className="px-6 py-5">
+												<p className="text-sm font-bold text-slate-700">
+													{new Date(lead.created_at).toLocaleDateString(
+														"id-ID",
+														{
+															day: "2-digit",
+															month: "short",
+															year: "numeric",
+														},
+													)}
+												</p>
+											</td>
+											<td className="px-6 pr-8 py-5">
+												<Badge
+													className={cn(
+														"px-3 py-1 rounded-xl text-[9px] font-black uppercase tracking-widest border-none shadow-none",
+														STATUS_COLORS[lead.status],
+													)}
+												>
+													{STATUS_LABELS[lead.status]}
+												</Badge>
+											</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						</div>
+
+						<div className="px-4 md:px-6 pb-6">
+							<PaginationControls
+								currentPage={currentPage}
+								totalPages={totalPages}
+								onPageChange={setCurrentPage}
+								totalItems={totalItems}
+								itemsPerPage={pageSize}
+								onPageSizeChange={setPageSize}
+							/>
+						</div>
+					</>
 				)}
 			</div>
 
-			{/* Lead Detail Modal */}
 			{selectedLead && (
 				<LeadDetailModal
 					lead={selectedLead}
@@ -351,8 +379,6 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 		</div>
 	);
 }
-
-// ─── Stat Card ────────────────────────────────────────────────────────────────
 
 interface StatCardProps {
 	label: string;

@@ -102,7 +102,6 @@ export async function registerStaffMember(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Staff action failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -120,7 +119,7 @@ export async function deleteStaffMember(id: string): Promise<ActionResponse> {
 			.delete()
 			.eq("id", id);
 		if (profileError) {
-			console.warn("Profile already deleted or FK cascade handled it.");
+			// Profile already deleted or FK cascade handled it
 		}
 
 		revalidatePath("/pegawai");
@@ -128,7 +127,6 @@ export async function deleteStaffMember(id: string): Promise<ActionResponse> {
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Delete staff failed:", err);
 		return { success: false, error: err.message };
 	}
 }

@@ -113,8 +113,8 @@ export default async function SuperadminLayout({
 					</div>
 				</header>
 				{/* Main Content */}
-				<main className="p-4 md:p-8">
-					{children}
+				<main className="flex-1 p-4 md:p-8 flex items-start justify-center">
+					<div className="w-full max-w-7xl">{children}</div>
 				</main>
 				{/* Dashboard Footer */}
 				<footer className="p-4 md:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">

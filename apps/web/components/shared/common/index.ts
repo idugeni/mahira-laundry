@@ -1,5 +1,4 @@
 export * from "@/components/shared/common/back-to-top";
-export * from "@/components/shared/common/confirm-dialog";
 export * from "@/components/shared/common/empty-state";
 export * from "@/components/shared/common/idr-input";
 export * from "@/components/shared/common/mahira-spinner";

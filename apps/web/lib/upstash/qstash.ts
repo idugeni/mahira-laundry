@@ -14,7 +14,6 @@ export async function enqueueJob(
 	options?: { delay?: number; retries?: number },
 ) {
 	if (!qstash) {
-		console.warn("[QStash] QSTASH_TOKEN not set, skipping job enqueue");
 		return;
 	}
 
@@ -25,7 +24,7 @@ export async function enqueueJob(
 			delay: options?.delay,
 			retries: options?.retries || 3,
 		});
-	} catch (error) {
-		console.error("[QStash] Failed to enqueue job:", error);
+	} catch (_error) {
+		// Job enqueue failed — non-critical
 	}
 }

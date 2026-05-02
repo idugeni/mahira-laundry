@@ -9,8 +9,29 @@ import {
 	MdOutlineLocalLaundryService,
 	MdOutlineRocketLaunch,
 } from "react-icons/md";
+import { Badge } from "@/components/ui/badge";
 
 import type { BusinessPackage } from "@/lib/types";
+
+const tierBadgeColors: Record<string, string> = {
+	Starter: "bg-blue-50 text-blue-600 border-blue-200",
+	Standard: "bg-emerald-50 text-emerald-600 border-emerald-200",
+	Premium: "bg-purple-50 text-purple-600 border-purple-200",
+	Custom: "bg-orange-50 text-orange-600 border-orange-200",
+};
+const defaultBadgeColor = "bg-slate-50 text-slate-600 border-slate-200";
+
+function isPromoActive(pkg: BusinessPackage): boolean {
+	return (
+		pkg.promo_price != null &&
+		pkg.promo_expires_at != null &&
+		new Date(pkg.promo_expires_at) > new Date()
+	);
+}
+
+function getEffectivePrice(pkg: BusinessPackage): number {
+	return isPromoActive(pkg) ? (pkg.promo_price as number) : pkg.price;
+}
 
 interface HomeHeroSectionProps {
 	user: unknown;
@@ -113,27 +134,30 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 							>
 								<HiOutlineSparkles />
 							</motion.span>
-							<span>Peluang Bisnis 2026</span>
+							<span>Peluang Bisnis {new Date().getFullYear()}</span>
 						</motion.div>
 
 						<motion.h1
 							variants={itemVariants}
 							className="text-4xl sm:text-5xl lg:text-7xl font-black font-[family-name:var(--font-heading)] leading-[1] tracking-tighter text-slate-900"
 						>
-							Jual Paket
+							Punya Bisnis Laundry
 							<br />
 							<span className="inline-block text-brand-gradient py-2">
-								Usaha Laundry.
+								Autopilot, Tanpa Pusing
 							</span>
+							<br />
+							Mulai dari Nol.
 						</motion.h1>
 
 						<motion.p
 							variants={itemVariants}
 							className="mt-6 text-lg text-slate-500 leading-relaxed max-w-lg font-medium"
 						>
-							Wujudkan impian bisnis Anda dengan sistem franchise-like yang
-							sudah teruji. Mulai dari peralatan premium hingga sistem autopilot
-							siap pakai.
+							Tinggalkan cara lama yang ribet dan rawan rugi. Kami siapkan
+							sistem teruji: mulai dari mesin premium, training SDM, hingga
+							operasional otomatis. Anda terima beres dan tinggal pantau profit
+							setiap hari.
 						</motion.p>
 
 						<motion.div
@@ -247,14 +271,29 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 											className="flex items-center justify-between p-5 rounded-2xl bg-slate-50 border border-slate-100 shadow-xs"
 										>
 											<div className="flex items-center gap-3">
-												<div className="w-2 h-2 rounded-full bg-brand-primary" />
-												<span className="text-xs font-black text-slate-700 uppercase tracking-widest">
-													{pkg.name}
+												<div
+													className={`w-2 h-2 rounded-full ${pkg.tier === "Starter" ? "bg-blue-500" : pkg.tier === "Standard" ? "bg-emerald-500" : pkg.tier === "Premium" ? "bg-purple-500" : "bg-orange-500"}`}
+												/>
+												<span className="text-xs font-black uppercase tracking-widest text-slate-900">
+													{pkg.name.split(" ")[0]}{" "}
+													<Badge
+														variant="secondary"
+														className={`${tierBadgeColors[pkg.tier] ?? defaultBadgeColor} text-[10px] font-black uppercase tracking-widest px-2 py-0.5`}
+													>
+														{pkg.name.split(" ").slice(1).join(" ")}
+													</Badge>
 												</span>
 											</div>
-											<span className="text-brand-primary font-black text-sm">
-												Rp {(pkg.price / 1000000).toFixed(0)}jt
-											</span>
+											<div className="flex items-center gap-2">
+												{isPromoActive(pkg) && (
+													<span className="text-slate-400 font-bold text-xs line-through">
+														Rp {(pkg.price / 1000000).toFixed(0)}jt
+													</span>
+												)}
+												<span className="text-brand-primary font-black text-sm">
+													Rp {(getEffectivePrice(pkg) / 1000000).toFixed(0)}jt
+												</span>
+											</div>
 										</motion.div>
 									))
 								) : (
@@ -282,7 +321,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 									</div>
 								</div>
 								<div className="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl">
-									Verified 2026
+									Verified {new Date().getFullYear()}
 								</div>
 							</div>
 						</motion.div>

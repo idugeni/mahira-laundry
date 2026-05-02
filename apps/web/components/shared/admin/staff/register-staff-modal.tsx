@@ -17,6 +17,16 @@ import {
 import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { toast } from "sonner";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -45,6 +55,7 @@ export function RegisterStaffModal({
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [mounted, setMounted] = useState(false);
+	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 	const [role, setRole] = useState<RegisterStaffInput["role"]>(
 		staff?.role === "manager" || staff?.role === "kurir" ? staff.role : "kasir",
 	);
@@ -56,16 +67,11 @@ export function RegisterStaffModal({
 
 	async function handleDelete() {
 		if (!staff) return;
-		if (
-			!confirm(
-				`Hapus akses ${staff.full_name || "staf ini"} dari sistem secara permanen?`,
-			)
-		)
-			return;
 		setIsLoading(true);
 		const result = await deleteStaffMember(staff.id);
 		if (result.success) {
 			toast.success("Kredensial staf telah dicabut dan dihapus.");
+			setShowDeleteConfirm(false);
 			setIsOpen(false);
 		} else {
 			toast.error(result.error || "Gagal mencabut akses.");
@@ -340,7 +346,7 @@ export function RegisterStaffModal({
 											<Button
 												type="button"
 												variant="ghost"
-												onClick={handleDelete}
+												onClick={() => setShowDeleteConfirm(true)}
 												disabled={isLoading}
 												className="w-full sm:w-auto px-5 h-11 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest shadow-xs flex items-center gap-2"
 											>
@@ -387,6 +393,42 @@ export function RegisterStaffModal({
 					</div>,
 					document.body,
 				)}
+
+			<AlertDialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
+				<AlertDialogContent className="rounded-[2.5rem] border-slate-100 p-8">
+					<AlertDialogHeader>
+						<div className="w-16 h-16 rounded-3xl bg-red-50 text-red-500 flex items-center justify-center text-3xl mb-4 mx-auto sm:mx-0 shadow-inner">
+							<Trash2 />
+						</div>
+						<AlertDialogTitle className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900">
+							Cabut Akses Staf?
+						</AlertDialogTitle>
+						<AlertDialogDescription className="text-slate-500 font-medium text-base">
+							Akses {staff?.full_name || "staf ini"} akan dicabut dari sistem
+							secara permanen. Tindakan ini{" "}
+							<span className="text-red-600 font-bold underline decoration-2 underline-offset-4">
+								tidak dapat dibatalkan
+							</span>
+							.
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">
+						<AlertDialogCancel className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs border-slate-100 hover:bg-slate-50 transition-all">
+							Batal
+						</AlertDialogCancel>
+						<AlertDialogAction
+							onClick={(e: React.MouseEvent) => {
+								e.preventDefault();
+								handleDelete();
+							}}
+							disabled={isLoading}
+							className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 transition-all"
+						>
+							{isLoading ? "Menghapus..." : "Ya, Cabut Akses"}
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
 		</>
 	);
 }

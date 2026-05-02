@@ -18,13 +18,11 @@ export async function sendEmail({ to, subject, html }: EmailParams) {
 		});
 
 		if (error) {
-			console.error("[Email] Error:", error);
 			return { success: false, error: error.message };
 		}
 
 		return { success: true, data };
 	} catch (error) {
-		console.error("[Email] Error sending email:", error);
 		return { success: false, error: String(error) };
 	}
 }

@@ -28,7 +28,7 @@ export default function CookiesPage() {
 		<LegalLayout
 			title="Kebijakan Cookie"
 			subtitle="Memahami bagaimana kami menggunakan teknologi untuk meningkatkan pengalaman Anda."
-			lastUpdated="12 April 2026"
+			lastUpdated="2 Mei 2026"
 		>
 			<div className="space-y-12">
 				<section>
@@ -98,7 +98,7 @@ export default function CookiesPage() {
 				</section>
 
 				<div className="pt-10 border-t border-slate-100 italic text-sm text-slate-400">
-					Terakhir diperbarui: 12 April 2026
+					Terakhir diperbarui: 2 Mei 2026
 				</div>
 			</div>
 		</LegalLayout>

@@ -8,6 +8,54 @@ interface ComparisonTableProps {
 	packages: BusinessPackage[];
 }
 
+const tierColors: Record<
+	string,
+	{
+		bg: string;
+		headerBg: string;
+		headerText: string;
+		mobileBg: string;
+		border: string;
+	}
+> = {
+	Starter: {
+		bg: "bg-blue-50",
+		headerBg: "bg-blue-600",
+		headerText: "text-white",
+		mobileBg: "bg-blue-50",
+		border: "border-blue-100",
+	},
+	Standard: {
+		bg: "bg-emerald-50",
+		headerBg: "bg-emerald-600",
+		headerText: "text-white",
+		mobileBg: "bg-emerald-50",
+		border: "border-emerald-100",
+	},
+	Premium: {
+		bg: "bg-purple-50",
+		headerBg: "bg-purple-600",
+		headerText: "text-white",
+		mobileBg: "bg-purple-50",
+		border: "border-purple-100",
+	},
+	Custom: {
+		bg: "bg-orange-50",
+		headerBg: "bg-orange-600",
+		headerText: "text-white",
+		mobileBg: "bg-orange-50",
+		border: "border-orange-100",
+	},
+};
+
+const defaultTierColor = {
+	bg: "bg-slate-50",
+	headerBg: "bg-slate-700",
+	headerText: "text-white",
+	mobileBg: "bg-slate-50",
+	border: "border-slate-100",
+};
+
 const formatIDR = (amount: number) =>
 	new Intl.NumberFormat("id-ID", {
 		style: "currency",
@@ -93,14 +141,17 @@ export default function ComparisonTable({ packages }: ComparisonTableProps) {
 							<th className="px-10 py-8 text-left font-black text-slate-400 uppercase tracking-[0.4em] text-[10px]">
 								Analisis Komparasi
 							</th>
-							{packages.map((pkg) => (
-								<th
-									key={pkg.id}
-									className="px-10 py-8 text-center font-black text-white uppercase tracking-[0.2em] text-xs"
-								>
-									{pkg.name}
-								</th>
-							))}
+							{packages.map((pkg) => {
+								const color = tierColors[pkg.tier] ?? defaultTierColor;
+								return (
+									<th
+										key={pkg.id}
+										className={`px-10 py-8 text-center font-black uppercase tracking-[0.2em] text-xs ${color.headerBg} ${color.headerText}`}
+									>
+										{pkg.name}
+									</th>
+								);
+							})}
 						</tr>
 					</thead>
 					<tbody className="divide-y divide-slate-50">
@@ -116,14 +167,17 @@ export default function ComparisonTable({ packages }: ComparisonTableProps) {
 								<td className="px-10 py-6 font-bold text-slate-400 group-hover:text-slate-900 transition-colors bg-slate-50/30 group-hover:bg-white border-r border-slate-50 text-[11px] uppercase tracking-widest">
 									{row.label}
 								</td>
-								{packages.map((pkg) => (
-									<td
-										key={pkg.id}
-										className="px-10 py-6 text-center font-black text-slate-900 text-sm"
-									>
-										{row.getValue(pkg)}
-									</td>
-								))}
+								{packages.map((pkg) => {
+									const color = tierColors[pkg.tier] ?? defaultTierColor;
+									return (
+										<td
+											key={pkg.id}
+											className={`px-10 py-6 text-center font-black text-slate-900 text-sm ${color.bg} border-l ${color.border}`}
+										>
+											{row.getValue(pkg)}
+										</td>
+									);
+								})}
 							</motion.tr>
 						))}
 					</tbody>
@@ -147,19 +201,22 @@ export default function ComparisonTable({ packages }: ComparisonTableProps) {
 								{row.label}
 							</p>
 							<div className="grid grid-cols-3 gap-3">
-								{packages.map((pkg, idx) => (
-									<div
-										key={pkg.id}
-										className={`flex flex-col items-center text-center px-1 ${idx !== packages.length - 1 ? "border-r border-slate-50" : ""}`}
-									>
-										<span className="text-[8px] font-black text-slate-300 uppercase tracking-widest mb-2 truncate w-full">
-											{pkg.name.split(" ")[0]}
-										</span>
-										<div className="text-[10px] font-black text-slate-900 leading-tight">
-											{row.getValue(pkg)}
+								{packages.map((pkg, idx) => {
+									const color = tierColors[pkg.tier] ?? defaultTierColor;
+									return (
+										<div
+											key={pkg.id}
+											className={`flex flex-col items-center text-center px-3 py-2 rounded-xl ${color.mobileBg} ${idx !== packages.length - 1 ? "" : ""}`}
+										>
+											<span className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2 truncate w-full">
+												{pkg.name.split(" ")[0]}
+											</span>
+											<div className="text-[10px] font-black text-slate-900 leading-tight">
+												{row.getValue(pkg)}
+											</div>
 										</div>
-									</div>
-								))}
+									);
+								})}
 							</div>
 						</div>
 					))}

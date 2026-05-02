@@ -27,6 +27,7 @@ export async function updateProfile(formData: FormData) {
 	if (error) return { error: error.message };
 
 	revalidatePath("/profil");
+	revalidatePath("/admin/profil");
 	return { success: true };
 }
 
@@ -64,12 +65,61 @@ export async function updateAvatar(formData: FormData) {
 		revalidatePath("/profil");
 		revalidatePath("/admin/profil");
 		revalidatePath("/customer/profil");
+		revalidatePath("/manager/profil");
 
 		return { success: true, url: publicUrl };
 	} catch (error: unknown) {
-		console.error("Update Avatar Error:", error);
 		const errorMessage =
 			error instanceof Error ? error.message : "Gagal memperbarui foto profil";
 		return { error: errorMessage };
 	}
+}
+
+export async function sendPasswordReset() {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user || !user.email) return { error: "Unauthorized" };
+
+	const { error } = await supabase.auth.resetPasswordForEmail(user.email, {
+		redirectTo: `${process.env.NEXT_PUBLIC_APP_URL}/auth/callback?type=recovery`,
+	});
+
+	if (error) return { error: error.message };
+	return { success: true };
+}
+
+export async function updateRecoveryEmail(newEmail: string) {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) return { error: "Unauthorized" };
+
+	const { error } = await supabase.auth.updateUser({ email: newEmail });
+
+	if (error) return { error: error.message };
+
+	revalidatePath("/admin/profil");
+	return { success: true };
+}
+
+export async function updatePassword(newPassword: string) {
+	const supabase = await createClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	if (!user) return { error: "Unauthorized" };
+
+	if (!newPassword || newPassword.length < 6) {
+		return { error: "Password minimal 6 karakter." };
+	}
+
+	const { error } = await supabase.auth.updateUser({ password: newPassword });
+
+	if (error) return { error: error.message };
+
+	revalidatePath("/admin/profil");
+	return { success: true };
 }

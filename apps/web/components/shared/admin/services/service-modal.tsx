@@ -11,6 +11,16 @@ import {
 } from "react-icons/hi2";
 import { toast } from "sonner";
 import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
 	Select,
 	SelectContent,
 	SelectItem,
@@ -48,6 +58,7 @@ export function ServiceModal({
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [mounted, setMounted] = useState(false);
+	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
 	const [isExpress, setIsExpress] = useState(service?.is_express || false);
 	const [isFeatured, setIsFeatured] = useState(service?.is_featured || false);
@@ -60,11 +71,12 @@ export function ServiceModal({
 	}, []);
 
 	const handleDelete = async () => {
-		if (!service || !confirm("Yakin ingin menghapus layanan ini?")) return;
+		if (!service) return;
 		setIsLoading(true);
 		const result = await deleteService(service.id);
 		if (result.success) {
 			toast.success("Layanan dihapus");
+			setShowDeleteConfirm(false);
 			setIsOpen(false);
 		} else {
 			toast.error(result.error || "Gagal menghapus");
@@ -117,7 +129,8 @@ export function ServiceModal({
 
 	return (
 		<>
-			<div
+			<button
+				type="button"
 				onClick={() => setIsOpen(true)}
 				className="contents"
 			>
@@ -126,7 +139,7 @@ export function ServiceModal({
 						+ Tambah Layanan
 					</span>
 				)}
-			</div>
+			</button>
 
 			{isOpen &&
 				mounted &&
@@ -487,7 +500,7 @@ export function ServiceModal({
 										{service && (
 											<button
 												type="button"
-												onClick={handleDelete}
+												onClick={() => setShowDeleteConfirm(true)}
 												disabled={isLoading}
 												className="px-4 py-3 text-slate-500 hover:text-red-600 bg-white border border-slate-200 rounded-xl hover:bg-red-50 hover:border-red-200 transition-colors"
 												title="Hapus Layanan"
@@ -520,6 +533,38 @@ export function ServiceModal({
 					</div>,
 					document.body,
 				)}
+
+			<AlertDialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
+				<AlertDialogContent className="rounded-[2.5rem] border-slate-100 p-8">
+					<AlertDialogHeader>
+						<div className="w-16 h-16 rounded-3xl bg-red-50 text-red-500 flex items-center justify-center text-3xl mb-4 mx-auto sm:mx-0 shadow-inner">
+							<HiOutlineTrash />
+						</div>
+						<AlertDialogTitle className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900">
+							Hapus Layanan?
+						</AlertDialogTitle>
+						<AlertDialogDescription className="text-slate-500 font-medium text-base">
+							Layanan ini akan dihapus secara permanen dan tidak dapat
+							dikembalikan.
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">
+						<AlertDialogCancel className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs border-slate-100 hover:bg-slate-50 transition-all">
+							Batal
+						</AlertDialogCancel>
+						<AlertDialogAction
+							onClick={(e: React.MouseEvent) => {
+								e.preventDefault();
+								handleDelete();
+							}}
+							disabled={isLoading}
+							className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 transition-all"
+						>
+							{isLoading ? "Menghapus..." : "Ya, Hapus Layanan"}
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
 		</>
 	);
 }

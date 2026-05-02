@@ -15,6 +15,16 @@ import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiOutlineCamera } from "react-icons/hi2";
 import { toast } from "sonner";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -34,6 +44,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [imageUrl, setImageUrl] = useState(outlet?.image_url || "");
 	const [mounted, setMounted] = useState(false);
+	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
 	useEffect(() => {
 		setMounted(true);
@@ -58,18 +69,12 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 	}
 
 	async function handleDelete() {
-		if (
-			!confirm(
-				"PERINGATAN: Menghapus outlet akan menghapus seluruh data terkait secara permanen. Lanjutkan?",
-			)
-		)
-			return;
-
 		setIsLoading(true);
 		const result = await deleteOutlet(outlet?.id ?? "");
 
 		if (result.success) {
 			toast.success("Outlet telah dihapus dari ekosistem bisnis.");
+			setShowDeleteConfirm(false);
 			setIsOpen(false);
 		} else {
 			toast.error(result.error || "Gagal menghapus outlet.");
@@ -354,7 +359,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 											<Button
 												type="button"
 												variant="ghost"
-												onClick={handleDelete}
+												onClick={() => setShowDeleteConfirm(true)}
 												disabled={isLoading}
 												className="w-full sm:w-auto px-5 h-11 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100 font-black text-[10px] uppercase tracking-widest shadow-xs flex items-center gap-2"
 											>
@@ -401,6 +406,43 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 					</div>,
 					document.body,
 				)}
+
+			<AlertDialog open={showDeleteConfirm} onOpenChange={setShowDeleteConfirm}>
+				<AlertDialogContent className="rounded-[2.5rem] border-slate-100 p-8">
+					<AlertDialogHeader>
+						<div className="w-16 h-16 rounded-3xl bg-red-50 text-red-500 flex items-center justify-center text-3xl mb-4 mx-auto sm:mx-0 shadow-inner">
+							<Trash2 />
+						</div>
+						<AlertDialogTitle className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900">
+							Hapus Outlet?
+						</AlertDialogTitle>
+						<AlertDialogDescription className="text-slate-500 font-medium text-base">
+							<span className="text-red-600 font-bold">PERINGATAN:</span>{" "}
+							Menghapus outlet akan menghapus seluruh data terkait secara
+							permanen. Tindakan ini{" "}
+							<span className="text-red-600 font-bold underline decoration-2 underline-offset-4">
+								tidak dapat dibatalkan
+							</span>
+							.
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">
+						<AlertDialogCancel className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs border-slate-100 hover:bg-slate-50 transition-all">
+							Batal
+						</AlertDialogCancel>
+						<AlertDialogAction
+							onClick={(e: React.MouseEvent) => {
+								e.preventDefault();
+								handleDelete();
+							}}
+							disabled={isLoading}
+							className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 transition-all"
+						>
+							{isLoading ? "Menghapus..." : "Ya, Hapus Outlet"}
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
 		</>
 	);
 }

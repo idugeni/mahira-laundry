@@ -16,6 +16,16 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { PaginationControls } from "@/components/shared/common/pagination-controls";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -105,7 +115,8 @@ function CategoryDropdown({
 									className={cn(
 										"flex w-full items-center justify-between rounded-xl px-3 py-3 text-left text-sm font-black text-slate-600 transition-colors",
 										"hover:bg-indigo-50 hover:text-indigo-600",
-										active && "bg-indigo-600 text-white hover:bg-indigo-600 hover:text-white",
+										active &&
+											"bg-indigo-600 text-white hover:bg-indigo-600 hover:text-white",
 									)}
 								>
 									<span>{option}</span>
@@ -135,6 +146,8 @@ export function AdminGalleryClient({
 	const [editingId, setEditingId] = useState<string | null>(null);
 	const [editTitle, setEditTitle] = useState("");
 	const [editCategory, setEditCategory] = useState("");
+	const [deleteId, setDeleteId] = useState<string | null>(null);
+	const [deleteImageUrl, setDeleteImageUrl] = useState<string | null>(null);
 
 	const filteredItems =
 		activeCategory === "Semua"
@@ -213,15 +226,22 @@ export function AdminGalleryClient({
 		});
 	}
 
-	async function handleDelete(id: string, imageUrl: string) {
-		if (!confirm("Hapus aset visual ini secara permanen?")) return;
+	function confirmDelete(id: string, imageUrl: string) {
+		setDeleteId(id);
+		setDeleteImageUrl(imageUrl);
+	}
 
-		const promise = deleteGalleryItem(id, imageUrl);
+	async function handleDelete() {
+		if (!deleteId || !deleteImageUrl) return;
+
+		const promise = deleteGalleryItem(deleteId, deleteImageUrl);
 
 		toast.promise(promise, {
 			loading: "Menghapus identitas visual...",
 			success: () => {
-				setItems(items.filter((i) => i.id !== id));
+				setItems(items.filter((i) => i.id !== deleteId));
+				setDeleteId(null);
+				setDeleteImageUrl(null);
 				return "Aset visual berhasil dimusnahkan.";
 			},
 			error: "Interupsi sistem: Pembersihan gagal.",
@@ -230,6 +250,41 @@ export function AdminGalleryClient({
 
 	return (
 		<div className="space-y-8 sm:space-y-12">
+			<AlertDialog
+				open={!!deleteId}
+				onOpenChange={(open: boolean) =>
+					!open && (setDeleteId(null), setDeleteImageUrl(null))
+				}
+			>
+				<AlertDialogContent className="rounded-[2.5rem] border-slate-100 p-8">
+					<AlertDialogHeader>
+						<div className="w-16 h-16 rounded-3xl bg-red-50 text-red-500 flex items-center justify-center text-3xl mb-4 mx-auto sm:mx-0 shadow-inner">
+							<Trash2 />
+						</div>
+						<AlertDialogTitle className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900">
+							Hapus Aset Visual?
+						</AlertDialogTitle>
+						<AlertDialogDescription className="text-slate-500 font-medium text-base">
+							Aset visual ini akan dihapus secara permanen dan tidak dapat
+							dikembalikan.
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter className="mt-8 gap-3 sm:gap-0">
+						<AlertDialogCancel className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs border-slate-100 hover:bg-slate-50 transition-all">
+							Batal
+						</AlertDialogCancel>
+						<AlertDialogAction
+							onClick={(e: React.MouseEvent) => {
+								e.preventDefault();
+								handleDelete();
+							}}
+							className="rounded-2xl h-14 font-black uppercase tracking-widest text-xs bg-red-500 hover:bg-red-600 shadow-xl shadow-red-100 transition-all"
+						>
+							Hapus Sekarang
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
 			<div className="relative overflow-hidden rounded-none bg-slate-950 p-6 text-white shadow-2xl shadow-slate-900/30 sm:rounded-3xl sm:p-8 md:rounded-[2rem] md:p-10">
 				<div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full bg-indigo-500/10 blur-3xl" />
 				<div className="absolute bottom-0 left-0 h-px w-full bg-gradient-to-r from-transparent via-indigo-400/40 to-transparent" />
@@ -409,7 +464,13 @@ export function AdminGalleryClient({
 						<>
 							<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8">
 								{paginatedItems.map((item, index) => (
-									<div key={item.id} className={cn("group relative", editingId === item.id && "z-40")}>
+									<div
+										key={item.id}
+										className={cn(
+											"group relative",
+											editingId === item.id && "z-40",
+										)}
+									>
 										<Card className="overflow-visible rounded-none border-b border-slate-100 py-0 shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-100 hover:shadow-2xl hover:shadow-indigo-500/10 sm:rounded-3xl sm:border">
 											<CardContent className="relative aspect-[4/3] overflow-hidden rounded-t-none p-0 sm:rounded-t-3xl">
 												<Image
@@ -447,7 +508,7 @@ export function AdminGalleryClient({
 																variant="ghost"
 																className="h-10 w-10 rounded-xl border border-red-500/10 bg-red-500/20 text-red-100 backdrop-blur-xl transition-colors hover:bg-red-500 hover:text-white"
 																onClick={() =>
-																	handleDelete(item.id, item.image_url)
+																	confirmDelete(item.id, item.image_url)
 																}
 															>
 																<Trash2 size={18} />

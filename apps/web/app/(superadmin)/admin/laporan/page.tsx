@@ -87,7 +87,8 @@ export default async function LaporanPage() {
 							</Badge>
 							<span className="text-slate-500 hidden sm:inline">•</span>
 							<span className="text-slate-400 text-xs lg:text-sm font-bold uppercase tracking-widest flex items-center gap-2">
-								<Layers size={14} className="hidden sm:block" /> <span className="hidden sm:inline">Comprehensive Auditing</span>
+								<Layers size={14} className="hidden sm:block" />{" "}
+								<span className="hidden sm:inline">Comprehensive Auditing</span>
 							</span>
 						</div>
 						<h1 className="text-2xl sm:text-4xl lg:text-6xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-none text-white">

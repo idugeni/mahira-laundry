@@ -47,7 +47,6 @@ export async function addGalleryItem(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Add gallery item failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -67,7 +66,7 @@ export async function deleteGalleryItem(
 			.from("gallery")
 			.remove([filePath]);
 
-		if (storageError) console.error("Storage delete error:", storageError);
+		// Storage cleanup best-effort — don't block DB deletion
 
 		const { error: dbError } = await supabase
 			.from("gallery")
@@ -82,7 +81,6 @@ export async function deleteGalleryItem(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Delete gallery item failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -107,7 +105,6 @@ export async function updateGalleryItem(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Update gallery item failed:", err);
 		return { success: false, error: err.message };
 	}
 }

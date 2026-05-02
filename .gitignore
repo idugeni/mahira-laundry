@@ -99,4 +99,5 @@ apps/web/test-query.mjs
 
 # AI Assistant Metadata
 skills-lock.json
-.agents/
+.agents/
+CLAUDE.md

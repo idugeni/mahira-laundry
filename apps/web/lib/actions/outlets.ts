@@ -58,7 +58,6 @@ export async function upsertOutlet(data: OutletInput): Promise<ActionResponse> {
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Outlet upsert failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -75,7 +74,6 @@ export async function deleteOutlet(id: string): Promise<ActionResponse> {
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Delete outlet failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -113,7 +111,6 @@ export async function uploadOutletImage(
 		return { success: true, data: { url: publicUrl } };
 	} catch (error) {
 		const err = error as Error;
-		console.error("Upload image failed:", err);
 		return { success: false, error: err.message };
 	}
 }

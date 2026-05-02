@@ -155,7 +155,7 @@ export async function getAllTestimonials() {
 		.select("*, profiles(full_name), guest_name")
 		.order("created_at", { ascending: false });
 
-	if (error) console.error("Error fetching all testimonials:", error);
+	if (error) return [];
 	return testimonials || [];
 }
 
@@ -277,7 +277,6 @@ export async function getRecentExpenses(limit = 10) {
 		.limit(limit);
 
 	if (error) {
-		console.error("Error fetching expenses:", error.message);
 		return [];
 	}
 	return data || [];
@@ -410,7 +409,6 @@ export async function getAuditLogs(limit = 50, tableName?: string) {
 
 	const { data, error } = await query;
 	if (error) {
-		console.error("Error fetching audit logs:", error);
 		return [];
 	}
 	if (!data) return [];
@@ -418,23 +416,26 @@ export async function getAuditLogs(limit = 50, tableName?: string) {
 	// Deduplicate: skip entries with same user+action+table+record within 5 min window
 	const seenWindows: Map<string, number> = new Map(); // key -> earliest timestamp
 	const deduped = [];
-		for (const log of data) {
-			// Only deduplicate logs that have a record_id, as these are likely
-			// to be duplicate entries for the same record action (e.g., from retries).
-			// Security events like login/logout without record_id should never be deduplicated.
-			if (log.record_id === null || log.record_id === undefined) {
-				deduped.push(log);
-				if (deduped.length >= limit) break;
-				continue;
-			}
-			const key = `${log.user_id}-${log.action}-${log.table_name}-${log.record_id}`;
-			const logTime = new Date(log.created_at).getTime();
-			const earliest = seenWindows.get(key);
-			if (earliest !== undefined && Math.abs(logTime - earliest) < 5 * 60 * 1000) {
-				continue; // duplicate within 5 min window
-			}
-			seenWindows.set(key, logTime);
+	for (const log of data) {
+		// Only deduplicate logs that have a record_id, as these are likely
+		// to be duplicate entries for the same record action (e.g., from retries).
+		// Security events like login/logout without record_id should never be deduplicated.
+		if (log.record_id === null || log.record_id === undefined) {
 			deduped.push(log);
+			if (deduped.length >= limit) break;
+			continue;
+		}
+		const key = `${log.user_id}-${log.action}-${log.table_name}-${log.record_id}`;
+		const logTime = new Date(log.created_at).getTime();
+		const earliest = seenWindows.get(key);
+		if (
+			earliest !== undefined &&
+			Math.abs(logTime - earliest) < 5 * 60 * 1000
+		) {
+			continue; // duplicate within 5 min window
+		}
+		seenWindows.set(key, logTime);
+		deduped.push(log);
 		if (deduped.length >= limit) break;
 	}
 	return deduped;

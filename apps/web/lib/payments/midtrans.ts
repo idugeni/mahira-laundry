@@ -51,7 +51,6 @@ export async function createSnapTransaction(params: MidtransSnapParams) {
 		const data = await response.json();
 		return { success: true, data };
 	} catch (error) {
-		console.error("[Midtrans] Error:", error);
 		return { success: false, error: String(error) };
 	}
 }

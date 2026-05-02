@@ -14,6 +14,7 @@ import {
 import type { Metadata } from "next";
 import Image from "next/image";
 import { OutletModal } from "@/components/shared/admin/outlet/outlet-modal";
+import { PaginatedGrid } from "@/components/shared/common/paginated-grid";
 import { StatCard } from "@/components/shared/common/stat-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -44,7 +45,10 @@ export default async function OutletPage() {
 	);
 	const revenueGrowth =
 		totalLastMonthRevenue > 0
-			? (((totalRevenue - totalLastMonthRevenue) / totalLastMonthRevenue) * 100).toFixed(1)
+			? (
+					((totalRevenue - totalLastMonthRevenue) / totalLastMonthRevenue) *
+					100
+				).toFixed(1)
 			: totalRevenue > 0
 				? "100.0"
 				: "0.0";
@@ -58,7 +62,10 @@ export default async function OutletPage() {
 				<div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
 					<div className="space-y-4">
 						<div className="flex items-center gap-3">
-							<Badge variant="outline" className="bg-indigo-50 text-indigo-700 border-indigo-200 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-colors">
+							<Badge
+								variant="outline"
+								className="bg-indigo-50 text-indigo-700 border-indigo-200 px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] hover:bg-indigo-600 hover:text-white hover:border-indigo-600 transition-colors"
+							>
 								Ekosistem Bisnis
 							</Badge>
 							<span className="text-slate-200">•</span>
@@ -97,7 +104,11 @@ export default async function OutletPage() {
 					subtitle={formatIDR(totalRevenue)}
 					icon={<CreditCard size={24} />}
 					variant="success"
-					trend={{ value: `${Math.abs(parseFloat(revenueGrowth))}%`, positive: parseFloat(revenueGrowth) >= 0, label: "vs bln lalu" }}
+					trend={{
+						value: `${Math.abs(parseFloat(revenueGrowth))}%`,
+						positive: parseFloat(revenueGrowth) >= 0,
+						label: "vs bln lalu",
+					}}
 				/>
 				<StatCard
 					title="Total Pesanan"
@@ -123,12 +134,13 @@ export default async function OutletPage() {
 			</div>
 
 			{/* Outlet Cards Grid */}
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
-				{outlets.map((outlet) => (
-					<div
-						key={outlet.id}
-						className="group relative bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 p-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-indigo-500/10 transition-[box-shadow,border-color] duration-300 overflow-hidden"
-					>
+			<PaginatedGrid
+				items={outlets}
+				defaultPageSize={8}
+				pageSizeOptions={[8, 16, 32]}
+				gridClassName="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6"
+				renderItem={(outlet) => (
+					<div className="group relative bg-white rounded-none sm:rounded-2xl border-y sm:border border-slate-100 p-6 shadow-lg shadow-slate-200/35 hover:shadow-xl hover:shadow-indigo-500/10 transition-[box-shadow,border-color] duration-300 overflow-hidden">
 						{/* Background Decorative Pattern */}
 						<div className="absolute top-0 right-0 p-10 opacity-5 group-hover:opacity-10 transition-opacity duration-700 pointer-events-none">
 							{outlet.is_franchise ? (
@@ -246,27 +258,26 @@ export default async function OutletPage() {
 							</div>
 						</div>
 					</div>
-				))}
-			</div>
-
-			{outlets.length === 0 && (
-				<div className="bg-white rounded-2xl border border-slate-100 p-10 sm:p-14 text-center shadow-lg shadow-slate-200/40 relative overflow-hidden group">
-					<div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/20 to-slate-50/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-					<div className="relative flex flex-col items-center">
-						<div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mb-8 border-4 border-dashed border-slate-100">
-							<Building2 size={48} className="text-slate-200" />
+				)}
+				emptyState={
+					<div className="bg-white rounded-2xl border border-slate-100 p-10 sm:p-14 text-center shadow-lg shadow-slate-200/40 relative overflow-hidden group">
+						<div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-50/20 to-slate-50/40 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+						<div className="relative flex flex-col items-center">
+							<div className="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mb-8 border-4 border-dashed border-slate-100">
+								<Building2 size={48} className="text-slate-200" />
+							</div>
+							<h3 className="text-3xl font-black text-slate-800 uppercase tracking-tight">
+								Belum Ada Jaringan
+							</h3>
+							<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-4 max-w-lg leading-relaxed">
+								Sistem siap untuk diintegrasikan dengan outlet-outlet baru.
+								Silakan klik tombol Registrasi Outlet untuk mulai membangun
+								ekosistem bisnis Anda.
+							</p>
 						</div>
-						<h3 className="text-3xl font-black text-slate-800 uppercase tracking-tight">
-							Belum Ada Jaringan
-						</h3>
-						<p className="text-slate-400 font-bold text-sm uppercase tracking-widest mt-4 max-w-lg leading-relaxed">
-							Sistem siap untuk diintegrasikan dengan outlet-outlet baru.
-							Silakan klik tombol Registrasi Outlet untuk mulai membangun
-							ekosistem bisnis Anda.
-						</p>
 					</div>
-				</div>
-			)}
+				}
+			/>
 		</div>
 	);
 }

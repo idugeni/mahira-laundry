@@ -58,7 +58,6 @@ export async function topUpBalance(
 		revalidatePath("/admin/keuangan");
 		return { success: true };
 	} catch (error) {
-		console.error("Top up failed:", error);
 		return { success: false, error: (error as Error).message };
 	}
 }
@@ -93,7 +92,6 @@ export async function settleRoyalty(data: {
 		revalidatePath("/admin/keuangan");
 		return { success: true };
 	} catch (error) {
-		console.error("Royalty settlement failed:", error);
 		return { success: false, error: (error as Error).message };
 	}
 }
@@ -140,7 +138,6 @@ export async function recordIncome(data: {
 		revalidatePath("/admin/keuangan");
 		return { success: true };
 	} catch (error) {
-		console.error("Record income failed:", error);
 		return { success: false, error: (error as Error).message };
 	}
 }

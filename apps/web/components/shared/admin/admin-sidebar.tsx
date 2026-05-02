@@ -28,10 +28,7 @@ interface SidebarContentProps {
 	onNavClick: () => void;
 }
 
-function SidebarContent({
-	navItems,
-	onNavClick,
-}: SidebarContentProps) {
+function SidebarContent({ navItems, onNavClick }: SidebarContentProps) {
 	const pathname = usePathname();
 
 	const isActive = (href: string) => {
@@ -92,7 +89,6 @@ function SidebarContent({
 					);
 				})}
 			</nav>
-
 		</div>
 	);
 }
@@ -110,10 +106,7 @@ export function AdminSidebar({
 		<>
 			{/* Desktop Sidebar */}
 			<aside className="hidden md:flex md:w-64 shrink-0 flex-col border-r border-slate-100 bg-white/95 backdrop-blur-xs sticky top-0 h-screen">
-				<SidebarContent
-					navItems={navItems}
-					onNavClick={() => {}}
-				/>
+				<SidebarContent navItems={navItems} onNavClick={() => {}} />
 			</aside>
 
 			{/* Mobile Top Bar */}

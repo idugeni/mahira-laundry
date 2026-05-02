@@ -49,7 +49,6 @@ export async function createBusinessPackage(
 		return { success: true, data: created as BusinessPackage };
 	} catch (error) {
 		const err = error as Error;
-		console.error("createBusinessPackage failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -84,7 +83,6 @@ export async function updateBusinessPackage(
 		return { success: true, data: updated as BusinessPackage };
 	} catch (error) {
 		const err = error as Error;
-		console.error("updateBusinessPackage failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -120,7 +118,6 @@ export async function deleteBusinessPackage(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("deleteBusinessPackage failed:", err);
 		return { success: false, error: err.message };
 	}
 }
@@ -142,7 +139,6 @@ export async function toggleBusinessPackageActive(
 		return { success: true };
 	} catch (error) {
 		const err = error as Error;
-		console.error("toggleBusinessPackageActive failed:", err);
 		return { success: false, error: err.message };
 	}
 }

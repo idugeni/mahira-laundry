@@ -80,7 +80,7 @@ export async function registerMitra(formData: Record<string, unknown>) {
 				.eq("id", authUser.user.id);
 
 			if (profileError) {
-				console.error("Error linking mitra to outlet:", profileError);
+				// Profile link failed — non-blocking
 			} else {
 				await enqueueJob("/api/jobs/welcome-mitra", {
 					userId: authUser.user.id,
@@ -96,7 +96,6 @@ export async function registerMitra(formData: Record<string, unknown>) {
 
 		return { success: true, outletId: outlet.id };
 	} catch (error) {
-		console.error("Mitra registration failed:", error);
 		if (error instanceof z.ZodError) {
 			return { success: false, error: error.issues[0].message };
 		}

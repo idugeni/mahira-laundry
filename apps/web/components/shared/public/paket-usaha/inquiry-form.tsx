@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
@@ -63,9 +63,6 @@ export function InquiryForm({
 	defaultPackageName,
 	packages,
 }: InquiryFormProps) {
-	const [successMessage, setSuccessMessage] = useState<string | null>(null);
-	const [duplicateMessage, setDuplicateMessage] = useState<string | null>(null);
-
 	const form = useForm<FormValues>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -86,9 +83,6 @@ export function InquiryForm({
 	}, [defaultPackageName, form]);
 
 	async function onSubmit(values: FormValues) {
-		setSuccessMessage(null);
-		setDuplicateMessage(null);
-
 		const selectedPackage = packages.find(
 			(p) => p.name === values.package_name,
 		);
@@ -105,7 +99,7 @@ export function InquiryForm({
 		});
 
 		if (result.success) {
-			setSuccessMessage(
+			toast.success(
 				"Terima kasih! Tim kami akan menghubungi Anda dalam 1x24 jam kerja.",
 			);
 			form.reset({
@@ -118,9 +112,9 @@ export function InquiryForm({
 				message: "",
 			});
 		} else if (result.error?.includes("sudah mengajukan")) {
-			setDuplicateMessage(result.error);
+			toast.error(result.error);
 		} else {
-			toast.error("Terjadi kesalahan, coba lagi.");
+			toast.error(result.error || "Terjadi kesalahan, coba lagi.");
 		}
 	}
 
@@ -129,18 +123,6 @@ export function InquiryForm({
 			<h3 className="mb-6 text-xl font-bold text-gray-900">
 				Ajukan Inquiry Paket Usaha
 			</h3>
-
-			{successMessage && (
-				<div className="mb-6 rounded-xl bg-green-50 p-4 text-green-800 font-medium">
-					{successMessage}
-				</div>
-			)}
-
-			{duplicateMessage && (
-				<div className="mb-6 rounded-xl bg-yellow-50 p-4 text-yellow-800 font-medium">
-					{duplicateMessage}
-				</div>
-			)}
 
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">

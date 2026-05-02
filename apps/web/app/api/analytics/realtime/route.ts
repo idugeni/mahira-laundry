@@ -1,6 +1,24 @@
 import { BetaAnalyticsDataClient } from "@google-analytics/data";
 import { NextResponse } from "next/server";
-import { publicApiLimiter } from "@/lib/upstash/rate-limit";
+import { redis } from "@/lib/upstash/redis";
+
+const CACHE_KEY = "mahira:ga4:realtime" as const;
+const CACHE_TTL_S = 60 as const;
+
+interface CachedRealtimeData {
+	activeUsers: number;
+	eventCount: number;
+	deviceBreakdown: Array<{
+		device: string;
+		city: string;
+		users: number;
+	}>;
+	topPages: Array<{
+		page: string;
+		users: number;
+	}>;
+	timestamp: string;
+}
 
 const analyticsClient = new BetaAnalyticsDataClient({
 	credentials: {
@@ -11,13 +29,7 @@ const analyticsClient = new BetaAnalyticsDataClient({
 
 const propertyId = process.env.GA_PROPERTY_ID;
 
-export async function GET(request: Request) {
-	const ip = request.headers.get("x-forwarded-for") ?? "unknown";
-	const { success } = await publicApiLimiter.limit(ip);
-	if (!success) {
-		return NextResponse.json({ error: "Too many requests" }, { status: 429 });
-	}
-
+export async function GET() {
 	if (
 		!process.env.GOOGLE_CLIENT_EMAIL ||
 		!process.env.GOOGLE_PRIVATE_KEY ||
@@ -29,16 +41,35 @@ export async function GET(request: Request) {
 		);
 	}
 
+	// ── Edge cache: share one GA4 call across all users for 60 s ──
+	if (redis) {
+		const cached = await redis.get<CachedRealtimeData>(CACHE_KEY);
+		if (cached) {
+			return NextResponse.json(cached, {
+				headers: {
+					"x-cache": "HIT",
+					"cache-control": "public, s-maxage=60",
+				},
+			});
+		}
+	}
+
 	try {
+		// ── Device + City breakdown ──
 		const [response] = await analyticsClient.runRealtimeReport({
 			property: `properties/${propertyId}`,
 			dimensions: [{ name: "deviceCategory" }, { name: "city" }],
-			metrics: [{ name: "activeUsers" }, { name: "screenPageViewsPerUser" }],
+			metrics: [{ name: "activeUsers" }, { name: "eventCount" }],
 		});
 
 		const activeUsers =
 			response.rows?.reduce((acc, row) => {
 				return acc + Number(row.metricValues?.[0].value || 0);
+			}, 0) || 0;
+
+		const eventCount =
+			response.rows?.reduce((acc, row) => {
+				return acc + Number(row.metricValues?.[1].value || 0);
 			}, 0) || 0;
 
 		const deviceBreakdown =
@@ -48,10 +79,37 @@ export async function GET(request: Request) {
 				users: Number(row.metricValues?.[0].value || 0),
 			})) || [];
 
-		return NextResponse.json({
+		// ── Top active pages ──
+		const [pagesResponse] = await analyticsClient.runRealtimeReport({
+			property: `properties/${propertyId}`,
+			dimensions: [{ name: "unifiedScreenName" }],
+			metrics: [{ name: "activeUsers" }],
+		});
+
+		const topPages =
+			pagesResponse.rows?.map((row) => ({
+				page: row.dimensionValues?.[0].value || "/",
+				users: Number(row.metricValues?.[0].value || 0),
+			})) || [];
+
+		const payload = {
 			activeUsers,
+			eventCount,
 			deviceBreakdown,
+			topPages,
 			timestamp: new Date().toISOString(),
+		};
+
+		// Store in Redis for 60 s so subsequent requests skip the GA4 call
+		if (redis) {
+			await redis.set(CACHE_KEY, JSON.stringify(payload), { ex: CACHE_TTL_S });
+		}
+
+		return NextResponse.json(payload, {
+			headers: {
+				"x-cache": "MISS",
+				"cache-control": "public, s-maxage=60",
+			},
 		});
 	} catch (err: unknown) {
 		const errorMessage =

@@ -34,14 +34,14 @@ export default async function IntegratedPOSPage() {
 			.single();
 		outletId = outlet?.id;
 		outletName = outlet?.name || PRIMARY_OUTLET.name;
-		} else if (outletId) {
-			const { data: outlet } = await supabase
-				.from("outlets")
-				.select("name")
-				.eq("id", outletId)
-				.maybeSingle();
-			outletName = outlet?.name || PRIMARY_OUTLET.name;
-		}
+	} else if (outletId) {
+		const { data: outlet } = await supabase
+			.from("outlets")
+			.select("name")
+			.eq("id", outletId)
+			.maybeSingle();
+		outletName = outlet?.name || PRIMARY_OUTLET.name;
+	}
 
 	const finalOutletId = outletId || PRIMARY_OUTLET.id;
 

@@ -1,8 +1,6 @@
 import {
 	AlertCircle,
 	Bell,
-	Globe,
-	Lock,
 	LogOut,
 	Mail,
 	Phone,
@@ -12,15 +10,17 @@ import {
 } from "lucide-react";
 import type { Metadata } from "next";
 import { AdminAvatarSection } from "@/components/shared/admin/profil/admin-avatar-section";
+import { AdminSecuritySection } from "@/components/shared/admin/profil/admin-security-section";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { APP_NAME } from "@/lib/constants";
 import { createClient, getUserProfile } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
 	title: "Profil Pengguna",
-	description: "Kelola profil dan pengaturan akun Superadmin Mahira Laundry.",
+	description: `Kelola profil dan pengaturan akun ${APP_NAME}.`,
 };
 
 export const dynamic = "force-dynamic";
@@ -36,7 +36,7 @@ export default async function SuperadminProfilPage() {
 
 	return (
 		<div className="space-y-8 sm:space-y-10  animate-in fade-in slide-in-from-bottom-4 duration-700 ease-out">
-			{/* High-End Header */}
+			{/* Header */}
 			<div className="relative overflow-hidden bg-white rounded-none sm:rounded-2xl lg:rounded-[2rem] p-6 sm:p-8 lg:p-10 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/40 group">
 				<div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-50 rounded-full -mr-40 -mt-40 blur-3xl opacity-50 transition-colors duration-500 group-hover:bg-indigo-100" />
 
@@ -47,21 +47,16 @@ export default async function SuperadminProfilPage() {
 						<div className="text-center lg:text-left space-y-4">
 							<div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
 								<Badge className="bg-indigo-600 text-white border-none px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em]">
-									System Authority
+									{profile.role}
 								</Badge>
 								<span className="text-slate-200">•</span>
-								<span className="text-slate-400 text-sm font-bold uppercase tracking-widest flex items-center gap-2">
-									<Globe size={14} /> ID:{" "}
-									{profile?.id?.slice(0, 8).toUpperCase()}
+								<span className="text-slate-400 text-sm font-bold flex items-center gap-2">
+									<Mail size={14} /> {authUser?.email || profile?.email || "—"}
 								</span>
 							</div>
 							<h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight font-[family-name:var(--font-heading)] leading-tight text-slate-900">
-								{profile?.full_name || "Superadmin Account"}
+								{profile?.full_name || "—"}
 							</h1>
-							<p className="text-slate-500 font-bold text-sm lg:text-base max-w-xl leading-relaxed">
-								Otoritas tertinggi dalam ekosistem Mahira Laundry. Anda memiliki
-								akses penuh ke seluruh operasional cabang dan manajemen data.
-							</p>
 						</div>
 					</div>
 
@@ -69,12 +64,15 @@ export default async function SuperadminProfilPage() {
 						<Button className="bg-slate-900 hover:bg-indigo-600 text-white rounded-xl px-5 h-11 font-black text-xs uppercase tracking-widest shadow-lg shadow-slate-900/10 flex items-center gap-2.5">
 							<Settings2 size={20} /> Kelola Token API
 						</Button>
-						<Button
-							variant="outline"
-							className="rounded-xl h-11 px-5 font-black text-xs uppercase tracking-widest border-rose-100 text-rose-600 hover:bg-rose-50 flex items-center gap-2.5"
-						>
-							<LogOut size={18} /> Keluar Sistem
-						</Button>
+						<form action="/api/auth/signout" method="POST">
+							<Button
+								type="submit"
+								variant="outline"
+								className="rounded-xl h-11 px-5 font-black text-xs uppercase tracking-widest border-rose-100 text-rose-600 hover:bg-rose-50 flex items-center gap-2.5 w-full"
+							>
+								<LogOut size={18} /> Keluar Sistem
+							</Button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -88,9 +86,11 @@ export default async function SuperadminProfilPage() {
 								<ShieldCheck className="text-indigo-600" size={28} /> Identitas
 								& Kredensial
 							</h2>
-							<Badge className="bg-emerald-50 text-emerald-600 border-none px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
-								Verified Agent
-							</Badge>
+							{profile.is_active && (
+								<Badge className="bg-emerald-50 text-emerald-600 border-none px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
+									Aktif
+								</Badge>
+							)}
 						</div>
 
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
@@ -155,9 +155,9 @@ export default async function SuperadminProfilPage() {
 								</label>
 								<Badge
 									id="profil-timezone"
-									className="w-full justify-center h-11 rounded-xl bg-indigo-50/50 border-indigo-100/50 text-indigo-600 text-sm font-black tracking-tight shadow-none border"
+									className="w-full justify-center h-11 rounded-xl bg-indigo-50/50 border-indigo-100/50 text-indigo-600 hover:bg-indigo-600 hover:text-white dark:bg-indigo-950/50 dark:border-indigo-900/50 dark:text-indigo-300 dark:hover:bg-indigo-300 dark:hover:text-indigo-950 text-sm font-black tracking-tight shadow-none border transition-colors duration-300 cursor-default"
 								>
-									Asia/Jakarta (GMT+07:00)
+									{Intl.DateTimeFormat().resolvedOptions().timeZone}
 								</Badge>
 							</div>
 						</div>
@@ -175,145 +175,66 @@ export default async function SuperadminProfilPage() {
 						</div>
 					</div>
 
-					<div className="bg-white rounded-none sm:rounded-2xl p-6 sm:p-8 border-y sm:border border-slate-100 shadow-lg shadow-slate-200/35 space-y-6">
-						<h2 className="text-2xl font-black text-slate-900 uppercase tracking-tight flex items-center gap-4">
-							<Lock className="text-indigo-600" size={28} /> Keamanan & Enkripsi
-						</h2>
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-center">
-							<div className="p-5 sm:p-6 rounded-2xl border border-amber-100 bg-amber-50/30 space-y-4">
-								<div className="flex items-center justify-between">
-									<h4 className="font-black text-slate-900 uppercase tracking-tight text-sm">
-										Two-Factor Auth
-									</h4>
-									<Badge className="bg-emerald-500 text-white border-none py-1">
-										Active
-									</Badge>
-								</div>
-								<p className="text-xs text-slate-500 font-bold leading-relaxed">
-									Lapisan keamanan tambahan diaktifkan untuk melindungi otoritas
-									superadmin.
-								</p>
-							</div>
-							<div className="flex flex-col gap-4">
-								<Button className="w-full rounded-xl h-11 bg-slate-900 text-white font-black text-[10px] uppercase tracking-widest shadow-lg shadow-slate-900/10">
-									Ganti Password
-								</Button>
-								<Button
-									variant="outline"
-									className="w-full rounded-xl h-11 border-slate-100 font-black text-[10px] uppercase tracking-widest text-slate-500"
-								>
-									Update Recovery Email
-								</Button>
-							</div>
-						</div>
-					</div>
+					<AdminSecuritySection
+						email={authUser?.email || profile?.email || ""}
+					/>
 				</div>
 
-				{/* Sidebar Stats / Settings */}
+				{/* Sidebar Settings */}
 				<div className="space-y-6">
-					<div className="bg-slate-950 rounded-2xl p-6 sm:p-8 text-white relative overflow-hidden group border border-slate-800 shadow-xl">
-						{/* Animated Cyber Gradients */}
-						<div className="absolute top-0 right-0 w-64 h-64 bg-indigo-600/30 rounded-full -mr-32 -mt-32 blur-[100px] animate-pulse" />
-						<div className="absolute bottom-0 left-0 w-64 h-64 bg-violet-600/20 rounded-full -ml-32 -mb-32 blur-[100px] animate-pulse transition-all duration-1000 group-hover:bg-indigo-500/30" />
-
-						<div className="relative space-y-10 h-full flex flex-col z-10">
-							<div className="w-14 h-14 rounded-2xl bg-indigo-500/10 flex items-center justify-center text-3xl shadow-[0_0_30px_rgba(99,102,241,0.2)] backdrop-blur-xl transition-transform duration-300 group-hover:-translate-y-0.5">
-								<span className="drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]">
-									⚡
-								</span>
-							</div>
-
-							<div className="space-y-4">
-								<div className="inline-flex items-center gap-2 px-3 py-1.5 bg-indigo-500/5 backdrop-blur-md rounded-full shadow-inner">
-									<div className="w-1.5 h-1.5 bg-indigo-500 rounded-full shadow-[0_0_8px_rgba(99,102,241,1)] animate-pulse" />
-									<span className="text-[8px] font-black uppercase tracking-[0.3em] text-indigo-400/80">
-										System High Priority
-									</span>
-								</div>
-								<div>
-									<h3 className="text-3xl font-black uppercase tracking-tighter mb-3 leading-none italic">
-										Power <span className="text-indigo-500">User</span>
-									</h3>
-									<p className="text-slate-400 font-bold text-[11px] leading-relaxed max-w-[200px]">
-										Otoritas penuh atas infrastruktur{" "}
-										<span className="text-white">Mahira Group</span>.
-									</p>
-								</div>
-							</div>
-
-							<div className="space-y-5 pt-8 mt-auto relative">
-								{/* Subtle Gradient Divider */}
-								<div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
-
-								<div className="flex justify-between items-end">
-									<div className="space-y-1">
-										<span className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500">
-											System Uptime
-										</span>
-										<p className="text-sm font-black text-indigo-400">
-											Operational
-										</p>
-									</div>
-									<span className="text-2xl font-black tracking-tighter">
-										99.99<span className="text-xs text-slate-500">%</span>
-									</span>
-								</div>
-								<div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
-									<div className="h-full w-[99.9%] bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,0.3)]" />
-								</div>
-							</div>
-						</div>
-					</div>
-
 					<div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-100 shadow-lg shadow-slate-200/35 space-y-6">
 						<h3 className="text-lg font-black text-slate-900 uppercase tracking-tight flex items-center gap-3">
-							<Bell className="text-indigo-600" /> Notifications
+							<Bell className="text-indigo-600" /> Notifikasi
 						</h3>
 						<div className="space-y-6">
 							{[
 								{
-									label: "Alert Audit Log",
-									desc: "Notif saat ada data dihapus permanen",
-									active: true,
+									key: "whatsapp" as const,
+									label: "WhatsApp",
+									desc: "Notifikasi pesanan via WhatsApp",
 								},
 								{
-									label: "Laporan Keuangan",
-									desc: "Summary mingguan via push",
-									active: true,
+									key: "email" as const,
+									label: "Email",
+									desc: "Ringkasan & laporan via email",
 								},
 								{
-									label: "Status Infrastruktur",
-									desc: "Peringatan downtime sistem",
-									active: false,
+									key: "push" as const,
+									label: "Push Notification",
+									desc: "Notifikasi real-time di browser",
 								},
-							].map((item) => (
-								<div
-									key={item.label}
-									className="flex items-center justify-between pb-6 border-b border-slate-50 last:border-0 last:pb-0"
-								>
-									<div className="flex-1">
-										<p className="font-black text-slate-800 uppercase tracking-tight text-[11px] mb-1">
-											{item.label}
-										</p>
-										<p className="text-[10px] text-slate-400 font-bold">
-											{item.desc}
-										</p>
-									</div>
+							].map((item) => {
+								const active =
+									profile.notification_preferences?.[item.key] ?? true;
+								return (
 									<div
-										className={cn(
-											"w-12 h-6 rounded-full p-1 cursor-pointer transition-colors duration-500",
-											item.active ? "bg-indigo-600" : "bg-slate-100",
-										)}
+										key={item.key}
+										className="flex items-center justify-between pb-6 border-b border-slate-50 last:border-0 last:pb-0"
 									>
+										<div className="flex-1">
+											<p className="font-black text-slate-800 uppercase tracking-tight text-[11px] mb-1">
+												{item.label}
+											</p>
+											<p className="text-[10px] text-slate-400 font-bold">
+												{item.desc}
+											</p>
+										</div>
 										<div
 											className={cn(
-												"w-4 h-4 rounded-full bg-white shadow-xs transition-transform duration-500",
-												item.active ? "translate-x-6" : "translate-x-0",
+												"w-12 h-6 rounded-full p-1 cursor-pointer transition-colors duration-500",
+												active ? "bg-indigo-600" : "bg-slate-100",
 											)}
-										/>
+										>
+											<div
+												className={cn(
+													"w-4 h-4 rounded-full bg-white shadow-xs transition-transform duration-500",
+													active ? "translate-x-6" : "translate-x-0",
+												)}
+											/>
+										</div>
 									</div>
-								</div>
-							))}
+								);
+							})}
 						</div>
 					</div>
 
@@ -327,7 +248,7 @@ export default async function SuperadminProfilPage() {
 							</h4>
 							<p className="text-[10px] text-slate-400 font-bold leading-relaxed px-4">
 								Pastikan Anda tidak membagikan kredensial akses kepada pihak
-								manapun demi integritas data Mahira Laundry.
+								manapun demi integritas data {APP_NAME}.
 							</p>
 						</div>
 					</div>

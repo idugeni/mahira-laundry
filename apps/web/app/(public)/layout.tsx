@@ -19,7 +19,10 @@ export default async function PublicLayout({
 	return (
 		<div className="flex flex-col min-h-screen">
 			<MahiraHeader key="public-header" />
-			<main key="public-main" className="flex-1">
+			<main
+				key="public-main"
+				className="flex-1 flex items-start justify-center"
+			>
 				{children}
 			</main>
 			<MahiraFooter key="public-footer" services={services || []} />

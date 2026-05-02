@@ -6,7 +6,7 @@ import {
 	ChevronsLeft,
 	ChevronsRight,
 } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -59,17 +59,46 @@ export function PaginationControls({
 
 	if (!showPagination && !onPageSizeChange) return null;
 
-	// Page navigation buttons (shared between mobile and desktop)
+	// Page number buttons (responsive: fewer on mobile, more on lg)
+	const pageNumbers = (() => {
+		let ellipsisCount = 0;
+		return getVisiblePages().map((page) =>
+			page === "..." ? (
+				<span
+					key={`ellipsis-${++ellipsisCount}`}
+					className="w-7 text-center text-slate-300 text-xs font-black"
+				>
+					···
+				</span>
+			) : (
+				<Button
+					key={page}
+					variant="ghost"
+					onClick={() => onPageChange(page)}
+					className={cn(
+						"w-8 h-8 md:w-9 md:h-9 p-0 rounded-lg md:rounded-xl text-[10px] md:text-xs font-black transition-all",
+						currentPage === page
+							? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:text-white"
+							: "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600",
+					)}
+				>
+					{page}
+				</Button>
+			),
+		);
+	})();
+
+	// Page navigation buttons (shared between all layouts)
 	const pageNavButtons = showPagination ? (
-		<div className="flex items-center gap-1.5">
+		<div className="flex items-center gap-1 md:gap-1.5">
 			{/* First page */}
 			<Button
 				variant="ghost"
 				disabled={currentPage === 1}
 				onClick={() => onPageChange(1)}
-				className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
+				className="w-8 h-8 md:w-9 md:h-9 p-0 rounded-lg md:rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
 			>
-				<ChevronsLeft size={14} />
+				<ChevronsLeft size={13} className="md:w-3.5 md:h-3.5" />
 			</Button>
 
 			{/* Previous page */}
@@ -77,50 +106,22 @@ export function PaginationControls({
 				variant="ghost"
 				disabled={currentPage === 1}
 				onClick={() => onPageChange(currentPage - 1)}
-				className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
+				className="w-8 h-8 md:w-9 md:h-9 p-0 rounded-lg md:rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
 			>
-				<ChevronLeft size={14} />
+				<ChevronLeft size={13} className="md:w-3.5 md:h-3.5" />
 			</Button>
 
 			{/* Page numbers */}
-			<div className="flex items-center gap-1">
-				{(() => {
-					let ellipsisCount = 0;
-					return getVisiblePages().map((page) =>
-						page === "..." ? (
-							<span
-								key={`ellipsis-${++ellipsisCount}`}
-								className="w-7 text-center text-slate-300 text-xs font-black"
-							>
-								···
-							</span>
-						) : (
-							<Button
-								key={page}
-								variant="ghost"
-								onClick={() => onPageChange(page)}
-								className={cn(
-									"w-9 h-9 p-0 rounded-xl text-xs font-black transition-all",
-									currentPage === page
-										? "bg-slate-900 text-white shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:text-white"
-										: "text-slate-500 hover:bg-indigo-50 hover:text-indigo-600",
-								)}
-							>
-								{page}
-							</Button>
-						),
-					);
-				})()}
-			</div>
+			<div className="flex items-center gap-0.5 md:gap-1">{pageNumbers}</div>
 
 			{/* Next page */}
 			<Button
 				variant="ghost"
 				disabled={currentPage === totalPages}
 				onClick={() => onPageChange(currentPage + 1)}
-				className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
+				className="w-8 h-8 md:w-9 md:h-9 p-0 rounded-lg md:rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
 			>
-				<ChevronRight size={14} />
+				<ChevronRight size={13} className="md:w-3.5 md:h-3.5" />
 			</Button>
 
 			{/* Last page */}
@@ -128,9 +129,9 @@ export function PaginationControls({
 				variant="ghost"
 				disabled={currentPage === totalPages}
 				onClick={() => onPageChange(totalPages)}
-				className="w-9 h-9 p-0 rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
+				className="w-8 h-8 md:w-9 md:h-9 p-0 rounded-lg md:rounded-xl text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 disabled:opacity-30 transition-all"
 			>
-				<ChevronsRight size={14} />
+				<ChevronsRight size={13} className="md:w-3.5 md:h-3.5" />
 			</Button>
 		</div>
 	) : null;
@@ -177,28 +178,30 @@ export function PaginationControls({
 
 	return (
 		<div className={cn("pt-6", className)}>
-			{/* Mobile layout: two rows */}
-			<div className="sm:hidden flex flex-col gap-3">
-				{/* Row 1: data info (left) + rows selector (right) */}
+			{/* Mobile layout: stacked rows */}
+			<div className="flex flex-col gap-3 md:hidden">
 				{(dataInfo || rowsSelector) && (
 					<div className="flex items-center justify-between gap-2">
 						<div>{dataInfo}</div>
 						<div>{rowsSelector}</div>
 					</div>
 				)}
-				{/* Row 2: centered page navigation */}
 				{pageNavButtons && (
 					<div className="flex justify-center">{pageNavButtons}</div>
 				)}
 			</div>
 
-			{/* Desktop layout: three-column grid */}
-			<div className="hidden sm:grid sm:grid-cols-3 sm:items-center sm:gap-4">
-				{/* Left: data info */}
+			{/* md layout: compact three-column grid */}
+			<div className="hidden md:grid md:grid-cols-3 md:items-center md:gap-4 lg:hidden">
 				<div className="flex items-center">{dataInfo}</div>
-				{/* Center: page navigation */}
 				<div className="flex justify-center">{pageNavButtons}</div>
-				{/* Right: rows-per-page selector */}
+				<div className="flex justify-end">{rowsSelector}</div>
+			</div>
+
+			{/* lg layout: spacious three-column grid with more breathing room */}
+			<div className="hidden lg:grid lg:grid-cols-3 lg:items-center lg:gap-6">
+				<div className="flex items-center">{dataInfo}</div>
+				<div className="flex justify-center">{pageNavButtons}</div>
 				<div className="flex justify-end">{rowsSelector}</div>
 			</div>
 		</div>
@@ -210,7 +213,15 @@ export function usePagination<T>(items: T[], defaultPageSize = 10) {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [pageSize, setPageSize] = useState(defaultPageSize);
 
-	const totalPages = Math.ceil(items.length / pageSize);
+	const totalPages = Math.ceil(items.length / pageSize) || 0;
+
+	// Reset currentPage if it's out of bounds after items change
+	React.useEffect(() => {
+		if (currentPage > totalPages && totalPages > 0) {
+			setCurrentPage(1);
+		}
+	}, [totalPages, currentPage]);
+
 	const paginatedItems = items.slice(
 		(currentPage - 1) * pageSize,
 		currentPage * pageSize,

@@ -93,7 +93,6 @@ export async function upsertInventory(
 		await invalidateCache("inventory:*");
 		return { success: true };
 	} catch (error) {
-		console.error("Inventory action failed:", error);
 		return { success: false, error: (error as Error).message };
 	}
 }
@@ -109,7 +108,6 @@ export async function deleteInventory(id: string): Promise<ActionResponse> {
 		await invalidateCache("inventory:*");
 		return { success: true };
 	} catch (error) {
-		console.error("Delete inventory failed:", error);
 		return { success: false, error: (error as Error).message };
 	}
 }
@@ -162,7 +160,6 @@ export async function restockInventory(
 		await invalidateCache("inventory:*");
 		return { success: true };
 	} catch (error) {
-		console.error("Restock inventory failed:", error);
 		return { success: false, error: (error as Error).message };
 	}
 }

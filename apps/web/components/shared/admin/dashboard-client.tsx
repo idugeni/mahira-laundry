@@ -111,7 +111,10 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 					<div
 						key={stat.label}
 						className={`animate-in fade-in slide-in-from-bottom-4 bg-white rounded-2xl border ${stat.border} p-4 sm:p-5 hover:shadow-lg hover:shadow-slate-200/50 transition-shadow group`}
-						style={{ animationDelay: `${i * 100}ms`, animationFillMode: "both" }}
+						style={{
+							animationDelay: `${i * 100}ms`,
+							animationFillMode: "both",
+						}}
 					>
 						<div
 							className={`w-10 h-10 rounded-xl ${stat.bg} ${stat.color} flex items-center justify-center text-xl mb-4 transition-transform group-hover:-translate-y-0.5`}
@@ -143,7 +146,10 @@ export function DashboardClient({ stats: realStats }: DashboardClientProps) {
 						<div
 							key={action.href}
 							className="animate-in fade-in zoom-in-95 duration-500"
-							style={{ animationDelay: `${400 + i * 100}ms`, animationFillMode: "both" }}
+							style={{
+								animationDelay: `${400 + i * 100}ms`,
+								animationFillMode: "both",
+							}}
 						>
 							<Link
 								href={action.href}

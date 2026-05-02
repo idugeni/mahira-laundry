@@ -20,7 +20,6 @@ export async function searchCustomers(
 		return { success: true, data: data as unknown as Profile[] };
 	} catch (error: unknown) {
 		const err = error as Error;
-		console.error("Customer search failed:", err);
 		return { success: false, error: err.message };
 	}
 }

@@ -9,7 +9,6 @@ interface WhatsAppMessage {
 export async function sendWhatsApp({ to, message }: WhatsAppMessage) {
 	const apiKey = process.env.FONNTE_API_KEY;
 	if (!apiKey) {
-		console.warn("[WhatsApp] FONNTE_API_KEY not configured");
 		return { success: false, error: "API key not configured" };
 	}
 
@@ -30,7 +29,6 @@ export async function sendWhatsApp({ to, message }: WhatsAppMessage) {
 		const data = await response.json();
 		return { success: data.status, data };
 	} catch (error) {
-		console.error("[WhatsApp] Error sending message:", error);
 		return { success: false, error: String(error) };
 	}
 }

@@ -16,20 +16,20 @@ export default async function AnalyticsPage() {
 	const isConfigured = !!gaId && gaId.startsWith("G-");
 
 	return (
-		<div className="space-y-8 animate-fade-in-up">
+		<div className="space-y-4 sm:space-y-6 lg:space-y-8 animate-fade-in-up">
 			{/* Page Header */}
-			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
 				<div>
-					<h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+					<h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 tracking-tight">
 						Traffic Analytics
 					</h1>
-					<p className="text-slate-500 mt-1 text-sm">
+					<p className="text-slate-500 mt-0.5 sm:mt-1 text-xs sm:text-sm">
 						Analisis perilaku pengunjung via Google Analytics 4.
 					</p>
 				</div>
 				<div
 					className={cn(
-						"flex items-center gap-2 px-4 py-2 rounded-xl border text-xs font-bold transition-colors shadow-xs",
+						"flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg sm:rounded-xl border text-[10px] sm:text-xs font-bold transition-colors shadow-xs shrink-0",
 						isConfigured
 							? "bg-emerald-50 border-emerald-100 text-emerald-600 shadow-emerald-100"
 							: "bg-amber-50 border-amber-100 text-amber-600 shadow-amber-100",
@@ -37,7 +37,7 @@ export default async function AnalyticsPage() {
 				>
 					<span
 						className={cn(
-							"w-2 h-2 rounded-full",
+							"w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full",
 							isConfigured ? "bg-emerald-500 animate-pulse" : "bg-amber-500",
 						)}
 					/>

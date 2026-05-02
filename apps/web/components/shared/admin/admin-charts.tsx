@@ -56,17 +56,9 @@ export function RevenueBarChart({ data }: RevenueChartProps) {
 	};
 
 	return (
-		<div
-			className="w-full h-full min-h-[200px]"
-			style={{ minHeight: 200, minWidth: 0 }}
-		>
+		<div className="w-full h-full min-h-[200px]" style={{ minHeight: 200 }}>
 			{mounted && (
-				<ResponsiveContainer
-					width="100%"
-					height="100%"
-					minWidth={0}
-					minHeight={200}
-				>
+				<ResponsiveContainer width="100%" height="100%">
 					<BarChart
 						data={data}
 						margin={{ top: 4, right: 4, left: -20, bottom: 0 }}
@@ -139,17 +131,9 @@ export function OrderTrendChart({ data }: OrderTrendChartProps) {
 	};
 
 	return (
-		<div
-			className="w-full h-full min-h-[200px]"
-			style={{ minHeight: 200, minWidth: 0 }}
-		>
+		<div className="w-full h-full min-h-[200px]" style={{ minHeight: 200 }}>
 			{mounted && (
-				<ResponsiveContainer
-					width="100%"
-					height="100%"
-					minWidth={0}
-					minHeight={200}
-				>
+				<ResponsiveContainer width="100%" height="100%">
 					<AreaChart
 						data={data}
 						margin={{ top: 4, right: 4, left: -20, bottom: 0 }}
@@ -249,17 +233,9 @@ export function PaymentPieChart({ data }: PaymentPieChartProps) {
 	};
 
 	return (
-		<div
-			className="w-full h-full min-h-[200px]"
-			style={{ minHeight: 200, minWidth: 0 }}
-		>
+		<div className="w-full h-full min-h-[200px]" style={{ minHeight: 200 }}>
 			{mounted && (
-				<ResponsiveContainer
-					width="100%"
-					height="100%"
-					minWidth={0}
-					minHeight={200}
-				>
+				<ResponsiveContainer width="100%" height="100%">
 					<PieChart>
 						<Pie
 							data={data}

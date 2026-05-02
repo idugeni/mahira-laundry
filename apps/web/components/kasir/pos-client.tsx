@@ -35,8 +35,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { searchCustomers } from "@/lib/actions/customers";
 import { createOrder } from "@/lib/actions/orders";
-import type { Profile, Service } from "@/lib/types";
 import { POS_CONFIG } from "@/lib/constants";
+import type { Profile, Service } from "@/lib/types";
 import { cn, formatIDR } from "@/lib/utils";
 
 interface CartItem {
@@ -248,12 +248,16 @@ export function POSClient({
 			const result = await createOrder(formData);
 
 			if (result.success && result.data) {
-				toast.success(`Berhasil! Order: ${result.data.order_number || result.data.id.slice(0, 8)}`);
+				toast.success(
+					`Berhasil! Order: ${result.data.order_number || result.data.id.slice(0, 8)}`,
+				);
 
 				// Show receipt view
 				setReceiptData({
 					orderId: result.data.id,
-					orderNumber: result.data.order_number || `ORD-${result.data.id.slice(0, 8).toUpperCase()}`,
+					orderNumber:
+						result.data.order_number ||
+						`ORD-${result.data.id.slice(0, 8).toUpperCase()}`,
 					items: [...cart],
 					total,
 					paymentMethod,
@@ -554,7 +558,10 @@ export function POSClient({
 												{c.phone || c.email}
 											</p>
 										</div>
-										<Badge variant="secondary" className="text-[10px] font-black uppercase tracking-wider">
+										<Badge
+											variant="secondary"
+											className="text-[10px] font-black uppercase tracking-wider"
+										>
 											Pilih
 										</Badge>
 									</Button>
@@ -635,257 +642,257 @@ export function POSClient({
 					<div className="p-8">
 						{activeTab === "manual" ? (
 							<div className="max-w-4xl mx-auto space-y-8">
-									<div className="flex items-center justify-between">
-										<h2 className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900 flex items-center gap-4">
-											<div className="w-12 h-12 bg-brand-primary/10 rounded-2xl flex items-center justify-center text-brand-primary shadow-inner">
-												<Scale className="w-7 h-7" />
-											</div>
-											Input Pesanan & Timbangan
-										</h2>
-										<Button
-											type="button"
-											variant={isPureManual ? "default" : "outline"}
-											onClick={() => setIsPureManual(!isPureManual)}
-											className={`text-[10px] font-black px-5 py-2.5 rounded-xl border-2 transition-all ${isPureManual ? "bg-brand-primary border-brand-primary text-white shadow-lg shadow-brand-primary/20" : "bg-white border-slate-200 text-slate-500 hover:border-brand-primary hover:text-brand-primary"}`}
-										>
-											{isPureManual
-												? "Layanan Custom Aktif ⚡"
-												: "Layanan Custom?"}
-										</Button>
-									</div>
+								<div className="flex items-center justify-between">
+									<h2 className="text-2xl font-black font-[family-name:var(--font-heading)] text-slate-900 flex items-center gap-4">
+										<div className="w-12 h-12 bg-brand-primary/10 rounded-2xl flex items-center justify-center text-brand-primary shadow-inner">
+											<Scale className="w-7 h-7" />
+										</div>
+										Input Pesanan & Timbangan
+									</h2>
+									<Button
+										type="button"
+										variant={isPureManual ? "default" : "outline"}
+										onClick={() => setIsPureManual(!isPureManual)}
+										className={`text-[10px] font-black px-5 py-2.5 rounded-xl border-2 transition-all ${isPureManual ? "bg-brand-primary border-brand-primary text-white shadow-lg shadow-brand-primary/20" : "bg-white border-slate-200 text-slate-500 hover:border-brand-primary hover:text-brand-primary"}`}
+									>
+										{isPureManual
+											? "Layanan Custom Aktif ⚡"
+											: "Layanan Custom?"}
+									</Button>
+								</div>
 
-									<form onSubmit={addToCartFromForm} className="space-y-6">
-										<div className="p-8 bg-slate-50/50 rounded-[2.5rem] border border-slate-200 ring-8 ring-slate-50/30 space-y-6">
-											{/* Baris 1: Nama / Search */}
-											{isPureManual ? (
-												<div className="space-y-3">
-													<label
-														htmlFor="pos-custom-service-name"
-														className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
-													>
-														Nama Layanan Custom
-													</label>
+								<form onSubmit={addToCartFromForm} className="space-y-6">
+									<div className="p-8 bg-slate-50/50 rounded-[2.5rem] border border-slate-200 ring-8 ring-slate-50/30 space-y-6">
+										{/* Baris 1: Nama / Search */}
+										{isPureManual ? (
+											<div className="space-y-3">
+												<label
+													htmlFor="pos-custom-service-name"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+												>
+													Nama Layanan Custom
+												</label>
+												<Input
+													id="pos-custom-service-name"
+													required
+													type="text"
+													placeholder="Cth: Cuci Boneka Besar..."
+													value={manualName}
+													onChange={(e) => setManualName(e.target.value)}
+													className="h-[58px] px-5 rounded-2xl border border-slate-200 bg-white focus:ring-4 focus:ring-brand-primary/10 transition-all font-bold"
+												/>
+											</div>
+										) : (
+											<div className="relative space-y-3">
+												<label
+													htmlFor="pos-service-select"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+												>
+													Pilih Layanan / Jenis Barang
+												</label>
+												<div className="relative">
 													<Input
-														id="pos-custom-service-name"
+														id="pos-service-select"
+														type="text"
+														placeholder="Ketik nama layanan..."
+														value={quickSearch}
+														onChange={(e) => {
+															setQuickSearch(e.target.value);
+															if (selectedService) setSelectedService(null);
+														}}
+														className={cn(
+															"h-[58px] px-5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-brand-primary/10 transition-all font-bold",
+															selectedService
+																? "bg-brand-primary/5 border-brand-primary/20"
+																: "bg-white",
+														)}
+													/>
+													{!selectedService && quickSearch.length > 0 && (
+														<div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-2xl shadow-2xl border border-slate-100 z-50 max-h-60 overflow-auto py-3 animate-in fade-in slide-in-from-top-2">
+															{filteredServices.map((s) => (
+																<Button
+																	key={s.id}
+																	type="button"
+																	variant="ghost"
+																	onClick={() => handleSelectService(s)}
+																	className="w-full px-6 py-4 text-left hover:bg-brand-primary/5 flex items-center justify-between group rounded-none h-auto"
+																>
+																	<div>
+																		<p className="text-sm font-bold group-hover:text-brand-primary transition-colors">
+																			{s.name}
+																		</p>
+																		<p className="text-[10px] text-slate-400 uppercase mt-1">
+																			{formatIDR(s.price)} / {s.unit}
+																		</p>
+																	</div>
+																	<ChevronDown className="w-5 h-5 text-slate-300 -rotate-90 group-hover:text-brand-primary transition-colors" />
+																</Button>
+															))}
+														</div>
+													)}
+												</div>
+											</div>
+										)}
+
+										{/* Baris 2: Qty, Unit, Price */}
+										<div
+											className={`grid gap-4 ${isPureManual ? "md:grid-cols-3" : "grid-cols-2"}`}
+										>
+											<div className="space-y-3">
+												<label
+													htmlFor="pos-quantity"
+													className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+												>
+													Berat / Qty
+												</label>
+												<div className="relative">
+													<Input
+														id="pos-quantity"
+														ref={qtyInputRef}
 														required
 														type="text"
-														placeholder="Cth: Cuci Boneka Besar..."
-														value={manualName}
-														onChange={(e) => setManualName(e.target.value)}
-														className="h-[58px] px-5 rounded-2xl border border-slate-200 bg-white focus:ring-4 focus:ring-brand-primary/10 transition-all font-bold"
+														inputMode="decimal"
+														placeholder="0.00"
+														value={quickQty}
+														onFocus={(e) =>
+															(e.target as HTMLInputElement).select()
+														}
+														onChange={(e) => {
+															const val = e.target.value.replace(",", ".");
+															if (val === "" || /^\d*\.?\d*$/.test(val)) {
+																setQuickQty(val);
+															}
+														}}
+														className="h-[58px] px-5 rounded-2xl border border-slate-200 bg-white focus:ring-4 focus:ring-brand-primary/10 transition-all font-black text-brand-primary text-xl"
 													/>
+													<div className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] font-black uppercase">
+														{isPureManual
+															? manualUnit
+															: selectedService?.unit || "kg"}
+													</div>
 												</div>
-											) : (
-												<div className="relative space-y-3">
-													<label
-														htmlFor="pos-service-select"
-														className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
-													>
-														Pilih Layanan / Jenis Barang
-													</label>
-													<div className="relative">
+											</div>
+
+											{isPureManual ? (
+												<>
+													<div className="space-y-3">
+														<label
+															htmlFor="pos-unit-select"
+															className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+														>
+															Satuan
+														</label>
+														<Select
+															value={manualUnit}
+															onValueChange={setManualUnit}
+														>
+															<SelectTrigger
+																id="pos-unit-select"
+																className="w-full h-[58px] px-5 bg-white border border-slate-200 rounded-2xl font-bold"
+															>
+																<SelectValue placeholder="Pilih Satuan" />
+															</SelectTrigger>
+															<SelectContent className="rounded-2xl shadow-2xl">
+																<SelectItem
+																	value="kg"
+																	className="font-bold py-3"
+																>
+																	Kilogram (kg)
+																</SelectItem>
+																<SelectItem
+																	value="pcs"
+																	className="font-bold py-3"
+																>
+																	Pcs / Satuan
+																</SelectItem>
+																<SelectItem
+																	value="m2"
+																	className="font-bold py-3"
+																>
+																	Meter Persegi (m2)
+																</SelectItem>
+																<SelectItem
+																	value="pasang"
+																	className="font-bold py-3"
+																>
+																	Pasang
+																</SelectItem>
+																<SelectItem
+																	value="set"
+																	className="font-bold py-3"
+																>
+																	Set
+																</SelectItem>
+															</SelectContent>
+														</Select>
+													</div>
+													<div className="space-y-3">
+														<label
+															htmlFor="pos-manual-price"
+															className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
+														>
+															Harga / Unit
+														</label>
 														<Input
-															id="pos-service-select"
+															id="pos-manual-price"
+															required
 															type="text"
-															placeholder="Ketik nama layanan..."
-															value={quickSearch}
+															placeholder="Rp 0"
+															value={manualPrice}
 															onChange={(e) => {
-																setQuickSearch(e.target.value);
-																if (selectedService) setSelectedService(null);
+																const val = e.target.value.replace(/\D/g, "");
+																setManualPrice(
+																	val ? formatIDR(parseInt(val, 10)) : "",
+																);
 															}}
-															className={cn(
-																"h-[58px] px-5 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-brand-primary/10 transition-all font-bold",
-																selectedService
-																	? "bg-brand-primary/5 border-brand-primary/20"
-																	: "bg-white",
-															)}
+															className="h-[58px] px-5 rounded-2xl border border-slate-200 bg-white focus:ring-4 focus:ring-brand-primary/10 transition-all font-black text-slate-900"
 														/>
-														{!selectedService && quickSearch.length > 0 && (
-															<div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-2xl shadow-2xl border border-slate-100 z-50 max-h-60 overflow-auto py-3 animate-in fade-in slide-in-from-top-2">
-																{filteredServices.map((s) => (
-																	<Button
-																		key={s.id}
-																		type="button"
-																		variant="ghost"
-																		onClick={() => handleSelectService(s)}
-																		className="w-full px-6 py-4 text-left hover:bg-brand-primary/5 flex items-center justify-between group rounded-none h-auto"
-																	>
-																		<div>
-																			<p className="text-sm font-bold group-hover:text-brand-primary transition-colors">
-																				{s.name}
-																			</p>
-																			<p className="text-[10px] text-slate-400 uppercase mt-1">
-																				{formatIDR(s.price)} / {s.unit}
-																			</p>
-																		</div>
-																		<ChevronDown className="w-5 h-5 text-slate-300 -rotate-90 group-hover:text-brand-primary transition-colors" />
-																	</Button>
-																))}
-															</div>
-														)}
+													</div>
+												</>
+											) : (
+												<div className="space-y-3">
+													<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
+														Total Harga Preview
+													</p>
+													<div className="w-full h-[58px] px-5 rounded-2xl bg-white border border-slate-200 flex items-center justify-end font-black text-xl text-slate-900 shadow-xs transition-all animate-in fade-in slide-in-from-bottom-2 duration-200">
+														{selectedService
+															? formatIDR(
+																	selectedService.price *
+																		parseFloat(quickQty || "0"),
+																)
+															: "Rp 0"}
 													</div>
 												</div>
 											)}
-
-											{/* Baris 2: Qty, Unit, Price */}
-											<div
-												className={`grid gap-4 ${isPureManual ? "md:grid-cols-3" : "grid-cols-2"}`}
-											>
-												<div className="space-y-3">
-													<label
-														htmlFor="pos-quantity"
-														className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
-													>
-														Berat / Qty
-													</label>
-													<div className="relative">
-														<Input
-															id="pos-quantity"
-															ref={qtyInputRef}
-															required
-															type="text"
-															inputMode="decimal"
-															placeholder="0.00"
-															value={quickQty}
-															onFocus={(e) =>
-																(e.target as HTMLInputElement).select()
-															}
-															onChange={(e) => {
-																const val = e.target.value.replace(",", ".");
-																if (val === "" || /^\d*\.?\d*$/.test(val)) {
-																	setQuickQty(val);
-																}
-															}}
-															className="h-[58px] px-5 rounded-2xl border border-slate-200 bg-white focus:ring-4 focus:ring-brand-primary/10 transition-all font-black text-brand-primary text-xl"
-														/>
-														<div className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px] font-black uppercase">
-															{isPureManual
-																? manualUnit
-																: selectedService?.unit || "kg"}
-														</div>
-													</div>
-												</div>
-
-												{isPureManual ? (
-													<>
-														<div className="space-y-3">
-															<label
-																htmlFor="pos-unit-select"
-																className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
-															>
-																Satuan
-															</label>
-															<Select
-																value={manualUnit}
-																onValueChange={setManualUnit}
-															>
-																<SelectTrigger
-																	id="pos-unit-select"
-																	className="w-full h-[58px] px-5 bg-white border border-slate-200 rounded-2xl font-bold"
-																>
-																	<SelectValue placeholder="Pilih Satuan" />
-																</SelectTrigger>
-																<SelectContent className="rounded-2xl shadow-2xl">
-																	<SelectItem
-																		value="kg"
-																		className="font-bold py-3"
-																	>
-																		Kilogram (kg)
-																	</SelectItem>
-																	<SelectItem
-																		value="pcs"
-																		className="font-bold py-3"
-																	>
-																		Pcs / Satuan
-																	</SelectItem>
-																	<SelectItem
-																		value="m2"
-																		className="font-bold py-3"
-																	>
-																		Meter Persegi (m2)
-																	</SelectItem>
-																	<SelectItem
-																		value="pasang"
-																		className="font-bold py-3"
-																	>
-																		Pasang
-																	</SelectItem>
-																	<SelectItem
-																		value="set"
-																		className="font-bold py-3"
-																	>
-																		Set
-																	</SelectItem>
-																</SelectContent>
-															</Select>
-														</div>
-														<div className="space-y-3">
-															<label
-																htmlFor="pos-manual-price"
-																className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1"
-															>
-																Harga / Unit
-															</label>
-															<Input
-																id="pos-manual-price"
-																required
-																type="text"
-																placeholder="Rp 0"
-																value={manualPrice}
-																onChange={(e) => {
-																	const val = e.target.value.replace(/\D/g, "");
-																	setManualPrice(
-																		val ? formatIDR(parseInt(val, 10)) : "",
-																	);
-																}}
-																className="h-[58px] px-5 rounded-2xl border border-slate-200 bg-white focus:ring-4 focus:ring-brand-primary/10 transition-all font-black text-slate-900"
-															/>
-														</div>
-													</>
-												) : (
-													<div className="space-y-3">
-														<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">
-															Total Harga Preview
-														</p>
-														<div className="w-full h-[58px] px-5 rounded-2xl bg-white border border-slate-200 flex items-center justify-end font-black text-xl text-slate-900 shadow-xs transition-all animate-in fade-in slide-in-from-bottom-2 duration-200">
-															{selectedService
-																? formatIDR(
-																		selectedService.price *
-																			parseFloat(quickQty || "0"),
-																	)
-																: "Rp 0"}
-														</div>
-													</div>
-												)}
-											</div>
-
-											<div className="space-y-3">
-												<label
-													htmlFor="pos-item-notes"
-													className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 flex items-center gap-2"
-												>
-													<Info className="w-3 h-3 text-brand-primary" />{" "}
-													Rincian Item (Cth: 5 Kemeja, 3 Celana Kain)
-												</label>
-												<Textarea
-													id="pos-item-notes"
-													rows={3}
-													placeholder="Berikan detail isi laundry untuk mempermudah pengecekan..."
-													value={quickNote}
-													onChange={(e) => setQuickNote(e.target.value)}
-													className="px-6 py-5 rounded-[2rem] border border-slate-200 bg-slate-50/50 focus:ring-4 focus:ring-brand-primary/10 transition-all resize-none text-sm placeholder:italic"
-												/>
-											</div>
 										</div>
 
-										<Button
-											type="submit"
-											disabled={!isPureManual && !selectedService}
-											className="w-full h-auto py-5 bg-brand-gradient text-white rounded-[2rem] font-black text-lg shadow-2xl shadow-brand-primary/30 transition-all disabled:opacity-50 flex items-center justify-center gap-4 border-none"
-										>
-											<PlusCircle className="w-7 h-7" /> TAMBAHKAN KE TRANSAKSI
-										</Button>
-									</form>
+										<div className="space-y-3">
+											<label
+												htmlFor="pos-item-notes"
+												className="text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1 flex items-center gap-2"
+											>
+												<Info className="w-3 h-3 text-brand-primary" /> Rincian
+												Item (Cth: 5 Kemeja, 3 Celana Kain)
+											</label>
+											<Textarea
+												id="pos-item-notes"
+												rows={3}
+												placeholder="Berikan detail isi laundry untuk mempermudah pengecekan..."
+												value={quickNote}
+												onChange={(e) => setQuickNote(e.target.value)}
+												className="px-6 py-5 rounded-[2rem] border border-slate-200 bg-slate-50/50 focus:ring-4 focus:ring-brand-primary/10 transition-all resize-none text-sm placeholder:italic"
+											/>
+										</div>
+									</div>
+
+									<Button
+										type="submit"
+										disabled={!isPureManual && !selectedService}
+										className="w-full h-auto py-5 bg-brand-gradient text-white rounded-[2rem] font-black text-lg shadow-2xl shadow-brand-primary/30 transition-all disabled:opacity-50 flex items-center justify-center gap-4 border-none"
+									>
+										<PlusCircle className="w-7 h-7" /> TAMBAHKAN KE TRANSAKSI
+									</Button>
+								</form>
 							</div>
 						) : (
 							<div className="grid grid-cols-2 md:grid-cols-4 gap-5">
