@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { ServiceDetailModal } from "@/components/shared/customer/order/service-detail-modal";
 import { GallerySection } from "@/components/shared/public/gallery/gallery-section";
 import { HomeBusinessPackagesSection } from "@/components/shared/public/home/home-business-packages-section";
@@ -27,6 +27,38 @@ interface HomeClientProps {
 	businessPackages: BusinessPackage[];
 }
 
+function ServiceDetailUrlModal({ services }: { services: Service[] }) {
+	const searchParams = useSearchParams();
+	const router = useRouter();
+	const [selectedService, setSelectedService] = useState<Service | null>(null);
+	const [isDetailOpen, setIsDetailOpen] = useState(false);
+
+	useEffect(() => {
+		const serviceSlug = searchParams.get("s");
+		if (serviceSlug) {
+			const service = services.find((s) => s.id === serviceSlug || s.slug === serviceSlug);
+			if (service) {
+				setSelectedService(service);
+				setIsDetailOpen(true);
+			}
+		} else {
+			setIsDetailOpen(false);
+		}
+	}, [searchParams, services]);
+
+	const handleCloseDetail = () => {
+		router.push("/", { scroll: false });
+	};
+
+	return (
+		<ServiceDetailModal
+			service={selectedService}
+			isOpen={isDetailOpen}
+			onClose={handleCloseDetail}
+		/>
+	);
+}
+
 export function HomeClient({
 	initialServices,
 	stats,
@@ -36,30 +68,9 @@ export function HomeClient({
 }: HomeClientProps) {
 	const { user, profile, loading } = useAuth();
 	const router = useRouter();
-	const searchParams = useSearchParams();
-	const [selectedService, setSelectedService] = useState<Service | null>(null);
-	const [isDetailOpen, setIsDetailOpen] = useState(false);
-
-	// Sync state with URL
-	useEffect(() => {
-		const serviceSlug = searchParams.get("s");
-		if (serviceSlug) {
-			const service = initialServices.find((s) => s.id === serviceSlug || s.slug === serviceSlug);
-			if (service) {
-				setSelectedService(service);
-				setIsDetailOpen(true);
-			}
-		} else {
-			setIsDetailOpen(false);
-		}
-	}, [searchParams, initialServices]);
 
 	const handleServiceClick = (slug: string) => {
 		router.push(`/?s=${slug}`, { scroll: false });
-	};
-
-	const handleCloseDetail = () => {
-		router.push("/", { scroll: false });
 	};
 
 	const dashboardHref = getDashboardUrl(profile?.role as string);
@@ -75,7 +86,7 @@ export function HomeClient({
 			<HomeStatsSection stats={stats} />
 			<HomeServicesSection
 				services={initialServices}
-				isDetailOpen={isDetailOpen}
+				isDetailOpen={false}
 				onServiceClick={handleServiceClick}
 			/>
 			<GallerySection items={galleryItems} />
@@ -83,12 +94,10 @@ export function HomeClient({
 			<HomeBusinessPackagesSection packages={businessPackages} />
 			<HomeCtaSection />
 
-			{/* Service Detail Modal (PWA Model) */}
-			<ServiceDetailModal
-				service={selectedService}
-				isOpen={isDetailOpen}
-				onClose={handleCloseDetail}
-			/>
+			{/* Service Detail Modal (Isolasi useSearchParams dari tree utama) */}
+			<Suspense fallback={null}>
+				<ServiceDetailUrlModal services={initialServices} />
+			</Suspense>
 		</div>
 	);
 }
