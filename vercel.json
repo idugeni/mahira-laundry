@@ -1,7 +1,7 @@
 {
-	"buildCommand": "npx turbo run build --filter=web",
-	"installCommand": "npm install",
-	"outputDirectory": "apps/web/.next",
+	"buildCommand": "cd ../.. && npx turbo run build --filter=web",
+	"installCommand": "npm install --prefix=../..",
+	"outputDirectory": ".next",
 	"framework": "nextjs",
 	"headers": [
 		{
@@ -13,8 +13,8 @@
 				}
 			]
 		},
-			{
-"source": "/og/(.*)\\.png",
+		{
+			"source": "/og/(.*).png",
 			"headers": [
 				{
 					"key": "Cache-Control",
