@@ -50,7 +50,6 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 	const y1 = useTransform(smoothScrollY, [0, 500], [0, 50]);
 	const y2 = useTransform(smoothScrollY, [0, 500], [0, -40]);
-	const rotateValue = useTransform(smoothScrollY, [0, 500], [0, 0]); // Disable scroll rotation as it feels broken on mobile
 
 	const containerVariants = {
 		hidden: { opacity: 0 },
@@ -75,7 +74,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 	return (
 		<section
 			ref={containerRef}
-			className="relative w-full min-w-0 lg:min-h-screen pt-24 pb-8 lg:pt-4 lg:pb-4 flex flex-col"
+			className="relative w-full min-w-0 lg:min-h-screen pt-10 sm:pt-12 md:pt-14 lg:pt-16 pb-8 lg:pb-4 flex flex-col"
 		>
 			{/* Mesh Gradient Background */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -84,30 +83,30 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 				{/* Primary glow - top right */}
 				<motion.div
 					style={{ y: y1 }}
-					className="absolute -top-10 right-[8%] max-w-[70vw] w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(219,39,119,0.12)_0%,transparent_70%)]"
+					className="absolute -top-10 right-[8%] max-w-[70vw] w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(219,39,119,0.12)_0%,transparent_70%)] hidden md:block"
 				/>
 				{/* Accent glow - bottom left */}
 				<motion.div
 					style={{ y: y2 }}
-					className="absolute -bottom-20 left-0 max-w-[70vw] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.10)_0%,transparent_70%)]"
+					className="absolute -bottom-20 left-0 max-w-[70vw] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.10)_0%,transparent_70%)] hidden md:block"
 				/>
 				{/* Soft rose - center left */}
 				<motion.div
 					animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
 					transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-					className="absolute top-[30%] left-[5%] max-w-[70vw] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(244,114,182,0.08)_0%,transparent_70%)]"
+					className="absolute top-[30%] left-[5%] max-w-[70vw] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(244,114,182,0.08)_0%,transparent_70%)] hidden md:block"
 				/>
 				{/* Warm peach - center right */}
 				<motion.div
 					animate={{ x: [0, -20, 0], y: [0, 25, 0] }}
 					transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-					className="absolute top-[40%] right-[15%] max-w-[60vw] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.06)_0%,transparent_70%)]"
+					className="absolute top-[40%] right-[15%] max-w-[60vw] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.06)_0%,transparent_70%)] hidden md:block"
 				/>
 				{/* Subtle violet accent - top center */}
 				<motion.div
 					animate={{ x: [0, 15, 0] }}
 					transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-					className="absolute top-[10%] left-[25%] max-w-[50vw] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(190,24,93,0.05)_0%,transparent_70%)]"
+					className="absolute top-[10%] left-[25%] max-w-[50vw] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(190,24,93,0.05)_0%,transparent_70%)] hidden md:block"
 				/>
 			</div>
 
@@ -220,11 +219,6 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 						<motion.div
 							initial={{ opacity: 0, x: 50 }}
 							animate={{ opacity: 1, x: 0 }}
-							style={{
-								rotate: rotateValue,
-								y: y2,
-								willChange: "transform",
-							}}
 							className="relative z-10 w-full max-w-md p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
 						>
 							{/* Floating Decoration Icons */}
