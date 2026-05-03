@@ -40,14 +40,19 @@ function isPathMatch(pathname: string, paths: readonly string[]) {
 
 export async function proxy(request: NextRequest) {
 	const { pathname } = request.nextUrl;
+	const userAgent = request.headers.get("user-agent") || "";
+
+	// 1. DETEKSI BOT & CRAWLER (Penting untuk OG Image & Vercel Preview)
+	// Menambahkan pengecekan bot agar Facebook, WhatsApp, dan Vercel Screenshot tidak di-redirect ke login
+	const isBot = /facebookexternalhit|Facebot|Vercelbot|Twitterbot|Slackbot-LinkExpanding|WhatsApp|BingPreview|Googlebot/i.test(userAgent);
 
 	const isPublicPath = isPathMatch(pathname, publicPaths);
 	const isProtectedPath = isPathMatch(pathname, protectedPaths);
 	const isAuthPath = isPathMatch(pathname, authPaths);
 
-	// Halaman publik tidak perlu Supabase auth.
-	// Ini mencegah 403 untuk browser, Vercel preview, Meta, WhatsApp, dan crawler lain.
-	if (isPublicPath) {
+	// 2. BYPASS UNTUK PUBLIC & BOT
+	// Jika bot atau halaman publik, langsung berikan akses tanpa menyentuh Supabase
+	if (isBot || isPublicPath) {
 		return NextResponse.next();
 	}
 
@@ -76,10 +81,12 @@ export async function proxy(request: NextRequest) {
 		},
 	);
 
+	// Pastikan menggunakan getUser() bukan getSession() untuk keamanan middleware
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
 
+	// 3. LOGIKA PROTECTED PATHS
 	if (!user && isProtectedPath) {
 		const url = request.nextUrl.clone();
 		url.pathname = "/login";
@@ -99,6 +106,7 @@ export async function proxy(request: NextRequest) {
 		profileRole = profile?.role ?? null;
 	}
 
+	// 4. LOGIKA ROLE PROTECTION
 	if (user && isProtectedPath) {
 		const protectedRoute = roleProtectedPaths.find(({ path }) =>
 			pathname.startsWith(path),
@@ -123,6 +131,7 @@ export async function proxy(request: NextRequest) {
 		}
 	}
 
+	// 5. REDIRECT JIKA SUDAH AUTH TAPI AKSES HALAMAN LOGIN
 	if (user && isAuthPath) {
 		const targetUrl = getDashboardUrl(profileRole);
 
