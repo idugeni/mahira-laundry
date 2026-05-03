@@ -36,11 +36,6 @@ const nextConfig: NextConfig = {
 						value: "max-age=63072000; includeSubDomains; preload",
 					},
 					{
-						key: "Content-Security-Policy",
-						value:
-							"default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' *.googletagmanager.com *.google-analytics.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data: blob: *.supabase.co images.unsplash.com i.pravatar.cc ui-avatars.com *.google-analytics.com *.googletagmanager.com *.facebook.com *.fbcdn.net *.cdninstagram.com; font-src 'self' fonts.gstatic.com; connect-src 'self' *.supabase.co *.google-analytics.com *.analytics.google.com *.googletagmanager.com; frame-src 'self' *.google.com *.facebook.com; upgrade-insecure-requests;",
-					},
-					{
 						key: "X-Content-Type-Options",
 						value: "nosniff",
 					},
