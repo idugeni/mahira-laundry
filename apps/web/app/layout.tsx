@@ -6,6 +6,7 @@ import "./globals.css";
 import { JsonLd } from "@/components/shared/common/json-ld";
 import { baseOpenGraph } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
+import { AuthProvider } from "@/providers/auth-provider";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 
@@ -21,11 +22,10 @@ const inter = Inter({
 	weight: ["300", "400", "500", "600", "700"],
 });
 
-const vercelUrl = process.env["VERCEL_URL"];
-const protocol = vercelUrl?.startsWith('localhost') ? 'http' : 'https';
+const vercelProductionUrl = process.env["VERCEL_PROJECT_PRODUCTION_URL"];
 const baseUrl =
 	process.env.NEXT_PUBLIC_APP_URL ||
-	(vercelUrl ? `${protocol}://${vercelUrl}` : "https://mahiralaundry.id");
+	(vercelProductionUrl ? `https://${vercelProductionUrl}` : "https://mahiralaundry.id");
 
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
@@ -45,29 +45,29 @@ export const metadata: Metadata = {
 		"peluang usaha laundry",
 		"laundry business setup",
 	],
-openGraph: {
-	...baseOpenGraph,
-	title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
-	description:
-		"Peluang investasi bisnis laundry dengan sistem teruji dan dukungan penuh. Mulai usaha laundry premium Anda hari ini.",
-	url: baseUrl,
-	images: [
-		{
-			url: `${baseUrl}/og/paket-usaha.png`,
-			width: 1200,
-			height: 630,
-			alt: "Mahira Laundry Premium Experience",
-		},
-	],
-},
-twitter: {
-	card: "summary_large_image",
-	title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
-	description:
-		"Investasi bisnis laundry premium dengan sistem manajemen profesional dan mesin terbaik.",
-	images: [`${baseUrl}/og/paket-usaha.png`],
-	creator: "@mahiralaundry",
-},
+	openGraph: {
+		...baseOpenGraph,
+		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
+		description:
+			"Peluang investasi bisnis laundry dengan sistem teruji dan dukungan penuh. Mulai usaha laundry premium Anda hari ini.",
+		url: baseUrl,
+		images: [
+			{
+				url: `${baseUrl}/og/paket-usaha.png`,
+				width: 1200,
+				height: 630,
+				alt: "Mahira Laundry Premium Experience",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
+		description:
+			"Investasi bisnis laundry premium dengan sistem manajemen profesional dan mesin terbaik.",
+		images: [`${baseUrl}/og/paket-usaha.png`],
+		creator: "@mahiralaundry",
+	},
 	alternates: {
 		canonical: "/",
 	},
@@ -188,8 +188,6 @@ const navigationSchema = {
 		},
 	],
 };
-
-import { AuthProvider } from "@/providers/auth-provider";
 
 export default function RootLayout({
 	children,
