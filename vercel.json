@@ -1,23 +1,30 @@
 {
 	"buildCommand": "cd ../.. && npx turbo run build --filter=web",
 	"installCommand": "npm install --prefix=../..",
-	"outputDirectory": ".next",
-	"framework": "nextjs",
 	"headers": [
 		{
 			"source": "/(.*)",
 			"headers": [
 				{
+					"key": "Strict-Transport-Security",
+					"value": "max-age=63072000; includeSubDomains; preload"
+				},
+				{
 					"key": "X-Content-Type-Options",
 					"value": "nosniff"
-				},
+				}
+			]
+		},
+		{
+			"source": "/api/(.*)",
+			"headers": [
 				{
 					"key": "Access-Control-Allow-Origin",
 					"value": "*"
 				},
 				{
 					"key": "Access-Control-Allow-Methods",
-					"value": "GET, OPTIONS"
+					"value": "GET, POST, PUT, PATCH, DELETE, OPTIONS"
 				},
 				{
 					"key": "Access-Control-Allow-Headers",
