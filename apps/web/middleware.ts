@@ -38,7 +38,7 @@ function isPathMatch(pathname: string, paths: readonly string[]) {
 	);
 }
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl;
 	const userAgent = request.headers.get("user-agent") || "";
 
