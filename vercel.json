@@ -13,8 +13,8 @@
 				}
 			]
 		},
-		{
-			"source": "/og/(.*).png",
+			{
+"source": "/og/(.*)\\.png",
 			"headers": [
 				{
 					"key": "Cache-Control",
