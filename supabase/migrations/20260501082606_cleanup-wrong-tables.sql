@@ -920,7 +920,7 @@ with check ((( SELECT internal.get_user_role() AS get_user_role) = 'superadmin':
   as permissive
   for select
   to public
-using (((id = ( SELECT auth.uid() AS uid)) OR ( SELECT internal.is_staff_or_above() AS is_staff_or_above) OR (( SELECT internal.get_user_role() AS get_user_role) = 'superadmin'::public.user_role) OR true));
+using (((id = ( SELECT auth.uid() AS uid)) OR ( SELECT internal.is_staff_or_above() AS is_staff_or_above) OR (( SELECT internal.get_user_role() AS get_user_role) = 'superadmin'::public.user_role)));
 
 
 

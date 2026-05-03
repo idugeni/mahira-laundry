@@ -6,6 +6,7 @@ import "./globals.css";
 import { JsonLd } from "@/components/shared/common/json-ld";
 import { baseOpenGraph } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
+import { AuthProvider } from "@/providers/auth-provider";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 
@@ -21,7 +22,12 @@ const inter = Inter({
 	weight: ["300", "400", "500", "600", "700"],
 });
 
-const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://mahiralaundry.id";
+const vercelProductionUrl = process.env["VERCEL_PROJECT_PRODUCTION_URL"];
+const rawBaseUrl =
+	process.env.NEXT_PUBLIC_APP_URL ||
+	(vercelProductionUrl ? `https://${vercelProductionUrl}` : "https://mahiralaundry.id");
+
+const baseUrl = rawBaseUrl.replace(/\/$/, "");
 
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
@@ -49,7 +55,7 @@ export const metadata: Metadata = {
 		url: baseUrl,
 		images: [
 			{
-				url: "/og/paket-usaha.png",
+				url: `${baseUrl}/og/paket-usaha.png`,
 				width: 1200,
 				height: 630,
 				alt: "Mahira Laundry Premium Experience",
@@ -61,7 +67,7 @@ export const metadata: Metadata = {
 		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
 		description:
 			"Investasi bisnis laundry premium dengan sistem manajemen profesional dan mesin terbaik.",
-		images: ["/og/paket-usaha.png"],
+		images: [`${baseUrl}/og/paket-usaha.png`],
 		creator: "@mahiralaundry",
 	},
 	alternates: {
@@ -184,8 +190,6 @@ const navigationSchema = {
 		},
 	],
 };
-
-import { AuthProvider } from "@/providers/auth-provider";
 
 export default function RootLayout({
 	children,

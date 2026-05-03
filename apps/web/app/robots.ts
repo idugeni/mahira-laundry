@@ -6,33 +6,40 @@ export default function robots(): MetadataRoute.Robots {
 	return {
 		rules: [
 			{
-				userAgent: "*",
-				allow: "/",
-				disallow: [
-					"/api/",
-					"/auth/",
-					"/admin/",
-					"/dashboard/",
-					"/*.json$", // Protect internal config files
-					"/_next/static/development/", // Extra dev protection
-				],
-			},
-			{
-				// Ensure social media scrapers can access the site for link previews
-				userAgent: [
-					"facebookexternalhit",
-					"Facebot",
-					"Twitterbot",
-					"Pinterest",
-					"Slackbot",
-					"LinkedInBot",
-					"WhatsApp",
-					"TelegramBot",
-				],
+				// Social media scrapers — full access, no restrictions
+				userAgent: "facebookexternalhit",
 				allow: "/",
 			},
 			{
-				// High-priority for 2026 AI Search Engines (SearchGPT, Claude, Perplexity, etc.)
+				userAgent: "Facebot",
+				allow: "/",
+			},
+			{
+				userAgent: "Twitterbot",
+				allow: "/",
+			},
+			{
+				userAgent: "LinkedInBot",
+				allow: "/",
+			},
+			{
+				userAgent: "Slackbot",
+				allow: "/",
+			},
+			{
+				userAgent: "WhatsApp",
+				allow: "/",
+			},
+			{
+				userAgent: "TelegramBot",
+				allow: "/",
+			},
+			{
+				userAgent: "Pinterest",
+				allow: "/",
+			},
+			{
+			// AI Search Engines
 				userAgent: [
 					"GPTBot",
 					"CCBot",
@@ -49,9 +56,22 @@ export default function robots(): MetadataRoute.Robots {
 				disallow: ["/admin", "/dashboard", "/api"],
 			},
 			{
-				// Ensure images are fully indexed for Google Image Search
+				// Google Image Search
 				userAgent: "Googlebot-Image",
 				allow: ["/logo.png", "/og/*.png", "/galeri/*.jpg"],
+			},
+			{
+				// Default — allow public, block private paths
+				userAgent: "*",
+				allow: "/",
+				disallow: [
+					"/api/",
+					"/auth/",
+					"/admin/",
+					"/dashboard/",
+					"/*.json$",
+					"/_next/static/development/",
+				],
 			},
 		],
 		sitemap: `${baseUrl}/sitemap.xml`,
