@@ -22,6 +22,7 @@ const inter = Inter({
 	weight: ["300", "400", "500", "600", "700"],
 });
 
+// biome-ignore lint/complexity/useLiteralKeys: required by TS for index signature
 const vercelProductionUrl = process.env["VERCEL_PROJECT_PRODUCTION_URL"];
 const rawBaseUrl =
 	process.env.NEXT_PUBLIC_APP_URL ||

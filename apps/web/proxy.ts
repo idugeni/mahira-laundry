@@ -33,9 +33,7 @@ const protectedPaths = ["/customer", "/admin", "/manager", "/kasir", "/kurir"];
 const authPaths = ["/login", "/register", "/lupa-password"];
 
 function isPathMatch(pathname: string, paths: readonly string[]) {
-	return paths.some((path) =>
-		path === "/" ? pathname === "/" : pathname.startsWith(path),
-	);
+	return paths.some((path) => (path === "/" ? pathname === "/" : pathname.startsWith(path)));
 }
 
 export async function proxy(request: NextRequest) {
@@ -44,7 +42,10 @@ export async function proxy(request: NextRequest) {
 
 	// 1. DETEKSI BOT & CRAWLER (Penting untuk OG Image & Vercel Preview)
 	// Menambahkan pengecekan bot agar Facebook, WhatsApp, Twitter, LinkedIn, Telegram, Discord, dan Vercel Screenshot tidak di-redirect ke login
-	const isBot = /facebookexternalhit|Facebot|Vercelbot|Twitterbot|Twitter|Slackbot|Slackbot-LinkExpanding|WhatsApp|BingPreview|Googlebot|meta-external|facebook|telegram|discord|linkedin|bot|crawler|spider/i.test(userAgent);
+	const isBot =
+		/facebookexternalhit|Facebot|Vercelbot|Twitterbot|Twitter|Slackbot|Slackbot-LinkExpanding|WhatsApp|BingPreview|Googlebot|meta-external|facebook|telegram|discord|linkedin|bot|crawler|spider/i.test(
+			userAgent,
+		);
 
 	const isPublicPath = isPathMatch(pathname, publicPaths);
 	const isProtectedPath = isPathMatch(pathname, protectedPaths);
@@ -59,8 +60,8 @@ export async function proxy(request: NextRequest) {
 	let supabaseResponse = NextResponse.next({ request });
 
 	const supabase = createServerClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
+		process.env.NEXT_PUBLIC_SUPABASE_URL || "",
+		process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || "",
 		{
 			cookies: {
 				getAll() {
@@ -108,19 +109,12 @@ export async function proxy(request: NextRequest) {
 
 	// 4. LOGIKA ROLE PROTECTION
 	if (user && isProtectedPath) {
-		const protectedRoute = roleProtectedPaths.find(({ path }) =>
-			pathname.startsWith(path),
-		);
+		const protectedRoute = roleProtectedPaths.find(({ path }) => pathname.startsWith(path));
 
-		if (
-			protectedRoute &&
-			!protectedRoute.roles.some((role) => role === profileRole)
-		) {
+		if (protectedRoute && !protectedRoute.roles.some((role) => role === profileRole)) {
 			const dashboardUrl = getDashboardUrl(profileRole);
 
-			const targetUrl = pathname.startsWith(dashboardUrl)
-				? "/customer"
-				: dashboardUrl;
+			const targetUrl = pathname.startsWith(dashboardUrl) ? "/customer" : dashboardUrl;
 
 			if (!pathname.startsWith(targetUrl)) {
 				const url = request.nextUrl.clone();

@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa6";
-import { HiStar, HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
+import { HiOutlineChevronLeft, HiOutlineChevronRight, HiStar } from "react-icons/hi2";
 
 export interface TestimonialData {
 	id: string;
@@ -76,6 +76,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 					{totalPages > 1 && (
 						<>
 							<button
+								type="button"
 								onClick={goToPrev}
 								className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 lg:-translate-x-6 z-10 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white shadow-lg shadow-slate-200/50 border border-slate-100 flex items-center justify-center text-slate-400 hover:text-brand-primary hover:shadow-xl transition-all duration-300"
 								aria-label="Testimonial sebelumnya"
@@ -83,14 +84,15 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 								<HiOutlineChevronLeft size={20} />
 							</button>
 							<button
+								type="button"
 								onClick={goToNext}
 								className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 lg:translate-x-6 z-10 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white shadow-lg shadow-slate-200/50 border border-slate-100 flex items-center justify-center text-slate-400 hover:text-brand-primary hover:shadow-xl transition-all duration-300"
 								aria-label="Testimonial berikutnya"
 							>
 								<HiOutlineChevronRight size={20} />
 							</button>
-							</>
-						)}
+						</>
+					)}
 
 					{/* Testimonials Grid with Animation */}
 					<div className="overflow-hidden">
@@ -115,6 +117,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 						<div className="flex justify-center gap-2 mt-10">
 							{Array.from({ length: totalPages }, (_, i) => i).map((index) => (
 								<button
+									type="button"
 									key={index}
 									onClick={() => setCurrentPage(index)}
 									className={`w-2 h-2 rounded-full transition-all duration-300 ${
@@ -125,11 +128,11 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 									aria-label={`Halaman ${index + 1}`}
 								/>
 							))}
-							</div>
-						)}
-					</div>
+						</div>
+					)}
 				</div>
-			</section>
+			</div>
+		</section>
 	);
 }
 

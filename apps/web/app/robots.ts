@@ -39,7 +39,7 @@ export default function robots(): MetadataRoute.Robots {
 				allow: "/",
 			},
 			{
-			// AI Search Engines
+				// AI Search Engines
 				userAgent: [
 					"GPTBot",
 					"CCBot",
