@@ -30,35 +30,7 @@ const publicPaths = [
 ];
 
 const protectedPaths = ["/customer", "/admin", "/manager", "/kasir", "/kurir"];
-
 const authPaths = ["/login", "/register", "/lupa-password"];
-
-const socialBotUserAgents = [
-	"facebookexternalhit",
-	"Facebot",
-	"Twitterbot",
-	"LinkedInBot",
-	"Slackbot",
-	"TelegramBot",
-	"Pinterest",
-	"WhatsAppBot",
-];
-
-const botAllowedPaths = [
-	"/",
-	"/layanan",
-	"/paket-usaha",
-	"/galeri",
-	"/faq",
-	"/tentang",
-	"/lokasi",
-	"/privacy",
-	"/terms",
-	"/cookies",
-	"/robots.txt",
-	"/sitemap.xml",
-	"/llms.txt",
-];
 
 function isPathMatch(pathname: string, paths: readonly string[]) {
 	return paths.some((path) =>
@@ -66,56 +38,17 @@ function isPathMatch(pathname: string, paths: readonly string[]) {
 	);
 }
 
-function isSocialBot(userAgent: string) {
-	return socialBotUserAgents.some((bot) => userAgent.includes(bot));
-}
-
 export async function proxy(request: NextRequest) {
 	const { pathname } = request.nextUrl;
-	const userAgent = request.headers.get("user-agent") || "";
-
-	const isBot = isSocialBot(userAgent);
-	const isBotAllowedPath = isPathMatch(pathname, botAllowedPaths);
-
-	// Jangan jalankan Supabase auth/session refresh untuk crawler sosial.
-	// Ini mencegah Meta/Facebook/WhatsApp scraper menerima 403.
-	if (isBot && isBotAllowedPath) {
-		return NextResponse.next();
-	}
 
 	const isPublicPath = isPathMatch(pathname, publicPaths);
+	const isProtectedPath = isPathMatch(pathname, protectedPaths);
+	const isAuthPath = isPathMatch(pathname, authPaths);
 
-	// Untuk halaman publik, hanya refresh session cookie.
-	// Tidak redirect dan tidak block.
+	// Halaman publik tidak perlu Supabase auth.
+	// Ini mencegah 403 untuk browser, Vercel preview, Meta, WhatsApp, dan crawler lain.
 	if (isPublicPath) {
-		let supabaseResponse = NextResponse.next({ request });
-
-		const supabase = createServerClient(
-			process.env.NEXT_PUBLIC_SUPABASE_URL!,
-			process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-			{
-				cookies: {
-					getAll() {
-						return request.cookies.getAll();
-					},
-					setAll(cookiesToSet) {
-						for (const { name, value } of cookiesToSet) {
-							request.cookies.set(name, value);
-						}
-
-						supabaseResponse = NextResponse.next({ request });
-
-						for (const { name, value, options } of cookiesToSet) {
-							supabaseResponse.cookies.set(name, value, options);
-						}
-					},
-				},
-			},
-		);
-
-		await supabase.auth.getUser();
-
-		return supabaseResponse;
+		return NextResponse.next();
 	}
 
 	let supabaseResponse = NextResponse.next({ request });
@@ -146,8 +79,6 @@ export async function proxy(request: NextRequest) {
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
-
-	const isProtectedPath = isPathMatch(pathname, protectedPaths);
 
 	if (!user && isProtectedPath) {
 		const url = request.nextUrl.clone();
@@ -192,8 +123,6 @@ export async function proxy(request: NextRequest) {
 		}
 	}
 
-	const isAuthPath = isPathMatch(pathname, authPaths);
-
 	if (user && isAuthPath) {
 		const targetUrl = getDashboardUrl(profileRole);
 
@@ -207,6 +136,6 @@ export async function proxy(request: NextRequest) {
 
 export const config = {
 	matcher: [
-		"/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+		"/((?!_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt|manifest.json|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|json)$).*)",
 	],
 };
