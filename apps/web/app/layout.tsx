@@ -21,9 +21,11 @@ const inter = Inter({
 	weight: ["300", "400", "500", "600", "700"],
 });
 
+const vercelUrl = process.env["VERCEL_URL"];
+const protocol = vercelUrl?.startsWith('localhost') ? 'http' : 'https';
 const baseUrl =
 	process.env.NEXT_PUBLIC_APP_URL ||
-	(process.env["VERCEL_URL"] ? `https://${process.env["VERCEL_URL"]}` : "https://mahiralaundry.id");
+	(vercelUrl ? `${protocol}://${vercelUrl}` : "https://mahiralaundry.id");
 
 export const metadata: Metadata = {
 	metadataBase: new URL(baseUrl),
