@@ -86,8 +86,8 @@ function buildCrumbs(pathname: string): Crumb[] {
 	}
 
 	// If root itself is the current page, ensure it's marked as last
-	if (crumbs.length === 1) {
-		crumbs[0]!.isLast = true;
+	if (crumbs.length === 1 && crumbs[0]) {
+		crumbs[0].isLast = true;
 	}
 
 	return crumbs;

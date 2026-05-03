@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { requireRole, SUPERADMIN_ROLES } from "@/lib/auth/guards";
 import {
 	createClient,
 	getActiveBusinessPackages as queryGetActiveBusinessPackages,
@@ -25,6 +26,7 @@ export async function createBusinessPackage(
 	data: CreatePackageInput,
 ): Promise<ActionResponse<BusinessPackage>> {
 	try {
+		await requireRole(SUPERADMIN_ROLES, "Akses superadmin diperlukan untuk mengelola paket usaha.");
 		if (data.promo_price != null && data.price != null && data.promo_price >= data.price) {
 			return {
 				success: false,
@@ -54,6 +56,7 @@ export async function updateBusinessPackage(
 	data: UpdatePackageInput,
 ): Promise<ActionResponse<BusinessPackage>> {
 	try {
+		await requireRole(SUPERADMIN_ROLES, "Akses superadmin diperlukan untuk mengelola paket usaha.");
 		if (data.promo_price != null && data.price != null && data.promo_price >= data.price) {
 			return {
 				success: false,
@@ -81,6 +84,7 @@ export async function updateBusinessPackage(
 
 export async function deleteBusinessPackage(id: string): Promise<ActionResponse> {
 	try {
+		await requireRole(SUPERADMIN_ROLES, "Akses superadmin diperlukan untuk mengelola paket usaha.");
 		const supabase = await createClient();
 
 		const { count, error: countError } = await supabase
@@ -114,6 +118,7 @@ export async function toggleBusinessPackageActive(
 	isActive: boolean,
 ): Promise<ActionResponse> {
 	try {
+		await requireRole(SUPERADMIN_ROLES, "Akses superadmin diperlukan untuk mengelola paket usaha.");
 		const supabase = await createClient();
 		const { error } = await supabase
 			.from("business_packages")

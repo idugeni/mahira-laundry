@@ -2,6 +2,13 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
+import {
+	isStaffRole,
+	MANAGER_ROLES,
+	requireRole,
+	requireUser,
+	STAFF_ROLES,
+} from "@/lib/auth/guards";
 import { createClient } from "@/lib/supabase/server";
 import type { ActionResponse, Order, OrderStatus } from "@/lib/types";
 
@@ -19,7 +26,7 @@ const OrderSchema = z.object({
 				service_name: z.string(),
 				quantity: z.number().min(0.01),
 				unit: z.string(),
-				unit_price: z.number(),
+				unit_price: z.number().optional(),
 				is_express: z.boolean(),
 				notes: z.string().optional(),
 			}),
@@ -27,14 +34,27 @@ const OrderSchema = z.object({
 		.min(1),
 });
 
-export async function createOrder(formData: FormData): Promise<ActionResponse<Order>> {
-	const supabase = await createClient();
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-	if (!user) return { success: false, error: "Unauthorized" };
+const OrderStatusSchema = z.enum([
+	"pending",
+	"confirmed",
+	"picked_up",
+	"washing",
+	"ironing",
+	"ready",
+	"delivering",
+	"completed",
+	"cancelled",
+]);
 
+const AssignStaffSchema = z.object({
+	orderId: z.string().uuid(),
+	staffId: z.string().uuid(),
+	role: z.enum(["washer", "ironer", "qc", "kasir"]),
+});
+
+export async function createOrder(formData: FormData): Promise<ActionResponse<Order>> {
 	try {
+		const { supabase, user, role, outletId } = await requireUser();
 		const rawItems = JSON.parse(formData.get("items") as string);
 		const validatedData = OrderSchema.parse({
 			customer_id: formData.get("customer_id") || undefined,
@@ -46,13 +66,53 @@ export async function createOrder(formData: FormData): Promise<ActionResponse<Or
 			items: rawItems,
 		});
 
+		if (validatedData.customer_id && validatedData.customer_id !== user.id && !isStaffRole(role)) {
+			return { success: false, error: "Tidak boleh membuat pesanan untuk pelanggan lain." };
+		}
+
+		if (isStaffRole(role) && role !== "superadmin" && outletId !== validatedData.outlet_id) {
+			return { success: false, error: "Akses outlet ditolak." };
+		}
+
 		const finalCustomerId = validatedData.customer_id || user.id;
 		const generatedOrderNumber = Math.random().toString(36).substring(2, 8).toUpperCase();
 
-		const serverTotal = validatedData.items.reduce((acc, item) => {
-			const sub = item.quantity * item.unit_price * (item.is_express ? 1.5 : 1);
-			return acc + sub;
-		}, 0);
+		const serviceIds = [...new Set(validatedData.items.map((item) => item.service_id))];
+		const { data: services, error: servicesError } = await supabase
+			.from("services")
+			.select("id, name, unit, price, express_multiplier, is_active")
+			.in("id", serviceIds)
+			.eq("is_active", true);
+
+		if (servicesError) throw servicesError;
+		if (!services || services.length !== serviceIds.length) {
+			return { success: false, error: "Layanan tidak valid atau sudah tidak aktif." };
+		}
+
+		const serviceById = new Map(services.map((service) => [service.id, service]));
+		const orderItems = validatedData.items.map((item) => {
+			const service = serviceById.get(item.service_id);
+			if (!service) {
+				throw new Error("Layanan tidak ditemukan.");
+			}
+
+			const unitPrice = Number(service.price);
+			const multiplier = item.is_express ? Number(service.express_multiplier ?? 1.5) : 1;
+			const subtotal = item.quantity * unitPrice * multiplier;
+
+			return {
+				service_id: service.id,
+				service_name: service.name,
+				quantity: item.quantity,
+				unit: service.unit,
+				unit_price: unitPrice,
+				is_express: item.is_express,
+				subtotal,
+				notes: item.notes,
+			};
+		});
+
+		const serverTotal = orderItems.reduce((acc, item) => acc + item.subtotal, 0);
 
 		const { data: order, error } = await supabase
 			.from("orders")
@@ -73,19 +133,12 @@ export async function createOrder(formData: FormData): Promise<ActionResponse<Or
 
 		if (error) return { success: false, error: error.message };
 
-		const orderItems = validatedData.items.map((item) => ({
+		const orderItemsWithOrderId = orderItems.map((item) => ({
 			order_id: order.id,
-			service_id: item.service_id,
-			service_name: item.service_name,
-			quantity: item.quantity,
-			unit: item.unit,
-			unit_price: item.unit_price,
-			is_express: item.is_express,
-			subtotal: item.quantity * item.unit_price * (item.is_express ? 1.5 : 1),
-			notes: item.notes,
+			...item,
 		}));
 
-		const { error: itemsError } = await supabase.from("order_items").insert(orderItems);
+		const { error: itemsError } = await supabase.from("order_items").insert(orderItemsWithOrderId);
 		if (itemsError) return { success: false, error: itemsError.message };
 
 		await supabase.from("order_status_logs").insert({
@@ -118,13 +171,15 @@ export async function updateOrderStatus(
 	orderId: string,
 	status: OrderStatus,
 ): Promise<ActionResponse> {
-	const supabase = await createClient();
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-	if (!user) return { success: false, error: "Unauthorized" };
+	const parsedStatus = OrderStatusSchema.safeParse(status);
+	if (!parsedStatus.success) return { success: false, error: "Status pesanan tidak valid." };
 
-	const updateData: Partial<Order> = { status };
+	const { supabase, user, role, outletId } = await requireRole(
+		STAFF_ROLES,
+		"Akses staff diperlukan untuk memperbarui pesanan.",
+	);
+
+	const updateData: Partial<Order> = { status: parsedStatus.data };
 	const now = new Date().toISOString();
 
 	const statusToTimeMap: Record<string, string> = {
@@ -140,18 +195,29 @@ export async function updateOrderStatus(
 		cancelled: "cancelled_at",
 	};
 
-	const timeField = statusToTimeMap[status] as keyof Order;
+	const timeField = statusToTimeMap[parsedStatus.data] as keyof Order;
 	if (timeField) {
 		Object.assign(updateData, { [timeField]: now });
 	}
 
-	const { error } = await supabase.from("orders").update(updateData).eq("id", orderId);
+	let updateQuery = supabase.from("orders").update(updateData).eq("id", orderId).select("id");
+	if (role !== "superadmin" && !outletId) {
+		return { success: false, error: "Akses outlet ditolak." };
+	}
+	if (role !== "superadmin" && outletId) {
+		updateQuery = updateQuery.eq("outlet_id", outletId);
+	}
+
+	const { data: updatedOrders, error } = await updateQuery;
 
 	if (error) return { success: false, error: error.message };
+	if (!updatedOrders || updatedOrders.length === 0) {
+		return { success: false, error: "Pesanan tidak ditemukan atau akses ditolak." };
+	}
 
 	await supabase.from("order_status_logs").insert({
 		order_id: orderId,
-		status: status,
+		status: parsedStatus.data,
 		actor_id: user.id,
 	});
 
@@ -210,14 +276,27 @@ export async function assignStaffToOrder(data: {
 	role: "washer" | "ironer" | "qc" | "kasir";
 }): Promise<ActionResponse<void>> {
 	try {
-		const supabase = await createClient();
+		const parsed = AssignStaffSchema.parse(data);
+		const {
+			supabase,
+			role: actorRole,
+			outletId,
+		} = await requireRole(MANAGER_ROLES, "Akses manager diperlukan untuk menugaskan staff.");
 		const updateData: Partial<Order> = {};
-		if (data.role === "washer") updateData.washer_id = data.staffId;
-		if (data.role === "ironer") updateData.ironer_id = data.staffId;
-		if (data.role === "qc") updateData.qc_id = data.staffId;
-		if (data.role === "kasir") updateData.kasir_id = data.staffId;
+		if (parsed.role === "washer") updateData.washer_id = parsed.staffId;
+		if (parsed.role === "ironer") updateData.ironer_id = parsed.staffId;
+		if (parsed.role === "qc") updateData.qc_id = parsed.staffId;
+		if (parsed.role === "kasir") updateData.kasir_id = parsed.staffId;
 
-		const { error } = await supabase.from("orders").update(updateData).eq("id", data.orderId);
+		let updateQuery = supabase.from("orders").update(updateData).eq("id", parsed.orderId);
+		if (actorRole !== "superadmin" && !outletId) {
+			return { success: false, error: "Akses outlet ditolak." };
+		}
+		if (actorRole !== "superadmin" && outletId) {
+			updateQuery = updateQuery.eq("outlet_id", outletId);
+		}
+
+		const { error } = await updateQuery;
 
 		if (error) throw error;
 		revalidatePath("/admin/pos");

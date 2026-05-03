@@ -1,17 +1,34 @@
-import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { z } from "zod";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { qstashRoute } from "@/lib/upstash/qstash-route";
+
+const NotifyPayloadSchema = z.object({
+	orderId: z.string().min(1).max(80),
+	newStatus: z.enum([
+		"confirmed",
+		"picked_up",
+		"washing",
+		"ironing",
+		"ready",
+		"delivering",
+		"completed",
+		"cancelled",
+	]),
+	customerId: z.string().uuid(),
+	customerPhone: z.string().min(6).max(32).optional(),
+	customerName: z.string().max(120).optional(),
+});
 
 async function handler(request: Request) {
 	try {
-		const body = await request.json();
-		const { orderId, newStatus, customerPhone, customerName } = body;
-
-		if (!orderId || !newStatus) {
-			return NextResponse.json({ error: "Missing orderId or newStatus" }, { status: 400 });
+		const payload = NotifyPayloadSchema.safeParse(await request.json());
+		if (!payload.success) {
+			return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
 		}
 
-		const supabase = await createClient();
+		const { orderId, newStatus, customerId, customerPhone, customerName } = payload.data;
+		const supabase = createAdminClient();
 
 		const statusMessages: Record<string, string> = {
 			confirmed: `Halo ${customerName || "Pelanggan"}, pesanan #${orderId} Anda telah dikonfirmasi. Kami akan segera memprosesnya.`,
@@ -33,7 +50,7 @@ async function handler(request: Request) {
 		}
 
 		await supabase.from("notifications").insert({
-			user_id: body.customerId,
+			user_id: customerId,
 			type: "order_update",
 			title: `Pesanan ${newStatus === "completed" ? "Selesai" : "Update"}`,
 			body: message,
@@ -62,6 +79,4 @@ async function handler(request: Request) {
 	}
 }
 
-export const POST = process.env.QSTASH_CURRENT_SIGNING_KEY
-	? verifySignatureAppRouter(handler)
-	: handler;
+export const POST = qstashRoute(handler);

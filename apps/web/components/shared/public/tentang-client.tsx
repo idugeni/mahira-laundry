@@ -13,7 +13,7 @@ import { MdOutlineScience } from "react-icons/md";
 
 export function TentangClient() {
 	return (
-		<div className="py-16 bg-white relative overflow-hidden">
+		<div className="py-16 bg-white relative overflow-hidden w-full min-w-0">
 			{/* Decorative Background Elements */}
 			<div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
 				<motion.div
@@ -53,7 +53,7 @@ export function TentangClient() {
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-						className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
+						className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.85] tracking-tighter"
 					>
 						Eksklusivitas <br />
 						<span className="text-brand-gradient">Mahira Laundry.</span>
@@ -77,7 +77,7 @@ export function TentangClient() {
 					</motion.p>
 				</div>
 
-				<div className="grid gap-32">
+				<div className="grid gap-24 lg:gap-32 min-w-0">
 					{/* Visi Section */}
 					<motion.section
 						initial={{ opacity: 0, y: 50 }}
@@ -85,7 +85,7 @@ export function TentangClient() {
 						viewport={{ once: true }}
 						className="relative group p-8 md:p-12 bg-slate-900 rounded-[2rem] overflow-hidden"
 					>
-						<div className="absolute top-0 right-0 p-12 text-[200px] text-white/5 font-black pointer-events-none select-none -mr-20 -mt-20">
+						<div className="absolute top-0 right-0 p-6 sm:p-12 text-[100px] sm:text-[200px] text-white/5 font-black pointer-events-none select-none -mr-10 -mt-10 sm:-mr-20 sm:-mt-20">
 							VISI
 						</div>
 
@@ -104,11 +104,12 @@ export function TentangClient() {
 					</motion.section>
 
 					{/* Misi Section */}
-					<div className="grid md:grid-cols-2 gap-12 lg:gap-20 items-center">
+					<div className="grid md:grid-cols-2 gap-10 lg:gap-20 items-center min-w-0">
 						<motion.div
-							initial={{ opacity: 0, x: -30 }}
-							whileInView={{ opacity: 1, x: 0 }}
+							initial={{ opacity: 0, y: 30 }}
+							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: true }}
+							className="min-w-0"
 						>
 							<div className="w-20 h-20 bg-brand-accent/20 rounded-3xl flex items-center justify-center text-brand-accent-dark mb-10 shadow-inner">
 								<HiOutlineTrophy size={40} />
@@ -132,16 +133,18 @@ export function TentangClient() {
 							].map((misi, i) => (
 								<motion.div
 									key={misi}
-									initial={{ opacity: 0, x: 30 }}
-									whileInView={{ opacity: 1, x: 0 }}
+									initial={{ opacity: 0, y: 20 }}
+									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
 									transition={{ delay: i * 0.1 }}
-									className="flex items-start gap-6 p-6 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-100 transition-all group"
+									className="flex items-start gap-4 sm:gap-6 p-5 sm:p-6 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-xl hover:shadow-slate-100 transition-all group min-w-0"
 								>
 									<div className="w-12 h-12 rounded-2xl bg-white text-brand-primary flex items-center justify-center font-black shrink-0 shadow-xs group-hover:bg-brand-primary group-hover:text-white transition-colors duration-500">
 										0{i + 1}
 									</div>
-									<p className="text-slate-600 font-bold leading-snug pt-2 text-lg">{misi}</p>
+									<p className="text-slate-600 font-bold leading-snug pt-2 text-base sm:text-lg min-w-0">
+										{misi}
+									</p>
 								</motion.div>
 							))}
 						</div>
@@ -159,7 +162,7 @@ export function TentangClient() {
 								Filosofi Kerja Kami
 							</h2>
 						</motion.div>
-						<div className="grid sm:grid-cols-2 gap-8">
+						<div className="grid md:grid-cols-2 gap-6 lg:gap-8">
 							{[
 								{
 									icon: MdOutlineScience,
@@ -196,7 +199,7 @@ export function TentangClient() {
 									whileInView={{ opacity: 1, y: 0 }}
 									viewport={{ once: true }}
 									transition={{ delay: i * 0.1 }}
-									className="p-10 bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] flex flex-col items-start gap-8 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.06)] transition-all duration-500 group"
+									className="p-6 sm:p-8 lg:p-10 bg-white rounded-[2rem] lg:rounded-[2.5rem] border border-slate-100 shadow-[0_20px_40px_-15px_rgba(0,0,0,0.03)] flex flex-col items-start gap-8 hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.06)] transition-all duration-500 group min-w-0"
 								>
 									<div
 										className={`w-16 h-16 rounded-2xl ${item.bg} ${item.color} flex items-center justify-center text-3xl shrink-0 transition-transform duration-500 group-hover:rotate-6 shadow-inner`}

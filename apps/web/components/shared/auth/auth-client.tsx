@@ -96,14 +96,14 @@ export function AuthClient({ type, action }: AuthClientProps) {
 	};
 
 	return (
-		<div className="h-screen w-full flex bg-slate-50 overflow-hidden">
+		<div className="h-dvh w-full flex bg-slate-50 overflow-hidden">
 			{/* Left Side - Compact Card Layout */}
 			<div className="flex-1 flex flex-col h-full relative z-20 overflow-hidden p-4 lg:p-8">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					animate={{ opacity: 1, y: 0 }}
 					transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-					className="w-full max-w-md mx-auto bg-white rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col overflow-hidden my-auto max-h-[95vh]"
+					className="w-full max-w-md mx-auto bg-white rounded-[2rem] sm:rounded-[2.5rem] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)] border border-slate-100 flex flex-col overflow-hidden my-auto max-h-[95dvh]"
 				>
 					{/* Card Header (Optimized - No Logo) */}
 					<div className="p-8 pb-4 shrink-0 text-center">
@@ -305,7 +305,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 				onMouseLeave={handleMouseLeave}
 				role="application"
 				aria-label="Interactive visual effect"
-				className="hidden md:block md:flex-1 relative overflow-hidden bg-slate-900 group cursor-default h-full"
+				className="hidden md:flex md:flex-1 relative overflow-hidden bg-slate-900 group cursor-default"
 			>
 				{/* Background Gradients */}
 				<div className="absolute inset-0 bg-brand-gradient opacity-30 mix-blend-overlay" />
@@ -318,7 +318,8 @@ export function AuthClient({ type, action }: AuthClientProps) {
 					className="absolute top-0 right-0 w-full h-full bg-brand-primary/20 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2"
 				/>
 
-				<div className="absolute inset-0 flex flex-col justify-between p-16 lg:p-12 relative z-10">
+				<div className="absolute inset-0 flex flex-col p-16 lg:p-12 relative z-10">
+					{/* Top - MAHIRA Logo */}
 					<motion.div
 						initial={{ opacity: 0, y: -20 }}
 						animate={{ opacity: 1, y: 0 }}
@@ -327,27 +328,35 @@ export function AuthClient({ type, action }: AuthClientProps) {
 						MAHIRA
 					</motion.div>
 
+					{/* Center - Main Headline (flex-1 to push quote to bottom) */}
 					<motion.div
 						style={{
 							rotateX,
 							rotateY,
 							transformStyle: "preserve-3d",
 						}}
-						className="text-white"
+						className="text-white flex-1 flex flex-col justify-center"
 					>
 						<motion.div
 							initial={{ width: 0 }}
 							animate={{ width: "60px" }}
 							className="h-1 bg-brand-accent mb-6 rounded-full"
 						/>
-						<h2 className="text-5xl lg:text-6xl font-black leading-[0.9] mb-6 tracking-tighter">
+						<h2 className="text-5xl lg:text-6xl font-black leading-[0.9] tracking-tighter">
 							Standar Baru <br />
 							<span className="text-brand-accent">Kualitas Hidup.</span>
 						</h2>
-						<p className="text-white/30 text-lg max-w-sm leading-relaxed font-medium italic">
-							"Kami tidak hanya mencuci pakaian, kami merawat memori dan kenyamanan Anda."
-						</p>
 					</motion.div>
+
+					{/* Bottom - Quote */}
+					<motion.p
+						initial={{ opacity: 0, y: 20 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ delay: 0.3 }}
+						className="text-white/30 text-lg max-w-sm leading-relaxed font-medium italic"
+					>
+						"Kami tidak hanya mencuci pakaian, kami merawat memori dan kenyamanan Anda."
+					</motion.p>
 				</div>
 
 				{/* Floating Interactive Cards */}

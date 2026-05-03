@@ -3,12 +3,27 @@ import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb"
 import { PRIMARY_OUTLET } from "@/lib/constants";
 
 const managerNav = [
-	{ href: "/manager", label: "Dashboard", icon: "🏠" },
-	{ href: "/manager/analytics", label: "Analytics", icon: "📊" },
-	{ href: "/manager/kelola-layanan", label: "Kelola Layanan", icon: "🧺" },
-	{ href: "/manager/voucher", label: "Voucher", icon: "🎫" },
-	{ href: "/manager/inventori", label: "Inventori", icon: "📦" },
-	{ href: "/manager/tim", label: "Tim", icon: "👥" },
+	{
+		label: "Utama",
+		items: [
+			{ href: "/manager", label: "Dashboard", icon: "🏠" },
+			{ href: "/manager/analytics", label: "Analytics", icon: "📊" },
+		],
+	},
+	{
+		label: "Operasional",
+		items: [
+			{ href: "/manager/kelola-layanan", label: "Kelola Layanan", icon: "🧺" },
+			{ href: "/manager/voucher", label: "Voucher", icon: "🎫" },
+			{ href: "/manager/inventori", label: "Inventori", icon: "📦" },
+		],
+	},
+	{
+		label: "Tim",
+		items: [
+			{ href: "/manager/tim", label: "Tim", icon: "👥" },
+		],
+	},
 ];
 
 export default function ManagerLayout({ children }: { children: React.ReactNode }) {

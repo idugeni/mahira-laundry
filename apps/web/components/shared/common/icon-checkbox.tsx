@@ -40,7 +40,12 @@ export function IconCheckbox({
 	label,
 	activeColor,
 }: IconCheckboxProps) {
-	const colors = colorMap[activeColor] ?? colorMap["brand"]!;
+	const defaultColors = {
+		border: "border-brand-primary",
+		bg: "bg-brand-primary",
+		hover: "group-hover/check:border-brand-primary/40",
+	};
+	const colors = colorMap[activeColor] ?? defaultColors;
 
 	return (
 		<label className="flex items-center gap-3 cursor-pointer group/check shrink-0">

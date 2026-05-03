@@ -1,14 +1,32 @@
-import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 import { NextResponse } from "next/server";
+import { z } from "zod";
+import { qstashRoute } from "@/lib/upstash/qstash-route";
+
+const InquiryReceivedPayloadSchema = z.object({
+	email: z.string().email(),
+	fullName: z.string().min(1).max(120),
+	packageName: z.string().max(160).optional(),
+});
+
+function escapeHtml(value: string): string {
+	return value
+		.replace(/&/g, "&amp;")
+		.replace(/</g, "&lt;")
+		.replace(/>/g, "&gt;")
+		.replace(/"/g, "&quot;")
+		.replace(/'/g, "&#39;");
+}
 
 async function handler(request: Request) {
 	try {
-		const body = await request.json();
-		const { email, fullName, packageName } = body;
-
-		if (!email || !fullName) {
-			return NextResponse.json({ error: "Missing email or fullName" }, { status: 400 });
+		const payload = InquiryReceivedPayloadSchema.safeParse(await request.json());
+		if (!payload.success) {
+			return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
 		}
+
+		const { email, fullName, packageName } = payload.data;
+		const escapedFullName = escapeHtml(fullName);
+		const escapedPackageName = packageName ? escapeHtml(packageName) : "";
 
 		if (!process.env.RESEND_API_KEY) {
 			return NextResponse.json({ error: "RESEND_API_KEY not configured" }, { status: 500 });
@@ -27,8 +45,8 @@ async function handler(request: Request) {
 					subject: "Terima kasih atas minat Anda menjadi Mitra Mahira Laundry",
 					html: `
 						<div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
-							<h2>Halo ${fullName},</h2>
-							<p>Terima kasih atas minat Anda untuk menjadi bagian dari ekosistem Mahira Laundry${packageName ? ` dengan paket <strong>${packageName}</strong>` : ""}.</p>
+							<h2>Halo ${escapedFullName},</h2>
+							<p>Terima kasih atas minat Anda untuk menjadi bagian dari ekosistem Mahira Laundry${escapedPackageName ? ` dengan paket <strong>${escapedPackageName}</strong>` : ""}.</p>
 							<p>Tim kami akan menghubungi Anda dalam 1-2 hari kerja untuk membahas langkah selanjutnya.</p>
 							<p>Salam hangat,<br/>Tim Mahira Laundry</p>
 						</div>
@@ -43,6 +61,4 @@ async function handler(request: Request) {
 	}
 }
 
-export const POST = process.env.QSTASH_CURRENT_SIGNING_KEY
-	? verifySignatureAppRouter(handler)
-	: handler;
+export const POST = qstashRoute(handler);

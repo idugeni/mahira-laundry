@@ -15,7 +15,7 @@ export default async function PublicLayout({ children }: { children: React.React
 	return (
 		<div className="flex flex-col min-h-screen">
 			<MahiraHeader key="public-header" />
-			<main key="public-main" className="flex-1 flex items-start justify-center">
+			<main key="public-main" className="flex-1 w-full min-w-0">
 				{children}
 			</main>
 			<MahiraFooter key="public-footer" services={services || []} />

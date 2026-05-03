@@ -105,8 +105,8 @@ export function MahiraHeader() {
 				className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-border"
 			>
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-					<div className="flex items-center justify-between h-16 lg:h-20">
-						<Link href="/" className="flex items-center">
+					<div className="flex items-center justify-between h-16 lg:h-20 gap-4 min-w-0">
+						<Link href="/" className="flex items-center min-w-0">
 							<MahiraLogo size={36} />
 						</Link>
 

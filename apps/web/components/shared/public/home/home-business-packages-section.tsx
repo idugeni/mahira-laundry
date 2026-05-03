@@ -42,6 +42,12 @@ const TIER_STYLE: Record<
 		gradient: "from-orange-500/5 to-transparent",
 	},
 };
+const DEFAULT_TIER_STYLE = {
+	badge: "bg-blue-100 text-blue-700",
+	accent: "border-blue-100 shadow-xs",
+	featured: false,
+	gradient: "from-blue-500/5 to-transparent",
+};
 
 function formatIDR(amount: number) {
 	return new Intl.NumberFormat("id-ID", {
@@ -53,7 +59,7 @@ function formatIDR(amount: number) {
 
 function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 	const [isExpanded, setIsExpanded] = useState(false);
-	const style = TIER_STYLE[pkg.tier] ?? TIER_STYLE["Starter"]!;
+	const style = TIER_STYLE[pkg.tier] ?? DEFAULT_TIER_STYLE;
 	const isPromoActive =
 		pkg.promo_price != null &&
 		pkg.promo_expires_at != null &&
@@ -79,22 +85,24 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 				// FIX: Pisahkan transisi layout agar tidak terlalu lambat saat expand/collapse
 				layout: { duration: 0.3, ease: "easeInOut" },
 			}}
-			className={`relative flex flex-col h-full rounded-[2rem] border bg-white p-6 sm:p-8 transition-[box-shadow,border-color] duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] ${style.accent}`}
+			className={`relative flex flex-col h-full rounded-[2rem] border bg-white p-6 sm:p-8 transition-[box-shadow,border-color] duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] min-w-0 ${style.accent}`}
 		>
-			<div className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none`} />
+			<div className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none rounded-[2rem]`} />
 
-			<div className="relative z-10 flex flex-col h-full">
-				{style.featured && (
-					<div className="flex justify-center -mt-10 mb-2">
-						<motion.span
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							className="px-6 py-2 rounded-b-2xl bg-emerald-500 text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-emerald-200"
-						>
-							Paling Populer
-						</motion.span>
-					</div>
-				)}
+			{/* Badge Paling Populer - Absolute positioned at top */}
+			{style.featured && (
+				<motion.div
+					initial={{ opacity: 0, y: -10 }}
+					animate={{ opacity: 1, y: 0 }}
+					className="absolute -top-px left-1/2 -translate-x-1/2 z-20"
+				>
+					<span className="inline-flex px-6 py-2 rounded-b-2xl bg-emerald-500 text-white text-[10px] font-black uppercase tracking-[0.2em] shadow-lg shadow-emerald-200/50 whitespace-nowrap">
+						Paling Populer
+					</span>
+				</motion.div>
+			)}
+
+			<div className="relative z-10 flex flex-col h-full pt-4">
 
 				{/* Tier badge */}
 				<div className="flex justify-center">
@@ -127,7 +135,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 							</span>
 						</div>
 					) : (
-						<span className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter">
+						<span className="text-3xl md:text-4xl font-black text-slate-900 tracking-tighter break-words">
 							{formatIDR(pkg.price)}
 						</span>
 					)}
@@ -254,12 +262,12 @@ export function HomeBusinessPackagesSection({ packages }: HomeBusinessPackagesSe
 	if (packages.length === 0) return null;
 
 	return (
-		<section className="py-14 sm:py-16 relative overflow-hidden bg-white">
+		<section className="py-14 sm:py-16 relative overflow-hidden bg-white w-full min-w-0">
 			{/* Decorative Elements */}
 			<motion.div
 				animate={{ rotate: 360 }}
 				transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-				className="absolute -top-8 sm:p-12 -right-24 w-96 h-96 border-[40px] border-slate-50 rounded-full opacity-50"
+				className="absolute -top-8 right-0 w-48 sm:w-64 h-48 sm:h-64 border-[20px] sm:border-[32px] border-slate-50 rounded-full opacity-50"
 			/>
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -281,7 +289,7 @@ export function HomeBusinessPackagesSection({ packages }: HomeBusinessPackagesSe
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: false }}
-							className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9]"
+							className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9]"
 						>
 							Pilih Paket <br />
 							<span className="text-brand-gradient">Usaha Anda.</span>
@@ -301,7 +309,7 @@ export function HomeBusinessPackagesSection({ packages }: HomeBusinessPackagesSe
 				{/* Package Cards */}
 				{/* FIX: Tambah id pada LayoutGroup untuk mencegah konflik scope layout */}
 				<LayoutGroup id="packages-grid">
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-md sm:max-w-none mx-auto sm:mx-0">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md md:max-w-none mx-auto md:mx-0">
 						{packages.slice(0, 3).map((pkg, i) => (
 							<PackageCard key={pkg.id} pkg={pkg} index={i} />
 						))}

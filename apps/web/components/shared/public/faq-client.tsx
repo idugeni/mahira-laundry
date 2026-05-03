@@ -100,7 +100,7 @@ export function FAQClient() {
 		.filter((cat) => cat.questions.length > 0);
 
 	return (
-		<div className="min-h-screen bg-slate-50 pb-24">
+		<div className="min-h-screen bg-slate-50 pb-24 w-full min-w-0">
 			{/* Hero Section */}
 			<section className="relative pt-32 pb-20 overflow-hidden bg-white border-b border-slate-100">
 				<div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-40">
@@ -124,7 +124,7 @@ export function FAQClient() {
 						initial={{ opacity: 0, y: 20 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ delay: 0.1 }}
-						className="text-4xl md:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900 mb-6 tracking-tight"
+						className="text-3xl sm:text-4xl md:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900 mb-6 tracking-tight"
 					>
 						Ada yang bisa kami <span className="text-brand-primary">bantu?</span>
 					</motion.h1>
@@ -161,9 +161,9 @@ export function FAQClient() {
 
 			{/* Main Content */}
 			<section className="max-w-6xl mx-auto px-4 -mt-10 relative z-20">
-				<div className="flex flex-col md:flex-row gap-8">
+				<div className="flex flex-col md:flex-row gap-8 min-w-0">
 					{/* Sidebar Categories */}
-					<div className="md:w-1/3">
+					<div className="md:w-1/3 min-w-0">
 						<div className="sticky top-28 bg-white/70 backdrop-blur-xl p-4 rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-white flex flex-col gap-2">
 							<p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2 pl-4">
 								Kategori Pertanyaan
@@ -176,7 +176,7 @@ export function FAQClient() {
 										setActiveCategory(cat.id);
 										setOpenIndex(0);
 									}}
-									className={`flex items-center gap-4 px-6 py-4 rounded-2xl font-bold transition-all ${
+									className={`flex items-center gap-4 px-5 sm:px-6 py-4 rounded-2xl font-bold transition-all min-w-0 ${
 										activeCategory === cat.id
 											? "bg-brand-primary text-white shadow-lg shadow-brand-primary/25"
 											: "text-slate-600 hover:bg-slate-50"
@@ -187,14 +187,14 @@ export function FAQClient() {
 									>
 										{cat.icon}
 									</span>
-									<span>{cat.label}</span>
+									<span className="min-w-0 text-left">{cat.label}</span>
 								</button>
 							))}
 						</div>
 					</div>
 
 					{/* FAQ Accordion */}
-					<div className="md:w-2/3">
+					<div className="md:w-2/3 min-w-0">
 						<div className="space-y-4">
 							<AnimatePresence initial={false}>
 								{filteredCategories
@@ -202,9 +202,9 @@ export function FAQClient() {
 									?.questions.map((faq, idx) => (
 										<motion.div
 											key={`${activeCategory}-${faq.q}`}
-											initial={{ opacity: 0, x: 20 }}
-											animate={{ opacity: 1, x: 0 }}
-											exit={{ opacity: 0, x: -20 }}
+											initial={{ opacity: 0, y: 16 }}
+											animate={{ opacity: 1, y: 0 }}
+											exit={{ opacity: 0, y: -16 }}
 											transition={{ delay: idx * 0.05 }}
 											className="group"
 										>
@@ -218,10 +218,10 @@ export function FAQClient() {
 												<button
 													type="button"
 													onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
-													className="w-full flex items-center justify-between p-6 md:p-8 text-left"
+													className="w-full flex items-center justify-between gap-4 p-6 md:p-8 text-left"
 												>
 													<span
-														className={`text-lg md:text-xl font-bold transition-colors ${openIndex === idx ? "text-brand-primary" : "text-slate-900"}`}
+														className={`text-base sm:text-lg md:text-xl font-bold transition-colors min-w-0 ${openIndex === idx ? "text-brand-primary" : "text-slate-900"}`}
 													>
 														{faq.q}
 													</span>

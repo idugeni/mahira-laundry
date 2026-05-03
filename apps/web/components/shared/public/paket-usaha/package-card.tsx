@@ -92,7 +92,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 	const extraCount = pkg.items.length - MAX_ITEMS;
 
 	return (
-		<motion.div className="relative flex flex-col h-full rounded-[2.5rem] border border-slate-100 bg-white p-8 sm:p-10 transition-all duration-500 overflow-hidden group hover:shadow-2xl hover:shadow-slate-200/50 hover:border-slate-200">
+		<motion.div className="relative flex flex-col h-full rounded-[2rem] sm:rounded-[2.5rem] border border-slate-100 bg-white p-6 sm:p-8 transition-all duration-500 overflow-hidden group hover:shadow-2xl hover:shadow-slate-200/50 hover:border-slate-200 min-w-0">
 			{/* Animated background glow */}
 			<div
 				className={`absolute -top-24 -right-24 w-48 h-48 bg-gradient-to-br ${tier.gradient} rounded-full blur-[80px] opacity-0 group-hover:opacity-15 transition-opacity duration-700`}
@@ -112,7 +112,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 
 			{/* Image with Advanced Overlay */}
 			{pkg.image_url && (
-				<div className="relative h-64 w-[calc(100%+4rem)] sm:w-[calc(100%+5rem)] -ml-8 sm:-ml-10 -mt-8 sm:-mt-10 overflow-hidden rounded-2xl z-0">
+				<div className="relative h-56 sm:h-64 w-[calc(100%+3rem)] sm:w-[calc(100%+4rem)] -ml-6 sm:-ml-8 -mt-6 sm:-mt-8 overflow-hidden rounded-2xl z-0">
 					<Image
 						src={pkg.image_url}
 						alt={pkg.name}
@@ -145,7 +145,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 				</div>
 
 				{/* Package name - Stronger Typography */}
-				<h3 className="text-3xl font-black text-slate-900 tracking-tighter leading-[1.1]">
+				<h3 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tighter leading-[1.1] break-words">
 					{pkg.name}
 				</h3>
 
@@ -168,8 +168,8 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 						<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full animate-shimmer" />
 
 						<div className="relative z-10">
-							<div className="flex items-center justify-between mb-3">
-								<div className="flex items-center gap-2">
+							<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-3">
+								<div className="flex items-center gap-2 min-w-0">
 									<span className="text-brand-primary">
 										<HiOutlineTrophy size={16} />
 									</span>
@@ -197,13 +197,13 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 							: "bg-slate-900 border-slate-800 shadow-xl shadow-slate-900/20"
 					}`}
 				>
-					{/* Verified badge centered at top */}
+					{/* Terverifikasi badge centered at top */}
 					<div className="flex justify-center mb-4">
 						<span
 							className={`inline-flex items-center gap-1.5 rounded-full backdrop-blur-sm px-2.5 py-1 text-[8px] font-black uppercase tracking-[0.15em] ${promoActive ? "bg-brand-primary/10 text-brand-primary/50" : "bg-white/10 text-white/60"}`}
 						>
 							<HiOutlineShieldCheck size={10} />
-							Verified
+							Terverifikasi
 						</span>
 					</div>
 
@@ -217,8 +217,8 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 
 					{promoActive ? (
 						<div className="flex flex-col items-center gap-1">
-							<div className="flex items-baseline gap-3 flex-wrap justify-center">
-								<span className="text-4xl font-black text-brand-primary tracking-tighter">
+							<div className="flex items-baseline gap-3 flex-wrap justify-center min-w-0">
+								<span className="text-3xl sm:text-4xl lg:text-3xl xl:text-4xl font-black text-brand-primary tracking-tighter break-words">
 									{formatIDR(pkg.promo_price as number)}
 								</span>
 								<span className="text-lg text-slate-500 line-through font-bold opacity-60">
@@ -230,7 +230,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 							</div>
 						</div>
 					) : (
-						<span className="text-5xl font-black text-white tracking-tighter block text-center">
+						<span className="text-3xl sm:text-5xl lg:text-3xl xl:text-5xl font-black text-white tracking-tighter block text-center break-words">
 							{formatIDR(pkg.price)}
 						</span>
 					)}
@@ -260,7 +260,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 										<span className="mt-1 text-brand-primary shrink-0 bg-brand-primary/10 p-1 rounded-lg">
 											<HiOutlineCheck size={14} />
 										</span>
-										<div className="flex flex-col">
+										<div className="flex flex-col min-w-0">
 											<span>
 												{item.quantity != null && (
 													<span className="font-black text-slate-900 mr-1">{item.quantity}x </span>
@@ -282,7 +282,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 							<motion.button
 								type="button"
 								onClick={() => setIsExpanded(!isExpanded)}
-								className="mt-8 text-[10px] text-brand-primary font-black uppercase tracking-[0.2em] flex items-center gap-3 hover:opacity-70 transition-opacity"
+								className="mt-8 text-[10px] text-brand-primary font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] flex items-center gap-3 hover:opacity-70 transition-opacity"
 							>
 								<div className="w-6 h-6 rounded-full bg-brand-primary/10 flex items-center justify-center">
 									{isExpanded ? (
@@ -302,7 +302,7 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 					href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent(`Halo Mahira Laundry, saya tertarik dengan Paket Usaha ${pkg.name}. Bisa bantu jelaskan detailnya?`)}`}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="mt-8 w-full rounded-[2rem] bg-slate-900 px-8 py-4.5 text-[10px] font-black uppercase tracking-[0.3em] text-white text-center shadow-2xl shadow-slate-200 transition-all hover:bg-brand-primary hover:shadow-brand-primary/30 flex items-center justify-center gap-4 group/btn"
+					className="mt-8 w-full rounded-[2rem] bg-slate-900 px-5 sm:px-8 py-4.5 text-[10px] font-black uppercase tracking-[0.18em] sm:tracking-[0.3em] text-white text-center shadow-2xl shadow-slate-200 transition-all hover:bg-brand-primary hover:shadow-brand-primary/30 flex items-center justify-center gap-4 group/btn"
 				>
 					<span>Konsultasi Sekarang</span>
 					<span className="-rotate-90">

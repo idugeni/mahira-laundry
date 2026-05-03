@@ -6,10 +6,6 @@
 		"**/node_modules": true
 	},
 	"js/ts.tsserver.watchOptions": {
-		"excludeDirectories": [
-			"**/node_modules",
-			"**/.git",
-			"**/.next"
-		]
+		"excludeDirectories": ["**/node_modules", "**/.git", "**/.next"]
 	}
 }

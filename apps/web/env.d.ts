@@ -23,6 +23,8 @@ declare namespace NodeJS {
 		MIDTRANS_SERVER_KEY: string;
 		QSTASH_TOKEN: string;
 		QSTASH_CURRENT_SIGNING_KEY: string;
+		QSTASH_NEXT_SIGNING_KEY: string;
+		SUPABASE_WEBHOOK_SECRET: string;
 		UPSTASH_REDIS_REST_URL: string;
 		UPSTASH_REDIS_REST_TOKEN: string;
 		GA_PROPERTY_ID: string;

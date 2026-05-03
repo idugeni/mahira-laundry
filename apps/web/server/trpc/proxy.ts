@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 interface Context {
 	userId: string | null;
 	role: string | null;
+	outletId: string | null;
 }
 
 export async function createContext(): Promise<Context> {
@@ -12,17 +13,18 @@ export async function createContext(): Promise<Context> {
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	if (!user) return { userId: null, role: null };
+	if (!user) return { userId: null, role: null, outletId: null };
 
 	const { data: profile } = await supabase
 		.from("profiles")
-		.select("role")
+		.select("role, outlet_id")
 		.eq("id", user.id)
 		.single();
 
 	return {
 		userId: user.id,
 		role: profile?.role || "customer",
+		outletId: profile?.outlet_id || null,
 	};
 }
 

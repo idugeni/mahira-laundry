@@ -1,7 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import { z } from "zod";
+import { requireRole, SUPERADMIN_ROLES } from "@/lib/auth/guards";
 import type { ActionResponse } from "@/lib/types";
 import { invalidateCache } from "@/lib/upstash/cache";
 
@@ -17,25 +18,44 @@ export type OutletInput = {
 	franchise_fee?: number;
 };
 
+const OutletInputSchema = z.object({
+	id: z.string().uuid().optional(),
+	name: z.string().min(1).max(160),
+	slug: z.string().min(1).max(160),
+	address: z.string().min(5).max(1_000),
+	phone: z.string().max(40).optional(),
+	image_url: z.preprocess(
+		(value) => (value === "" ? undefined : value),
+		z.string().url().optional(),
+	),
+	is_active: z.boolean().optional(),
+	is_franchise: z.boolean().optional(),
+	franchise_fee: z.number().nonnegative().max(1_000_000_000).optional(),
+});
+
 export async function upsertOutlet(data: OutletInput): Promise<ActionResponse> {
 	try {
-		const supabase = await createClient();
+		const parsed = OutletInputSchema.parse(data);
+		const { supabase } = await requireRole(
+			SUPERADMIN_ROLES,
+			"Akses superadmin diperlukan untuk mengelola outlet.",
+		);
 
 		const outletData = {
-			name: data.name,
-			slug: data.slug,
-			address: data.address,
-			phone: data.phone,
-			image_url: data.image_url,
-			is_active: data.is_active ?? true,
-			is_franchise: data.is_franchise ?? false,
-			franchise_fee: data.franchise_fee ?? 0,
+			name: parsed.name,
+			slug: parsed.slug,
+			address: parsed.address,
+			phone: parsed.phone,
+			image_url: parsed.image_url,
+			is_active: parsed.is_active ?? true,
+			is_franchise: parsed.is_franchise ?? false,
+			franchise_fee: parsed.franchise_fee ?? 0,
 			updated_at: new Date().toISOString(),
 		};
 
 		let result: { error: { message: string } | null };
-		if (data.id) {
-			result = await supabase.from("outlets").update(outletData).eq("id", data.id);
+		if (parsed.id) {
+			result = await supabase.from("outlets").update(outletData).eq("id", parsed.id);
 		} else {
 			result = await supabase.from("outlets").insert({
 				...outletData,
@@ -61,8 +81,12 @@ export async function upsertOutlet(data: OutletInput): Promise<ActionResponse> {
 
 export async function deleteOutlet(id: string): Promise<ActionResponse> {
 	try {
-		const supabase = await createClient();
-		const { error } = await supabase.from("outlets").delete().eq("id", id);
+		const parsedId = z.string().uuid().parse(id);
+		const { supabase } = await requireRole(
+			SUPERADMIN_ROLES,
+			"Akses superadmin diperlukan untuk mengelola outlet.",
+		);
+		const { error } = await supabase.from("outlets").delete().eq("id", parsedId);
 		if (error) throw error;
 
 		revalidatePath("/outlet");
@@ -80,12 +104,18 @@ export async function uploadOutletImage(
 	formData: FormData,
 ): Promise<ActionResponse<{ url: string }>> {
 	try {
-		const supabase = await createClient();
+		const parsedOutletId = outletId === "temp" ? outletId : z.string().uuid().parse(outletId);
+		const { supabase } = await requireRole(
+			SUPERADMIN_ROLES,
+			"Akses superadmin diperlukan untuk mengelola outlet.",
+		);
 		const file = formData.get("image") as File;
 		if (!file) throw new Error("File tidak ditemukan");
+		if (!file.type.startsWith("image/")) throw new Error("File harus berupa gambar.");
+		if (file.size > 5 * 1024 * 1024) throw new Error("Ukuran gambar maksimal 5MB.");
 
 		const fileExt = file.name.split(".").pop();
-		const filePath = `outlets/${outletId}/${Date.now()}.${fileExt}`;
+		const filePath = `outlets/${parsedOutletId}/${Date.now()}.${fileExt}`;
 
 		const { error: uploadError } = await supabase.storage
 			.from("outlet-images")
@@ -97,11 +127,11 @@ export async function uploadOutletImage(
 			data: { publicUrl },
 		} = supabase.storage.from("outlet-images").getPublicUrl(filePath);
 
-		if (outletId !== "temp") {
+		if (parsedOutletId !== "temp") {
 			const { error: updateError } = await supabase
 				.from("outlets")
 				.update({ image_url: publicUrl })
-				.eq("id", outletId);
+				.eq("id", parsedOutletId);
 			if (updateError) throw updateError;
 		}
 

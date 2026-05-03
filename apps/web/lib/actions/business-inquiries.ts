@@ -1,5 +1,7 @@
 "use server";
 
+import { z } from "zod";
+import { requireRole, SUPERADMIN_ROLES } from "@/lib/auth/guards";
 import { createClient, getBusinessPackageInquiries } from "@/lib/supabase/server";
 import type {
 	ActionResponse,
@@ -11,10 +13,29 @@ import type {
 import { enqueueJob } from "@/lib/upstash/qstash";
 import { formLimiter } from "@/lib/upstash/rate-limit";
 
+const SubmitBusinessInquirySchema = z.object({
+	package_id: z.string().uuid().optional(),
+	package_name: z.string().min(1).max(160),
+	full_name: z.string().min(2).max(160),
+	phone: z.string().min(8).max(32),
+	email: z.string().email().max(254),
+	city: z.string().min(2).max(120),
+	budget_range: z.string().max(120).optional(),
+	message: z.string().max(2_000).optional(),
+});
+
+const InquiryStatusSchema = z.enum(["new", "contacted", "negotiating", "converted", "rejected"]);
+
 export async function submitBusinessInquiry(
 	data: SubmitInquiryInput,
 ): Promise<ActionResponse<BusinessPackageInquiry>> {
-	const { success } = await formLimiter.limit(data.phone || data.email || "anonymous");
+	const parsed = SubmitBusinessInquirySchema.safeParse(data);
+	if (!parsed.success) {
+		return { success: false, error: "Data inquiry tidak valid." };
+	}
+
+	const validated = parsed.data;
+	const { success } = await formLimiter.limit(validated.phone || validated.email || "anonymous");
 	if (!success) {
 		return {
 			success: false,
@@ -26,18 +47,18 @@ export async function submitBusinessInquiry(
 		const supabase = await createClient();
 
 		if (typeof supabase.rpc !== "function") {
-			return await submitBusinessInquiryViaTables(supabase, data);
+			return await submitBusinessInquiryViaTables(supabase, validated);
 		}
 
 		const { data: _inquiryId, error: rpcError } = await supabase.rpc("submit_business_inquiry_v1", {
-			p_full_name: data.full_name,
-			p_phone: data.phone,
-			p_email: data.email,
-			p_city: data.city,
-			p_package_id: data.package_id,
-			p_package_name: data.package_name,
-			p_budget_range: data.budget_range,
-			p_message: data.message,
+			p_full_name: validated.full_name,
+			p_phone: validated.phone,
+			p_email: validated.email,
+			p_city: validated.city,
+			p_package_id: validated.package_id,
+			p_package_name: validated.package_name,
+			p_budget_range: validated.budget_range,
+			p_message: validated.message,
 		});
 
 		if (rpcError) {
@@ -52,9 +73,9 @@ export async function submitBusinessInquiry(
 		}
 
 		await enqueueJob("/api/jobs/inquiry-received", {
-			email: data.email,
-			fullName: data.full_name,
-			packageName: data.package_name,
+			email: validated.email,
+			fullName: validated.full_name,
+			packageName: validated.package_name,
 		});
 
 		return { success: true };
@@ -144,6 +165,7 @@ async function submitBusinessInquiryViaTables(
 export async function getBusinessInquiries(
 	filters?: InquiryFilters,
 ): Promise<BusinessPackageInquiry[]> {
+	await requireRole(SUPERADMIN_ROLES, "Akses superadmin diperlukan untuk melihat inquiry.");
 	return getBusinessPackageInquiries(filters);
 }
 
@@ -153,6 +175,8 @@ export async function updateInquiryStatus(
 	note?: string,
 ): Promise<ActionResponse> {
 	try {
+		const parsedStatus = InquiryStatusSchema.parse(status);
+		await requireRole(SUPERADMIN_ROLES, "Akses superadmin diperlukan untuk mengelola inquiry.");
 		const supabase = await createClient();
 
 		const { data: current, error: fetchError } = await supabase
@@ -167,7 +191,7 @@ export async function updateInquiryStatus(
 
 		const { error: updateError } = await supabase
 			.from("business_package_inquiries")
-			.update({ status })
+			.update({ status: parsedStatus })
 			.eq("id", id);
 
 		if (updateError) throw updateError;
@@ -182,7 +206,7 @@ export async function updateInquiryStatus(
 			inquiry_id: id,
 			changed_by: user.id,
 			old_status: oldStatus,
-			new_status: status,
+			new_status: parsedStatus,
 			note: note ?? null,
 		});
 
@@ -200,6 +224,7 @@ export async function updateInquiryConvertedOutlet(
 	outletId: string,
 ): Promise<ActionResponse> {
 	try {
+		await requireRole(SUPERADMIN_ROLES, "Akses superadmin diperlukan untuk mengelola inquiry.");
 		const supabase = await createClient();
 
 		const { error } = await supabase
@@ -220,13 +245,15 @@ export async function exportInquiriesCSV(
 	filters?: InquiryFilters,
 ): Promise<ActionResponse<string>> {
 	try {
+		await requireRole(SUPERADMIN_ROLES, "Akses superadmin diperlukan untuk mengekspor inquiry.");
 		const inquiries = await getBusinessPackageInquiries(filters);
 
 		const header = "full_name,phone,email,city,package_name,status,budget_range,message,created_at";
 
 		const escapeField = (value: string | null | undefined): string => {
 			const str = value ?? "";
-			return `"${str.replace(/"/g, '""')}"`;
+			const safeStr = /^[=+\-@]/.test(str.trimStart()) ? `'${str}` : str;
+			return `"${safeStr.replace(/"/g, '""')}"`;
 		};
 
 		const rows = inquiries.map((inquiry) =>

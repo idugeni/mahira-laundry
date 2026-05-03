@@ -82,7 +82,7 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 	const hasResults = filteredServices.length > 0 || filteredGallery.length > 0;
 
 	return (
-		<div className="min-h-[70vh] py-14 sm:py-20">
+		<div className="min-h-[70vh] py-14 sm:py-20 w-full min-w-0">
 			<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 				{/* Header */}
 				<motion.div
@@ -127,11 +127,11 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 										<div className="w-10 h-10 rounded-xl bg-brand-primary/5 flex items-center justify-center text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300 shrink-0">
 											<Icon size={20} />
 										</div>
-										<div>
+										<div className="min-w-0">
 											<p className="text-sm font-bold text-slate-900 group-hover:text-brand-primary transition-colors">
 												{page.label}
 											</p>
-											<p className="text-[11px] text-slate-400">{page.description}</p>
+											<p className="text-[11px] text-slate-400 truncate">{page.description}</p>
 										</div>
 									</Link>
 								);
@@ -160,7 +160,7 @@ export function CariClient({ services, galleryItems }: CariClientProps) {
 										<p className="text-xs font-bold text-slate-900 group-hover:text-brand-primary transition-colors truncate">
 											{service.name}
 										</p>
-										<p className="text-[10px] text-slate-400">
+										<p className="text-[10px] text-slate-400 truncate">
 											{formatIDR(service.price)}/{service.unit}
 										</p>
 									</div>

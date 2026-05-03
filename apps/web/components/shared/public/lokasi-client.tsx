@@ -41,7 +41,7 @@ export function LokasiClient() {
 	}, []);
 
 	return (
-		<div className="py-14 sm:py-16 bg-white relative overflow-hidden">
+		<div className="py-14 sm:py-16 bg-white relative overflow-hidden w-full min-w-0">
 			{/* Decorative Elements */}
 			<div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-brand-primary/5 rounded-full blur-[120px] -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 			<div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] bg-brand-accent/5 rounded-full blur-[120px] translate-x-1/2 translate-y-1/2 pointer-events-none" />
@@ -65,22 +65,22 @@ export function LokasiClient() {
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-						className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.85] tracking-tighter"
+						className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.85] tracking-tighter"
 					>
 						Temukan <br />
 						<span className="text-brand-gradient">Kami Disini.</span>
 					</motion.h1>
 				</div>
 
-				<div className="grid md:grid-cols-12 gap-8 lg:gap-12">
+				<div className="grid lg:grid-cols-12 gap-8 lg:gap-12 min-w-0">
 					{/* Map Section */}
 					<motion.div
 						initial={{ opacity: 0, x: -30 }}
 						whileInView={{ opacity: 1, x: 0 }}
 						viewport={{ once: true }}
-						className="md:col-span-7 h-full"
+						className="lg:col-span-7 h-full min-w-0"
 					>
-						<div className="relative rounded-[3.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] border-[12px] border-white h-full min-h-[500px] bg-slate-100 group">
+						<div className="relative rounded-[2rem] sm:rounded-[3.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] border-4 sm:border-[12px] border-white h-full min-h-[300px] sm:min-h-[500px] bg-slate-100 group">
 							{mounted ? (
 								<iframe
 									src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.5!2d${PRIMARY_OUTLET.lng}!3d${PRIMARY_OUTLET.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInNDIuNSJTIDEwNsKwNTEnMjEuMiJF!5e0!3m2!1sid!2sid!4v1`}
@@ -103,11 +103,11 @@ export function LokasiClient() {
 							)}
 
 							{/* Map Overlay Button */}
-							<div className="absolute bottom-10 left-10 right-10 pointer-events-none">
+							<div className="absolute bottom-4 left-4 right-4 sm:bottom-10 sm:left-10 sm:right-10 pointer-events-none">
 								<motion.div
 									initial={{ opacity: 0, y: 20 }}
 									whileInView={{ opacity: 1, y: 0 }}
-									className="bg-white/90 backdrop-blur-md p-6 rounded-3xl border border-white flex items-center justify-between shadow-2xl"
+									className="bg-white/90 backdrop-blur-md p-4 sm:p-6 rounded-3xl border border-white flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-2xl"
 								>
 									<div className="flex items-center gap-4">
 										<div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-white">
@@ -134,7 +134,7 @@ export function LokasiClient() {
 					</motion.div>
 
 					{/* Outlet Details */}
-					<div className="md:col-span-5">
+					<div className="lg:col-span-5 min-w-0">
 						{outlets.map((outlet, i) => (
 							<motion.div
 								key={outlet.name}
@@ -142,7 +142,7 @@ export function LokasiClient() {
 								whileInView={{ opacity: 1, x: 0 }}
 								viewport={{ once: true }}
 								transition={{ delay: 0.2 + i * 0.1 }}
-								className="group relative bg-white rounded-[3.5rem] p-8 md:p-10 lg:p-14 border border-slate-100 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.04)] hover:shadow-[0_48px_80px_-16px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden h-full flex flex-col justify-between"
+								className="group relative bg-white rounded-[2rem] sm:rounded-[3.5rem] p-6 sm:p-8 md:p-10 lg:p-14 border border-slate-100 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.04)] hover:shadow-[0_48px_80px_-16px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden h-full flex flex-col justify-between"
 							>
 								{/* Accent Decor */}
 								<div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-primary/5 rounded-full blur-3xl group-hover:bg-brand-primary/10 transition-colors duration-500" />
@@ -158,7 +158,7 @@ export function LokasiClient() {
 										</span>
 									</div>
 
-									<h2 className="text-3xl md:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-8">
+									<h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-8">
 										{outlet.name}
 									</h2>
 
@@ -168,37 +168,37 @@ export function LokasiClient() {
 
 									<div className="grid gap-10 mb-14">
 										{/* Phone */}
-										<div className="flex items-center gap-6 group/item">
+										<div className="flex items-center gap-4 sm:gap-6 group/item min-w-0">
 											<div className="w-16 h-16 rounded-[2rem] bg-slate-50 flex items-center justify-center text-brand-primary shadow-inner group-hover/item:bg-brand-primary group-hover/item:text-white transition-all duration-500">
 												<HiOutlinePhone size={28} />
 											</div>
-											<div className="flex flex-col">
+											<div className="flex flex-col min-w-0">
 												<span className="text-[10px] font-black text-slate-300 uppercase tracking-widest mb-1">
 													Hubungi Admin
 												</span>
-												<span className="text-xl font-black text-slate-900 tracking-tight">
+												<span className="text-lg sm:text-xl font-black text-slate-900 tracking-tight break-words">
 													{outlet.phone}
 												</span>
 											</div>
 										</div>
 
 										{/* Hours */}
-										<div className="flex items-start gap-6 group/item">
+										<div className="flex items-start gap-4 sm:gap-6 group/item min-w-0">
 											<div className="w-16 h-16 rounded-[2rem] bg-slate-50 flex items-center justify-center text-brand-primary shadow-inner group-hover/item:bg-brand-primary group-hover/item:text-white transition-all duration-500 shrink-0">
 												<HiOutlineClock size={28} />
 											</div>
-											<div className="flex flex-col gap-3 pt-1">
+											<div className="flex flex-col gap-3 pt-1 min-w-0">
 												<span className="text-[10px] font-black text-slate-300 uppercase tracking-widest mb-1">
 													Jam Operasional
 												</span>
 												<div className="space-y-2">
-													<div className="flex items-center gap-4">
+													<div className="flex flex-wrap items-center gap-2 sm:gap-4">
 														<span className="text-xs font-bold text-slate-400 w-16">Sen - Jum</span>
 														<span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-black text-slate-900 uppercase tracking-wider">
 															{outlet.hours.weekday}
 														</span>
 													</div>
-													<div className="flex items-center gap-4">
+													<div className="flex flex-wrap items-center gap-2 sm:gap-4">
 														<span className="text-xs font-bold text-slate-400 w-16">Sab - Min</span>
 														<span className="px-3 py-1 bg-brand-accent/20 text-brand-accent-dark rounded-full text-[10px] font-black uppercase tracking-wider">
 															{outlet.hours.weekend}
@@ -215,7 +215,7 @@ export function LokasiClient() {
 										rel="noopener noreferrer"
 										className="flex items-center justify-between w-full p-2 bg-slate-900 rounded-3xl shadow-2xl shadow-slate-200 group/btn hover:bg-brand-primary transition-all duration-500"
 									>
-										<span className="text-white font-black text-xs uppercase tracking-[0.2em] pl-8">
+										<span className="text-white font-black text-[10px] sm:text-xs uppercase tracking-[0.15em] sm:tracking-[0.2em] pl-4 sm:pl-8">
 											Navigasi Langsung
 										</span>
 										<div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white group-hover/btn:bg-white group-hover/btn:text-brand-primary transition-all duration-500">

@@ -65,7 +65,7 @@ export function HomeClient({
 	const dashboardHref = getDashboardUrl(profile?.role as string);
 
 	return (
-		<div className="overflow-hidden">
+		<div className="w-full min-w-0">
 			<HomeHeroSection
 				user={user}
 				loading={loading}

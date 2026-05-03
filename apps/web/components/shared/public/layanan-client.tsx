@@ -76,7 +76,7 @@ function ServiceCard({
 			onMouseMove={handleMouseMove}
 			onMouseLeave={handleMouseLeave}
 			onClick={onClick}
-			className="group relative p-8 bg-white rounded-[2.5rem] border border-slate-100 hover:border-brand-primary/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-500 cursor-pointer"
+			className="group relative p-6 sm:p-8 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-slate-100 hover:border-brand-primary/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-all duration-500 cursor-pointer min-w-0"
 		>
 			<div style={{ transform: "translateZ(50px)" }} className="relative z-10">
 				<div
@@ -96,12 +96,12 @@ function ServiceCard({
 				<p className="text-slate-500 leading-relaxed text-sm mb-8 line-clamp-3 font-medium">
 					{service.description}
 				</p>
-				<div className="flex items-center justify-between pt-8 border-t border-slate-50">
-					<div className="flex flex-col">
+				<div className="flex items-center justify-between gap-4 pt-8 border-t border-slate-50">
+					<div className="flex flex-col min-w-0">
 						<span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
 							Mulai Dari
 						</span>
-						<span className="text-2xl font-black text-slate-900 tracking-tighter">
+						<span className="text-xl sm:text-2xl font-black text-slate-900 tracking-tighter break-words">
 							{formatIDR(service.price)}
 							<span className="text-xs text-slate-400 font-medium ml-1">/{service.unit}</span>
 						</span>
@@ -193,7 +193,7 @@ export function LayananClient({ initialServices }: { initialServices: Service[] 
 	}
 
 	return (
-		<div className="py-14 sm:py-16 relative overflow-hidden bg-white">
+		<div className="py-14 sm:py-16 relative overflow-hidden bg-white w-full min-w-0">
 			{/* Background Decorative */}
 			<div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none overflow-hidden">
 				<motion.div
@@ -233,7 +233,7 @@ export function LayananClient({ initialServices }: { initialServices: Service[] 
 						whileInView={{ opacity: 1, y: 0 }}
 						viewport={{ once: true }}
 						transition={{ duration: 0.8 }}
-						className="text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
+						className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.8] tracking-tighter"
 					>
 						Layanan <br />
 						<span className="text-brand-gradient">Terbaik Kami.</span>
@@ -281,7 +281,7 @@ export function LayananClient({ initialServices }: { initialServices: Service[] 
 					}
 
 					return (
-						<div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-10">
 							{filteredServices.map((service, i) => (
 								<ServiceCard
 									key={service.id}

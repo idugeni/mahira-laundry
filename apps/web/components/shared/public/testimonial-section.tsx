@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
+import { useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa6";
-import { HiStar } from "react-icons/hi2";
+import { HiStar, HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 
 export interface TestimonialData {
 	id: string;
@@ -18,29 +19,32 @@ interface TestimonialSectionProps {
 	testimonials: TestimonialData[];
 }
 
+const ITEMS_PER_PAGE = 6; // Max 6 testimonials (3x2 grid)
+
 export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
+	const [currentPage, setCurrentPage] = useState(0);
 	const displayTestimonials = testimonials || [];
 
 	if (!displayTestimonials || displayTestimonials.length === 0) {
 		return null;
 	}
 
-	// Duplicate testimonials to create a seamless loop
-	const duplicatedTestimonials = [
-		...displayTestimonials.map((t) => ({ ...t, _dupKey: `0-${t.id}` })),
-		...displayTestimonials.map((t) => ({ ...t, _dupKey: `1-${t.id}` })),
-		...displayTestimonials.map((t) => ({ ...t, _dupKey: `2-${t.id}` })),
-	];
+	const totalPages = Math.ceil(displayTestimonials.length / ITEMS_PER_PAGE);
+	const startIndex = currentPage * ITEMS_PER_PAGE;
+	const visibleTestimonials = displayTestimonials.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
+	const goToPrev = () => setCurrentPage((prev) => (prev > 0 ? prev - 1 : totalPages - 1));
+	const goToNext = () => setCurrentPage((prev) => (prev < totalPages - 1 ? prev + 1 : 0));
 
 	return (
-		<section className="py-14 sm:py-16 bg-slate-50 relative overflow-hidden">
+		<section className="py-14 sm:py-16 bg-slate-50 relative [overflow:clip] w-full min-w-0">
 			{/* Background Blurs */}
-			<div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-				<div className="absolute top-1/4 -left-20 w-80 h-80 bg-brand-primary/10 rounded-full blur-[100px]" />
-				<div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-brand-accent/10 rounded-full blur-[100px]" />
+			<div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
+				<div className="absolute top-1/4 left-0 w-52 sm:w-72 h-52 sm:h-72 bg-brand-primary/10 rounded-full blur-[100px]" />
+				<div className="absolute bottom-1/4 right-0 w-52 sm:w-72 h-52 sm:h-72 bg-brand-accent/10 rounded-full blur-[100px]" />
 			</div>
 
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative mb-16 text-center">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative mb-12 text-center">
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
@@ -58,62 +62,74 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: false }}
 					transition={{ delay: 0.1 }}
-					className="text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-tight"
+					className="text-3xl sm:text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-tight"
 				>
 					Dipercaya Ribuan <br />
 					<span className="text-brand-gradient">Pelanggan Setia Setiap Hari</span>
 				</motion.h2>
 			</div>
 
-			{/* Infinite Marquee Container */}
-			<div className="relative flex flex-col gap-8 py-10 overflow-hidden">
-				{/* Row 1: Scrolling Left */}
-				<div className="flex w-full">
-					<motion.div
-						animate={{
-							x: [0, -1920],
-						}}
-						transition={{
-							x: {
-								duration: 40,
-								repeat: Infinity,
-								ease: "linear",
-							},
-						}}
-						className="flex gap-6 whitespace-nowrap"
-					>
-						{duplicatedTestimonials.map((t) => (
-							<TestimonialCard key={`marquee-L-${t._dupKey}`} testimonial={t} />
-						))}
-					</motion.div>
-				</div>
+			{/* Carousel Container */}
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+				<div className="relative">
+					{/* Navigation Arrows */}
+					{totalPages > 1 && (
+						<>
+							<button
+								onClick={goToPrev}
+								className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 lg:-translate-x-6 z-10 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white shadow-lg shadow-slate-200/50 border border-slate-100 flex items-center justify-center text-slate-400 hover:text-brand-primary hover:shadow-xl transition-all duration-300"
+								aria-label="Testimonial sebelumnya"
+							>
+								<HiOutlineChevronLeft size={20} />
+							</button>
+							<button
+								onClick={goToNext}
+								className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 lg:translate-x-6 z-10 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white shadow-lg shadow-slate-200/50 border border-slate-100 flex items-center justify-center text-slate-400 hover:text-brand-primary hover:shadow-xl transition-all duration-300"
+								aria-label="Testimonial berikutnya"
+							>
+								<HiOutlineChevronRight size={20} />
+							</button>
+							</>
+						)}
 
-				{/* Row 2: Scrolling Right (Reverse Offset) */}
-				<div className="flex w-full">
-					<motion.div
-						animate={{
-							x: [-1920, 0],
-						}}
-						transition={{
-							x: {
-								duration: 50,
-								repeat: Infinity,
-								ease: "linear",
-							},
-						}}
-						className="flex gap-6 whitespace-nowrap"
-					>
-						{[...duplicatedTestimonials].reverse().map((t) => (
-							<TestimonialCard key={`marquee-R-${t._dupKey}`} testimonial={t} />
-						))}
-					</motion.div>
-				</div>
+					{/* Testimonials Grid with Animation */}
+					<div className="overflow-hidden">
+						<AnimatePresence mode="wait">
+							<motion.div
+								key={currentPage}
+								initial={{ opacity: 0, x: 20 }}
+								animate={{ opacity: 1, x: 0 }}
+								exit={{ opacity: 0, x: -20 }}
+								transition={{ duration: 0.3, ease: "easeInOut" }}
+								className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+							>
+								{visibleTestimonials.map((testimonial) => (
+									<TestimonialCard key={testimonial.id} testimonial={testimonial} />
+								))}
+							</motion.div>
+						</AnimatePresence>
+					</div>
 
-				{/* Shading Gradients for Smooth Edges */}
-				<div className="absolute inset-y-0 left-0 w-40 bg-gradient-to-r from-slate-50 to-transparent z-10" />
-				<div className="absolute inset-y-0 right-0 w-40 bg-gradient-to-l from-slate-50 to-transparent z-10" />
-			</div>
-		</section>
+					{/* Pagination Dots */}
+					{totalPages > 1 && (
+						<div className="flex justify-center gap-2 mt-10">
+							{Array.from({ length: totalPages }, (_, i) => i).map((index) => (
+								<button
+									key={index}
+									onClick={() => setCurrentPage(index)}
+									className={`w-2 h-2 rounded-full transition-all duration-300 ${
+										index === currentPage
+											? "w-8 bg-brand-primary"
+											: "bg-slate-200 hover:bg-slate-300"
+									}`}
+									aria-label={`Halaman ${index + 1}`}
+								/>
+							))}
+							</div>
+						)}
+					</div>
+				</div>
+			</section>
 	);
 }
 
@@ -124,7 +140,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 		<motion.div
 			whileHover={{ y: -6 }}
 			transition={{ type: "spring", stiffness: 300, damping: 25 }}
-			className="w-[350px] sm:w-[450px] shrink-0 p-8 bg-white/70 backdrop-blur-md rounded-[2.5rem] border border-white shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-brand-primary/5 transition-[box-shadow] duration-500 group"
+			className="w-full min-w-0 h-full p-6 sm:p-8 bg-white/70 backdrop-blur-md rounded-[2rem] sm:rounded-[2.5rem] border border-white shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-brand-primary/5 transition-[box-shadow] duration-500 group"
 		>
 			<div className="flex gap-1 mb-6">
 				{Array.from({ length: testimonial.rating || 5 }, (_, i) => i).map((i) => (
@@ -151,7 +167,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 					<p className="font-bold text-slate-900 leading-none">{name}</p>
 					<p className="text-[10px] text-brand-primary font-bold uppercase tracking-widest mt-1.5 flex items-center gap-1">
 						<span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-						Verified
+						Terverifikasi
 					</p>
 				</div>
 			</div>

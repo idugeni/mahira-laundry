@@ -1,3 +1,4 @@
+import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { protectedProcedure, router, staffProcedure } from "@/server/trpc/proxy";
@@ -26,13 +27,27 @@ export const ordersRouter = router({
 			return { data: data || [], total: count || 0 };
 		}),
 
-	getById: protectedProcedure.input(z.string().uuid()).query(async ({ input }) => {
+	getById: protectedProcedure.input(z.string().uuid()).query(async ({ ctx, input }) => {
 		const supabase = await createClient();
-		const { data } = await supabase
+		let query = supabase
 			.from("orders")
 			.select("*, order_items(*, services(*)), payments(*), delivery(*)")
-			.eq("id", input)
-			.single();
+			.eq("id", input);
+
+		if (ctx.role === "customer") {
+			query = query.eq("customer_id", ctx.userId);
+		} else if (ctx.role !== "superadmin" && ctx.outletId) {
+			// Staff can only view orders from their assigned outlet
+			query = query.eq("outlet_id", ctx.outletId);
+		} else if (ctx.role !== "superadmin" && !ctx.outletId) {
+			// Staff without outlet assignment cannot access orders via this endpoint
+			throw new TRPCError({
+				code: "FORBIDDEN",
+				message: "Akses ditolak: Anda tidak memiliki outlet yang ditugaskan.",
+			});
+		}
+
+		const { data } = await query.single();
 		return data;
 	}),
 
@@ -43,12 +58,21 @@ export const ordersRouter = router({
 				status: z.string(),
 			}),
 		)
-		.mutation(async ({ input }) => {
+		.mutation(async ({ ctx, input }) => {
 			const supabase = await createClient();
-			const { error } = await supabase
-				.from("orders")
-				.update({ status: input.status })
-				.eq("id", input.orderId);
+			let query = supabase.from("orders").update({ status: input.status }).eq("id", input.orderId);
+
+			// Enforce outlet-based access control for non-superadmin staff
+			if (ctx.role !== "superadmin" && ctx.outletId) {
+				query = query.eq("outlet_id", ctx.outletId);
+			} else if (ctx.role !== "superadmin" && !ctx.outletId) {
+				throw new TRPCError({
+					code: "FORBIDDEN",
+					message: "Akses ditolak: Anda tidak memiliki outlet yang ditugaskan.",
+				});
+			}
+
+			const { error } = await query;
 			if (error) throw error;
 			return { success: true };
 		}),

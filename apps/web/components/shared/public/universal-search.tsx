@@ -78,7 +78,7 @@ export function UniversalSearch({
 	}
 
 	return (
-		<div className={`w-full max-w-2xl mx-auto ${className}`}>
+		<div className={`w-full max-w-2xl mx-auto min-w-0 ${className}`}>
 			<form onSubmit={handleSearch} className="relative group">
 				<motion.div
 					animate={{ opacity: 1 }}
@@ -105,7 +105,7 @@ export function UniversalSearch({
 						className="flex-1 bg-transparent border-none focus:!outline-hidden focus:!ring-0 focus:!shadow-none focus:!border-none py-4 md:py-5 px-3 md:px-4 text-sm md:text-base font-semibold text-slate-900 placeholder:text-slate-400 min-w-0"
 					/>
 
-					<div className="pr-3 md:pr-4 flex items-center gap-2">
+					<div className="pr-3 md:pr-4 flex items-center gap-2 shrink-0">
 						<AnimatePresence>
 							{query && (
 								<motion.button
@@ -134,7 +134,7 @@ export function UniversalSearch({
 
 						<motion.button
 							type="submit"
-							className="px-5 md:px-6 py-2.5 bg-slate-900 text-white rounded-xl font-black text-[10px] md:text-xs shadow-lg shadow-slate-900/20 hover:bg-slate-800 transition-all uppercase tracking-widest"
+							className="px-4 md:px-6 py-2.5 bg-slate-900 text-white rounded-xl font-black text-[10px] md:text-xs shadow-lg shadow-slate-900/20 hover:bg-slate-800 transition-all uppercase tracking-widest"
 						>
 							Cari
 						</motion.button>

@@ -202,22 +202,22 @@ export async function getStaffLeaderboard(month: number, year: number) {
 				) || 0;
 
 			if (order.washer_id) {
-				if (!leaderboard[order.washer_id])
-					leaderboard[order.washer_id] = {
-						id: order.washer_id,
-						washed: 0,
-						ironed: 0,
-					};
-				leaderboard[order.washer_id]!.washed += kg;
+				const entry = leaderboard[order.washer_id] ?? {
+					id: order.washer_id,
+					washed: 0,
+					ironed: 0,
+				};
+				entry.washed += kg;
+				leaderboard[order.washer_id] = entry;
 			}
 			if (order.ironer_id) {
-				if (!leaderboard[order.ironer_id])
-					leaderboard[order.ironer_id] = {
-						id: order.ironer_id,
-						washed: 0,
-						ironed: 0,
-					};
-				leaderboard[order.ironer_id]!.ironed += kg;
+				const entry = leaderboard[order.ironer_id] ?? {
+					id: order.ironer_id,
+					washed: 0,
+					ironed: 0,
+				};
+				entry.ironed += kg;
+				leaderboard[order.ironer_id] = entry;
 			}
 		});
 

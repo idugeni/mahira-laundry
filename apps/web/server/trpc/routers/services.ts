@@ -27,22 +27,24 @@ export const servicesRouter = router({
 				isExpress: z.boolean().default(false),
 			}),
 		)
-			.mutation(async ({ input }) => {
-				const supabase = await createClient();
-				const { outletId, estimatedDurationHours, isExpress, ...dbInput } = input;
-				const { data, error } = await supabase
-					.from("services")
-					.insert({
-						...dbInput,
-						outlet_id: outletId,
-						estimated_duration_hours: estimatedDurationHours,
-						is_express: isExpress,
-					})
-					.select()
-					.single();
-				if (error) throw error;
-				return data;
-			}),
+		.mutation(async ({ input }) => {
+			const supabase = await createClient();
+			const { outletId, estimatedDurationHours, isExpress, ...dbInput } = input;
+			const { data, error } = await supabase
+				.from("services")
+				.insert({
+					...dbInput,
+					outlet_id: outletId,
+					estimated_duration_hours: estimatedDurationHours,
+					is_express: isExpress,
+					sort_order: 0,
+					express_multiplier: 1.5,
+				})
+				.select()
+				.single();
+			if (error) throw error;
+			return data;
+		}),
 
 	update: managerProcedure
 		.input(

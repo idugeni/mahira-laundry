@@ -34,7 +34,7 @@ export default function NotFound() {
 					transition={{ type: "spring", stiffness: 100, damping: 20 }}
 					className="relative inline-block mb-16"
 				>
-					<span className="text-[12rem] lg:text-[18rem] font-black font-[family-name:var(--font-heading)] text-slate-100 leading-none select-none tracking-tighter">
+					<span className="text-[6rem] sm:text-[12rem] lg:text-[18rem] font-black font-[family-name:var(--font-heading)] text-slate-100 leading-none select-none tracking-tighter">
 						404
 					</span>
 

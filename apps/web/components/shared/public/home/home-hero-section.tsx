@@ -75,7 +75,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 	return (
 		<section
 			ref={containerRef}
-			className="relative min-h-screen pt-16 pb-4 md:pt-4 md:pb-4 overflow-hidden flex flex-col"
+			className="relative w-full min-w-0 lg:min-h-screen pt-24 pb-8 lg:pt-4 lg:pb-4 flex flex-col"
 		>
 			{/* Mesh Gradient Background */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -84,41 +84,41 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 				{/* Primary glow - top right */}
 				<motion.div
 					style={{ y: y1 }}
-					className="absolute -top-10 right-[10%] w-[700px] h-[700px] rounded-full bg-[radial-gradient(circle,rgba(219,39,119,0.12)_0%,transparent_70%)]"
+					className="absolute -top-10 right-[8%] max-w-[70vw] w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(219,39,119,0.12)_0%,transparent_70%)]"
 				/>
 				{/* Accent glow - bottom left */}
 				<motion.div
 					style={{ y: y2 }}
-					className="absolute -bottom-20 -left-[10%] w-[600px] h-[600px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.10)_0%,transparent_70%)]"
+					className="absolute -bottom-20 left-0 max-w-[70vw] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.10)_0%,transparent_70%)]"
 				/>
 				{/* Soft rose - center left */}
 				<motion.div
 					animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
 					transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-					className="absolute top-[30%] left-[5%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(244,114,182,0.08)_0%,transparent_70%)]"
+					className="absolute top-[30%] left-[5%] max-w-[70vw] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(244,114,182,0.08)_0%,transparent_70%)]"
 				/>
 				{/* Warm peach - center right */}
 				<motion.div
 					animate={{ x: [0, -20, 0], y: [0, 25, 0] }}
 					transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
-					className="absolute top-[40%] right-[15%] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.06)_0%,transparent_70%)]"
+					className="absolute top-[40%] right-[15%] max-w-[60vw] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.06)_0%,transparent_70%)]"
 				/>
 				{/* Subtle violet accent - top center */}
 				<motion.div
 					animate={{ x: [0, 15, 0] }}
 					transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-					className="absolute top-[10%] left-[40%] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(190,24,93,0.05)_0%,transparent_70%)]"
+					className="absolute top-[10%] left-[25%] max-w-[50vw] w-[420px] h-[420px] rounded-full bg-[radial-gradient(circle,rgba(190,24,93,0.05)_0%,transparent_70%)]"
 				/>
 			</div>
 
-			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex-1 flex items-start">
-				<div className="grid md:grid-cols-2 gap-10 lg:gap-20 items-center w-full">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex-1 flex items-start w-full min-w-0">
+				<div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center w-full min-w-0">
 					{/* Left Content */}
 					<motion.div
 						variants={containerVariants}
 						initial="hidden"
 						animate="visible"
-						className="text-center md:text-left flex flex-col items-center md:items-start"
+						className="text-center lg:text-left flex flex-col items-center lg:items-start min-w-0"
 					>
 						<motion.div
 							variants={itemVariants}
@@ -136,7 +136,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 						<motion.h1
 							variants={itemVariants}
-							className="text-4xl sm:text-5xl lg:text-7xl font-black font-[family-name:var(--font-heading)] leading-[1] tracking-tighter text-slate-900"
+							className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-black font-[family-name:var(--font-heading)] leading-[1] tracking-tighter text-slate-900"
 						>
 							Punya Bisnis Laundry
 							<br />
@@ -156,11 +156,11 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 						<motion.div
 							variants={itemVariants}
-							className="mt-8 flex flex-wrap justify-center md:justify-start gap-4"
+							className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 w-full sm:w-auto"
 						>
 							<Link
 								href="/paket-usaha"
-								className="group relative px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all duration-300 hover:bg-pink-700 text-sm inline-flex items-center gap-4"
+								className="group relative w-full sm:w-auto px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all duration-300 hover:bg-pink-700 text-sm inline-flex items-center justify-center gap-4"
 							>
 								PILIH PAKET USAHA
 								<motion.div
@@ -174,21 +174,24 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 								href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent("Halo Mahira, saya ingin konsultasi mengenai paket usaha laundry.")}`}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="px-8 py-4 border-2 border-slate-200 rounded-full font-black text-slate-700 hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/5 transition-all duration-300 flex items-center gap-2 text-sm"
+								className="w-full sm:w-auto px-8 py-4 border-2 border-slate-200 rounded-full font-black text-slate-700 hover:border-brand-primary hover:text-brand-primary hover:bg-brand-primary/5 transition-all duration-300 flex items-center justify-center gap-2 text-sm"
 							>
 								KONSULTASI GRATIS
 							</a>
 						</motion.div>
 
 						{/* Social Proof */}
-						<motion.div variants={itemVariants} className="mt-16 flex items-center gap-6">
-							<div className="flex -space-x-4">
+						<motion.div
+							variants={itemVariants}
+							className="mt-10 lg:mt-16 flex items-center gap-4 md:gap-6"
+						>
+							<div className="flex -space-x-3 md:-space-x-4">
 								{[1, 2, 3, 4].map((i) => (
 									<motion.div
 										key={`partner-avatar-${i}`}
 										whileHover={{ y: -4 }}
 										transition={{ type: "spring", stiffness: 400, damping: 25 }}
-										className="w-14 h-14 rounded-full border-4 border-white overflow-hidden shadow-lg cursor-pointer relative z-0 hover:z-10"
+										className="w-10 h-10 md:w-14 md:h-14 rounded-full border-2 md:border-4 border-white overflow-hidden shadow-lg cursor-pointer relative z-0 hover:z-10"
 									>
 										<Image
 											src={`https://i.pravatar.cc/150?u=${i + 20}`}
@@ -200,12 +203,12 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 									</motion.div>
 								))}
 							</div>
-							<div className="h-12 w-px bg-slate-200" />
+							<div className="h-8 md:h-12 w-px bg-slate-200" />
 							<div>
-								<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+								<p className="text-[9px] md:text-[10px] font-black text-slate-400 uppercase tracking-widest">
 									Dipercaya oleh
 								</p>
-								<p className="text-lg font-black text-slate-900">
+								<p className="text-base md:text-lg font-black text-slate-900">
 									150+ <span className="text-brand-primary">Mitra Aktif</span>
 								</p>
 							</div>
@@ -213,7 +216,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 					</motion.div>
 
 					{/* Right Visual Content */}
-					<div className="relative py-4 md:py-0 md:h-[600px] flex items-center justify-center">
+					<div className="relative py-4 lg:py-0 lg:h-[600px] flex items-center justify-center min-w-0">
 						<motion.div
 							initial={{ opacity: 0, x: 50 }}
 							animate={{ opacity: 1, x: 0 }}
@@ -222,7 +225,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 								y: y2,
 								willChange: "transform",
 							}}
-							className="relative z-10 w-full max-w-md p-8 rounded-[2.5rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
+							className="relative z-10 w-full max-w-md p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
 						>
 							{/* Floating Decoration Icons */}
 							<motion.div
@@ -259,23 +262,23 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 											initial={{ opacity: 0, x: 20 }}
 											animate={{ opacity: 1, x: 0 }}
 											transition={{ delay: 0.5 + i * 0.1 }}
-											className="flex items-center justify-between p-5 rounded-2xl bg-slate-50 border border-slate-100 shadow-xs"
+											className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 rounded-2xl bg-slate-50 border border-slate-100 shadow-xs min-w-0"
 										>
-											<div className="flex items-center gap-3">
+											<div className="flex items-center gap-3 min-w-0">
 												<div
 													className={`w-2 h-2 rounded-full ${pkg.tier === "Starter" ? "bg-blue-500" : pkg.tier === "Standard" ? "bg-emerald-500" : pkg.tier === "Premium" ? "bg-purple-500" : "bg-orange-500"}`}
 												/>
-												<span className="text-xs font-black uppercase tracking-widest text-slate-900">
+												<span className="text-xs font-black uppercase tracking-widest text-slate-900 min-w-0">
 													{pkg.name.split(" ")[0]}{" "}
 													<Badge
 														variant="secondary"
-														className={`${tierBadgeColors[pkg.tier] ?? defaultBadgeColor} text-[10px] font-black uppercase tracking-widest px-2 py-0.5`}
+														className={`${tierBadgeColors[pkg.tier] ?? defaultBadgeColor} text-[10px] font-black uppercase tracking-widest px-2 py-0.5 whitespace-normal`}
 													>
 														{pkg.name.split(" ").slice(1).join(" ")}
 													</Badge>
 												</span>
 											</div>
-											<div className="flex items-center gap-2">
+											<div className="flex items-center gap-2 shrink-0">
 												{isPromoActive(pkg) && (
 													<span className="text-slate-400 font-bold text-xs line-through">
 														Rp {(pkg.price / 1000000).toFixed(0)}jt
@@ -312,7 +315,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 									</div>
 								</div>
 								<div className="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl">
-									Verified {new Date().getFullYear()}
+									Terverifikasi {new Date().getFullYear()}
 								</div>
 							</div>
 						</motion.div>

@@ -10,7 +10,7 @@ interface MahiraLogoProps {
 
 export function MahiraLogo({ size = 40, className = "", showText = true }: MahiraLogoProps) {
 	return (
-		<div className={`flex items-center gap-3 ${className}`}>
+		<div className={`flex items-center gap-3 min-w-0 ${className}`}>
 			<Image
 				src="/logo.png"
 				alt="Mahira Laundry Logo"
@@ -22,12 +22,12 @@ export function MahiraLogo({ size = 40, className = "", showText = true }: Mahir
 				fetchPriority="high"
 			/>
 			{showText && (
-				<div className="flex flex-col">
+				<div className="flex flex-col min-w-0">
 					<span className="font-[family-name:var(--font-heading)] font-bold text-lg leading-tight tracking-tight">
 						<span className="text-brand-primary">Mahira</span>
 						<span className="text-brand-accent">Laundry</span>
 					</span>
-					<span className="text-[10px] text-muted-foreground uppercase font-black tracking-[0.2em]">
+					<span className="text-[10px] text-muted-foreground uppercase font-black tracking-[0.2em] text-wrap break-all">
 						Premium Laundry & Dry Cleaning
 					</span>
 				</div>

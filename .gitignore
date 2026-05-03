@@ -68,7 +68,7 @@ yarn-debug.log*
 # Database & Migrations (STRICT)
 supabase/.temp/
 supabase/functions/.env
-supabase/migrations/
+# supabase/migrations/ - DO NOT IGNORE: RLS policies and schema must be version controlled
 supabase/seed.sql
 .supabase/
 apps/web/drizzle/

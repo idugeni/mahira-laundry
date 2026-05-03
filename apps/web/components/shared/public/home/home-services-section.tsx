@@ -70,16 +70,14 @@ function getServiceStyles(name: string) {
 
 export function HomeServicesSection({ services, onServiceClick }: HomeServicesSectionProps) {
 	return (
-		<section className="py-14 sm:py-16 relative bg-slate-50/40 overflow-hidden" id="layanan">
+		<section className="py-14 sm:py-16 relative bg-slate-50/40 w-full min-w-0" id="layanan">
 			{/* Animated background accent */}
 			<motion.div
 				animate={{
-					x: [0, 50, 0],
 					y: [0, 30, 0],
-					rotate: [0, 180, 360],
 				}}
-				transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-				className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-slate-200/50 rounded-full opacity-30 pointer-events-none"
+				transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+				className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(560px,72vw)] h-[min(560px,72vw)] border border-slate-200/50 rounded-full opacity-30 pointer-events-none"
 			/>
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -100,7 +98,7 @@ export function HomeServicesSection({ services, onServiceClick }: HomeServicesSe
 							initial={{ opacity: 0, y: 20 }}
 							whileInView={{ opacity: 1, y: 0 }}
 							viewport={{ once: false }}
-							className="text-4xl md:text-5xl lg:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.9]"
+							className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-[family-name:var(--font-heading)] text-slate-900 tracking-tighter leading-[0.9]"
 						>
 							Layanan <br />
 							<span className="text-brand-gradient">Unggulan.</span>
@@ -124,7 +122,7 @@ export function HomeServicesSection({ services, onServiceClick }: HomeServicesSe
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: false }}
 						transition={{ duration: 0.5 }}
-						className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+						className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
 					>
 						<AnimatePresence mode="popLayout">
 							{services.slice(0, 6).map((service, i) => {
@@ -144,7 +142,7 @@ export function HomeServicesSection({ services, onServiceClick }: HomeServicesSe
 											ease: [0.16, 1, 0.3, 1],
 										}}
 										onClick={() => onServiceClick(service.slug || service.id)}
-										className="group p-10 bg-white rounded-[2.5rem] border border-slate-100 hover:border-brand-primary/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-[border-color,box-shadow] duration-500 ease-out cursor-pointer relative overflow-hidden"
+										className="group p-6 sm:p-8 lg:p-10 bg-white rounded-[2rem] lg:rounded-[2.5rem] border border-slate-100 hover:border-brand-primary/20 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] transition-[border-color,box-shadow] duration-500 ease-out cursor-pointer relative overflow-hidden min-w-0"
 									>
 										<div
 											className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${styles.bg} rounded-bl-[5rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
@@ -171,12 +169,12 @@ export function HomeServicesSection({ services, onServiceClick }: HomeServicesSe
 											</p>
 										</div>
 
-										<div className="flex items-center justify-between pt-8 border-t border-slate-50 group-hover:border-brand-primary/10 transition-colors duration-300">
-											<div className="flex flex-col">
+										<div className="flex items-center justify-between gap-4 pt-8 border-t border-slate-50 group-hover:border-brand-primary/10 transition-colors duration-300">
+											<div className="flex flex-col min-w-0">
 												<span className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">
 													Mulai Dari
 												</span>
-												<span className="text-2xl font-black text-brand-primary tracking-tighter">
+												<span className="text-xl sm:text-2xl font-black text-brand-primary tracking-tighter break-words">
 													{new Intl.NumberFormat("id-ID", {
 														style: "currency",
 														currency: "IDR",

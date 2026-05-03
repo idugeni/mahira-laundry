@@ -147,10 +147,10 @@ export default async function HomePage() {
 	const businessPackages = await getActiveBusinessPackages();
 
 	return (
-		<div key="home-root">
+		<div key="home-root" className="w-full min-w-0">
 			<JsonLd key="ld-main" id="home-business-jsonld" data={jsonLd} />
 			<JsonLd key="ld-faq" id="home-faq-jsonld" data={faqJsonLd} />
-			<div id="home-page-container">
+			<div id="home-page-container" className="w-full min-w-0">
 				<Suspense fallback={<HomeSkeleton />}>
 					<HomeClient
 						initialServices={services || []}

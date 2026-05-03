@@ -23,60 +23,85 @@ export default async function SuperadminLayout({ children }: { children: React.R
 	const [profile, inquiryStats] = await Promise.all([getUserProfile(), getInquiryStats()]);
 
 	const superadminNav = [
-		{ href: "/admin", label: "Dashboard", icon: <LayoutDashboard size={17} /> },
-		{ href: "/admin/pos", label: "POS Kasir", icon: <ReceiptText size={17} /> },
 		{
-			href: "/admin/antrian",
-			label: "Antrian",
-			icon: <ClipboardList size={17} />,
-		},
-		{ href: "/admin/outlet", label: "Outlet", icon: <Store size={17} /> },
-		{
-			href: "/admin/franchise",
-			label: "Franchise",
-			icon: <Building2 size={17} />,
-		},
-		{
-			href: "/admin/paket-usaha",
-			label: "Paket Usaha",
-			icon: <PackageOpen size={17} />,
-			badge: inquiryStats.new > 0 ? inquiryStats.new : undefined,
+			label: "Utama",
+			items: [
+				{ href: "/admin", label: "Dashboard", icon: <LayoutDashboard size={17} /> },
+				{ href: "/admin/pos", label: "POS Kasir", icon: <ReceiptText size={17} /> },
+				{
+					href: "/admin/antrian",
+					label: "Antrian",
+					icon: <ClipboardList size={17} />,
+				},
+			],
 		},
 		{
-			href: "/admin/pegawai",
-			label: "Manajemen Pegawai",
-			icon: <UsersRound size={17} />,
+			label: "Bisnis",
+			items: [
+				{ href: "/admin/outlet", label: "Outlet", icon: <Store size={17} /> },
+				{
+					href: "/admin/franchise",
+					label: "Franchise",
+					icon: <Building2 size={17} />,
+				},
+				{
+					href: "/admin/paket-usaha",
+					label: "Paket Usaha",
+					icon: <PackageOpen size={17} />,
+					badge: inquiryStats.new > 0 ? inquiryStats.new : undefined,
+				},
+			],
 		},
 		{
-			href: "/admin/testimonials",
-			label: "Testimoni",
-			icon: <MessageSquareText size={17} />,
+			label: "Operasional",
+			items: [
+				{
+					href: "/admin/pegawai",
+					label: "Manajemen Pegawai",
+					icon: <UsersRound size={17} />,
+				},
+				{
+					href: "/admin/testimonials",
+					label: "Testimoni",
+					icon: <MessageSquareText size={17} />,
+				},
+				{
+					href: "/admin/layanan",
+					label: "Kelola Layanan",
+					icon: <Shirt size={17} />,
+				},
+				{ href: "/admin/galeri", label: "Galeri", icon: <Images size={17} /> },
+			],
 		},
 		{
-			href: "/admin/layanan",
-			label: "Kelola Layanan",
-			icon: <Shirt size={17} />,
+			label: "Insight",
+			items: [
+				{
+					href: "/admin/keuangan",
+					label: "Keuangan",
+					icon: <Landmark size={17} />,
+				},
+				{
+					href: "/admin/laporan",
+					label: "Laporan & Audit",
+					icon: <BarChart3 size={17} />,
+				},
+				{
+					href: "/admin/analytics",
+					label: "Traffic Analytics",
+					icon: <ChartNoAxesCombined size={17} />,
+				},
+			],
 		},
-		{ href: "/admin/galeri", label: "Galeri", icon: <Images size={17} /> },
 		{
-			href: "/admin/keuangan",
-			label: "Keuangan",
-			icon: <Landmark size={17} />,
-		},
-		{
-			href: "/admin/laporan",
-			label: "Laporan & Audit",
-			icon: <BarChart3 size={17} />,
-		},
-		{
-			href: "/admin/analytics",
-			label: "Traffic Analytics",
-			icon: <ChartNoAxesCombined size={17} />,
-		},
-		{
-			href: "/admin/profil",
-			label: "Profil Akun",
-			icon: <UserCircle size={17} />,
+			label: "Akun",
+			items: [
+				{
+					href: "/admin/profil",
+					label: "Profil Akun",
+					icon: <UserCircle size={17} />,
+				},
+			],
 		},
 	];
 

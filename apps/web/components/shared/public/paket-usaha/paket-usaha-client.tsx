@@ -37,9 +37,9 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 	const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent("Halo Mahira Laundry, saya ingin konsultasi mengenai paket usaha laundry.")}`;
 
 	return (
-		<div className="bg-white">
+		<div className="bg-white w-full min-w-0">
 			{/* Hero / Header - Premium Overhaul */}
-			<section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-slate-900 py-14 sm:py-16">
+			<section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-slate-900 py-14 sm:py-16 w-full min-w-0">
 				{/* Cinematic Background */}
 				<div className="absolute inset-0 bg-brand-gradient opacity-20 mix-blend-overlay" />
 				<motion.div
@@ -51,7 +51,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 					className="absolute top-0 right-0 w-full h-full bg-brand-primary/20 blur-[150px] rounded-full -translate-y-1/2 translate-x-1/2"
 				/>
 
-				<div className="container relative z-10 mx-auto px-6 text-center">
+				<div className="container relative z-10 mx-auto px-4 sm:px-6 text-center min-w-0">
 					<motion.div
 						initial={{ opacity: 0, scale: 0.8 }}
 						animate={{ opacity: 1, scale: 1 }}
@@ -68,7 +68,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 						initial={{ opacity: 0, y: 30 }}
 						animate={{ opacity: 1, y: 0 }}
 						transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-						className="max-w-4xl mx-auto text-4xl font-black leading-[0.95] text-white sm:text-5xl md:text-6xl lg:text-7xl tracking-tighter"
+						className="max-w-4xl mx-auto text-3xl sm:text-4xl font-black leading-[0.95] text-white md:text-6xl lg:text-7xl tracking-tighter"
 					>
 						Bangun Bisnis <br />
 						<span className="text-brand-gradient">Laundry Masa Depan.</span>
@@ -106,8 +106,11 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 			</section>
 
 			{/* Package Cards - Staggered Motion */}
-			<section id="packages" className="py-14 sm:py-16 bg-slate-50 relative overflow-hidden">
-				<div className="container relative z-10 mx-auto px-6">
+			<section
+				id="packages"
+				className="py-14 sm:py-16 bg-slate-50 relative overflow-hidden w-full min-w-0"
+			>
+				<div className="container relative z-10 mx-auto px-4 sm:px-6 min-w-0">
 					<div className="mb-16 text-center">
 						<h2 className="text-3xl font-black tracking-tighter text-slate-900 sm:text-4xl">
 							Pilihan Paket Investasi
@@ -131,7 +134,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 							initial="hidden"
 							whileInView="visible"
 							viewport={{ once: true, margin: "-100px" }}
-							className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+							className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md lg:max-w-none mx-auto"
 						>
 							{packages.map((pkg) => (
 								<motion.div key={pkg.id} variants={itemVariants}>
@@ -146,7 +149,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 			{/* Comparison Table - Reveal Animation */}
 			{packages.length > 0 && (
 				<section id="perbandingan" className="bg-white py-14 sm:py-16 scroll-mt-24">
-					<div className="container mx-auto px-6">
+					<div className="container mx-auto px-4 sm:px-6 min-w-0">
 						<motion.div
 							initial={{ opacity: 0, y: 30 }}
 							whileInView={{ opacity: 1, y: 0 }}
@@ -166,7 +169,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 							whileInView={{ opacity: 1 }}
 							transition={{ duration: 1 }}
 							viewport={{ once: true }}
-							className="rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.05)] border border-slate-200"
+							className="rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.05)] border border-slate-200 max-w-full"
 						>
 							<ComparisonTable packages={packages} />
 						</motion.div>
@@ -177,7 +180,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 			{/* WhatsApp CTA Section - High Impact Motion */}
 			<section id="contact-wa" className="py-16 bg-slate-900 relative overflow-hidden">
 				<div className="absolute inset-0 bg-brand-gradient opacity-10" />
-				<div className="container relative z-10 mx-auto px-6 text-center">
+				<div className="container relative z-10 mx-auto px-4 sm:px-6 text-center min-w-0">
 					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
@@ -196,7 +199,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 							href={waUrl}
 							target="_blank"
 							rel="noopener noreferrer"
-							className="inline-flex items-center gap-4 rounded-full bg-brand-accent px-10 py-4 text-[10px] font-black uppercase tracking-[0.2em] text-slate-900 shadow-2xl shadow-brand-accent/20 transition-all duration-300 hover:bg-slate-900 hover:text-brand-accent hover:shadow-slate-900/30"
+							className="inline-flex max-w-full items-center justify-center gap-3 sm:gap-4 rounded-full bg-brand-accent px-6 sm:px-10 py-4 text-[10px] font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] text-slate-900 shadow-2xl shadow-brand-accent/20 transition-all duration-300 hover:bg-slate-900 hover:text-brand-accent hover:shadow-slate-900/30"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

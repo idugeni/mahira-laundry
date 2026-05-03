@@ -130,7 +130,7 @@ export default function ComparisonTable({ packages }: ComparisonTableProps) {
 	return (
 		<div className="w-full">
 			{/* Desktop View: Ultra Premium Table */}
-			<div className="hidden md:block overflow-hidden bg-white">
+			<div className="hidden lg:block overflow-x-auto bg-white">
 				<table className="w-full border-collapse text-sm">
 					<thead>
 						<tr className="bg-slate-900">
@@ -181,7 +181,7 @@ export default function ComparisonTable({ packages }: ComparisonTableProps) {
 			</div>
 
 			{/* Mobile View: Seamless Cohesive List */}
-			<div className="md:hidden">
+			<div className="lg:hidden">
 				<motion.div
 					initial={{ opacity: 0 }}
 					whileInView={{ opacity: 1 }}
@@ -196,7 +196,7 @@ export default function ComparisonTable({ packages }: ComparisonTableProps) {
 							<p className="text-[10px] font-black text-brand-primary uppercase tracking-[0.3em] mb-6 text-center italic opacity-60">
 								{row.label}
 							</p>
-							<div className="grid grid-cols-3 gap-3">
+							<div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
 								{packages.map((pkg, idx) => {
 									const color = tierColors[pkg.tier] ?? defaultTierColor;
 									return (
@@ -207,7 +207,7 @@ export default function ComparisonTable({ packages }: ComparisonTableProps) {
 											<span className="text-[8px] font-black text-slate-400 uppercase tracking-widest mb-2 truncate w-full">
 												{pkg.name.split(" ")[0]}
 											</span>
-											<div className="text-[10px] font-black text-slate-900 leading-tight">
+											<div className="text-[10px] font-black text-slate-900 leading-tight break-words">
 												{row.getValue(pkg)}
 											</div>
 										</div>

@@ -199,7 +199,8 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 		}
 	};
 
-	const currentStatusInfo = allStatuses.find((s) => s.id === activeTab) ?? allStatuses[0]!;
+	const currentStatusInfo = allStatuses.find((s) => s.id === activeTab) ?? allStatuses[0];
+	if (!currentStatusInfo) return null;
 
 	return (
 		<div className="max-w-[1400px] mx-auto space-y-12 px-4 md:px-8">
@@ -337,7 +338,8 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 					>
 						{paginatedOrders.length > 0 ? (
 							paginatedOrders.map((order) => {
-								const colInfo = allStatuses.find((s) => s.id === order.status) ?? allStatuses[0]!;
+								const colInfo = allStatuses.find((s) => s.id === order.status) ?? allStatuses[0];
+								if (!colInfo) return null;
 								return (
 									<motion.div
 										key={order.id}

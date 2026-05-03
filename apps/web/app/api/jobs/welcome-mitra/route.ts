@@ -1,17 +1,23 @@
-import { verifySignatureAppRouter } from "@upstash/qstash/nextjs";
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { z } from "zod";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { qstashRoute } from "@/lib/upstash/qstash-route";
+
+const WelcomeMitraPayloadSchema = z.object({
+	userId: z.string().uuid(),
+	outletName: z.string().min(1).max(160),
+	outletId: z.string().uuid().optional(),
+});
 
 async function handler(request: Request) {
 	try {
-		const body = await request.json();
-		const { userId, outletName, outletId } = body;
-
-		if (!userId || !outletName) {
-			return NextResponse.json({ error: "Missing userId or outletName" }, { status: 400 });
+		const payload = WelcomeMitraPayloadSchema.safeParse(await request.json());
+		if (!payload.success) {
+			return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
 		}
 
-		const supabase = await createClient();
+		const { userId, outletName, outletId } = payload.data;
+		const supabase = createAdminClient();
 
 		await supabase.from("notifications").insert({
 			user_id: userId,
@@ -27,6 +33,4 @@ async function handler(request: Request) {
 	}
 }
 
-export const POST = process.env.QSTASH_CURRENT_SIGNING_KEY
-	? verifySignatureAppRouter(handler)
-	: handler;
+export const POST = qstashRoute(handler);

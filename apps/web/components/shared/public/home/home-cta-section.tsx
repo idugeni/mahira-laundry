@@ -7,14 +7,14 @@ import { PRIMARY_OUTLET } from "@/lib/constants";
 
 export function HomeCtaSection() {
 	return (
-		<section className="py-20 relative overflow-hidden bg-white">
+		<section className="py-20 relative overflow-hidden bg-white w-full min-w-0">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 				<motion.div
 					initial={{ opacity: 0, y: 40 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: false }}
 					transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-					className="group relative p-10 lg:p-10 rounded-[2rem] bg-slate-900 text-white shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden"
+					className="group relative p-6 sm:p-10 lg:p-10 rounded-[2rem] bg-slate-900 text-white shadow-[0_40px_100px_-20px_rgba(0,0,0,0.3)] overflow-hidden"
 				>
 					{/* Elite Background Effects */}
 					<motion.div
@@ -24,7 +24,7 @@ export function HomeCtaSection() {
 						transition={{ duration: 1.2, delay: 0.3 }}
 						className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-brand-primary/20 via-transparent to-transparent group-hover:opacity-70 transition-opacity duration-1000"
 					/>
-					<div className="absolute -bottom-24 -left-24 w-96 h-96 bg-brand-accent/10 rounded-full blur-[100px]" />
+					<div className="absolute bottom-0 left-0 w-56 sm:w-80 h-56 sm:h-80 bg-brand-accent/10 rounded-full blur-[100px]" />
 					<div className="absolute inset-0 opacity-10 [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:48px_48px]" />
 
 					<div className="relative z-10 flex flex-col md:flex-row items-center gap-12 lg:gap-16">
@@ -118,7 +118,7 @@ export function HomeCtaSection() {
 								whileHover={{ scale: 1.03 }}
 								whileTap={{ scale: 0.98 }}
 								transition={{ type: "spring", stiffness: 400, damping: 25 }}
-								className="w-full sm:w-auto inline-flex items-center justify-center gap-4 px-10 py-5 bg-white text-slate-900 rounded-[2rem] font-black text-lg hover:bg-brand-accent hover:text-slate-900 transition-colors duration-300 shadow-[0_20px_40px_rgba(255,255,255,0.1)] group/btn"
+								className="w-full sm:w-auto inline-flex items-center justify-center gap-4 px-6 sm:px-10 py-5 bg-white text-slate-900 rounded-[2rem] font-black text-base sm:text-lg hover:bg-brand-accent hover:text-slate-900 transition-colors duration-300 shadow-[0_20px_40px_rgba(255,255,255,0.1)] group/btn"
 							>
 								<span className="w-8 h-8 flex items-center justify-center text-emerald-500 bg-emerald-50 rounded-full group-hover/btn:bg-slate-900 transition-colors duration-300">
 									<FaWhatsapp />
