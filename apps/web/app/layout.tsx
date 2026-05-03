@@ -45,29 +45,29 @@ export const metadata: Metadata = {
 		"peluang usaha laundry",
 		"laundry business setup",
 	],
-	openGraph: {
-		...baseOpenGraph,
-		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
-		description:
-			"Peluang investasi bisnis laundry dengan sistem teruji dan dukungan penuh. Mulai usaha laundry premium Anda hari ini.",
-		url: baseUrl,
-		images: [
-			{
-				url: "/og/paket-usaha.png",
-				width: 1200,
-				height: 630,
-				alt: "Mahira Laundry Premium Experience",
-			},
-		],
-	},
-	twitter: {
-		card: "summary_large_image",
-		title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
-		description:
-			"Investasi bisnis laundry premium dengan sistem manajemen profesional dan mesin terbaik.",
-		images: ["/og/paket-usaha.png"],
-		creator: "@mahiralaundry",
-	},
+openGraph: {
+	...baseOpenGraph,
+	title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
+	description:
+		"Peluang investasi bisnis laundry dengan sistem teruji dan dukungan penuh. Mulai usaha laundry premium Anda hari ini.",
+	url: baseUrl,
+	images: [
+		{
+			url: `${baseUrl}/og/paket-usaha.png`,
+			width: 1200,
+			height: 630,
+			alt: "Mahira Laundry Premium Experience",
+		},
+	],
+},
+twitter: {
+	card: "summary_large_image",
+	title: "Mahira Laundry — Paket Usaha & Kemitraan Laundry Premium",
+	description:
+		"Investasi bisnis laundry premium dengan sistem manajemen profesional dan mesin terbaik.",
+	images: [`${baseUrl}/og/paket-usaha.png`],
+	creator: "@mahiralaundry",
+},
 	alternates: {
 		canonical: "/",
 	},
