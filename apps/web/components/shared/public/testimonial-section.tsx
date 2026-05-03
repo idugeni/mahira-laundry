@@ -3,7 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa6";
-import { HiStar, HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
+import { HiOutlineChevronLeft, HiOutlineChevronRight, HiStar } from "react-icons/hi2";
 
 export interface TestimonialData {
 	id: string;
@@ -89,8 +89,8 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 							>
 								<HiOutlineChevronRight size={20} />
 							</button>
-							</>
-						)}
+						</>
+					)}
 
 					{/* Testimonials Grid with Animation */}
 					<div className="overflow-hidden">
@@ -125,11 +125,11 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 									aria-label={`Halaman ${index + 1}`}
 								/>
 							))}
-							</div>
-						)}
-					</div>
+						</div>
+					)}
 				</div>
-			</section>
+			</div>
+		</section>
 	);
 }
 

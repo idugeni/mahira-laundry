@@ -20,9 +20,7 @@ const managerNav = [
 	},
 	{
 		label: "Tim",
-		items: [
-			{ href: "/manager/tim", label: "Tim", icon: "👥" },
-		],
+		items: [{ href: "/manager/tim", label: "Tim", icon: "👥" }],
 	},
 ];
 

@@ -22,7 +22,7 @@ const inter = Inter({
 	weight: ["300", "400", "500", "600", "700"],
 });
 
-const vercelProductionUrl = process.env["VERCEL_PROJECT_PRODUCTION_URL"];
+const vercelProductionUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL;
 const baseUrl =
 	process.env.NEXT_PUBLIC_APP_URL ||
 	(vercelProductionUrl ? `https://${vercelProductionUrl}` : "https://mahiralaundry.id");

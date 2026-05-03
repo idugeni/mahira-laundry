@@ -87,7 +87,9 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 			}}
 			className={`relative flex flex-col h-full rounded-[2rem] border bg-white p-6 sm:p-8 transition-[box-shadow,border-color] duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] min-w-0 ${style.accent}`}
 		>
-			<div className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none rounded-[2rem]`} />
+			<div
+				className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none rounded-[2rem]`}
+			/>
 
 			{/* Badge Paling Populer - Absolute positioned at top */}
 			{style.featured && (
@@ -103,7 +105,6 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 			)}
 
 			<div className="relative z-10 flex flex-col h-full pt-4">
-
 				{/* Tier badge */}
 				<div className="flex justify-center">
 					<span
