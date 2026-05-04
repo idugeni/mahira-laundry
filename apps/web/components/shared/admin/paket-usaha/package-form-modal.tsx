@@ -182,9 +182,9 @@ export function PackageFormModal({ package: pkg, onSuccess, onClose }: PackageFo
 			/>
 
 			{/* Modal */}
-			<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl my-8 overflow-hidden border border-white/20">
+			<div className="relative bg-white rounded-[2.5rem] shadow-2xl w-full max-w-2xl my-4 flex flex-col max-h-[calc(100vh-2rem)] overflow-hidden border border-white/20">
 				{/* Header */}
-				<div className="px-8 pt-8 pb-6 bg-indigo-50 border-b border-indigo-100 relative overflow-hidden">
+				<div className="px-8 pt-8 pb-6 bg-indigo-50 border-b border-indigo-100 relative overflow-hidden shrink-0">
 					<div className="absolute top-0 right-0 w-48 h-48 bg-indigo-500/5 rounded-full -mr-24 -mt-24 blur-3xl" />
 					<div className="relative flex items-center justify-between">
 						<div className="flex items-center gap-3">
@@ -219,7 +219,7 @@ export function PackageFormModal({ package: pkg, onSuccess, onClose }: PackageFo
 				</div>
 
 				{/* Form Body */}
-				<form onSubmit={handleSubmit(onSubmit)} className="p-8 space-y-6">
+				<form onSubmit={handleSubmit(onSubmit)} className="p-8 space-y-6 flex-1 overflow-y-auto">
 					{/* Row: Name + Tier */}
 					<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 						<div className="space-y-1.5">
