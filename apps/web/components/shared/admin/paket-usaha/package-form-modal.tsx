@@ -17,7 +17,8 @@ import type { BusinessPackage, PackageTier } from "@/lib/types";
 
 const packageItemSchema = z.object({
 	name: z.string().min(1, "Nama item wajib diisi"),
-	quantity: z.coerce.number().optional(),
+	quantity: z.coerce.number().nullable().optional(),
+	unit: z.string().optional(),
 	spec: z.string().optional(),
 });
 
@@ -372,7 +373,7 @@ export function PackageFormModal({ package: pkg, onSuccess, onClose }: PackageFo
 							{fields.map((field, index) => (
 								<div
 									key={field.id}
-									className="grid grid-cols-[1fr_80px_1fr_auto] gap-2 items-start"
+									className="grid grid-cols-[1.5fr_70px_80px_1.5fr_auto] gap-2 items-start"
 								>
 									<div>
 										<input
@@ -391,7 +392,12 @@ export function PackageFormModal({ package: pkg, onSuccess, onClose }: PackageFo
 										type="number"
 										min={1}
 										placeholder="Qty"
-										className="w-full h-10 px-3 rounded-xl border border-slate-100 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+										className="w-full h-10 px-2 rounded-xl border border-slate-100 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
+									/>
+									<input
+										{...register(`items.${index}.unit`)}
+										placeholder="Satuan"
+										className="w-full h-10 px-2 rounded-xl border border-slate-100 bg-slate-50 text-xs font-bold text-slate-900 placeholder:text-slate-300 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all"
 									/>
 									<input
 										{...register(`items.${index}.spec`)}

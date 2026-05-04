@@ -265,7 +265,8 @@ export type PackageTier = "Starter" | "Standard" | "Premium" | "Custom";
 
 export interface PackageItem {
 	name: string;
-	quantity?: number;
+	quantity?: number | null;
+	unit?: string;
 	spec?: string;
 }
 

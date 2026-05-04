@@ -184,7 +184,10 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 									<div className="flex flex-col min-w-0">
 										<span>
 											{item.quantity != null ? (
-												<span className="font-black text-slate-900 mr-1">{item.quantity}× </span>
+												<span className="font-black text-slate-900 mr-1">
+													{item.quantity}
+													{item.unit ? ` ${item.unit}` : "×"}{" "}
+												</span>
 											) : (
 												""
 											)}

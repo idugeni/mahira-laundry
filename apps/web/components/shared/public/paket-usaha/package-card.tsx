@@ -263,7 +263,10 @@ export function PackageCard({ package: pkg }: PackageCardProps) {
 										<div className="flex flex-col min-w-0">
 											<span>
 												{item.quantity != null && (
-													<span className="font-black text-slate-900 mr-1">{item.quantity}x </span>
+													<span className="font-black text-slate-900 mr-1">
+														{item.quantity}
+														{item.unit ? ` ${item.unit}` : "x"}{" "}
+													</span>
 												)}
 												{item.name}
 											</span>
