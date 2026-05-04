@@ -193,8 +193,8 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 										className="w-10 h-10 md:w-14 md:h-14 rounded-full border-2 md:border-4 border-white overflow-hidden shadow-lg cursor-pointer relative z-0 hover:z-10"
 									>
 										<Image
-											src={`https://i.pravatar.cc/150?u=${i + 20}`}
-											alt="Partner"
+											src={`/avatars/partner_${i}.png`}
+											alt={`Indonesian Partner ${i}`}
 											width={56}
 											height={56}
 											className="w-full h-full object-cover"
