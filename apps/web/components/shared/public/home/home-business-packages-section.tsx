@@ -2,7 +2,7 @@
 
 // FIX: Ganti ArrowRight dengan ChevronDown untuk toggle expand/collapse
 import { ChevronDown } from "lucide-react";
-import { AnimatePresence, LayoutGroup, motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
 import { HiOutlineArrowRight } from "react-icons/hi2";
@@ -73,7 +73,6 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 
 	return (
 		<motion.div
-			layout
 			initial={{ opacity: 0, y: 30 }}
 			whileInView={{ opacity: 1, y: 0 }}
 			whileHover={{ y: -6 }}
@@ -82,10 +81,8 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 				duration: 0.7,
 				delay: index * 0.1,
 				ease: [0.16, 1, 0.3, 1],
-				// FIX: Pisahkan transisi layout agar tidak terlalu lambat saat expand/collapse
-				layout: { duration: 0.3, ease: "easeInOut" },
 			}}
-			className={`relative flex flex-col h-full rounded-[2rem] border bg-white p-6 sm:p-8 transition-[box-shadow,border-color] duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] min-w-0 ${style.accent}`}
+			className={`relative flex flex-col h-full rounded-[2rem] border bg-white p-6 sm:p-8 transition-all duration-500 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.08)] min-w-0 ${style.accent}`}
 		>
 			<div
 				className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none rounded-[2rem]`}
@@ -159,7 +156,6 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 						<AnimatePresence mode="popLayout" initial={false}>
 							{visibleItems.map((item, i) => (
 								<motion.li
-									layout
 									key={`${item.name}-${item.quantity ?? "item"}-${item.spec ?? "none"}`}
 									initial={{ opacity: 0, x: -10 }}
 									animate={{ opacity: 1, x: 0 }}
@@ -207,7 +203,6 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 					</ul>
 					{pkg.items.length > 4 && (
 						<motion.button
-							layout
 							type="button"
 							onClick={() => setIsExpanded(!isExpanded)}
 							whileHover={{ x: 5 }}
@@ -315,14 +310,11 @@ export function HomeBusinessPackagesSection({ packages }: HomeBusinessPackagesSe
 				</div>
 
 				{/* Package Cards */}
-				{/* FIX: Tambah id pada LayoutGroup untuk mencegah konflik scope layout */}
-				<LayoutGroup id="packages-grid">
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md md:max-w-none mx-auto md:mx-0">
-						{packages.slice(0, 3).map((pkg, i) => (
-							<PackageCard key={pkg.id} pkg={pkg} index={i} />
-						))}
-					</div>
-				</LayoutGroup>
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md md:max-w-none mx-auto md:mx-0">
+					{packages.slice(0, 3).map((pkg, i) => (
+						<PackageCard key={pkg.id} pkg={pkg} index={i} />
+					))}
+				</div>
 
 				{/* View all link */}
 				<motion.div
