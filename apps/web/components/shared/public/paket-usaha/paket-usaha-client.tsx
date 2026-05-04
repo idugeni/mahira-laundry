@@ -164,15 +164,7 @@ export function PaketUsahaClient({ packages }: PaketUsahaClientProps) {
 							</div>
 						</motion.div>
 
-						<motion.div
-							initial={{ opacity: 0 }}
-							whileInView={{ opacity: 1 }}
-							transition={{ duration: 1 }}
-							viewport={{ once: true }}
-							className="rounded-[2rem] overflow-hidden shadow-[0_40px_80px_-20px_rgba(0,0,0,0.05)] border border-slate-200 max-w-full"
-						>
-							<ComparisonTable packages={packages} />
-						</motion.div>
+						<ComparisonTable packages={packages} />
 					</div>
 				</section>
 			)}

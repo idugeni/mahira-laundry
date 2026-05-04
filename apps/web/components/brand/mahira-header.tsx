@@ -1,5 +1,6 @@
 "use client";
 
+import type { User } from "@supabase/supabase-js";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -19,6 +20,7 @@ import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { AdminAvatar } from "@/components/shared/admin/admin-avatar";
 import { UniversalSearch } from "@/components/shared/public/universal-search";
 import { useAuth } from "@/hooks/use-auth";
+import type { Profile } from "@/lib/types";
 import { getDashboardUrl } from "@/lib/utils";
 
 const megaMenuItems = [
@@ -69,11 +71,21 @@ const megaItemVariants = {
 	},
 };
 
-export function MahiraHeader() {
+export function MahiraHeader({
+	initialUser = null,
+	initialProfile = null,
+}: {
+	initialUser?: User | null;
+	initialProfile?: Profile | null;
+}) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [megaOpen, setMegaOpen] = useState(false);
 	const megaRef = useRef<HTMLDivElement>(null);
-	const { user, profile, loading } = useAuth();
+	const { user: ctxUser, profile: ctxProfile, loading: ctxLoading } = useAuth();
+
+	const user = ctxLoading ? initialUser : ctxUser;
+	const profile = ctxLoading ? initialProfile : ctxProfile;
+	const loading = ctxLoading && !initialUser;
 
 	const _getInitials = (name?: string) => {
 		if (!name) return "??";
@@ -97,6 +109,18 @@ export function MahiraHeader() {
 		if (megaOpen) document.addEventListener("mousedown", handler);
 		return () => document.removeEventListener("mousedown", handler);
 	}, [megaOpen]);
+
+	// Prevent background scrolling when mobile menu is open
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+		return () => {
+			document.body.style.overflow = "";
+		};
+	}, [isOpen]);
 
 	return (
 		<div key="header-root-container" className="contents">

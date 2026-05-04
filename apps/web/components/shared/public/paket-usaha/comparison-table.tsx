@@ -130,7 +130,7 @@ export default function ComparisonTable({ packages }: ComparisonTableProps) {
 	return (
 		<div className="w-full">
 			{/* Desktop View: Ultra Premium Table */}
-			<div className="hidden lg:block overflow-x-auto bg-white">
+			<div className="hidden lg:block overflow-x-auto bg-white rounded-[2rem] overflow-hidden border border-slate-200 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.05)]">
 				<table className="w-full border-collapse text-sm">
 					<thead>
 						<tr className="bg-slate-900">

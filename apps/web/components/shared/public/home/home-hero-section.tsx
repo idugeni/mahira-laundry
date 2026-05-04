@@ -130,7 +130,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 							>
 								<HiOutlineSparkles />
 							</motion.span>
-							<span>Peluang Bisnis {new Date().getFullYear()}</span>
+							<span>Terpercaya Sejak 2023</span>
 						</motion.div>
 
 						<motion.h1
@@ -217,8 +217,9 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 					{/* Right Visual Content */}
 					<div className="relative py-4 lg:py-0 lg:h-[600px] flex items-center justify-center min-w-0">
 						<motion.div
-							initial={{ opacity: 0, x: 50 }}
-							animate={{ opacity: 1, x: 0 }}
+							initial={{ opacity: 0 }}
+							animate={{ opacity: 1 }}
+							transition={{ duration: 0.5, ease: "easeOut" }}
 							className="relative z-10 w-full max-w-md p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
 						>
 							{/* Floating Decoration Icons */}
@@ -253,9 +254,10 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 									packages.slice(0, 3).map((pkg, i) => (
 										<motion.div
 											key={pkg.id}
-											initial={{ opacity: 0, x: 20 }}
-											animate={{ opacity: 1, x: 0 }}
-											transition={{ delay: 0.5 + i * 0.1 }}
+											initial={{ opacity: 0, y: 10 }}
+											whileInView={{ opacity: 1, y: 0 }}
+											viewport={{ once: true }}
+											transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
 											className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 rounded-2xl bg-slate-50 border border-slate-100 shadow-xs min-w-0"
 										>
 											<div className="flex items-center gap-3 min-w-0">
@@ -309,7 +311,7 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 									</div>
 								</div>
 								<div className="px-5 py-2.5 bg-slate-900 text-white rounded-xl text-[10px] font-black uppercase tracking-widest shadow-xl">
-									Terverifikasi {new Date().getFullYear()}
+									Teruji Sejak 2023
 								</div>
 							</div>
 						</motion.div>

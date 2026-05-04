@@ -48,12 +48,12 @@ export function LokasiClient() {
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 				{/* Header */}
-				<div className="text-center mb-24">
+				<div className="text-center mb-10 sm:mb-16 md:mb-20 lg:mb-24">
 					<motion.div
 						initial={{ opacity: 0 }}
 						whileInView={{ opacity: 1 }}
 						viewport={{ once: true }}
-						className="inline-flex items-center gap-3 px-6 py-2.5 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] mb-8 border border-brand-primary/10"
+						className="inline-flex items-center gap-3 px-6 py-2.5 bg-brand-primary/10 rounded-full text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] mb-6 sm:mb-8 border border-brand-primary/10"
 					>
 						<span className="w-5 h-5 flex items-center justify-center bg-white rounded-full shadow-xs">
 							<HiOutlineMapPin size={14} />

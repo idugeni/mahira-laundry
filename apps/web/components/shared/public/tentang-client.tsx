@@ -13,7 +13,7 @@ import { MdOutlineScience } from "react-icons/md";
 
 export function TentangClient() {
 	return (
-		<div className="py-16 bg-white relative overflow-hidden w-full min-w-0">
+		<div className="py-14 sm:py-16 bg-white relative overflow-hidden w-full min-w-0">
 			{/* Decorative Background Elements */}
 			<div className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-hidden">
 				<motion.div

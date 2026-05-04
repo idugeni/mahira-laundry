@@ -4,50 +4,30 @@ import { motion } from "motion/react";
 
 export function MahiraSpinner({ size = "md" }: { size?: "sm" | "md" | "lg" }) {
 	const sizeMap = { sm: "w-6 h-6", md: "w-10 h-10", lg: "w-14 h-14" };
-	const dotSize = { sm: "w-1.5 h-1.5", md: "w-2 h-2", lg: "w-3 h-3" };
+	const insetMap = { sm: "inset-1", md: "inset-2", lg: "inset-2.5" };
+	const coreMap = { sm: "inset-2", md: "inset-3.5", lg: "inset-5" };
 
 	return (
 		<div className="flex flex-col items-center gap-6">
-			<div className={`${sizeMap[size]} relative`}>
-				{/* Inner rotating ring */}
+			<div className={`${sizeMap[size]} relative flex items-center justify-center`}>
+				{/* Outer spinning ring */}
 				<motion.div
-					className="absolute inset-0 border-2 border-brand-primary/10 rounded-full"
+					className="absolute inset-0 border-t-2 border-r-2 border-brand-primary rounded-full shadow-[0_0_15px_rgba(219,39,119,0.3)]"
 					animate={{ rotate: 360 }}
-					transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+					transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
 				/>
-				{/* Outer glow dots */}
-				{[0, 1, 2, 3].map((i) => (
-					<motion.div
-						key={i}
-						className={`absolute ${dotSize[size]} rounded-full bg-brand-primary shadow-[0_0_15px_rgba(219,39,119,0.5)]`}
-						style={{
-							top: "50%",
-							left: "50%",
-							x: "-50%",
-							y: "-50%",
-						}}
-						animate={{
-							x: [
-								"-50%",
-								`calc(-50% + ${Math.cos((i * Math.PI) / 2) * (size === "lg" ? 24 : 16)}px)`,
-								"-50%",
-							],
-							y: [
-								"-50%",
-								`calc(-50% + ${Math.sin((i * Math.PI) / 2) * (size === "lg" ? 24 : 16)}px)`,
-								"-50%",
-							],
-							scale: [1, 1.5, 1],
-							opacity: [0.3, 1, 0.3],
-						}}
-						transition={{
-							duration: 2,
-							repeat: Infinity,
-							delay: i * 0.2,
-							ease: "easeInOut",
-						}}
-					/>
-				))}
+				{/* Inner counter-rotating ring */}
+				<motion.div
+					className={`absolute ${insetMap[size]} border-b-2 border-l-2 border-brand-accent rounded-full opacity-60`}
+					animate={{ rotate: -360 }}
+					transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+				/>
+				{/* Core pulsing dot */}
+				<motion.div
+					className={`absolute ${coreMap[size]} bg-brand-primary rounded-full shadow-[0_0_10px_rgba(219,39,119,0.5)]`}
+					animate={{ scale: [0.8, 1.2, 0.8], opacity: [0.5, 1, 0.5] }}
+					transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
+				/>
 			</div>
 			<div className="flex flex-col items-center gap-1">
 				<span className="text-[10px] font-black uppercase tracking-[0.3em] text-brand-primary animate-pulse">

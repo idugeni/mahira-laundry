@@ -94,7 +94,7 @@ const sitemapData = [
 
 export function SitemapClient() {
 	return (
-		<div className="bg-white min-h-screen py-20 relative overflow-hidden">
+		<div className="bg-white min-h-screen py-14 sm:py-16 relative overflow-hidden">
 			{/* Decorative Background */}
 			<div className="absolute top-0 left-0 w-full h-full pointer-events-none">
 				<motion.div

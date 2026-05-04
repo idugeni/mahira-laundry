@@ -1,4 +1,4 @@
-﻿import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
+import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 
@@ -50,7 +50,7 @@ export default function ManagerLayout({ children }: { children: React.ReactNode 
 				</main>
 				{/* Dashboard Footer */}
 				<footer className="p-4 md:p-6 border-t border-slate-200/80 text-center text-sm text-slate-500 bg-white/50 shrink-0">
-					<p>© {new Date().getFullYear()} Mahira Group. All rights reserved.</p>
+					<p>© 2023-{new Date().getFullYear()} Mahira Group. All rights reserved.</p>
 				</footer>
 			</div>
 		</div>

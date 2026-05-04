@@ -158,7 +158,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 
 	return (
 		<section
-			className={`${isGalleryPage ? "pt-10 pb-32" : "py-14 sm:py-16"} bg-white relative overflow-hidden w-full min-w-0`}
+			className={`${isGalleryPage ? "pt-14 sm:pt-16 pb-32" : "py-14 sm:py-16"} bg-white relative overflow-hidden w-full min-w-0`}
 		>
 			{/* Decorative Background */}
 			<div className="absolute inset-0 pointer-events-none opacity-40 overflow-hidden">
@@ -365,7 +365,7 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 							</div>
 
 							{/* Info Section - Centered */}
-							<div className="flex-none sm:flex-1 sm:min-h-0 flex flex-col items-center justify-center p-6 sm:p-10 md:p-12 relative bg-white max-h-[40dvh] sm:max-h-none md:max-h-none overflow-y-auto">
+							<div className="flex-none sm:flex-1 sm:min-h-0 flex flex-col justify-between p-6 sm:p-10 md:p-12 relative bg-white max-h-[45dvh] sm:max-h-none md:max-h-none overflow-y-auto">
 								<button
 									type="button"
 									onClick={() => setSelectedItem(null)}
@@ -374,57 +374,59 @@ export function GallerySection({ items = [] }: { items?: GalleryItem[] }) {
 									<HiOutlineXMark size={20} />
 								</button>
 
-								<div className="text-center max-w-sm">
-									<motion.div
-										key={`meta-${selectedItem.id}`}
-										initial={{ opacity: 0, y: 10 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{ duration: 0.4, delay: 0.1 }}
-										className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] rounded-full mb-8 border border-brand-primary/10"
-									>
-										<span className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse" />
-										{selectedItem.category}
-									</motion.div>
+								<div className="text-center max-w-sm mx-auto flex-1 flex flex-col justify-center py-6 sm:py-0">
+									<div className="mb-auto sm:mb-0">
+										<motion.div
+											key={`meta-${selectedItem.id}`}
+											initial={{ opacity: 0, y: 10 }}
+											animate={{ opacity: 1, y: 0 }}
+											transition={{ duration: 0.4, delay: 0.1 }}
+											className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase tracking-[0.3em] rounded-full mb-6 sm:mb-8 border border-brand-primary/10"
+										>
+											<span className="w-1.5 h-1.5 rounded-full bg-brand-primary animate-pulse" />
+											{selectedItem.category}
+										</motion.div>
 
-									<motion.h3
-										key={`title-${selectedItem.id}`}
-										initial={{ opacity: 0, y: 20 }}
-										animate={{ opacity: 1, y: 0 }}
-										transition={{
-											duration: 0.5,
-											delay: 0.15,
-											ease: [0.16, 1, 0.3, 1],
-										}}
-										className="text-3xl sm:text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-6"
-									>
-										{selectedItem.title}
-									</motion.h3>
+										<motion.h3
+											key={`title-${selectedItem.id}`}
+											initial={{ opacity: 0, y: 20 }}
+											animate={{ opacity: 1, y: 0 }}
+											transition={{
+												duration: 0.5,
+												delay: 0.15,
+												ease: [0.16, 1, 0.3, 1],
+											}}
+											className="text-2xl sm:text-4xl md:text-5xl font-black font-[family-name:var(--font-heading)] text-slate-900 leading-[0.9] tracking-tighter mb-4 sm:mb-6"
+										>
+											{selectedItem.title}
+										</motion.h3>
 
-									<motion.div
-										key={`divider-${selectedItem.id}`}
-										initial={{ scaleX: 0 }}
-										animate={{ scaleX: 1 }}
-										transition={{
-											duration: 0.5,
-											delay: 0.25,
-											ease: [0.16, 1, 0.3, 1],
-										}}
-										className="w-12 h-px bg-brand-primary mx-auto mb-6"
-									/>
+										<motion.div
+											key={`divider-${selectedItem.id}`}
+											initial={{ scaleX: 0 }}
+											animate={{ scaleX: 1 }}
+											transition={{
+												duration: 0.5,
+												delay: 0.25,
+												ease: [0.16, 1, 0.3, 1],
+											}}
+											className="w-12 h-px bg-brand-primary mx-auto mb-4 sm:mb-6"
+										/>
 
-									<motion.p
-										key={`desc-${selectedItem.id}`}
-										initial={{ opacity: 0 }}
-										animate={{ opacity: 1 }}
-										transition={{ delay: 0.3 }}
-										className="text-slate-500 text-base font-medium leading-relaxed"
-									>
-										{selectedItem.description ||
-											"Setiap helai kain ditangani dengan presisi dan standar kebersihan tertinggi Mahira."}
-									</motion.p>
+										<motion.p
+											key={`desc-${selectedItem.id}`}
+											initial={{ opacity: 0 }}
+											animate={{ opacity: 1 }}
+											transition={{ delay: 0.3 }}
+											className="text-slate-500 text-sm sm:text-base font-medium leading-relaxed"
+										>
+											{selectedItem.description ||
+												"Setiap helai kain ditangani dengan presisi dan standar kebersihan tertinggi Mahira."}
+										</motion.p>
+									</div>
 								</div>
 
-								<div className="absolute bottom-6 left-8 right-8 flex items-center justify-between">
+								<div className="flex items-center justify-between pt-4 sm:pt-6 border-t border-slate-100 shrink-0 w-full max-w-sm mx-auto">
 									<div className="flex items-center gap-3">
 										<div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white">
 											<HiOutlinePhoto size={16} />

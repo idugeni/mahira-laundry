@@ -115,7 +115,7 @@ export default function KurirLayout({ children }: { children: React.ReactNode })
 				</header>
 				<main className="flex-1 p-4 md:p-6 overflow-auto">{children}</main>
 				<footer className="p-4 md:p-6 border-t border-border text-center text-sm text-muted-foreground bg-white/50 shrink-0">
-					<p>© {new Date().getFullYear()} Mahira Group. All rights reserved.</p>
+					<p>© 2023-{new Date().getFullYear()} Mahira Group. All rights reserved.</p>
 				</footer>
 			</div>
 		</div>

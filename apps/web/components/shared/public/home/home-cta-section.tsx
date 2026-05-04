@@ -115,12 +115,9 @@ export function HomeCtaSection() {
 								href={`https://wa.me/${PRIMARY_OUTLET.whatsapp}?text=Halo Mahira Laundry, saya ingin order laundry`}
 								target="_blank"
 								rel="noopener noreferrer"
-								whileHover={{ scale: 1.03 }}
-								whileTap={{ scale: 0.98 }}
-								transition={{ type: "spring", stiffness: 400, damping: 25 }}
-								className="w-full sm:w-auto inline-flex items-center justify-center gap-4 px-6 sm:px-10 py-5 bg-white text-slate-900 rounded-[2rem] font-black text-base sm:text-lg hover:bg-brand-accent hover:text-slate-900 transition-colors duration-300 shadow-[0_20px_40px_rgba(255,255,255,0.1)] group/btn"
+								className="w-full sm:w-auto inline-flex items-center justify-center gap-4 px-6 sm:px-10 py-5 bg-white text-slate-900 hover:bg-emerald-500 hover:text-white rounded-[2rem] font-black text-base sm:text-lg transition-all duration-300 shadow-[0_20px_40px_rgba(0,0,0,0.1)] group/btn"
 							>
-								<span className="w-8 h-8 flex items-center justify-center text-emerald-500 bg-emerald-50 rounded-full group-hover/btn:bg-slate-900 transition-colors duration-300">
+								<span className="w-10 h-10 flex items-center justify-center text-white bg-emerald-500 rounded-full group-hover/btn:bg-white group-hover/btn:text-emerald-500 transition-all duration-300 shrink-0 text-xl">
 									<FaWhatsapp />
 								</span>
 								Hubungi Kami Sekarang

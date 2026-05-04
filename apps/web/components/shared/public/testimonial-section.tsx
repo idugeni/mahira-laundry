@@ -95,7 +95,7 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 					)}
 
 					{/* Testimonials Grid with Animation */}
-					<div className="overflow-x-clip overflow-y-visible py-4 -my-4">
+					<div>
 						<AnimatePresence mode="wait">
 							<motion.div
 								key={currentPage}
@@ -140,7 +140,7 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 	const name = testimonial.guest_name || testimonial.profiles?.full_name || "Pelanggan Setia";
 
 	return (
-		<div className="w-full min-w-0 h-full p-6 sm:p-8 bg-white/70 backdrop-blur-md hover:bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-white hover:border-slate-100 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-brand-primary/5 hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden">
+		<div className="relative hover:z-20 w-full min-w-0 h-full p-6 sm:p-8 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-slate-100 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-brand-primary/5 hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden">
 			<div className="flex gap-1 mb-6">
 				{Array.from({ length: testimonial.rating || 5 }, (_, i) => i).map((i) => (
 					<span key={`star-${testimonial.id}-${i}`} className="text-amber-400 transition-transform">

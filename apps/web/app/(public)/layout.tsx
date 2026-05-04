@@ -1,20 +1,26 @@
 import { MahiraFooter } from "@/components/brand/mahira-footer";
 import { MahiraHeader } from "@/components/brand/mahira-header";
 import { BackToTop } from "@/components/shared/common/back-to-top";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getUser, getUserProfile } from "@/lib/supabase/server";
 
 export default async function PublicLayout({ children }: { children: React.ReactNode }) {
 	const supabase = await createClient();
-	const { data: services } = await supabase
-		.from("services")
-		.select("name, slug, id")
-		.eq("is_active", true)
-		.order("sort_order", { ascending: true })
-		.limit(6);
+	const [user, profile, servicesResult] = await Promise.all([
+		getUser(),
+		getUserProfile(),
+		supabase
+			.from("services")
+			.select("name, slug, id")
+			.eq("is_active", true)
+			.order("sort_order", { ascending: true })
+			.limit(6),
+	]);
+
+	const services = servicesResult.data;
 
 	return (
 		<div className="flex flex-col min-h-screen">
-			<MahiraHeader key="public-header" />
+			<MahiraHeader key="public-header" initialUser={user} initialProfile={profile} />
 			<main key="public-main" className="flex-1 w-full min-w-0">
 				{children}
 			</main>

@@ -138,7 +138,7 @@ export default function CustomerLayout({ children }: { children: React.ReactNode
 
 				{/* Dashboard Footer */}
 				<footer className="p-4 md:p-6 text-center text-sm text-slate-500 bg-transparent shrink-0">
-					<p>© {new Date().getFullYear()} Mahira Group. All rights reserved.</p>
+					<p>© 2023-{new Date().getFullYear()} Mahira Group. All rights reserved.</p>
 				</footer>
 			</div>
 

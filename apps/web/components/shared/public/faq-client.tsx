@@ -102,7 +102,7 @@ export function FAQClient() {
 	return (
 		<div className="min-h-screen bg-slate-50 pb-24 w-full min-w-0">
 			{/* Hero Section */}
-			<section className="relative pt-32 pb-20 overflow-hidden bg-white border-b border-slate-100">
+			<section className="relative pt-14 sm:pt-16 pb-14 sm:pb-20 overflow-hidden bg-white border-b border-slate-100">
 				<div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full pointer-events-none opacity-40">
 					<div className="absolute top-[-10%] left-[-10%] w-[40%] h-[60%] bg-brand-primary/10 blur-[120px] rounded-full" />
 					<div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[60%] bg-brand-accent/10 blur-[120px] rounded-full" />
