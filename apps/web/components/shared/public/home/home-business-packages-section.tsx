@@ -186,14 +186,21 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 											<polyline points="22 4 12 14.01 9 11.01" />
 										</svg>
 									</div>
-									<span>
-										{item.quantity != null ? (
-											<span className="font-black text-slate-900">{item.quantity}× </span>
-										) : (
-											""
+									<div className="flex flex-col min-w-0">
+										<span>
+											{item.quantity != null ? (
+												<span className="font-black text-slate-900 mr-1">{item.quantity}× </span>
+											) : (
+												""
+											)}
+											{item.name}
+										</span>
+										{item.spec && (
+											<span className="text-xs text-slate-400 font-normal mt-1 leading-tight">
+												{item.spec}
+											</span>
 										)}
-										{item.name}
-									</span>
+									</div>
 								</motion.li>
 							))}
 						</AnimatePresence>
