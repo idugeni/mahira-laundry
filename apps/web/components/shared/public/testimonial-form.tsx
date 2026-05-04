@@ -17,14 +17,21 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { submitTestimonial } from "@/lib/actions/testimonial";
 
+import { Input } from "@/components/ui/input";
+
 const formSchema = z.object({
 	content: z.string().min(10, {
 		message: "Testimoni terlalu singkat, minimal 10 karakter ya Sultan.",
 	}),
 	rating: z.number().min(1).max(5),
+	guest_name: z.string().optional(),
 });
 
-export function TestimonialForm() {
+interface TestimonialFormProps {
+	showGuestName?: boolean;
+}
+
+export function TestimonialForm({ showGuestName = false }: TestimonialFormProps) {
 	const [hover, setHover] = useState(0);
 	const [loading, setLoading] = useState(false);
 
@@ -33,6 +40,7 @@ export function TestimonialForm() {
 		defaultValues: {
 			content: "",
 			rating: 5,
+			guest_name: "",
 		},
 	});
 
@@ -42,6 +50,9 @@ export function TestimonialForm() {
 		const formData = new FormData();
 		formData.append("content", values.content);
 		formData.append("rating", values.rating.toString());
+		if (values.guest_name) {
+			formData.append("guest_name", values.guest_name);
+		}
 
 		try {
 			const result = await submitTestimonial(formData);
@@ -74,6 +85,28 @@ export function TestimonialForm() {
 
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+					{showGuestName && (
+						<FormField
+							control={form.control}
+							name="guest_name"
+							render={({ field }) => (
+								<FormItem className="space-y-3">
+									<FormLabel className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1 text-slate-400">
+										Nama Lengkap Anda
+									</FormLabel>
+									<FormControl>
+										<Input
+											placeholder="Masukkan nama lengkap Anda..."
+											className="w-full px-6 py-4 h-12 rounded-2xl bg-slate-50/50 outline-hidden focus:bg-white focus:ring-4 focus:ring-brand-primary/5 font-bold text-slate-900 transition-all"
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage className="text-red-500 font-bold px-2 !mt-2" />
+								</FormItem>
+							)}
+						/>
+					)}
+
 					<FormField
 						control={form.control}
 						name="rating"

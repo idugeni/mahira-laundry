@@ -9,22 +9,36 @@ export async function submitTestimonial(formData: FormData) {
 		data: { user },
 	} = await supabase.auth.getUser();
 
-	if (!user) {
-		return { error: "Anda harus login untuk memberikan testimoni." };
-	}
-
 	const content = formData.get("content") as string;
 	const rating = parseInt(formData.get("rating") as string, 10);
+	const guestName = formData.get("guest_name") as string;
 
 	if (!content || !rating) {
 		return { error: "Konten dan rating wajib diisi." };
 	}
 
+	if (!user && !guestName) {
+		return { error: "Nama wajib diisi jika Anda tidak sedang login." };
+	}
+
 	try {
+		let fallbackUserId: string | null = null;
+		if (!user) {
+			const { data: firstProfile } = await supabase
+				.from("profiles")
+				.select("id")
+				.limit(1)
+				.single();
+			if (firstProfile) {
+				fallbackUserId = firstProfile.id;
+			}
+		}
+
 		const { error } = await supabase.from("testimonials").insert({
-			user_id: user.id,
+			user_id: user ? user.id : fallbackUserId,
 			content,
 			rating,
+			guest_name: user ? null : guestName,
 			is_published: false, // Default to false for moderation
 		});
 

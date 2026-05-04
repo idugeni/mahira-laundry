@@ -11,8 +11,9 @@ export interface TestimonialData {
 	rating: number;
 	profiles?: {
 		full_name?: string;
+		avatar_url?: string | null;
 	};
-	guest_name?: string;
+	guest_name?: string | null;
 }
 
 interface TestimonialSectionProps {
@@ -137,7 +138,10 @@ export function TestimonialSection({ testimonials }: TestimonialSectionProps) {
 }
 
 function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
-	const name = testimonial.guest_name || testimonial.profiles?.full_name || "Pelanggan Setia";
+	const rawName = testimonial.guest_name || testimonial.profiles?.full_name || "Pelanggan Setia";
+	const [name, avatarUrl] = rawName.includes("|")
+		? rawName.split("|")
+		: [rawName, testimonial.profiles?.avatar_url || null];
 
 	return (
 		<div className="relative hover:z-20 w-full min-w-0 h-full p-6 sm:p-8 bg-white rounded-[2rem] sm:rounded-[2.5rem] border border-slate-100 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] hover:shadow-2xl hover:shadow-brand-primary/5 hover:-translate-y-1.5 transition-all duration-300 group overflow-hidden">
@@ -159,9 +163,17 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 			</div>
 
 			<div className="flex items-center gap-4">
-				<div className="w-12 h-12 rounded-full bg-brand-primary/10 border-2 border-white flex items-center justify-center font-black text-brand-primary text-sm shadow-xs ring-4 ring-slate-50">
-					{name.charAt(0)}
-				</div>
+				{avatarUrl ? (
+					<img
+						src={avatarUrl}
+						alt={name}
+						className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-xs ring-4 ring-slate-50 shrink-0"
+					/>
+				) : (
+					<div className="w-12 h-12 rounded-full bg-brand-primary/10 border-2 border-white flex items-center justify-center font-black text-brand-primary text-sm shadow-xs ring-4 ring-slate-50 shrink-0">
+						{name.charAt(0)}
+					</div>
+				)}
 				<div>
 					<p className="font-bold text-slate-900 leading-none">{name}</p>
 					<p className="text-[10px] text-brand-primary font-bold uppercase tracking-widest mt-1.5 flex items-center gap-1">
