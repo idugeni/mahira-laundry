@@ -153,13 +153,12 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 				{/* Items list */}
 				<div className="flex-1 min-h-[160px]">
 					<ul className="space-y-3">
-						<AnimatePresence mode="popLayout" initial={false}>
+						<AnimatePresence mode="popLayout">
 							{visibleItems.map((item, i) => (
 								<motion.li
 									key={`${item.name}-${item.quantity ?? "item"}-${item.spec ?? "none"}`}
 									initial={{ opacity: 0, x: -10 }}
 									animate={{ opacity: 1, x: 0 }}
-									exit={{ opacity: 0, x: -10 }}
 									transition={{ delay: i * 0.05 }}
 									className="flex items-start gap-3 text-sm text-slate-600 font-medium"
 								>
