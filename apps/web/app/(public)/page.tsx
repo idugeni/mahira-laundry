@@ -4,7 +4,6 @@ import { JsonLd } from "@/components/shared/common/json-ld";
 import { HomeClient } from "@/components/shared/public/home/home-client";
 import { HomeSkeleton } from "@/components/shared/public/home/home-skeleton";
 import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
-import { PRIMARY_OUTLET } from "@/lib/constants";
 import { baseOpenGraph } from "@/lib/metadata";
 import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
 
@@ -33,44 +32,7 @@ export const metadata: Metadata = {
 	},
 };
 
-const jsonLd = {
-	"@context": "https://schema.org",
-	"@type": "LaundryBusiness",
-	name: "Mahira Laundry",
-	image: "https://mahiralaundry.id/logo.png",
-	description: "Penyedia paket usaha laundry premium dan solusi bisnis laundry terlengkap.",
-	"@id": "https://mahiralaundry.id",
-	url: "https://mahiralaundry.id",
-	telephone: PRIMARY_OUTLET.phone,
-	address: {
-		"@type": "PostalAddress",
-		streetAddress: PRIMARY_OUTLET.address,
-		addressLocality: "Indonesia",
-		addressRegion: "Asia",
-		postalCode: "17411",
-		addressCountry: "ID",
-	},
-	geo: {
-		"@type": "GeoCoordinates",
-		latitude: PRIMARY_OUTLET.lat,
-		longitude: PRIMARY_OUTLET.lng,
-	},
-	openingHoursSpecification: [
-		{
-			"@type": "OpeningHoursSpecification",
-			dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-			opens: "07:00",
-			closes: "21:00",
-		},
-		{
-			"@type": "OpeningHoursSpecification",
-			dayOfWeek: ["Saturday", "Sunday"],
-			opens: "08:00",
-			closes: "20:00",
-		},
-	],
-	priceRange: "$$",
-};
+import { getPrimaryOutlet } from "@/lib/supabase/public";
 
 const faqJsonLd = {
 	"@context": "https://schema.org",
@@ -106,6 +68,46 @@ const faqJsonLd = {
 export default async function HomePage() {
 	const supabase = await createClient();
 	const testimonials = await getPublishedTestimonials();
+	const outlet = await getPrimaryOutlet();
+
+	const jsonLd = {
+		"@context": "https://schema.org",
+		"@type": "LaundryBusiness",
+		name: outlet.name || "Mahira Laundry",
+		image: "https://mahiralaundry.id/logo.png",
+		description: "Penyedia paket usaha laundry premium dan solusi bisnis laundry terlengkap.",
+		"@id": "https://mahiralaundry.id",
+		url: "https://mahiralaundry.id",
+		telephone: outlet.phone,
+		address: {
+			"@type": "PostalAddress",
+			streetAddress: outlet.address,
+			addressLocality: "Indonesia",
+			addressRegion: "Asia",
+			postalCode: "17411",
+			addressCountry: "ID",
+		},
+		geo: {
+			"@type": "GeoCoordinates",
+			latitude: outlet.lat,
+			longitude: outlet.lng,
+		},
+		openingHoursSpecification: [
+			{
+				"@type": "OpeningHoursSpecification",
+				dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+				opens: outlet.operatingHours?.weekday?.split("-")[0] || "07:00",
+				closes: outlet.operatingHours?.weekday?.split("-")[1] || "21:00",
+			},
+			{
+				"@type": "OpeningHoursSpecification",
+				dayOfWeek: ["Saturday", "Sunday"],
+				opens: outlet.operatingHours?.weekend?.split("-")[0] || "08:00",
+				closes: outlet.operatingHours?.weekend?.split("-")[1] || "20:00",
+			},
+		],
+		priceRange: "$$",
+	};
 
 	const { data: services } = await supabase
 		.from("services")
