@@ -4,13 +4,23 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 
+type SplashWindow = Window & { mahiraSplashShown?: boolean };
+
 export default function RootTemplate({ children }: { children: React.ReactNode }) {
+	const [showSplash] = useState(() => {
+		if (typeof window === "undefined") return true;
+		const splashWindow = window as SplashWindow;
+		if (splashWindow.mahiraSplashShown) return false;
+		splashWindow.mahiraSplashShown = true;
+		return true;
+	});
 	const [exiting, setExiting] = useState(false);
-	const [gone, setGone] = useState(false);
+	const [gone, setGone] = useState(() => !showSplash);
 	const pathname = usePathname();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: pathname intentionally restarts the route transition loader.
 	useEffect(() => {
+		if (!showSplash) return;
 		setExiting(false);
 		setGone(false);
 
