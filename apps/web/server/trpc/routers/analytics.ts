@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { managerProcedure, router } from "@/server/trpc/proxy";
+import { managerProcedure, router } from "@/server/trpc/trpc";
 
 export const analyticsRouter = router({
 	dashboard: managerProcedure

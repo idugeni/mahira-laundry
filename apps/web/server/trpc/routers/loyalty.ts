@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { protectedProcedure, router } from "@/server/trpc/proxy";
+import { protectedProcedure, router } from "@/server/trpc/trpc";
 
 export const loyaltyRouter = router({
 	getPoints: protectedProcedure.query(async ({ ctx }) => {

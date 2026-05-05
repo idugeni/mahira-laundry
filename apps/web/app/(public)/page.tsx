@@ -7,7 +7,8 @@ import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
 import { baseOpenGraph } from "@/lib/metadata";
 import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 3600; // ISR: Revalidate every hour
+
 
 export const metadata: Metadata = {
 	title: {
@@ -67,32 +68,39 @@ const faqJsonLd = {
 
 export default async function HomePage() {
 	const supabase = await createClient();
-	const [
-		testimonials,
-		outlet,
-		servicesResult,
-		statsResult,
-		outletCountResult,
-		galleryResult,
-		businessPackages,
-	] = await Promise.all([
-		getPublishedTestimonials(),
+
+	// Parallel fetching of critical metadata and primary data
+	const [outlet, businessPackages] = await Promise.all([
 		getPrimaryOutlet(),
-		supabase
-			.from("services")
-			.select("*")
-			.eq("is_active", true)
-			.order("sort_order", { ascending: true }),
-		supabase.rpc("get_public_stats"),
-		supabase.from("outlets").select("*", { count: "exact", head: true }).eq("is_active", true),
-		supabase
-			.from("gallery")
-			.select("*")
-			.eq("is_active", true)
-			.order("sort_order", { ascending: true })
-			.limit(12),
 		getActiveBusinessPackages(),
 	]);
+
+	// Defer non-critical data fetching to let initial page render faster
+	const servicesPromise = supabase
+		.from("services")
+		.select("*")
+		.eq("is_active", true)
+		.order("sort_order", { ascending: true })
+		.then((res) => res);
+
+	const statsPromise = supabase.rpc("get_public_stats").then((res) => res);
+
+	const outletCountPromise = supabase
+		.from("outlets")
+		.select("*", { count: "exact", head: true })
+		.eq("is_active", true)
+		.then((res) => res);
+
+	const galleryPromise = supabase
+		.from("gallery")
+		.select("*")
+		.eq("is_active", true)
+		.order("sort_order", { ascending: true })
+		.limit(12)
+		.then((res) => res);
+
+	const testimonialsPromise = getPublishedTestimonials();
+
 
 	const jsonLd = {
 		"@context": "https://schema.org",
@@ -133,41 +141,18 @@ export default async function HomePage() {
 		priceRange: "$$",
 	};
 
-	const { data: services } = servicesResult;
-	const { data: statsData } = statsResult;
-	const orderCount = statsData?.[0]?.completed_orders_count || 0;
-
-	const { count: outletCount } = outletCountResult;
-
-	const stats = [
-		{
-			value: `${(orderCount || 0) + 2847}+`,
-			label: "Order Selesai",
-			numericValue: (orderCount || 0) + 2847,
-			suffix: "+",
-		},
-		{ value: "4.9", label: "Rating", numericValue: 4.9, decimal: 1 },
-		{
-			value: (outletCount || 0).toString(),
-			label: "Outlet",
-			numericValue: outletCount || 0,
-		},
-		{ value: "24/7", label: "Tracking Online" },
-	];
-
-	const { data: galleryItems } = galleryResult;
-
 	return (
 		<div key="home-root" className="w-full min-w-0">
 			<JsonLd key="ld-main" id="home-business-jsonld" data={jsonLd} />
 			<JsonLd key="ld-faq" id="home-faq-jsonld" data={faqJsonLd} />
 			<div id="home-page-container" className="w-full min-w-0">
 				<Suspense fallback={<HomeSkeleton />}>
-					<HomeClient
-						initialServices={services || []}
-						stats={stats}
-						testimonials={testimonials}
-						galleryItems={galleryItems || []}
+					<AsyncHomeContent
+						servicesPromise={servicesPromise}
+						statsPromise={statsPromise}
+						outletCountPromise={outletCountPromise}
+						galleryPromise={galleryPromise}
+						testimonialsPromise={testimonialsPromise}
 						businessPackages={businessPackages}
 					/>
 				</Suspense>
@@ -175,3 +160,62 @@ export default async function HomePage() {
 		</div>
 	);
 }
+
+/**
+ * Modern Streaming Component: Renders once deferred promises resolve.
+ * Standard 2026: Progressive Hydration / Streaming
+ */
+async function AsyncHomeContent({
+	servicesPromise,
+	statsPromise,
+	outletCountPromise,
+	galleryPromise,
+	testimonialsPromise,
+	businessPackages,
+}: {
+	servicesPromise: any;
+	statsPromise: any;
+	outletCountPromise: any;
+	galleryPromise: any;
+	testimonialsPromise: any;
+	businessPackages: any[];
+}) {
+	const [servicesResult, statsResult, outletCountResult, galleryItemsResult, testimonials] =
+		await Promise.all([
+			servicesPromise,
+			statsPromise,
+			outletCountPromise,
+			galleryPromise,
+			testimonialsPromise,
+		]);
+
+	const { data: services } = servicesResult;
+	const { data: statsData } = statsResult;
+	const { count: outletCount } = outletCountResult;
+	const { data: galleryItems } = galleryItemsResult;
+
+	const orderCount = statsData?.[0]?.completed_orders_count || 0;
+	const stats = [
+		{
+			value: `${(orderCount || 0) + 2847}+`,
+			label: "Order Selesai",
+		},
+		{ value: "4.9", label: "Rating" },
+		{
+			value: (outletCount || 0).toString(),
+			label: "Outlet",
+		},
+		{ value: "24/7", label: "Tracking Online" },
+	];
+
+	return (
+		<HomeClient
+			initialServices={services || []}
+			stats={stats}
+			testimonials={testimonials}
+			galleryItems={galleryItems || []}
+			businessPackages={businessPackages}
+		/>
+	);
+}
+

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { router, staffProcedure } from "@/server/trpc/proxy";
+import { router, staffProcedure } from "@/server/trpc/trpc";
 
 export const deliveryRouter = router({
 	listByKurir: staffProcedure.query(async ({ ctx }) => {

@@ -1,4 +1,5 @@
-import { router } from "@/server/trpc/proxy";
+import { router } from "@/server/trpc/trpc";
+
 import { analyticsRouter } from "@/server/trpc/routers/analytics";
 import { deliveryRouter } from "@/server/trpc/routers/delivery";
 import { inventoryRouter } from "@/server/trpc/routers/inventory";

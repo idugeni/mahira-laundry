@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { protectedProcedure, router, staffProcedure } from "@/server/trpc/proxy";
+import { protectedProcedure, router, staffProcedure } from "@/server/trpc/trpc";
 
 export const paymentsRouter = router({
 	getByOrder: protectedProcedure.input(z.string().uuid()).query(async ({ input }) => {

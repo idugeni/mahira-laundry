@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { protectedProcedure, router } from "@/server/trpc/proxy";
+import { protectedProcedure, router } from "@/server/trpc/trpc";
 
 export const notificationsRouter = router({
 	list: protectedProcedure

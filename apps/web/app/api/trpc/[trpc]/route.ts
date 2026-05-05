@@ -1,7 +1,8 @@
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 import { NextResponse } from "next/server";
 import { apiLimiter } from "@/lib/upstash/rate-limit";
-import { createContext } from "@/server/trpc/proxy";
+import { createContext } from "@/server/trpc/trpc";
+
 import { appRouter } from "@/server/trpc/root";
 
 const handler = async (req: Request) => {

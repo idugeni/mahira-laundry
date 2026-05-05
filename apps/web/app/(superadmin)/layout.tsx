@@ -17,10 +17,14 @@ import {
 import { AdminAvatarDropdown } from "@/components/shared/admin/admin-avatar-dropdown";
 import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
-import { getInquiryStats, getUserProfile } from "@/lib/supabase/server";
+import { protectPage } from "@/lib/auth/role-guards";
+import { getInquiryStats } from "@/lib/supabase/server";
 
 export default async function SuperadminLayout({ children }: { children: React.ReactNode }) {
-	const [profile, inquiryStats] = await Promise.all([getUserProfile(), getInquiryStats()]);
+	// Guard the entire superadmin route at the layout level
+	const profile = await protectPage(["superadmin"]);
+	const inquiryStats = await getInquiryStats();
+
 
 	const superadminNav = [
 		{

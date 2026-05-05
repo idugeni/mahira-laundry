@@ -1,8 +1,9 @@
 import { AdminSidebar } from "@/components/shared/admin/admin-sidebar";
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
+import { protectPage } from "@/lib/auth/role-guards";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 
-const managerNav = [
+export const managerNav = [
 	{
 		label: "Utama",
 		items: [
@@ -24,7 +25,9 @@ const managerNav = [
 	},
 ];
 
-export default function ManagerLayout({ children }: { children: React.ReactNode }) {
+export default async function ManagerLayout({ children }: { children: React.ReactNode }) {
+	const profile = await protectPage(["manager", "superadmin"]);
+
 	return (
 		<div className="min-h-screen flex bg-slate-50/50">
 			<AdminSidebar
@@ -32,6 +35,7 @@ export default function ManagerLayout({ children }: { children: React.ReactNode 
 				panelLabel="Manager"
 				panelBadgeColor="bg-gradient-to-r from-indigo-500 to-violet-500 text-white"
 				headerInfo={PRIMARY_OUTLET.name}
+				profile={profile}
 			/>
 			<div className="flex-1 flex flex-col min-w-0 pt-14 md:pt-0 min-h-screen">
 				{/* Top Header (desktop only) */}

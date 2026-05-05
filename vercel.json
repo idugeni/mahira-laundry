@@ -12,9 +12,23 @@
 				{
 					"key": "X-Content-Type-Options",
 					"value": "nosniff"
+				},
+				{
+					"key": "Content-Security-Policy",
+					"value": "img-src * data: blob: https:; default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.vercel-scripts.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; connect-src *;"
 				}
 			]
 		},
+		{
+			"source": "/_next/image(.*)",
+			"headers": [
+				{
+					"key": "Cache-Control",
+					"value": "public, max-age=31536000, immutable"
+				}
+			]
+		},
+
 		{
 			"source": "/api/(.*)",
 			"headers": [
