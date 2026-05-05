@@ -9,7 +9,10 @@ type SplashWindow = Window & { __mahiraSplashShown?: boolean };
 export default function RootTemplate({ children }: { children: React.ReactNode }) {
 	const [showSplash] = useState(() => {
 		if (typeof window === "undefined") return true;
-		return !(window as SplashWindow).__mahiraSplashShown;
+		const splashWindow = window as SplashWindow;
+		if (splashWindow.__mahiraSplashShown) return false;
+		splashWindow.__mahiraSplashShown = true;
+		return true;
 	});
 	const [exiting, setExiting] = useState(false);
 	const [gone, setGone] = useState(() => !showSplash);
@@ -31,11 +34,6 @@ export default function RootTemplate({ children }: { children: React.ReactNode }
 			clearTimeout(goneTimer);
 		};
 	}, [pathname]);
-
-	useEffect(() => {
-		if (typeof window === "undefined") return;
-		(window as SplashWindow).__mahiraSplashShown = true;
-	}, []);
 
 	return (
 		<div key="template-root-wrapper">
