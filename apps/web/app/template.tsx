@@ -5,12 +5,17 @@ import { useEffect, useState } from "react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 
 export default function RootTemplate({ children }: { children: React.ReactNode }) {
+	const [showSplash] = useState(() => {
+		if (typeof window === "undefined") return true;
+		return !(window as Window & { __mahiraSplashShown?: boolean }).__mahiraSplashShown;
+	});
 	const [exiting, setExiting] = useState(false);
-	const [gone, setGone] = useState(false);
+	const [gone, setGone] = useState(() => !showSplash);
 	const pathname = usePathname();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: pathname intentionally restarts the route transition loader.
 	useEffect(() => {
+		if (!showSplash) return;
 		setExiting(false);
 		setGone(false);
 
@@ -23,7 +28,12 @@ export default function RootTemplate({ children }: { children: React.ReactNode }
 			clearTimeout(exitTimer);
 			clearTimeout(goneTimer);
 		};
-	}, [pathname]);
+	}, [pathname, showSplash]);
+
+	useEffect(() => {
+		if (typeof window === "undefined") return;
+		(window as Window & { __mahiraSplashShown?: boolean }).__mahiraSplashShown = true;
+	}, []);
 
 	return (
 		<div key="template-root-wrapper">
