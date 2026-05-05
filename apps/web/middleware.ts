@@ -36,7 +36,7 @@ function isPathMatch(pathname: string, paths: readonly string[]) {
 	return paths.some((path) => (path === "/" ? pathname === "/" : pathname.startsWith(path)));
 }
 
-export async function proxy(request: NextRequest) {
+export async function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl;
 	const userAgent = request.headers.get("user-agent") || "";
 
