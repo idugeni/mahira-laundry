@@ -67,8 +67,32 @@ const faqJsonLd = {
 
 export default async function HomePage() {
 	const supabase = await createClient();
-	const testimonials = await getPublishedTestimonials();
-	const outlet = await getPrimaryOutlet();
+	const [
+		testimonials,
+		outlet,
+		servicesResult,
+		statsResult,
+		outletCountResult,
+		galleryResult,
+		businessPackages,
+	] = await Promise.all([
+		getPublishedTestimonials(),
+		getPrimaryOutlet(),
+		supabase
+			.from("services")
+			.select("*")
+			.eq("is_active", true)
+			.order("sort_order", { ascending: true }),
+		supabase.rpc("get_public_stats"),
+		supabase.from("outlets").select("*", { count: "exact", head: true }).eq("is_active", true),
+		supabase
+			.from("gallery")
+			.select("*")
+			.eq("is_active", true)
+			.order("sort_order", { ascending: true })
+			.limit(12),
+		getActiveBusinessPackages(),
+	]);
 
 	const jsonLd = {
 		"@context": "https://schema.org",
@@ -109,19 +133,11 @@ export default async function HomePage() {
 		priceRange: "$$",
 	};
 
-	const { data: services } = await supabase
-		.from("services")
-		.select("*")
-		.eq("is_active", true)
-		.order("sort_order", { ascending: true });
-
-	const { data: statsData } = await supabase.rpc("get_public_stats");
+	const { data: services } = servicesResult;
+	const { data: statsData } = statsResult;
 	const orderCount = statsData?.[0]?.completed_orders_count || 0;
 
-	const { count: outletCount } = await supabase
-		.from("outlets")
-		.select("*", { count: "exact", head: true })
-		.eq("is_active", true);
+	const { count: outletCount } = outletCountResult;
 
 	const stats = [
 		{
@@ -139,14 +155,7 @@ export default async function HomePage() {
 		{ value: "24/7", label: "Tracking Online" },
 	];
 
-	const { data: galleryItems } = await supabase
-		.from("gallery")
-		.select("*")
-		.eq("is_active", true)
-		.order("sort_order", { ascending: true })
-		.limit(12);
-
-	const businessPackages = await getActiveBusinessPackages();
+	const { data: galleryItems } = galleryResult;
 
 	return (
 		<div key="home-root" className="w-full min-w-0">
