@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "motion/react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -255,13 +256,26 @@ export function InquiryForm({ defaultPackageName, packages }: InquiryFormProps) 
 						)}
 					/>
 
-					<button
+					<motion.button
 						type="submit"
+						whileHover={{ scale: 1.02 }}
+						whileTap={{ scale: 0.98 }}
 						disabled={form.formState.isSubmitting}
-						className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition-all hover:bg-blue-700 disabled:opacity-50"
+						className="w-full rounded-xl bg-blue-600 py-3 font-semibold text-white transition-all hover:bg-blue-700 disabled:opacity-50 flex items-center justify-center gap-3"
 					>
-						{form.formState.isSubmitting ? "Mengirim..." : "Kirim Inquiry"}
-					</button>
+						{form.formState.isSubmitting ? (
+							<>
+								<motion.span
+									animate={{ rotate: 360 }}
+									transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+									className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full"
+								/>
+								<span>Mengirim...</span>
+							</>
+						) : (
+							"Kirim Inquiry"
+						)}
+					</motion.button>
 				</form>
 			</Form>
 		</div>

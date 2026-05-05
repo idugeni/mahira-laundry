@@ -228,11 +228,17 @@ export function AuthClient({ type, action }: AuthClientProps) {
 
 							<motion.button
 								type="submit"
+								whileHover={{ scale: 1.01, translateY: -2 }}
+								whileTap={{ scale: 0.98 }}
 								disabled={!isFormValid || loading}
-								className="w-full py-4 bg-slate-900 text-white rounded-[1.2rem] font-black text-[10px] uppercase tracking-[0.2em] hover:bg-brand-primary disabled:bg-slate-100 disabled:text-slate-300 transition-all shadow-xl shadow-slate-200 flex items-center justify-center gap-3 mt-2"
+								className="w-full py-4 bg-slate-900 text-white rounded-[1.2rem] font-black text-[10px] uppercase tracking-[0.2em] hover:bg-brand-primary disabled:bg-slate-100 disabled:text-slate-300 transition-all shadow-xl shadow-slate-200 hover:shadow-brand-primary/20 flex items-center justify-center gap-3 mt-2 relative overflow-hidden"
 							>
 								{loading ? (
-									<span className="flex items-center gap-3">
+									<motion.div
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										className="flex items-center gap-3"
+									>
 										<motion.span
 											animate={{ rotate: 360 }}
 											transition={{
@@ -240,16 +246,25 @@ export function AuthClient({ type, action }: AuthClientProps) {
 												repeat: Infinity,
 												ease: "linear",
 											}}
-											className="w-3.5 h-3.5 border-2 border-white/20 border-t-white rounded-full"
+											className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full"
 											aria-hidden="true"
 										/>
-										Memproses...
-									</span>
+										<motion.span
+											animate={{ opacity: [1, 0.5, 1] }}
+											transition={{ duration: 1.5, repeat: Infinity }}
+										>
+											Sedang Memproses...
+										</motion.span>
+									</motion.div>
 								) : (
-									<>
+									<motion.div
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										className="flex items-center gap-3"
+									>
 										<span>{isLogin ? "Masuk Sekarang" : "Daftar Akun"}</span>
 										<HiOutlineArrowRight size={16} />
-									</>
+									</motion.div>
 								)}
 							</motion.button>
 						</form>

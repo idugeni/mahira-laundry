@@ -111,11 +111,24 @@ export function ProfilForm({
 					<motion.button
 						initial={{ opacity: 0, y: 10 }}
 						animate={{ opacity: 1, y: 0 }}
+						whileHover={{ scale: 1.01, translateY: -2 }}
+						whileTap={{ scale: 0.98 }}
 						type="submit"
 						disabled={loading}
 						className="w-full py-5 bg-slate-900 text-white rounded-2xl font-black text-lg shadow-xl shadow-slate-200 hover:bg-brand-primary hover:shadow-brand-primary/20 transition-all disabled:opacity-50 flex items-center justify-center gap-3"
 					>
-						{loading ? "Menyimpan..." : "Simpan Perubahan"}
+						{loading ? (
+							<div className="flex items-center gap-3">
+								<motion.span
+									animate={{ rotate: 360 }}
+									transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+									className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full"
+								/>
+								<span>Menyimpan...</span>
+							</div>
+						) : (
+							"Simpan Perubahan"
+						)}
 					</motion.button>
 				)}
 			</form>
