@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import {
 	HiOutlineListBullet,
@@ -141,13 +141,28 @@ export function ServiceModal({
 
 	return (
 		<>
-			<button type="button" onClick={() => setIsOpen(true)} className="contents">
-				{trigger || (
-					<span className="px-5 py-2.5 bg-brand-primary text-white text-sm font-black rounded-xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-shadow duration-200 inline-block cursor-pointer">
-						+ Tambah Layanan
-					</span>
-				)}
-			</button>
+			{React.isValidElement(trigger) ? (
+				(() => {
+					const typedTrigger = trigger as React.ReactElement<{
+						onClick?: (e: React.MouseEvent) => void;
+					}>;
+					const existingOnClick = typedTrigger.props.onClick;
+					return React.cloneElement(typedTrigger, {
+						onClick: (e: React.MouseEvent) => {
+							existingOnClick?.(e);
+							setIsOpen(true);
+						},
+					});
+				})()
+			) : (
+				<div onClick={() => setIsOpen(true)} className="contents cursor-pointer">
+					{trigger || (
+						<span className="px-5 py-2.5 bg-brand-primary text-white text-sm font-black rounded-xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-shadow duration-200 inline-block cursor-pointer">
+							+ Tambah Layanan
+						</span>
+					)}
+				</div>
+			)}
 
 			{isOpen &&
 				mounted &&
