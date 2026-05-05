@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { requireRole, SUPERADMIN_ROLES } from "@/lib/auth/guards";
 import { createClient, getBusinessPackageInquiries } from "@/lib/supabase/server";
+import { formatPhoneForWhatsApp } from "@/lib/utils";
 import type {
 	ActionResponse,
 	BusinessPackageInquiry,
@@ -34,7 +35,10 @@ export async function submitBusinessInquiry(
 		return { success: false, error: "Data inquiry tidak valid." };
 	}
 
-	const validated = parsed.data;
+	const validated = {
+		...parsed.data,
+		phone: formatPhoneForWhatsApp(parsed.data.phone),
+	};
 	const { success } = await formLimiter.limit(validated.phone || validated.email || "anonymous");
 	if (!success) {
 		return {

@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
+import { formatPhoneForWhatsApp } from "@/lib/utils";
 
 export async function updateProfile(formData: FormData) {
 	const supabase = await createClient();
@@ -12,7 +13,7 @@ export async function updateProfile(formData: FormData) {
 
 	const profileData = {
 		full_name: formData.get("full_name") as string,
-		phone: formData.get("phone") as string,
+		phone: formatPhoneForWhatsApp(formData.get("phone") as string),
 		addresses: JSON.parse((formData.get("addresses") as string) || "[]"),
 		notification_preferences: JSON.parse(
 			(formData.get("notification_preferences") as string) || "{}",

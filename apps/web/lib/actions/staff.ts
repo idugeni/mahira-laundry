@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { formatPhoneForWhatsApp } from "@/lib/utils";
 import type { ActionResponse } from "@/lib/types";
 
 export type RegisterStaffInput = {
@@ -40,6 +41,7 @@ export async function registerStaffMember(data: RegisterStaffInput): Promise<Act
 	try {
 		await assertSuperadmin();
 		const admin = createAdminClient();
+		const formattedPhone = formatPhoneForWhatsApp(data.phone);
 
 		if (data.id) {
 			const { error: authError } = await admin.auth.admin.updateUserById(data.id, {
@@ -47,7 +49,7 @@ export async function registerStaffMember(data: RegisterStaffInput): Promise<Act
 				user_metadata: {
 					full_name: data.fullName,
 					role: data.role,
-					phone: data.phone,
+					phone: formattedPhone,
 				},
 				...(data.password ? { password: data.password } : {}),
 			});
@@ -59,7 +61,7 @@ export async function registerStaffMember(data: RegisterStaffInput): Promise<Act
 				.update({
 					full_name: data.fullName,
 					role: data.role,
-					phone: data.phone,
+					phone: formattedPhone,
 					outlet_id: data.outletId,
 				})
 				.eq("id", data.id);
@@ -73,7 +75,7 @@ export async function registerStaffMember(data: RegisterStaffInput): Promise<Act
 				user_metadata: {
 					full_name: data.fullName,
 					role: data.role,
-					phone: data.phone,
+					phone: formattedPhone,
 				},
 			});
 

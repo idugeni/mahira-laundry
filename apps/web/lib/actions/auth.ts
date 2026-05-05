@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { getDashboardUrl } from "@/lib/utils";
+import { formatPhoneForWhatsApp, getDashboardUrl } from "@/lib/utils";
 
 export async function signUp(formData: FormData): Promise<void> {
 	const supabase = await createClient();
@@ -14,7 +14,7 @@ export async function signUp(formData: FormData): Promise<void> {
 		options: {
 			data: {
 				full_name: formData.get("full_name") as string,
-				phone: formData.get("phone") as string,
+				phone: formatPhoneForWhatsApp(formData.get("phone") as string),
 				referred_by_code: formData.get("referred_by_code") as string,
 				role: "customer",
 			},

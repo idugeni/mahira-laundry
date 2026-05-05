@@ -85,3 +85,36 @@ export function getDashboardUrl(role?: UserRole | string | null): string {
 			return "/customer";
 	}
 }
+
+export function formatPhoneForWhatsApp(phone: string): string {
+	if (!phone) return "";
+
+	// Remove all non-digit characters
+	let cleaned = phone.replace(/\D/g, "");
+
+	// If input is too short, return as is (not a valid phone number)
+	if (cleaned.length < 5) return cleaned;
+
+	// Handle international '00' prefix (e.g., 0062 -> 62)
+	if (cleaned.startsWith("0062")) {
+		cleaned = cleaned.substring(2);
+	}
+
+	// Handle case where user types "0812..."
+	if (cleaned.startsWith("0")) {
+		cleaned = `62${cleaned.substring(1)}`;
+	}
+
+	// Handle case where user types "+62 0812..." which becomes "620812..."
+	if (cleaned.startsWith("620")) {
+		cleaned = `62${cleaned.substring(3)}`;
+	}
+
+	// Handle case where user types "812..." (without 0 or 62)
+	// Indonesian mobile numbers are typically 9-13 digits after the prefix
+	if (cleaned.startsWith("8") && cleaned.length >= 9 && cleaned.length <= 13) {
+		cleaned = `62${cleaned}`;
+	}
+
+	return cleaned;
+}
