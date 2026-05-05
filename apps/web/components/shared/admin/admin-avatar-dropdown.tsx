@@ -36,7 +36,6 @@ export function AdminAvatarDropdown({
 		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, [open]);
 
-	// Close on Escape
 	useEffect(() => {
 		function handleEsc(e: KeyboardEvent) {
 			if (e.key === "Escape") setOpen(false);
@@ -67,10 +66,8 @@ export function AdminAvatarDropdown({
 				</div>
 			</button>
 
-			{/* Dropdown */}
 			{open && (
 				<div className="absolute right-0 top-full mt-2 w-64 bg-white rounded-2xl border border-slate-100 shadow-xl shadow-slate-200/50 z-50 overflow-hidden animate-in fade-in slide-in-from-top-2 duration-200">
-					{/* Profile Header */}
 					<div className="p-4 border-b border-slate-50 bg-slate-50/50">
 						<div className="flex items-center gap-3">
 							<AdminAvatar
@@ -97,7 +94,6 @@ export function AdminAvatarDropdown({
 						)}
 					</div>
 
-					{/* Menu Items */}
 					<div className="p-2">
 						<Link
 							href={profileHref}
@@ -109,7 +105,6 @@ export function AdminAvatarDropdown({
 						</Link>
 					</div>
 
-					{/* Logout */}
 					<div className="p-2 border-t border-slate-50">
 						<form action="/api/auth/signout" method="POST">
 							<button

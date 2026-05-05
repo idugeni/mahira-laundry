@@ -9,7 +9,6 @@ export function useRealtimeOrders(outletId?: string) {
 	const supabase = createClient();
 
 	useEffect(() => {
-		// Initial fetch
 		const fetchOrders = async () => {
 			let query = supabase.from("orders").select("*").order("created_at", { ascending: false });
 			if (outletId) query = query.eq("outlet_id", outletId);
@@ -19,7 +18,6 @@ export function useRealtimeOrders(outletId?: string) {
 
 		fetchOrders();
 
-		// Subscribe to realtime
 		const channel = supabase
 			.channel("orders-realtime")
 			.on(

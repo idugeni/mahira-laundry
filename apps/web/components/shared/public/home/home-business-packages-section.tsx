@@ -1,6 +1,5 @@
 "use client";
 
-// FIX: Ganti ArrowRight dengan ChevronDown untuk toggle expand/collapse
 import { ChevronDown } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
@@ -88,7 +87,6 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 				className={`absolute inset-0 bg-gradient-to-br ${style.gradient} pointer-events-none rounded-[2rem]`}
 			/>
 
-			{/* Badge Paling Populer - Absolute positioned at top */}
 			{style.featured && (
 				<motion.div
 					initial={{ opacity: 0, y: -10 }}
@@ -102,7 +100,6 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 			)}
 
 			<div className="relative z-10 flex flex-col h-full pt-4">
-				{/* Tier badge */}
 				<div className="flex justify-center">
 					<span
 						className={`inline-block rounded-full px-4 py-1.5 text-[10px] font-black uppercase tracking-widest ${style.badge}`}
@@ -111,12 +108,10 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 					</span>
 				</div>
 
-				{/* Name */}
 				<h3 className="mt-6 text-2xl md:text-3xl font-black text-slate-900 leading-tight text-center sm:text-left">
 					{pkg.name}
 				</h3>
 
-				{/* Price */}
 				<div className="mt-4 flex flex-col items-center sm:items-start">
 					{isPromoActive ? (
 						<div className="flex flex-col items-center sm:items-start gap-1.5">
@@ -147,10 +142,8 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 					)}
 				</div>
 
-				{/* Divider */}
 				<div className="my-8 h-px bg-slate-100" />
 
-				{/* Items list */}
 				<div className="flex-1 min-h-[160px]">
 					<ul className="space-y-3">
 						<AnimatePresence mode="popLayout">
@@ -163,7 +156,6 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 									className="flex items-start gap-3 text-sm text-slate-600 font-medium"
 								>
 									<div className="w-5 h-5 rounded-full bg-brand-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-										{/* FIX: Import CheckCircle2 tetap dipakai di sini */}
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											width="12"
@@ -208,12 +200,10 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 							type="button"
 							onClick={() => setIsExpanded(!isExpanded)}
 							whileHover={{ x: 5 }}
-							// FIX: Tambah aria-expanded agar screen reader mengenali status tombol
 							aria-expanded={isExpanded}
 							className="mt-6 text-[10px] text-brand-primary font-black uppercase tracking-[0.2em] hover:underline underline-offset-8 flex items-center justify-center sm:justify-start gap-2"
 						>
 							{isExpanded ? "Tampilkan Sedikit" : `+${pkg.items.length - 4} Item Lainnya`}
-							{/* FIX: Ganti ArrowRight → ChevronDown; rotasi 180° kini benar (menunjuk ke atas = collapse) */}
 							<motion.div
 								animate={{ rotate: isExpanded ? 180 : 0 }}
 								transition={{ duration: 0.2 }}
@@ -225,10 +215,7 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 					)}
 				</div>
 
-				{/* CTA */}
-				{/* FIX: Hapus prop `layout` — tidak perlu; mencegah layout-shift animation saat items expand */}
 				<div className="mt-10">
-					{/* FIX: Ganti motion.a → a biasa karena tidak ada motion props yang dipakai */}
 					<a
 						href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent(`Halo Mahira Laundry, saya tertarik dengan Paket Usaha ${pkg.name}. Bisa bantu jelaskan detailnya?`)}`}
 						target="_blank"
@@ -240,7 +227,6 @@ function PackageCard({ pkg, index }: { pkg: BusinessPackage; index: number }) {
 						}`}
 					>
 						Tanya via WhatsApp
-						{/* FIX: Import ChevronDown sudah cukup; ArrowRight tetap bisa dipakai di sini jika mau */}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="16"
@@ -268,7 +254,6 @@ export function HomeBusinessPackagesSection({ packages }: HomeBusinessPackagesSe
 
 	return (
 		<section className="py-14 sm:py-16 relative overflow-hidden bg-white w-full min-w-0">
-			{/* Decorative Elements */}
 			<motion.div
 				animate={{ rotate: 360 }}
 				transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -276,7 +261,6 @@ export function HomeBusinessPackagesSection({ packages }: HomeBusinessPackagesSe
 			/>
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-				{/* Header */}
 				<div className="flex flex-col md:flex-row md:items-end justify-between gap-10 mb-20 text-center md:text-left">
 					<div className="max-w-2xl text-center md:text-left">
 						<motion.div
@@ -311,21 +295,18 @@ export function HomeBusinessPackagesSection({ packages }: HomeBusinessPackagesSe
 					</motion.p>
 				</div>
 
-				{/* Package Cards */}
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-md md:max-w-none mx-auto md:mx-0">
 					{packages.slice(0, 3).map((pkg, i) => (
 						<PackageCard key={pkg.id} pkg={pkg} index={i} />
 					))}
 				</div>
 
-				{/* View all link */}
 				<motion.div
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: false }}
 					className="text-center mt-20"
 				>
-					{/* FIX: Hapus inner motion.div yang redundan — tidak ada motion props di dalamnya */}
 					<Link
 						href="/paket-usaha"
 						className="group inline-flex items-center gap-4 px-8 py-4 bg-slate-50 text-slate-900 rounded-full font-black text-[10px] uppercase tracking-widest hover:bg-slate-100 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 border border-slate-100"
