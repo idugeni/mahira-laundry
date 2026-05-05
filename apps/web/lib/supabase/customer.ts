@@ -1,4 +1,4 @@
-import { createClient } from "./auth";
+import { createClient } from "@/lib/supabase/auth";
 
 export async function getDashboardStats() {
 	const supabase = await createClient();

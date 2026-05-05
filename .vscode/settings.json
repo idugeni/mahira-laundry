@@ -7,5 +7,9 @@
 	},
 	"js/ts.tsserver.watchOptions": {
 		"excludeDirectories": ["**/node_modules", "**/.git", "**/.next"]
-	}
+	},
+	"powershell.powerShellExePath": "C:\\Program Files\\PowerShell\\7-preview\\pwsh.exe",
+	"powershell.integratedConsole.useSeparateSoftKeyboard": true,
+	"powershell.editorServices.loglevel": "Verbose",
+	"powershell.integratedConsole.suppressStartupBanner": true
 }

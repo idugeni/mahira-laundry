@@ -1,4 +1,4 @@
-import { createClient } from "./auth";
+import { createClient } from "@/lib/supabase/auth";
 
 function getDateRanges() {
 	const now = new Date();

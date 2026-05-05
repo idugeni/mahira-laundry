@@ -4,7 +4,7 @@ import { AdminAvatarDropdown } from "@/components/shared/admin/admin-avatar-drop
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
 import { protectPage } from "@/lib/auth/role-guards";
 import { PRIMARY_OUTLET } from "@/lib/constants";
-import { KasirMobileNav } from "./kasir-mobile-nav";
+import { KasirMobileNav } from "@/app/(kasir)/kasir/kasir-mobile-nav";
 
 export const kasirNav = [
 	{ href: "/kasir", label: "POS Kasir", icon: "💰" },
@@ -13,7 +13,7 @@ export const kasirNav = [
 ];
 
 export default async function KasirLayout({ children }: { children: React.ReactNode }) {
-	const profile = await protectPage(["kasir", "superadmin"]);
+	const profile = await protectPage(["kasir"]);
 
 	return (
 		<div className="min-h-screen flex bg-muted/30">

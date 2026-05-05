@@ -10,7 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { formatIDR } from "@/lib/utils";
-import type { CartItem } from "./pos-types";
+import type { CartItem } from "@/components/kasir/pos-types";
 
 interface PosCartSidebarProps {
 	cart: CartItem[];

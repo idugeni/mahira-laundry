@@ -4,7 +4,7 @@ import type {
 	InquiryFilters,
 	InquiryStats,
 } from "@/lib/types";
-import { createClient } from "./auth";
+import { createClient } from "@/lib/supabase/auth";
 
 export async function getActiveBusinessPackages(): Promise<BusinessPackage[]> {
 	const supabase = await createClient();

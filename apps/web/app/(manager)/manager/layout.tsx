@@ -26,7 +26,7 @@ export const managerNav = [
 ];
 
 export default async function ManagerLayout({ children }: { children: React.ReactNode }) {
-	const profile = await protectPage(["manager", "superadmin"]);
+	const profile = await protectPage(["manager"]);
 
 	return (
 		<div className="min-h-screen flex bg-slate-50/50">

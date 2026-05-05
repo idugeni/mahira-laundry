@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { POS_CONFIG } from "@/lib/constants";
 import { formatIDR } from "@/lib/utils";
-import type { CartItem, ReceiptData } from "./pos-types";
+import type { CartItem, ReceiptData } from "@/components/kasir/pos-types";
 
 interface PosReceiptViewProps {
 	receiptData: ReceiptData;

@@ -4,12 +4,12 @@ import { AdminAvatarDropdown } from "@/components/shared/admin/admin-avatar-drop
 import { DynamicBreadcrumb } from "@/components/shared/admin/dynamic-breadcrumb";
 import { protectPage } from "@/lib/auth/role-guards";
 import { PRIMARY_OUTLET } from "@/lib/constants";
-import { KurirMobileNav } from "./kurir-mobile-nav";
+import { KurirMobileNav } from "@/app/(kurir)/kurir/kurir-mobile-nav";
 
 const kurirNav = [{ href: "/kurir/tugas", label: "Peta Tugas", icon: "🗺️" }];
 
 export default async function KurirLayout({ children }: { children: React.ReactNode }) {
-	const profile = await protectPage(["kurir", "superadmin"]);
+	const profile = await protectPage(["kurir"]);
 
 	return (
 		<div className="min-h-screen flex bg-muted/30">
