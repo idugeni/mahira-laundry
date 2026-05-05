@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { RevenueBarChart } from "@/components/shared/admin/admin-charts";
 import { StatCard } from "@/components/shared/common/stat-card";
 import { ORDER_STATUS_COLORS, ORDER_STATUS_LABELS } from "@/lib/constants";
@@ -138,11 +137,9 @@ export default async function SuperadminDashboardPage() {
 							💰 Bulan ini: {formatCompact(stats.totalRevenue)}
 						</span>
 					</div>
-					<Suspense fallback={<div className="h-64 bg-slate-50 rounded-xl animate-pulse" />}>
-						<div className="h-64 w-full">
-							<RevenueBarChart data={revenueData} />
-						</div>
-					</Suspense>
+					<div className="h-64 w-full">
+						<RevenueBarChart data={revenueData} />
+					</div>
 				</div>
 
 				{/* Quick Stats */}

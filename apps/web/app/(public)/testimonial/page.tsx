@@ -33,7 +33,8 @@ export default function PublicTestimonialPage() {
 							<span className="text-brand-accent">Sultan Anda</span>
 						</h1>
 						<p className="text-white/60 text-base sm:text-lg font-medium leading-relaxed">
-							Bagikan pengalaman jujur Anda tentang layanan kami untuk membantu kami terus berkembang dan memberikan yang terbaik.
+							Bagikan pengalaman jujur Anda tentang layanan kami untuk membantu kami terus
+							berkembang dan memberikan yang terbaik.
 						</p>
 					</div>
 				</div>

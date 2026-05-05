@@ -14,14 +14,19 @@ export async function protectPage(allowedRoles: readonly UserRole[]) {
 		switch (profile.role) {
 			case "superadmin":
 				redirect("/admin");
+				break;
 			case "manager":
 				redirect("/manager");
+				break;
 			case "kasir":
 				redirect("/kasir");
+				break;
 			case "kurir":
 				redirect("/kurir");
+				break;
 			default:
 				redirect("/customer");
+				break;
 		}
 	}
 

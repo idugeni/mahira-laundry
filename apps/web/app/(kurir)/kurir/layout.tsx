@@ -6,13 +6,10 @@ import { protectPage } from "@/lib/auth/role-guards";
 import { PRIMARY_OUTLET } from "@/lib/constants";
 import { KurirMobileNav } from "./kurir-mobile-nav";
 
-const kurirNav = [
-	{ href: "/kurir/tugas", label: "Peta Tugas", icon: "🗺️" },
-];
+const kurirNav = [{ href: "/kurir/tugas", label: "Peta Tugas", icon: "🗺️" }];
 
 export default async function KurirLayout({ children }: { children: React.ReactNode }) {
 	const profile = await protectPage(["kurir", "superadmin"]);
-
 
 	return (
 		<div className="min-h-screen flex bg-muted/30">
@@ -41,7 +38,6 @@ export default async function KurirLayout({ children }: { children: React.ReactN
 
 			{/* Mobile Nav Component (Client-side) */}
 			<KurirMobileNav navItems={kurirNav} />
-
 
 			<div className="flex-1 flex flex-col min-w-0 pt-14 md:pt-0">
 				<header className="hidden md:flex h-16 border-b border-border bg-white items-center justify-between px-6 sticky top-0 z-30">

@@ -1,5 +1,4 @@
-﻿import type { Metadata } from "next";
-import { Suspense } from "react";
+import type { Metadata } from "next";
 import { OrderTrendChart } from "@/components/shared/admin/admin-charts";
 import { getManagerDashboardStats, getOrdersByDay } from "@/lib/supabase/server";
 import { formatIDR } from "@/lib/utils";
@@ -73,11 +72,9 @@ export default async function ManagerAnalyticsPage() {
 				<h2 className="text-base font-bold text-slate-900 mb-4">
 					Tren Volume Order 14 Hari Terakhir
 				</h2>
-				<Suspense fallback={<div className="h-64 bg-slate-50 animate-pulse rounded-xl" />}>
-					<div className="h-64">
-						<OrderTrendChart data={orderTrend} />
-					</div>
-				</Suspense>
+				<div className="h-64">
+					<OrderTrendChart data={orderTrend} />
+				</div>
 			</div>
 
 			<div className="grid lg:grid-cols-2 gap-6">

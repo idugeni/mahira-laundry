@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import { Geist, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
+import { AuthToastHandler } from "@/components/shared/auth/auth-toast-handler";
 import { JsonLd } from "@/components/shared/common/json-ld";
 import { baseOpenGraph } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/providers/auth-provider";
-import { AuthToastHandler } from "@/components/shared/auth/auth-toast-handler";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 

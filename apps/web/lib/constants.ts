@@ -2,7 +2,10 @@ export const APP_NAME = "Mahira Laundry";
 export const APP_TAGLINE = "Cucian Bersih, Hidup Nyaman.";
 
 export const PRIMARY_OUTLET = {
-	id: typeof crypto !== "undefined" && typeof crypto.randomUUID === "function" ? crypto.randomUUID() : "",
+	id:
+		typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+			? crypto.randomUUID()
+			: "",
 	name: "Mahira Laundry",
 	slug: "mahira-laundry",
 	address: "Jl. Raya Jatiwaringin No. 12, Pondok Gede, Kota Bekasi, Jawa Barat 17411",

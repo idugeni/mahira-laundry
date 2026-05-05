@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState, useTransition } from "react";
 import { FaGoogle } from "react-icons/fa6";
-import { toast } from "sonner";
 import {
 	HiOutlineArrowRight,
 	HiOutlineCheckCircle,
@@ -18,6 +17,7 @@ import {
 	HiOutlineStar,
 	HiOutlineUser,
 } from "react-icons/hi2";
+import { toast } from "sonner";
 import { createClient } from "@/lib/supabase/client";
 
 interface AuthClientProps {

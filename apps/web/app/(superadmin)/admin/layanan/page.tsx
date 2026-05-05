@@ -1,6 +1,5 @@
 import { Globe, Layers } from "lucide-react";
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { ServiceManager } from "@/components/admin/service-manager";
 import { Badge } from "@/components/ui/badge";
 import { getAllServices, getUserProfile } from "@/lib/supabase/server";
@@ -57,17 +56,7 @@ export default async function SuperadminLayananPage() {
 				</div>
 			</div>
 
-			<Suspense
-				fallback={
-					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 animate-pulse">
-						{[1, 2, 3, 4, 5, 6].map((i) => (
-							<div key={i} className="h-72 bg-slate-50 rounded-2xl" />
-						))}
-					</div>
-				}
-			>
-				<ServiceManager services={services || []} outletId={outletId} />
-			</Suspense>
+			<ServiceManager services={services || []} outletId={outletId} />
 		</div>
 	);
 }

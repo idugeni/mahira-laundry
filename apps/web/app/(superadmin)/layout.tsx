@@ -25,7 +25,6 @@ export default async function SuperadminLayout({ children }: { children: React.R
 	const profile = await protectPage(["superadmin"]);
 	const inquiryStats = await getInquiryStats();
 
-
 	const superadminNav = [
 		{
 			label: "Utama",

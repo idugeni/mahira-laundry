@@ -3,8 +3,8 @@
 import { revalidatePath } from "next/cache";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
-import { formatPhoneForWhatsApp } from "@/lib/utils";
 import type { ActionResponse } from "@/lib/types";
+import { formatPhoneForWhatsApp } from "@/lib/utils";
 
 export type RegisterStaffInput = {
 	id?: string;

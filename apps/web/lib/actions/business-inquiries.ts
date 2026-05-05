@@ -3,7 +3,6 @@
 import { z } from "zod";
 import { requireRole, SUPERADMIN_ROLES } from "@/lib/auth/guards";
 import { createClient, getBusinessPackageInquiries } from "@/lib/supabase/server";
-import { formatPhoneForWhatsApp } from "@/lib/utils";
 import type {
 	ActionResponse,
 	BusinessPackageInquiry,
@@ -13,6 +12,7 @@ import type {
 } from "@/lib/types";
 import { enqueueJob } from "@/lib/upstash/qstash";
 import { formLimiter } from "@/lib/upstash/rate-limit";
+import { formatPhoneForWhatsApp } from "@/lib/utils";
 
 const SubmitBusinessInquirySchema = z.object({
 	package_id: z.string().uuid().optional(),

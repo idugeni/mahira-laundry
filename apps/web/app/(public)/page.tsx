@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { JsonLd } from "@/components/shared/common/json-ld";
 import { HomeClient } from "@/components/shared/public/home/home-client";
-import { HomeSkeleton } from "@/components/shared/public/home/home-skeleton";
 import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
 import { baseOpenGraph } from "@/lib/metadata";
 import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
 
 export const revalidate = 3600; // ISR: Revalidate every hour
-
 
 export const metadata: Metadata = {
 	title: {
@@ -101,7 +98,6 @@ export default async function HomePage() {
 
 	const testimonialsPromise = getPublishedTestimonials();
 
-
 	const jsonLd = {
 		"@context": "https://schema.org",
 		"@type": "LaundryBusiness",
@@ -146,16 +142,14 @@ export default async function HomePage() {
 			<JsonLd key="ld-main" id="home-business-jsonld" data={jsonLd} />
 			<JsonLd key="ld-faq" id="home-faq-jsonld" data={faqJsonLd} />
 			<div id="home-page-container" className="w-full min-w-0">
-				<Suspense fallback={<HomeSkeleton />}>
-					<AsyncHomeContent
-						servicesPromise={servicesPromise}
-						statsPromise={statsPromise}
-						outletCountPromise={outletCountPromise}
-						galleryPromise={galleryPromise}
-						testimonialsPromise={testimonialsPromise}
-						businessPackages={businessPackages}
-					/>
-				</Suspense>
+				<AsyncHomeContent
+					servicesPromise={servicesPromise}
+					statsPromise={statsPromise}
+					outletCountPromise={outletCountPromise}
+					galleryPromise={galleryPromise}
+					testimonialsPromise={testimonialsPromise}
+					businessPackages={businessPackages}
+				/>
 			</div>
 		</div>
 	);
@@ -218,4 +212,3 @@ async function AsyncHomeContent({
 		/>
 	);
 }
-

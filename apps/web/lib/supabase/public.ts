@@ -53,7 +53,10 @@ export async function getPrimaryOutlet() {
 
 	// Fallback to constants if no outlet is found in the database
 	return {
-		id: typeof crypto !== "undefined" && typeof crypto.randomUUID === "function" ? crypto.randomUUID() : "",
+		id:
+			typeof crypto !== "undefined" && typeof crypto.randomUUID === "function"
+				? crypto.randomUUID()
+				: "",
 		name: "Mahira Laundry",
 		slug: "mahira-laundry",
 		address: "Jl. Raya Jatiwaringin No. 12, Pondok Gede, Kota Bekasi, Jawa Barat 17411",

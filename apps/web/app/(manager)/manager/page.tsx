@@ -1,4 +1,4 @@
-﻿import {
+import {
 	AlertTriangle,
 	ArrowRight,
 	Bell,
@@ -11,7 +11,6 @@
 	Users,
 } from "lucide-react";
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { OrderTrendChart } from "@/components/shared/admin/admin-charts";
 import { StatCard } from "@/components/shared/common/stat-card";
 import { Badge } from "@/components/ui/badge";
@@ -153,11 +152,9 @@ export default async function ManagerDashboardPage() {
 					</div>
 
 					<div className="relative">
-						<Suspense fallback={<div className="h-72 bg-slate-50 rounded-3xl animate-pulse" />}>
-							<div className="h-72">
-								<OrderTrendChart data={orderTrend} />
-							</div>
-						</Suspense>
+						<div className="h-72">
+							<OrderTrendChart data={orderTrend} />
+						</div>
 					</div>
 				</div>
 

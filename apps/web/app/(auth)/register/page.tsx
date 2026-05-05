@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { AuthClient } from "@/components/shared/auth/auth-client";
-import { AuthSkeleton } from "@/components/shared/auth/auth-skeleton";
 import { signUp } from "@/lib/actions/auth";
 
 export const metadata: Metadata = {
@@ -11,9 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function RegisterPage() {
-	return (
-		<Suspense fallback={<AuthSkeleton />}>
-			<AuthClient type="register" action={signUp} />
-		</Suspense>
-	);
+	return <AuthClient type="register" action={signUp} />;
 }

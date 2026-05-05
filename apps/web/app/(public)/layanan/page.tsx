@@ -21,9 +21,7 @@ export const metadata: Metadata = {
 	},
 };
 
-import { Suspense } from "react";
 import { JsonLd } from "@/components/shared/common/json-ld";
-import { MahiraSpinner } from "@/components/shared/common/mahira-spinner";
 import { LayananClient } from "@/components/shared/public/layanan-client";
 import { createClient } from "@/lib/supabase/server";
 
@@ -58,19 +56,7 @@ export default async function LayananPage() {
 	return (
 		<div key="layanan-root">
 			<JsonLd key="ld-breadcrumb" data={breadcrumbJsonLd} />
-			<Suspense
-				key="layanan-suspense"
-				fallback={
-					<div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-						<MahiraSpinner size="lg" />
-						<p className="text-slate-400 font-medium animate-pulse text-sm uppercase tracking-widest">
-							Menyiapkan Layanan Premium...
-						</p>
-					</div>
-				}
-			>
-				<LayananClient initialServices={services || []} />
-			</Suspense>
+			<LayananClient initialServices={services || []} />
 		</div>
 	);
 }

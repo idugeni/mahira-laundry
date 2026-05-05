@@ -239,52 +239,41 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 							</div>
 
 							<div className="space-y-4 relative z-10">
-								{packages.length > 0 ? (
-									packages.slice(0, 3).map((pkg, i) => (
-										<motion.div
-											key={pkg.id}
-											initial={{ opacity: 0, y: 10 }}
-											whileInView={{ opacity: 1, y: 0 }}
-											viewport={{ once: true }}
-											transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
-											className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 rounded-2xl bg-slate-50 border border-slate-100 shadow-xs min-w-0"
-										>
-											<div className="flex items-center gap-3 min-w-0">
-												<div
-													className={`w-2 h-2 rounded-full ${pkg.tier === "Starter" ? "bg-blue-500" : pkg.tier === "Standard" ? "bg-emerald-500" : pkg.tier === "Premium" ? "bg-purple-500" : "bg-orange-500"}`}
-												/>
-												<span className="text-xs font-black uppercase tracking-widest text-slate-900 min-w-0">
-													{pkg.name.split(" ")[0]}{" "}
-													<Badge
-														variant="secondary"
-														className={`${tierBadgeColors[pkg.tier] ?? defaultBadgeColor} text-[10px] font-black uppercase tracking-widest px-2 py-0.5 whitespace-normal`}
-													>
-														{pkg.name.split(" ").slice(1).join(" ")}
-													</Badge>
-												</span>
-											</div>
-											<div className="flex items-center gap-2 shrink-0">
-												{isPromoActive(pkg) && (
-													<span className="text-slate-400 font-bold text-xs line-through">
-														Rp {(pkg.price / 1000000).toFixed(0)}jt
-													</span>
-												)}
-												<span className="text-brand-primary font-black text-sm">
-													Rp {(getEffectivePrice(pkg) / 1000000).toFixed(0)}jt
-												</span>
-											</div>
-										</motion.div>
-									))
-								) : (
-									<div className="space-y-4">
-										{[1, 2, 3].map((i) => (
+								{packages.slice(0, 3).map((pkg, i) => (
+									<motion.div
+										key={pkg.id}
+										initial={{ opacity: 0, y: 10 }}
+										whileInView={{ opacity: 1, y: 0 }}
+										viewport={{ once: true }}
+										transition={{ delay: 0.1 + i * 0.05, duration: 0.4 }}
+										className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 rounded-2xl bg-slate-50 border border-slate-100 shadow-xs min-w-0"
+									>
+										<div className="flex items-center gap-3 min-w-0">
 											<div
-												key={`hero-skeleton-${i}`}
-												className="h-14 bg-slate-50 animate-pulse rounded-2xl border border-slate-100"
+												className={`w-2 h-2 rounded-full ${pkg.tier === "Starter" ? "bg-blue-500" : pkg.tier === "Standard" ? "bg-emerald-500" : pkg.tier === "Premium" ? "bg-purple-500" : "bg-orange-500"}`}
 											/>
-										))}
-									</div>
-								)}
+											<span className="text-xs font-black uppercase tracking-widest text-slate-900 min-w-0">
+												{pkg.name.split(" ")[0]}{" "}
+												<Badge
+													variant="secondary"
+													className={`${tierBadgeColors[pkg.tier] ?? defaultBadgeColor} text-[10px] font-black uppercase tracking-widest px-2 py-0.5 whitespace-normal`}
+												>
+													{pkg.name.split(" ").slice(1).join(" ")}
+												</Badge>
+											</span>
+										</div>
+										<div className="flex items-center gap-2 shrink-0">
+											{isPromoActive(pkg) && (
+												<span className="text-slate-400 font-bold text-xs line-through">
+													Rp {(pkg.price / 1000000).toFixed(0)}jt
+												</span>
+											)}
+											<span className="text-brand-primary font-black text-sm">
+												Rp {(getEffectivePrice(pkg) / 1000000).toFixed(0)}jt
+											</span>
+										</div>
+									</motion.div>
+								))}
 							</div>
 
 							<div className="mt-10 pt-8 border-t border-slate-100 flex items-center justify-between relative z-10">

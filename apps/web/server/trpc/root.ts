@@ -1,5 +1,3 @@
-import { router } from "@/server/trpc/trpc";
-
 import { analyticsRouter } from "@/server/trpc/routers/analytics";
 import { deliveryRouter } from "@/server/trpc/routers/delivery";
 import { inventoryRouter } from "@/server/trpc/routers/inventory";
@@ -8,6 +6,7 @@ import { notificationsRouter } from "@/server/trpc/routers/notifications";
 import { ordersRouter } from "@/server/trpc/routers/orders";
 import { paymentsRouter } from "@/server/trpc/routers/payments";
 import { servicesRouter } from "@/server/trpc/routers/services";
+import { router } from "@/server/trpc/trpc";
 
 export const appRouter = router({
 	orders: ordersRouter,

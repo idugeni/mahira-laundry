@@ -12,8 +12,6 @@ export const metadata: Metadata = {
 	},
 };
 
-import { Suspense } from "react";
-import { MahiraSpinner } from "@/components/shared/common/mahira-spinner";
 import { CariClient } from "@/components/shared/public/cari-client";
 import { createClient } from "@/lib/supabase/server";
 
@@ -36,19 +34,7 @@ export default async function CariPage() {
 
 	return (
 		<div key="cari-root">
-			<Suspense
-				key="cari-suspense"
-				fallback={
-					<div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-						<MahiraSpinner size="lg" />
-						<p className="text-slate-400 font-medium animate-pulse text-sm uppercase tracking-widest">
-							Memuat Pencarian...
-						</p>
-					</div>
-				}
-			>
-				<CariClient services={services || []} galleryItems={galleryItems || []} />
-			</Suspense>
+			<CariClient services={services || []} galleryItems={galleryItems || []} />
 		</div>
 	);
 }

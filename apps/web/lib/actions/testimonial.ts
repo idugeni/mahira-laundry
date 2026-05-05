@@ -24,11 +24,7 @@ export async function submitTestimonial(formData: FormData) {
 	try {
 		let fallbackUserId: string | null = null;
 		if (!user) {
-			const { data: firstProfile } = await supabase
-				.from("profiles")
-				.select("id")
-				.limit(1)
-				.single();
+			const { data: firstProfile } = await supabase.from("profiles").select("id").limit(1).single();
 			if (firstProfile) {
 				fallbackUserId = firstProfile.id;
 			}

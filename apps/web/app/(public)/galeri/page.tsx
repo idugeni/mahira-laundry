@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import { MahiraSpinner } from "@/components/shared/common/mahira-spinner";
 import { GallerySection } from "@/components/shared/public/gallery/gallery-section";
 import { baseOpenGraph } from "@/lib/metadata";
 import { createClient } from "@/lib/supabase/server";
@@ -36,19 +34,7 @@ export default async function GalleryPage() {
 
 	return (
 		<div>
-			<Suspense
-				key="galeri-suspense"
-				fallback={
-					<div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-						<MahiraSpinner size="lg" />
-						<p className="text-slate-400 font-medium animate-pulse text-sm uppercase tracking-widest">
-							Menyiapkan Galeri...
-						</p>
-					</div>
-				}
-			>
-				<GallerySection items={galleryItems || []} />
-			</Suspense>
+			<GallerySection items={galleryItems || []} />
 		</div>
 	);
 }

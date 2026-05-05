@@ -15,7 +15,6 @@ export const kasirNav = [
 export default async function KasirLayout({ children }: { children: React.ReactNode }) {
 	const profile = await protectPage(["kasir", "superadmin"]);
 
-
 	return (
 		<div className="min-h-screen flex bg-muted/30">
 			{/* Desktop Sidebar */}
@@ -46,7 +45,6 @@ export default async function KasirLayout({ children }: { children: React.ReactN
 
 			{/* Mobile Nav Component (Client-side) */}
 			<KasirMobileNav navItems={kasirNav} />
-
 
 			<div className="flex-1 flex flex-col min-w-0 pt-14 md:pt-0">
 				<header className="hidden md:flex h-16 border-b border-border bg-white items-center justify-between px-6 sticky top-0 z-30">

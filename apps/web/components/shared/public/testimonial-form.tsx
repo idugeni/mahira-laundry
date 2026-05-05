@@ -14,10 +14,9 @@ import {
 	FormLabel,
 	FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitTestimonial } from "@/lib/actions/testimonial";
-
-import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
 	content: z.string().min(10, {
