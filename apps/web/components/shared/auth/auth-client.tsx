@@ -3,8 +3,9 @@
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { FaGoogle } from "react-icons/fa6";
+import { toast } from "sonner";
 import {
 	HiOutlineArrowRight,
 	HiOutlineCheckCircle,
@@ -30,7 +31,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 	const supabase = createClient();
 	const error = searchParams.get("error");
 
-	const [loading, setLoading] = useState(false);
+	const [isPending, startTransition] = useTransition();
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
@@ -77,13 +78,15 @@ export function AuthClient({ type, action }: AuthClientProps) {
 		}));
 	};
 
-	const handleAction = async (data: FormData) => {
-		setLoading(true);
-		try {
-			await action(data);
-		} finally {
-			setLoading(false);
-		}
+	const handleAction = (data: FormData) => {
+		const toastId = toast.loading(isLogin ? "Sedang masuk..." : "Sedang mendaftarkan akun...");
+		startTransition(async () => {
+			try {
+				await action(data);
+			} catch (err) {
+				toast.dismiss(toastId);
+			}
+		});
 	};
 
 	const handleGoogleLogin = async () => {
@@ -230,10 +233,10 @@ export function AuthClient({ type, action }: AuthClientProps) {
 								type="submit"
 								whileHover={{ scale: 1.01, translateY: -2 }}
 								whileTap={{ scale: 0.98 }}
-								disabled={!isFormValid || loading}
-								className="w-full py-4 bg-slate-900 text-white rounded-[1.2rem] font-black text-[10px] uppercase tracking-[0.2em] hover:bg-brand-primary disabled:bg-slate-100 disabled:text-slate-300 transition-all shadow-xl shadow-slate-200 hover:shadow-brand-primary/20 flex items-center justify-center gap-3 mt-2 relative overflow-hidden"
+								disabled={!isFormValid || isPending}
+								className="w-full py-4 bg-slate-900 text-white rounded-[1.2rem] font-black text-[10px] uppercase tracking-[0.2em] hover:bg-brand-primary disabled:bg-slate-800 disabled:text-white/50 disabled:cursor-not-allowed transition-all shadow-xl shadow-slate-200 hover:shadow-brand-primary/20 flex items-center justify-center gap-3 mt-2 relative overflow-hidden"
 							>
-								{loading ? (
+								{isPending ? (
 									<motion.div
 										initial={{ opacity: 0 }}
 										animate={{ opacity: 1 }}
@@ -249,12 +252,9 @@ export function AuthClient({ type, action }: AuthClientProps) {
 											className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full"
 											aria-hidden="true"
 										/>
-										<motion.span
-											animate={{ opacity: [1, 0.5, 1] }}
-											transition={{ duration: 1.5, repeat: Infinity }}
-										>
-											Sedang Memproses...
-										</motion.span>
+										<span className="animate-pulse">
+											{isLogin ? "Memverifikasi..." : "Mendaftarkan..."}
+										</span>
 									</motion.div>
 								) : (
 									<motion.div
