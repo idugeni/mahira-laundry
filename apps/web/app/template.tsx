@@ -4,14 +4,14 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 
-type SplashWindow = Window & { __mahiraSplashShown?: boolean };
+type SplashWindow = Window & { mahiraSplashShown?: boolean };
 
 export default function RootTemplate({ children }: { children: React.ReactNode }) {
 	const [showSplash] = useState(() => {
 		if (typeof window === "undefined") return true;
 		const splashWindow = window as SplashWindow;
-		if (splashWindow.__mahiraSplashShown) return false;
-		splashWindow.__mahiraSplashShown = true;
+		if (splashWindow.mahiraSplashShown) return false;
+		splashWindow.mahiraSplashShown = true;
 		return true;
 	});
 	const [exiting, setExiting] = useState(false);
