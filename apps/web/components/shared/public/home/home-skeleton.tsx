@@ -4,7 +4,6 @@ import { Skeleton } from "@/components/shared/common/skeleton";
 export function HomeSkeleton() {
 	return (
 		<div className="w-full space-y-12 pb-20">
-			{/* Hero Skeleton */}
 			<section className="relative h-[600px] flex items-center justify-center bg-muted/30 overflow-hidden">
 				<div className="container px-4 grid lg:grid-cols-2 gap-12 items-center">
 					<div className="space-y-6">
@@ -21,11 +20,9 @@ export function HomeSkeleton() {
 						<Skeleton className="absolute inset-0 rounded-3xl" />
 					</div>
 				</div>
-				{/* Background shimmer effect */}
 				<div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-[shimmer_2s_infinite] pointer-events-none" />
 			</section>
 
-			{/* Stats Skeleton */}
 			<section className="container px-4">
 				<div className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-border">
 					{Array.from({ length: 4 }).map((_, i) => (
@@ -37,7 +34,6 @@ export function HomeSkeleton() {
 				</div>
 			</section>
 
-			{/* Services Skeleton */}
 			<section className="container px-4 space-y-10">
 				<div className="text-center space-y-4 max-w-2xl mx-auto">
 					<Skeleton className="h-4 w-32 mx-auto" />
@@ -60,7 +56,6 @@ export function HomeSkeleton() {
 				</div>
 			</section>
 
-			{/* Gallery Skeleton */}
 			<section className="bg-muted/30 py-20">
 				<div className="container px-4 space-y-10">
 					<div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
@@ -78,7 +73,6 @@ export function HomeSkeleton() {
 				</div>
 			</section>
 
-			{/* Testimonials Skeleton */}
 			<section className="container px-4 py-20 space-y-10">
 				<div className="text-center space-y-4">
 					<Skeleton className="h-10 w-64 mx-auto" />

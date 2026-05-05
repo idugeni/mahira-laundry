@@ -76,33 +76,26 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 			ref={containerRef}
 			className="relative w-full min-w-0 lg:min-h-screen pt-10 sm:pt-12 md:pt-14 lg:pt-16 pb-8 lg:pb-4 flex flex-col"
 		>
-			{/* Mesh Gradient Background */}
 			<div className="absolute inset-0 overflow-hidden pointer-events-none">
-				{/* Base warm tint */}
 				<div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(219,39,119,0.08),transparent)]" />
-				{/* Primary glow - top right */}
 				<motion.div
 					style={{ y: y1 }}
 					className="absolute -top-10 right-[8%] max-w-[70vw] w-[560px] h-[560px] rounded-full bg-[radial-gradient(circle,rgba(219,39,119,0.12)_0%,transparent_70%)] hidden md:block"
 				/>
-				{/* Accent glow - bottom left */}
 				<motion.div
 					style={{ y: y2 }}
 					className="absolute -bottom-20 left-0 max-w-[70vw] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.10)_0%,transparent_70%)] hidden md:block"
 				/>
-				{/* Soft rose - center left */}
 				<motion.div
 					animate={{ x: [0, 30, 0], y: [0, -20, 0] }}
 					transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
 					className="absolute top-[30%] left-[5%] max-w-[70vw] w-[500px] h-[500px] rounded-full bg-[radial-gradient(circle,rgba(244,114,182,0.08)_0%,transparent_70%)] hidden md:block"
 				/>
-				{/* Warm peach - center right */}
 				<motion.div
 					animate={{ x: [0, -20, 0], y: [0, 25, 0] }}
 					transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
 					className="absolute top-[40%] right-[15%] max-w-[60vw] w-[400px] h-[400px] rounded-full bg-[radial-gradient(circle,rgba(251,113,133,0.06)_0%,transparent_70%)] hidden md:block"
 				/>
-				{/* Subtle violet accent - top center */}
 				<motion.div
 					animate={{ x: [0, 15, 0] }}
 					transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
@@ -112,7 +105,6 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative flex-1 flex items-start w-full min-w-0">
 				<div className="grid lg:grid-cols-2 gap-10 lg:gap-20 items-center w-full min-w-0">
-					{/* Left Content */}
 					<motion.div
 						variants={containerVariants}
 						initial="hidden"
@@ -179,7 +171,6 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 							</a>
 						</motion.div>
 
-						{/* Social Proof */}
 						<motion.div
 							variants={itemVariants}
 							className="mt-10 lg:mt-16 flex items-center gap-4 md:gap-6"
@@ -214,7 +205,6 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 						</motion.div>
 					</motion.div>
 
-					{/* Right Visual Content */}
 					<div className="relative py-4 lg:py-0 lg:h-[600px] flex items-center justify-center min-w-0">
 						<motion.div
 							initial={{ opacity: 0 }}
@@ -222,7 +212,6 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 							transition={{ duration: 0.5, ease: "easeOut" }}
 							className="relative z-10 w-full max-w-md p-5 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] bg-white shadow-[0_50px_100px_-20px_rgba(0,0,0,0.12)] border border-slate-100 overflow-hidden"
 						>
-							{/* Floating Decoration Icons */}
 							<motion.div
 								animate={{ y: [0, -10, 0] }}
 								transition={{

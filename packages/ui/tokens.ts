@@ -1,4 +1,3 @@
-// Brand design tokens untuk Mahira Laundry Jakarta
 export const brandTokens = {
 	colors: {
 		primary: {
@@ -7,7 +6,7 @@ export const brandTokens = {
 			200: "#80cbac",
 			300: "#4db68b",
 			400: "#26a673",
-			500: "#1a6b4a", // brand primary teal
+			500: "#1a6b4a",
 			600: "#155c3f",
 			700: "#104d34",
 			800: "#0b3e29",
@@ -19,7 +18,7 @@ export const brandTokens = {
 			200: "#f5da88",
 			300: "#f0cb58",
 			400: "#ecbf35",
-			500: "#d4a017", // brand accent gold
+			500: "#d4a017",
 			600: "#b88a14",
 			700: "#9c7411",
 			800: "#805e0e",

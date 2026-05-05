@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const PATH_LABELS: Record<string, string> = {
-	// Admin / Superadmin
 	"/admin": "Dashboard",
 	"/admin/pos": "POS Kasir",
 	"/admin/antrian": "Antrian",
@@ -22,22 +21,18 @@ const PATH_LABELS: Record<string, string> = {
 	"/admin/paket-usaha/leads": "Leads",
 	"/admin/notifikasi": "Notifikasi",
 	"/admin/profil": "Profil",
-	// Manager
 	"/manager": "Dashboard",
 	"/manager/analytics": "Analytics",
 	"/manager/kelola-layanan": "Kelola Layanan",
 	"/manager/voucher": "Voucher",
 	"/manager/inventori": "Inventori",
 	"/manager/tim": "Tim",
-	// Kasir
 	"/kasir": "POS Kasir",
 	"/kasir/antrian": "Antrian",
 	"/kasir/shift": "Shift",
 	"/kasir/kasir-order": "Detail Order",
-	// Kurir
 	"/kurir": "Dashboard",
 	"/kurir/tugas": "Peta Tugas",
-	// Customer
 	"/customer": "Dashboard",
 	"/customer/order": "Order",
 	"/customer/order/baru": "Buat Order",
@@ -73,7 +68,6 @@ function buildCrumbs(pathname: string): Crumb[] {
 	const segments = normalized.split("/").filter(Boolean);
 	const crumbs: Crumb[] = [];
 
-	// Build each level
 	for (let i = 1; i <= segments.length; i++) {
 		const href = `/${segments.slice(0, i).join("/")}`;
 		const label = PATH_LABELS[href];
@@ -85,7 +79,6 @@ function buildCrumbs(pathname: string): Crumb[] {
 		});
 	}
 
-	// If root itself is the current page, ensure it's marked as last
 	if (crumbs.length === 1 && crumbs[0]) {
 		crumbs[0].isLast = true;
 	}
@@ -121,7 +114,6 @@ export function DynamicBreadcrumb({ homeHref, compact = true }: DynamicBreadcrum
 			</Link>
 
 			{crumbs.map((crumb) => {
-				// In compact mode, hide intermediate (non-last) crumbs on small screens
 				const hiddenOnSmall = compact && !crumb.isLast;
 				return (
 					<span

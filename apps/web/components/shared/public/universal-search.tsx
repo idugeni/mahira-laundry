@@ -22,7 +22,6 @@ export function UniversalSearch({
 	const [isFocused, setIsFocused] = useState(false);
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	// Sync with URL params
 	useEffect(() => {
 		setQuery(searchParams.get("q") || "");
 	}, [searchParams]);
@@ -141,7 +140,6 @@ export function UniversalSearch({
 					</div>
 				</motion.div>
 
-				{/* Compact Chips - CSS Grid collapse approach */}
 				<div
 					className="grid transition-[grid-template-rows,opacity] duration-400 ease-[cubic-bezier(0.4,0,0.2,1)]"
 					style={{

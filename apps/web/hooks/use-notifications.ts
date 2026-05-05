@@ -32,7 +32,6 @@ export function useNotifications() {
 
 		fetchNotifications();
 
-		// Subscribe to new notifications
 		const channel = supabase
 			.channel("notifications-realtime")
 			.on(
