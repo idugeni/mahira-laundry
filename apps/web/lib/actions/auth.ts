@@ -39,7 +39,7 @@ export async function signUp(formData: FormData): Promise<void> {
 	}
 
 	revalidatePath("/", "layout");
-	redirect(targetUrl);
+	redirect(`${targetUrl}?toast=registered`);
 }
 
 export async function signIn(formData: FormData): Promise<void> {
@@ -68,7 +68,7 @@ export async function signIn(formData: FormData): Promise<void> {
 	}
 
 	revalidatePath("/", "layout");
-	redirect(targetUrl);
+	redirect(`${targetUrl}?toast=welcome`);
 }
 
 export async function signOut(): Promise<void> {

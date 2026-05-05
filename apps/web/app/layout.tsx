@@ -7,6 +7,7 @@ import { JsonLd } from "@/components/shared/common/json-ld";
 import { baseOpenGraph } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/providers/auth-provider";
+import { AuthToastHandler } from "@/components/shared/auth/auth-toast-handler";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist-sans" });
 
@@ -222,6 +223,7 @@ export default function RootLayout({
 			>
 				<div className="contents">
 					<AuthProvider>{children}</AuthProvider>
+					<AuthToastHandler />
 					<Toaster richColors position="top-right" />
 					{process.env.NEXT_PUBLIC_GA_ID && (
 						<GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
