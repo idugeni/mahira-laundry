@@ -18,7 +18,7 @@ export default function GlobalLoading() {
 
 	const loaderContent = (
 		<div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background/95 backdrop-blur-md transition-opacity duration-300">
-			<div className="flex flex-col items-center gap-8 animate-in fade-in zoom-in duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+			<div className="flex flex-col items-center gap-8 animate-in fade-in duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
 				{/* Circular logo with spinning ring */}
 				<div className="relative w-32 h-32 flex items-center justify-center">
 					{/* Spinning ring */}
