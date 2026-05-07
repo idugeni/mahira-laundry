@@ -27,8 +27,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 	const fetchProfile = async (userId: string) => {
 		const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single();
-		if (error) {
-			// Profile fetch failed — user may not have a profile row yet
+		if (error || !data) {
+			// Profile missing or fetch failed - likely after a DB reset
+			// Force sign out to prevent "half-logged-in" state
+			await supabase.auth.signOut();
+			setUser(null);
+			setProfile(null);
+			return;
 		}
 		setProfile(data as unknown as Profile);
 	};

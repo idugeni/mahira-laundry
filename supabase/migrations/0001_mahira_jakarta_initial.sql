@@ -116,7 +116,7 @@ CREATE INDEX idx_profiles_role ON profiles(role);
 CREATE INDEX idx_profiles_outlet ON profiles(outlet_id);
 CREATE INDEX idx_profiles_phone ON profiles(phone);
 CREATE INDEX idx_profiles_referral ON profiles(referral_code);
-CREATE INDEX idx_profiles_name_trgm ON profiles USING GIN(full_name gin_trgm_ops);
+CREATE INDEX idx_profiles_name_trgm ON profiles USING GIN(full_name extensions.gin_trgm_ops);
 
 -- ─────────────────────────────────────────────
 -- 3. SERVICES (Jenis Layanan)

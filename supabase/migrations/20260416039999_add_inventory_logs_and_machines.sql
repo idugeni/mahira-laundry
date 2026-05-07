@@ -56,11 +56,11 @@ CREATE POLICY "Staff can view logs" ON public.inventory_logs
 CREATE POLICY "inventory_logs_insert_v1" ON public.inventory_logs
   FOR INSERT TO authenticated
   WITH CHECK (
-    internal.is_staff_or_above()
+    public.is_staff_or_above()
     AND EXISTS (
       SELECT 1 FROM public.inventory
       WHERE inventory.id = inventory_logs.inventory_id
-      AND inventory.outlet_id = internal.get_user_outlet()
+      AND inventory.outlet_id = public.get_user_outlet()
     )
   );
 

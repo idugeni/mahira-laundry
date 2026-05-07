@@ -280,7 +280,7 @@ export function MahiraHeader({
 									<div className="w-8 h-8 rounded-full bg-slate-200" />
 									<div className="h-4 w-12 bg-slate-200 rounded-sm" />
 								</div>
-							) : user ? (
+							) : user && profile ? (
 								<motion.div
 									key="header-user-profile"
 									initial={{ opacity: 0, scale: 0.95 }}
