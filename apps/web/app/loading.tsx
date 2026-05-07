@@ -4,14 +4,25 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 
+const MINIMUM_LOADER_DURATION = 1200; // Minimum time loader stays visible (ms)
+
 export default function GlobalLoading() {
 	const [mounted, setMounted] = useState(false);
+	const [showLoader, setShowLoader] = useState(true);
 
 	useEffect(() => {
+		// Set mounted flag for hydration
 		setMounted(true);
 		// Prevent scrolling when loader is active
 		document.body.style.overflow = "hidden";
+
+		// Ensure loader stays visible for minimum duration to prevent flashing
+		const hideTimer = setTimeout(() => {
+			setShowLoader(false);
+		}, MINIMUM_LOADER_DURATION);
+
 		return () => {
+			clearTimeout(hideTimer);
 			document.body.style.overflow = "";
 		};
 	}, []);
@@ -65,10 +76,14 @@ export default function GlobalLoading() {
 		</div>
 	);
 
+	// Server-side fallback: render inline but it will be hidden/trapped until hydration
 	if (!mounted) {
-		// Server-side fallback: render inline but it will be hidden/trapped until hydration
-		// This ensures there's no layout shift once it hydrates and portals out
 		return loaderContent;
+	}
+
+	// Only show loader if showLoader state is true (after hydration and within minimum duration)
+	if (!showLoader) {
+		return null;
 	}
 
 	return createPortal(loaderContent, document.body);
