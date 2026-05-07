@@ -34,23 +34,43 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 	};
 
 	useEffect(() => {
+		let isMounted = true;
 		const initAuth = async () => {
-			const {
-				data: { session },
-			} = await supabase.auth.getSession();
-			if (session?.user) {
-				setUser(session.user);
-				await fetchProfile(session.user.id);
+			try {
+				// Step 1: Get initial session (synchronous from cache if available)
+				const {
+					data: { session },
+				} = await supabase.auth.getSession();
+
+				if (!isMounted) return;
+
+				// Step 2: Fetch profile if session exists
+				if (session?.user) {
+					setUser(session.user);
+					await fetchProfile(session.user.id);
+				}
+
+				// Step 3: Mark initialization complete
+				if (isMounted) {
+					setLoading(false);
+				}
+			} catch (error) {
+				console.error("Auth initialization error:", error);
+				if (isMounted) {
+					setLoading(false);
+				}
 			}
-			setLoading(false);
 		};
 
 		initAuth();
 
+		// Step 4: Listen for auth state changes
 		const {
 			data: { subscription },
 		} = supabase.auth.onAuthStateChange(
 			async (_event: string, session: { user: User | null } | null) => {
+				if (!isMounted) return;
+
 				if (session?.user) {
 					setUser(session.user);
 					await fetchProfile(session.user.id);
@@ -62,9 +82,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 			},
 		);
 
-		return () => subscription.unsubscribe();
+		// Cleanup
+		return () => {
+			isMounted = false;
+			subscription.unsubscribe();
+		};
 		// biome-ignore lint/correctness/useExhaustiveDependencies: supabase.auth methods are stable references
-	}, [fetchProfile, supabase.auth.getSession, supabase.auth.onAuthStateChange]);
+	}, []);
 
 	return (
 		<AuthContext.Provider
