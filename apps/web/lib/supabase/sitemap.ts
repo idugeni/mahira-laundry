@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/auth";
+import { createStaticClient } from "@/lib/supabase/static";
 
 export interface SitemapEntry {
 	url: string;
@@ -12,7 +12,7 @@ export interface SitemapEntry {
  */
 export async function getSitemapServices(): Promise<SitemapEntry[]> {
 	try {
-		const supabase = await createClient();
+		const supabase = createStaticClient();
 		const { data: services } = await supabase
 			.from("services")
 			.select("slug, updated_at")
@@ -38,7 +38,7 @@ export async function getSitemapServices(): Promise<SitemapEntry[]> {
  */
 export async function getSitemapOutlets(): Promise<SitemapEntry[]> {
 	try {
-		const supabase = await createClient();
+		const supabase = createStaticClient();
 		const { data: outlets } = await supabase
 			.from("outlets")
 			.select("slug, updated_at")
@@ -64,7 +64,7 @@ export async function getSitemapOutlets(): Promise<SitemapEntry[]> {
  */
 export async function getSitemapGalleryItems(): Promise<SitemapEntry[]> {
 	try {
-		const supabase = await createClient();
+		const supabase = createStaticClient();
 		const { data: galleryItems } = await supabase
 			.from("gallery")
 			.select("id, updated_at")
@@ -90,7 +90,7 @@ export async function getSitemapGalleryItems(): Promise<SitemapEntry[]> {
  */
 export async function getSitemapFaqItems(): Promise<SitemapEntry[]> {
 	try {
-		const supabase = await createClient();
+		const supabase = createStaticClient();
 		const { data: faqItems } = await supabase
 			.from("faqs")
 			.select("slug, updated_at")
@@ -116,7 +116,7 @@ export async function getSitemapFaqItems(): Promise<SitemapEntry[]> {
  */
 export async function getSitemapBusinessPackages(): Promise<SitemapEntry[]> {
 	try {
-		const supabase = await createClient();
+		const supabase = createStaticClient();
 		const { data: packages } = await supabase
 			.from("business_packages")
 			.select("slug, updated_at")
