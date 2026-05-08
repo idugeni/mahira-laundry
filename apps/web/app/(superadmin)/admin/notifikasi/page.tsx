@@ -3,6 +3,13 @@
 import { BellRing, Loader2, Megaphone, Send, ShieldAlert } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { broadcastNotification } from "@/lib/actions/notifications";
 
 export default function AdminNotificationPage() {
@@ -90,36 +97,39 @@ export default function AdminNotificationPage() {
 								<label htmlFor="notif-type" className="text-sm font-medium">
 									Tipe
 								</label>
-								<select
-									id="notif-type"
-									className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-hidden transition-all"
+								<Select
 									value={formData.type}
-									onChange={(e) =>
-										setFormData({
-											...formData,
-											type: e.target.value as "promotion" | "system",
-										})
+									onValueChange={(value: "promotion" | "system") =>
+										setFormData({ ...formData, type: value })
 									}
 								>
-									<option value="promotion">Promosi / Diskon</option>
-									<option value="system">Sistem / Informasi</option>
-								</select>
+									<SelectTrigger id="notif-type">
+										<SelectValue placeholder="Pilih Tipe" />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="promotion">Promosi / Diskon</SelectItem>
+										<SelectItem value="system">Sistem / Informasi</SelectItem>
+									</SelectContent>
+								</Select>
 							</div>
 							<div className="space-y-2">
 								<label htmlFor="notif-target" className="text-sm font-medium">
 									Target Pengguna
 								</label>
-								<select
-									id="notif-target"
-									className="w-full px-4 py-3 rounded-xl border bg-background focus:ring-2 focus:ring-emerald-500 focus:outline-hidden transition-all"
+								<Select
 									value={formData.targetRole}
-									onChange={(e) => setFormData({ ...formData, targetRole: e.target.value })}
+									onValueChange={(value: string) => setFormData({ ...formData, targetRole: value })}
 								>
-									<option value="">Semua Pengguna</option>
-									<option value="customer">Pelanggan Saja</option>
-									<option value="kasir">Staff Kasir Saja</option>
-									<option value="kurir">Kurir Saja</option>
-								</select>
+									<SelectTrigger id="notif-target">
+										<SelectValue placeholder="Semua Pengguna" />
+									</SelectTrigger>
+									<SelectContent>
+										<SelectItem value="">Semua Pengguna</SelectItem>
+										<SelectItem value="customer">Pelanggan Saja</SelectItem>
+										<SelectItem value="kasir">Staff Kasir Saja</SelectItem>
+										<SelectItem value="kurir">Kurir Saja</SelectItem>
+									</SelectContent>
+								</Select>
 							</div>
 						</div>
 

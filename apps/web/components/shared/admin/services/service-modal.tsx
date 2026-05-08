@@ -236,31 +236,16 @@ export function ServiceModal({
 											</p>
 											<input type="hidden" name="category" value={category} />
 											<Select value={category} onValueChange={setCategory}>
-												<SelectTrigger
-													aria-label="Kategori"
-													className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden focus:ring-brand-primary/20 transition-all"
-												>
+												<SelectTrigger aria-label="Kategori">
 													<SelectValue placeholder="Pilih Kategori" />
 												</SelectTrigger>
-												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
-													<SelectItem value="kiloan" className="font-bold py-3">
-														Kiloan
-													</SelectItem>
-													<SelectItem value="satuan" className="font-bold py-3">
-														Satuan
-													</SelectItem>
-													<SelectItem value="specialist" className="font-bold py-3">
-														Spesial (Sepatu/Tas)
-													</SelectItem>
-													<SelectItem value="bedding" className="font-bold py-3">
-														Bedding & Karpet
-													</SelectItem>
-													<SelectItem value="express" className="font-bold py-3">
-														Layanan Kilat
-													</SelectItem>
-													<SelectItem value="luxury" className="font-bold py-3">
-														Luxury Care
-													</SelectItem>
+												<SelectContent>
+													<SelectItem value="kiloan">Kiloan</SelectItem>
+													<SelectItem value="satuan">Satuan</SelectItem>
+													<SelectItem value="specialist">Spesial (Sepatu/Tas)</SelectItem>
+													<SelectItem value="bedding">Bedding & Karpet</SelectItem>
+													<SelectItem value="express">Layanan Kilat</SelectItem>
+													<SelectItem value="luxury">Luxury Care</SelectItem>
 												</SelectContent>
 											</Select>
 										</div>
@@ -313,25 +298,14 @@ export function ServiceModal({
 											</p>
 											<input type="hidden" name="unit" value={unit} />
 											<Select value={unit} onValueChange={setUnit}>
-												<SelectTrigger
-													aria-label="Satuan"
-													className="w-full h-[54px] px-6 bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden focus:ring-brand-primary/20 transition-all"
-												>
+												<SelectTrigger aria-label="Satuan">
 													<SelectValue placeholder="Satuan" />
 												</SelectTrigger>
-												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
-													<SelectItem value="kg" className="font-bold py-3">
-														kg
-													</SelectItem>
-													<SelectItem value="pcs" className="font-bold py-3">
-														pcs
-													</SelectItem>
-													<SelectItem value="m2" className="font-bold py-3">
-														m2
-													</SelectItem>
-													<SelectItem value="pasang" className="font-bold py-3">
-														pasang
-													</SelectItem>
+												<SelectContent>
+													<SelectItem value="kg">kg</SelectItem>
+													<SelectItem value="pcs">pcs</SelectItem>
+													<SelectItem value="m2">m2</SelectItem>
+													<SelectItem value="pasang">pasang</SelectItem>
 												</SelectContent>
 											</Select>
 										</div>

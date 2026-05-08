@@ -8,6 +8,13 @@ import { LeadDetailModal } from "@/components/shared/admin/paket-usaha/leads/lea
 import { PaginationControls, usePagination } from "@/components/shared/common/pagination-controls";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { exportInquiriesCSV } from "@/lib/actions/business-inquiries";
 import type { BusinessPackageInquiry, InquiryStats, InquiryStatus } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -149,19 +156,22 @@ export function AdminLeadsClient({ leads, stats }: AdminLeadsClientProps) {
 						>
 							Status
 						</label>
-						<select
-							id="filter-status"
+						<Select
 							value={currentStatus}
-							onChange={(e) => updateParam("status", e.target.value)}
-							className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
+							onValueChange={(value: string) => updateParam("status", value)}
 						>
-							<option value="">Semua Status</option>
-							{ALL_STATUSES.map((s) => (
-								<option key={s} value={s}>
-									{STATUS_LABELS[s]}
-								</option>
-							))}
-						</select>
+							<SelectTrigger id="filter-status">
+								<SelectValue placeholder="Semua Status" />
+							</SelectTrigger>
+							<SelectContent>
+								<SelectItem value="">Semua Status</SelectItem>
+								{ALL_STATUSES.map((s) => (
+									<SelectItem key={s} value={s}>
+										{STATUS_LABELS[s]}
+									</SelectItem>
+								))}
+							</SelectContent>
+						</Select>
 					</div>
 
 					{/* Package name */}

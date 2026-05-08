@@ -141,31 +141,23 @@ export function ExpenseModal({
 									<div className="space-y-2">
 										<label
 											htmlFor="expense-category"
-											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
+											className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
 										>
 											Kategori Biaya
 										</label>
-										<div className="relative group/input">
-											<span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-rose-600 transition-colors z-10">
-												<HiOutlineTag />
-											</span>
-											<input type="hidden" name="category" value={category} />
-											<Select value={category} onValueChange={setCategory}>
-												<SelectTrigger
-													id="expense-category"
-													className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden focus:ring-rose-500/20 transition-all"
-												>
-													<SelectValue placeholder="Pilih Kategori" />
-												</SelectTrigger>
-												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
-													{CATEGORIES.map((cat) => (
-														<SelectItem key={cat.id} value={cat.id} className="font-bold py-3">
-															{cat.label}
-														</SelectItem>
-													))}
-												</SelectContent>
-											</Select>
-										</div>
+										<input type="hidden" name="category" value={category} />
+										<Select value={category} onValueChange={setCategory}>
+											<SelectTrigger id="expense-category">
+												<SelectValue placeholder="Pilih Kategori" />
+											</SelectTrigger>
+											<SelectContent>
+												{CATEGORIES.map((cat) => (
+													<SelectItem key={cat.id} value={cat.id}>
+														{cat.label}
+													</SelectItem>
+												))}
+											</SelectContent>
+										</Select>
 									</div>
 
 									<div className="space-y-2">

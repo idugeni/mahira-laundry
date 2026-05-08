@@ -385,18 +385,14 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 													value={order.status}
 													onValueChange={(val: string) => handleStatusChange(order.id, val)}
 												>
-													<SelectTrigger className="w-[140px] h-9 bg-slate-50 border-none rounded-xl text-[10px] font-black uppercase tracking-widest focus:ring-brand-primary/20">
+													<SelectTrigger className="w-[140px]">
 														<SelectValue placeholder="Status" />
 													</SelectTrigger>
-													<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
+													<SelectContent>
 														{allStatuses
 															.filter((s) => s.id !== "all")
 															.map((c) => (
-																<SelectItem
-																	key={c.id}
-																	value={c.id}
-																	className="text-[10px] font-bold uppercase tracking-widest py-3 focus:bg-brand-primary/5 focus:text-brand-primary"
-																>
+																<SelectItem key={c.id} value={c.id}>
 																	{c.label}
 																</SelectItem>
 															))}

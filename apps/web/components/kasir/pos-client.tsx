@@ -743,28 +743,15 @@ export function POSClient({ initialServices, outletId, cashierName }: POSClientP
 															Satuan
 														</label>
 														<Select value={manualUnit} onValueChange={setManualUnit}>
-															<SelectTrigger
-																id="pos-unit-select"
-																className="w-full h-[58px] px-5 bg-white border border-slate-200 rounded-2xl font-bold"
-															>
+															<SelectTrigger id="pos-unit-select">
 																<SelectValue placeholder="Pilih Satuan" />
 															</SelectTrigger>
-															<SelectContent className="rounded-2xl shadow-2xl">
-																<SelectItem value="kg" className="font-bold py-3">
-																	Kilogram (kg)
-																</SelectItem>
-																<SelectItem value="pcs" className="font-bold py-3">
-																	Pcs / Satuan
-																</SelectItem>
-																<SelectItem value="m2" className="font-bold py-3">
-																	Meter Persegi (m2)
-																</SelectItem>
-																<SelectItem value="pasang" className="font-bold py-3">
-																	Pasang
-																</SelectItem>
-																<SelectItem value="set" className="font-bold py-3">
-																	Set
-																</SelectItem>
+															<SelectContent>
+																<SelectItem value="kg">Kilogram (kg)</SelectItem>
+																<SelectItem value="pcs">Pcs / Satuan</SelectItem>
+																<SelectItem value="m2">Meter Persegi (m2)</SelectItem>
+																<SelectItem value="pasang">Pasang</SelectItem>
+																<SelectItem value="set">Set</SelectItem>
 															</SelectContent>
 														</Select>
 													</div>

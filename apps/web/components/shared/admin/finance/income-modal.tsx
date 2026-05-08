@@ -181,32 +181,39 @@ export function IncomeModal({
 										</div>
 									</div>
 
-									{/* Outlet */}
-									<div className="space-y-2">
-										<label
-											htmlFor="income-outlet"
-											className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1"
-										>
-											Outlet / Cabang
-										</label>
-										<div className="relative group/input">
-											<span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within/input:text-emerald-600 transition-colors z-10">
-												<HiOutlineBuildingOffice2 />
-											</span>
-											<Select value={outletId} onValueChange={setOutletId}>
-												<SelectTrigger
-													id="income-outlet"
-													className="w-full pl-12 pr-6 h-[54px] bg-slate-50 border border-slate-100 rounded-2xl text-sm font-bold outline-hidden focus:ring-emerald-500/20 transition-all"
-												>
+									<div className="grid grid-cols-2 gap-6">
+										<div className="space-y-2">
+											<label
+												htmlFor="income-category"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
+												Kategori Arus
+											</label>
+											<Select name="category" defaultValue="Layanan">
+												<SelectTrigger id="income-category">
+													<SelectValue placeholder="Pilih Kategori" />
+												</SelectTrigger>
+												<SelectContent>
+													<SelectItem value="Layanan">Pendapatan Layanan</SelectItem>
+													<SelectItem value="Franchise">Franchise Fee</SelectItem>
+													<SelectItem value="Lainnya">Lain-lain</SelectItem>
+												</SelectContent>
+											</Select>
+										</div>
+										<div className="space-y-2">
+											<label
+												htmlFor="income-outlet"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
+												Titik Outlet
+											</label>
+											<Select name="outlet_id" defaultValue={outletId}>
+												<SelectTrigger id="income-outlet">
 													<SelectValue placeholder="Pilih Outlet" />
 												</SelectTrigger>
-												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl">
+												<SelectContent>
 													{outlets.map((outlet) => (
-														<SelectItem
-															key={outlet.id}
-															value={outlet.id}
-															className="font-bold py-3"
-														>
+														<SelectItem key={outlet.id} value={outlet.id}>
 															{outlet.name}
 														</SelectItem>
 													))}

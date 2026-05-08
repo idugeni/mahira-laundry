@@ -238,59 +238,47 @@ export function RegisterStaffModal({ staff, outlets, trigger }: RegisterStaffMod
 
 									<div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 										<div className="space-y-2">
-											<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label
+												htmlFor="staff-role"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
 												Otoritas Peran
-											</p>
+											</label>
 											<Select
 												value={role}
 												onValueChange={(value: RegisterStaffInput["role"]) => setRole(value)}
 											>
-												<SelectTrigger className="px-5 h-12 rounded-xl border-slate-100 bg-slate-50 focus:bg-white font-bold text-sm transition-colors shadow-none">
+												<SelectTrigger id="staff-role">
 													<div className="flex items-center gap-3">
 														<Briefcase size={18} className="text-emerald-400" />
 														<SelectValue placeholder="Pilih Peran" />
 													</div>
 												</SelectTrigger>
-												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl p-2">
-													<SelectItem
-														value="kasir"
-														className="rounded-xl py-3 font-bold text-slate-600 focus:bg-emerald-50 focus:text-emerald-600 cursor-pointer"
-													>
-														Kasir Operasional
-													</SelectItem>
-													<SelectItem
-														value="kurir"
-														className="rounded-xl py-3 font-bold text-slate-600 focus:bg-emerald-50 focus:text-emerald-600 cursor-pointer"
-													>
-														Kurir Penjemputan
-													</SelectItem>
-													<SelectItem
-														value="manager"
-														className="rounded-xl py-3 font-bold text-slate-600 focus:bg-emerald-50 focus:text-emerald-600 cursor-pointer"
-													>
-														Manager Cabang
-													</SelectItem>
+												<SelectContent>
+													<SelectItem value="kasir">Kasir Operasional</SelectItem>
+													<SelectItem value="kurir">Kurir Penjemputan</SelectItem>
+													<SelectItem value="manager">Manager Cabang</SelectItem>
 												</SelectContent>
 											</Select>
 										</div>
+
 										<div className="space-y-2">
-											<p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1">
+											<label
+												htmlFor="staff-outlet"
+												className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 ml-1"
+											>
 												Penempatan Unit
-											</p>
+											</label>
 											<Select value={outletId} onValueChange={setOutletId}>
-												<SelectTrigger className="px-5 h-12 rounded-xl border-slate-100 bg-slate-50 focus:bg-white font-bold text-sm transition-colors shadow-none">
+												<SelectTrigger id="staff-outlet">
 													<div className="flex items-center gap-3">
 														<Building2 size={18} className="text-emerald-400" />
 														<SelectValue placeholder="Pilih Outlet" />
 													</div>
 												</SelectTrigger>
-												<SelectContent className="rounded-2xl border-slate-100 shadow-2xl p-2">
+												<SelectContent>
 													{outlets.map((o) => (
-														<SelectItem
-															key={o.id}
-															value={o.id}
-															className="rounded-xl py-3 font-bold text-slate-600 focus:bg-emerald-50 focus:text-emerald-600 cursor-pointer"
-														>
+														<SelectItem key={o.id} value={o.id}>
 															{o.name}
 														</SelectItem>
 													))}

@@ -20,6 +20,13 @@ import { createPortal } from "react-dom";
 import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { updateInquiryStatus } from "@/lib/actions/business-inquiries";
 import { createClient } from "@/lib/supabase/client";
 import type { BusinessPackageInquiry, InquiryLog, InquiryStatus } from "@/lib/types";
@@ -316,18 +323,21 @@ export function LeadDetailModal({ lead, onClose }: LeadDetailModalProps) {
 								>
 									Status Baru
 								</label>
-								<select
-									id="lead-new-status"
+								<Select
 									value={newStatus}
-									onChange={(e) => setNewStatus(e.target.value as InquiryStatus)}
-									className="w-full h-11 rounded-2xl border border-slate-100 bg-slate-50 px-4 text-sm font-bold text-slate-700 focus:outline-hidden focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-300 transition-all"
+									onValueChange={(value: InquiryStatus) => setNewStatus(value)}
 								>
-									{ALL_STATUSES.map((s) => (
-										<option key={s} value={s}>
-											{STATUS_LABELS[s]}
-										</option>
-									))}
-								</select>
+									<SelectTrigger id="lead-new-status">
+										<SelectValue placeholder="Pilih Status" />
+									</SelectTrigger>
+									<SelectContent>
+										{ALL_STATUSES.map((s) => (
+											<SelectItem key={s} value={s}>
+												{STATUS_LABELS[s]}
+											</SelectItem>
+										))}
+									</SelectContent>
+								</Select>
 							</div>
 							<div className="space-y-1.5">
 								<label

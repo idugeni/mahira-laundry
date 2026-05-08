@@ -75,19 +75,13 @@ export function OrderDetailStep({
 								Waktu
 							</p>
 							<Select value={pickupTime} onValueChange={onTimeChange}>
-								<SelectTrigger className="w-full h-[68px] px-6 bg-white border border-slate-100 rounded-[30px] font-bold outline-hidden focus:ring-brand-primary/20 transition-all shadow-xs">
+								<SelectTrigger>
 									<SelectValue placeholder="Pilih Waktu" />
 								</SelectTrigger>
-								<SelectContent className="rounded-3xl border-slate-100 shadow-2xl">
-									<SelectItem value="08:00 - 12:00" className="py-4 font-bold rounded-2xl">
-										08:00 - 12:00
-									</SelectItem>
-									<SelectItem value="12:00 - 16:00" className="py-4 font-bold rounded-2xl">
-										12:00 - 16:00
-									</SelectItem>
-									<SelectItem value="16:00 - 20:00" className="py-4 font-bold rounded-2xl">
-										16:00 - 20:00
-									</SelectItem>
+								<SelectContent>
+									<SelectItem value="08:00 - 12:00">08:00 - 12:00</SelectItem>
+									<SelectItem value="12:00 - 16:00">12:00 - 16:00</SelectItem>
+									<SelectItem value="16:00 - 20:00">16:00 - 20:00</SelectItem>
 								</SelectContent>
 							</Select>
 						</div>

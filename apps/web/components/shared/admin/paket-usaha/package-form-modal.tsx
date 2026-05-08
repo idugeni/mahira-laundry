@@ -10,6 +10,13 @@ import { HiOutlineXMark } from "react-icons/hi2";
 import { toast } from "sonner";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from "@/components/ui/select";
 import { createBusinessPackage, updateBusinessPackage } from "@/lib/actions/business-packages";
 import type { BusinessPackage, PackageTier } from "@/lib/types";
 
@@ -248,17 +255,21 @@ export function PackageFormModal({ package: pkg, onSuccess, onClose }: PackageFo
 							>
 								Tier <span className="text-rose-500">*</span>
 							</label>
-							<select
-								id="pkg-tier"
-								{...register("tier")}
-								className="w-full h-12 px-4 rounded-2xl border border-slate-100 bg-slate-50 text-sm font-bold text-slate-900 focus:outline-hidden focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-300 transition-all appearance-none cursor-pointer"
+							<Select
+								value={watch("tier")}
+								onValueChange={(value: PackageTier) => reset({ ...watch(), tier: value })}
 							>
-								{TIER_OPTIONS.map((t) => (
-									<option key={t} value={t}>
-										{t}
-									</option>
-								))}
-							</select>
+								<SelectTrigger id="pkg-tier">
+									<SelectValue placeholder="Pilih Tier" />
+								</SelectTrigger>
+								<SelectContent>
+									{TIER_OPTIONS.map((t) => (
+										<SelectItem key={t} value={t}>
+											{t}
+										</SelectItem>
+									))}
+								</SelectContent>
+							</Select>
 							{errors.tier && (
 								<p className="text-[10px] font-bold text-rose-500">{errors.tier.message}</p>
 							)}
