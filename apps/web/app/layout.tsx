@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Geist, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Suspense } from "react";
 import { Toaster } from "sonner";
-import GlobalLoading from "@/app/loading";
+import { GlobalLoading } from "@/components/shared/common/global-loading";
 import "@/app/globals.css";
 import { AuthToastHandler } from "@/components/shared/auth/auth-toast-handler";
 import { JsonLd } from "@/components/shared/common/json-ld";

@@ -1,11 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { cn } from "@/lib/utils";
 
-
-export default function GlobalLoading() {
+export function GlobalLoading() {
 	useEffect(() => {
 		// Prevent scrolling when loader is active
 		document.body.style.overflow = "hidden";
@@ -14,7 +13,7 @@ export default function GlobalLoading() {
 		};
 	}, []);
 
-	const loaderContent = (
+	return (
 		<div
 			className={cn(
 				"fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background",
@@ -34,13 +33,13 @@ export default function GlobalLoading() {
 								cx="64"
 								cy="64"
 								r="60"
-								stroke="url(#splash-gradient)"
+								stroke="url(#splash-gradient-new)"
 								strokeWidth="4"
 								strokeLinecap="round"
 								strokeDasharray="94 282"
 							/>
 							<defs>
-								<linearGradient id="splash-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+								<linearGradient id="splash-gradient-new" x1="0%" y1="0%" x2="100%" y2="100%">
 									<stop offset="0%" stopColor="var(--brand-primary)" />
 									<stop offset="100%" stopColor="var(--brand-accent)" />
 								</linearGradient>
@@ -66,6 +65,4 @@ export default function GlobalLoading() {
 			</div>
 		</div>
 	);
-
-	return loaderContent;
 }
