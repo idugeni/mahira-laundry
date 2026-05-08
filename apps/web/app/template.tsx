@@ -8,7 +8,7 @@ export default function RootTemplate({ children }: { children: React.ReactNode }
 	return (
 		<div
 			key={pathname}
-			className="flex-1 flex flex-col animate-in fade-in duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]"
+			className="flex-1 flex flex-col animate-fade-in"
 		>
 			{children}
 		</div>

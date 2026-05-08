@@ -4,32 +4,12 @@ import { useEffect, useState } from "react";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
 import { cn } from "@/lib/utils";
 
-const MINIMUM_LOADER_DURATION = 800; // Reduced for snappier feel
 
 export default function GlobalLoading() {
-	const [_mounted, setMounted] = useState(false);
-	const [showLoader, setShowLoader] = useState(true);
-	const [isFadingOut, setIsFadingOut] = useState(false);
-
 	useEffect(() => {
-		// Set mounted flag for hydration
-		setMounted(true);
 		// Prevent scrolling when loader is active
 		document.body.style.overflow = "hidden";
-
-		// Step 1: Start fading out
-		const fadeTimer = setTimeout(() => {
-			setIsFadingOut(true);
-		}, MINIMUM_LOADER_DURATION);
-
-		// Step 2: Completely unmount after fade animation
-		const hideTimer = setTimeout(() => {
-			setShowLoader(false);
-		}, MINIMUM_LOADER_DURATION + 300); // match duration-300
-
 		return () => {
-			clearTimeout(fadeTimer);
-			clearTimeout(hideTimer);
 			document.body.style.overflow = "";
 		};
 	}, []);
@@ -37,8 +17,7 @@ export default function GlobalLoading() {
 	const loaderContent = (
 		<div
 			className={cn(
-				"fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background backdrop-blur-md transition-all duration-300 ease-in-out",
-				isFadingOut ? "opacity-0 pointer-events-none" : "opacity-100",
+				"fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background",
 			)}
 		>
 			<div className="flex flex-col items-center gap-8 animate-in fade-in duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]">
@@ -87,14 +66,6 @@ export default function GlobalLoading() {
 			</div>
 		</div>
 	);
-
-	// We still need mounted to avoid portal issues if we were using portals,
-	// but here we just want to avoid any hydration mismatch on the body class.
-	// However, returning the same structure for both SSR and CSR is best for stability.
-
-	if (!showLoader) {
-		return null;
-	}
 
 	return loaderContent;
 }

@@ -7,12 +7,13 @@ CREATE INDEX IF NOT EXISTS idx_profiles_referred_by ON public.profiles(referred_
 CREATE INDEX IF NOT EXISTS idx_orders_washer_id ON public.orders(washer_id);
 CREATE INDEX IF NOT EXISTS idx_orders_ironer_id ON public.orders(ironer_id);
 CREATE INDEX IF NOT EXISTS idx_orders_qc_id ON public.orders(qc_id);
-CREATE INDEX IF NOT EXISTS idx_delivery_courier_id ON public.delivery(courier_id);
 CREATE INDEX IF NOT EXISTS idx_redemptions_user_id ON public.redemptions(user_id);
 
 -- 2. Audit Logs Optimization
-CREATE INDEX IF NOT EXISTS idx_audit_logs_table_name ON public.audit_logs(table_name);
-CREATE INDEX IF NOT EXISTS idx_audit_logs_record_id ON public.audit_logs(record_id);
+-- Indexing record_id for faster lookup of specific entity history
+-- Note: table_name and record_id are already indexed in initial migration under different names, 
+-- but we ensure they exist here for robustness. Actually, to avoid conflicts in CI, 
+-- we only add what is truly missing.
 
 -- 3. Data Integrity Constraints
 ALTER TABLE public.profiles 
@@ -22,5 +23,4 @@ ALTER TABLE public.inventory
   ADD CONSTRAINT check_positive_quantity CHECK (quantity >= 0);
 
 -- 4. Additional Performance: Search by Names (GIN index for trigram search)
--- Phone and Email already indexed in initial migration
-CREATE INDEX IF NOT EXISTS idx_profiles_full_name_trgm ON public.profiles USING gin (full_name extensions.gin_trgm_ops);
+-- Already handled in initial migration (idx_profiles_name_trgm)
