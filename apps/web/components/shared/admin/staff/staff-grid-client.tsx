@@ -117,7 +117,9 @@ export function StaffGridClient({ staff }: StaffGridClientProps) {
 								<Clock size={14} className="text-emerald-400" />
 								<span className="text-[10px] font-black uppercase tracking-widest">Registrasi</span>
 							</div>
-							<span className="text-xs font-bold text-slate-700">{s.created_at ? formatDate(s.created_at) : "—"}</span>
+							<span className="text-xs font-bold text-slate-700">
+								{s.created_at ? formatDate(s.created_at) : "—"}
+							</span>
 						</div>
 					</div>
 
