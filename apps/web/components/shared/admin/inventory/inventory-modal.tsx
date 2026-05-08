@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import {
 	HiOutlineArchiveBoxArrowDown,
@@ -73,13 +73,32 @@ export function InventoryModal({ item, outletId, mode = "create", trigger }: Inv
 
 	return (
 		<>
-			<button type="button" onClick={() => setIsOpen(true)} className="contents">
-				{trigger || (
-					<span className="inline-flex h-10 cursor-pointer items-center rounded-xl bg-brand-primary px-4 text-sm font-black text-white shadow-md shadow-brand-primary/20 transition-colors hover:bg-brand-primary/90">
-						+ Tambah Item
-					</span>
-				)}
-			</button>
+			{React.isValidElement(trigger) ? (
+				(() => {
+					const typedTrigger = trigger as React.ReactElement<{
+						onClick?: (e: React.MouseEvent) => void;
+					}>;
+					const existingOnClick = typedTrigger.props.onClick;
+					return React.cloneElement(typedTrigger, {
+						onClick: (e: React.MouseEvent) => {
+							existingOnClick?.(e);
+							setIsOpen(true);
+						},
+					});
+				})()
+			) : (
+				<button
+					type="button"
+					onClick={() => setIsOpen(true)}
+					className="contents cursor-pointer border-none bg-transparent p-0 text-left"
+				>
+					{trigger || (
+						<span className="inline-flex h-10 cursor-pointer items-center rounded-xl bg-brand-primary px-4 text-sm font-black text-white shadow-md shadow-brand-primary/20 transition-colors hover:bg-brand-primary/90">
+							+ Tambah Item
+						</span>
+					)}
+				</button>
+			)}
 
 			{isOpen &&
 				mounted &&

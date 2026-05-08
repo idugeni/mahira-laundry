@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import {
 	HiOutlineArrowDownTray,
@@ -53,13 +53,28 @@ export function ReportModal({ initialType = "harian", trigger }: ReportModalProp
 
 	return (
 		<>
-			<button
-				type="button"
-				onClick={() => setIsOpen(true)}
-				className="contents h-full cursor-pointer"
-			>
-				{trigger}
-			</button>
+			{React.isValidElement(trigger) ? (
+				(() => {
+					const typedTrigger = trigger as React.ReactElement<{
+						onClick?: (e: React.MouseEvent) => void;
+					}>;
+					const existingOnClick = typedTrigger.props.onClick;
+					return React.cloneElement(typedTrigger, {
+						onClick: (e: React.MouseEvent) => {
+							existingOnClick?.(e);
+							setIsOpen(true);
+						},
+					});
+				})()
+			) : (
+				<button
+					type="button"
+					onClick={() => setIsOpen(true)}
+					className="contents cursor-pointer border-none bg-transparent p-0 text-left"
+				>
+					{trigger}
+				</button>
+			)}
 
 			{isOpen &&
 				mounted &&

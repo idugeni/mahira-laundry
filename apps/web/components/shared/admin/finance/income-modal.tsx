@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import {
 	HiOutlineBanknotes,
@@ -65,14 +65,33 @@ export function IncomeModal({
 
 	return (
 		<>
-			<button type="button" onClick={() => setIsOpen(true)} className="contents">
-				{trigger || (
-					<span className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-emerald-500 px-3.5 text-sm font-semibold text-white shadow-md shadow-emerald-100 transition-colors hover:bg-emerald-600">
-						<HiOutlineBanknotes size={18} />
-						<span>Input Pemasukan</span>
-					</span>
-				)}
-			</button>
+			{React.isValidElement(trigger) ? (
+				(() => {
+					const typedTrigger = trigger as React.ReactElement<{
+						onClick?: (e: React.MouseEvent) => void;
+					}>;
+					const existingOnClick = typedTrigger.props.onClick;
+					return React.cloneElement(typedTrigger, {
+						onClick: (e: React.MouseEvent) => {
+							existingOnClick?.(e);
+							setIsOpen(true);
+						},
+					});
+				})()
+			) : (
+				<button
+					type="button"
+					onClick={() => setIsOpen(true)}
+					className="contents cursor-pointer border-none bg-transparent p-0 text-left"
+				>
+					{trigger || (
+						<span className="inline-flex h-10 cursor-pointer items-center gap-2 rounded-xl bg-emerald-500 px-3.5 text-sm font-semibold text-white shadow-md shadow-emerald-100 transition-colors hover:bg-emerald-600">
+							<HiOutlineBanknotes size={18} />
+							<span>Input Pemasukan</span>
+						</span>
+					)}
+				</button>
+			)}
 
 			{isOpen &&
 				mounted &&

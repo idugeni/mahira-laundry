@@ -28,11 +28,29 @@ export function AdminAvatar({ fullName, avatarUrl, className }: AdminAvatarProps
 		setCacheBust(true);
 	}, []);
 
-	const src = avatarUrl
-		? cacheBust && !avatarUrl.includes("?")
-			? `${avatarUrl}?t=${Date.now().toString(36)}`
-			: avatarUrl
-		: undefined;
+	const src = (() => {
+		if (!avatarUrl) return undefined;
+
+		// If it's already an absolute URL (starts with http)
+		if (avatarUrl.startsWith("http")) {
+			// Only cache-bust Supabase URLs that don't have query params yet
+			const isSupabase = avatarUrl.includes("supabase.co");
+			if (isSupabase && cacheBust && !avatarUrl.includes("?")) {
+				return `${avatarUrl}?t=${Date.now().toString(36)}`;
+			}
+			return avatarUrl;
+		}
+
+		// If it's a relative path from Supabase storage
+		const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+		if (supabaseUrl && !avatarUrl.startsWith("/")) {
+			const baseUrl = `${supabaseUrl}/storage/v1/object/public/avatars/`;
+			const fullUrl = `${baseUrl}${avatarUrl}`;
+			return cacheBust ? `${fullUrl}?t=${Date.now().toString(36)}` : fullUrl;
+		}
+
+		return avatarUrl;
+	})();
 
 	return (
 		<Avatar className={className}>
