@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/shared/common/json-ld";
 import { PaketUsahaClient } from "@/components/shared/public/paket-usaha/paket-usaha-client";
 import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
 import { baseOpenGraph } from "@/lib/metadata";
@@ -7,9 +8,18 @@ import type { BusinessPackage } from "@/lib/types";
 export const revalidate = 0;
 
 export const metadata: Metadata = {
-	title: "Paket Usaha Laundry Lengkap",
+	title: "Paket Usaha Laundry & Peluang Kemitraan Mahira",
 	description:
-		"Mulai bisnis laundry Anda bersama Mahira dengan dukungan mesin, pelatihan, dan sistem manajemen terbaik.",
+		"Mulai bisnis laundry sukses Anda dengan Paket Usaha Laundry Mahira. Investasi aman, sistem teruji, mesin terbaik, dan dukungan operasional penuh.",
+	keywords: [
+		"paket usaha laundry",
+		"kemitraan laundry",
+		"franchise laundry indonesia",
+		"investasi bisnis laundry",
+		"peluang usaha laundry premium",
+		"setup bisnis laundry",
+		"paket kemitraan mahira",
+	],
 	openGraph: {
 		...baseOpenGraph,
 		title: "Jual Paket Usaha Laundry Lengkap — Mahira Laundry",
@@ -26,8 +36,6 @@ export const metadata: Metadata = {
 		],
 	},
 };
-
-import { JsonLd } from "@/components/shared/common/json-ld";
 
 function buildJsonLd(packages: BusinessPackage[]) {
 	return {

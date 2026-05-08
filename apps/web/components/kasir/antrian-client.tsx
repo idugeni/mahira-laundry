@@ -300,10 +300,11 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 											setActiveTab(status.id);
 											setCurrentPage(1);
 										}}
-										className={`px-8 py-3.5 rounded-2xl text-[11px] font-black transition-all whitespace-nowrap flex items-center gap-3 relative shrink-0 ${activeTab === status.id
+										className={`px-8 py-3.5 rounded-2xl text-[11px] font-black transition-all whitespace-nowrap flex items-center gap-3 relative shrink-0 ${
+											activeTab === status.id
 												? "bg-white text-brand-primary shadow-xl shadow-brand-primary/10 scale-105 z-10"
 												: "text-slate-400 hover:text-slate-600 hover:bg-white/40"
-											}`}
+										}`}
 									>
 										<span className="uppercase tracking-[0.2em]">{status.label}</span>
 										{count > 0 && (
@@ -513,10 +514,11 @@ export function AntrianClient({ initialOrders }: AntrianClientProps) {
 								type="button"
 								variant={currentPage === page ? "default" : "outline"}
 								onClick={() => setCurrentPage(page)}
-								className={`w-12 h-12 rounded-2xl text-xs font-black transition-all border-slate-100 ${currentPage === page
+								className={`w-12 h-12 rounded-2xl text-xs font-black transition-all border-slate-100 ${
+									currentPage === page
 										? "bg-brand-primary text-white shadow-lg shadow-brand-primary/20 scale-110"
 										: "bg-white text-slate-400 hover:text-slate-600"
-									}`}
+								}`}
 							>
 								{page}
 							</Button>

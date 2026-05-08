@@ -83,7 +83,7 @@ export function AuthClient({ type, action }: AuthClientProps) {
 		startTransition(async () => {
 			try {
 				await action(data);
-			} catch (err) {
+			} catch (_err) {
 				toast.dismiss(toastId);
 			}
 		});

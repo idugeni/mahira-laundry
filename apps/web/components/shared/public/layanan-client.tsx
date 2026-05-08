@@ -1,5 +1,6 @@
 "use client";
 
+import type { User } from "@supabase/supabase-js";
 import { AnimatePresence, motion, useMotionValue, useSpring, useTransform } from "motion/react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -16,7 +17,7 @@ import { RiGraduationCapLine } from "react-icons/ri";
 import { ServiceDetailModal } from "@/components/shared/customer/order/service-detail-modal";
 import { UniversalSearch } from "@/components/shared/public/universal-search";
 import { useAuth } from "@/hooks/use-auth";
-import type { Service } from "@/lib/types";
+import type { Profile, Service } from "@/lib/types";
 import { formatIDR, getDashboardUrl } from "@/lib/utils";
 
 function ServiceCard({
@@ -120,8 +121,20 @@ function ServiceCard({
 	);
 }
 
-export function LayananClient({ initialServices }: { initialServices: Service[] }) {
-	const { user, profile, loading } = useAuth();
+export function LayananClient({
+	initialServices,
+	initialUser,
+	initialProfile,
+}: {
+	initialServices: Service[];
+	initialUser?: User | null;
+	initialProfile?: Profile | null;
+}) {
+	const { user: ctxUser, profile: ctxProfile, loading: ctxLoading } = useAuth();
+	const user = ctxLoading && initialUser !== undefined ? initialUser : ctxUser;
+	const profile = ctxLoading && initialProfile !== undefined ? initialProfile : ctxProfile;
+	const _loading = ctxLoading && initialUser === undefined;
+
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const [selectedService, setSelectedService] = useState<Service | null>(null);
@@ -177,20 +190,9 @@ export function LayananClient({ initialServices }: { initialServices: Service[] 
 		return { color: "text-blue-500", bg: "bg-blue-50" };
 	};
 
-	if (loading) {
-		return (
-			<div className="py-14 sm:py-16 text-center">
-				<motion.div
-					animate={{ rotate: 360 }}
-					transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-					className="w-12 h-12 border-4 border-brand-primary border-t-transparent rounded-full mx-auto mb-6"
-				/>
-				<p className="text-slate-400 font-black uppercase tracking-widest text-xs">
-					Memuat katalog...
-				</p>
-			</div>
-		);
-	}
+	// Standard flicker-free rendering: we always render the services
+	// because they are passed as initialServices from the server.
+	// Only CTA and some auth-dependent links might resolve later.
 
 	return (
 		<div className="py-14 sm:py-16 relative overflow-hidden bg-white w-full min-w-0">

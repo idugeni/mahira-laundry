@@ -83,7 +83,7 @@ export function LokasiClient() {
 						<div className="relative rounded-[2rem] sm:rounded-[3.5rem] overflow-hidden shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] border-4 sm:border-[12px] border-white h-full min-h-[300px] sm:min-h-[500px] bg-slate-100 group">
 							{mounted ? (
 								<iframe
-									src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.5!2d${PRIMARY_OUTLET.lng}!3d${PRIMARY_OUTLET.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTInNDIuNSJTIDEwNsKwNTEnMjEuMiJF!5e0!3m2!1sid!2sid!4v1`}
+									src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7932.028224174933!2d106.9100612!3d-6.2618708!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3979c55405b%3A0x70c5774d4083a9cd!2sMahira%20Laundry!5e0!3m2!1sid!2sid!4v1778170228074!5m2!1sid!2sid"
 									width="100%"
 									height="100%"
 									style={{ border: 0 }}
@@ -117,7 +117,7 @@ export function LokasiClient() {
 											<p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
 												Alamat Presisi
 											</p>
-											<p className="text-sm font-black text-slate-900">Jatiwaringin, Bekasi</p>
+											<p className="text-sm font-black text-slate-900">Jaticempaka, Bekasi</p>
 										</div>
 									</div>
 									<a
@@ -193,13 +193,13 @@ export function LokasiClient() {
 												</span>
 												<div className="space-y-2">
 													<div className="flex flex-wrap items-center gap-2 sm:gap-4">
-														<span className="text-xs font-bold text-slate-400 w-16">Sen - Jum</span>
+														<span className="text-xs font-bold text-slate-400 w-16">Sen - Sab</span>
 														<span className="px-3 py-1 bg-slate-100 rounded-full text-[10px] font-black text-slate-900 uppercase tracking-wider">
 															{outlet.hours.weekday}
 														</span>
 													</div>
 													<div className="flex flex-wrap items-center gap-2 sm:gap-4">
-														<span className="text-xs font-bold text-slate-400 w-16">Sab - Min</span>
+														<span className="text-xs font-bold text-slate-400 w-16">Minggu</span>
 														<span className="px-3 py-1 bg-brand-accent/20 text-brand-accent-dark rounded-full text-[10px] font-black uppercase tracking-wider">
 															{outlet.hours.weekend}
 														</span>

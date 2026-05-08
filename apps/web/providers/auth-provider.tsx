@@ -19,10 +19,18 @@ const AuthContext = createContext<AuthContextType>({
 	refreshProfile: async () => {},
 });
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
-	const [user, setUser] = useState<User | null>(null);
-	const [profile, setProfile] = useState<Profile | null>(null);
-	const [loading, setLoading] = useState(true);
+export function AuthProvider({
+	children,
+	initialUser,
+	initialProfile,
+}: {
+	children: React.ReactNode;
+	initialUser?: User | null;
+	initialProfile?: Profile | null;
+}) {
+	const [user, setUser] = useState<User | null>(initialUser ?? null);
+	const [profile, setProfile] = useState<Profile | null>(initialProfile ?? null);
+	const [loading, setLoading] = useState(initialUser === undefined);
 	const supabase = createClient();
 
 	const fetchProfile = async (userId: string) => {
@@ -59,8 +67,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 				if (isMounted) {
 					setLoading(false);
 				}
-			} catch (error) {
-				console.error("Auth initialization error:", error);
+			} catch (_error) {
 				if (isMounted) {
 					setLoading(false);
 				}
@@ -93,7 +100,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 			subscription.unsubscribe();
 		};
 		// biome-ignore lint/correctness/useExhaustiveDependencies: supabase.auth methods are stable references
-	}, []);
+	}, [supabase.auth.onAuthStateChange, supabase.auth.getSession, fetchProfile]);
 
 	return (
 		<AuthContext.Provider

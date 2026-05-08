@@ -1,5 +1,5 @@
-import { cache } from "@/lib/upstash/cache";
 import { createClient } from "@/lib/supabase/auth";
+import { cache } from "@/lib/upstash/cache";
 
 export async function getAllInventory(outletId?: string) {
 	const cacheKey = `inventory:${outletId || "all"}`;

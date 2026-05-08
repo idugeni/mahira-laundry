@@ -24,7 +24,7 @@ const faqCategories = [
 			},
 			{
 				q: "Di mana lokasi outlet Mahira Laundry?",
-				a: "Outlet utama kami berlokasi di Jatiwaringin, Bekasi. Kami juga memiliki beberapa titik jemput strategis dan berencana untuk terus berekspansi ke area Jabodetabek lainnya.",
+				a: "Outlet utama kami berlokasi di Jaticempaka, Bekasi. Kami juga memiliki beberapa titik jemput strategis dan berencana untuk terus berekspansi ke area Jabodetabek lainnya.",
 			},
 			{
 				q: "Bagaimana cara memesan layanan Mahira Laundry?",
@@ -58,7 +58,7 @@ const faqCategories = [
 		questions: [
 			{
 				q: "Apakah layanan antar-jemput gratis?",
-				a: "Kami menyediakan layanan antar-jemput GRATIS untuk area Jatiwaringin dengan minimum order tertentu. Untuk area di luar itu, dikenakan biaya flat yang sangat terjangkau.",
+				a: "Kami menyediakan layanan antar-jemput GRATIS untuk area Jaticempaka dengan minimum order tertentu. Untuk area di luar itu, dikenakan biaya flat yang sangat terjangkau.",
 			},
 			{
 				q: "Bagaimana cara melacak pesanan saya?",

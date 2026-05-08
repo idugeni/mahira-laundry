@@ -155,13 +155,17 @@ export function ServiceModal({
 					});
 				})()
 			) : (
-				<div onClick={() => setIsOpen(true)} className="contents cursor-pointer">
+				<button
+					type="button"
+					onClick={() => setIsOpen(true)}
+					className="contents cursor-pointer border-none bg-transparent p-0 text-left"
+				>
 					{trigger || (
 						<span className="px-5 py-2.5 bg-brand-primary text-white text-sm font-black rounded-xl shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/30 transition-shadow duration-200 inline-block cursor-pointer">
 							+ Tambah Layanan
 						</span>
 					)}
-				</div>
+				</button>
 			)}
 
 			{isOpen &&

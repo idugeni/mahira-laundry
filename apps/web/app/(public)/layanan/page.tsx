@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/shared/common/json-ld";
+import { LayananClient } from "@/components/shared/public/layanan-client";
 import { baseOpenGraph } from "@/lib/metadata";
+import { createClient, getUser, getUserProfile } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
-	title: "Layanan Laundry Premium",
+	title: "Layanan Laundry Premium & Kiloan Bekasi",
 	description:
-		"Daftar lengkap layanan laundry premium: cuci lipat, cuci setrika, express, dry cleaning, cuci sepatu, dan lainnya dengan standar kualitas tinggi.",
+		"Daftar lengkap layanan laundry premium: cuci lipat, cuci setrika, express 6 jam, dry cleaning, cuci sepatu, dan baby care dengan standar kualitas tinggi di Bekasi.",
+	keywords: [
+		"laundry kiloan bekasi",
+		"laundry express bekasi",
+		"cuci sepatu bekasi",
+		"dry cleaning bekasi",
+		"laundry satuan premium",
+		"cuci karpet bekasi",
+		"laundry bayi bekasi",
+	],
 	openGraph: {
 		...baseOpenGraph,
 		url: "/layanan",
@@ -21,12 +33,9 @@ export const metadata: Metadata = {
 	},
 };
 
-import { JsonLd } from "@/components/shared/common/json-ld";
-import { LayananClient } from "@/components/shared/public/layanan-client";
-import { createClient } from "@/lib/supabase/server";
-
 export default async function LayananPage() {
 	const supabase = await createClient();
+	const [user, profile] = await Promise.all([getUser(), getUserProfile()]);
 
 	const { data: services } = await supabase
 		.from("services")
@@ -56,7 +65,7 @@ export default async function LayananPage() {
 	return (
 		<div key="layanan-root">
 			<JsonLd key="ld-breadcrumb" data={breadcrumbJsonLd} />
-			<LayananClient initialServices={services || []} />
+			<LayananClient initialServices={services || []} initialUser={user} initialProfile={profile} />
 		</div>
 	);
 }

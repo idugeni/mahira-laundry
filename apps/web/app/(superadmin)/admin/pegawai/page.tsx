@@ -1,4 +1,4 @@
-import { Building2, Search, UserPlus, Users } from "lucide-react";
+import { Search, UserPlus, Users } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { RegisterStaffModal } from "@/components/shared/admin/staff/register-staff-modal";

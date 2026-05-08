@@ -1,15 +1,15 @@
 -- ═══════════════════════════════════════════════════════════════
 -- Update Business Package Prices
 -- ═══════════════════════════════════════════════════════════════
--- Starter: 15jt (promo 12jt)
+-- Starter: 18jt (promo 15jt)
 -- Standard: 35jt
 -- Premium: 75jt
 -- ═══════════════════════════════════════════════════════════════
 
 UPDATE public.business_packages
 SET 
-  price = 15000000,
-  promo_price = 12000000
+  price = 18000000,
+  promo_price = 15000000
 WHERE tier = 'Starter';
 
 UPDATE public.business_packages

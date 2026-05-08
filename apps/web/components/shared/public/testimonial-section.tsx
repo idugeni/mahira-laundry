@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useState } from "react";
 import { FaQuoteLeft } from "react-icons/fa6";
 import { HiOutlineChevronLeft, HiOutlineChevronRight, HiStar } from "react-icons/hi2";
@@ -164,9 +165,11 @@ function TestimonialCard({ testimonial }: { testimonial: TestimonialData }) {
 
 			<div className="flex items-center gap-4">
 				{avatarUrl ? (
-					<img
+					<Image
 						src={avatarUrl}
 						alt={name}
+						width={48}
+						height={48}
 						className="w-12 h-12 rounded-full object-cover border-2 border-white shadow-xs ring-4 ring-slate-50 shrink-0"
 					/>
 				) : (

@@ -4,14 +4,24 @@ import { Building2, Clock, Edit, Eye, Phone, Trash2, Users } from "lucide-react"
 import { PaginatedGrid } from "@/components/shared/common/paginated-grid";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import type { Outlet, Profile, UserRole } from "@/lib/types";
 import { cn, formatDate } from "@/lib/utils";
 
-interface StaffGridClientProps {
-	staff: any[];
+interface ExtendedStaff extends Partial<Profile> {
+	id: string;
+	full_name: string;
+	role: UserRole;
+	is_active: boolean;
+	outlets?: { name: string | null }[] | Outlet[] | Outlet | null;
 }
 
-function getOutletName(staff: any) {
-	return (Array.isArray(staff.outlets) ? staff.outlets[0]?.name : null) || "";
+interface StaffGridClientProps {
+	staff: ExtendedStaff[];
+}
+
+function getOutletName(staff: ExtendedStaff) {
+	const outlets = staff.outlets;
+	return (Array.isArray(outlets) ? outlets[0]?.name : (outlets as Outlet)?.name) || "";
 }
 
 export function StaffGridClient({ staff }: StaffGridClientProps) {
@@ -87,9 +97,7 @@ export function StaffGridClient({ staff }: StaffGridClientProps) {
 						<div className="flex items-center justify-between">
 							<div className="flex items-center gap-3 text-slate-400">
 								<Building2 size={14} className="text-emerald-400" />
-								<span className="text-[10px] font-black uppercase tracking-widest">
-									Penempatan
-								</span>
+								<span className="text-[10px] font-black uppercase tracking-widest">Penempatan</span>
 							</div>
 							<span className="text-xs font-bold text-slate-700 truncate max-w-[150px]">
 								{getOutletName(s) || "Unassigned"}
@@ -107,13 +115,9 @@ export function StaffGridClient({ staff }: StaffGridClientProps) {
 						<div className="flex items-center justify-between">
 							<div className="flex items-center gap-3 text-slate-400">
 								<Clock size={14} className="text-emerald-400" />
-								<span className="text-[10px] font-black uppercase tracking-widest">
-									Registrasi
-								</span>
+								<span className="text-[10px] font-black uppercase tracking-widest">Registrasi</span>
 							</div>
-							<span className="text-xs font-bold text-slate-700">
-								{formatDate(s.created_at)}
-							</span>
+							<span className="text-xs font-bold text-slate-700">{s.created_at ? formatDate(s.created_at) : "—"}</span>
 						</div>
 					</div>
 

@@ -52,6 +52,13 @@ const megaMenuItems = [
 		icon: HiOutlineInformationCircle,
 		badge: null,
 	},
+	{
+		href: "/faq",
+		label: "Bantuan & FAQ",
+		description: "Pertanyaan yang sering diajukan",
+		icon: HiOutlineSquares2X2,
+		badge: null,
+	},
 ];
 
 const megaContainerVariants = {
@@ -72,8 +79,8 @@ const megaItemVariants = {
 };
 
 export function MahiraHeader({
-	initialUser = null,
-	initialProfile = null,
+	initialUser,
+	initialProfile,
 }: {
 	initialUser?: User | null;
 	initialProfile?: Profile | null;
@@ -83,9 +90,9 @@ export function MahiraHeader({
 	const megaRef = useRef<HTMLDivElement>(null);
 	const { user: ctxUser, profile: ctxProfile, loading: ctxLoading } = useAuth();
 
-	const user = ctxLoading ? initialUser : ctxUser;
-	const profile = ctxLoading ? initialProfile : ctxProfile;
-	const loading = ctxLoading && !initialUser;
+	const user = ctxLoading && initialUser !== undefined ? initialUser : ctxUser;
+	const profile = ctxLoading && initialProfile !== undefined ? initialProfile : ctxProfile;
+	const loading = ctxLoading && initialUser === undefined;
 
 	const _getInitials = (name?: string) => {
 		if (!name) return "??";

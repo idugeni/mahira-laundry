@@ -8,16 +8,17 @@ export const PRIMARY_OUTLET = {
 			: "",
 	name: "Mahira Laundry",
 	slug: "mahira-laundry",
-	address: "Jl. Cempaka Baru No.109, RT.002/RW.05, Jaticempaka, Kec. Pd. Gede, Kota Bks, Jawa Barat 13620",
+	address:
+		"Jl. Cempaka Baru No.109, RT.002/RW.05, Jaticempaka, Kec. Pd. Gede, Kota Bks, Jawa Barat 13620",
 	phone: "0838-0651-8859",
 	whatsapp: "6283806518859",
 	whatsapp_clean: "6283806518859",
 	email: "hello@mahiralaundry.id",
-	lat: -6.273114,
-	lng: 106.924298,
+	lat: -6.2621416,
+	lng: 106.909272,
 	operatingHours: {
-		weekday: "07:00-21:00",
-		weekend: "08:00-20:00",
+		weekday: "08:00-19:00 (Sen 09:00-17:00)",
+		weekend: "Sab 08:00-19:00, Min Tutup",
 	},
 };
 

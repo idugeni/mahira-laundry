@@ -5,7 +5,7 @@ Mahira Laundry adalah platform layanan laundry premium dan penyedia paket usaha 
 ## Core Information
 - **Brand**: Mahira Laundry
 - **Tagline**: Cucian Bersih, Hidup Nyaman.
-- **Location**: Jl. Jatiwaringin No. 28, Bekasi, Jawa Barat 17411, Indonesia.
+- **Location**: Jl. Cempaka Baru No.109, RT.002/RW.05, Jaticempaka, Kec. Pd. Gede, Kota Bks, Jawa Barat 13620.
 - **Official Website**: https://mahiralaundry.id
 
 ## Key Public Pages

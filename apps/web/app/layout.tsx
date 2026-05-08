@@ -2,10 +2,11 @@ import { GoogleAnalytics } from "@next/third-parties/google";
 import type { Metadata } from "next";
 import { Geist, Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "sonner";
-import "./globals.css";
+import "@/app/globals.css";
 import { AuthToastHandler } from "@/components/shared/auth/auth-toast-handler";
 import { JsonLd } from "@/components/shared/common/json-ld";
 import { baseOpenGraph } from "@/lib/metadata";
+import { getUser, getUserProfile } from "@/lib/supabase/server";
 import { cn } from "@/lib/utils";
 import { AuthProvider } from "@/providers/auth-provider";
 
@@ -48,6 +49,10 @@ export const metadata: Metadata = {
 		"mahira laundry",
 		"peluang usaha laundry",
 		"laundry business setup",
+		"laundry kiloan terdekat",
+		"laundry bekasi premium",
+		"jasa cuci sepatu",
+		"dry cleaning indonesia",
 	],
 	openGraph: {
 		...baseOpenGraph,
@@ -116,15 +121,15 @@ const organizationSchema = {
 	description: "Penyedia paket usaha laundry premium dan kemitraan bisnis terpercaya.",
 	address: {
 		"@type": "PostalAddress",
-		streetAddress: "Jl. Jatiwaringin No. 28",
+		streetAddress: "Jl. Cempaka Baru No.109, RT.002/RW.05, Jaticempaka, Kec. Pd. Gede",
 		addressLocality: "Bekasi",
 		addressRegion: "Jawa Barat",
-		postalCode: "17411",
+		postalCode: "13620",
 		addressCountry: "ID",
 	},
 	contactPoint: {
 		"@type": "ContactPoint",
-		telephone: "+6281234567890",
+		telephone: "+6283806518859",
 		contactType: "customer service",
 		areaServed: "ID",
 		availableLanguage: "Indonesian",
@@ -193,11 +198,13 @@ const navigationSchema = {
 	],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const [user, profile] = await Promise.all([getUser(), getUserProfile()]);
+
 	return (
 		<html
 			lang="id"
@@ -222,7 +229,9 @@ export default function RootLayout({
 				className="min-h-full flex flex-col bg-background text-foreground font-[family-name:var(--font-body)]"
 			>
 				<div className="contents">
-					<AuthProvider>{children}</AuthProvider>
+					<AuthProvider initialUser={user} initialProfile={profile}>
+						{children}
+					</AuthProvider>
 					<AuthToastHandler />
 					<Toaster richColors position="top-right" />
 					{process.env.NEXT_PUBLIC_GA_ID && (

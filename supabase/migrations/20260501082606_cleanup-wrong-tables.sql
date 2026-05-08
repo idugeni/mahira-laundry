@@ -8,11 +8,8 @@ create type "public"."deposit_type" as enum ('topup', 'payment', 'refund', 'adju
 
 create type "public"."expense_category" as enum ('utilities', 'supplies', 'rent', 'salary', 'marketing', 'maintenance', 'other');
 
-create type "public"."jenis_layanan" as enum ('PB', 'CB', 'CMB');
 
-create type "public"."status_wbp" as enum ('aktif', 'selesai', 'ditolak');
-
-create type "public"."tahap_proses" as enum ('verifikasi_rutan', 'upload_sdp', 'verifikasi_kanwil', 'proses_ditjen_pas', 'sk_terbit');
+-- Removed unrelated enum types to prevent schema mixing
 
 drop trigger if exists "trg_referral_bonus" on "public"."orders";
 

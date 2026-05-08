@@ -5,10 +5,16 @@ import Image from "next/image";
 import { PaginatedGrid } from "@/components/shared/common/paginated-grid";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import type { Outlet } from "@/lib/types";
 import { cn, formatCompact } from "@/lib/utils";
 
+interface ExtendedOutlet extends Outlet {
+	monthlyRevenue: number;
+	ordersThisMonth: number;
+}
+
 interface FranchiseGridClientProps {
-	franchiseOutlets: any[];
+	franchiseOutlets: ExtendedOutlet[];
 }
 
 export function FranchiseGridClient({ franchiseOutlets }: FranchiseGridClientProps) {

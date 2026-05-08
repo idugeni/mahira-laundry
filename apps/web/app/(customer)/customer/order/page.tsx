@@ -4,7 +4,7 @@ import { getOrders } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
 	title: "Daftar Pesanan",
-	description: "Pantau status cucian Anda secara real-time di Mahira Laundry Bekasi Jatiwaringin.",
+	description: "Pantau status cucian Anda secara real-time di Mahira Laundry Bekasi Jaticempaka.",
 };
 
 export default async function OrderPage() {

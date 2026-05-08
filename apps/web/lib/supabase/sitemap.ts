@@ -27,8 +27,7 @@ export async function getSitemapServices(): Promise<SitemapEntry[]> {
 			changeFrequency: "weekly" as const,
 			priority: 0.7,
 		}));
-	} catch (error) {
-		console.error("Error fetching services for sitemap:", error);
+	} catch (_error) {
 		return [];
 	}
 }
@@ -53,8 +52,7 @@ export async function getSitemapOutlets(): Promise<SitemapEntry[]> {
 			changeFrequency: "weekly" as const,
 			priority: 0.8,
 		}));
-	} catch (error) {
-		console.error("Error fetching outlets for sitemap:", error);
+	} catch (_error) {
 		return [];
 	}
 }
@@ -79,8 +77,7 @@ export async function getSitemapGalleryItems(): Promise<SitemapEntry[]> {
 			changeFrequency: "monthly" as const,
 			priority: 0.6,
 		}));
-	} catch (error) {
-		console.error("Error fetching gallery items for sitemap:", error);
+	} catch (_error) {
 		return [];
 	}
 }
@@ -105,7 +102,7 @@ export async function getSitemapFaqItems(): Promise<SitemapEntry[]> {
 			changeFrequency: "monthly" as const,
 			priority: 0.6,
 		}));
-	} catch (error) {
+	} catch (_error) {
 		// FAQ table might not exist, silently fail
 		return [];
 	}
@@ -131,9 +128,7 @@ export async function getSitemapBusinessPackages(): Promise<SitemapEntry[]> {
 			changeFrequency: "weekly" as const,
 			priority: 0.8,
 		}));
-	} catch (error) {
-		// Business packages slug might not exist, fallback to single page
-		console.error("Error fetching business packages for sitemap:", error);
+	} catch (_error) {
 		return [];
 	}
 }

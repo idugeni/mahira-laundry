@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { MahiraLogo } from "@/components/brand/mahira-logo";
+import { cn } from "@/lib/utils";
 
-const MINIMUM_LOADER_DURATION = 1200; // Minimum time loader stays visible (ms)
+const MINIMUM_LOADER_DURATION = 800; // Reduced for snappier feel
 
 export default function GlobalLoading() {
-	const [mounted, setMounted] = useState(false);
+	const [_mounted, setMounted] = useState(false);
 	const [showLoader, setShowLoader] = useState(true);
+	const [isFadingOut, setIsFadingOut] = useState(false);
 
 	useEffect(() => {
 		// Set mounted flag for hydration
@@ -16,20 +17,31 @@ export default function GlobalLoading() {
 		// Prevent scrolling when loader is active
 		document.body.style.overflow = "hidden";
 
-		// Ensure loader stays visible for minimum duration to prevent flashing
-		const hideTimer = setTimeout(() => {
-			setShowLoader(false);
+		// Step 1: Start fading out
+		const fadeTimer = setTimeout(() => {
+			setIsFadingOut(true);
 		}, MINIMUM_LOADER_DURATION);
 
+		// Step 2: Completely unmount after fade animation
+		const hideTimer = setTimeout(() => {
+			setShowLoader(false);
+		}, MINIMUM_LOADER_DURATION + 300); // match duration-300
+
 		return () => {
+			clearTimeout(fadeTimer);
 			clearTimeout(hideTimer);
 			document.body.style.overflow = "";
 		};
 	}, []);
 
 	const loaderContent = (
-		<div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background/95 backdrop-blur-md transition-opacity duration-300">
-			<div className="flex flex-col items-center gap-8 animate-in fade-in duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+		<div
+			className={cn(
+				"fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background backdrop-blur-md transition-all duration-300 ease-in-out",
+				isFadingOut ? "opacity-0 pointer-events-none" : "opacity-100",
+			)}
+		>
+			<div className="flex flex-col items-center gap-8 animate-in fade-in duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]">
 				{/* Circular logo with spinning ring */}
 				<div className="relative w-32 h-32 flex items-center justify-center">
 					{/* Spinning ring */}
@@ -76,15 +88,13 @@ export default function GlobalLoading() {
 		</div>
 	);
 
-	// Server-side fallback: render inline but it will be hidden/trapped until hydration
-	if (!mounted) {
-		return loaderContent;
-	}
+	// We still need mounted to avoid portal issues if we were using portals,
+	// but here we just want to avoid any hydration mismatch on the body class.
+	// However, returning the same structure for both SSR and CSR is best for stability.
 
-	// Only show loader if showLoader state is true (after hydration and within minimum duration)
 	if (!showLoader) {
 		return null;
 	}
 
-	return createPortal(loaderContent, document.body);
+	return loaderContent;
 }

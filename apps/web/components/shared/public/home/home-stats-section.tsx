@@ -7,7 +7,7 @@ import { MdOutlineFlashOn } from "react-icons/md";
 import { CountUp } from "@/components/ui/count-up";
 
 interface Stat {
-	value: string;
+	value?: string;
 	label: string;
 	numericValue?: number;
 	decimal?: number;

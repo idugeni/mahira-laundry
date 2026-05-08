@@ -7,7 +7,7 @@ export async function getPublishedTestimonials() {
 		.select("*, profiles(full_name, avatar_url), guest_name")
 		.eq("is_published", true)
 		.order("created_at", { ascending: false })
-		.limit(10);
+		.limit(20);
 
 	return testimonials || [];
 }
@@ -59,16 +59,17 @@ export async function getPrimaryOutlet() {
 				: "",
 		name: "Mahira Laundry",
 		slug: "mahira-laundry",
-		address: "Jl. Raya Jatiwaringin No. 12, Pondok Gede, Kota Bekasi, Jawa Barat 17411",
+		address:
+			"Jl. Cempaka Baru No.109, RT.002/RW.05, Jaticempaka, Kec. Pd. Gede, Kota Bks, Jawa Barat 13620",
 		phone: "0838-0651-8859",
 		whatsapp: "6283806518859",
 		whatsapp_clean: "6283806518859",
 		email: "hello@mahiralaundry.id",
-		lat: -6.273114,
-		lng: 106.924298,
+		lat: -6.2621416,
+		lng: 106.909272,
 		operatingHours: {
-			weekday: "07:00-21:00",
-			weekend: "08:00-20:00",
+			weekday: "08:00-19:00 (Sen 09:00-17:00)",
+			weekend: "Sab 08:00-19:00, Minggu Tutup",
 		},
 	};
 }

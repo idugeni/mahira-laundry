@@ -214,7 +214,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 												id="outlet-name"
 												name="name"
 												defaultValue={outlet?.name || ""}
-												placeholder="Contoh: Jatiwaringin Prime"
+												placeholder="Contoh: Jaticempaka Prime"
 												className="w-full px-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-hidden"
 											/>
 										</div>
@@ -230,7 +230,7 @@ export function OutletModal({ outlet, trigger }: OutletModalProps) {
 												id="outlet-slug"
 												name="slug"
 												defaultValue={outlet?.slug || ""}
-												placeholder="jatiwaringin-prime"
+												placeholder="jaticempaka-prime"
 												className="w-full px-6 py-5 bg-slate-50 border border-slate-50 rounded-2xl text-sm font-bold focus:bg-white focus:ring-4 focus:ring-indigo-500/5 transition-all outline-hidden"
 											/>
 										</div>

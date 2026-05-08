@@ -4,10 +4,10 @@ import { PlusCircle, Receipt } from "lucide-react";
 import { QRCodeSVG } from "qrcode.react";
 import { useRef } from "react";
 import { toast } from "sonner";
+import type { CartItem, ReceiptData } from "@/components/kasir/pos-types";
 import { Button } from "@/components/ui/button";
 import { POS_CONFIG } from "@/lib/constants";
 import { formatIDR } from "@/lib/utils";
-import type { CartItem, ReceiptData } from "@/components/kasir/pos-types";
 
 interface PosReceiptViewProps {
 	receiptData: ReceiptData;

@@ -1,14 +1,7 @@
-import {
-	Building2,
-	CreditCard,
-	Globe,
-	Package,
-	Plus,
-	Users2,
-} from "lucide-react";
+import { Building2, CreditCard, Globe, Package, Plus, Users2 } from "lucide-react";
 import type { Metadata } from "next";
-import { OutletModal } from "@/components/shared/admin/outlet/outlet-modal";
 import { OutletGridClient } from "@/components/shared/admin/outlet/outlet-grid-client";
+import { OutletModal } from "@/components/shared/admin/outlet/outlet-modal";
 import { StatCard } from "@/components/shared/common/stat-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

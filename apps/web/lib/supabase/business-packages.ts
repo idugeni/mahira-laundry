@@ -1,10 +1,10 @@
+import { createClient } from "@/lib/supabase/auth";
 import type {
 	BusinessPackage,
 	BusinessPackageInquiry,
 	InquiryFilters,
 	InquiryStats,
 } from "@/lib/types";
-import { createClient } from "@/lib/supabase/auth";
 
 export async function getActiveBusinessPackages(): Promise<BusinessPackage[]> {
 	const supabase = await createClient();

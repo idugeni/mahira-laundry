@@ -29,7 +29,7 @@ export default async function TugasDetailPage({ params }: { params: Promise<{ id
 				</div>
 				<div>
 					<span className="text-sm font-medium">Alamat Jemput</span>
-					<p className="text-sm text-muted-foreground">Jl. Jatiwaringin Raya No. 10, Bekasi</p>
+					<p className="text-sm text-muted-foreground">Jl. Jaticempaka Raya No. 10, Bekasi</p>
 				</div>
 				<div>
 					<span className="text-sm font-medium">Pelanggan</span>

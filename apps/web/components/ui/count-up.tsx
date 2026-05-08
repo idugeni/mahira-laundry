@@ -52,7 +52,12 @@ export function CountUp({
 			const eased = progress === 1 ? 1 : 1 - 2 ** (-10 * progress);
 			const current = eased * to;
 
-			setDisplay(prefix + current.toFixed(decimal) + suffix);
+			const formatter = new Intl.NumberFormat("id-ID", {
+				minimumFractionDigits: decimal,
+				maximumFractionDigits: decimal,
+			});
+
+			setDisplay(prefix + formatter.format(current) + suffix);
 
 			if (progress < 1) {
 				requestAnimationFrame(step);

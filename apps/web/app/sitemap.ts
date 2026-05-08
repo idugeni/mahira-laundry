@@ -1,10 +1,10 @@
 import type { MetadataRoute } from "next";
 import {
-	getSitemapServices,
-	getSitemapOutlets,
-	getSitemapGalleryItems,
-	getSitemapFaqItems,
 	getSitemapBusinessPackages,
+	getSitemapFaqItems,
+	getSitemapGalleryItems,
+	getSitemapOutlets,
+	getSitemapServices,
 } from "@/lib/supabase/sitemap";
 
 /**
@@ -133,9 +133,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		];
 
 		return allRoutes;
-	} catch (error) {
-		// Fallback to static routes only if database fetch fails
-		console.error("Error generating dynamic sitemap:", error);
+	} catch (_error) {
 		return staticRoutes;
 	}
 }

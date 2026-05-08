@@ -1,9 +1,17 @@
+import type { PostgrestResponse, User } from "@supabase/supabase-js";
 import type { Metadata } from "next";
 import { JsonLd } from "@/components/shared/common/json-ld";
 import { HomeClient } from "@/components/shared/public/home/home-client";
 import { getActiveBusinessPackages } from "@/lib/actions/business-packages";
 import { baseOpenGraph } from "@/lib/metadata";
-import { createClient, getPublishedTestimonials } from "@/lib/supabase/server";
+import { getPrimaryOutlet } from "@/lib/supabase/public";
+import {
+	createClient,
+	getPublishedTestimonials,
+	getUser,
+	getUserProfile,
+} from "@/lib/supabase/server";
+import type { BusinessPackage, GalleryItem, Profile, Service, Testimonial } from "@/lib/types";
 
 export const revalidate = 3600; // ISR: Revalidate every hour
 
@@ -29,8 +37,6 @@ export const metadata: Metadata = {
 		],
 	},
 };
-
-import { getPrimaryOutlet } from "@/lib/supabase/public";
 
 const faqJsonLd = {
 	"@context": "https://schema.org",
@@ -65,6 +71,7 @@ const faqJsonLd = {
 
 export default async function HomePage() {
 	const supabase = await createClient();
+	const [user, profile] = await Promise.all([getUser(), getUserProfile()]);
 
 	// Parallel fetching of critical metadata and primary data
 	const [outlet, businessPackages] = await Promise.all([
@@ -80,7 +87,11 @@ export default async function HomePage() {
 		.order("sort_order", { ascending: true })
 		.then((res) => res);
 
-	const statsPromise = supabase.rpc("get_public_stats").then((res) => res);
+	const statsPromise = supabase
+		.from("orders")
+		.select("*", { count: "exact", head: true })
+		.eq("status", "completed")
+		.then((res) => res);
 
 	const outletCountPromise = supabase
 		.from("outlets")
@@ -149,6 +160,8 @@ export default async function HomePage() {
 					galleryPromise={galleryPromise}
 					testimonialsPromise={testimonialsPromise}
 					businessPackages={businessPackages}
+					user={user}
+					profile={profile}
 				/>
 			</div>
 		</div>
@@ -166,13 +179,17 @@ async function AsyncHomeContent({
 	galleryPromise,
 	testimonialsPromise,
 	businessPackages,
+	user,
+	profile,
 }: {
-	servicesPromise: any;
-	statsPromise: any;
-	outletCountPromise: any;
-	galleryPromise: any;
-	testimonialsPromise: any;
-	businessPackages: any[];
+	servicesPromise: PromiseLike<PostgrestResponse<Service>>;
+	statsPromise: PromiseLike<PostgrestResponse<null>>;
+	outletCountPromise: PromiseLike<PostgrestResponse<null>>;
+	galleryPromise: PromiseLike<PostgrestResponse<GalleryItem>>;
+	testimonialsPromise: Promise<Testimonial[]>;
+	businessPackages: BusinessPackage[];
+	user: User | null;
+	profile: Profile | null;
 }) {
 	const [servicesResult, statsResult, outletCountResult, galleryItemsResult, testimonials] =
 		await Promise.all([
@@ -184,19 +201,18 @@ async function AsyncHomeContent({
 		]);
 
 	const { data: services } = servicesResult;
-	const { data: statsData } = statsResult;
+	const { count: orderCount } = statsResult;
 	const { count: outletCount } = outletCountResult;
 	const { data: galleryItems } = galleryItemsResult;
-
-	const orderCount = statsData?.[0]?.completed_orders_count || 0;
 	const stats = [
 		{
-			value: `${(orderCount || 0) + 2847}+`,
+			numericValue: (orderCount || 0) + 2847,
+			suffix: "+",
 			label: "Order Selesai",
 		},
-		{ value: "4.9", label: "Rating" },
+		{ numericValue: 4.9, decimal: 1, label: "Rating" },
 		{
-			value: (outletCount || 0).toString(),
+			numericValue: outletCount || 0,
 			label: "Outlet",
 		},
 		{ value: "24/7", label: "Tracking Online" },
@@ -209,6 +225,8 @@ async function AsyncHomeContent({
 			testimonials={testimonials}
 			galleryItems={galleryItems || []}
 			businessPackages={businessPackages}
+			initialUser={user}
+			initialProfile={profile}
 		/>
 	);
 }

@@ -7,8 +7,9 @@ import { useRef } from "react";
 import { HiOutlineArrowRight, HiOutlineSparkles } from "react-icons/hi2";
 import { MdOutlineLocalLaundryService, MdOutlineRocketLaunch } from "react-icons/md";
 import { Badge } from "@/components/ui/badge";
-
+import { useAuth } from "@/hooks/use-auth";
 import type { BusinessPackage } from "@/lib/types";
+import { getDashboardUrl } from "@/lib/utils";
 
 const tierBadgeColors: Record<string, string> = {
 	Starter: "bg-blue-50 text-blue-600 border-blue-200",
@@ -37,7 +38,9 @@ interface HomeHeroSectionProps {
 	packages?: BusinessPackage[];
 }
 
-export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
+export function HomeHeroSection({ packages = [], user, loading }: HomeHeroSectionProps) {
+	const { profile } = useAuth();
+	const dashboardHref = getDashboardUrl(profile?.role as string);
 	const containerRef = useRef(null);
 	const { scrollY } = useScroll();
 
@@ -149,18 +152,33 @@ export function HomeHeroSection({ packages = [] }: HomeHeroSectionProps) {
 							variants={itemVariants}
 							className="mt-8 flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-4 w-full sm:w-auto"
 						>
-							<Link
-								href="/paket-usaha"
-								className="group relative w-full sm:w-auto px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all duration-300 hover:bg-pink-700 text-sm inline-flex items-center justify-center gap-4"
-							>
-								PILIH PAKET USAHA
-								<motion.div
-									animate={{ x: [0, 5, 0] }}
-									transition={{ repeat: Infinity, duration: 1.5 }}
+							{!loading && user ? (
+								<Link
+									href={dashboardHref}
+									className="group relative w-full sm:w-auto px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all duration-300 hover:bg-pink-700 text-sm inline-flex items-center justify-center gap-4"
 								>
-									<HiOutlineArrowRight size={18} />
-								</motion.div>
-							</Link>
+									KE DASHBOARD SULTAN
+									<motion.div
+										animate={{ x: [0, 5, 0] }}
+										transition={{ repeat: Infinity, duration: 1.5 }}
+									>
+										<HiOutlineArrowRight size={18} />
+									</motion.div>
+								</Link>
+							) : (
+								<Link
+									href="/paket-usaha"
+									className="group relative w-full sm:w-auto px-8 py-4 bg-brand-primary text-white rounded-full font-black overflow-hidden transition-all duration-300 hover:bg-pink-700 text-sm inline-flex items-center justify-center gap-4"
+								>
+									PILIH PAKET USAHA
+									<motion.div
+										animate={{ x: [0, 5, 0] }}
+										transition={{ repeat: Infinity, duration: 1.5 }}
+									>
+										<HiOutlineArrowRight size={18} />
+									</motion.div>
+								</Link>
+							)}
 							<a
 								href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_CS ?? "6281234567890"}?text=${encodeURIComponent("Halo Mahira, saya ingin konsultasi mengenai paket usaha laundry.")}`}
 								target="_blank"

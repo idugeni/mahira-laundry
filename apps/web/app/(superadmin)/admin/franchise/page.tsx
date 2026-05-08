@@ -1,7 +1,7 @@
 import { ArrowUpRight, Building2, Coins, Globe, Handshake, Plus } from "lucide-react";
 import type { Metadata } from "next";
-import { MitraModal } from "@/components/shared/admin/mitra/mitra-modal";
 import { FranchiseGridClient } from "@/components/shared/admin/mitra/franchise-grid-client";
+import { MitraModal } from "@/components/shared/admin/mitra/mitra-modal";
 import { StatCard } from "@/components/shared/common/stat-card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

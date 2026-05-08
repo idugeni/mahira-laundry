@@ -1,22 +1,21 @@
 "use client";
 
-import {
-	Building2,
-	Clock,
-	Edit3,
-	MapPin,
-	Phone,
-	Users2,
-} from "lucide-react";
+import { Building2, Clock, Edit3, MapPin, Phone, Users2 } from "lucide-react";
 import Image from "next/image";
 import { OutletModal } from "@/components/shared/admin/outlet/outlet-modal";
 import { PaginatedGrid } from "@/components/shared/common/paginated-grid";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import type { Outlet } from "@/lib/types";
 import { cn, formatCompact } from "@/lib/utils";
 
+interface ExtendedOutlet extends Outlet {
+	monthlyRevenue?: number;
+	ordersThisMonth?: number;
+}
+
 interface OutletGridClientProps {
-	outlets: any[];
+	outlets: ExtendedOutlet[];
 }
 
 export function OutletGridClient({ outlets }: OutletGridClientProps) {
@@ -135,7 +134,7 @@ export function OutletGridClient({ outlets }: OutletGridClientProps) {
 								</div>
 								<div className="flex items-center gap-2 text-xs font-bold text-slate-400">
 									<Clock size={14} className="text-indigo-400" />
-									{outlet.operating_hours?.weekday || "Belum diatur"}
+									{outlet.operating_hours?.["weekday"] || "Belum diatur"}
 								</div>
 							</div>
 						</div>

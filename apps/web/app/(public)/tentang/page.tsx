@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { JsonLd } from "@/components/shared/common/json-ld";
+import { TentangClient } from "@/components/shared/public/tentang-client";
 import { baseOpenGraph } from "@/lib/metadata";
 
 export const metadata: Metadata = {
@@ -21,9 +23,6 @@ export const metadata: Metadata = {
 		],
 	},
 };
-
-import { JsonLd } from "@/components/shared/common/json-ld";
-import { TentangClient } from "@/components/shared/public/tentang-client";
 
 export default function TentangPage() {
 	const breadcrumbJsonLd = {

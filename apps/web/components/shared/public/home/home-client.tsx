@@ -1,5 +1,6 @@
 "use client";
 
+import type { User } from "@supabase/supabase-js";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { ServiceDetailModal } from "@/components/shared/customer/order/service-detail-modal";
@@ -11,12 +12,16 @@ import { HomeServicesSection } from "@/components/shared/public/home/home-servic
 import { HomeStatsSection } from "@/components/shared/public/home/home-stats-section";
 import { TestimonialSection } from "@/components/shared/public/testimonial-section";
 import { useAuth } from "@/hooks/use-auth";
-import type { BusinessPackage, GalleryItem, Service, Testimonial } from "@/lib/types";
+import type { BusinessPackage, GalleryItem, Profile, Service, Testimonial } from "@/lib/types";
 import { getDashboardUrl } from "@/lib/utils";
 
 interface Stat {
-	value: string;
+	value?: string;
 	label: string;
+	numericValue?: number;
+	decimal?: number;
+	suffix?: string;
+	prefix?: string;
 }
 
 interface HomeClientProps {
@@ -25,6 +30,8 @@ interface HomeClientProps {
 	testimonials: Testimonial[];
 	galleryItems: GalleryItem[];
 	businessPackages: BusinessPackage[];
+	initialUser?: User | null;
+	initialProfile?: Profile | null;
 }
 
 function ServiceDetailUrlModal({ services }: { services: Service[] }) {
@@ -65,8 +72,14 @@ export function HomeClient({
 	testimonials,
 	galleryItems,
 	businessPackages,
+	initialUser,
+	initialProfile,
 }: HomeClientProps) {
-	const { user, profile, loading } = useAuth();
+	const { user: ctxUser, profile: ctxProfile, loading: ctxLoading } = useAuth();
+	const user = ctxLoading && initialUser !== undefined ? initialUser : ctxUser;
+	const profile = ctxLoading && initialProfile !== undefined ? initialProfile : ctxProfile;
+	const loading = ctxLoading && initialUser === undefined;
+
 	const router = useRouter();
 
 	const handleServiceClick = (slug: string) => {
