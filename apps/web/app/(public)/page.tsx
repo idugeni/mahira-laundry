@@ -17,22 +17,22 @@ export const revalidate = 3600; // ISR: Revalidate every hour
 
 export const metadata: Metadata = {
 	title: {
-		absolute: "Mahira Laundry — Paket Usaha Laundry Premium & Kemitraan",
+		absolute: "Mahira Laundry — Layanan Laundry Premium & Antar Jemput",
 	},
 	description:
-		"Mulai bisnis laundry sukses Anda dengan Paket Usaha Laundry Mahira. Investasi aman, sistem teruji, dan dukungan operasional penuh untuk profit maksimal.",
+		"Nikmati layanan laundry premium dengan standar hotel di Mahira Laundry. Tersedia cuci kiloan, satuan, hingga dry cleaning dengan gratis antar-jemput.",
 	openGraph: {
 		...baseOpenGraph,
-		title: "Jual Paket Usaha Laundry Premium — Peluang Investasi Kemitraan",
+		title: "Layanan Laundry Premium — Solusi Pakaian Bersih & Wangi",
 		description:
-			"Wujudkan impian memiliki bisnis laundry profesional. Pilih paket usaha laundry yang sesuai dengan budget dan target pasar Anda.",
+			"Urusan pakaian kotor jadi mudah dengan Mahira Laundry. Proses higienis, standar premium, dan layanan tepat waktu langsung ke rumah Anda.",
 		url: "/",
 		images: [
 			{
-				url: "/og/paket-usaha.png",
+				url: "/og/services.png",
 				width: 1200,
 				height: 630,
-				alt: "Mahira Laundry Premium Experience",
+				alt: "Mahira Laundry Premium Services",
 			},
 		],
 	},
@@ -47,7 +47,7 @@ const faqJsonLd = {
 			name: "Berapa harga laundry per kg di Mahira Laundry?",
 			acceptedAnswer: {
 				"@type": "Answer",
-				text: "Harga laundry kiloan di Mahira Laundry mulai dari Rp 7.000 per kg untuk layanan cuci lipat. Kami juga menawarkan berbagai paket laundry premium lainnya.",
+				text: "Harga laundry kiloan di Mahira Laundry mulai dari Rp 7.000 per kg untuk layanan cuci lipat. Kami juga menawarkan berbagai layanan premium lainnya.",
 			},
 		},
 		{
@@ -114,7 +114,8 @@ export default async function HomePage() {
 		"@type": "LaundryBusiness",
 		name: outlet.name || "Mahira Laundry",
 		image: "https://mahiralaundry.id/logo.png",
-		description: "Penyedia paket usaha laundry premium dan solusi bisnis laundry terlengkap.",
+		description:
+			"Layanan laundry premium, cuci kiloan, dan dry cleaning dengan antar-jemput gratis.",
 		"@id": "https://mahiralaundry.id",
 		url: "https://mahiralaundry.id",
 		telephone: outlet.phone,
@@ -147,7 +148,6 @@ export default async function HomePage() {
 		],
 		priceRange: "$$",
 	};
-
 	return (
 		<div key="home-root" className="w-full min-w-0">
 			<JsonLd key="ld-main" id="home-business-jsonld" data={jsonLd} />
@@ -160,6 +160,7 @@ export default async function HomePage() {
 					galleryPromise={galleryPromise}
 					testimonialsPromise={testimonialsPromise}
 					businessPackages={businessPackages}
+					outlet={outlet}
 					user={user}
 					profile={profile}
 				/>
@@ -179,6 +180,7 @@ async function AsyncHomeContent({
 	galleryPromise,
 	testimonialsPromise,
 	businessPackages,
+	outlet,
 	user,
 	profile,
 }: {
@@ -188,6 +190,7 @@ async function AsyncHomeContent({
 	galleryPromise: PromiseLike<PostgrestResponse<GalleryItem>>;
 	testimonialsPromise: Promise<Testimonial[]>;
 	businessPackages: BusinessPackage[];
+	outlet: any;
 	user: User | null;
 	profile: Profile | null;
 }) {
@@ -225,6 +228,7 @@ async function AsyncHomeContent({
 			testimonials={testimonials}
 			galleryItems={galleryItems || []}
 			businessPackages={businessPackages}
+			outlet={outlet}
 			initialUser={user}
 			initialProfile={profile}
 		/>

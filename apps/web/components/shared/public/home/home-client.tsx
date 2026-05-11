@@ -30,6 +30,7 @@ interface HomeClientProps {
 	testimonials: Testimonial[];
 	galleryItems: GalleryItem[];
 	businessPackages: BusinessPackage[];
+	outlet: any;
 	initialUser?: User | null;
 	initialProfile?: Profile | null;
 }
@@ -72,6 +73,7 @@ export function HomeClient({
 	testimonials,
 	galleryItems,
 	businessPackages,
+	outlet,
 	initialUser,
 	initialProfile,
 }: HomeClientProps) {
@@ -95,6 +97,8 @@ export function HomeClient({
 				loading={loading}
 				dashboardHref={dashboardHref}
 				packages={businessPackages}
+				services={initialServices}
+				outlet={outlet}
 			/>
 			<HomeStatsSection stats={stats} />
 			<HomeServicesSection

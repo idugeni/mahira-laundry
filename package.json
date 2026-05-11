@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"author": "Eliyanto Sarage <officialelsa21@gmail.com>",
 	"private": true,
-	"packageManager": "npm@11.13.0",
+	"packageManager": "npm@11.14.1",
 	"workspaces": [
 		"apps/*",
 		"packages/*"
@@ -21,16 +21,16 @@
 		"postinstall": "node -e \"try{require('fs').unlinkSync(require('path').join('node_modules','html2canvas','tsconfig.json'))}catch(e){}\""
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.13",
-		"turbo": "^2.9.7",
+		"@biomejs/biome": "^2.4.15",
+		"turbo": "^2.9.12",
 		"typescript": "^6.0.3"
 	},
 	"dependencies": {
 		"html5-qrcode": "^2.3.8",
 		"jspdf": "^4.2.1",
-		"next": "^16.2.4",
+		"next": "^16.2.6",
 		"qrcode.react": "^4.2.0",
-		"react": "^19.2.5",
-		"react-dom": "^19.2.5"
+		"react": "^19.2.6",
+		"react-dom": "^19.2.6"
 	}
 }
