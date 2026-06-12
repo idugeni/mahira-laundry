@@ -121,7 +121,10 @@ export function HomeHeroSection({
 
 						<motion.div variants={itemVariants} className="w-full lg:max-w-[95%]">
 							<p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-500 leading-relaxed font-medium mb-8 max-w-3xl">
-								Manjakan diri dengan kemewahan waktu yang tak ternilai. Sahabat Mahira cukup duduk manis dan menikmati momen berharga, biar kurir kami yang menjemput pakaian Anda. Setiap helai akan kembali dalam kondisi sempurna—bersih maksimal, rapi presisi, dan harum elegan yang siap meningkatkan kepercayaan diri Anda.
+								Manjakan diri dengan kemewahan waktu yang tak ternilai. Sahabat Mahira cukup duduk
+								manis dan menikmati momen berharga, biar kurir kami yang menjemput pakaian Anda.
+								Setiap helai akan kembali dalam kondisi sempurna—bersih maksimal, rapi presisi, dan
+								harum elegan yang siap meningkatkan kepercayaan diri Anda.
 							</p>
 
 							{/* Premium Pillars */}
@@ -294,12 +297,13 @@ export function HomeHeroSection({
 											<div className="relative z-20">
 												<div
 													className={`flex items-center justify-center rounded-lg sm:rounded-2xl shadow-sm w-7 h-7 sm:w-10 sm:h-10 xl:w-12 xl:h-12 transition-all duration-500 group-hover:scale-110 group-hover:-translate-y-1
-													${isBrand
+													${
+														isBrand
 															? "bg-white text-brand-primary"
 															: isDark
 																? "bg-white/10 text-white backdrop-blur-md border border-white/20"
 																: "bg-slate-900 text-white"
-														}
+													}
 												`}
 												>
 													<span className="text-base sm:text-2xl">{service.icon || "🧺"}</span>
@@ -311,8 +315,9 @@ export function HomeHeroSection({
 												{/* Meta Info */}
 												<div className="flex items-center gap-1 sm:gap-2 mb-0.5 sm:mb-1.5">
 													<div
-														className={`text-[6px] sm:text-[9px] xl:text-[10px] font-black uppercase tracking-[0.25em] ${isDark ? "text-brand-primary" : "text-brand-primary"
-															}`}
+														className={`text-[6px] sm:text-[9px] xl:text-[10px] font-black uppercase tracking-[0.25em] ${
+															isDark ? "text-brand-primary" : "text-brand-primary"
+														}`}
 													>
 														{service.category || "Premium"}
 													</div>
@@ -322,12 +327,13 @@ export function HomeHeroSection({
 												<h3
 													className={`font-[950] leading-[1.1] tracking-tighter transition-all duration-300
 													${idx === 0 ? "text-base sm:text-2xl xl:text-4xl mb-0.5 sm:mb-2" : "text-[10px] sm:text-lg xl:text-2xl"}
-													${isBrand
+													${
+														isBrand
 															? "text-white"
 															: isDark
 																? "text-white group-hover:text-brand-primary"
 																: "text-slate-900 group-hover:text-brand-primary"
-														}
+													}
 												`}
 												>
 													{service.name.split(" ").slice(0, 3).join(" ")}
@@ -336,12 +342,13 @@ export function HomeHeroSection({
 												{idx === 0 && (
 													<p
 														className={`text-[8px] sm:text-[11px] font-medium leading-relaxed line-clamp-1 sm:line-clamp-2 mt-1 sm:mt-2 transition-all duration-300
-														${isBrand
+														${
+															isBrand
 																? "text-white/80"
 																: isDark
 																	? "text-white/50 group-hover:text-white/70"
 																	: "text-slate-500"
-															}
+														}
 													`}
 													>
 														{service.description}
